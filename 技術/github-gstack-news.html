@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>gstack 開源：YC 總裁的 Claude Code 代理團隊 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="gstack 是 Y Combinator 總裁 Garry Tan 開源的 Claude Code 技能集，GitHub 星標達 133,236。它以 23 個角色技能與 8 項工具把單一代理擴充為具備分工的開發團隊，本文解析其核心架構、七階段 sprint 流程、跨代理支援範圍，以及針對提示注入的多層安全設計...">
+  <meta name="keywords" content="AI, Claude Code, gstack, Y Combinator, 代理, 開源, 開發者工具, Agent Skills">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="gstack 開源：YC 總裁的 Claude Code 代理團隊">
+  <meta property="og:description" content="gstack 是 Y Combinator 總裁 Garry Tan 開源的 Claude Code 技能集，GitHub 星標達 133,236。它以 23 個角色技能與 8 項工具把單一代理擴充為具備分工的開發團隊，本文解析其核心架構、七階段 sprint 流程、跨代理支援範圍，以及針對提示注入的多層安全設計...">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-gstack-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="gstack 開源：YC 總裁的 Claude Code 代理團隊">
+  <meta name="twitter:description" content="gstack 是 Y Combinator 總裁 Garry Tan 開源的 Claude Code 技能集，GitHub 星標達 133,236。它以 23 個角色技能與 8 項工具把單一代理擴充為具備分工的開發團隊，本文解析其核心架構、七階段 sprint 流程、跨代理支援範圍，以及針對提示注入的多層安全設計...">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-gstack-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "gstack 開源：YC 總裁的 Claude Code 代理團隊",
+      "description": "gstack 是 Y Combinator 總裁 Garry Tan 開源的 Claude Code 技能集，GitHub 星標達 133,236。它以 23 個角色技能與 8 項工具把單一代理擴充為具備分工的開發團隊，本文解析其核心架構、七階段 sprint 流程、跨代理支援範圍，以及針對提示注入的多層安全設計與實際導入成本。",
+      "datePublished": "2026-09-16T16:00:01+08:00",
+      "dateModified": "2026-09-16T16:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/garrytan/gstack" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-gstack-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "gstack 需要付費嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "gstack 採 MIT 授權，專案說明明確標示為免費且永久可用。使用者仍需自行負擔所選編碼代理的訂閱費用，以及執行代理時產生的模型呼叫成本。" }
+        },
+        {
+          "@type": "Question",
+          "name": "安裝 gstack 需要什麼前置條件？",
+          "acceptedAnswer": { "@type": "Answer", "text": "專案列出的需求包括 Claude Code、Git 與 Bun 執行環境，Windows 使用者另需 Node.js。若使用開發者體驗審查與原生安全稽核技能，還需要額外的原生工具鏈支援。" }
+        },
+        {
+          "@type": "Question",
+          "name": "gstack 只能用於 Claude Code 嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不是。安裝程式支援十種編碼代理，包括 Codex CLI、OpenCode、Cursor 與 Factory Droid 等。對無法安裝技能檔的環境，專案另外提供一份約 2KB 的摘要文件，可直接附加至代理指示檔。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "gstack 開源：YC 總裁的 Claude Code 代理團隊",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">gstack 開源：YC 總裁的 Claude Code 代理團隊</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">gstack 開源：YC 總裁的 Claude Code 代理團隊</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月16日 16:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-gstack-news-cover.jpg" alt="gstack 開源：YC 總裁的 Claude Code 代理團隊" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/garrytan/gstack" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/garrytan/gstack
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>gstack 是 Y Combinator 總裁 Garry Tan 於 2026 年 3 月開源的 Claude Code 技能集，GitHub 星標已達 133,236，複製數 19,861。它把 23 個角色技能與 8 項工具技能打包為一套完整開發流程，全部以斜線指令與 Markdown 實作，採 MIT 授權釋出。這份專案的價值不在於新增幾個好用指令，而在於它主張代理的產出品質取決於流程是否被明確寫下，並試圖用可複製的技能組合把單一代理擴充為具備分工的工程團隊。</p>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>gstack 是 YC 總裁 Garry Tan 開源的 Claude Code 技能集，累積 133,236 星，把 23 個角色技能與 8 項工具整合為完整開發流程。
+<!-- End AEO Capsule --></p>
+
+<h2 id="gstack-是什麼">gstack 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>gstack 是一套以 Markdown 撰寫的代理技能集合，把產品經理、設計師、工程主管、安全官與發佈工程師等角色拆成獨立技能，供編碼代理在開發週期中依序呼叫。
+<!-- End AEO Capsule --></p>
+
+<p>專案的作者 Garry Tan 是 Y Combinator 總裁兼執行長，過去曾任 Palantir 早期工程與產品人員，並共同創辦 Posterous。他在專案說明中表示，自己於 2026 年的邏輯程式碼產出速率約為 2013 年的八百倍，而這個差距來自工具鏈的改變，而非個人能力的提升。gstack 即是他把日常作業方式公開化的結果，目標讀者包括仍在親自寫程式的技術創辦人、初次接觸 Claude Code 的使用者，以及需要在每次提交維持審查與測試品質的技術主管。</p>
+
+<h2 id="gstack-的核心架構包含哪些部分">gstack 的核心架構包含哪些部分？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>核心由 23 個角色技能與 8 項工具技能組成，涵蓋產品詰問、架構鎖定、設計把關、程式審查、瀏覽器測試、安全稽核與發佈自動化，全部以斜線指令與 Markdown 實作。
+<!-- End AEO Capsule --></p>
+
+<p>角色技能對應軟體團隊中的實際職能，例如負責重新框架產品問題的執行長審查、鎖定架構與資料流的工程主管審查、逐項評分並偵測生成內容樣板化的資深設計師審查，以及實際開啟瀏覽器點擊流程的品質保證負責人。工具技能則處理較機械的工作，包括銷毀性指令警告、目錄編輯鎖定、獨立第二意見審查、文件自動更新與圖表產生。兩層技能共用同一套狀態，前一項技能產出的設計文件會成為後續技能的輸入，因此不需要重複描述背景。</p>
+
+<h2 id="gstack-的-sprint-流程如何運作">gstack 的 sprint 流程如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>流程依思考、規劃、建置、審查、測試、發佈、反思七個階段推進，每項技能產出的文件成為下一項技能的輸入，使各步驟共享同一份設計與測試計畫。
+<!-- End AEO Capsule --></p>
+
+<p>專案說明把這七個階段描述為一次完整的開發衝刺。初始的產品詰問技能以六個強制問題迫使需求方在寫程式前釐清真實痛點，其產出的設計文件接著被架構審查與設計審查讀取；架構審查寫下的測試計畫再由品質保證技能接手執行。由於每一步都知悉前一步的結論，專案主張開發過程中較少出現無人承接的斷點。使用者若不想逐項呼叫，也可改用自動化審查管線，一次執行執行長、設計、開發者體驗與架構四層審查，架構審查排在最後，以確保發佈前的把關對象是最終修訂過的計畫。</p>
+
+<h2 id="gstack-支援哪些-ai-編碼代理">gstack 支援哪些 AI 編碼代理？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>除 Claude Code 外，安裝程式會自動偵測並支援 Codex CLI、OpenCode、Cursor、Kiro、OpenClaw 與 Hermes 等十種編碼代理。
+<!-- End AEO Capsule --></p>
+
+<p>跨代理支援是這份專案的關鍵設計之一。專案說明指出，gstack 可運作於十種編碼代理，安裝程式會偵測使用者環境中已存在的代理並產生對應格式的技能檔。其中 OpenClaw 的整合方式較特殊，由於 OpenClaw 透過代理通訊協議啟動 Claude Code 工作階段，因此只要 Claude Code 安裝了 gstack，相關技能即可直接生效。專案同時在技能市集 ClawHub 上提供四個可直接於 OpenClaw 對話中執行的方法論技能，涵蓋產品詰問、策略質疑、根因調查與每週工程回顧。此外，專案對無法安裝技能的環境提供一份約 2KB 的摘要檔，可附加至專案的代理指示文件中，取得方法論層面的效力。</p>
+
+<h2 id="gstack-與-karpathy-的-ai-編碼規則有什麼關係">gstack 與 Karpathy 的 AI 編碼規則有什麼關係？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>Karpathy 歸納的四類失敗模式為錯誤假設、過度複雜、無關修改與命令式撰寫，gstack 以流程技能在整個開發週期強制檢查這四項。
+<!-- End AEO Capsule --></p>
+
+<p>專案說明直接引用 Andrej Karpathy 對 AI 編碼的觀察，指出四種常見失敗模式分別是基於錯誤假設動工、產出不必要的複雜度、進行與任務無關的修改，以及以命令式步驟取代可驗證的目標描述。gstack 主張自身屬於流程強制層，而不是規則文件本身：產品詰問技能負責在動工前把假設攤開，架構審查技能攔下推測性的設計決定，程式審查技能標記多餘複雜度與順手修改，發佈技能則把任務轉為可驗證目標。專案認為這補上了單靠規則文件無法覆蓋整個開發週期的缺口。</p>
+
+<h2 id="gstack-的安全設計有哪些特點">gstack 的安全設計有哪些特點？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>gstack 對代理讀取的網頁內容設有多層防護，包括內容標記、隱藏元素剝離、網址封鎖清單，以及在本機執行、約 22MB 的機器學習分類器。
+<!-- End AEO Capsule --></p>
+
+<p>當代理具備瀏覽器操作能力，外部網頁的內容即成為潛在的指令注入來源。專案說明其防護分為兩層，第一層在每次讀取頁面時施加內容標記、隱藏元素剝離、無障礙標籤清理與網址封鎖清單；第二層則以一個約 22MB 的機器學習分類器在本機側行程中掃描頁面衍生內容，並透過裁決合併機制要求兩個模型一致同意才攔截，以避免單一模型對 Stack Overflow 類型頁面產生誤判。所有防護均在使用者本機執行，不進行網路傳輸，並提供環境變數作為緊急關閉開關。此外，專案的所有對外傳輸都會先寫入雜湊鏈結的收據記錄，供使用者稽核。</p>
+
+<h2 id="gstack-的數據表現如何">gstack 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>gstack 在 GitHub 累積 133,236 星與 19,861 次複製，採 MIT 授權，主要語言為 TypeScript，2026 年 3 月建立並持續更新。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat"><div class="stat-num">133,236</div><div class="stat-label">GitHub 星標</div></div>
+  <div class="stat"><div class="stat-num">19,861</div><div class="stat-label">Forks</div></div>
+  <div class="stat"><div class="stat-num">MIT</div><div class="stat-label">開源授權</div></div>
+  <div class="stat"><div class="stat-num">TypeScript</div><div class="stat-label">主要語言</div></div>
+  <div class="stat"><div class="stat-num">2026-03</div><div class="stat-label">創建時間</div></div>
+  <div class="stat"><div class="stat-num">891</div><div class="stat-label">待處理議題</div></div>
+</div>
+
+<p><img src="assets/images/posts/github-gstack-news-shot1.png" alt="gstack README 開頭（項目名稱、Garry Tan 對 Karpathy 引言的說明與 1,237 次貢獻統計）" /></p>
+
+<p><img src="assets/images/posts/github-gstack-news-shot2.png" alt="gstack GitHub 首頁頂部（repo 名 garrytan/gstack、專案描述與 133k 星標統計）" /></p>
+
+<p><img src="assets/images/posts/github-gstack-news-shot3.png" alt="gstack Contributors 統計頁（倉庫名 garrytan/gstack 與每週提交次數圖表）" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>本文資訊來源為 gstack 的 GitHub 儲存庫，內容涵蓋星標與複製統計、技能清單、安裝說明、安全架構文件與授權條款等公開資料。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>gstack 儲存庫：<a href="https://github.com/garrytan/gstack">garrytan/gstack</a></li>
+  <li>技能深入說明文件：<a href="https://github.com/garrytan/gstack/blob/main/docs/skills.md">docs/skills.md</a></li>
+  <li>安全架構文件：<a href="https://github.com/garrytan/gstack/blob/main/ARCHITECTURE.md">ARCHITECTURE.md</a></li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>以下整理三個關於 gstack 的常見疑問，涵蓋費用、最低安裝需求，以及這套技能是否只能用於 Claude Code 環境。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>gstack 需要付費嗎？</h3>
+
+gstack 採 MIT 授權，專案說明明確標示為免費且永久可用。使用者仍需自行負擔所選編碼代理的訂閱費用，以及執行代理時產生的模型呼叫成本。
+
+<h3>安裝 gstack 需要什麼前置條件？</h3>
+
+專案列出的需求包括 Claude Code、Git 與 Bun 執行環境，Windows 使用者另需 Node.js。若使用開發者體驗審查與原生安全稽核技能，還需要額外的原生工具鏈支援。
+
+<h3>gstack 只能用於 Claude Code 嗎？</h3>
+
+不是。安裝程式支援十種編碼代理，包括 Codex CLI、OpenCode、Cursor 與 Factory Droid 等。對無法安裝技能檔的環境，專案另外提供一份約 2KB 的摘要文件，可直接附加至代理指示檔。
+
+</div>
+
+<h2 id="總結gstack-適合什麼樣的團隊">總結：gstack 適合什麼樣的團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>gstack 適合已在用 Claude Code 或 Codex 等代理、但缺乏固定流程的技術團隊，透過角色分工與強制審查步驟，把單次提示導入可重複的開發紀律。
+<!-- End AEO Capsule --></p>
+
+<p>gstack 反映的是代理工具鏈的下一個競爭面向：當模型能力逐漸趨同，差異化將落在流程與紀律的封裝上。這套專案以角色分工取代單一提示，把品質要求寫進技能本身，使審查與測試不再是靠個人記得才做的事。對資源有限的小型團隊而言，這種把大型組織的分工經驗預先寫成技能的做法，可能是把代理從輔助工具推向生產力的關鍵一步；但專案的成熟度仍反映在 891 個待處理議題上，實際導入時仍須自行評估維護成本。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI" class="badge bg-secondary text-decoration-none me-1">AI</a>
+          
+          
+          <a href="/search/?q=Claude+Code" class="badge bg-secondary text-decoration-none me-1">Claude Code</a>
+          
+          
+          <a href="/search/?q=gstack" class="badge bg-secondary text-decoration-none me-1">gstack</a>
+          
+          
+          <a href="/search/?q=Y+Combinator" class="badge bg-secondary text-decoration-none me-1">Y Combinator</a>
+          
+          
+          <a href="/search/?q=%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">代理</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E7%99%BC%E8%80%85%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開發者工具</a>
+          
+          
+          <a href="/search/?q=Agent+Skills" class="badge bg-secondary text-decoration-none me-1">Agent Skills</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news&text=gstack+%E9%96%8B%E6%BA%90%EF%BC%9AYC+%E7%B8%BD%E8%A3%81%E7%9A%84+Claude+Code+%E4%BB%A3%E7%90%86%E5%9C%98%E9%9A%8A" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?gstack+%E9%96%8B%E6%BA%90%EF%BC%9AYC+%E7%B8%BD%E8%A3%81%E7%9A%84+Claude+Code+%E4%BB%A3%E7%90%86%E5%9C%98%E9%9A%8A%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-gstack-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-face-recognition-news" class="text-decoration-none">face_recognition 開源：5.7 萬星的人臉辨識入門庫</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/free-claude-code-news" class="text-decoration-none">free-claude-code 開源：1.3B 免費 Token 統一代理層</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-marketingskills-news" class="text-decoration-none">52,996 星開源項目：Marketing Skills 行銷技能庫</a>
+              <br><small class="text-muted">2026-10-05</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-i-have-adhd-news" class="text-decoration-none">53,555 星開源項目：i-have-adhd 讓 AI 代理先講重點</a>
+              <br><small class="text-muted">2026-10-05</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/google-private-ai-compute-memory-news" class="text-decoration-none">Google Private AI Compute 持久記憶兼顧隱私</a>
+              <br><small class="text-muted">2026-10-05</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

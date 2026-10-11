@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#2a3a6a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a2a4a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8C84A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ECDC4;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3DB8A5;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="650" cy="80" r="120" fill="#ffffff" opacity="0.03"/>
+  <circle cx="100" cy="380" r="80" fill="#ffffff" opacity="0.02"/>
+  <circle cx="400" cy="225" r="200" fill="#ffffff" opacity="0.02"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+  </g>
+
+  <!-- Speech bubbles - main visual -->
+  <!-- Large speech bubble 1 -->
+  <g transform="translate(80, 60)">
+    <path d="M0,20 C0,9 9,0 20,0 L160,0 C171,0 180,9 180,20 L180,80 C180,91 171,100 160,100 L50,100 L25,125 L30,100 L20,100 C9,100 0,91 0,80 Z" 
+          fill="none" stroke="url(#accent)" stroke-width="2.5" opacity="0.9"/>
+    <text x="30" y="35" font-family="system-ui, sans-serif" font-size="12" fill="url(#accent)" opacity="0.8">聽你意思係…</text>
+    <text x="30" y="53" font-family="system-ui, sans-serif" font-size="12" fill="url(#accent)" opacity="0.8">即係你覺得咁樣</text>
+    <text x="30" y="71" font-family="system-ui, sans-serif" font-size="12" fill="url(#accent)" opacity="0.8">會比較好？</text>
+    <text x="30" y="92" font-family="system-ui, sans-serif" font-size="9" fill="#4ECDC4" opacity="0.6">👂 主動聆聽</text>
+  </g>
+
+  <!-- Large speech bubble 2 -->
+  <g transform="translate(480, 50)">
+    <path d="M0,20 C0,9 9,0 20,0 L200,0 C211,0 220,9 220,20 L220,90 C220,101 211,110 200,110 L60,110 L35,138 L40,110 L20,110 C9,110 0,101 0,90 Z" 
+          fill="none" stroke="url(#accent2)" stroke-width="2.5" opacity="0.9"/>
+    <text x="20" y="32" font-family="system-ui, sans-serif" font-size="11" fill="#4ECDC4" opacity="0.85">關於呢個 proposal，</text>
+    <text x="20" y="49" font-family="system-ui, sans-serif" font-size="11" fill="#4ECDC4" opacity="0.85">我有三個建議：</text>
+    <text x="20" y="68" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.6">第一，先做用戶訪問…</text>
+    <text x="20" y="84" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.6">第二，用 MVP 測試…</text>
+    <text x="20" y="100" font-family="system-ui, sans-serif" font-size="9" fill="#4ECDC4" opacity="0.6">💡 3 點法則</text>
+  </g>
+
+  <!-- Small speech bubble 3 -->
+  <g transform="translate(20, 310)">
+    <path d="M0,15 C0,7 7,0 15,0 L130,0 C138,0 145,7 145,15 L145,55 C145,63 138,70 130,70 L45,70 L25,85 L28,70 L15,70 C7,70 0,63 0,55 Z" 
+          fill="none" stroke="url(#accent)" stroke-width="1.5" opacity="0.7"/>
+    <text x="15" y="28" font-family="system-ui, sans-serif" font-size="9" fill="#ffffff" opacity="0.7">我明你感受，</text>
+    <text x="15" y="42" font-family="system-ui, sans-serif" font-size="9" fill="#ffffff" opacity="0.7">好抱歉令你失望。</text>
+    <text x="15" y="58" font-family="system-ui, sans-serif" font-size="8" fill="#FB923C" opacity="0.6">🤝 EAR 模型</text>
+  </g>
+
+  <!-- Small speech bubble 4 -->
+  <g transform="translate(580, 320)">
+    <path d="M0,15 C0,7 7,0 15,0 L140,0 C148,0 155,7 155,15 L155,55 C155,63 148,70 140,70 L50,70 L30,88 L33,70 L15,70 C7,70 0,63 0,55 Z" 
+          fill="none" stroke="url(#accent2)" stroke-width="1.5" opacity="0.7"/>
+    <text x="15" y="28" font-family="system-ui, sans-serif" font-size="9" fill="#ffffff" opacity="0.7">呢個我要 check 下，</text>
+    <text x="15" y="42" font-family="system-ui, sans-serif" font-size="9" fill="#ffffff" opacity="0.7">聽日覆你可以嗎？</text>
+    <text x="15" y="58" font-family="system-ui, sans-serif" font-size="8" fill="#4ECDC4" opacity="0.6">📋 誠實跟進</text>
+  </g>
+
+  <!-- Center connection nodes -->
+  <g transform="translate(350, 200)">
+    <!-- Central node -->
+    <circle cx="0" cy="0" r="35" fill="url(#accent)" opacity="0.15"/>
+    <circle cx="0" cy="0" r="25" fill="url(#accent)" opacity="0.3"/>
+    <circle cx="0" cy="0" r="18" fill="url(#accent)" filter="url(#glow)" opacity="0.8"/>
+    <text x="0" y="5" font-family="system-ui, sans-serif" font-size="16" fill="#1a2a4a" text-anchor="middle" font-weight="bold">說</text>
+  </g>
+
+  <!-- Connection lines from center -->
+  <g stroke="url(#accent)" stroke-width="1" opacity="0.3" stroke-dasharray="5,5">
+    <line x1="260" y1="140" x2="350" y2="200"/>
+    <line x1="480" y1="140" x2="350" y2="200"/>
+    <line x1="165" y1="350" x2="350" y2="200"/>
+    <line x1="580" y1="350" x2="350" y2="200"/>
+  </g>
+
+  <!-- Decorative nodes -->
+  <g opacity="0.4">
+    <!-- Small dots on connection lines -->
+    <circle cx="290" cy="165" r="3" fill="#FB923C"/>
+    <circle cx="440" cy="165" r="3" fill="#4ECDC4"/>
+    <circle cx="240" cy="290" r="2.5" fill="#FB923C"/>
+    <circle cx="510" cy="280" r="2.5" fill="#4ECDC4"/>
+  </g>
+
+  <!-- Title -->
+  <g transform="translate(400, 240)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="32" fill="#ffffff" text-anchor="middle" font-weight="bold" letter-spacing="2">
+      溝通表達力提升指南
+    </text>
+    <text x="0" y="32" font-family="system-ui, sans-serif" font-size="16" fill="#FB923C" text-anchor="middle" opacity="0.9">
+      職場・社交・家庭 — 實用說話攻略
+    </text>
+    <text x="0" y="58" font-family="system-ui, sans-serif" font-size="12" fill="#ffffff" text-anchor="middle" opacity="0.5">
+      由經歷者寫俾香港人嘅溝通實戰手冊
+    </text>
+    <text x="0" y="78" font-family="system-ui, sans-serif" font-size="10" fill="#4ECDC4" text-anchor="middle" opacity="0.5">
+      PREP · SCQA · NVC · SBI · EAR
+    </text>
+  </g>
+
+  <!-- Bottom accent bar -->
+  <rect x="300" y="400" width="200" height="3" rx="1.5" fill="url(#accent)" opacity="0.6"/>
+</svg>

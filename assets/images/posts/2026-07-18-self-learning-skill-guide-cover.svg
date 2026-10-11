@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d4a7a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8c84c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9b59b6;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#8e44ad;stop-opacity:0.6" />
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#2980b9;stop-opacity:0.7" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
+
+  <!-- Subtle circular pattern -->
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.05"/>
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.05"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.05"/>
+
+  <!-- Brain / Learning icon -->
+  <g transform="translate(256, 130)" filter="url(#softGlow)">
+    <!-- Book icon -->
+    <rect x="-55" y="-40" width="110" height="80" rx="6" fill="#f5f0e0" stroke="#c9a84c" stroke-width="2" opacity="0.9"/>
+    <!-- Book spine -->
+    <rect x="-55" y="-40" width="8" height="80" rx="2" fill="url(#gold)" opacity="0.8"/>
+    <!-- Book pages / lines -->
+    <rect x="-40" y="-25" width="75" height="3" rx="1.5" fill="#333" opacity="0.15"/>
+    <rect x="-40" y="-15" width="60" height="3" rx="1.5" fill="#333" opacity="0.15"/>
+    <rect x="-40" y="-5" width="65" height="3" rx="1.5" fill="#333" opacity="0.15"/>
+    <rect x="-40" y="5" width="55" height="3" rx="1.5" fill="#333" opacity="0.15"/>
+    <rect x="-40" y="15" width="45" height="3" rx="1.5" fill="#333" opacity="0.12"/>
+    <!-- Sparkle / lightbulb on top -->
+    <g transform="translate(40, -48)">
+      <circle cx="0" cy="0" r="14" fill="url(#gold)" opacity="0.9"/>
+      <line x1="0" y1="-10" x2="0" y2="-18" stroke="#e8c84c" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+      <line x1="6" y1="-8" x2="11" y2="-13" stroke="#e8c84c" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+      <line x1="-6" y1="-8" x2="-11" y2="-13" stroke="#e8c84c" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+      <path d="M-5,3 Q0,7 5,3" fill="none" stroke="#1a2a4a" stroke-width="1.2" opacity="0.6"/>
+      <circle cx="0" cy="-1" r="3" fill="#1a2a4a" opacity="0.4"/>
+    </g>
+  </g>
+
+  <!-- 4-step process badges -->
+  <g transform="translate(256, 208)">
+    <rect x="-110" y="-12" width="50" height="20" rx="10" fill="url(#gold)" opacity="0.8"/>
+    <text x="-85" y="3" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#1a2a4a" text-anchor="middle" font-weight="bold">Step 1 選科</text>
+
+    <rect x="-50" y="-12" width="50" height="20" rx="10" fill="url(#cyan)" opacity="0.8"/>
+    <text x="-25" y="3" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Step 2 規劃</text>
+
+    <rect x="10" y="-12" width="50" height="20" rx="10" fill="url(#purple)" opacity="0.8"/>
+    <text x="35" y="3" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#fff" text-anchor="middle" font-weight="bold">Step 3 執行</text>
+
+    <rect x="70" y="-12" width="50" height="20" rx="10" fill="url(#gold)" opacity="0.7"/>
+    <text x="95" y="3" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#1a2a4a" text-anchor="middle" font-weight="bold">Step 4 變現</text>
+  </g>
+
+  <!-- Main title -->
+  <g transform="translate(256, 280)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="26" font-weight="bold" fill="#ffffff" text-anchor="middle">自學新技能</text>
+    <text x="0" y="32" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="22" font-weight="bold" fill="url(#gold)" text-anchor="middle">4 步學習系統實戰指南</text>
+  </g>
+
+  <!-- Subtitle -->
+  <g transform="translate(256, 330)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="14" fill="#b0c4de" text-anchor="middle">由零基礎到專業級 · AI 時代必備自學方法</text>
+  </g>
+
+  <!-- Info cards at bottom -->
+  <g transform="translate(50, 370)">
+    <rect x="0" y="0" width="85" height="70" rx="8" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.15"/>
+    <text x="42" y="25" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="24" font-weight="bold" fill="url(#gold)" text-anchor="middle">4</text>
+    <text x="42" y="50" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#b0c4de" text-anchor="middle">學習步驟</text>
+  </g>
+  <g transform="translate(156, 370)">
+    <rect x="0" y="0" width="85" height="70" rx="8" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.15"/>
+    <text x="42" y="25" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="24" font-weight="bold" fill="#3498db" text-anchor="middle">AI</text>
+    <text x="42" y="50" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#b0c4de" text-anchor="middle">AI 輔助學習</text>
+  </g>
+  <g transform="translate(262, 370)">
+    <rect x="0" y="0" width="85" height="70" rx="8" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.15"/>
+    <text x="42" y="25" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="24" font-weight="bold" fill="#2ecc71" text-anchor="middle">21</text>
+    <text x="42" y="50" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#b0c4de" text-anchor="middle">日習慣建立</text>
+  </g>
+  <g transform="translate(368, 370)">
+    <rect x="0" y="0" width="85" height="70" rx="8" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.15"/>
+    <text x="42" y="25" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="24" font-weight="bold" fill="#e74c3c" text-anchor="middle">→</text>
+    <text x="42" y="50" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="10" fill="#b0c4de" text-anchor="middle">技能變現</text>
+  </g>
+
+  <!-- Stars -->
+  <circle cx="50" cy="50" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="460" cy="45" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="420" cy="100" r="1" fill="#ffffff" opacity="0.3"/>
+  <circle cx="90" cy="80" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="430" cy="70" r="1" fill="#ffffff" opacity="0.3"/>
+  <circle cx="140" cy="60" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="40" cy="150" r="1.5" fill="#ffffff" opacity="0.3"/>
+  <circle cx="475" cy="155" r="1" fill="#ffffff" opacity="0.4"/>
+  <circle cx="30" cy="300" r="1" fill="#ffffff" opacity="0.3"/>
+  <circle cx="485" cy="320" r="1" fill="#ffffff" opacity="0.3"/>
+
+  <!-- Bottom tag -->
+  <g transform="translate(256, 490)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="12" fill="#5a7a9a" text-anchor="middle">Sun ny's Blog · 2026</text>
+  </g>
+</svg>

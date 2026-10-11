@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>starship 開源：6 萬星跨 Shell 提示符工具 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="starship 是 GitHub 上累積 60,144 顆星標的跨 Shell 提示符工具，以 Rust 撰寫並採用 ISC 授權。本文整理它的模組化提示符架構、跨 Shell 與跨平台運作方式、最新 v1.26.0 版本內容，以及它與其他命令列提示符方案之間的差異。">
+  <meta name="keywords" content="starship, Shell, 終端機, Rust, 開源, 命令列, GitHub">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="starship 開源：6 萬星跨 Shell 提示符工具">
+  <meta property="og:description" content="starship 是 GitHub 上累積 60,144 顆星標的跨 Shell 提示符工具，以 Rust 撰寫並採用 ISC 授權。本文整理它的模組化提示符架構、跨 Shell 與跨平台運作方式、最新 v1.26.0 版本內容，以及它與其他命令列提示符方案之間的差異。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-starship-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="starship 開源：6 萬星跨 Shell 提示符工具">
+  <meta name="twitter:description" content="starship 是 GitHub 上累積 60,144 顆星標的跨 Shell 提示符工具，以 Rust 撰寫並採用 ISC 授權。本文整理它的模組化提示符架構、跨 Shell 與跨平台運作方式、最新 v1.26.0 版本內容，以及它與其他命令列提示符方案之間的差異。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-starship-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "starship 開源：6 萬星跨 Shell 提示符工具",
+      "description": "starship 是 GitHub 上累積 60,144 顆星標的跨 Shell 提示符工具，以 Rust 撰寫並採用 ISC 授權。本文整理它的模組化提示符架構、跨 Shell 與跨平台運作方式、最新 v1.26.0 版本內容，以及它與其他命令列提示符方案之間的差異。",
+      "datePublished": "2026-10-04T20:00:01+08:00",
+      "dateModified": "2026-10-04T20:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/starship/starship" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-starship-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "starship 是免費的嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "程式採用 ISC 授權，可自由用於個人與商業專案，包括修改與再散布，只需保留原始授權聲明。" }
+        },
+        {
+          "@type": "Question",
+          "name": "starship 支援哪些 Shell？",
+          "acceptedAnswer": { "@type": "Answer", "text": "官方文件列出 Bash、Cmd、Elvish、Fish、Ion、Nushell、PowerShell、Tcsh、Xonsh 與 Zsh 的整合方式，覆蓋主流命令列環境。" }
+        },
+        {
+          "@type": "Question",
+          "name": "使用 starship 需要什麼前置需求？",
+          "acceptedAnswer": { "@type": "Answer", "text": "建議在終端機安裝並啟用 Nerd Font，以便正確顯示提示符中的圖示；其餘只需基本的 Shell 設定知識。" }
+        },
+        {
+          "@type": "Question",
+          "name": "starship 會拖慢終端機嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "它採用原生執行檔與非同步外部指令查詢，並提供逾時與快取設定；相較滿載外掛的 Shell 框架，啟動負擔通常較低。" }
+        },
+        {
+          "@type": "Question",
+          "name": "starship 可以用於商業專案嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。ISC 授權允許商業使用、修改與再散布，開發者可依需求自由整合，無須支付授權費用。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "starship 開源：6 萬星跨 Shell 提示符工具",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">starship 開源：6 萬星跨 Shell 提示符工具</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">starship 開源：6 萬星跨 Shell 提示符工具</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月04日 20:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/starship/starship" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-starship-news-cover.jpg" alt="starship 開源：6 萬星跨 Shell 提示符工具" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/starship/starship" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/starship/starship
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>starship 是一套以 Rust 撰寫的跨 Shell 命令列提示符工具，截至二零二六年十月在 GitHub 累積 60,144 顆星標與 2,692 次複製，採用 ISC 授權，最新正式版本為 v1.26.0。該專案自二零一九年四月建立後持續維護至今，同時支援 Bash、Zsh、Fish、PowerShell、Nushell 與 Xonsh 等十多種 Shell，是命令列生態中覆蓋面最廣的提示符方案之一。</p>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>starship 是以 Rust 撰寫的跨 Shell 提示符工具，GitHub 星標 60,144 顆，採用 ISC 授權，支援十多種 Shell。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-starship-news-shot1.png" alt="starship 的 GitHub 儲存庫 README 開頭，顯示專案名稱 Starship、副標題 Cross-shell prompt，以及說明其快速、可自訂與通用特性的簡介段落" /></p>
+
+<h2 id="starship-是什麼">starship 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>starship 是一套可在任何 Shell 與作業系統運作的命令列提示符，會依當前目錄與環境自動顯示 Git 分支、語言版本與執行狀態等資訊。
+<!-- End AEO Capsule --></p>
+
+<p>starship 的官方定位相當清楚，它是一套極簡、極速且可無限自訂的跨 Shell 提示符。使用者在原本的 Shell 設定檔中加入一行初始化指令後，提示符的內容便交由 starship 接管，不需要為了換 Shell 而重新設計整套設定。</p>
+
+<p>它的運作邏輯建立在情境感知之上。當使用者進入一個 Git 儲存庫，提示符會顯示當前分支與工作區狀態；當目錄中存在特定語言專案，它會顯示對應的執行環境版本；當上一道指令執行時間過長，它也會標示耗時。這些資訊平時隱藏，需要時才出現，讓提示符維持簡潔而不失實用。</p>
+
+<h2 id="starship-的開發歷史與社群規模如何">starship 的開發歷史與社群規模如何？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>starship 於 2019 年 4 月建立，由全球貢獻者共同維護，至今累積逾 650 位貢獻者，是終端機提示符領域最具規模的開源專案之一。
+<!-- End AEO Capsule --></p>
+
+<p>專案最早的版本發布於二零一九年四月，由開發者社群以 Rust 語言實作。當時市面上已有 spaceship-prompt 等知名提示符專案，但它們多半綁定單一 Shell，換到其他環境就得重寫。starship 選擇以獨立的執行檔形式存在，由不同 Shell 負責呼叫，從架構上避開重複實作的問題。</p>
+
+<p>經過六年迭代，專案已從單純的提示符工具成長為具備完整生態的專案。官方維護多語言文件、設定範例與視覺化配置工具，社群則貢獻各式預設主題與模組。專案累積逾 650 位貢獻者，README 同時提供十多種語言的翻譯版本，這種規模在同類工具中並不常見。</p>
+
+<h2 id="starship-的核心技術特色有哪些">starship 的核心技術特色有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>核心特色包括以單一 Rust 執行檔支援所有 Shell、模組化提示符設計、情境感知的自動資訊顯示，以及可完整自訂的設定檔格式。
+<!-- End AEO Capsule --></p>
+
+<p>第一項特色是單一二進位檔的設計。starship 以 Rust 編譯成原生執行檔，不依賴特定 Shell 的腳本語言。無論使用 Bash 或 PowerShell，實際執行提示符渲染的都是同一份程式碼，行為因此在不同平台上保持一致。</p>
+
+<p>第二項特色是模組化的提示符結構。整個提示符由數十個獨立模組組合而成，涵蓋 Git 狀態、程式語言版本、雲端環境、容器情境與執行耗時等類別。使用者可在設定檔中逐項決定顯示與否、順序與格式，未啟用的模組不會產生額外負擔。</p>
+
+<p>第三項特色是效能導向的實作。提示符會在使用者每次敲下 Enter 後重新渲染，延遲直接影響操作手感。專案以非同步與快取機制處理較耗時的外部指令，官方文件亦提供效能調校指引，這也是它能在社群中建立口碑的關鍵。</p>
+
+<h2 id="starship-如何做到跨-shell-與跨平台支援">starship 如何做到跨 Shell 與跨平台支援？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>starship 以獨立執行檔配合各 Shell 的初始化腳本運作，官方提供十多種 Shell 整合方式，並支援各大作業系統。
+<!-- End AEO Capsule --></p>
+
+<p>運作方式是把提示符的生成與顯示分離。Shell 只負責在適當時機呼叫 starship 執行檔，取得渲染完成的提示符字串後輸出。這種設計讓新增 Shell 支援的工作量大幅降低，只需提供對應的初始化與觸發腳本，核心渲染邏輯不必改動。</p>
+
+<p>在安裝層面，專案覆蓋的範圍同樣廣。Linux 使用者可透過發行版套件庫或官方安裝腳本取得，macOS 可經由 Homebrew 或 MacPorts 安裝，Windows 則提供 MSI 安裝檔以及 winget、Scoop 與 Chocolatey 等套件來源。NixOS、Alpine、Fedora 與 Ubuntu 等系統亦都有對應管道。</p>
+
+<p>在 Shell 層面，官方文件列出 Bash、Cmd、Elvish、Fish、Ion、Nushell、PowerShell、Tcsh、Xonsh 與 Zsh 的設定方式。使用者只需在既有設定檔末端加入一行初始化指令，重新開啟 Shell 即可生效。</p>
+
+<h2 id="starship-的專案數據與版本節奏如何">starship 的專案數據與版本節奏如何？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>截至二零二六年十月，starship 擁有 60,144 顆星標、2,692 次複製與逾 650 位貢獻者，最新版本 v1.26.0 於六月二十八日發布。
+<!-- End AEO Capsule --></p>
+
+<ul class="ui-stat-grid">
+  <li class="ui-stat"><span class="ui-stat-num">60,144</span><span class="ui-stat-label">GitHub 星標</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">2,692</span><span class="ui-stat-label">複製次數</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">650+</span><span class="ui-stat-label">貢獻者</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">1,058</span><span class="ui-stat-label">開啟議題</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">Rust</span><span class="ui-stat-label">主要語言</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">ISC</span><span class="ui-stat-label">授權條款</span></li>
+</ul>
+
+<p>上述數字反映的是一套成熟且仍持續演進的工具。最新正式版本 v1.26.0 發布於二零二六年六月二十八日，儲存庫最近一次提交則在十月三日，內容為依賴套件更新，顯示維護節奏並未因專案年資而放緩。</p>
+
+<p>下圖為專案儲存庫首頁頂部，可見專案名稱、主要語言標示、星標數與授權資訊。</p>
+
+<p><img src="/assets/images/posts/github-starship-news-shot2.png" alt="starship 的 GitHub 儲存庫首頁頂部，顯示專案名稱 starship/starship、主要語言 Rust、星標數與 ISC 授權標示" /></p>
+
+<p>下圖為專案貢獻統計頁，顯示近三個月各主要貢獻者的提交分布。</p>
+
+<p><img src="/assets/images/posts/github-starship-news-shot3.png" alt="starship 的 GitHub 貢獻者統計頁，顯示二零二六年七月至九月期間各貢獻者的每週提交長條圖" /></p>
+
+<h2 id="starship-與其他-shell-提示符方案相比有何差異">starship 與其他 Shell 提示符方案相比有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>與 Oh My Zsh 等框架相比，starship 不綁定特定 Shell，以單一執行檔運作並保持輕量；取捨在於它不負責外掛與別名管理，須由使用者另行配置。
+<!-- End AEO Capsule --></p>
+
+<p>差異首先體現在定位。Oh My Zsh 與 Prezto 等專案屬於完整的 Shell 設定框架，除了提示符之外，還包含外掛管理、別名與補全等功能，但僅支援 Zsh。starship 則專注於提示符本身，換取跨 Shell 的通用性。</p>
+
+<p>其次是啟動成本的取捨。傳統框架透過大量 Shell 腳本載入功能，Shell 啟動時間容易隨外掛增加而上升；starship 以原生執行檔渲染提示符，啟動負擔相對可控。不過提示符每次重繪都需要呼叫外部程式，在極低速的環境中仍可能感受到差異，官方因此提供快取與逾時設定。</p>
+
+<p>第三是設定方式的取捨。starship 使用單一 TOML 設定檔描述所有模組行為，格式統一且易於版本控制；傳統框架則以 Shell 腳本為主要設定方式，彈性更大但可攜性較低。選擇取決於使用者更重視跨環境一致，還是單一 Shell 的深度整合。</p>
+
+<h2 id="如何快速開始使用-starship">如何快速開始使用 starship？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>可透過官方安裝腳本或系統套件庫安裝，接著在 Shell 設定檔加入一行初始化指令並重開終端機；進階設定則集中於單一 TOML 設定檔。
+<!-- End AEO Capsule --></p>
+
+<p>入門流程相當直接。Linux 與 macOS 使用者可執行官方安裝腳本，或改用各發行版套件庫；Windows 使用者可下載安裝檔或透過套件管理器安裝。此後在既有 Shell 設定檔末端加入對應的初始化指令，重新開啟終端機即可看到預設提示符。</p>
+
+<p>若需進一步調整，starship 的所有行為都集中在一個設定檔中。使用者可指定顯示哪些模組、調整順序與圖示、切換主題風格，或針對特定目錄套用不同設定。官方網站提供完整的設定文件與多組預設主題，對照調整即可，無須修改程式碼。</p>
+
+<div class="language-toml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># ~/.config/starship.toml</span>
+<span class="py">add_newline</span> <span class="p">=</span> <span class="kc">false</span>
+
+<span class="nn">[directory]</span>
+<span class="py">truncation_length</span> <span class="p">=</span> <span class="mi">3</span>
+
+<span class="nn">[git_branch]</span>
+<span class="py">symbol</span> <span class="p">=</span> <span class="s">" "</span>
+</code></pre></div></div>
+
+<p>對於已熟悉命令列環境的使用者而言，從官方提供的預設主題出發，再逐步刪減不需要的模組，通常是維持提示符精簡與效率的實用做法。專案另提供互動式視覺化配置工具，可在瀏覽器中即時預覽調整結果。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>本文資訊來源為 starship 的 GitHub 儲存庫、官方網站與官方文件，包含專案說明、版本發布紀錄與貢獻者資料，讀者可透過下列連結查證原始資料。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/starship/starship</li>
+  <li>官方網站與文件：https://starship.rs</li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>starship 的常見疑問集中在授權、Shell 相容性與前置需求三方面；由於採用 ISC 授權，商業使用無須付費，且支援十多種 Shell 環境。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>starship 是免費的嗎？</h3>
+<p>程式採用 ISC 授權，可自由用於個人與商業專案，包括修改與再散布，只需保留原始授權聲明。</p>
+
+<h3>starship 支援哪些 Shell？</h3>
+<p>官方文件列出 Bash、Cmd、Elvish、Fish、Ion、Nushell、PowerShell、Tcsh、Xonsh 與 Zsh 的整合方式，覆蓋主流命令列環境。</p>
+
+<h3>使用 starship 需要什麼前置需求？</h3>
+<p>建議在終端機安裝並啟用 Nerd Font，以便正確顯示提示符中的圖示；其餘只需基本的 Shell 設定知識。</p>
+
+<h3>starship 會拖慢終端機嗎？</h3>
+<p>它採用原生執行檔與非同步外部指令查詢，並提供逾時與快取設定；相較滿載外掛的 Shell 框架，啟動負擔通常較低。</p>
+
+<h3>starship 可以用於商業專案嗎？</h3>
+<p>可以。ISC 授權允許商業使用、修改與再散布，開發者可依需求自由整合，無須支付授權費用。</p>
+
+</div>
+
+<h2 id="總結starship-適合什麼團隊">總結：starship 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>starship 適合需要跨多種 Shell 與作業系統維持一致體驗的開發者與團隊，其單一設定檔與活躍社群可降低維護成本；若重視外掛與別名整合則須另作搭配。
+<!-- End AEO Capsule --></p>
+
+<p>starship 的價值在於把命令列提示符從綁定單一 Shell 的設定，轉化為可跨環境通用的工具。專案擁有 60,144 顆星標、逾 650 位貢獻者與長達六年的維護歷史，並持續以 Rust 推進效能與相容性。對於同時在 Linux、macOS 與 Windows 之間切換，或在團隊中要求一致命令列體驗的使用者，它提供了成熟且資料充足的起點；若需求重心在別名、補全與外掛生態，則應搭配既有的 Shell 框架使用。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=starship" class="badge bg-secondary text-decoration-none me-1">starship</a>
+          
+          
+          <a href="/search/?q=Shell" class="badge bg-secondary text-decoration-none me-1">Shell</a>
+          
+          
+          <a href="/search/?q=%E7%B5%82%E7%AB%AF%E6%A9%9F" class="badge bg-secondary text-decoration-none me-1">終端機</a>
+          
+          
+          <a href="/search/?q=Rust" class="badge bg-secondary text-decoration-none me-1">Rust</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=%E5%91%BD%E4%BB%A4%E5%88%97" class="badge bg-secondary text-decoration-none me-1">命令列</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news&text=starship+%E9%96%8B%E6%BA%90%EF%BC%9A6+%E8%90%AC%E6%98%9F%E8%B7%A8+Shell+%E6%8F%90%E7%A4%BA%E7%AC%A6%E5%B7%A5%E5%85%B7" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?starship+%E9%96%8B%E6%BA%90%EF%BC%9A6+%E8%90%AC%E6%98%9F%E8%B7%A8+Shell+%E6%8F%90%E7%A4%BA%E7%AC%A6%E5%B7%A5%E5%85%B7%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-starship-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/nvm-news" class="text-decoration-none">nvm 開源 16 年：Node 版本管理器 9.5 萬星</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/fzf-news" class="text-decoration-none">fzf 開源：8.3 萬星的終端模糊搜尋</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-warp-news" class="text-decoration-none">Warp 開源：65k 星的 AI 原生終端機</a>
+              <br><small class="text-muted">2026-10-04</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-windows-terminal-news" class="text-decoration-none">Windows Terminal 開源：105K 星的現代終端機</a>
+              <br><small class="text-muted">2026-09-27</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-aider-news" class="text-decoration-none">49K 星 Aider 開源：終端機 AI 編程助手</a>
+              <br><small class="text-muted">2026-09-26</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ohmyzsh-news" class="text-decoration-none">Oh My Zsh 開源：19 萬星 zsh 配置框架</a>
+              <br><small class="text-muted">2026-09-24</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

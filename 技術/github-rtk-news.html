@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>RTK 開源：Rust 開發的 AI 指令輸出壓縮代理 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="RTK（Rust Token Killer）是 GitHub 上 7.8 萬星的開源 CLI 代理工具，以單一 Rust 二進位檔壓縮 shell 指令輸出，在進入 LLM 上下文前減少最多 90% 的 bash 輸出量。支援超過 100 種指令與 16 款 AI 編碼工具。本文整理其運作原理與 token 節省機制。">
+  <meta name="keywords" content="RTK, Rust, AI代理, 開源, Token優化, CLI工具, LLM">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="RTK 開源：Rust 開發的 AI 指令輸出壓縮代理">
+  <meta property="og:description" content="RTK（Rust Token Killer）是 GitHub 上 7.8 萬星的開源 CLI 代理工具，以單一 Rust 二進位檔壓縮 shell 指令輸出，在進入 LLM 上下文前減少最多 90% 的 bash 輸出量。支援超過 100 種指令與 16 款 AI 編碼工具。本文整理其運作原理與 token 節省機制。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-rtk-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RTK 開源：Rust 開發的 AI 指令輸出壓縮代理">
+  <meta name="twitter:description" content="RTK（Rust Token Killer）是 GitHub 上 7.8 萬星的開源 CLI 代理工具，以單一 Rust 二進位檔壓縮 shell 指令輸出，在進入 LLM 上下文前減少最多 90% 的 bash 輸出量。支援超過 100 種指令與 16 款 AI 編碼工具。本文整理其運作原理與 token 節省機制。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-rtk-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "RTK 開源：Rust 開發的 AI 指令輸出壓縮代理",
+      "description": "RTK（Rust Token Killer）是 GitHub 上 7.8 萬星的開源 CLI 代理工具，以單一 Rust 二進位檔壓縮 shell 指令輸出，在進入 LLM 上下文前減少最多 90% 的 bash 輸出量。支援超過 100 種指令與 16 款 AI 編碼工具。本文整理其運作原理與 token 節省機制。",
+      "datePublished": "2026-09-03T02:00:01+08:00",
+      "dateModified": "2026-09-03T02:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/rtk-ai/rtk" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-rtk-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "RTK 開源：Rust 開發的 AI 指令輸出壓縮代理",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">RTK 開源：Rust 開發的 AI 指令輸出壓縮代理</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">RTK 開源：Rust 開發的 AI 指令輸出壓縮代理</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月03日 02:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-rtk-news-cover.jpg" alt="RTK 開源：Rust 開發的 AI 指令輸出壓縮代理" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/rtk-ai/rtk" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/rtk-ai/rtk
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>RTK（Rust Token Killer）是 GitHub 上目前累積 78,303 顆星標的開源 CLI 代理工具，由 rtk-ai 團隊以 Rust 開發，採用 Apache 2.0 授權。該工具的核心定位是攔截開發者於終端機執行的 shell 指令，在輸出進入 AI 編碼代理的 LLM 上下文之前加以過濾與壓縮，官方宣稱可減少最多 90% 的 bash 輸出量，從根本降低大型語言模型的 token 消耗。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>RTK 是開源 CLI 代理工具，以 Rust 開發，攔截 shell 指令輸出並壓縮後才送入 AI 編碼代理的上下文，宣稱可減少最多 90% 的 bash 輸出量。目前約 7.8 萬星標。
+<!-- End AEO Capsule --></p>
+
+<h2 id="rtk-是什麼">RTK 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>RTK 全名為 Rust Token Killer，是一個效能取向的指令輸出壓縮代理，採用單一 Rust 二進位檔部署，支援超過 100 種常見指令的輸出處理，
+<!-- End AEO Capsule -->
+RTK 全名為 Rust Token Killer，是一個效能取向的指令輸出壓縮代理，採用單一 Rust 二進位檔部署，支援超過 100 種常見指令的輸出處理，單次介入的額外延遲低於 10 毫秒。它並非語言模型或推理框架，而是介於 AI 代理與 shell 之間的中介層：代理執行 <code class="language-plaintext highlighter-rouge">git status</code>、<code class="language-plaintext highlighter-rouge">cargo test</code> 或 <code class="language-plaintext highlighter-rouge">docker ps</code> 等指令時，RTK 接管執行流程，並將原本冗長的原始輸出改寫為精簡摘要後回傳。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>RTK 是介於 AI 代理與 shell 之間的輸出壓縮中介層，以單一 Rust 二進位檔處理超過 100 種指令，介入延遲低於 10 毫秒，目標是降低 LLM 的 token 消耗。
+<!-- End AEO Capsule --></p>
+
+<p>該專案由 Patrick Szymkowiak 創立，於 2026 年 1 月建立儲存庫，同年內星標數快速攀升至 7.8 萬，反映開發者社群對 token 成本優化的高度關注。專案提供 Homebrew、Cargo 與安裝腳本三種安裝方式，並針對 Windows、macOS 與 Linux 提供預編譯二進位檔。</p>
+
+<h2 id="rtk-如何壓縮指令輸出">RTK 如何壓縮指令輸出？</h2>
+
+<p>RTK 對指令輸出採用四種壓縮策略：智慧過濾、歸納分組、截斷與去重。智慧過濾移除註解、空白與樣板內容；歸納分組將相似項目聚合，例如以目錄與檔案數量取代逐行列表；截斷保留關鍵上下文並裁減冗餘資訊；去重則將重複的日誌行摺疊為計數。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>RTK 以智慧過濾、歸納分組、截斷與去重四種策略壓縮輸出，例如 <code class="language-plaintext highlighter-rouge">ls -la</code> 由 45 行縮為 12 行目錄樹，<code class="language-plaintext highlighter-rouge">git push</code> 縮為單行確認。
+<!-- End AEO Capsule --></p>
+
+<p>以官方文件中的實例對照，<code class="language-plaintext highlighter-rouge">ls -la</code> 原本輸出 45 行，經 RTK 處理後縮減為 12 行的緊湊目錄樹，並標示各資料夾的檔案數量；<code class="language-plaintext highlighter-rouge">git push</code> 原本輸出 15 行包括物件列舉與壓縮過程，RTK 僅回傳 <code class="language-plaintext highlighter-rouge">ok main</code> 單行確認；<code class="language-plaintext highlighter-rouge">cargo test</code> 在失敗時原本輸出超過 200 行，RTK 則保留失敗案例的斷言訊息與位置，壓縮至約 20 行。測試執行器是 RTK 效益最明顯的場景，pytest、go test 與 cargo test 的輸出縮減幅度均可達九成。</p>
+
+<h2 id="rtk-支援哪些-ai-開發工具">RTK 支援哪些 AI 開發工具？</h2>
+
+<p>RTK 目前支援 16 款主流 AI 編碼工具，整合方式因工具而異。Claude Code、GitHub Copilot 與 Cursor 透過 PreToolUse hook 進行指令改寫，Gemini CLI 使用 BeforeTool hook，Codex 則利用 AGENTS.md 文件指引，Cline 與 Kilo Code 採用專案層級的規則檔。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>RTK 支援 Claude Code、Copilot、Cursor、Gemini CLI、Codex 等 16 款 AI 編碼工具，以 hook 或專案規則自動改寫指令。
+<!-- End AEO Capsule --></p>
+
+<p>其自動改寫機制對 Bash 工具呼叫生效，代理執行指令前會先被改寫為對應的 <code class="language-plaintext highlighter-rouge">rtk</code> 指令，因此使用者無須逐條手動輸入。官方指出 Claude Code 內建的 Read、Grep 與 Glob 等工具不會經過 Bash hook，若要在這些流程獲得壓縮輸出，需改用 shell 指令或直接呼叫 <code class="language-plaintext highlighter-rouge">rtk read</code>、<code class="language-plaintext highlighter-rouge">rtk grep</code> 與 <code class="language-plaintext highlighter-rouge">rtk find</code>。</p>
+
+<h2 id="rtk-的-token-節省效果如何衡量">RTK 的 token 節省效果如何衡量？</h2>
+
+<p>RTK 提供 <code class="language-plaintext highlighter-rouge">rtk gain</code> 指令檢視 token 節省儀表板，包括摘要統計、30 日圖表、日明細與 JSON 匯出格式，另有 <code class="language-plaintext highlighter-rouge">rtk discover</code> 指令掃描尚未覆蓋的節省機會。官方特別澄清，輸出縮減幅度不等於帳單縮減幅度，因為 bash 輸出僅是輸入 token 的一部分，輸入 token 又僅是整體帳單的一部分。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>RTK 以 <code class="language-plaintext highlighter-rouge">rtk gain</code> 儀表板追蹤 token 節省，<code class="language-plaintext highlighter-rouge">rtk discover</code> 尋找未覆蓋的優化機會；輸出縮減並不等於帳單縮減。
+<!-- End AEO Capsule --></p>
+
+<p>RTK 未內建 tokenizer，節省的 token 數以位元組除以四估算，因此百分比數據可靠，但絕對 token 數字屬近似值。當指令執行失敗時，RTK 會將完整未過濾輸出存檔，讓 LLM 無需重新執行即可讀取原始錯誤內容，兼顧節省與除錯完整性。</p>
+
+<h2 id="rtk-的隱私與遙測設計如何">RTK 的隱私與遙測設計如何？</h2>
+
+<p>RTK 的遙測功能預設關閉，僅在 <code class="language-plaintext highlighter-rouge">rtk init</code> 過程中經使用者明確同意後啟用，符合 GDPR 規範。蒐集的數據全部是彙總計數或匿名化指令名稱，例如以雜湊裝置識別碼統計安裝數，指令僅記錄工具名稱而不記錄參數，明確排除原始碼、檔案路徑、指令參數、密鑰、環境變數與個人資料。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>RTK 遙測預設關閉並需明確同意，數據限於彙總計數與匿名指令名稱，不記錄原始碼或密鑰；可隨時撤回同意並刪除本地資料。
+<!-- End AEO Capsule --></p>
+
+<p>使用者可隨時以 <code class="language-plaintext highlighter-rouge">rtk telemetry status</code> 檢查同意狀態，透過 <code class="language-plaintext highlighter-rouge">rtk telemetry disable</code> 撤回同意，或設定 <code class="language-plaintext highlighter-rouge">RTK_TELEMETRY_DISABLED</code> 環境變數強制封鎖遙測。官方文件列出完整的數據類別與用途，包括指令類別分佈、採用程度與功能使用率，以協助團隊判斷哪些過濾器最值得優先開發。</p>
+
+<div class="ui-stat-grid">
+  <div class="stat"><div class="label">星標數</div><div class="value">78.3k</div></div>
+  <div class="stat"><div class="label">Forks</div><div class="value">4.9k</div></div>
+  <div class="stat"><div class="label">主要語言</div><div class="value">Rust</div></div>
+  <div class="stat"><div class="label">授權</div><div class="value">Apache 2.0</div></div>
+  <div class="stat"><div class="label">支援指令</div><div class="value">100+</div></div>
+  <div class="stat"><div class="label">支援 AI 工具</div><div class="value">16 款</div></div>
+</div>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>RTK 累積 78,303 顆星標與 4,937 個 forks，採用 Rust 與 Apache 2.0 授權，支援超過 100 種指令處理並宣稱可減少最多 90% 的 bash 輸出量。
+<!-- End AEO Capsule --></p>
+
+<p><img src="assets/images/posts/github-rtk-news-shot1.png" alt="RTK GitHub 專案 README 開頭（專案名稱 rtk + 高階語句：High-performance CLI proxy that cuts up to 90% of the bash output your agent reads）" /></p>
+
+<h2 id="rtk-的市場定位與生態影響如何">RTK 的市場定位與生態影響如何？</h2>
+
+<p>RTK 的崛起反映 AI 編碼代理普及後浮現的新一類基礎設施需求：上下文最佳化。當代理大量執行 shell 指令時，冗餘輸出會持續佔用上下文窗口並推高成本，RTK 選擇以透明代理層處理此問題，無須修改任何 agent 的模型設定或提示詞，降低採用門檻。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>RTK 填補 AI 編碼代理的上下文最佳化需求，以透明代理層壓縮輸出，無須修改模型設定或提示詞即可整合至 16 款主流工具，屬新興的 token 成本優化基礎設施。
+<!-- End AEO Capsule --></p>
+
+<p>與直接調整模型的方案相比，RTK 的優勢在於工具層級的高度相容性與可觀測性。<code class="language-plaintext highlighter-rouge">rtk gain</code> 儀表板提供實際節省數據，讓團隊能量化採用效益；生態系統方面，Homebrew 收錄、16 款代理整合與多語言 README 顯示其商業化與社群經營路徑正逐步成形。</p>
+
+<p><img src="assets/images/posts/github-rtk-news-shot2.png" alt="RTK GitHub 專案首頁頂部（repo 名稱 rtk-ai/rtk + Star 78.3k + 專案描述）" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<p>本文資訊整理自 RTK 的 GitHub 官方儲存庫，包括專案說明文件、指令參考、代理整合指南與官方網站文件，讀者可前往以下連結取得原始資料：</p>
+
+<ul>
+  <li>GitHub 專案頁面：<code class="language-plaintext highlighter-rouge">https://github.com/rtk-ai/rtk</code></li>
+  <li>官方文件網站：<code class="language-plaintext highlighter-rouge">https://www.rtk-ai.app/guide</code></li>
+</ul>
+
+<!-- AEO Answer Capsule — 約 55 字 -->
+<p>本文資訊來源為 RTK 的 GitHub 儲存庫（rtk-ai/rtk）與官方文件網站 rtk-ai.app，涵蓋安裝、指令參考、代理整合與架構設計等完整內容。
+<!-- End AEO Capsule --></p>
+
+<p><img src="assets/images/posts/github-rtk-news-shot3.png" alt="RTK GitHub Contributors 統計頁（repo 名稱 rtk-ai/rtk + Commits over time 貢獻趨勢圖）" /></p>
+
+<h2 id="總結rtk-適合什麼開發團隊">總結：RTK 適合什麼開發團隊？</h2>
+
+<p>RTK 適合長期使用 AI 編碼代理、並關注 token 成本與上下文效率的開發者與團隊，尤其是頻繁執行測試、建置與 Git 操作的工作流程，因為這些指令輸出最為冗長，壓縮效益最明顯。對於已使用 Claude Code、Gemini CLI 或 Cursor 等工具的開發者，RTK 的自動改寫機制可無痛整合。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>RTK 適合長期使用 AI 編碼代理並關注 token 成本的團隊，尤其適用頻繁執行測試、建置與 Git 操作的流程。Apache 2.0 授權亦適合商業環境採用。
+<!-- End AEO Capsule --></p>
+
+<p>對於僅偶爾使用 AI 輔助編碼、或專案規模細小的開發者，RTK 的效益可能有限，因為輸出壓縮的絕對節省量與使用頻率成正比。整體而言，該專案以務實的代理層設計切入 token 成本議題，兼具開源透明度與生態相容性，是 2026 年值得關注的開發工具基礎設施之一。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=RTK" class="badge bg-secondary text-decoration-none me-1">RTK</a>
+          
+          
+          <a href="/search/?q=Rust" class="badge bg-secondary text-decoration-none me-1">Rust</a>
+          
+          
+          <a href="/search/?q=AI%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">AI代理</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=Token%E5%84%AA%E5%8C%96" class="badge bg-secondary text-decoration-none me-1">Token優化</a>
+          
+          
+          <a href="/search/?q=CLI%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">CLI工具</a>
+          
+          
+          <a href="/search/?q=LLM" class="badge bg-secondary text-decoration-none me-1">LLM</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news&text=RTK+%E9%96%8B%E6%BA%90%EF%BC%9ARust+%E9%96%8B%E7%99%BC%E7%9A%84+AI+%E6%8C%87%E4%BB%A4%E8%BC%B8%E5%87%BA%E5%A3%93%E7%B8%AE%E4%BB%A3%E7%90%86" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?RTK+%E9%96%8B%E6%BA%90%EF%BC%9ARust+%E9%96%8B%E7%99%BC%E7%9A%84+AI+%E6%8C%87%E4%BB%A4%E8%BC%B8%E5%87%BA%E5%A3%93%E7%B8%AE%E4%BB%A3%E7%90%86%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-rtk-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/anthropic-internal-evals-offline-news" class="text-decoration-none">Anthropic 關閉內部評估聯網：AI 代理失控</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/bun-runtime-news" class="text-decoration-none">Bun 1.4 改用 Rust 重寫：96k 星 JS 執行環境</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/google-gemini-agentic-enterprise-news" class="text-decoration-none">Google Gemini 邁向代理時代：企業級 AI 代理登場</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vaultwarden-news" class="text-decoration-none">Vaultwarden 開源：6.8 萬星的自架密碼庫</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/anthropic-oss-scanner-news" class="text-decoration-none">Anthropic 推免費 OSS Scanner 掃描開源漏洞</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

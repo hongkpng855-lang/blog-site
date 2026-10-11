@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 Not... - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="2026 年 AI 搜尋引擎已經成熟到可以取代傳統 Google 搜尋。由 Perplexity、Google AI Overview、ChatGPT Search 到 NotebookLM，呢篇指南幫你揀啱工具、用得啱方法，大幅提升搵資訊嘅效率。">
+  <meta name="keywords" content="AI搜尋, Perplexity, NotebookLM, Google AI Overview, ChatGPT Search, AI工具, 資訊整理, 香港, 2026">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略">
+  <meta property="og:description" content="2026 年 AI 搜尋引擎已經成熟到可以取代傳統 Google 搜尋。由 Perplexity、Google AI Overview、ChatGPT Search 到 NotebookLM，呢篇指南幫你揀啱工具、用得啱方法，大幅提升搵資訊嘅效率。">
+  <meta property="og:url" content="https://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/2026-06-10-ai-search-engine-guide-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略">
+  <meta name="twitter:description" content="2026 年 AI 搜尋引擎已經成熟到可以取代傳統 Google 搜尋。由 Perplexity、Google AI Overview、ChatGPT Search 到 NotebookLM，呢篇指南幫你揀啱工具、用得啱方法，大幅提升搵資訊嘅效率。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/2026-06-10-ai-search-engine-guide-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略",
+      "description": "2026 年 AI 搜尋引擎已經成熟到可以取代傳統 Google 搜尋。由 Perplexity、Google AI Overview、ChatGPT Search 到 NotebookLM，呢篇指南幫你揀啱工具、用得啱方法，大幅提升搵資訊嘅效率。",
+      "datePublished": "2026-06-10T16:53:00+08:00",
+      "dateModified": "2026-06-10T16:53:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html" },
+      
+      "image": "https://anthroskill.com/assets/images/posts/2026-06-10-ai-search-engine-guide-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "tech",
+          "item": "https://anthroskill.com/categories/tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略",
+          "item": "https://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/tech/">tech</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年06月10日 16:53
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 8 分鐘
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/2026-06-10-ai-search-engine-guide-cover.jpg" alt="2026 AI 搜尋引擎與資訊整理實戰指南：由 Perplexity 到 NotebookLM，用 AI 取代傳統 Google 搜尋嘅完整攻略" class="img-fluid rounded">
+        </div>
+        
+
+        
+
+        <div class="post-content">
+          <h2 id="前言你仲用緊十年前嘅方法搵資料">前言：你仲用緊十年前嘅方法搵資料？</h2>
+
+<p>老實講，你上一次用 Google 係點樣搵嘢嘅？</p>
+
+<p>打 keyword → 睇 10 條藍色 link → 逐個 click → 彈出嚟 5 個廣告 → 睇兩段就要 close popup → scroll 到中間先見到少少有用嘅內容 → 開幾個 tab 對比 → 最後 copy and paste 去筆記。</p>
+
+<p><strong>呢個流程，其實好嘥時間。</strong></p>
+
+<p>2026 年嘅 AI 搜尋引擎已經完全改變咗呢個模式。你而家可以：</p>
+<ul>
+  <li>直接用自然語言問問題，AI 幫你整理答案，附 source link</li>
+  <li>一個問題可以問幾十個 source，AI 幫你綜合對比</li>
+  <li>將成堆文件/spreadsheet/PDF 掉入去，AI 幫你分析</li>
+  <li>甚至設定「每日自動幫我 monitor 某個 topic 嘅最新資訊」</li>
+</ul>
+
+<p>呢篇文我會同你逐个介紹 2026 年最好用嘅 AI 搜尋工具，教你點樣用得最有效率。</p>
+
+<hr />
+
+<h2 id="1-傳統搜尋-vs-ai-搜尋有咩分別">1. 傳統搜尋 vs AI 搜尋：有咩分別？</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>傳統搜尋（Google）</th>
+      <th>AI 搜尋（Perplexity / ChatGPT Search）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>輸入方式</strong></td>
+      <td>關鍵字</td>
+      <td>自然語言提問</td>
+    </tr>
+    <tr>
+      <td><strong>輸出方式</strong></td>
+      <td>藍色 link list</td>
+      <td>直接答案 + 附引用</td>
+    </tr>
+    <tr>
+      <td><strong>資訊整合</strong></td>
+      <td>你要自己對比多個 source</td>
+      <td>AI 幫你綜合</td>
+    </tr>
+    <tr>
+      <td><strong>追問能力</strong></td>
+      <td>要重新打 keyword</td>
+      <td>可以連續對話追問</td>
+    </tr>
+    <tr>
+      <td><strong>資料範圍</strong></td>
+      <td>網頁索引</td>
+      <td>網頁 + 文件 + 知識庫</td>
+    </tr>
+    <tr>
+      <td><strong>幻覺風險</strong></td>
+      <td>低（link 係真嘅）</td>
+      <td>中（AI 有可能亂作）</td>
+    </tr>
+    <tr>
+      <td><strong>速度</strong></td>
+      <td>快（0.5 秒）</td>
+      <td>中等（3-10 秒）</td>
+    </tr>
+    <tr>
+      <td><strong>適合場景</strong></td>
+      <td>快速搵網址、導航</td>
+      <td>研究、學習、分析</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>結論：</strong> 唔係 Google 冇用，係 AI 搜尋喺「需要理解、整合、分析」嘅場景大幅拋離傳統搜尋。</p>
+
+<hr />
+
+<h2 id="2-2026-年主流-ai-搜尋引擎逐個評測">2. 2026 年主流 AI 搜尋引擎逐個評測</h2>
+
+<h3 id="21-perplexity--目前最全面嘅-ai-搜尋引擎">2.1 Perplexity —— 目前最全面嘅 AI 搜尋引擎</h3>
+
+<p>Perplexity 係我目前最常用嘅 AI 搜尋工具，冇之一。</p>
+
+<p><strong>核心功能：</strong></p>
+<ul>
+  <li><strong>Pro Search：</strong> 深度研究模式，AI 會自動追問你 clarification 問題，確保佢明你真正想搵乜</li>
+  <li><strong>Collections：</strong> 將搜尋結果分類整理，好似 Playlist 咁</li>
+  <li><strong>Spaces：</strong> 共用 workspace，團隊可以一齊做 research</li>
+  <li><strong>File Upload：</strong> 可以 upload PDF/CSV/TXT，AI 直接分析</li>
+  <li><strong>每日自動搜尋：</strong> 設定關鍵字，每日自動幫你睇最新資訊</li>
+</ul>
+
+<p><strong>收費：</strong></p>
+<ul>
+  <li>免費版：每 4 小時 5 次 Pro Search</li>
+  <li>Pro 版：$20/月（無限 Pro Search + 更高用量）</li>
+</ul>
+
+<p><strong>香港用家實戰：</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 傳統做法：
+Google 「香港 MPF 2026 供款上限」
+→ 睇 5 個網頁 → 對比返工同一世 website
+→ 自己整理 → 10 分鐘
+
+ Perplexity 做法：
+問：「香港 2026 年 MPF 供款上限係幾多？同 2025 年有咩分別？」
+→ AI 直接俾答案 + 引用積金局官網
+→ 仲可以追問：「如果自僱人士，供款有冇唔同？」
+→ 3 分鐘搞掂
+</code></pre></div></div>
+
+<h3 id="22-google-ai-overview前稱-sge">2.2 Google AI Overview（前稱 SGE）</h3>
+
+<p>Google 終於將 AI 整合入核心搜尋。</p>
+
+<p><strong>特點：</strong></p>
+<ul>
+  <li>喺 Google 搜尋結果上方直接顯示 AI 摘要</li>
+  <li>自動引用來源（Google 搜尋嘅網站）</li>
+  <li>支援多步驟推理（例如：「搵間尖沙咀星期六下午有位嘅意大利餐廳」）</li>
+  <li>完全免費，唔使額外開戶</li>
+</ul>
+
+<p><strong>限制：</strong></p>
+<ul>
+  <li>只支援英文 Search（中文支援未完全）</li>
+  <li>摘要長度有限（通常 3-5 段）</li>
+  <li>深度不及 Perplexity</li>
+  <li>唔支援上載文件分析</li>
+</ul>
+
+<p><strong>適合：</strong> 快速查事實、定義、簡單比較</p>
+
+<h3 id="23-chatgpt-searchopenai">2.3 ChatGPT Search（OpenAI）</h3>
+
+<p>ChatGPT 內置嘅搜尋功能，2026 年已經做得好好。</p>
+
+<p><strong>特點：</strong></p>
+<ul>
+  <li>同一個對話入面可以混合搜尋、寫作、分析</li>
+  <li>自動判斷幾時需要搜尋（你唔使手動切換）</li>
+  <li>支援 source citation（hover 睇來源）</li>
+  <li>可以配合 GPTs 做特定領域搜尋</li>
+</ul>
+
+<p><strong>收費：</strong></p>
+<ul>
+  <li>免費版：有限搜尋次數</li>
+  <li>Plus 版：$20/月，無限搜尋</li>
+</ul>
+
+<p><strong>香港用家實戰：</strong></p>
+
+<p>「幫我搵香港 2026 年公司利得稅率，同新加坡比較，整一個對比表」
+→ ChatGPT Search 會先搜尋香港稅局同 IRAS 網站
+→ 直接俾你一個完整對比表 + 引用來源
+→ 仲可以叫佢幫你分析邊個適合開公司</p>
+
+<h3 id="24-microsoft-copilotbing-chat">2.4 Microsoft Copilot（Bing Chat）</h3>
+
+<p>Microsoft 嘅 AI 搜尋，整合咗 GPT-4 同 Bing 搜尋。</p>
+
+<p><strong>特點：</strong></p>
+<ul>
+  <li>免費使用 GPT-4 級別嘅搜尋能力</li>
+  <li>支援 3 種模式（創意/平衡/精確）</li>
+  <li>同 Office 365 整合（可以分析文件）</li>
+  <li>支援圖片搜尋</li>
+</ul>
+
+<p><strong>優勢：</strong> 免費而且有 GPT-4 質素，好過好多收費工具</p>
+
+<p><strong>限制：</strong> 每次對話有上限（30 個訊息）</p>
+
+<h3 id="25-各大-ai-搜尋引擎比較">2.5 各大 AI 搜尋引擎比較</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>工具</th>
+      <th>免費版</th>
+      <th>月費</th>
+      <th>資料即時性</th>
+      <th>中文支援</th>
+      <th>文件分析</th>
+      <th>自動 monitor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Perplexity</td>
+      <td>有限 Pro Search</td>
+      <td>$20</td>
+      <td>即時</td>
+      <td>好</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Google AI Overview</td>
+      <td>完全免費</td>
+      <td>$0</td>
+      <td>即時</td>
+      <td>有限</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>ChatGPT Search</td>
+      <td>有限</td>
+      <td>$20</td>
+      <td>即時</td>
+      <td>好</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Microsoft Copilot</td>
+      <td>完全免費</td>
+      <td>$0</td>
+      <td>即時</td>
+      <td>好</td>
+      <td>(Office)</td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>Gemini</td>
+      <td>完全免費</td>
+      <td>$20 (Advanced)</td>
+      <td>即時</td>
+      <td>好</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>You.com</td>
+      <td>有限</td>
+      <td>$15</td>
+      <td>即時</td>
+      <td>有限</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="3-notebooklm--google-嘅秘密武器">3. NotebookLM —— Google 嘅秘密武器</h2>
+
+<p>如果話 Perplexity 係最快嘅 AI 搜尋，NotebookLM 就係<strong>最深嘅 AI 研究工具</strong>。</p>
+
+<h3 id="31-notebooklm-係乜">3.1 NotebookLM 係乜？</h3>
+
+<p>NotebookLM（Notebook Language Model）係 Google 推出嘅「AI 筆記本」，同其他 AI 搜尋最大嘅分別係：</p>
+
+<blockquote>
+  <p><strong>佢只會根據你俾佢嘅 source 回答問題，唔會亂用互聯網上嘅資料。</strong></p>
+</blockquote>
+
+<p>呢點好重要——等於你有一個「只睇過你指定文件嘅 AI 研究助理」，唔會 hallucinate。</p>
+
+<h3 id="32-核心功能">3.2 核心功能</h3>
+
+<p><strong>Source Grounding（來源限制）</strong></p>
+<ul>
+  <li>Upload PDF、Google Doc、Google Slide、網頁 link、YouTube 片</li>
+  <li>每次最多 50 個 source（每個 source 最多 25 萬字）</li>
+  <li>AI 只會根據呢啲 source 回答</li>
+</ul>
+
+<p><strong>Audio Overview（語音摘要）</strong></p>
+<ul>
+  <li>最新功能：AI 會生成一段似 Podcast 嘅語音對話（兩個 AI 主持討論你啲 source）</li>
+  <li>超有用：通勤時聽住學嘢</li>
+</ul>
+
+<p><strong>Notebook Guide</strong></p>
+<ul>
+  <li>AI 幫你整理 source 嘅重點</li>
+  <li>生成 FAQ、Study Guide、Briefing Doc</li>
+  <li>Timeline、Summary 自動生成</li>
+</ul>
+
+<h3 id="33-香港人實戰用法">3.3 香港人實戰用法</h3>
+
+<p><strong>場景 1：睇公司年報</strong>
+Upload 3 間公司嘅 2025 年年報 PDF
+→ 問 NotebookLM：「呢三間公司嘅 revenue trend 有咩分別？邊間 profit margin 最高？」
+→ AI 只會根據年報內容答你，唔會作</p>
+
+<p><strong>場景 2：準備考試</strong>
+Upload 課程 notes + past paper
+→ Generate Study Guide + 模擬題目
+→ 開 Audio Overview 返工途中聽</p>
+
+<p><strong>場景 3：Research Project</strong>
+Upload 20 篇 research paper
+→ 問 NotebookLM：「呢個 field 嘅主流觀點有邊幾個？邊啲 paper 有 data 支持？」
+→ AI 幫你 cross-reference 所有 source</p>
+
+<h3 id="34-點解-notebooklm-咁重要">3.4 點解 NotebookLM 咁重要？</h3>
+
+<p>因為佢解決咗 AI 最大嘅問題：<strong>幻覺（Hallucination）</strong></p>
+
+<p>一般 AI 搜尋（ChatGPT、Perplexity）有時會作嘢——佢哋會估答案，然後 quote 一個唔 exist 嘅 source。</p>
+
+<p>NotebookLM 嘅設計強迫 AI 只可以用你俾嘅 source，所以：</p>
+<ul>
+  <li>唔會作 source</li>
+  <li>答案可以 trace 返 source</li>
+  <li>你可以判斷 AI 有冇解錯</li>
+</ul>
+
+<p><strong>收費：</strong> 完全免費（Google 未收費）</p>
+
+<hr />
+
+<h2 id="4-ai-搜尋實戰技巧">4. AI 搜尋實戰技巧</h2>
+
+<h3 id="41-prompt-engineering-for-search">4.1 Prompt Engineering for Search</h3>
+
+<p>同 AI 搜尋溝通都有技巧：</p>
+
+<p>** 差嘅 prompt：**
+「香港樓市點樣？」</p>
+
+<p>** 好嘅 prompt：**
+「分析香港樓市 2026 年上半年嘅走勢，重點包括：</p>
+<ol>
+  <li>住宅價格指數變化（對比 2025 年下半年）</li>
+  <li>成交量同 2025 年同期比較</li>
+  <li>影響樓市嘅主要因素（利率/供應/政策）</li>
+  <li>各區表現差異（港島/九龍/新界）
+請引用最新數據來源」</li>
+</ol>
+
+<h3 id="42-常用搜尋策略">4.2 常用搜尋策略</h3>
+
+<p><strong>策略 1：由闊到窄</strong>
+先問大方向，再逐步收窄：</p>
+<ol>
+  <li>「2026 年 AI 搜尋引擎有邊啲主流選擇？」</li>
+  <li>「Perplexity 同 ChatGPT Search 嘅搜尋質素有咩分別？」</li>
+  <li>「Perplexity Pro Search 嘅 Deep Research mode 值得俾錢嗎？」</li>
+</ol>
+
+<p><strong>策略 2：要求格式</strong>
+AI 可以 output 唔同 format，善用：</p>
+<ul>
+  <li>「用對比表列出⋯」</li>
+  <li>「用時間線列出⋯」</li>
+  <li>「用逐步指南 format 寫⋯」</li>
+  <li>「用 5 個重點 summary⋯」</li>
+</ul>
+
+<p><strong>策略 3：要求批判</strong>
+AI 傾向同意你，所以要主動叫佢批判：</p>
+<ul>
+  <li>「呢個觀點有冇爭議？」</li>
+  <li>「反對呢個講法嘅 argument 係咩？」</li>
+  <li>「呢個數據有冇 limitation？」</li>
+</ul>
+
+<p><strong>策略 4：多工具交叉驗證</strong>
+AI 搜尋有時會錯。重要資訊要用多個工具驗證：</p>
+<ol>
+  <li>Perplexity 搜一次</li>
+  <li>ChatGPT Search 搜一次</li>
+  <li>NotebookLM Upload source 再問</li>
+  <li>最後去官網 verify</li>
+</ol>
+
+<h3 id="43-ai-搜尋嘅幻覺點樣防">4.3 AI 搜尋嘅「幻覺」點樣防？</h3>
+
+<p>AI 幻覺係 2026 年仍然存在嘅問題。以下係我嘅防禦系統：</p>
+
+<p><strong>Level 1：睇 source</strong></p>
+<ul>
+  <li>Perplexity：hover 數字睇 source</li>
+  <li>ChatGPT Search：click citation 睇來源</li>
+  <li>如果冇 source，當佢冇講過</li>
+</ul>
+
+<p><strong>Level 2：fact check 重要資訊</strong></p>
+<ul>
+  <li>關乎錢/法律/健康嘅資訊，一定要去官網 verify</li>
+  <li>AI 好擅長作一個「似層層」但錯嘅數字</li>
+</ul>
+
+<p><strong>Level 3：用 NotebookLM 做 ground truth</strong></p>
+<ul>
+  <li>重要研究用 NotebookLM，確保答案 grounded in your sources</li>
+  <li>唔會 hallucinate</li>
+</ul>
+
+<hr />
+
+<h2 id="5-香港人實戰場景">5. 香港人實戰場景</h2>
+
+<h3 id="場景-1打工仔做-research">場景 1：打工仔做 Research</h3>
+
+<p><strong>工具：</strong> Perplexity Pro + NotebookLM</p>
+
+<p><strong>流程：</strong></p>
+<ol>
+  <li>用 Perplexity Pro Search 快速了解 topic（15 分鐘）</li>
+  <li>收集相關 PDF/report，upload 去 NotebookLM（10 分鐘）</li>
+  <li>用 NotebookLM 深入分析、生成 briefing doc（15 分鐘）</li>
+  <li>開 Audio Overview 返工途中聽（被動學習）</li>
+  <li>最後用 Perplexity 再 search 一轉最新資料</li>
+</ol>
+
+<p><strong>結果：</strong> 以往要半日嘅 research，而家 1 個鐘搞掂。</p>
+
+<h3 id="場景-2學生做功課">場景 2：學生做功課</h3>
+
+<p><strong>工具：</strong> NotebookLM + ChatGPT Search</p>
+
+<p><strong>流程：</strong></p>
+<ol>
+  <li>Upload syllabus + textbook chapters 去 NotebookLM</li>
+  <li>Generate study guide + 模擬題目</li>
+  <li>唔明嘅概念用 ChatGPT Search 補充搜尋</li>
+  <li>用 Audio Overview 複習</li>
+</ol>
+
+<h3 id="場景-3創業者做市場分析">場景 3：創業者做市場分析</h3>
+
+<p><strong>工具：</strong> Perplexity + Google AI Overview</p>
+
+<p><strong>流程：</strong></p>
+<ol>
+  <li>Perplexity Search：「香港 2026 年 FinTech 行業趨勢」</li>
+  <li>Google AI Overview 快速 check 競爭對手資料</li>
+  <li>Perplexity Collections 整理所有 research 分類</li>
+  <li>設定 Perplexity 每日自動 monitor 關鍵字</li>
+</ol>
+
+<h3 id="場景-4投資者分析股票">場景 4：投資者分析股票</h3>
+
+<p><strong>工具：</strong> NotebookLM + Perplexity</p>
+
+<p><strong>流程：</strong></p>
+<ol>
+  <li>Upload 公司年報 + analyst report 去 NotebookLM</li>
+  <li>問 NotebookLM 關於公司財務狀況嘅 deep dive</li>
+  <li>Perplexity search 最新 news 同 market sentiment</li>
+  <li>Cross reference 確保分析準確</li>
+</ol>
+
+<hr />
+
+<h2 id="6-ai-搜尋嘅限制同注意事項">6. AI 搜尋嘅限制同注意事項</h2>
+
+<h3 id="61-幻覺仍然存在">6.1 幻覺仍然存在</h3>
+
+<p>呢個係 AI 搜尋最大嘅風險。就算係 2026 年最先進嘅模型，仍然會：</p>
+<ul>
+  <li>作 source（quote 一個唔 exist 嘅 website）</li>
+  <li>解錯數據</li>
+  <li>時序混亂（將 2023 年嘅事當係 2026 年）</li>
+</ul>
+
+<p><strong>點做：</strong> 重要資訊一定去 source verify</p>
+
+<h3 id="62-私隱考慮">6.2 私隱考慮</h3>
+
+<p>你用 AI 搜尋嘅每一條問題，都有可能俾 AI 公司記錄：</p>
+<ul>
+  <li>Perplexity：聲明唔會用你嘅 data train model</li>
+  <li>ChatGPT：可以 opt out data training</li>
+  <li>Google：跟返 Google 嘅私隱政策</li>
+  <li>NotebookLM：Workplace 版有 enterprise security</li>
+</ul>
+
+<p><strong>建議：</strong> 機密資料唔好用 public AI 搜尋，考慮 NotebookLM（data 唔會用嚟 train model）</p>
+
+<h3 id="63-bias-同-filter-bubble">6.3 Bias 同 Filter Bubble</h3>
+
+<p>AI 搜尋引擎嘅 training data 有 bias：</p>
+<ul>
+  <li>英文 content 遠多過中文</li>
+  <li>美國/歐洲 perspective 主導</li>
+  <li>某啲 topic 有 censorship</li>
+</ul>
+
+<p><strong>點做：</strong></p>
+<ul>
+  <li>用中文 prompt 問香港相關話題</li>
+  <li>多工具交叉驗證</li>
+  <li>主動問：「呢個問題有冇其他觀點？」</li>
+</ul>
+
+<h3 id="64-付費-vs-免費">6.4 付費 vs 免費</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>免費夠用？</th>
+      <th>建議付費如果⋯</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Perplexity</td>
+      <td>基本搜尋夠用</td>
+      <td>每日做 research、需要 Pro Search</td>
+    </tr>
+    <tr>
+      <td>ChatGPT</td>
+      <td>偶爾用夠</td>
+      <td>經常用、需要文件分析</td>
+    </tr>
+    <tr>
+      <td>NotebookLM</td>
+      <td>完全免費</td>
+      <td>暫時唔使俾錢</td>
+    </tr>
+    <tr>
+      <td>Google AI Overview</td>
+      <td>完全免費</td>
+      <td>—</td>
+    </tr>
+    <tr>
+      <td>Copilot</td>
+      <td>完全免費</td>
+      <td>需要 Office 365 整合</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="7-我嘅每日-ai-搜尋工作流">7. 我嘅每日 AI 搜尋工作流</h2>
+
+<p>朝早（10 分鐘）</p>
+<ul>
+  <li>Perplexity 睇每日自動搜尋嘅 digest（設定咗：AI News / 香港 Startup / 我投資嘅股票）</li>
+  <li>如果有興趣嘅 topic，開 Pro Search 深入少少</li>
+</ul>
+
+<p>工作途中（碎片時間）</p>
+<ul>
+  <li>有問題就 open Perplexity / ChatGPT Search 問</li>
+  <li>唔明嘅 concept，叫 AI 用「我係 5 歲」mode 解釋</li>
+  <li>重要發現 save 去 Perplexity Collection</li>
+</ul>
+
+<p>週末（30 分鐘）</p>
+<ul>
+  <li>Notion 整理呢週嘅 AI 搜尋發現</li>
+  <li>NotebookLM upload 重要文章/PDF 做 deep read</li>
+  <li>Generate Audio Overview 下星期返工途中聽</li>
+</ul>
+
+<hr />
+
+<h2 id="8-faq">8. FAQ</h2>
+
+<h3 id="q1ai-搜尋會唔會完全取代-google">Q1：AI 搜尋會唔會完全取代 Google？</h3>
+
+<p>短期內唔會。Google 仍然有佢嘅優勢：</p>
+<ul>
+  <li>搵網址/導航（「Starbucks 邊條街」）— Google 快 10 倍</li>
+  <li>搵圖片/影片</li>
+  <li>購物比較（Google Shopping）</li>
+  <li>本地商戶搜尋（OpenRice、Google Maps）</li>
+</ul>
+
+<p>AI 搜尋取代嘅係「需要理解、整合、分析」嘅搜尋場景。</p>
+
+<h3 id="q2咁多-ai-搜尋工具我應該用邊個">Q2：咁多 AI 搜尋工具，我應該用邊個？</h3>
+
+<p>如果你用一個就夠：</p>
+<ul>
+  <li><strong>免費首選：</strong> Microsoft Copilot（免費 GPT-4 質素）</li>
+  <li><strong>研究首選：</strong> Perplexity Pro（最全面）</li>
+  <li><strong>深度分析：</strong> NotebookLM（免費又冇幻覺）</li>
+  <li><strong>All-in-one：</strong> ChatGPT Plus（搜尋 + 寫作 + 分析）</li>
+</ul>
+
+<p>我個人嘅 combo：Perplexity Pro（日常）+ NotebookLM（深度研究）+ ChatGPT Search（backup check）</p>
+
+<h3 id="q3ai-搜尋嘅-source-citation-可信嗎">Q3：AI 搜尋嘅 source citation 可信嗎？</h3>
+
+<p>大約 80-90% 可信。AI 有時會：</p>
+<ul>
+  <li>Quote 錯日期</li>
+  <li>Mix up 類似嘅 source</li>
+  <li>引用 blog 文章當作官方資料</li>
+</ul>
+
+<p><strong>黃金法則：</strong> 當 source citation 係「起點」，唔係「終點」。重要嘅 source 自己去睇原文。</p>
+
+<h3 id="q4用手機用-ai-搜尋方便嗎">Q4：用手機用 AI 搜尋方便嗎？</h3>
+
+<p>2026 年已經好方便：</p>
+<ul>
+  <li>Perplexity：有 iOS/Android app，支援 voice search</li>
+  <li>ChatGPT：app 有 voice mode，直接講問題</li>
+  <li>Google AI Overview：內置喺 Google app</li>
+  <li>NotebookLM：有 mobile web 版</li>
+</ul>
+
+<p>最正係 voice search——煮緊飯/行緊路，直接講問題就得。</p>
+
+<h3 id="q5ai-搜尋香港本地資訊準確嗎">Q5：AI 搜尋香港本地資訊準確嗎？</h3>
+
+<p>比 2024 年好咗好多，但仍然有改善空間：</p>
+<ul>
+  <li>香港本地新聞：Perplexity 同 ChatGPT Search 都做得唔錯</li>
+  <li>香港政府資訊：有時會 outdate，最好去返 gov.hk verify</li>
+  <li>香港交通/地產/飲食：Google 仍然更準</li>
+  <li>香港法律/會計：<strong>一定</strong>要去返專業 source verify</li>
+</ul>
+
+<p><strong>簡單 rule：</strong> 常識性問題（定義、概念）— AI 搜尋可靠。香港本地具體資料（條例、費用、日期）— cross verify 官網。</p>
+
+<h3 id="q6notebooklm-同一般-ai-搜尋有咩分別">Q6：NotebookLM 同一般 AI 搜尋有咩分別？</h3>
+
+<p>呢個係最重要嘅分別：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>一般 AI 搜尋</th>
+      <th>NotebookLM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>資料來源</td>
+      <td>整個互聯網</td>
+      <td>你指定嘅 source</td>
+    </tr>
+    <tr>
+      <td>幻覺風險</td>
+      <td>中高</td>
+      <td>極低</td>
+    </tr>
+    <tr>
+      <td>深度</td>
+      <td>一般</td>
+      <td>深入（可分析大量文件）</td>
+    </tr>
+    <tr>
+      <td>適合</td>
+      <td>快速搜尋、了解 topic</td>
+      <td>深度研究、學習</td>
+    </tr>
+    <tr>
+      <td>價錢</td>
+      <td>免費/付費</td>
+      <td>完全免費</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>建議：</strong> 兩個一齊用——Perplexity 做快速 research，NotebookLM 做深度分析。</p>
+
+<h3 id="q7ai-搜尋會唔會令我變得唔會思考">Q7：AI 搜尋會唔會令我變得唔會思考？</h3>
+
+<p>呢個擔心合理，但關鍵係你點用：</p>
+
+<p><strong>被動使用：</strong> AI 俾咩就信咩，唔 verify，唔批判
+ <strong>主動使用：</strong> 用 AI 做起點，自己判斷、整合、批判</p>
+
+<p>AI 搜尋最好嘅用法係：<strong>將 low-level 嘅資訊搜集工作俾 AI 做，釋放你嘅腦力去做 high-level 嘅思考同決策。</strong></p>
+
+<h3 id="q82026-下半年有咩-ai-搜尋趨勢要留意">Q8：2026 下半年有咩 AI 搜尋趨勢要留意？</h3>
+
+<p>根據而家嘅發展方向：</p>
+<ol>
+  <li><strong>Deep Research 普及化</strong> — Perplexity 嘅 Deep Research 模式會更平民化</li>
+  <li><strong>Multimodal Search</strong> — 語音 + 圖片 + 影片 + 文字混合搜尋</li>
+  <li><strong>Agent Search</strong> — AI 唔只搜尋，仲會幫你行動（幫你 booking、填 form）</li>
+  <li><strong>Personal Knowledge Base</strong> — AI 搜尋整合你個人嘅知識庫（Notion/OneDrive）</li>
+  <li><strong>Local Search Improvement</strong> — AI 搜尋本地資訊會更準確</li>
+</ol>
+
+<hr />
+
+<h2 id="結語ai-搜尋嘅真正價值">結語：AI 搜尋嘅真正價值</h2>
+
+<p>AI 搜尋唔係取代你諗嘢，而係幫你慳時間。</p>
+
+<p>以前你要用 30 分鐘搵資料、對比、整理——而家 AI 幫你 5 分鐘做完，你慳返 25 分鐘用嚟<strong>思考、判斷、做決策</strong>。</p>
+
+<p>不過，AI 搜尋只係工具。真正嘅價值仍然係：</p>
+<ul>
+  <li>你識唔識問啱問題</li>
+  <li>你識唔識驗證資訊</li>
+  <li>你識唔識將資訊轉化為行動</li>
+</ul>
+
+<p><strong>最後送你一句：AI 搜尋係你嘅 Research Assistant，唔係你嘅大腦。</strong></p>
+
+<p>用得好，佢可以幫你慳大量時間；用得唔好，佢可以令你愈嚟愈懶。</p>
+
+<p>今個星期嘅 challenge：試吓將一個平日用 Google 搜尋嘅問題，用 AI 搜尋去解決。睇吓邊個快、邊個準、邊個幫你慳多啲時間。</p>
+
+<hr />
+
+<p><em>本文章內容僅供參考，AI 搜尋工具及功能可能隨時間更新。重要決策請自行驗證資訊。</em></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI%E6%90%9C%E5%B0%8B" class="badge bg-secondary text-decoration-none me-1">AI搜尋</a>
+          
+          
+          <a href="/search/?q=Perplexity" class="badge bg-secondary text-decoration-none me-1">Perplexity</a>
+          
+          
+          <a href="/search/?q=NotebookLM" class="badge bg-secondary text-decoration-none me-1">NotebookLM</a>
+          
+          
+          <a href="/search/?q=Google+AI+Overview" class="badge bg-secondary text-decoration-none me-1">Google AI Overview</a>
+          
+          
+          <a href="/search/?q=ChatGPT+Search" class="badge bg-secondary text-decoration-none me-1">ChatGPT Search</a>
+          
+          
+          <a href="/search/?q=AI%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">AI工具</a>
+          
+          
+          <a href="/search/?q=%E8%B3%87%E8%A8%8A%E6%95%B4%E7%90%86" class="badge bg-secondary text-decoration-none me-1">資訊整理</a>
+          
+          
+          <a href="/search/?q=%E9%A6%99%E6%B8%AF" class="badge bg-secondary text-decoration-none me-1">香港</a>
+          
+          
+          <a href="/search/?q=2026" class="badge bg-secondary text-decoration-none me-1">2026</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html&text=2026+AI+%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E%E8%88%87%E8%B3%87%E8%A8%8A%E6%95%B4%E7%90%86%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97%EF%BC%9A%E7%94%B1+Perplexity+%E5%88%B0+NotebookLM%EF%BC%8C%E7%94%A8+AI+%E5%8F%96%E4%BB%A3%E5%82%B3%E7%B5%B1+Google+%E6%90%9C%E5%B0%8B%E5%98%85%E5%AE%8C%E6%95%B4%E6%94%BB%E7%95%A5" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?2026+AI+%E6%90%9C%E5%B0%8B%E5%BC%95%E6%93%8E%E8%88%87%E8%B3%87%E8%A8%8A%E6%95%B4%E7%90%86%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97%EF%BC%9A%E7%94%B1+Perplexity+%E5%88%B0+NotebookLM%EF%BC%8C%E7%94%A8+AI+%E5%8F%96%E4%BB%A3%E5%82%B3%E7%B5%B1+Google+%E6%90%9C%E5%B0%8B%E5%98%85%E5%AE%8C%E6%95%B4%E6%94%BB%E7%95%A5%0Ahttps://anthroskill.com/tech/2026/06/10/ai-search-engine-guide-hk.html" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E7%A7%91%E6%8A%80/2026/08/11/ai-search-engine-guide-hk.html" class="text-decoration-none">2026 AI 搜尋引擎實戰指南：三大工具怎麼選？</a>
+              <br><small class="text-muted">2026-08-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/2026/08/01/notebooklm-research-prompts-guide-hk.html" class="text-decoration-none">AI 文獻回顧指南：NotebookLM 8 個 Prompt 快速消化研究庫</a>
+              <br><small class="text-muted">2026-08-01</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/06/11/ai-search-engine-guide-hk.html" class="text-decoration-none">2026 AI 搜尋引擎實戰指南：用 Perplexity、ChatGPT Search 同 AI Search 顛覆傳統 Google 搜尋</a>
+              <br><small class="text-muted">2026-06-11</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/05/26/2026-AI%E5%B7%A5%E5%85%B7%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97-%E6%AF%8F%E5%A4%A9%E5%9C%A8%E7%94%A8%E7%9A%84%E9%AB%98%E6%95%88%E5%B7%A5%E5%85%B7%E6%8E%A8%E8%96%A6.html" class="text-decoration-none">2026 AI 工具實戰指南：10 款每天在用的高效工具推薦（免費＋付費）</a>
+              <br><small class="text-muted">2026-05-26</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/04/11/ai-productivity-workflow-2026.html" class="text-decoration-none">2026 AI 工作流實戰：3 個工具讓生產力翻倍</a>
+              <br><small class="text-muted">2026-04-11</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

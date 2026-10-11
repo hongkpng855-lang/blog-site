@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a4a7a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4aa;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#00b894;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="brain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8f5e9;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#c8e6c9;stop-opacity:0.7" />
+    </linearGradient>
+    <linearGradient id="calm-wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#81c784;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#81c784;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#81c784;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="calm-wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a5d6a7;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#a5d6a7;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#a5d6a7;stop-opacity:0" />
+    </linearGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <circle cx="256" cy="280" r="180" fill="url(#glow)"/>
+
+  <!-- 腦部圖案（人腦側面簡化線條） -->
+  <g transform="translate(256,240)" fill="none" stroke="url(#brain)" stroke-width="2.5" stroke-linecap="round">
+    <!-- 大腦半球 -->
+    <ellipse cx="0" cy="-20" rx="55" ry="65" stroke-dasharray="4,3" opacity="0.5"/>
+    <!-- 腦內路徑／神經網絡 -->
+    <circle cx="-15" cy="-35" r="3" fill="url(#brain)" stroke="none"/>
+    <circle cx="10" cy="-45" r="2.5" fill="url(#brain)" stroke="none"/>
+    <circle cx="-5" cy="-55" r="2" fill="url(#brain)" stroke="none"/>
+    <circle cx="25" cy="-30" r="3" fill="url(#brain)" stroke="none"/>
+    <circle cx="-25" cy="-20" r="2.5" fill="url(#brain)" stroke="none"/>
+    <circle cx="15" cy="-15" r="2" fill="url(#brain)" stroke="none"/>
+    <line x1="-15" y1="-35" x2="10" y2="-45" stroke-width="1.5" opacity="0.6"/>
+    <line x1="10" y1="-45" x2="-5" y2="-55" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-15" y1="-35" x2="-25" y2="-20" stroke-width="1.5" opacity="0.6"/>
+    <line x1="10" y1="-45" x2="25" y2="-30" stroke-width="1.5" opacity="0.6"/>
+    <line x1="25" y1="-30" x2="15" y2="-15" stroke-width="1.5" opacity="0.6"/>
+    <line x1="15" y1="-15" x2="-15" y2="-35" stroke-width="1.5" opacity="0.6"/>
+    <!-- 大腦下方→心臟 -->
+    <path d="M0,45 Q5,60 15,65" stroke-width="1.5" opacity="0.3"/>
+    <path d="M0,45 Q-5,60 -15,65" stroke-width="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- 皮質醇分子圖示 -->
+  <g transform="translate(180,200)" fill="none" stroke="#ef9a9a" stroke-width="1.5" opacity="0.4">
+    <text x="0" y="0" font-family="monospace" font-size="11" fill="#ef9a9a" stroke="none" opacity="0.6">CORTISOL</text>
+  </g>
+
+  <!-- 波紋效果（放鬆／修復象徵） -->
+  <g transform="translate(256,310)">
+    <ellipse cx="0" cy="0" rx="120" ry="18" fill="url(#calm-wave)"/>
+    <ellipse cx="0" cy="0" rx="90" ry="12" fill="url(#calm-wave2)"/>
+    <ellipse cx="0" cy="0" rx="55" ry="7" fill="none" stroke="#81c784" stroke-width="1" opacity="0.25"/>
+    <ellipse cx="0" cy="0" rx="35" ry="4" fill="none" stroke="#a5d6a7" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- 頂部裝飾圓點（平衡／和諧象徵） -->
+  <g fill="#81c784" opacity="0.3">
+    <circle cx="160" cy="100" r="3"/>
+    <circle cx="352" cy="100" r="3"/>
+    <circle cx="140" cy="120" r="2"/>
+    <circle cx="372" cy="120" r="2"/>
+  </g>
+
+  <!-- 冥想小人輪廓 -->
+  <g transform="translate(256,370)" fill="none" stroke="#81c784" stroke-width="2" stroke-linecap="round" opacity="0.5">
+    <!-- 頭 -->
+    <circle cx="0" cy="-30" r="10"/>
+    <!-- 身體（盤腿坐姿） -->
+    <path d="M0,-20 Q-15,-5 -20,10"/>
+    <path d="M0,-20 Q15,-5 20,10"/>
+    <!-- 腿（盤腿） -->
+    <ellipse cx="0" cy="15" rx="22" ry="8"/>
+    <!-- 手臂（放鬆垂放／冥想手勢） -->
+    <path d="M-10,-12 Q-25,-10 -20,-5"/>
+    <path d="M10,-12 Q25,-10 20,-5"/>
+  </g>
+
+  <!-- 標題文字 -->
+  <text x="256" y="440" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="700" font-size="18" fill="#e8f5e9" filter="url(#softShadow)">
+    壓力科學管理指南
+  </text>
+  <text x="256" y="465" text-anchor="middle" font-family="system-ui, sans-serif" font-weight="500" font-size="12" fill="#a5d6a7" opacity="0.8">
+    降低皮質醇 · 重建身心韌性
+  </text>
+
+  <!-- 底部裝飾線 -->
+  <line x1="180" y1="478" x2="332" y2="478" stroke="#81c784" stroke-width="0.5" opacity="0.3"/>
+  <circle cx="256" cy="478" r="2" fill="#81c784" opacity="0.5"/>
+
+  <!-- 年份標籤 -->
+  <text x="256" y="498" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#81c784" opacity="0.4">2026</text>
+</svg>

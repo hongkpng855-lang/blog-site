@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e2b714;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#e2b714;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="book" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f3460"/>
+      <stop offset="100%" style="stop-color:#1a5276"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  
+  <!-- Glow circle -->
+  <circle cx="256" cy="240" r="200" fill="url(#glow)"/>
+  
+  <!-- Open book -->
+  <g filter="url(#shadow)">
+    <!-- Book pages -->
+    <path d="M256 180 L256 340" stroke="#e2b714" stroke-width="2" opacity="0.6"/>
+    <path d="M130 190 Q190 180 256 180 Q322 180 382 190 L382 340 Q322 330 256 330 Q190 330 130 340 Z" fill="url(#book)" stroke="#e2b714" stroke-width="1.5" opacity="0.9"/>
+    <!-- Book spine detail -->
+    <line x1="256" y1="180" x2="256" y2="340" stroke="#e2b714" stroke-width="2" opacity="0.8"/>
+  </g>
+  
+  <!-- Lightbulb (idea) above book -->
+  <g transform="translate(256, 130)" filter="url(#shadow)">
+    <path d="M0 -30 Q-18 -30 -18 -10 Q-18 5 -8 15 L-8 25 Q-8 30 -4 32 L4 32 Q8 30 8 25 L8 15 Q18 5 18 -10 Q18 -30 0 -30 Z" fill="#e2b714" opacity="0.9"/>
+    <!-- Bulb glow lines -->
+    <line x1="0" y1="-38" x2="0" y2="-45" stroke="#e2b714" stroke-width="2" opacity="0.7"/>
+    <line x1="-12" y1="-33" x2="-16" y2="-38" stroke="#e2b714" stroke-width="2" opacity="0.5"/>
+    <line x1="12" y1="-33" x2="16" y2="-38" stroke="#e2b714" stroke-width="2" opacity="0.5"/>
+    <line x1="-20" y1="-20" x2="-26" y2="-22" stroke="#e2b714" stroke-width="2" opacity="0.4"/>
+    <line x1="20" y1="-20" x2="26" y2="-22" stroke="#e2b714" stroke-width="2" opacity="0.4"/>
+  </g>
+  
+  <!-- Abstract brain illustration on right page -->
+  <g transform="translate(290, 260)" opacity="0.3">
+    <path d="M0 0 C10 -15 30 -15 40 0 C50 -10 65 -5 60 15 C70 20 65 35 50 35 C45 45 25 45 20 35 C10 40 0 35 5 25 C-5 20 0 10 10 10 Z" fill="#e2b714" stroke="#e2b714" stroke-width="1"/>
+  </g>
+  
+  <!-- Text lines on left page -->
+  <g opacity="0.3">
+    <line x1="145" y1="210" x2="240" y2="210" stroke="#e2b714" stroke-width="3" stroke-linecap="round"/>
+    <line x1="145" y1="225" x2="230" y2="225" stroke="#e2b714" stroke-width="2" stroke-linecap="round"/>
+    <line x1="145" y1="240" x2="235" y2="240" stroke="#e2b714" stroke-width="2" stroke-linecap="round"/>
+    <line x1="145" y1="255" x2="225" y2="255" stroke="#e2b714" stroke-width="2" stroke-linecap="round"/>
+    <line x1="145" y1="270" x2="240" y2="270" stroke="#e2b714" stroke-width="2" stroke-linecap="round"/>
+    <line x1="145" y1="285" x2="220" y2="285" stroke="#e2b714" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  
+  <!-- Small stars scattered around -->
+  <g fill="#e2b714" opacity="0.6">
+    <circle cx="100" cy="100" r="2"/>
+    <circle cx="420" cy="90" r="2.5"/>
+    <circle cx="80" cy="350" r="1.5"/>
+    <circle cx="440" cy="370" r="2"/>
+    <circle cx="380" cy="120" r="1.5"/>
+    <circle cx="130" cy="400" r="2"/>
+  </g>
+  
+  <!-- Title text -->
+  <text x="256" y="420" text-anchor="middle" fill="#e2b714" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" letter-spacing="2">
+    高效學習法
+  </text>
+  <text x="256" y="445" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" opacity="0.7" letter-spacing="1">
+    5個科學實證方法
+  </text>
+</svg>

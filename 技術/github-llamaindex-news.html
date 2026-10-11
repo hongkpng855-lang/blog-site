@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>LlamaIndex 開源：51.9K 星標的 AI 資料框架 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="LlamaIndex 是 GitHub 上擁有 5.19 萬星標的開源資料框架，專為大型語言模型應用設計，提供資料連接器、索引結構與檢索查詢介面，可串接 OpenAI、Ollama 等模型及超過 300 個整合套件，被視為 RAG 應用的標準起點。本文分析其核心架構、與 LangChain 的差異及商業化路徑。">
+  <meta name="keywords" content="AI, 開源項目, RAG, LlamaIndex, LLM, 資料框架">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="LlamaIndex 開源：51.9K 星標的 AI 資料框架">
+  <meta property="og:description" content="LlamaIndex 是 GitHub 上擁有 5.19 萬星標的開源資料框架，專為大型語言模型應用設計，提供資料連接器、索引結構與檢索查詢介面，可串接 OpenAI、Ollama 等模型及超過 300 個整合套件，被視為 RAG 應用的標準起點。本文分析其核心架構、與 LangChain 的差異及商業化路徑。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-llamaindex-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="LlamaIndex 開源：51.9K 星標的 AI 資料框架">
+  <meta name="twitter:description" content="LlamaIndex 是 GitHub 上擁有 5.19 萬星標的開源資料框架，專為大型語言模型應用設計，提供資料連接器、索引結構與檢索查詢介面，可串接 OpenAI、Ollama 等模型及超過 300 個整合套件，被視為 RAG 應用的標準起點。本文分析其核心架構、與 LangChain 的差異及商業化路徑。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-llamaindex-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "LlamaIndex 開源：51.9K 星標的 AI 資料框架",
+      "description": "LlamaIndex 是 GitHub 上擁有 5.19 萬星標的開源資料框架，專為大型語言模型應用設計，提供資料連接器、索引結構與檢索查詢介面，可串接 OpenAI、Ollama 等模型及超過 300 個整合套件，被視為 RAG 應用的標準起點。本文分析其核心架構、與 LangChain 的差異及商業化路徑。",
+      "datePublished": "2026-08-28T10:00:01+08:00",
+      "dateModified": "2026-08-28T10:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/run-llama/llama_index" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-llamaindex-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LlamaIndex 開源：51.9K 星標的 AI 資料框架",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">LlamaIndex 開源：51.9K 星標的 AI 資料框架</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">LlamaIndex 開源：51.9K 星標的 AI 資料框架</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月28日 10:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/run-llama/llama_index" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-llamaindex-news-cover.jpg" alt="LlamaIndex 開源：51.9K 星標的 AI 資料框架" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/run-llama/llama_index" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/run-llama/llama_index
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>LlamaIndex 是 GitHub 上擁有超過 5.19 萬星標的開源資料框架，由 Jerry Liu 於 2022 年 11 月創建，官方定位為「數據框架」，專門解決大型語言模型與私有資料之間的連接問題。此項目以 Python 為主要語言，提供資料連接器、索引結構與進階檢索查詢介面，讓開發者能以五行程式碼將企業文件轉化為可查詢的 AI 知識庫，是目前 RAG（檢索增強生成）應用最廣泛使用的開源框架之一。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>LlamaIndex 是一個開源的 AI 資料框架，用於將 PDF、網頁、SQL 等私有資料與大型語言模型連接，支援檢索增強生成（RAG）與代理應用開發。目前擁有超過 5.19 萬星標與 8,000 分叉，採用 MIT 授權，提供 300 個以上整合套件。
+<!-- End AEO Capsule --></p>
+
+<h2 id="llamaindex-是什麼">LlamaIndex 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>LlamaIndex 由 Jerry Liu 於 2022 年 11 月發起，最初定位為「將大型語言模型與私有資料連接的資料框架」，
+<!-- End AEO Capsule -->
+LlamaIndex 由 Jerry Liu 於 2022 年 11 月發起，最初定位為「將大型語言模型與私有資料連接的資料框架」，設計目標是解決 LLM 無法存取企業內部資料的問題。與僅提供模型推論的工具不同，此項目聚焦在資料層：從資料攝取、結構化、索引建立到檢索查詢，提供完整管線。</p>
+
+<p>此專案的核心價值在於降低 RAG 應用的開發門檻。開發者只需安裝 <code class="language-plaintext highlighter-rouge">llama-index</code> 套件，透過 <code class="language-plaintext highlighter-rouge">SimpleDirectoryReader</code> 讀取文件，再以 <code class="language-plaintext highlighter-rouge">VectorStoreIndex.from_documents</code> 建立索引，即可完成一個可查詢的知識庫。高階使用者則可自訂資料連接器、檢索器、查詢引擎與重排序模組，從入門到生產級應用都能涵蓋。</p>
+
+<p><img src="/assets/images/posts/github-llamaindex-news-shot1.png" alt="LlamaIndex README 開頭（項目名稱與標語）" /></p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>LlamaIndex 是為大型語言模型設計的開源資料框架，提供資料連接器、索引結構與檢索查詢介面，讓 LLM 應用能讀取並查詢私有資料。其高階 API 以五行程式碼完成資料攝取與索引建立，並支援自訂模組延伸。
+<!-- End AEO Capsule --></p>
+
+<h2 id="llamaindex-有哪些核心技術亮點">LlamaIndex 有哪些核心技術亮點？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>LlamaIndex 的技術架構圍繞資料攝取與檢索兩大主軸。資料層提供超過百種資料連接器，涵蓋 PDF、DOCX、網頁、SQL 資料庫、API 等格式，
+<!-- End AEO Capsule -->
+LlamaIndex 的技術架構圍繞資料攝取與檢索兩大主軸。資料層提供超過百種資料連接器，涵蓋 PDF、DOCX、網頁、SQL 資料庫、API 等格式，並以 300 個以上的整合套件串接主流模型供應商。檢索層則提供多種索引類型，包括向量索引、樹狀索引、知識圖譜索引與關鍵字索引，開發者可依應用場景選擇。</p>
+
+<p>此框架在 2026 年的發展重點轉向代理化能力。官方推出的 LlamaParse 平台專注於 Agentic OCR 與文件解析，支援 130 種以上文件格式的結構化抽取；LlamaAgents 提供端對端文件代理系統，可部署具備工具呼叫能力的文件代理。其 Workflows 機制讓開發者能以事件驅動方式組合複雜的代理流程，這是此框架與傳統 RAG 工具最大的差異。</p>
+
+<p><img src="/assets/images/posts/github-llamaindex-news-shot2.png" alt="LlamaIndex GitHub 首頁頂部（repo 名 + Star 數 + 描述）" /></p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>LlamaIndex 的核心亮點包括：超過百種資料連接器、多種索引類型（向量、樹狀、知識圖譜）、300 個以上整合套件，以及 Workflows 事件驅動代理機制。其 LlamaParse 平台提供 Agentic OCR 能力，支援 130 種文件格式的結構化抽取。
+<!-- End AEO Capsule --></p>
+
+<h2 id="llamaindex-與-langchain-有什麼不同">LlamaIndex 與 LangChain 有什麼不同？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>LlamaIndex 與 LangChain 同為 LLM 應用開發的主流框架，但切入角度不同。LangChain 定位為「應用編排框架」，
+<!-- End AEO Capsule -->
+LlamaIndex 與 LangChain 同為 LLM 應用開發的主流框架，但切入角度不同。LangChain 定位為「應用編排框架」，提供鏈（Chain）、代理（Agent）與工具呼叫等應用層抽象；LlamaIndex 則聚焦「資料層」，強調資料索引、檢索與查詢引擎的深度最佳化。實務上，許多開發者會同時使用兩者：以 LlamaIndex 處理資料攝取與檢索，以 LangChain 編排整體應用流程。</p>
+
+<p>此差異反映在各自的架構設計上。LlamaIndex 的查詢引擎直接封裝檢索、重排序與回應合成邏輯，對 RAG 場景提供開箱即用的體驗；LangChain 則提供更泛用的代理與工具生態。值得注意的是，LlamaIndex 的整合套件近年也加入代理與工作流能力，兩框架的功能邊界正逐漸模糊，開發者選擇時應以資料管線複雜度與既有生態為主要考量。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>LlamaIndex 專注於資料層，提供索引、檢索與查詢引擎的深度最佳化；LangChain 則聚焦應用編排，提供鏈與代理抽象。兩者可互補使用，實務上常見以 LlamaIndex 處理資料、以 LangChain 編排流程的組合。
+<!-- End AEO Capsule --></p>
+
+<h2 id="如何快速開始使用-llamaindex">如何快速開始使用 LlamaIndex？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>LlamaIndex 提供兩種安裝方式：初學者可直接安裝 llama-index 完整套件，包含核心功能與常用整合；
+<!-- End AEO Capsule -->
+LlamaIndex 提供兩種安裝方式：初學者可直接安裝 <code class="language-plaintext highlighter-rouge">llama-index</code> 完整套件，包含核心功能與常用整合；進階使用者則安裝 <code class="language-plaintext highlighter-rouge">llama-index-core</code> 並依需加入個別整合套件。實際使用時，開發者以 <code class="language-plaintext highlighter-rouge">SimpleDirectoryReader</code> 讀取資料目錄，透過 <code class="language-plaintext highlighter-rouge">VectorStoreIndex.from_documents</code> 建立向量索引，再以 <code class="language-plaintext highlighter-rouge">query_engine.query</code> 完成查詢，全程只需數行程式碼。</p>
+
+<p>此框架支援多種模型後端。除 OpenAI 外，可透過設定類別串接 Ollama 本地模型、HuggingFace 嵌入模型等，適合重視資料私隱的部署場景。索引建立後可將儲存上下文持久化至磁碟，下次啟動直接載入，無需重複攝取文件。官方文件提供完整的範例與逐步教學，涵蓋從基本 RAG 到多代理系統的各種應用。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>開始使用 LlamaIndex 只需三步：安裝 <code class="language-plaintext highlighter-rouge">llama-index</code> 套件、以 <code class="language-plaintext highlighter-rouge">SimpleDirectoryReader</code> 讀取資料、用 <code class="language-plaintext highlighter-rouge">VectorStoreIndex.from_documents</code> 建立索引並以 <code class="language-plaintext highlighter-rouge">as_query_engine</code> 查詢。支援 OpenAI、Ollama 與 HuggingFace 等多種模型後端。
+<!-- End AEO Capsule --></p>
+
+<h2 id="llamaindex-的商業化路徑是什麼">LlamaIndex 的商業化路徑是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>LlamaIndex 採取開源核心與雲端平台並行的雙軌策略。開源版本以 MIT 授權維持社群擴散，累積超過 5.19 萬星標與 1,904 位貢獻者；
+<!-- End AEO Capsule -->
+LlamaIndex 採取開源核心與雲端平台並行的雙軌策略。開源版本以 MIT 授權維持社群擴散，累積超過 5.19 萬星標與 1,904 位貢獻者；商業化則透過 LlamaCloud 平台實現，提供 Agentic OCR、結構化資料抽取與託管檢索服務，讓企業以 API 形式使用 LlamaParse 等進階能力。</p>
+
+<p>此商業模式與其他開源 AI 框架一致：以開放框架建立開發者生態，再以託管服務與企業功能變現。LlamaIndex 的差異在於強化文件代理與 OCR 領域，直接對應企業文件處理的高頻需求。對個人開發者而言，開源版本已涵蓋大部分使用場景；對需要 SLA、擴展性與資料管線託管的團隊，雲端平台則提供付費路徑。</p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><div class="ui-stat-number">51.9K</div><div class="ui-stat-label">GitHub 星標</div></div>
+  <div class="ui-stat"><div class="ui-stat-number">8.0K</div><div class="ui-stat-label">Forks</div></div>
+  <div class="ui-stat"><div class="ui-stat-number">MIT</div><div class="ui-stat-label">開源許可證</div></div>
+  <div class="ui-stat"><div class="ui-stat-number">Python</div><div class="ui-stat-label">主要語言</div></div>
+</div>
+
+<p><img src="/assets/images/posts/github-llamaindex-news-shot3.png" alt="LlamaIndex Contributors 統計頁（1,904 位貢獻者與語言分佈）" /></p>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>LlamaIndex 以 MIT 授權的開源框架建立開發者生態，透過 LlamaCloud 平台提供 Agentic OCR、結構化抽取與託管檢索服務變現，形成開放擴散與企業付費並行的雙軌商業模式。
+<!-- End AEO Capsule --></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<p>本文資訊來源為 LlamaIndex 的 GitHub 儲存庫，包含完整的 README 文件、安裝指引、API 參考與整合套件清單。讀者可前往官方儲存庫查看原始碼、範例與社群討論，相關文件與 LlamaCloud 產品資訊亦可在官方文件網站取得。</p>
+
+<!-- AEO Answer Capsule — 約 55 字 -->
+<p>本文資訊來源為 run-llama/llama_index 的 GitHub 儲存庫，官方文件位於 developers.llamaindex.ai。讀者可查看原始碼、安裝指引、整合套件清單與最新版本資訊。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：<a href="https://github.com/run-llama/llama_index">run-llama/llama_index</a></li>
+  <li>官方文件：<a href="https://developers.llamaindex.ai/">LlamaIndex Documentation</a></li>
+</ul>
+
+<h2 id="總結llamaindex-適合什麼團隊">總結：LlamaIndex 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>LlamaIndex 適合需要將私有資料轉化為可查詢知識庫的團隊，包括 RAG 應用開發者、企業文件處理部門與 AI 產品團隊。其低門檻 API 適合快速原型，進階模組與雲端平台則支援生產級部署，目前仍持續擴展代理與 OCR 能力。
+<!-- End AEO Capsule --></p>
+
+<p>LlamaIndex 以資料層為核心的定位，使其在 RAG 與文件智能領域建立穩固的開源地位。其超過 5.19 萬星標與 8,000 分叉反映社群認可度，MIT 授權與雙軌商業模式則平衡開放與永續發展。對需要將大型語言模型與自有資料整合的開發者與企業而言，此框架提供從原型到生產的完整路徑，未來在代理系統與文件處理領域的擴展值得持續關注。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI" class="badge bg-secondary text-decoration-none me-1">AI</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE" class="badge bg-secondary text-decoration-none me-1">開源項目</a>
+          
+          
+          <a href="/search/?q=RAG" class="badge bg-secondary text-decoration-none me-1">RAG</a>
+          
+          
+          <a href="/search/?q=LlamaIndex" class="badge bg-secondary text-decoration-none me-1">LlamaIndex</a>
+          
+          
+          <a href="/search/?q=LLM" class="badge bg-secondary text-decoration-none me-1">LLM</a>
+          
+          
+          <a href="/search/?q=%E8%B3%87%E6%96%99%E6%A1%86%E6%9E%B6" class="badge bg-secondary text-decoration-none me-1">資料框架</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news&text=LlamaIndex+%E9%96%8B%E6%BA%90%EF%BC%9A51.9K+%E6%98%9F%E6%A8%99%E7%9A%84+AI+%E8%B3%87%E6%96%99%E6%A1%86%E6%9E%B6" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?LlamaIndex+%E9%96%8B%E6%BA%90%EF%BC%9A51.9K+%E6%98%9F%E6%A8%99%E7%9A%84+AI+%E8%B3%87%E6%96%99%E6%A1%86%E6%9E%B6%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-llamaindex-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llmapp-news" class="text-decoration-none">Pathway LLM App 開源：5.8 萬星的實時 RAG 模板</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-face-recognition-news" class="text-decoration-none">face_recognition 開源：5.7 萬星的人臉辨識入門庫</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/public-apis-news" class="text-decoration-none">public-apis 開源：2038 個免費 API 總表</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

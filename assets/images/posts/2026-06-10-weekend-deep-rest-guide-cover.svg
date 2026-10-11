@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#e8c76a"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ecc71"/>
+      <stop offset="100%" style="stop-color:#27ae60"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1abc9c"/>
+      <stop offset="100%" style="stop-color:#16a085"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f3460;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:0.95"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:0.95"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#16213e;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:0.95"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f3460;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#16213e;stop-opacity:0.95"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="450" cy="80" r="120" fill="#FB923C" opacity="0.04"/>
+  <circle cx="60" cy="420" r="100" fill="#2ecc71" opacity="0.03"/>
+  <circle cx="256" cy="256" r="200" fill="#1abc9c" opacity="0.02"/>
+
+  <!-- Moon -->
+  <circle cx="420" cy="70" r="25" fill="#f1c40f" opacity="0.15"/>
+  <circle cx="428" cy="65" r="22" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <circle cx="380" cy="45" r="1.5" fill="#fff" opacity="0.3"/>
+  <circle cx="440" cy="30" r="1" fill="#fff" opacity="0.2"/>
+  <circle cx="460" cy="55" r="1" fill="#fff" opacity="0.25"/>
+  <circle cx="395" cy="75" r="1" fill="#fff" opacity="0.15"/>
+
+  <!-- Central icon: Battery / Recharge symbol -->
+  <g transform="translate(256, 60)" filter="url(#glow)">
+    <!-- Battery outline -->
+    <rect x="-24" y="-12" width="48" height="24" rx="4" fill="none" stroke="url(#gold)" stroke-width="2"/>
+    <rect x="24" y="-6" width="5" height="12" rx="2" fill="url(#gold)" opacity="0.6"/>
+    <!-- Lightning bolt -->
+    <polygon points="-4,-10 2,-2 -2,-2 4,8" fill="url(#gold)" opacity="0.9"/>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="bold" fill="url(#gold)" text-anchor="middle" letter-spacing="1">
+    週末深度休息
+  </text>
+  <text x="256" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#8899aa" text-anchor="middle">
+    真正叉電嘅 4 種休息模式
+  </text>
+
+  <!-- Card 1: Release -->
+  <g filter="url(#softShadow)">
+    <rect x="25" y="165" width="225" height="140" rx="10" fill="url(#card1)" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+    <!-- Icon -->
+    <circle cx="55" cy="190" r="12" fill="url(#gold)" opacity="0.15"/>
+    <text x="55" y="194" font-family="sans-serif" font-size="12" fill="url(#gold)" text-anchor="middle">☀</text>
+    <text x="75" y="194" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#e8c76a">Release</text>
+    <text x="75" y="208" font-family="system-ui, sans-serif" font-size="9" fill="#778899">釋放壓力</text>
+    <line x1="35" y1="215" x2="240" y2="215" stroke="#FB923C" stroke-width="0.3" opacity="0.2"/>
+    <text x="35" y="232" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 拉筋 / 瑜伽 roll</text>
+    <text x="35" y="248" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 熱水涼 + 鎂鹽</text>
+    <text x="35" y="264" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• Mental dump 倒出思緒</text>
+    <text x="35" y="280" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• Friday Reset 儀式</text>
+  </g>
+
+  <!-- Card 2: Connect -->
+  <g filter="url(#softShadow)">
+    <rect x="262" y="165" width="225" height="140" rx="10" fill="url(#card2)" stroke="#2ecc71" stroke-width="0.5" stroke-opacity="0.3"/>
+    <circle cx="292" cy="190" r="12" fill="#2ecc71" opacity="0.15"/>
+    <text x="292" y="194" font-family="sans-serif" font-size="12" fill="#2ecc71" text-anchor="middle">🌿</text>
+    <text x="312" y="194" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#2ecc71">Connect</text>
+    <text x="312" y="208" font-family="system-ui, sans-serif" font-size="9" fill="#778899">連結自己</text>
+    <line x1="272" y1="215" x2="477" y2="215" stroke="#2ecc71" stroke-width="0.3" opacity="0.2"/>
+    <text x="272" y="232" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 煮一餐鐘意嘅飯</text>
+    <text x="272" y="248" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 去咖啡店 / 行山</text>
+    <text x="272" y="264" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 畫畫 / 手工創作</text>
+    <text x="272" y="280" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 一個人嘅 Me Time</text>
+  </g>
+
+  <!-- Card 3: Prepare -->
+  <g filter="url(#softShadow)">
+    <rect x="25" y="320" width="225" height="140" rx="10" fill="url(#card3)" stroke="#1abc9c" stroke-width="0.5" stroke-opacity="0.3"/>
+    <circle cx="55" cy="345" r="12" fill="#1abc9c" opacity="0.15"/>
+    <text x="55" y="349" font-family="sans-serif" font-size="12" fill="#1abc9c" text-anchor="middle">📋</text>
+    <text x="75" y="349" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#1abc9c">Prepare</text>
+    <text x="75" y="363" font-family="system-ui, sans-serif" font-size="9" fill="#778899">溫柔準備</text>
+    <line x1="35" y1="370" x2="240" y2="370" stroke="#1abc9c" stroke-width="0.3" opacity="0.2"/>
+    <text x="35" y="387" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• Sunday Reset 執屋</text>
+    <text x="35" y="403" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 準備聽日返工基本</text>
+    <text x="35" y="419" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 計劃下周行事曆</text>
+    <text x="35" y="435" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 自我照顧預告</text>
+  </g>
+
+  <!-- Card 4: Restore -->
+  <g filter="url(#softShadow)">
+    <rect x="262" y="320" width="225" height="140" rx="10" fill="url(#card4)" stroke="#9b59b6" stroke-width="0.5" stroke-opacity="0.3"/>
+    <circle cx="292" cy="345" r="12" fill="#9b59b6" opacity="0.15"/>
+    <text x="292" y="349" font-family="sans-serif" font-size="12" fill="#9b59b6" text-anchor="middle">🌙</text>
+    <text x="312" y="349" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" fill="#9b59b6">Restore</text>
+    <text x="312" y="363" font-family="system-ui, sans-serif" font-size="9" fill="#778899">深層修復</text>
+    <line x1="272" y1="370" x2="477" y2="370" stroke="#9b59b6" stroke-width="0.3" opacity="0.2"/>
+    <text x="272" y="387" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 星期日夜晚理想流程</text>
+    <text x="272" y="403" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 早啲冲涼 + 閱讀</text>
+    <text x="272" y="419" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• ⏪ 倒帶感恩練習</text>
+    <text x="272" y="435" font-family="system-ui, sans-serif" font-size="8.5" fill="#99aabb">• 4-7-8 呼吸法助眠</text>
+  </g>
+
+  <!-- Bottom stats bar -->
+  <g>
+    <rect x="25" y="478" width="462" height="22" rx="6" fill="#0a1628" opacity="0.6"/>
+    <text x="256" y="493" font-family="system-ui, sans-serif" font-size="8.5" fill="#556677" text-anchor="middle">
+      4 種休息模式  ·  完整 Weekend Template  ·  香港人專屬對策  ·  FAQ 8 題
+    </text>
+  </g>
+</svg>

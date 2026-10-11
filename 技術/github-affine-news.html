@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>AFFiNE 開源：7.2 萬星的本地優先知識庫 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="AFFiNE 是 2022 年開源的本地優先知識庫，在 GitHub 累積 72,901 顆星標與 5,305 個分支。它把文件、白板與資料庫合併於同一畫布，以 CRDT 與 Rust 引擎支援離線編輯與即時協作，社群版採 MIT 授權可自行架設。">
+  <meta name="keywords" content="開源, AFFiNE, 知識庫, Notion 替代, 本地優先, CRDT, 白板工具, 生產力工具">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="AFFiNE 開源：7.2 萬星的本地優先知識庫">
+  <meta property="og:description" content="AFFiNE 是 2022 年開源的本地優先知識庫，在 GitHub 累積 72,901 顆星標與 5,305 個分支。它把文件、白板與資料庫合併於同一畫布，以 CRDT 與 Rust 引擎支援離線編輯與即時協作，社群版採 MIT 授權可自行架設。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-affine-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AFFiNE 開源：7.2 萬星的本地優先知識庫">
+  <meta name="twitter:description" content="AFFiNE 是 2022 年開源的本地優先知識庫，在 GitHub 累積 72,901 顆星標與 5,305 個分支。它把文件、白板與資料庫合併於同一畫布，以 CRDT 與 Rust 引擎支援離線編輯與即時協作，社群版採 MIT 授權可自行架設。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-affine-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "AFFiNE 開源：7.2 萬星的本地優先知識庫",
+      "description": "AFFiNE 是 2022 年開源的本地優先知識庫，在 GitHub 累積 72,901 顆星標與 5,305 個分支。它把文件、白板與資料庫合併於同一畫布，以 CRDT 與 Rust 引擎支援離線編輯與即時協作，社群版採 MIT 授權可自行架設。",
+      "datePublished": "2026-09-24T08:00:01+08:00",
+      "dateModified": "2026-09-24T08:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/toeverything/AFFiNE" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-affine-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AFFiNE 開源：7.2 萬星的本地優先知識庫",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">AFFiNE 開源：7.2 萬星的本地優先知識庫</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">AFFiNE 開源：7.2 萬星的本地優先知識庫</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月24日 08:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/toeverything/AFFiNE" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-affine-news-cover.jpg" alt="AFFiNE 開源：7.2 萬星的本地優先知識庫" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/toeverything/AFFiNE" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/toeverything/AFFiNE
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>AFFiNE 是由新加坡團隊 toeverything 自 2022 年 7 月開源的知識庫平台，在 GitHub 累積 72,901 顆星標與 5,305 個分支。它的定位是把文件、白板與多維資料庫納入同一張無邊界畫布，並以本地優先架構與 CRDT 同步機制，讓使用者在離線狀態下依然能編輯與協作。</p>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>AFFiNE 是開源的本地優先知識庫，2022 年 7 月上線，星標達 72,901 顆，把文件、白板與資料庫合併於同一畫布，社群版採 MIT 授權並支援自行架設。
+<!-- End AEO Capsule --></p>
+
+<p>協作工具的市場長期被兩種取捨分割。一端是雲端優先的平台，功能完整但資料存放於廠商伺服器，離線能力有限；另一端是純本地的筆記軟體，資料主權完整，卻缺乏即時協作與跨裝置同步。AFFiNE 的設計目標正是繞開這道取捨，把資料先寫入本機，再透過同步引擎向其他裝置傳播變更。</p>
+
+<p>這項策略選擇直接反映在專案的技術堆疊上。AFFiNE 並未採用一般協作軟體常見的伺服器權威架構，而是把衝突解決的責任下放到用戶端，讓每個裝置都能獨立產生與合併操作。這種架構對同步引擎的要求更高，卻換來更短的編輯延遲與更強的抗斷網能力。</p>
+
+<h2 id="affine-是什麼">AFFiNE 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>AFFiNE 是開源的一體化工作空間，把文件、白板與多維資料庫整合在同一畫布，支援本地優先儲存、即時協作與自行架設，定位為 Notion 與 Miro 的替代方案。
+<!-- End AEO Capsule --></p>
+
+<p>專案自我定位為知識管理的作業系統，涵蓋 wiki、知識庫、簡報與數位資產等用途。與單一功能的筆記工具不同，AFFiNE 的核心設計是把文件與白板兩種形態合併，讓任何內容區塊都能在無邊界畫布上自由擺放，包括富文字、便利貼、嵌入網頁、多維表格、連結頁面、圖形與投影片。</p>
+
+<p>第二項特徵是 AI 能力的內建。專案提供名為 AFFiNE AI 的多模態助手，可依大綱生成簡報、把文章摘要成心智圖，或直接以提示詞產生原型頁面。這條產品線與編輯器共用同一份資料模型，因此 AI 產出的內容會直接落回畫布，而非停留在獨立對話視窗。</p>
+
+<p>第三項特徵是部署彈性。社群版以 MIT 授權釋出，使用者可透過 Docker 自行架設，或使用官方提供的 Render 與 Sealos 一鍵部署按鈕。這種安排讓團隊能在自有基礎設施上取得不受功能限制的版本。</p>
+
+<p><img src="/assets/images/posts/github-affine-news-shot1.png" alt="toeverything/AFFiNE README 開頭（專案名稱 AFFiNE、標語 Write, Draw and Plan All at Once，以及應用介面示意圖）" /></p>
+
+<h2 id="affine-由誰開發累積多少規模">AFFiNE 由誰開發、累積多少規模？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>AFFiNE 由新加坡團隊 toeverything 於 2022 年 7 月 31 日開源，累積逾 1.1 萬次提交與約 269 位貢獻者，最新一次程式碼推送為 2026 年 9 月 23 日。
+<!-- End AEO Capsule --></p>
+
+<p>儲存庫建立於 2022 年 7 月 31 日，由組織帳號 toeverything 維護，專案首頁與文件站分別位於 affine.pro 與 docs.affine.pro。截至 2026 年 9 月，專案累積超過 11,500 次提交與約 269 位貢獻者，另有 297 位追蹤者，未解決議題約 757 項，顯示議題吞吐量仍能跟上社群提交的速度。</p>
+
+<p>發布節奏上，專案維持兩種通道並行。穩定版以版本號標示，最新一版為 2026 年 8 月 18 日的 0.27.4；開發版則以日期加序號的 canary 標籤持續推送，最近一筆為 2026 年 9 月 23 日的 canary.909。這種雙軌模式讓願意嘗鮮的開發者能提早驗證新功能，一般使用者則停留在穩定通道。</p>
+
+<h2 id="affine-有哪些核心技術亮點">AFFiNE 有哪些核心技術亮點？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>核心亮點包括文件與白板合一的無邊界畫布、以 CRDT 為基礎的本地優先架構、Rust 撰寫的同步與儲存引擎，以及與編輯器共用資料模型的多模態 AI 助手。
+<!-- End AEO Capsule --></p>
+
+<p>畫布模型是它最直觀的差異點。多數編輯器把文件與白板做成兩個獨立模組，AFFiNE 則讓同一份內容同時具備兩種呈現方式，區塊可在有邊界文件與無邊界畫布之間切換。這種設計對需要同時進行文字撰寫與視覺整理的場景特別有利，例如把會議紀錄與流程圖放在同一視圖中對照。</p>
+
+<p>同步機制是第二個亮點。專案以 CRDT 為基礎處理並發編輯，並自研 y-octo 作為原生高效能的 YJS 實作，讓用戶端與伺服器能在沒有中央仲裁的情況下收斂到一致狀態。這項選擇使編輯操作不需等待伺服器往返，離線期間產生的變更也能在恢復連線後自動合併。</p>
+
+<p>第三個亮點是前後端的技術分層。編輯器核心由 BlockSuite 提供，儲存與同步層的 OctoBase 以 Rust 撰寫，桌面端則透過 Electron 打包，並以 napi-rs 銜接 Rust 與 Node.js。這種組合在保留網頁生態開發效率的同時，把效能敏感的環節交給原生模組處理。</p>
+
+<h2 id="affine-的架構為何能支援本地優先">AFFiNE 的架構為何能支援本地優先？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>AFFiNE 先在本機寫入變更，再透過 CRDT 與 YJS 實作向其他裝置傳播，衝突由用戶端自動合併；資料引擎 OctoBase 以 Rust 撰寫，不依賴伺服器仲裁。
+<!-- End AEO Capsule --></p>
+
+<p>本地優先的核心在於資料所有權的順序。使用者的編輯先落在本機儲存，網路同步只是把變更複製到其他裝置。這意味著連線中斷不會造成編輯中斷，也不會出現因伺服器不可用而無法開啟文件的狀況，資料始終保存在使用者自己的磁碟上。</p>
+
+<p>支撐這個行為的是兩層元件。上層的 y-octo 是原生、執行緒安全的 YJS CRDT 實作，負責處理並發操作與衝突消解；下層的 OctoBase 則是輕量、可擴充的資料引擎，以 Rust 撰寫並同時支援協作場景。兩者共同讓 AFFiNE 在沒有中央權威的情況下仍能維持資料一致。</p>
+
+<p>協作體驗同樣受益於此架構。由於同步是雙向的狀態合併而非狀態覆寫，多位使用者在同一份畫布上操作時，系統不需要鎖定區塊，也不需要等待授權，這在跨時區或網路品質不穩定的環境中尤其明顯。</p>
+
+<p><img src="/assets/images/posts/github-affine-news-shot2.png" alt="toeverything/AFFiNE GitHub 首頁頂部（儲存庫名稱、星標數、分支數與專案描述）" /></p>
+
+<h2 id="affine-與-notionmiro-相比有何差異">AFFiNE 與 Notion、Miro 相比有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>AFFiNE 把 Notion 的文件與 Miro 的白板合併於同一畫布，並以本地優先與開源授權為差異點；Notion 與 Miro 屬雲端優先的專有服務，不提供自行架設版本。
+<!-- End AEO Capsule --></p>
+
+<p>在功能座標上，AFFiNE 同時對標兩類產品。Notion 的優勢在於資料庫與協作生態成熟，Miro 的優勢在於無限白板的操作體驗。AFFiNE 的取徑是把兩者的原子區塊整合進同一份資料模型，讓使用者不必在兩個服務之間複製內容。</p>
+
+<p>授權與部署方式是更根本的差異。Notion 與 Miro 皆為專有雲端服務，資料存放位置由廠商決定；AFFiNE 社群版以 MIT 授權釋出，可完整自行架設。對於受合規要求約束的團隊而言，能在自有基礎設施上運行是決定性條件。</p>
+
+<p>商業模式上，專案採取社群版與企業版並行的路線。社群版免費自架，企業版規劃加入品牌替換、單一登入與進階稽核等功能，定價資訊公布於官方網站。這種分層方式在開源協作工具中相當常見，能在維持社群規模的同時建立營收來源。</p>
+
+<h2 id="affine-的數據規模如何">AFFiNE 的數據規模如何？</h2>
+
+<ul class="ui-stat-grid">
+  <li><span class="stat-value">72,901</span><span class="stat-label">Stars</span></li>
+  <li><span class="stat-value">5,305</span><span class="stat-label">Forks</span></li>
+  <li><span class="stat-value">MIT</span><span class="stat-label">社群版授權</span></li>
+  <li><span class="stat-value">TypeScript</span><span class="stat-label">主要語言</span></li>
+  <li><span class="stat-value">2026-09-23</span><span class="stat-label">最近推送</span></li>
+</ul>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>截至 2026 年 9 月，AFFiNE 累計 72,901 顆星標與 5,305 次複製，社群版採 MIT 授權，主要語言為 TypeScript，並以 Rust 撰寫同步與儲存引擎。
+<!-- End AEO Capsule --></p>
+
+<p>上表數據取自專案的 GitHub 公開統計，時間點為 2026 年 9 月 24 日。星標與複製的比例約為十四比一，反映專案的主要使用者偏向直接採用官方發行版本，而非自行編譯；未解決議題約 757 項，對照逾萬次提交與約 269 位貢獻者的規模，維護負擔仍屬可控。</p>
+
+<p>授權結構亦值得留意。社群版以 MIT 授權釋出，企業版則規劃為獨立授權通道，這種「開放核心加企業增補」的分層是開源基礎設施專案的常見模式，能在維持社群採用規模的同時，為商業化保留空間。</p>
+
+<p><img src="/assets/images/posts/github-affine-news-shot3.png" alt="toeverything/AFFiNE 貢獻者統計頁（近月提交頻率長條圖與主要貢獻者提交次數）" /></p>
+
+<h2 id="affine-適合哪些使用場景">AFFiNE 適合哪些使用場景？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>適合需要資料主權的團隊、習慣同時使用文件與白板進行規劃的知識工作者，以及希望在自有伺服器上部署協作平台並保留 AI 能力的組織。
+<!-- End AEO Capsule --></p>
+
+<p>最直接的適用場景是團隊知識庫。由於文件與畫布共用同一份資料模型，使用者可在同一處維護規範文件、流程圖與專案看板，不必在三個服務之間來回切換，也避免了版本不同步的困擾。</p>
+
+<p>第二類場景是對資料存放位置有要求的組織。金融、醫療與政府相關單位常被要求不得把內部文件放在境外雲端，AFFiNE 的自行架設能力讓這類團隊能在自有基礎設施上取得接近商用工具的體驗。</p>
+
+<p>第三類場景是個人與小型團隊的長期筆記系統。本地優先架構確保資料以檔案形式留在使用者裝置，即使日後停止使用服務，內容仍可直接讀取，降低了對單一廠商的依賴。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>本文資訊來自 toeverything/AFFiNE 的 GitHub 儲存庫與官方網站 affine.pro，可查閱完整功能說明、授權條款與自行架設文件。
+<!-- End AEO Capsule --></p>
+
+<p>本文內容整理自 toeverything/AFFiNE 的 GitHub 儲存庫（https://github.com/toeverything/AFFiNE）與官方網站（https://affine.pro），並參考專案文件站 docs.affine.pro 的自行架設說明。上述來源均採開源授權釋出或對外公開，讀者可前往查閱完整功能清單、授權條款與部署文件。</p>
+
+<h2 id="總結affine-適合什麼團隊">總結：AFFiNE 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>AFFiNE 適合重視資料主權的團隊與個人，其文件與白板合一的畫布與本地優先架構，在需要離線編輯或自行架設的情境下具備明顯優勢。
+<!-- End AEO Capsule --></p>
+
+<p>AFFiNE 的價值在於把兩項原本互斥的需求放在同一個產品裡。協作工具長期要求使用者在功能完整與資料主權之間選擇，而 AFFiNE 以本地優先架構、CRDT 同步與開源授權，讓兩者可以同時成立。對於需要自行架設的組織，它提供了一條不依賴境外雲端的協作路徑；對於個人使用者，它以 72,901 顆星標所代表的社群規模，證明了開源協作工具足以支撐長期使用。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=AFFiNE" class="badge bg-secondary text-decoration-none me-1">AFFiNE</a>
+          
+          
+          <a href="/search/?q=%E7%9F%A5%E8%AD%98%E5%BA%AB" class="badge bg-secondary text-decoration-none me-1">知識庫</a>
+          
+          
+          <a href="/search/?q=Notion+%E6%9B%BF%E4%BB%A3" class="badge bg-secondary text-decoration-none me-1">Notion 替代</a>
+          
+          
+          <a href="/search/?q=%E6%9C%AC%E5%9C%B0%E5%84%AA%E5%85%88" class="badge bg-secondary text-decoration-none me-1">本地優先</a>
+          
+          
+          <a href="/search/?q=CRDT" class="badge bg-secondary text-decoration-none me-1">CRDT</a>
+          
+          
+          <a href="/search/?q=%E7%99%BD%E6%9D%BF%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">白板工具</a>
+          
+          
+          <a href="/search/?q=%E7%94%9F%E7%94%A2%E5%8A%9B%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">生產力工具</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news&text=AFFiNE+%E9%96%8B%E6%BA%90%EF%BC%9A7.2+%E8%90%AC%E6%98%9F%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%84%AA%E5%85%88%E7%9F%A5%E8%AD%98%E5%BA%AB" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?AFFiNE+%E9%96%8B%E6%BA%90%EF%BC%9A7.2+%E8%90%AC%E6%98%9F%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%84%AA%E5%85%88%E7%9F%A5%E8%AD%98%E5%BA%AB%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-affine-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vaultwarden-news" class="text-decoration-none">Vaultwarden 開源：6.8 萬星的自架密碼庫</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-godot-news" class="text-decoration-none">Godot 118k 星開源引擎：完全免費無抽成</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-code-server-news" class="text-decoration-none">code-server 4.140.0：瀏覽器內的 VS Code</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news" class="text-decoration-none">codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

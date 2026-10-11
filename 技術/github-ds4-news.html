@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="DwarfStar（antirez/ds4）是由 Redis 作者 Salvatore Sanfilippo 開發的本地推理引擎，以純 C 撰寫，專為在消費級硬體上運行 DeepSeek V4 Flash 等開源權重模型而設計，GitHub 星標已達 22,842 顆。本文整理其架構取捨、硬體支援、效能數據與安裝流程。">
+  <meta name="keywords" content="開源專案, DwarfStar, 本地推理, DeepSeek, antirez, C 語言, 消費級硬體">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎">
+  <meta property="og:description" content="DwarfStar（antirez/ds4）是由 Redis 作者 Salvatore Sanfilippo 開發的本地推理引擎，以純 C 撰寫，專為在消費級硬體上運行 DeepSeek V4 Flash 等開源權重模型而設計，GitHub 星標已達 22,842 顆。本文整理其架構取捨、硬體支援、效能數據與安裝流程。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-ds4-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎">
+  <meta name="twitter:description" content="DwarfStar（antirez/ds4）是由 Redis 作者 Salvatore Sanfilippo 開發的本地推理引擎，以純 C 撰寫，專為在消費級硬體上運行 DeepSeek V4 Flash 等開源權重模型而設計，GitHub 星標已達 22,842 顆。本文整理其架構取捨、硬體支援、效能數據與安裝流程。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-ds4-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎",
+      "description": "DwarfStar（antirez/ds4）是由 Redis 作者 Salvatore Sanfilippo 開發的本地推理引擎，以純 C 撰寫，專為在消費級硬體上運行 DeepSeek V4 Flash 等開源權重模型而設計，GitHub 星標已達 22,842 顆。本文整理其架構取捨、硬體支援、效能數據與安裝流程。",
+      "datePublished": "2026-10-02T10:00:02+08:00",
+      "dateModified": "2026-10-02T10:00:02+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/antirez/ds4" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-ds4-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "需要什麼等級的硬體？",
+          "acceptedAnswer": { "@type": "Answer", "text": "主要目標是 96GB 以上記憶體的 Apple Silicon；NVIDIA CUDA 多卡與 Strix Halo 的 ROCm 亦支援。記憶體不足時可改用 SSD 串流，但仍需快速的本地固態硬碟。" }
+        },
+        {
+          "@type": "Question",
+          "name": "可以載入任意 GGUF 模型嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不行。專案明確定位為非通用執行器，必須使用專案自行產出的 GGUF 檔案，這些檔案屬於專案的一部分。" }
+        },
+        {
+          "@type": "Question",
+          "name": "使用時資料會外傳嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "推論在本地執行，伺服器預設只監聽 127.0.0.1。不過專案提醒，儲存的對話與追蹤紀錄可能包含私人資訊，需自行管理。" }
+        },
+        {
+          "@type": "Question",
+          "name": "商業使用是否需要授權費用？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不需要。專案採用 MIT 授權，允許商業使用、修改與再散布，僅需保留原始授權聲明。第三方模型權重則需個別確認。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月02日 10:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/antirez/ds4" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-ds4-news-cover.jpg" alt="DwarfStar 開源：本地跑 DeepSeek V4 的 C 引擎" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/antirez/ds4" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/antirez/ds4
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>DwarfStar 是一套以純 C 撰寫的本地大型語言模型推理引擎，由 Redis 作者 Salvatore Sanfilippo（antirez）於二零二六年五月開源，GitHub 主倉庫已累積 22,842 顆星標與 2,210 次複製。它的目標相當明確：在一般人真正買得起的消費級硬體上，運行少數幾個表現優異的開源權重模型，而非成為支援所有格式的通用推論工具。</p>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>DwarfStar 是由 Redis 作者 antirez 開發的純 C 推理引擎，二零二六年五月開源，專為在消費級硬體運行 DeepSeek V4 等模型而設計。
+<!-- End AEO Capsule --></p>
+
+<p>此專案在定位上刻意收窄。多數推論框架以「支援越多模型越好」為目標，DwarfStar 則反其道而行，只挑選少數在個人機器上真正跑得動、且品質足夠的模型，再為它們逐一優化。這種取捨讓它能在有限的硬體資源下，把載入速度、提示渲染、工具呼叫與 KV 快取狀態整合在同一套測試流程中驗證，而不是各自為政。</p>
+
+<p><img src="/assets/images/posts/github-ds4-news-shot1.png" alt="DwarfStar 專案的 README 開頭，顯示專案名稱 DwarfStar、標語與支援的 DeepSeek V4 Flash、GLM 5.3、Qwen3.8 Flash Next 等模型清單" /></p>
+
+<h2 id="dwarfstar-是什麼">DwarfStar 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>DwarfStar 是一套自帶模型的本地推論引擎，不是通用 GGUF 執行器，需搭配專案自行產出的 GGUF 檔案使用，主力支援 DeepSeek V4 系列。
+<!-- End AEO Capsule --></p>
+
+<p>README 的開頭寫得很直白：專案的目標是「在人們真正擁有得起的硬體上，跑幾個優秀的大型語言模型」。為此，團隊打造一個小巧的原生推論引擎，優先針對 DeepSeek V4 Flash（包含實驗性視覺模型）與 DeepSeek V4.1 Flash 進行優化，另外也支援 GLM 5.2 與 5.3、GLM 5.3 Flash、DeepSeek V4 PRO 以及 Qwen3.8 Flash Next。</p>
+
+<p>需要特別說明的是，這套引擎並非通用的模型執行器。使用者必須採用專案自行產出的 GGUF 檔案，這些檔案被視為專案的一部分。這種設計縮小了相容範圍，換來的是更極致的效能與更少的相依項目。</p>
+
+<h2 id="dwarfstar-的技術架構有什麼特點">DwarfStar 的技術架構有什麼特點？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>引擎以純 C 實作、相依極少，並把模型載入、提示渲染、工具呼叫、KV 快取與 HTTP 伺服器整合在同一套測試流程中驗證。
+<!-- End AEO Capsule --></p>
+
+<p>架構上最值得注意的是「整合式測試」的哲學。專案把模型載入、提示渲染、工具呼叫、KV 狀態、HTTP 伺服器與編碼代理一起建置、一起測試，而不是把每個環節當成獨立模組。這種做法讓跨層級的問題能在早期暴露，例如提示模板與工具格式之間的落差。</p>
+
+<p>另一個特點是對記憶體的高度敏感。專案支援壓縮的 KV 快取，並針對路由專家（routed-expert）量化做了調校，讓 DeepSeek V4 Flash 與 PRO、GLM 5.2 這類模型能容忍較激進的量化。搭配快速的本地 SSD，長上下文在個人機器上才變得實際可行。</p>
+
+<h2 id="dwarfstar-支援哪些硬體與模型">DwarfStar 支援哪些硬體與模型？</h2>
+
+<!-- AEO Answer Capsule — 約 63 字 -->
+<p>主要目標為 96GB 以上記憶體的 Apple Silicon，另支援 NVIDIA CUDA 多卡與 Strix Halo 的 ROCm；記憶體不足時可改用 SSD 串流。
+<!-- End AEO Capsule --></p>
+
+<p>硬體支援分成三條主線。第一是 Apple 的 Metal，這是主要目標平台，建議搭載 96GB 或以上記憶體；記憶體較小的機器則可改用 SSD 串流，甚至能運行完整的 GLM 5.x 這類超大模型。第二是 NVIDIA 的 CUDA，DGX Spark 是重要目標，同時支援其他後端較少觸及的多 GPU 系統，例如在 Ada Lovelace 顯示卡上運行 DeepSeek V4 Flash。</p>
+
+<p>第三是 Strix Halo 平台上的 ROCm，例如 Framework Desktop。專案文件提到，八張 L40S 組成的 Flash 伺服器在十六個工作階段下，可達到約每秒 126 個 token 的總合生成速度；若以兩台 128GB 的 Mac 透過 RDMA 連接，並啟用張量平行，則可運行 4 位元量化的 DeepSeek Flash 或 GLM 5.3 Flash。</p>
+
+<p><img src="/assets/images/posts/github-ds4-news-shot2.png" alt="DwarfStar 的 GitHub 倉庫首頁，顯示倉庫名稱 antirez/ds4、星標數、複製數與專案描述" /></p>
+
+<h2 id="如何開始使用-dwarfstar">如何開始使用 DwarfStar？</h2>
+
+<!-- AEO Answer Capsule — 約 61 字 -->
+<p>先複製倉庫，再依平台選擇 make 指令建置，例如 make、make cuda-spark 或 make strix-halo，下載模型後執行 ds4 或 ds4-server。
+<!-- End AEO Capsule --></p>
+
+<p>入門流程相當直接。首先複製倉庫，接著依硬體選擇對應的建置指令：Apple Silicon 使用 <code class="language-plaintext highlighter-rouge">make</code>，DGX Spark 使用 <code class="language-plaintext highlighter-rouge">make cuda-spark</code>，Strix Halo 使用 <code class="language-plaintext highlighter-rouge">make strix-halo</code>，一般 CUDA 多卡環境則使用 <code class="language-plaintext highlighter-rouge">make cuda-generic</code>。</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/antirez/ds4.git
+<span class="nb">cd </span>ds4
+make
+./download_model.sh ds4f-q2
+./ds4
+</code></pre></div></div>
+
+<p>模型下載由專案提供的腳本處理，下載內容存放在 <code class="language-plaintext highlighter-rouge">gguf/</code> 目錄，中斷後重跑同一指令即可續傳。日常使用上，<code class="language-plaintext highlighter-rouge">./ds4</code> 是互動式命令列，<code class="language-plaintext highlighter-rouge">./ds4 -p</code> 可執行單次提示，<code class="language-plaintext highlighter-rouge">./ds4-agent</code> 是原生編碼代理，<code class="language-plaintext highlighter-rouge">./ds4-server</code> 則啟動相容 OpenAI 風格的 API 伺服器，預設監聽 127.0.0.1:8000。</p>
+
+<h2 id="dwarfstar-的效能表現如何">DwarfStar 的效能表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>專案以 M5 Max、128GB 記憶體的機器錄製 DeepSeek V4 Flash Q2 吞吐基準，屬內部回歸測試，非官方排行榜。
+<!-- End AEO Capsule --></p>
+
+<p>專案附有可重現的效能基準。README 記錄了一段以 M5 Max、128GB 記憶體運行的 DeepSeek V4 Flash Q2 掃描，採用 2048 token 的續接提示間隔、每段前沿 128 個貪婪生成 token。團隊強調這是基準線，而非針對每個提交的即時跑分，完整的數字與 DGX Spark 結果都整理在效能文件中。</p>
+
+<p>推論品質方面，專案內建 <code class="language-plaintext highlighter-rouge">ds4-eval</code> 工具，可對實際 GGUF 檔案執行能力回歸測試。這些屬於 DwarfStar 自身的整合檢查，而非官方排行榜成績。此外，推測解碼（speculative decoding）為選用功能，GLM 與 Qwen 透過 <code class="language-plaintext highlighter-rouge">--mtp</code> 啟用，可改善生成速度，但並非所有工作負載都能受益。</p>
+
+<h2 id="dwarfstar-與-llamacpp-的關係是什麼">DwarfStar 與 llama.cpp 的關係是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>ds4.c 並不連結 GGML，但專案坦承其存在得益於 llama.cpp 開闢的路徑，並在 MIT 授權下沿用部分量化格式與核心程式碼。
+<!-- End AEO Capsule --></p>
+
+<p>README 中有一段罕見的坦誠說明。專案明確指出，<code class="language-plaintext highlighter-rouge">ds4.c</code> 雖然不連結 GGML，但整套引擎的存在「得益於 llama.cpp 計畫開闢的道路」，包括它的核心、量化格式、GGUF 生態與累積的工程知識。部分原始碼層級的元件，例如 GGUF 量化配置與表格、CPU 量化與點積邏輯，在 MIT 授權下被保留或改編。</p>
+
+<p>專案同時揭露，本軟體是在 AI 編碼代理的「強力協助」下開發，由人類負責構想、測試與除錯。這種公開聲明在開源專案中仍屬少數，也讓外界對其程式碼品質與維護模式有更清楚的預期。</p>
+
+<h2 id="dwarfstar-的專案數據與社群規模如何">DwarfStar 的專案數據與社群規模如何？</h2>
+
+<ul class="ui-stat-grid">
+  <li class="ui-stat"><span class="ui-stat-num">22,842</span><span class="ui-stat-label">GitHub 星標</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">2,210</span><span class="ui-stat-label">複製次數</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">748</span><span class="ui-stat-label">待處理議題</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">171</span><span class="ui-stat-label">追蹤者</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">C</span><span class="ui-stat-label">主要語言</span></li>
+</ul>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>截至二零二六年十月，DwarfStar 累積 22,842 顆星標、2,210 次複製、748 個待處理議題與 171 位追蹤者，採用 MIT 授權，主要語言為 C。
+<!-- End AEO Capsule --></p>
+
+<p>專案自二零二六年五月六日建立，短短數月即累積超過兩萬顆星標，成長速度與作者本身的知名度密切相關。程式碼更新時間落在二零二六年九月，議題數量維持在七百多個，反映專案處於快速演進、同時也快速累積待處理項目的階段。團隊在文件中坦言，軟體目前屬於 beta 品質，每次發行前雖會執行大規模品質保證，但穩定性問題與回歸仍有可能出現。</p>
+
+<p><img src="/assets/images/posts/github-ds4-news-shot3.png" alt="DwarfStar 倉庫的提交統計頁，顯示每週提交趨勢與程式碼變動圖表" /></p>
+
+<h2 id="dwarfstar-適合哪些開發者與團隊">DwarfStar 適合哪些開發者與團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 63 字 -->
+<p>適合擁有 96GB 以上 Apple Silicon 或多張 CUDA 卡、且需要本地運行 DeepSeek V4 等前沿模型的開發者；純雲端使用者則未必需要。
+<!-- End AEO Capsule --></p>
+
+<p>判斷的關鍵在於硬體條件與資料敏感度。若團隊已具備高階個人機器或多 GPU 工作站，並希望在不把資料送出本地的前提下使用前沿模型，DwarfStar 提供的專用路徑通常比通用框架更有效率。反之，若主要工作流程已依賴雲端 API，本地推論的硬體成本與維護負擔未必划算。</p>
+
+<p>另一個考量是團隊的技術能力。專案刻意保持精簡、相依極少，同時也鼓勵使用者透過編碼代理自行改造，針對特定硬體調整推論速度。這種「以程式碼為模板」的使用方式，適合具備 C 與系統除錯能力的團隊；對只想開箱即用的使用者而言，仍有一定的學習門檻。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>本文資訊整理自 antirez/ds4 的 GitHub 儲存庫與官方文件，授權條款、硬體指引與安裝說明均可在儲存庫中查閱。
+<!-- End AEO Capsule --></p>
+
+<p>完整的專案資訊與硬體指引，可於下列來源查閱：</p>
+
+<ul>
+  <li><a href="https://github.com/antirez/ds4">DwarfStar（antirez/ds4）GitHub 儲存庫</a></li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>以下整理四個常見疑問，涵蓋硬體門檻、模型相容性、資料隱私與授權範圍，答案均以官方文件與授權條款為準。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>需要什麼等級的硬體？</h3>
+<p>主要目標是 96GB 以上記憶體的 Apple Silicon；NVIDIA CUDA 多卡與 Strix Halo 的 ROCm 亦支援。記憶體不足時可改用 SSD 串流，但仍需快速的本地固態硬碟。</p>
+
+<h3>可以載入任意 GGUF 模型嗎？</h3>
+<p>不行。專案明確定位為非通用執行器，必須使用專案自行產出的 GGUF 檔案，這些檔案屬於專案的一部分。</p>
+
+<h3>使用時資料會外傳嗎？</h3>
+<p>推論在本地執行，伺服器預設只監聽 127.0.0.1。不過專案提醒，儲存的對話與追蹤紀錄可能包含私人資訊，需自行管理。</p>
+
+<h3>商業使用是否需要授權費用？</h3>
+<p>不需要。專案採用 MIT 授權，允許商業使用、修改與再散布，僅需保留原始授權聲明。第三方模型權重則需個別確認。</p>
+
+</div>
+
+<h2 id="總結dwarfstar-的價值在哪裡">總結：DwarfStar 的價值在哪裡？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>DwarfStar 的價值在於以極簡 C 引擎把前沿開源模型帶進個人硬體，五個月累積 2.2 萬星標，為本地推論提供專用而非通用的路徑。
+<!-- End AEO Capsule --></p>
+
+<p>DwarfStar 的意義不在於成為所有人的預設選擇，而在於示範另一種工程取捨：與其追求支援所有模型，不如為少數真正重要的模型打造專門路徑。當一套引擎能在 96GB 的個人機器上運行 DeepSeek V4 Flash，甚至靠 SSD 串流觸及更大的模型，本地推論的門檻就被實質降低了一截。</p>
+
+<p>本文僅作技術與生態層面的整理。專案目前仍屬 beta 品質、更新頻繁，實際導入前建議先依官方文件確認硬體條件與相依環境，並在正式工作流程中先行測試穩定性。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E5%B0%88%E6%A1%88" class="badge bg-secondary text-decoration-none me-1">開源專案</a>
+          
+          
+          <a href="/search/?q=DwarfStar" class="badge bg-secondary text-decoration-none me-1">DwarfStar</a>
+          
+          
+          <a href="/search/?q=%E6%9C%AC%E5%9C%B0%E6%8E%A8%E7%90%86" class="badge bg-secondary text-decoration-none me-1">本地推理</a>
+          
+          
+          <a href="/search/?q=DeepSeek" class="badge bg-secondary text-decoration-none me-1">DeepSeek</a>
+          
+          
+          <a href="/search/?q=antirez" class="badge bg-secondary text-decoration-none me-1">antirez</a>
+          
+          
+          <a href="/search/?q=C+%E8%AA%9E%E8%A8%80" class="badge bg-secondary text-decoration-none me-1">C 語言</a>
+          
+          
+          <a href="/search/?q=%E6%B6%88%E8%B2%BB%E7%B4%9A%E7%A1%AC%E9%AB%94" class="badge bg-secondary text-decoration-none me-1">消費級硬體</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news&text=DwarfStar+%E9%96%8B%E6%BA%90%EF%BC%9A%E6%9C%AC%E5%9C%B0%E8%B7%91+DeepSeek+V4+%E7%9A%84+C+%E5%BC%95%E6%93%8E" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?DwarfStar+%E9%96%8B%E6%BA%90%EF%BC%9A%E6%9C%AC%E5%9C%B0%E8%B7%91+DeepSeek+V4+%E7%9A%84+C+%E5%BC%95%E6%93%8E%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-ds4-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/bun-runtime-news" class="text-decoration-none">Bun 1.4 改用 Rust 重寫：96k 星 JS 執行環境</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/unsloth-news" class="text-decoration-none">Unsloth 桌面版發布：7.7 萬星本地訓練工具</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/textgen-news" class="text-decoration-none">TextGen 開源：4.7 萬星的本地 LLM 桌面應用</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/nvm-news" class="text-decoration-none">nvm 開源 16 年：Node 版本管理器 9.5 萬星</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/minio-news" class="text-decoration-none">MinIO 封存：61,336 星的 S3 儲存時代落幕</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/d2l-zh-news" class="text-decoration-none">動手學深度學習：8.1 萬星的開源 AI 教材</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

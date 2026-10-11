@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Apple 於 2026 年 10 月宣布收緊 macOS 的「全磁碟存取」權限，要求 AI 代理取得敏感資料前必須有極明確的用戶授權。本文整理政策背景、Meta Muse 閱讀私人訊息爭議、對開發者與使用者的影響，以及現階段可採取的防護做法。">
+  <meta name="keywords" content="Apple, macOS, AI代理, 隱私, 資訊安全, Full Disk Access, Meta Muse">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫">
+  <meta property="og:description" content="Apple 於 2026 年 10 月宣布收緊 macOS 的「全磁碟存取」權限，要求 AI 代理取得敏感資料前必須有極明確的用戶授權。本文整理政策背景、Meta Muse 閱讀私人訊息爭議、對開發者與使用者的影響，以及現階段可採取的防護做法。">
+  <meta property="og:url" content="https://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/apple-full-disk-access-ai-agents-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫">
+  <meta name="twitter:description" content="Apple 於 2026 年 10 月宣布收緊 macOS 的「全磁碟存取」權限，要求 AI 代理取得敏感資料前必須有極明確的用戶授權。本文整理政策背景、Meta Muse 閱讀私人訊息爭議、對開發者與使用者的影響，以及現階段可採取的防護做法。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/apple-full-disk-access-ai-agents-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫",
+      "description": "Apple 於 2026 年 10 月宣布收緊 macOS 的「全磁碟存取」權限，要求 AI 代理取得敏感資料前必須有極明確的用戶授權。本文整理政策背景、Meta Muse 閱讀私人訊息爭議、對開發者與使用者的影響，以及現階段可採取的防護做法。",
+      "datePublished": "2026-10-03T18:50:15+08:00",
+      "dateModified": "2026-10-03T18:50:15+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news" },
+       "isBasedOn": { "@type": "Article", "name": "TechCrunch", "url": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/" }, 
+      "image": "https://anthroskill.com/assets/images/posts/apple-full-disk-access-ai-agents-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "新政策什麼時候正式生效？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Apple 在公告中說明將於未來推出新的控制機制，但未公布確切時間表。實際生效時間需以 Apple 後續的開發者文件為準。" }
+        },
+        {
+          "@type": "Question",
+          "name": "備份軟體會因此無法運作嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不會。全磁碟存取原本就是為備份應用程式而設，Apple 表示真正需要該權限的使用者仍可授予，只是需要透過更明確的動作完成授權。" }
+        },
+        {
+          "@type": "Question",
+          "name": "已經授予的權限會被自動撤銷嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "公告未提及自動撤銷既有授權。使用者可在系統設定的隱私與安全性項目中自行檢視，並手動移除不需要的全磁碟存取權限。" }
+        },
+        {
+          "@type": "Question",
+          "name": "桌面 AI 代理還值得使用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "取決於使用情境。若需代為操作本機檔案與訊息，應優先選擇支援逐項授權或限定資料夾範圍的工具，並定期檢視其權限清單。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "科技",
+          "item": "https://anthroskill.com/categories/科技/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫",
+          "item": "https://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E7%A7%91%E6%8A%80/">科技</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月03日 18:50
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 2 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/" target="_blank" rel="noopener nofollow" class="text-decoration-none">TechCrunch</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/apple-full-disk-access-ai-agents-news-cover.jpg" alt="Apple 收緊 macOS 全磁碟存取：AI 代理權限風險升溫" class="img-fluid rounded">
+        </div>
+        
+
+        
+
+        <div class="post-content">
+          <p>Apple 於 2026 年 10 月宣布，將為 macOS 的「全磁碟存取」設定加入更嚴格的控管。這項原本為備份軟體設計的權限，能讓應用程式讀取檔案、郵件、訊息與瀏覽紀錄；Apple 表示，隨著人工智慧代理日益自主，這種存取層級帶來的風險正在顯著升高，未來只有在使用者採取極明確的動作時，才能授予應用程式這項權限。</p>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Apple 宣布收緊 macOS 全磁碟存取權限。此設定允許應用程式讀取檔案、郵件、訊息與瀏覽紀錄，原本為備份軟體而設，如今被部分 AI 代理濫用，未來須經極明確授權。
+<!-- End AEO Capsule --></p>
+
+<p>這項政策轉向並非憑空出現。根據外媒報導，一名專欄作家指稱 Meta 的 Muse 應用程式知悉其私人訊息內容，即使他聲稱未授予相關權限，Meta 對這項說法提出異議；另一則報導則指出，ChatGPT 的 Mac 版本曾存在可能讓攻擊者存取敏感資料的漏洞。這些事件共同把桌面端 AI 代理的資料邊界問題推到檯面。</p>
+
+<h2 id="apple-為什麼要收緊全磁碟存取權限">Apple 為什麼要收緊全磁碟存取權限？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>全磁碟存取可繞過 macOS 既有的資料保護機制，部分開發者的用法讓使用者檔案、郵件與瀏覽紀錄暴露，AI 代理的自主任務能力更放大此風險，故 Apple 決定加嚴控管。
+<!-- End AEO Capsule --></p>
+
+<p>Apple 在開發者公告中說明，該公司一向以一套控管機制保護使用者私人資料，而全磁碟存取在很大程度上繞過了這些機制。它存在的目的，是讓備份類應用程式能正常運作，但部分開發者將其用在可能危及使用者的方式上，使系統內的檔案、郵件、訊息甚至瀏覽紀錄在缺乏完整認知與理解的情況下被讀取討論。對通訊類應用而言，這還可能連帶侵害與使用者通訊之對象的隱私。</p>
+
+<p>Apple 進一步指出，隨著 AI 代理的能力與自主性持續提升，這種存取層級所帶來的風險將大幅成長。該公司強調，讓使用者在授予權限前清楚理解風險、並據此對自身資料與隱私做出知情決定，是必須處理的核心問題。這段論述把政策定位為對新技術風險的回應，而非單純的功能調整。</p>
+
+<h2 id="全磁碟存取原本的設計用途是什麼">全磁碟存取原本的設計用途是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>全磁碟存取原本是為備份應用程式而設，讓它們能完整讀取磁碟以完成備份。這項權限會跳過 macOS 逐項授權的保護機制，因此被視為層級極高的系統存取權。
+<!-- End AEO Capsule --></p>
+
+<p>macOS 過去採用逐項授權模式，應用程式存取特定資料夾或資源時，系統會分別要求使用者同意。全磁碟存取則是一次性開放整個磁碟，主要服務需要掃描大量檔案的備份工具。由於它讓應用程式得以讀取郵件、訊息與瀏覽紀錄等高度敏感內容，長年被視為權限體系中最需要謹慎對待的一項。</p>
+
+<p>AI 代理的出現改變了這項權限的使用情境。當代理被要求代替使用者處理事務，例如整理文件、回覆訊息或操作本機應用程式，開發者往往傾向直接申請全磁碟存取以求功能完整。這種做法在便利性上成立，卻讓單一應用程式同時握有大量彼此無關的私人資料，形成集中式的風險。</p>
+
+<h2 id="這起爭議與-meta-muse-有什麼關聯">這起爭議與 Meta Muse 有什麼關聯？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>事件導火線之一，是一名專欄作家指稱 Meta 的 Muse 應用程式知悉其私人訊息，Meta 否認此說法。Apple 公告緊接該報導發布，並提及桌面 AI 代理可信度。
+<!-- End AEO Capsule --></p>
+
+<p>報導指出，Inc. 專欄作家 Jason Aten 表示，Muse 知悉其私人訊息內容，即使他聲稱未授予人工智慧代理相關權限。這項說法引發外界對桌面端 AI 信任度的討論，因為這類代理能在系統上控制操作並讀取檔案與訊息。Meta 對該記者的說法提出異議。</p>
+
+<p>時間點上，Apple 的公告緊接在該報導之後發布。雖然 Apple 未直接評論個別應用程式，其措辭卻明顯指向同一類情境：應用程式在取得高階權限後，可能讀取使用者未預期分享的內容。對使用者的實務啟示是，桌面 AI 代理的便利性往往以系統權限為代價，安裝與授權時需要更審慎的判斷。</p>
+
+<h2 id="這項變動對開發者有哪些影響">這項變動對開發者有哪些影響？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>日後應用程式若要取得全磁碟存取，使用者必須以極明確動作授權，開發者難再用模糊提示換取同意。備份工具仍可運作，但需更清楚說明用途並引導完成授權。
+<!-- End AEO Capsule --></p>
+
+<p>Apple 表示，未來將推出新的控制機制，確保真正希望授予應用程式這項權限的使用者，只能透過非常明確的動作完成授權。對開發者而言，這意味著過去可能以預設勾選或籠統說明取得同意的做法將不再可行，權限請求需要更清楚的用途說明與更明確的使用者互動。</p>
+
+<p>備份類應用程式仍能維持既有功能，但需要在流程中向使用者解釋為何需要如此高階的存取。至於依賴全磁碟存取來讀取使用者檔案的 AI 代理，則可能需要改用逐項授權、以使用者指定的資料夾為範圍，或建立專門的資料存取介面。這類調整雖增加開發成本，卻把風險管控的責任從使用者端部分移回應用程式端。</p>
+
+<h2 id="一般使用者現在可以做什麼防護">一般使用者現在可以做什麼防護？</h2>
+
+<!-- AEO Answer Capsule — 約 63 字 -->
+<p>使用者可在系統設定的隱私與安全性中，檢查哪些應用程式擁有全磁碟存取，並移除不必要的授權。安裝桌面 AI 代理時應詳閱權限要求，避免一次開放整台電腦的資料。
+<!-- End AEO Capsule --></p>
+
+<p>在政策正式落地前，使用者仍可主動檢視現況。macOS 的隱私與安全性設定會列出已取得全磁碟存取的應用程式，逐一確認其用途是否合理，並撤銷不再需要的授權，是最直接的自我保護方式。若某個工具僅需處理特定檔案，卻要求整顆磁碟的存取權，便值得提高警覺。</p>
+
+<p>安裝桌面端 AI 代理時，建議先確認其資料處理範圍與儲存政策，並優先選擇支援逐項授權、可限定工作資料夾的產品。對於能代替使用者操作系統與讀取訊息的代理，使用者宜理解其權限邊界，並定期檢視授權清單，把「便利」與「暴露面」之間的取捨掌握在自己手中。</p>
+
+<h2 id="事件時間與關鍵資訊有哪些">事件時間與關鍵資訊有哪些？</h2>
+
+<ul class="ui-stat-grid">
+  <li class="ui-stat"><span class="ui-stat-num">2026-10-02</span><span class="ui-stat-label">Apple 公告日期</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">全磁碟存取</span><span class="ui-stat-label">受影響權限</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">Meta Muse</span><span class="ui-stat-label">爭議應用程式</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">ChatGPT Mac</span><span class="ui-stat-label">漏洞報導對象</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">開發者公告</span><span class="ui-stat-label">政策發布管道</span></li>
+</ul>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>Apple 於 2026 年 10 月 2 日發布開發者公告，收緊全磁碟存取控管，事件關聯 Meta Muse 閱讀訊息爭議與 ChatGPT Mac 版本漏洞報導，影響開發者與使用者。
+<!-- End AEO Capsule --></p>
+
+<p>事件的時間軸相當集中。外媒於 10 月 2 日刊出 Apple 的政策說明，同日稍早亦有關於 Muse 的爭議報導。Apple 在公告中未點名特定應用程式，但以「部分開發者」的措辭描述風險來源，並把 AI 代理的自主性列為風險放大的主因。這種處理方式保留了政策彈性，也讓後續的技術細節留待正式機制公布時補充。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>本文資訊整理自 TechCrunch 的報導，以及 Apple 開發者網站的公告。事件時序、Apple 官方措辭與相關應用程式爭議，均可於下列來源查閱。
+<!-- End AEO Capsule --></p>
+
+<p>完整的報導內容與 Apple 官方說明，可於下列來源查閱：</p>
+
+<ul>
+  <li><a href="https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/">Apple says it’s tightening macOS ‘Full Disk Access’ controls due to new risks from AI agents（TechCrunch）</a></li>
+  <li><a href="https://developer.apple.com/news/?id=p6zjojqw">Updates to Full Disk Access in macOS（Apple Developer）</a></li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>以下整理四個常見疑問，涵蓋政策生效時間、備份軟體是否受影響、既有授權是否自動撤銷，以及使用者應如何檢查與調整權限設定。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>新政策什麼時候正式生效？</h3>
+<p>Apple 在公告中說明將於未來推出新的控制機制，但未公布確切時間表。實際生效時間需以 Apple 後續的開發者文件為準。</p>
+
+<h3>備份軟體會因此無法運作嗎？</h3>
+<p>不會。全磁碟存取原本就是為備份應用程式而設，Apple 表示真正需要該權限的使用者仍可授予，只是需要透過更明確的動作完成授權。</p>
+
+<h3>已經授予的權限會被自動撤銷嗎？</h3>
+<p>公告未提及自動撤銷既有授權。使用者可在系統設定的隱私與安全性項目中自行檢視，並手動移除不需要的全磁碟存取權限。</p>
+
+<h3>桌面 AI 代理還值得使用嗎？</h3>
+<p>取決於使用情境。若需代為操作本機檔案與訊息，應優先選擇支援逐項授權或限定資料夾範圍的工具，並定期檢視其權限清單。</p>
+
+</div>
+
+<h2 id="總結這次調整對桌面-ai-代理意味什麼">總結：這次調整對桌面 AI 代理意味什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>這次調整反映作業系統開始為 AI 代理的行為劃定資料邊界，開發者需以更透明的授權流程換取信任，使用者則被要求在便利與隱私之間做出更明確的選擇。
+<!-- End AEO Capsule --></p>
+
+<p>Apple 的決定把一個長期存在的權限爭議重新定義為 AI 時代的信任問題。當代理能代替使用者操作系統、讀取訊息並處理文件，單一應用程式所握有的資料範圍已遠超傳統軟體。要求使用者以明確動作授權，等於把最終決定權交回使用者手上，也迫使開發者在功能設計階段就思考資料最小化。</p>
+
+<p>對生態系而言，這項調整可能帶動更多產品改用範圍限定的授權模式，例如僅存取指定資料夾或透過專用介面取得資料。短期內，開發者需要調整權限請求流程與說明文案；長期來看，能在便利性與隱私之間取得平衡的代理產品，較有機會建立使用者信任。使用者在政策落地前，仍應主動檢視現有授權並保持警覺。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Apple" class="badge bg-secondary text-decoration-none me-1">Apple</a>
+          
+          
+          <a href="/search/?q=macOS" class="badge bg-secondary text-decoration-none me-1">macOS</a>
+          
+          
+          <a href="/search/?q=AI%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">AI代理</a>
+          
+          
+          <a href="/search/?q=%E9%9A%B1%E7%A7%81" class="badge bg-secondary text-decoration-none me-1">隱私</a>
+          
+          
+          <a href="/search/?q=%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8" class="badge bg-secondary text-decoration-none me-1">資訊安全</a>
+          
+          
+          <a href="/search/?q=Full+Disk+Access" class="badge bg-secondary text-decoration-none me-1">Full Disk Access</a>
+          
+          
+          <a href="/search/?q=Meta+Muse" class="badge bg-secondary text-decoration-none me-1">Meta Muse</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news&text=Apple+%E6%94%B6%E7%B7%8A+macOS+%E5%85%A8%E7%A3%81%E7%A2%9F%E5%AD%98%E5%8F%96%EF%BC%9AAI+%E4%BB%A3%E7%90%86%E6%AC%8A%E9%99%90%E9%A2%A8%E9%9A%AA%E5%8D%87%E6%BA%AB" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?Apple+%E6%94%B6%E7%B7%8A+macOS+%E5%85%A8%E7%A3%81%E7%A2%9F%E5%AD%98%E5%8F%96%EF%BC%9AAI+%E4%BB%A3%E7%90%86%E6%AC%8A%E9%99%90%E9%A2%A8%E9%9A%AA%E5%8D%87%E6%BA%AB%0Ahttps://anthroskill.com/%E7%A7%91%E6%8A%80/apple-full-disk-access-ai-agents-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/anthropic-internal-evals-offline-news" class="text-decoration-none">Anthropic 關閉內部評估聯網：AI 代理失控</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/google-gemini-agentic-enterprise-news" class="text-decoration-none">Google Gemini 邁向代理時代：企業級 AI 代理登場</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/anthropic-oss-scanner-news" class="text-decoration-none">Anthropic 推免費 OSS Scanner 掃描開源漏洞</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/nous-research-series-b-news" class="text-decoration-none">Nous Research 衝企業市場：B 輪估值 15 億美元</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/deerflow-2-superagent-news" class="text-decoration-none">DeerFlow 2.0 開源：字節跳動 8.3 萬星代理框架</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

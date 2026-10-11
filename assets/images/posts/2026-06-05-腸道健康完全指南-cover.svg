@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d4f2b;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1a7a42;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" style="stop-color:#4ade80;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#4ade80;stop-opacity:0"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#86efac;stop-opacity:0.8"/>
+      <stop offset="70%" style="stop-color:#22c55e;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#16a34a;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Decorative circles - microbiome abstract -->
+  <circle cx="256" cy="230" r="140" fill="url(#glow)"/>
+  <!-- Large central microbiome cluster -->
+  <circle cx="256" cy="240" r="60" fill="none" stroke="#86efac" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="256" cy="240" r="90" fill="none" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+  <!-- Bacteria-like nodes -->
+  <g opacity="0.7">
+    <!-- Cluster 1 -->
+    <circle cx="240" cy="225" r="12" fill="#86efac" opacity="0.7"/>
+    <circle cx="265" cy="218" r="8" fill="#4ade80" opacity="0.6"/>
+    <circle cx="250" cy="250" r="10" fill="#a7f3d0" opacity="0.5"/>
+    <circle cx="275" cy="245" r="7" fill="#6ee7b7" opacity="0.6"/>
+    <circle cx="230" cy="240" r="6" fill="#34d399" opacity="0.5"/>
+    <circle cx="260" cy="260" r="9" fill="#86efac" opacity="0.5"/>
+    <circle cx="245" cy="210" r="5" fill="#a7f3d0" opacity="0.4"/>
+    <circle cx="270" cy="230" r="11" fill="#4ade80" opacity="0.6"/>
+    <circle cx="238" cy="255" r="7" fill="#6ee7b7" opacity="0.4"/>
+    <!-- Outer ring nodes -->
+    <circle cx="180" cy="240" r="8" fill="#86efac" opacity="0.4"/>
+    <circle cx="330" cy="240" r="8" fill="#86efac" opacity="0.4"/>
+    <circle cx="256" cy="155" r="7" fill="#4ade80" opacity="0.35"/>
+    <circle cx="256" cy="325" r="7" fill="#4ade80" opacity="0.35"/>
+    <circle cx="200" cy="200" r="5" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="312" cy="200" r="5" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="200" cy="280" r="5" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="312" cy="280" r="5" fill="#a7f3d0" opacity="0.3"/>
+    <!-- Connecting lines -->
+    <line x1="240" y1="225" x2="265" y2="218" stroke="#86efac" stroke-width="0.8" opacity="0.3"/>
+    <line x1="240" y1="225" x2="250" y2="250" stroke="#86efac" stroke-width="0.8" opacity="0.3"/>
+    <line x1="265" y1="218" x2="275" y2="245" stroke="#86efac" stroke-width="0.8" opacity="0.3"/>
+    <line x1="250" y1="250" x2="260" y2="260" stroke="#86efac" stroke-width="0.8" opacity="0.3"/>
+    <line x1="275" y1="245" x2="270" y2="230" stroke="#86efac" stroke-width="0.8" opacity="0.3"/>
+    <line x1="180" y1="240" x2="230" y2="240" stroke="#86efac" stroke-width="0.6" opacity="0.2"/>
+    <line x1="270" y1="230" x2="330" y2="240" stroke="#86efac" stroke-width="0.6" opacity="0.2"/>
+    <line x1="245" y1="210" x2="256" y2="155" stroke="#86efac" stroke-width="0.6" opacity="0.2"/>
+    <line x1="260" y1="260" x2="256" y2="325" stroke="#86efac" stroke-width="0.6" opacity="0.2"/>
+    <!-- Additional small dots -->
+    <circle cx="175" cy="210" r="3" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="340" cy="210" r="3" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="175" cy="270" r="3" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="340" cy="270" r="3" fill="#a7f3d0" opacity="0.3"/>
+    <circle cx="210" cy="170" r="3" fill="#4ade80" opacity="0.25"/>
+    <circle cx="300" cy="170" r="3" fill="#4ade80" opacity="0.25"/>
+    <circle cx="210" cy="310" r="3" fill="#4ade80" opacity="0.25"/>
+    <circle cx="300" cy="310" r="3" fill="#4ade80" opacity="0.25"/>
+  </g>
+  <!-- Gut shape abstract -->
+  <path d="M 180 380 Q 140 360 160 335 Q 185 310 210 335 T 240 335 Q 255 310 280 335 T 320 335 Q 345 310 365 335 Q 380 360 340 380 Z" fill="none" stroke="#86efac" stroke-width="2" opacity="0.5"/>
+  <!-- Title background -->
+  <rect x="60" y="400" width="392" height="90" rx="12" fill="rgba(0,0,0,0.4)"/>
+  <text x="256" y="438" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="bold" fill="#ffffff" text-anchor="middle" letter-spacing="1">腸道健康完全指南</text>
+  <text x="256" y="468" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#86efac" text-anchor="middle" letter-spacing="0.5">2026 最新腸道菌相科學與飲食實踐</text>
+  <!-- Decorative leaf -->
+  <path d="M 380 80 Q 400 60 420 70 Q 410 90 390 100 Q 385 85 380 80 Z" fill="#4ade80" opacity="0.5"/>
+  <path d="M 390 75 Q 405 55 425 60 Q 415 80 400 90 Z" fill="#22c55e" opacity="0.4"/>
+  <path d="M 130 100 Q 110 80 95 95 Q 110 110 130 120 Q 125 110 130 100 Z" fill="#4ade80" opacity="0.3"/>
+</svg>

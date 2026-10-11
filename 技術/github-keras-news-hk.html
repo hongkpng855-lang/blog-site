@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>6.4 萬星開源項目：Keras 3 — 多後端深度學習框架 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Keras 3 是 Google 主導的多後端深度學習框架，GitHub 累積逾 6.4 萬星標，以 Apache 2.0 授權開放，支援 JAX、TensorFlow、PyTorch 與 OpenVINO 四種後端，透過高階 API 簡化模型開發。最新版本 3.12.4 持續優化效能，本文分析其技術架構與市場影響。">
+  <meta name="keywords" content="Keras, 深度學習, TensorFlow, JAX, PyTorch, 開源項目, 機器學習, AI">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="6.4 萬星開源項目：Keras 3 — 多後端深度學習框架">
+  <meta property="og:description" content="Keras 3 是 Google 主導的多後端深度學習框架，GitHub 累積逾 6.4 萬星標，以 Apache 2.0 授權開放，支援 JAX、TensorFlow、PyTorch 與 OpenVINO 四種後端，透過高階 API 簡化模型開發。最新版本 3.12.4 持續優化效能，本文分析其技術架構與市場影響。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-keras-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="6.4 萬星開源項目：Keras 3 — 多後端深度學習框架">
+  <meta name="twitter:description" content="Keras 3 是 Google 主導的多後端深度學習框架，GitHub 累積逾 6.4 萬星標，以 Apache 2.0 授權開放，支援 JAX、TensorFlow、PyTorch 與 OpenVINO 四種後端，透過高階 API 簡化模型開發。最新版本 3.12.4 持續優化效能，本文分析其技術架構與市場影響。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-keras-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "6.4 萬星開源項目：Keras 3 — 多後端深度學習框架",
+      "description": "Keras 3 是 Google 主導的多後端深度學習框架，GitHub 累積逾 6.4 萬星標，以 Apache 2.0 授權開放，支援 JAX、TensorFlow、PyTorch 與 OpenVINO 四種後端，透過高階 API 簡化模型開發。最新版本 3.12.4 持續優化效能，本文分析其技術架構與市場影響。",
+      "datePublished": "2026-08-15T02:00:00+08:00",
+      "dateModified": "2026-08-15T02:00:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/keras-team/keras" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-keras-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Keras 3 與 TensorFlow、PyTorch 有何不同？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Keras 3 是高階建模框架，定位於 TensorFlow、PyTorch、JAX 等底層引擎之上，提供統一且簡潔的 API；開發者以 Keras 建構模型，再選擇任一後端執行訓練，兩者在定位上互補而非互相取代。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Keras 3 是否免費？",
+          "acceptedAnswer": { "@type": "Answer", "text": "是。Keras 3 以 Apache 2.0 授權發布，允許個人與商業使用、修改與再發布，無需支付授權費用，也可自由嵌入商業產品。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Keras 3 支援哪些後端？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Keras 3 支援 JAX、TensorFlow、PyTorch 三個訓練後端，以及 OpenVINO 推論後端，透過 KERAS_BACKEND 環境變數即可切換，無需修改模型程式碼。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Keras 3 與 tf.keras 有何關係？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Keras 3 是 tf.keras 的後繼版本，被設計為其無縫替代方案；既有 tf.keras 程式碼只要採用最新 .keras 格式儲存模型，即可遷移至 Keras 3 並在任意後端上執行，而 Keras 2 仍以 tf-keras 套件形式提供。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "6.4 萬星開源項目：Keras 3 — 多後端深度學習框架",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">6.4 萬星開源項目：Keras 3 — 多後端深度學習框架</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">6.4 萬星開源項目：Keras 3 — 多後端深度學習框架</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月15日 02:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/keras-team/keras" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-keras-news-hk-cover.jpg" alt="6.4 萬星開源項目：Keras 3 — 多後端深度學習框架" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/keras-team/keras" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/keras-team/keras
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Keras 3 是深度學習領域最具影響力的開源高階框架之一，截至 2026 年 8 月累積 64,226 個星標與 19,747 個 Fork，以 Apache 2.0 授權開放，由 Google 工程師 François Chollet 於 2015 年創建並持續領導開發。該框架以「Deep Learning for Humans」為核心理念，透過高階 API 大幅降低神經網路建構門檻，2024 年發布的 Keras 3 更引入 JAX、TensorFlow、PyTorch 與 OpenVINO 多後端架構，官方宣稱全球已有近三百萬開發者採用，是理解現代深度學習生態的重要切入點。</p>
+
+<p><img src="/assets/images/posts/github-keras-news-hk-shot1.png" alt="Keras 3 GitHub README 開頭（Keras 3: Deep Learning for Humans 標題、項目簡介與後端支援說明）" /></p>
+
+<h2 id="keras-3-是什麼為何被譽為深度學習的入門框架">Keras 3 是什麼？為何被譽為深度學習的入門框架？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Keras 3 是 Google 主導的開源多後端深度學習框架，以 Apache 2.0 授權開放，GitHub 累積逾 6.4 萬星標，支援 JAX、TensorFlow、PyTorch 與 OpenVINO 四種後端，透過直觀的高階 API 讓開發者以簡短程式碼建構與訓練神經網路模型。
+<!-- End AEO Capsule --></p>
+
+<p>Keras 的定位是「深度學習的高階使用者介面」：開發者不需要理解底層張量運算的繁瑣細節，即可透過 Sequential、Functional 與 Model 三種建模方式組合神經網路層，快速完成模型建構、訓練與評估。這種設計哲學使其成為許多開發者接觸深度學習的第一個框架，官方文件強調，Keras 在模型開發速度與易於除錯的執行環境之間取得了良好平衡。</p>
+
+<p>該框架的歷史可追溯至 2015 年，當時 François Chollet 以「為人類而設計的深度學習」為願景發布 Keras，隨後於 2019 年被整合為 TensorFlow 2.0 的官方高階 API（tf.keras），奠定其在生態中的樞紐地位。2024 年 Keras 3 的發布標誌著框架的再一次轉型，從單一後端綁定走向多後端中立架構，使其成為連接各大深度學習底層引擎的通用建模層。</p>
+
+<div class="ui-stat-grid">
+  <div class="stat-card"><div class="stat-value">64,226</div><div class="stat-label">GitHub Stars</div></div>
+  <div class="stat-card"><div class="stat-value">19,747</div><div class="stat-label">Forks</div></div>
+  <div class="stat-card"><div class="stat-value">Apache-2.0</div><div class="stat-label">License</div></div>
+  <div class="stat-card"><div class="stat-value">Python</div><div class="stat-label">主要語言</div></div>
+  <div class="stat-card"><div class="stat-value">2015</div><div class="stat-label">專案創建</div></div>
+  <div class="stat-card"><div class="stat-value">v3.12.4</div><div class="stat-label">最新版本</div></div>
+</div>
+
+<h2 id="keras-3-有哪些核心技術亮點">Keras 3 有哪些核心技術亮點？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Keras 3 的核心亮點包括多後端支援架構、高階且一致的建模 API、與底層框架深度整合的訓練迴圈，以及對 GPU 與 TPU 大規模分散式訓練的原生支援，讓開發者以同一份程式碼在不同深度學習引擎之間無縫遷移。
+<!-- End AEO Capsule --></p>
+
+<p>從技術架構來看，Keras 3 的核心創新在於將高階建模層與具體後端徹底解耦。開發者以 Keras API 定義模型，底層可由 JAX、TensorFlow 或 PyTorch 任一引擎負責張量運算與自動微分，並可透過設定 KERAS_BACKEND 環境變數或修改 ~/.keras/keras.json 設定檔即時切換後端。官方文件明確列出各後端的最低支援版本，包括 TensorFlow 2.16.1、JAX 0.4.20、PyTorch 2.1.0 與僅供推論的 OpenVINO 2026.2.0，展現對生態相容性的嚴謹管理。</p>
+
+<p>在功能面上，Keras 3 同時兼顧高階易用性與低階靈活性。開發者既可以透過高階 API 快速建構標準模型，也可以撰寫自訂層（Layer）、自訂模型與自訂訓練迴圈（train_step），並將這些元件直接嵌入原生 TensorFlow、JAX 或 PyTorch 的低階流程中使用。這意味著 Keras 模型可以作為 PyTorch 原生 Module 的一部分，或作為 JAX 原生模型函式參與訓練，打破傳統框架之間的壁壘。</p>
+
+<p>效能方面，官方基準測試顯示，透過選擇最適合模型架構的後端（通常是 JAX），可獲得相較其他框架 20% 至 350% 的速度提升。框架同時支援從筆記型電腦到大型 GPU 與 TPU 叢集的規模擴展，官方將「資料中心級規模訓練」列為核心賣點之一，顯示其在生產環境中的實用性。</p>
+
+<p><img src="/assets/images/posts/github-keras-news-hk-shot2.png" alt="Keras 3 GitHub 首頁頂部（repo 名 keras-team/keras + Star 數 64.2k + Fork 數 19.7k + 官方描述）" /></p>
+
+<h2 id="keras-3-的多後端架構帶來什麼優勢">Keras 3 的多後端架構帶來什麼優勢？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>多後端架構讓開發者以同一份 Keras 程式碼在 JAX、TensorFlow 或 PyTorch 上執行，避免被單一框架綁定，並可依需求選擇效能最佳或生態最成熟的後端，實現「一次編寫、處處運行」的開發體驗，同時確保程式碼面向未來。
+<!-- End AEO Capsule --></p>
+
+<p>多後端架構最直接的優勢是消除框架鎖定（Framework Lock-in）。過去選擇深度學習框架往往意味著長期綁定其生態系統，而 Keras 3 讓團隊可以同時利用 JAX 的效能與可擴展性、TensorFlow 的生產級工具生態，以及 PyTorch 的研究社群資源。對於企業而言，這代表技術投資的風險顯著降低，模型程式碼不會因為底層框架的演進而失效。</p>
+
+<p>對既有 tf.keras 用戶而言，Keras 3 被設計為無縫的替代方案。官方文件指出，只要既有模型採用最新的 .keras 格式儲存，即可直接遷移至 Keras 3 並立即在 JAX 或 PyTorch 後端上執行。若模型包含自訂元件，通常也只需數分鐘即可轉換為與後端無關的實作，這種向後相容設計大幅降低了升級成本。</p>
+
+<p>此外，多後端架構讓資料管線的使用更加靈活。Keras 3 模型可以消費任何格式的資料集，無論是 TensorFlow 的 tf.data.Dataset、PyTorch 的 DataLoader 或標準 NumPy 陣列，都可直接作為訓練輸入。這項設計打破了「選擇框架等於選擇資料生態」的慣例，讓團隊可以自由組合最佳的資料處理工具。</p>
+
+<h2 id="keras-3-在開源生態中的地位如何">Keras 3 在開源生態中的地位如何？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Keras 3 處於深度學習生態的「通用建模層」位置，向下對接 JAX、TensorFlow、PyTorch 等底層引擎，向上服務近三百萬開發者，並獲 Google 大規模訓練場景採用，其高階 API 慣例亦影響了眾多後續框架的設計。
+<!-- End AEO Capsule --></p>
+
+<p>Keras 在開源生態中的角色可以概括為「深度學習的通用語言」。作為 Google 深度學習團隊的主力框架之一，Keras 3 曾被用於訓練 Gemini 等大規模模型，這項事實既驗證了其效能與穩定性的上限，也為框架提供了極具說服力的生產案例。官方宣稱全球近三百萬開發者使用 Keras，涵蓋從新創企業到跨國企業的各類組織。</p>
+
+<p>在競爭格局中，Keras 3 與 PyTorch、TensorFlow 形成既競爭又互補的關係。PyTorch 以低階靈活性與研究社群見長，TensorFlow 以生產部署生態著稱，而 Keras 則定位於兩者之上的高階抽象層，讓開發者不必在低階 API 的複雜度中掙扎。這種分層定位使 Keras 不會與底層框架正面衝突，反而成為生態的黏合劑。</p>
+
+<p>從商業化路徑來看，Keras 的 Apache 2.0 授權允許商業使用、修改與再發布，配合 Google 的長期投入與 François Chollet 的持續領導，確保了專案的穩定性與發展方向。加上 KerasTuner、KerasNLP 與 KerasCV 等周邊函式庫的擴展，Keras 已形成涵蓋模型建構、超參數調校與領域應用的完整工具鏈，生態地位穩固。</p>
+
+<p><img src="/assets/images/posts/github-keras-news-hk-shot3.png" alt="Keras 3 GitHub 統計數據（repo 側欄：最新版本 v3.12.4、Used by 310K、Contributors 1,443、Languages Python 100%）" /></p>
+
+<h2 id="如何快速開始使用-keras-3">如何快速開始使用 Keras 3？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>開始使用 Keras 3 只需執行 pip install keras –upgrade 安裝框架，再依需求安裝 tensorflow、jax 或 torch 其中一個後端套件，並在匯入 Keras 前設定 KERAS_BACKEND 環境變數，即可開始建構與訓練模型。
+<!-- End AEO Capsule --></p>
+
+<p>開始使用 Keras 3 的門檻相當低。首先執行 pip install keras –upgrade 安裝最新版本框架，再選擇並安裝至少一個後端套件：tensorflow、jax 或 torch。對於僅需進行模型推論的場景，亦可選擇安裝 openvino 後端。</p>
+
+<p>官方文件建議在匯入 Keras 之前透過 export KERAS_BACKEND=”jax” 或編輯 ~/.keras/keras.json 設定後端，並強調後端必須在匯入前設定，之後無法中途更換。</p>
+
+<p>安裝完成後，建立第一個模型只需數行程式碼。以 Sequential 模型為例，開發者逐層加入 Dense 等層並指定啟動函式，接著以 compile 設定最佳化器與損失函式，再呼叫 fit 傳入訓練資料即可完成訓練流程。這種簡潔的開發體驗正是 Keras 被形容為「為人類設計」的原因，也是其長期吸引新手開發者的關鍵。</p>
+
+<p>對於進階使用者，官方文件提供完整的模型建構指南，涵蓋 Functional API 的複雜網路結構、子類化 Model 的自訂訓練迴圈，以及自訂層與自訂指標的撰寫方式。官方網站 keras.io 更提供詳細的基準測試數據、教學課程與 API 參考文件，幫助開發者從入門到進階逐步掌握框架的完整能力。</p>
+
+<h2 id="keras-3-值得一試嗎">Keras 3 值得一試嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Keras 3 值得一試。它以成熟的高階 API、多後端中立架構、Apache 2.0 開放授權與 Google 的持續投入，兼顧新手易用性與生產級效能，尤其適合希望快速開發模型、避免框架綁定或需要跨後端部署的開發者與團隊。
+<!-- End AEO Capsule --></p>
+
+<p>綜合評估，Keras 3 的價值建立在「易用、中立、開放」三項特質之上。作為歷經十年以上發展的專案，其 API 設計經過大量生產環境驗證，穩定性與文件完整性皆有保障。</p>
+
+<p>多後端架構則讓團隊保有技術選擇的彈性，不必在框架之間做不可逆的承諾。Apache 2.0 授權確保了商業使用的自由，企業可以安心地將其嵌入產品。</p>
+
+<p>當然，Keras 3 並非萬能工具。對於需要深度控制底層運算細節的研究型任務，PyTorch 或 JAX 的低階 API 可能更為直接。</p>
+
+<p>對於以推論部署為核心的邊緣場景，亦需搭配專用的推理引擎。但作為深度學習的「高階入口」與「通用建模層」，Keras 3 在教學、快速原型驗證與跨框架生產部署等場景中具有獨特價值，是深度學習開發者值得掌握的核心工具之一。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>本文章內容整理自 Keras 官方開源項目 keras-team/keras，以 Apache 2.0 授權開放，星標與版本資訊會隨時間變動，讀者可前往官方 GitHub 頁面與 keras.io 文件網站查閱最新內容。
+<!-- End AEO Capsule --></p>
+
+<p>本文章內容整理自 Keras 官方開源項目：<a href="https://github.com/keras-team/keras">keras-team/keras</a>（Apache 2.0 License），官方文件位於 <a href="https://keras.io">keras.io</a>。數據截至 2026 年 8 月 15 日，星標數與版本資訊會隨時間變動，建議前往官方頁面查閱最新資訊。</p>
+
+<div class="faq-section">
+<h2>常見問題有哪些？</h2>
+
+**Keras 3 與 TensorFlow、PyTorch 有何不同？**
+
+Keras 3 是高階建模框架，定位於 TensorFlow、PyTorch、JAX 等底層引擎之上，提供統一且簡潔的 API；開發者以 Keras 建構模型，再選擇任一後端執行訓練，兩者在定位上互補而非互相取代。
+
+**Keras 3 是否免費？**
+
+是。Keras 3 以 Apache 2.0 授權發布，允許個人與商業使用、修改與再發布，無需支付授權費用，也可自由嵌入商業產品。
+
+**Keras 3 支援哪些後端？**
+
+Keras 3 支援 JAX、TensorFlow、PyTorch 三個訓練後端，以及 OpenVINO 推論後端，透過 KERAS_BACKEND 環境變數即可切換，無需修改模型程式碼。
+
+**Keras 3 與 tf.keras 有何關係？**
+
+Keras 3 是 tf.keras 的後繼版本，被設計為其無縫替代方案；既有 tf.keras 程式碼只要採用最新 .keras 格式儲存模型，即可遷移至 Keras 3 並在任意後端上執行，而 Keras 2 仍以 tf-keras 套件形式提供。
+</div>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Keras" class="badge bg-secondary text-decoration-none me-1">Keras</a>
+          
+          
+          <a href="/search/?q=%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92" class="badge bg-secondary text-decoration-none me-1">深度學習</a>
+          
+          
+          <a href="/search/?q=TensorFlow" class="badge bg-secondary text-decoration-none me-1">TensorFlow</a>
+          
+          
+          <a href="/search/?q=JAX" class="badge bg-secondary text-decoration-none me-1">JAX</a>
+          
+          
+          <a href="/search/?q=PyTorch" class="badge bg-secondary text-decoration-none me-1">PyTorch</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE" class="badge bg-secondary text-decoration-none me-1">開源項目</a>
+          
+          
+          <a href="/search/?q=%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92" class="badge bg-secondary text-decoration-none me-1">機器學習</a>
+          
+          
+          <a href="/search/?q=AI" class="badge bg-secondary text-decoration-none me-1">AI</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk&text=6.4+%E8%90%AC%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AKeras+3+%E2%80%94+%E5%A4%9A%E5%BE%8C%E7%AB%AF%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E6%A1%86%E6%9E%B6" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?6.4+%E8%90%AC%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AKeras+3+%E2%80%94+%E5%A4%9A%E5%BE%8C%E7%AB%AF%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E6%A1%86%E6%9E%B6%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-keras-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/d2l-zh-news" class="text-decoration-none">動手學深度學習：8.1 萬星的開源 AI 教材</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/tensorflow-model-garden-news" class="text-decoration-none">TensorFlow Model Garden：7.7 萬星的官方模型庫</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ai-for-beginners-news" class="text-decoration-none">微軟 AI-For-Beginners 開源：24 堂免費 AI 課</a>
+              <br><small class="text-muted">2026-09-21</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-pytorch-news" class="text-decoration-none">102K 星開源項目：PyTorch — 全球深度學習框架的技術現況分析</a>
+              <br><small class="text-muted">2026-08-25</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-tensorflow-news" class="text-decoration-none">197K 星開源項目：TensorFlow — 全球最大機器學習框架現況分析</a>
+              <br><small class="text-muted">2026-08-22</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-coqui-tts-news-hk" class="text-decoration-none">45,908 星開源項目：Coqui TTS — 深度學習文字轉語音引擎</a>
+              <br><small class="text-muted">2026-08-18</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

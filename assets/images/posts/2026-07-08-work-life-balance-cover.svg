@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d4a7a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8c84c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sunrise" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff8c42;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0.6" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
+
+  <!-- Sunrise gradient at bottom -->
+  <ellipse cx="256" cy="480" rx="300" ry="120" fill="url(#sunrise)" opacity="0.4"/>
+
+  <!-- City skyline silhouette -->
+  <g fill="#0f1a30" opacity="0.3">
+    <rect x="20" y="280" width="40" height="180"/>
+    <rect x="55" y="310" width="25" height="150"/>
+    <rect x="80" y="250" width="35" height="210"/>
+    <rect x="115" y="290" width="20" height="170"/>
+    <rect x="135" y="230" width="45" height="230"/>
+    <rect x="180" y="270" width="30" height="190"/>
+    <rect x="210" y="300" width="25" height="160"/>
+    <rect x="240" y="220" width="40" height="240"/>
+    <rect x="280" y="260" width="30" height="200"/>
+    <rect x="310" y="240" width="35" height="220"/>
+    <rect x="345" y="280" width="25" height="180"/>
+    <rect x="370" y="210" width="40" height="250"/>
+    <rect x="410" y="260" width="30" height="200"/>
+    <rect x="440" y="290" width="25" height="170"/>
+    <rect x="465" y="250" width="30" height="210"/>
+  </g>
+
+  <!-- Balance scale -->
+  <g transform="translate(256, 170)">
+    <!-- Base -->
+    <rect x="-6" y="60" width="12" height="15" rx="2" fill="#c9a84c"/>
+    <polygon points="-40,75 40,75 20,85 -20,85" fill="#b8973c"/>
+
+    <!-- Pillar -->
+    <rect x="-4" y="-10" width="8" height="72" rx="1" fill="#d4b84c"/>
+
+    <!-- Top pivot -->
+    <circle cx="0" cy="-12" r="6" fill="url(#accent)" filter="url(#glow)"/>
+
+    <!-- Left beam (slightly tilted up to show balance) -->
+    <rect x="-120" y="-18" width="110" height="6" rx="3" fill="#c9a84c" transform="rotate(-5)"/>
+    <!-- Right beam -->
+    <rect x="10" y="-18" width="110" height="6" rx="3" fill="#c9a84c" transform="rotate(5)"/>
+
+    <!-- Left pan - work icon -->
+    <g transform="translate(-140, -20) rotate(-5)">
+      <rect x="-20" y="-8" width="40" height="8" rx="2" fill="#e0c050"/>
+      <rect x="-14" y="0" width="28" height="50" rx="3" fill="#f0d860" opacity="0.8"/>
+      <!-- Laptop -->
+      <rect x="-8" y="5" width="16" height="12" rx="1" fill="#1a2a4a"/>
+      <rect x="-6" y="7" width="12" height="8" rx="0.5" fill="#4a8af4"/>
+    </g>
+
+    <!-- Right pan - life icon (lower, tilted) -->
+    <g transform="translate(140, -20) rotate(5)">
+      <rect x="-20" y="-8" width="40" height="8" rx="2" fill="#e0c050"/>
+      <rect x="-14" y="0" width="28" height="50" rx="3" fill="#f0d860" opacity="0.8"/>
+      <!-- Heart -->
+      <path d="M0,8 C-10,-2 -20,2 -10,12 L0,22 L10,12 C20,2 10,-2 0,8Z" fill="#ff6b6b"/>
+      <!-- Leaf -->
+      <path d="M15,20 Q20,10 25,15 Q22,22 15,20Z" fill="#4caf50"/>
+      <!-- Sun -->
+      <circle cx="-12" cy="18" r="5" fill="#ffd700"/>
+    </g>
+  </g>
+
+  <!-- Title text -->
+  <g transform="translate(256, 300)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle">Work-Life Balance</text>
+    <text x="2" y="2" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="28" font-weight="bold" fill="url(#accent)" text-anchor="middle">Work-Life Balance</text>
+  </g>
+
+  <g transform="translate(256, 345)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="20" fill="#b0c4de" text-anchor="middle">香港人嘅 Work-Life Balance 實戰攻略</text>
+  </g>
+
+  <!-- Stars / dots decoration -->
+  <circle cx="80" cy="80" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="440" cy="60" r="1.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="400" cy="100" r="1" fill="#ffffff" opacity="0.3"/>
+  <circle cx="120" cy="50" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="380" cy="140" r="1" fill="#ffffff" opacity="0.3"/>
+  <circle cx="160" cy="100" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="30" cy="150" r="1.5" fill="#ffffff" opacity="0.3"/>
+  <circle cx="470" cy="170" r="1" fill="#ffffff" opacity="0.4"/>
+
+  <!-- Bottom tag -->
+  <g transform="translate(256, 480)" text-anchor="middle">
+    <text x="0" y="0" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="12" fill="#5a7a9a" text-anchor="middle">Sun ny's Blog · 2026</text>
+  </g>
+</svg>

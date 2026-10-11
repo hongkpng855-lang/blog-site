@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="AI 正由雲端走入你嘅手機同電腦！Edge AI 唔使連線、保障私隱、零延遲。呢篇文講解 Apple Intelligence、Gemini Nano、Ollama 等工具點樣喺 2026 年改變你嘅數碼生活，附送香港用家實戰應用場景。">
+  <meta name="keywords" content="Edge AI, On-device AI, Apple Intelligence, Gemini Nano, Ollama, 人工智能, 科技攻略, 2026科技趨勢, 私隱">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略">
+  <meta property="og:description" content="AI 正由雲端走入你嘅手機同電腦！Edge AI 唔使連線、保障私隱、零延遲。呢篇文講解 Apple Intelligence、Gemini Nano、Ollama 等工具點樣喺 2026 年改變你嘅數碼生活，附送香港用家實戰應用場景。">
+  <meta property="og:url" content="https://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/2026-06-09-edge-ai-on-device-guide-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略">
+  <meta name="twitter:description" content="AI 正由雲端走入你嘅手機同電腦！Edge AI 唔使連線、保障私隱、零延遲。呢篇文講解 Apple Intelligence、Gemini Nano、Ollama 等工具點樣喺 2026 年改變你嘅數碼生活，附送香港用家實戰應用場景。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/2026-06-09-edge-ai-on-device-guide-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略",
+      "description": "AI 正由雲端走入你嘅手機同電腦！Edge AI 唔使連線、保障私隱、零延遲。呢篇文講解 Apple Intelligence、Gemini Nano、Ollama 等工具點樣喺 2026 年改變你嘅數碼生活，附送香港用家實戰應用場景。",
+      "datePublished": "2026-06-09T21:26:00+08:00",
+      "dateModified": "2026-06-09T21:26:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html" },
+      
+      "image": "https://anthroskill.com/assets/images/posts/2026-06-09-edge-ai-on-device-guide-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "tech",
+          "item": "https://anthroskill.com/categories/tech/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略",
+          "item": "https://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/tech/">tech</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年06月09日 21:26
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 5 分鐘
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/2026-06-09-edge-ai-on-device-guide-cover.jpg" alt="2026 Edge AI 邊緣人工智能實戰指南：手機電腦直接運行 AI 嘅完整攻略" class="img-fluid rounded">
+        </div>
+        
+
+        
+
+        <div class="post-content">
+          <h2 id="ai-一定要用雲端其實你部手機已經做到">「AI 一定要用雲端？其實你部手機已經做到。」</h2>
+
+<p>你有冇試過呢種情況：</p>
+
+<ul>
+  <li>用 ChatGPT 整理公司機密文件，但擔心資料外洩</li>
+  <li>搭緊地鐵想用 AI 翻譯一段日文，但收唔到網絡</li>
+  <li>覺得每次問 AI 都要等幾秒先有回應，好無效率</li>
+</ul>
+
+<p>如果你有以上煩惱，<strong>Edge AI（邊緣人工智能）</strong>就係你要嘅答案。</p>
+
+<p>Edge AI 嘅概念好簡單：<strong>AI 模型直接喺你嘅裝置（手機、電腦、平版）上面運行，唔需要連上雲端伺服器。</strong></p>
+
+<p>2026 年，呢個技術已經由理論變成現實。Apple Intelligence、Google Gemini Nano、Qualcomm 嘅 NPU——全部喺你部機入面 24/7 待命。唔使連線、唔使比月費、唔使擔心私隱。</p>
+
+<p>我呢篇文會由零開始，講解 Edge AI 係乜、點樣用、同埋點樣喺日常生活同工作中實際應用。</p>
+
+<hr />
+
+<h2 id="1-edge-ai-vs-cloud-ai一張表睇晒分別">1. Edge AI vs Cloud AI：一張表睇晒分別</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>比較項目</th>
+      <th>Edge AI（裝置端）</th>
+      <th>Cloud AI（雲端）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>網絡要求</strong></td>
+      <td>完全 offline 可運作</td>
+      <td>必須連線</td>
+    </tr>
+    <tr>
+      <td><strong>延遲</strong></td>
+      <td>即時（毫秒級）</td>
+      <td>視乎網絡（1-5 秒）</td>
+    </tr>
+    <tr>
+      <td><strong>私隱</strong></td>
+      <td>資料留喺你部機</td>
+      <td>上傳到第三方伺服器</td>
+    </tr>
+    <tr>
+      <td><strong>運算能力</strong></td>
+      <td>受裝置硬件限制</td>
+      <td>幾乎無限（用錢買）</td>
+    </tr>
+    <tr>
+      <td><strong>成本</strong></td>
+      <td>硬件一次過</td>
+      <td>月費/按用量收費</td>
+    </tr>
+    <tr>
+      <td><strong>模型大小</strong></td>
+      <td>1B-70B 參數</td>
+      <td>70B-1T+ 參數</td>
+    </tr>
+    <tr>
+      <td><strong>電池消耗</strong></td>
+      <td>中至高（NPU 優化中）</td>
+      <td>低（裝置只做傳輸）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>簡單總結</strong>：Cloud AI 勝在「大力出奇蹟」，咩都問得；Edge AI 勝在「快、靜、私密」，適合日常貼身應用。</p>
+
+<p>2026 年嘅趨勢係<strong>混合 AI</strong>——簡單任務由 Edge 即時處理，複雜任務先交雲端。兩者互補，唔係取代。</p>
+
+<hr />
+
+<h2 id="2-apple-intelligence邊緣-ai-嘅大眾化推手">2. Apple Intelligence：邊緣 AI 嘅大眾化推手</h2>
+
+<p>Apple Intelligence 喺 2024 年 WWDC 首次亮相，到 2026 年已經全面融入所有 Apple 裝置。</p>
+
+<h3 id="對香港用家最有用嘅功能">對香港用家最有用嘅功能：</h3>
+
+<p>** 系統級寫作工具**</p>
+<ul>
+  <li>Mail、Message、Notes 入面直接改語氣、校對、總結</li>
+  <li><strong>重點</strong>：全部 offline 處理，你公司嘅機密電郵唔會離開你部機</li>
+  <li>支援繁體中文 + 廣東話語境理解</li>
+</ul>
+
+<p>** 相片編輯**</p>
+<ul>
+  <li>「清理」功能：一鍵移除背景路人</li>
+  <li>自然語言搜尋：「搵上次阿媽生日食飯張相」</li>
+  <li>全部喺 iPhone / Mac 入面運行</li>
+</ul>
+
+<p>** 個人情境理解**</p>
+<ul>
+  <li>Siri 可以存取你嘅 screen context</li>
+  <li>「幫我將呢個地址加入剛收到嘅訊息嘅聯絡人」——理解前文後理</li>
+  <li>資料只會留喺裝置，唔會上傳 Apple</li>
+</ul>
+
+<p>** Mac 嘅 Apple Silicon 優勢**</p>
+<ul>
+  <li>M 系列晶片嘅 Neural Engine 由 M1 嘅 11 TOPS 進化到 M4 Ultra 嘅 50+ TOPS</li>
+  <li>可以本地運行 7B 以下模型，速度可與入門 GPU 媲美</li>
+</ul>
+
+<blockquote>
+  <p><strong>實戰貼士</strong>：如果你用 iPhone 15 Pro 或更新機型，去 Settings &gt; Apple Intelligence &amp; Siri 確認功能已開啟。2026 年 iOS 已經內置大部分 Edge AI 功能，唔需要額外設定。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="3-google-ai-嘅邊緣策略gemini-nano-與-ai-core">3. Google AI 嘅邊緣策略：Gemini Nano 與 AI Core</h2>
+
+<p>Google 嘅 Edge AI 策略主打 Android 生態，核心係 <strong>Gemini Nano</strong>——專為流動裝置設計嘅小型 LLM。</p>
+
+<h3 id="gemini-nano-嘅演進2024--2026">Gemini Nano 嘅演進（2024 → 2026）</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>版本</th>
+      <th>參數量</th>
+      <th>推出年份</th>
+      <th>主要功能</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Nano-1</td>
+      <td>1.8B</td>
+      <td>2024</td>
+      <td>基本摘要、智能回覆</td>
+    </tr>
+    <tr>
+      <td>Nano-2</td>
+      <td>3.25B</td>
+      <td>2025</td>
+      <td>多模態（文字+圖片）、錄音轉錄</td>
+    </tr>
+    <tr>
+      <td>Nano-3</td>
+      <td>7B</td>
+      <td>2026</td>
+      <td>完整對話、程式生成、離線翻譯</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="android-用家嘅-edge-ai-功能">Android 用家嘅 Edge AI 功能：</h3>
+
+<p>** Call Screen / 來電過濾**</p>
+<ul>
+  <li>直接喺手機辨識詐騙來電</li>
+  <li>自動同陌生人對話，幫你記低對方來意</li>
+</ul>
+
+<p>** Magic Editor / 魔法編輯**</p>
+<ul>
+  <li>一鍵移除相片雜物</li>
+  <li>改變天空顏色、移動物件</li>
+  <li>全部喺 Pixel / Samsung 裝置端處理</li>
+</ul>
+
+<p>** 離線翻譯**</p>
+<ul>
+  <li>支援 59 種語言嘅離線翻譯</li>
+  <li>Google 翻譯 App 入面下載語言包後完全 offline</li>
+  <li>2026 年質素已接近雲端版本</li>
+</ul>
+
+<p>** Recorder App 錄音轉錄**</p>
+<ul>
+  <li>實時將語音轉文字</li>
+  <li>支援廣東話辨識</li>
+  <li>全部喺裝置完成，唔使連線</li>
+</ul>
+
+<blockquote>
+  <p><strong>實戰貼士</strong>：如果你用 Samsung Galaxy S 系列或 Google Pixel，去 Settings &gt; Advanced Intelligence &gt; AI Core 可以見到 Edge AI 嘅詳細狀態同用量。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="4-自己動手用-ollama-喺你部電腦跑-ai">4. 自己動手：用 Ollama 喺你部電腦跑 AI</h2>
+
+<p>如果你想進一步控制 Edge AI，Ollama 係目前最易用嘅工具。</p>
+
+<h3 id="ollama-係乜">Ollama 係乜？</h3>
+
+<p>Ollama 係一個開源工具，<strong>等你喺自己嘅電腦（Mac / Windows / Linux）直接下載同運行 LLM</strong>。支援數百個開源模型，全部 local 執行。</p>
+
+<h3 id="點解要用-ollama">點解要用 Ollama？</h3>
+
+<ul>
+  <li><strong>私隱</strong>：處理合約、財務報表、個人文件——資料唔會離開你部機</li>
+  <li><strong>免費</strong>：冇月費、冇按用量收費</li>
+  <li><strong>離線</strong>：冇網絡都用到</li>
+  <li><strong>可控</strong>：你可以揀用邊個模型、用咩參數</li>
+</ul>
+
+<h3 id="3-分鐘快速開始">3 分鐘快速開始</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 第一步：下載 Ollama（官網有 macOS / Windows / Linux 版本）</span>
+<span class="c"># macOS: https://ollama.com/download</span>
+<span class="c"># Windows: https://ollama.com/download/windows</span>
+
+<span class="c"># 第二步：安裝後 terminal 執行</span>
+ollama pull llama3.2:3b    <span class="c"># 下載 Meta 嘅 Llama 3.2 3B 模型（適合 8GB RAM 裝置）</span>
+ollama run llama3.2:3b     <span class="c"># 直接開 chat</span>
+
+<span class="c"># 第三步：試吓問問題</span>
+<span class="o">&gt;&gt;&gt;</span> 用廣東話解釋乜嘢係邊緣運算
+</code></pre></div></div>
+
+<h3 id="2026-年推薦-edge-ai-模型">2026 年推薦 Edge AI 模型</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>模型</th>
+      <th>參數量</th>
+      <th>RAM 需求</th>
+      <th>最佳用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Llama 3.2</td>
+      <td>1B / 3B</td>
+      <td>4-8 GB</td>
+      <td>日常對話、摘要</td>
+    </tr>
+    <tr>
+      <td>Phi-4</td>
+      <td>4B / 14B</td>
+      <td>8-16 GB</td>
+      <td>推理、數學、程式</td>
+    </tr>
+    <tr>
+      <td>Mistral Nemo</td>
+      <td>12B</td>
+      <td>16 GB</td>
+      <td>多語言、商業文件</td>
+    </tr>
+    <tr>
+      <td>Qwen 2.5</td>
+      <td>7B</td>
+      <td>8 GB</td>
+      <td>繁體中文表現佳</td>
+    </tr>
+    <tr>
+      <td>Gemma 2</td>
+      <td>2B / 9B</td>
+      <td>4-12 GB</td>
+      <td>Google 生態、Android 開發</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p><strong>香港用家提示</strong>：處理中英文混合文件（例如公司合約），<strong>Qwen 2.5 7B</strong> 同 <strong>Phi-4</strong> 嘅繁體中文能力最可靠。</p>
+</blockquote>
+
+<h3 id="進階應用local-rag本地文件問答">進階應用：local RAG（本地文件問答）</h3>
+
+<p>你可以用 Ollama + 其他工具，將自己嘅文件變成「私人 knowledge base」：</p>
+
+<ol>
+  <li>匯入 PDF、Word、Excel 文件</li>
+  <li>AI 自動為文件建立索引</li>
+  <li>用自然語言查詢文件內容</li>
+  <li>所有資料留喺你部機</li>
+</ol>
+
+<p><strong>工具推薦</strong>：</p>
+<ul>
+  <li><strong>AnythingLLM</strong>：最易用嘅 local RAG 界面（有 Desktop App）</li>
+  <li><strong>Open WebUI</strong>：類似 ChatGPT 界面，但行 local 模型</li>
+  <li><strong>LangChain + ChromaDB</strong>：開發者用，彈性最大</li>
+</ul>
+
+<hr />
+
+<h2 id="5-香港用家實戰場景-5-選">5. 香港用家實戰場景 5 選</h2>
+
+<h3 id="場景-1處理機密商業文件">場景 1：處理機密商業文件</h3>
+<blockquote>
+  <p>「我想用 AI 幫手分析份合約，但絕對唔可以上傳去 ChatGPT。」</p>
+  <ul>
+    <li><strong>方案</strong>：Ollama + Llama 3.2 或 Qwen 2.5</li>
+    <li><strong>做法</strong>：將合約貼入 local LLM，問「呢份合約有冇唔合理條款？」</li>
+    <li><strong>好處</strong>：文件唔會離開你部機，符合私隱要求</li>
+  </ul>
+</blockquote>
+
+<h3 id="場景-2離線翻譯日文菜單--路牌">場景 2：離線翻譯日文菜單 / 路牌</h3>
+<blockquote>
+  <p>「去日本旅行，但又唔想買漫遊數據。」</p>
+  <ul>
+    <li><strong>方案</strong>：Google Translate App（離線語言包）</li>
+    <li><strong>做法</strong>：出發前 Download 日文→繁體中文語言包</li>
+    <li><strong>好處</strong>：相機翻譯 + 語音翻譯全部 offline</li>
+  </ul>
+</blockquote>
+
+<h3 id="場景-3interview-錄音即時轉文字">場景 3：Interview 錄音即時轉文字</h3>
+<blockquote>
+  <p>「見咗份工想重溫 interview 內容，但唔想逐段聽。」</p>
+  <ul>
+    <li><strong>方案</strong>：iPhone Recorder App / Android Recorder App</li>
+    <li><strong>做法</strong>：錄音後直接用 Edge AI 轉文字 + 自動摘要</li>
+    <li><strong>好處</strong>：唔使上傳錄音去任何雲端服務</li>
+  </ul>
+</blockquote>
+
+<h3 id="場景-4用本地-ai-幫手寫-code">場景 4：用本地 AI 幫手寫 code</h3>
+<blockquote>
+  <p>「想用 AI 幫手寫 Python script，但公司政策唔准用 ChatGPT。」</p>
+  <ul>
+    <li><strong>方案</strong>：Continue.dev（VS Code Extension）+ Ollama</li>
+    <li><strong>做法</strong>：VS Code 入面直接同 local LLM 對話，自動補 code</li>
+    <li><strong>好處</strong>：公司嘅 source code 唔會流出</li>
+  </ul>
+</blockquote>
+
+<h3 id="場景-5個人知識管理">場景 5：個人知識管理</h3>
+<blockquote>
+  <p>「我有成百份 PDF 文章，想隨時問佢哋入面嘅內容。」</p>
+  <ul>
+    <li><strong>方案</strong>：AnythingLLM + Ollama</li>
+    <li><strong>做法</strong>：將 PDF 匯入 AnythingLLM，建立 local knowledge base</li>
+    <li><strong>好處</strong>：所有資料整理同搜尋都喺 local 完成</li>
+  </ul>
+</blockquote>
+
+<hr />
+
+<h2 id="6-edge-ai-嘅未來趨勢2026-2027">6. Edge AI 嘅未來趨勢（2026-2027）</h2>
+
+<h3 id="手機-npu-繼續進化">手機 NPU 繼續進化</h3>
+<p>Qualcomm Snapdragon 9 Gen 4、Apple M4/A18 Pro、MediaTek Dimensity 嘅 NPU 效能每年翻倍。預計 2027 年手機可以順暢運行 13B 模型。</p>
+
+<h3 id="企業-edge-ai-爆發">企業 Edge AI 爆發</h3>
+<p>愈來愈多企業將 AI 由雲端搬到內部 server 或 edge device，原因：<strong>資料主權、合規要求、成本控制</strong>。</p>
+
+<h3 id="專用-edge-ai-硬件">專用 Edge AI 硬件</h3>
+<ul>
+  <li><strong>AI PC</strong>：Microsoft Copilot+ PC 要求 NPU &gt; 40 TOPS</li>
+  <li><strong>AI Phone</strong>：Android 16 原生支援 local AI agent</li>
+  <li><strong>AIoT</strong>：智能家居、閉路電視逐步本地化 AI 處理</li>
+</ul>
+
+<h3 id="私隱法規推動">私隱法規推動</h3>
+<p>歐盟 AI Act、香港個人資料私隱條例修訂，令更多公司選擇 Edge AI 處理個人資料。</p>
+
+<h3 id="hybrid-ai-成為標準">Hybrid AI 成為標準</h3>
+<p>裝置做即時推理（&lt;100ms），雲端做複雜訓練——兩者無縫切換。</p>
+
+<hr />
+
+<h2 id="7-常見問題-faq">7. 常見問題 FAQ</h2>
+
+<h3 id="q1edge-ai-會取代-chatgpt-呢啲雲端-ai-嗎">Q1：Edge AI 會取代 ChatGPT 呢啲雲端 AI 嗎？</h3>
+<p>唔會。Edge AI 同 Cloud AI 各有定位。簡單、私密、需要即時回應嘅任務畀 Edge；複雜推理、創作、需要大量知識嘅任務仍然要靠雲端。未來係<strong>兩者並存</strong>。</p>
+
+<h3 id="q2我部舊手機用唔用到-edge-ai">Q2：我部舊手機用唔用到 Edge AI？</h3>
+<p>視乎機型。2023 年後嘅中高階手機（iPhone 15 Pro 以上、Samsung S24 以上、Pixel 8 以上）已經有專用 NPU，可以流暢運行 Edge AI 功能。舊機可能只得部分功能（例如離線翻譯）。</p>
+
+<h3 id="q3ollama-會唔會令部電腦變慢">Q3：Ollama 會唔會令部電腦變慢？</h3>
+<p>視乎模型大小同你部電腦嘅規格。3B 或以下模型喺 8GB RAM 嘅電腦可以順暢使用。7B+ 模型建議 16GB RAM 以上。Ollama 只喺你 call 佢嘅時候先用資源。</p>
+
+<h3 id="q4edge-ai-嘅私隱係咪真係安全">Q4：Edge AI 嘅私隱係咪真係安全？</h3>
+<p>係。因為<strong>AI 推理嘅過程完全喺你部機入面進行</strong>，資料唔會經網絡傳輸。唯一要注意係你下載嘅模型本身——建議用官方來源（Ollama Library / Hugging Face）。</p>
+
+<h3 id="q5香港有冇-edge-ai-嘅本地社群">Q5：香港有冇 Edge AI 嘅本地社群？</h3>
+<p>有。香港都有唔少人在 Discord、Telegram 群組討論 Edge AI 同 local LLM。你可以留意 Hugging Face Hong Kong 嘅 meetup，或者上 Reddit r/LocalLLaMA 睇國際討論。</p>
+
+<hr />
+
+<h2 id="一句總結">一句總結</h2>
+
+<p>Edge AI 唔係「弱化版」嘅雲端 AI，而係<strong>另一種思考方式</strong>：將 AI 能力由中央伺服器還原返俾你——你嘅手機、你嘅電腦、你嘅數據、你嘅控制。</p>
+
+<p>2026 年，唔使再等雲端回應，你已經可以隨身帶住一個私人 AI。</p>
+
+<hr />
+
+<p><em>如果你對 Edge AI 有任何問題，或者想知某個特定場景點樣用 local AI 解決，歡迎留言問我。我會繼續 update 呢篇文，跟進最新嘅 Edge AI 發展。</em></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Edge+AI" class="badge bg-secondary text-decoration-none me-1">Edge AI</a>
+          
+          
+          <a href="/search/?q=On-device+AI" class="badge bg-secondary text-decoration-none me-1">On-device AI</a>
+          
+          
+          <a href="/search/?q=Apple+Intelligence" class="badge bg-secondary text-decoration-none me-1">Apple Intelligence</a>
+          
+          
+          <a href="/search/?q=Gemini+Nano" class="badge bg-secondary text-decoration-none me-1">Gemini Nano</a>
+          
+          
+          <a href="/search/?q=Ollama" class="badge bg-secondary text-decoration-none me-1">Ollama</a>
+          
+          
+          <a href="/search/?q=%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD" class="badge bg-secondary text-decoration-none me-1">人工智能</a>
+          
+          
+          <a href="/search/?q=%E7%A7%91%E6%8A%80%E6%94%BB%E7%95%A5" class="badge bg-secondary text-decoration-none me-1">科技攻略</a>
+          
+          
+          <a href="/search/?q=2026%E7%A7%91%E6%8A%80%E8%B6%A8%E5%8B%A2" class="badge bg-secondary text-decoration-none me-1">2026科技趨勢</a>
+          
+          
+          <a href="/search/?q=%E7%A7%81%E9%9A%B1" class="badge bg-secondary text-decoration-none me-1">私隱</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html&text=2026+Edge+AI+%E9%82%8A%E7%B7%A3%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97%EF%BC%9A%E6%89%8B%E6%A9%9F%E9%9B%BB%E8%85%A6%E7%9B%B4%E6%8E%A5%E9%81%8B%E8%A1%8C+AI+%E5%98%85%E5%AE%8C%E6%95%B4%E6%94%BB%E7%95%A5" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?2026+Edge+AI+%E9%82%8A%E7%B7%A3%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97%EF%BC%9A%E6%89%8B%E6%A9%9F%E9%9B%BB%E8%85%A6%E7%9B%B4%E6%8E%A5%E9%81%8B%E8%A1%8C+AI+%E5%98%85%E5%AE%8C%E6%95%B4%E6%94%BB%E7%95%A5%0Ahttps://anthroskill.com/tech/2026/06/09/edge-ai-on-device-guide-2026.html" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/2026/07/31/ai-phone-guide-hk.html" class="text-decoration-none">2026 AI 手機實戰指南：Apple Intelligence、Galaxy AI 同 AI 手機終極活用攻略</a>
+              <br><small class="text-muted">2026-07-31</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/06/09/wwdc-2026-siri-ai-apple-intelligence-guide.html" class="text-decoration-none">WWDC 2026 懶人包：Siri AI 全面進化、iOS 27 登場，8 大重點香港用家必讀</a>
+              <br><small class="text-muted">2026-06-09</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/06/05/%E9%82%8A%E7%B7%A3AI%E8%A3%9D%E7%BD%AE%E7%AB%AF%E6%99%BA%E6%85%A7%E9%81%8B%E7%AE%97%E6%8C%87%E5%8D%97-2026%E5%BE%9E%E9%9B%B2%E7%AB%AF%E5%88%B0%E7%B5%82%E7%AB%AF%E7%9A%84AI%E9%9D%A9%E5%91%BD.html" class="text-decoration-none">邊緣 AI（Edge AI）與裝置端智慧運算指南：2026 年從雲端到終端的 AI 革命</a>
+              <br><small class="text-muted">2026-06-05</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/06/04/EdgeAI-SLM-%E5%BE%9E%E9%9B%B2%E7%AB%AF%E5%88%B0%E7%B5%82%E7%AB%AF%E7%9A%84AI%E6%96%B0%E6%B5%AA%E6%BD%AE.html" class="text-decoration-none">邊緣 AI 與小型語言模型（SLM）實戰指南：2026 年從雲端到終端的 AI 新浪潮</a>
+              <br><small class="text-muted">2026-06-04</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/tech/2026/05/31/%E9%82%8A%E7%B7%A3AI%E8%88%87AI-Agent-2026%E7%A7%91%E6%8A%80%E9%9D%A9%E5%91%BD.html" class="text-decoration-none">邊緣 AI 與 AI Agent 正悄悄改變你的生活：2026 年最值得關注的兩大科技趨勢</a>
+              <br><small class="text-muted">2026-05-31</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E7%A7%91%E6%8A%80/2026/05/29/%E9%82%8A%E7%B7%A3AI%E5%85%A8%E9%9D%A2%E4%BE%86%E8%A5%B2-%E5%BE%9E%E6%89%8B%E6%A9%9F%E5%88%B0%E5%AE%B6%E9%9B%BB-2026%E4%BD%A0%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84EdgeAI%E7%94%9F%E6%B4%BB%E9%9D%A9%E5%91%BD.html" class="text-decoration-none">邊緣 AI 全面來襲！從手機到家電，2026 你不可不知的 Edge AI 生活革命</a>
+              <br><small class="text-muted">2026-05-29</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

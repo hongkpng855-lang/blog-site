@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1A33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#E8C86A"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4FC3F7"/>
+      <stop offset="100%" style="stop-color:#29B6F6"/>
+    </linearGradient>
+    <linearGradient id="nodeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#81C784"/>
+      <stop offset="100%" style="stop-color:#66BB6A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSoft">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGrad)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.06" stroke="white" stroke-width="0.5">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="650" cy="60" r="40" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.15"/>
+  <circle cx="650" cy="60" r="55" fill="none" stroke="#FB923C" stroke-width="0.7" opacity="0.1"/>
+  <circle cx="120" cy="380" r="30" fill="none" stroke="#4FC3F7" stroke-width="1" opacity="0.12"/>
+  <circle cx="120" cy="380" r="45" fill="none" stroke="#4FC3F7" stroke-width="0.7" opacity="0.08"/>
+
+  <!-- Brain icon (centerpiece) -->
+  <g transform="translate(400, 170)" filter="url(#glowSoft)">
+    <!-- Brain outer shape -->
+    <path d="M0,-60 C-20,-60 -45,-50 -55,-30 C-65,-10 -60,10 -55,25 C-50,40 -40,50 -25,55 C-15,58 -5,60 0,58" 
+          fill="none" stroke="url(#brainGrad)" stroke-width="2.5" opacity="0.9"/>
+    <path d="M0,-60 C20,-60 45,-50 55,-30 C65,-10 60,10 55,25 C50,40 40,50 25,55 C15,58 5,60 0,58" 
+          fill="none" stroke="url(#brainGrad)" stroke-width="2.5" opacity="0.9"/>
+    <!-- Brain bottom -->
+    <path d="M-25,55 C-15,62 -5,65 0,65 C5,65 15,62 25,55" 
+          fill="none" stroke="url(#brainGrad)" stroke-width="2" opacity="0.8"/>
+    <!-- Brain mid line -->
+    <line x1="0" y1="-55" x2="0" y2="60" stroke="#FB923C" stroke-width="1" opacity="0.3"/>
+    <!-- Brain folds left -->
+    <path d="M-20,-35 C-30,-25 -35,-15 -30,-5 C-25,5 -20,10 -25,20" fill="none" stroke="#FB923C" stroke-width="1.2" opacity="0.5"/>
+    <path d="M-10,-40 C-15,-30 -20,-20 -15,-10 C-10,0 -8,10 -12,20" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <!-- Brain folds right -->
+    <path d="M20,-35 C30,-25 35,-15 30,-5 C25,5 20,10 25,20" fill="none" stroke="#FB923C" stroke-width="1.2" opacity="0.5"/>
+    <path d="M10,-40 C15,-30 20,-20 15,-10 C10,0 8,10 12,20" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <!-- Inner glow dots -->
+    <circle cx="-12" cy="-8" r="3" fill="#E8C86A" opacity="0.4" filter="url(#glow)"/>
+    <circle cx="15" cy="-20" r="2.5" fill="#E8C86A" opacity="0.35" filter="url(#glow)"/>
+    <circle cx="-8" cy="20" r="2" fill="#E8C86A" opacity="0.3" filter="url(#glow)"/>
+  </g>
+
+  <!-- Connection nodes around brain -->
+  <!-- Node 1 - top left -->
+  <circle cx="310" cy="95" r="8" fill="url(#nodeGrad)" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="310" cy="95" r="3" fill="white" opacity="0.5"/>
+  <!-- Node 2 - top right -->
+  <circle cx="490" cy="95" r="8" fill="url(#nodeGrad2)" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="490" cy="95" r="3" fill="white" opacity="0.5"/>
+  <!-- Node 3 - left -->
+  <circle cx="300" cy="220" r="7" fill="url(#nodeGrad2)" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="300" cy="220" r="2.5" fill="white" opacity="0.4"/>
+  <!-- Node 4 - right -->
+  <circle cx="500" cy="220" r="7" fill="url(#nodeGrad)" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="500" cy="220" r="2.5" fill="white" opacity="0.4"/>
+  <!-- Node 5 - bottom left -->
+  <circle cx="340" cy="270" r="6" fill="url(#nodeGrad)" opacity="0.55" filter="url(#glow)"/>
+  <circle cx="340" cy="270" r="2" fill="white" opacity="0.35"/>
+  <!-- Node 6 - bottom right -->
+  <circle cx="460" cy="270" r="6" fill="url(#nodeGrad2)" opacity="0.55" filter="url(#glow)"/>
+  <circle cx="460" cy="270" r="2" fill="white" opacity="0.35"/>
+
+  <!-- Connection lines -->
+  <g stroke="url(#brainGrad)" stroke-width="0.8" opacity="0.25">
+    <line x1="340" y1="130" x2="310" y2="95"/>
+    <line x1="460" y1="130" x2="490" y2="95"/>
+    <line x1="355" y1="180" x2="300" y2="220"/>
+    <line x1="445" y1="180" x2="500" y2="220"/>
+    <line x1="370" y1="210" x2="340" y2="270"/>
+    <line x1="430" y1="210" x2="460" y2="270"/>
+    <line x1="310" y1="95" x2="490" y2="95" opacity="0.15"/>
+  </g>
+
+  <!-- Book icon left -->
+  <g transform="translate(165, 340)" opacity="0.35">
+    <rect x="0" y="0" width="30" height="24" rx="2" fill="#FB923C"/>
+    <rect x="3" y="2" width="24" height="20" rx="1" fill="#0F1A33"/>
+    <line x1="15" y1="2" x2="15" y2="22" stroke="#FB923C" stroke-width="0.8"/>
+    <line x1="8" y1="6" x2="12" y2="6" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+    <line x1="8" y1="10" x2="12" y2="10" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+    <line x1="18" y1="6" x2="24" y2="6" stroke="#4FC3F7" stroke-width="1" opacity="0.4"/>
+    <line x1="18" y1="10" x2="24" y2="10" stroke="#4FC3F7" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- Lightbulb icon right -->
+  <g transform="translate(600, 330)" opacity="0.35">
+    <ellipse cx="15" cy="12" rx="12" ry="14" fill="#FB923C" opacity="0.4"/>
+    <rect x="12" y="27" width="6" height="5" rx="1" fill="#FB923C" opacity="0.4"/>
+    <line x1="11" y1="26" x2="11" y2="24" stroke="#FB923C" stroke-width="1.5" opacity="0.3"/>
+    <line x1="19" y1="26" x2="19" y2="24" stroke="#FB923C" stroke-width="1.5" opacity="0.3"/>
+    <circle cx="15" cy="8" r="3" fill="#E8C86A" opacity="0.3" filter="url(#glow)"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="400" y="340" text-anchor="middle" fill="white" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="26" font-weight="700" letter-spacing="1.5">
+    知識內化實戰系統
+  </text>
+
+  <!-- Subtitle -->
+  <text x="400" y="370" text-anchor="middle" fill="#A0B0D0" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="14" letter-spacing="1" opacity="0.8">
+    從被動閱讀到主動掌握的完整學習方法
+  </text>
+
+  <!-- Divider -->
+  <line x1="320" y1="385" x2="480" y2="385" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+
+  <!-- Bottom tags -->
+  <text x="400" y="410" text-anchor="middle" fill="#FB923C" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="11" letter-spacing="2" opacity="0.6">
+    #知識內化 · #費曼技巧 · #間隔重複 · #主動學習
+  </text>
+
+  <!-- Decorative data flow lines at bottom -->
+  <g stroke="#4FC3F7" stroke-width="0.5" opacity="0.12">
+    <path d="M50,430 Q200,420 350,430 Q500,440 650,430 Q720,420 780,430" fill="none"/>
+    <path d="M50,440 Q200,430 350,440 Q500,450 650,440 Q720,430 780,440" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="100%" style="stop-color:#1B2A4A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22C55E"/>
+      <stop offset="100%" style="stop-color:#16A34A"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E3A5F"/>
+      <stop offset="100%" style="stop-color:#162D4A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="85" x2="512" y2="85" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="170" x2="512" y2="170" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="255" x2="512" y2="255" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="340" x2="512" y2="340" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="425" x2="512" y2="425" stroke="white" stroke-width="0.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="48" text-anchor="middle" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">月供股票·平均成本法</text>
+  <text x="256" y="70" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="13">Dollar-Cost Averaging 實戰指南</text>
+
+  <!-- Chart area -->
+  <g transform="translate(40,85)">
+    <!-- Grid lines -->
+    <line x1="0" y1="0" x2="432" y2="0" stroke="#334155" stroke-width="0.5"/>
+    <line x1="0" y1="35" x2="432" y2="35" stroke="#334155" stroke-width="0.5"/>
+    <line x1="0" y1="70" x2="432" y2="70" stroke="#334155" stroke-width="0.5"/>
+    <line x1="0" y1="105" x2="432" y2="105" stroke="#334155" stroke-width="0.5"/>
+    <line x1="0" y1="140" x2="432" y2="140" stroke="#334155" stroke-width="0.5"/>
+
+    <!-- Y-axis labels -->
+    <text x="-8" y="145" text-anchor="end" fill="#64748B" font-family="system-ui" font-size="9">$0</text>
+    <text x="-8" y="110" text-anchor="end" fill="#64748B" font-family="system-ui" font-size="9">$25</text>
+    <text x="-8" y="75" text-anchor="end" fill="#64748B" font-family="system-ui" font-size="9">$50</text>
+    <text x="-8" y="40" text-anchor="end" fill="#64748B" font-family="system-ui" font-size="9">$75</text>
+    <text x="-8" y="5" text-anchor="end" fill="#64748B" font-family="system-ui" font-size="9">$100</text>
+
+    <!-- X-axis months -->
+    <text x="36" y="158" text-anchor="middle" fill="#64748B" font-family="system-ui" font-size="9">1月</text>
+    <text x="108" y="158" text-anchor="middle" fill="#64748B" font-family="system-ui" font-size="9">2月</text>
+    <text x="180" y="158" text-anchor="middle" fill="#64748B" font-family="system-ui" font-size="9">3月</text>
+    <text x="252" y="158" text-anchor="middle" fill="#64748B" font-family="system-ui" font-size="9">4月</text>
+    <text x="324" y="158" text-anchor="middle" fill="#64748B" font-family="system-ui" font-size="9">5月</text>
+    <text x="396" y="158" text-anchor="middle" fill="#64748B" font-family="system-ui" font-size="9">6月</text>
+
+    <!-- Price line (zigzag) -->
+    <polyline points="36,20 108,50 180,100 252,60 324,30 396,10"
+      fill="none" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+
+    <!-- DCA average line -->
+    <line x1="0" y1="55" x2="432" y2="55" stroke="url(#gold)" stroke-width="1.5" stroke-dasharray="6,3"/>
+    <text x="434" y="58" fill="url(#gold)" font-family="system-ui" font-size="9">平均成本 $45</text>
+
+    <!-- Buy indicators (dots on price line) -->
+    <circle cx="36" cy="20" r="4" fill="url(#green)"/>
+    <circle cx="108" cy="50" r="4" fill="url(#green)"/>
+    <circle cx="180" cy="100" r="4" fill="url(#green)"/>
+    <circle cx="252" cy="60" r="4" fill="url(#green)"/>
+    <circle cx="324" cy="30" r="4" fill="url(#green)"/>
+    <circle cx="396" cy="10" r="4" fill="url(#green)"/>
+  </g>
+
+  <!-- Stats bar -->
+  <g transform="translate(40,270)">
+    <rect x="0" y="0" width="432" height="36" rx="6" fill="#1E3A5F" opacity="0.8"/>
+    <text x="216" y="23" text-anchor="middle" fill="#94A3B8" font-family="system-ui" font-size="10">每月 $5,000 ｜ 6 個月 ｜ 投資 $30,000 ｜ 市值 $35,200（+17.3%）</text>
+  </g>
+
+  <!-- Information cards -->
+  <!-- Card 1: DCA原理 -->
+  <g transform="translate(30,320)">
+    <rect x="0" y="0" width="220" height="85" rx="8" fill="url(#card1)" stroke="#334155" stroke-width="1"/>
+    <rect x="10" y="10" width="28" height="28" rx="6" fill="#FB923C" opacity="0.2"/>
+    <text x="24" y="29" text-anchor="middle" fill="#FB923C" font-family="system-ui" font-size="14">💰</text>
+    <text x="46" y="27" fill="#E2E8F0" font-family="system-ui" font-size="11" font-weight="bold">DCA 原理</text>
+    <text x="10" y="48" fill="#94A3B8" font-family="system-ui" font-size="9">跌市買多啲股數</text>
+    <text x="10" y="62" fill="#94A3B8" font-family="system-ui" font-size="9">升市買少啲股數</text>
+    <text x="10" y="76" fill="#22C55E" font-family="system-ui" font-size="9">✓ 自然拉低平均成本</text>
+  </g>
+
+  <!-- Card 2: ETF選擇 -->
+  <g transform="translate(262,320)">
+    <rect x="0" y="0" width="220" height="85" rx="8" fill="url(#card1)" stroke="#334155" stroke-width="1"/>
+    <rect x="10" y="10" width="28" height="28" rx="6" fill="#22C55E" opacity="0.2"/>
+    <text x="24" y="29" text-anchor="middle" fill="#22C55E" font-family="system-ui" font-size="14">📊</text>
+    <text x="46" y="27" fill="#E2E8F0" font-family="system-ui" font-size="11" font-weight="bold">ETF 選擇</text>
+    <text x="10" y="48" fill="#94A3B8" font-family="system-ui" font-size="9">VOO / VT / 2800</text>
+    <text x="10" y="62" fill="#94A3B8" font-family="system-ui" font-size="9">每月 $500 起可入場</text>
+    <text x="10" y="76" fill="#22C55E" font-family="system-ui" font-size="9">✓ 券商零佣金</text>
+  </g>
+
+  <!-- Card 3: 常見錯誤 -->
+  <g transform="translate(30,416)">
+    <rect x="0" y="0" width="220" height="85" rx="8" fill="url(#card1)" stroke="#334155" stroke-width="1"/>
+    <rect x="10" y="10" width="28" height="28" rx="6" fill="#EF4444" opacity="0.2"/>
+    <text x="24" y="29" text-anchor="middle" fill="#EF4444" font-family="system-ui" font-size="14">⚠️</text>
+    <text x="46" y="27" fill="#E2E8F0" font-family="system-ui" font-size="11" font-weight="bold">常見錯誤</text>
+    <text x="10" y="48" fill="#94A3B8" font-family="system-ui" font-size="9">跌市停供 ❌</text>
+    <text x="10" y="62" fill="#94A3B8" font-family="system-ui" font-size="9">頻繁轉標的 ❌</text>
+    <text x="10" y="76" fill="#EF4444" font-family="system-ui" font-size="9">忽視收費 ❌</text>
+  </g>
+
+  <!-- Card 4: 實戰組合 -->
+  <g transform="translate(262,416)">
+    <rect x="0" y="0" width="220" height="85" rx="8" fill="url(#card1)" stroke="#334155" stroke-width="1"/>
+    <rect x="10" y="10" width="28" height="28" rx="6" fill="#3B82F6" opacity="0.2"/>
+    <text x="24" y="29" text-anchor="middle" fill="#3B82F6" font-family="system-ui" font-size="14">🎯</text>
+    <text x="46" y="27" fill="#E2E8F0" font-family="system-ui" font-size="11" font-weight="bold">實戰組合</text>
+    <text x="10" y="48" fill="#94A3B8" font-family="system-ui" font-size="9">80% 股票 + 20% 債券</text>
+    <text x="10" y="62" fill="#94A3B8" font-family="system-ui" font-size="9">每月自動扣數唔使理</text>
+    <text x="10" y="76" fill="#3B82F6" font-family="system-ui" font-size="9">✓ 10 年複利效應</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="480" cy="40" r="2" fill="#FB923C" opacity="0.3"/>
+  <circle cx="490" cy="55" r="1.5" fill="#FB923C" opacity="0.2"/>
+  <circle cx="30" cy="300" r="1.5" fill="#FB923C" opacity="0.2"/>
+  <circle cx="485" cy="300" r="1" fill="#FB923C" opacity="0.15"/>
+</svg>

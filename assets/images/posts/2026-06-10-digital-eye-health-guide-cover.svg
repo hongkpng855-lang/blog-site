@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="50%" stop-color="#1F3A5F"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FB923C" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FB923C" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4CAF50" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4CAF50" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2196F3" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#2196F3" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF9800" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FF9800" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="goldText" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8C860"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03">
+    <line x1="0" y1="80" x2="512" y2="80" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="160" x2="512" y2="160" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="512" y2="240" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="320" x2="512" y2="320" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="512" y2="400" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="80" y1="0" x2="80" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="160" y1="0" x2="160" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="240" y1="0" x2="240" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="320" y1="0" x2="320" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+  </g>
+
+  <!-- Central eye icon -->
+  <g transform="translate(256, 95)">
+    <!-- Eye outer shape -->
+    <ellipse cx="0" cy="0" rx="55" ry="30" fill="none" stroke="url(#goldText)" stroke-width="3"/>
+    <!-- Iris -->
+    <circle cx="0" cy="0" r="18" fill="#FB923C" fill-opacity="0.3" stroke="url(#goldText)" stroke-width="2"/>
+    <!-- Pupil -->
+    <circle cx="0" cy="0" r="8" fill="#FB923C"/>
+    <!-- Highlight -->
+    <circle cx="-5" cy="-4" r="3" fill="white" opacity="0.6"/>
+    <!-- Screen reflection lines on eye -->
+    <line x1="-20" y1="-12" x2="-10" y2="-18" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <line x1="-12" y1="-18" x2="0" y2="-20" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- Screen glow behind eye -->
+  <rect x="180" y="52" width="152" height="88" rx="10" fill="#FB923C" fill-opacity="0.06" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.15"/>
+
+  <!-- Title -->
+  <text x="256" y="155" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" font-weight="bold" fill="url(#goldText)" letter-spacing="1">護眼實戰指南</text>
+
+  <!-- Subtitle badge -->
+  <rect x="145" y="168" width="222" height="24" rx="12" fill="#FB923C" fill-opacity="0.12" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+  <text x="256" y="185" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#E8C860">👁️ Screen Time 爆燈年代嘅眼睛保養系統</text>
+
+  <!-- Info Cards -->
+  <!-- Card 1: Digital Eye Strain -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="205" width="220" height="78" rx="10" fill="url(#card1)" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="50" y="230" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#FB923C">📱 數碼眼睛疲勞 (DES)</text>
+    <text x="50" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">75% 香港打工仔有 DES 症狀</text>
+    <text x="50" y="266" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">眨眼頻率由15次→5次/分鐘</text>
+    <!-- Bar -->
+    <rect x="50" y="273" width="180" height="4" rx="2" fill="#1a2a4a"/>
+    <rect x="50" y="273" width="135" height="4" rx="2" fill="#FB923C" opacity="0.8"/>
+  </g>
+
+  <!-- Card 2: 20-20-20 Rule -->
+  <g filter="url(#shadow)">
+    <rect x="262" y="205" width="220" height="78" rx="10" fill="url(#card2)" stroke="#4CAF50" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="282" y="230" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#81C784">⏱️ 20-20-20 法則</text>
+    <text x="282" y="250" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">每20分鐘 → 睇20呎外 → 20秒</text>
+    <text x="282" y="266" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">最簡單但最有效嘅護眼習慣</text>
+    <rect x="282" y="273" width="180" height="4" rx="2" fill="#1a2a4a"/>
+    <rect x="282" y="273" width="90" height="4" rx="2" fill="#4CAF50" opacity="0.8"/>
+  </g>
+
+  <!-- Card 3: Nutrition -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="295" width="220" height="78" rx="10" fill="url(#card3)" stroke="#2196F3" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="50" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#64B5F6">🥬 營養補眼金字塔</text>
+    <text x="50" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">葉黃素 + Omega-3 最關鍵</text>
+    <text x="50" y="356" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">菠菜、蛋黃、三文魚</text>
+    <rect x="50" y="363" width="180" height="4" rx="2" fill="#1a2a4a"/>
+    <rect x="50" y="363" width="140" height="4" rx="2" fill="#2196F3" opacity="0.8"/>
+  </g>
+
+  <!-- Card 4: Environment & Habits -->
+  <g filter="url(#shadow)">
+    <rect x="262" y="295" width="220" height="78" rx="10" fill="url(#card4)" stroke="#FF9800" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="282" y="320" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="bold" fill="#FFB74D">💡 環境設計 + 護眼操</text>
+    <text x="282" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">熱敷 + 對焦轉換 + 眨眼練習</text>
+    <text x="282" y="356" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0BEC5">Monitor Light Bar / 加濕器 $100起</text>
+    <rect x="282" y="363" width="180" height="4" rx="2" fill="#1a2a4a"/>
+    <rect x="282" y="363" width="120" height="4" rx="2" fill="#FF9800" opacity="0.8"/>
+  </g>
+
+  <!-- Bottom stat bar -->
+  <rect x="60" y="395" width="392" height="1" fill="#FB923C" opacity="0.15"/>
+  <text x="256" y="420" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#78909C">香港近視率全球最高 | 62% 6-12歲學童近視 | 乾眼症發病率亞洲第一</text>
+
+  <!-- Bottom badges -->
+  <g transform="translate(256, 445)">
+    <rect x="-120" y="-12" width="240" height="24" rx="12" fill="#FB923C" fill-opacity="0.1" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.2"/>
+    <text x="0" y="4" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#FB923C">👁️ 每日10分鐘護眼系統 • 守護一生視力 👁️</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <circle cx="480" cy="30" r="3" fill="#FB923C" opacity="0.2"/>
+  <circle cx="460" cy="25" r="2" fill="#FB923C" opacity="0.15"/>
+  <circle cx="40" cy="35" r="2.5" fill="#FB923C" opacity="0.2"/>
+  <circle cx="25" cy="50" r="1.5" fill="#FB923C" opacity="0.15"/>
+  <circle cx="490" cy="490" r="2" fill="#FB923C" opacity="0.15"/>
+  <circle cx="475" cy="500" r="3" fill="#FB923C" opacity="0.1"/>
+  <circle cx="30" cy="480" r="2" fill="#FB923C" opacity="0.15"/>
+</svg>

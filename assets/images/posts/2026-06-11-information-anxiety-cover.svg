@@ -1,0 +1,182 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4B96A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#34D399"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444"/>
+      <stop offset="100%" style="stop-color:#F87171"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6"/>
+      <stop offset="100%" style="stop-color:#A78BFA"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)" rx="0"/>
+
+  <!-- Background data stream dots (資訊過載視覺化) -->
+  <g opacity="0.08">
+    <circle cx="50" cy="40" r="1.5" fill="#FB923C"/>
+    <circle cx="150" cy="80" r="1" fill="#FB923C"/>
+    <circle cx="250" cy="30" r="1.5" fill="#FB923C"/>
+    <circle cx="350" cy="60" r="1" fill="#FB923C"/>
+    <circle cx="450" cy="25" r="1.5" fill="#FB923C"/>
+    <circle cx="550" cy="70" r="1" fill="#FB923C"/>
+    <circle cx="650" cy="45" r="1.5" fill="#FB923C"/>
+    <circle cx="750" cy="55" r="1" fill="#FB923C"/>
+    <circle cx="80" cy="420" r="1" fill="#FB923C"/>
+    <circle cx="180" cy="400" r="1.5" fill="#FB923C"/>
+    <circle cx="320" cy="430" r="1" fill="#FB923C"/>
+    <circle cx="500" cy="410" r="1.5" fill="#FB923C"/>
+    <circle cx="680" cy="420" r="1" fill="#FB923C"/>
+    <circle cx="760" cy="390" r="1" fill="#FB923C"/>
+    <circle cx="700" cy="100" r="1" fill="#FB923C"/>
+    <circle cx="100" cy="200" r="1" fill="#FB923C"/>
+    <circle cx="720" cy="280" r="1" fill="#FB923C"/>
+  </g>
+
+  <!-- Grid lines background -->
+  <g opacity="0.04" stroke="#FB923C" stroke-width="0.5">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+    <line x1="160" y1="0" x2="160" y2="450"/>
+    <line x1="320" y1="0" x2="320" y2="450"/>
+    <line x1="480" y1="0" x2="480" y2="450"/>
+    <line x1="640" y1="0" x2="640" y2="450"/>
+  </g>
+
+  <!-- ═══ Left Section: Central Icon ═══ -->
+
+  <!-- Big head silhouette -->
+  <circle cx="150" cy="220" r="65" fill="none" stroke="url(#gold)" stroke-width="2" opacity="0.6"/>
+  <circle cx="150" cy="180" r="35" fill="url(#gold)" opacity="0.15"/>
+  <circle cx="150" cy="180" r="35" fill="none" stroke="url(#gold)" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Brain lines inside head -->
+  <g stroke="url(#gold)" stroke-width="1" opacity="0.3" fill="none">
+    <path d="M130 175 Q150 165 170 175"/>
+    <path d="M135 185 Q150 178 165 185"/>
+    <path d="M133 195 Q150 188 167 195"/>
+  </g>
+
+  <!-- Overflowing data streams from brain -->
+  <g opacity="0.5">
+    <line x1="170" y1="170" x2="210" y2="160" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <line x1="172" y1="180" x2="215" y2="180" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <line x1="170" y1="190" x2="210" y2="200" stroke="#10B981" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <line x1="150" y1="215" x2="150" y2="260" stroke="#EF4444" stroke-width="1.5" stroke-dasharray="4,3"/>
+  </g>
+
+  <!-- FOMO / Anxiety text near head -->
+  <text x="130" y="285" fill="#EF4444" font-size="11" font-family="system-ui" opacity="0.6" text-anchor="middle">FOMO</text>
+  <text x="140" y="298" fill="#F59E0B" font-size="9" font-family="system-ui" opacity="0.4" text-anchor="middle">焦慮</text>
+
+  <!-- ═══ Right Section: 4 Info Cards ═══ -->
+
+  <!-- Card 1: 資訊斷捨離 (Purple) -->
+  <g filter="url(#shadow)">
+    <rect x="290" y="80" width="225" height="75" rx="10" fill="#1B2A4A" stroke="url(#purple)" stroke-width="1.5" opacity="0.95"/>
+    <rect x="290" y="80" width="225" height="75" rx="10" fill="url(#purple)" opacity="0.08"/>
+    <circle cx="315" cy="117" r="18" fill="none" stroke="url(#purple)" stroke-width="1.5"/>
+    <text x="315" y="122" fill="url(#purple)" font-size="18" font-family="system-ui" text-anchor="middle" font-weight="bold">✂</text>
+    <text x="342" y="108" fill="#E5E7EB" font-size="14" font-family="system-ui" font-weight="bold">資訊斷捨離</text>
+    <text x="342" y="126" fill="#9CA3AF" font-size="10" font-family="system-ui">來源審計・Notification 大屠殺</text>
+    <text x="342" y="140" fill="#6B7280" font-size="9" font-family="system-ui">將資訊來源由 50→5</text>
+  </g>
+
+  <!-- Card 2: 有限學習系統 (Gold) -->
+  <g filter="url(#shadow)">
+    <rect x="290" y="168" width="225" height="75" rx="10" fill="#1B2A4A" stroke="url(#gold)" stroke-width="1.5" opacity="0.95"/>
+    <rect x="290" y="168" width="225" height="75" rx="10" fill="url(#gold)" opacity="0.08"/>
+    <circle cx="315" cy="205" r="18" fill="none" stroke="url(#gold)" stroke-width="1.5"/>
+    <text x="315" y="210" fill="url(#gold)" font-size="18" font-family="system-ui" text-anchor="middle" font-weight="bold">🎯</text>
+    <text x="342" y="196" fill="#E5E7EB" font-size="14" font-family="system-ui" font-weight="bold">有限學習系統</text>
+    <text x="342" y="214" fill="#9CA3AF" font-size="10" font-family="system-ui">Learning Radar・3 Active Max</text>
+    <text x="342" y="228" fill="#6B7280" font-size="9" font-family="system-ui">同一時間最多 3 個學習項目</text>
+  </g>
+
+  <!-- Card 3: 知識閉環 (Blue) -->
+  <g filter="url(#shadow)">
+    <rect x="527" y="80" width="225" height="75" rx="10" fill="#1B2A4A" stroke="url(#accent)" stroke-width="1.5" opacity="0.95"/>
+    <rect x="527" y="80" width="225" height="75" rx="10" fill="url(#accent)" opacity="0.08"/>
+    <circle cx="552" cy="117" r="18" fill="none" stroke="url(#accent)" stroke-width="1.5"/>
+    <text x="552" y="122" fill="url(#accent)" font-size="18" font-family="system-ui" text-anchor="middle" font-weight="bold">🔄</text>
+    <text x="579" y="108" fill="#E5E7EB" font-size="14" font-family="system-ui" font-weight="bold">知識閉環機制</text>
+    <text x="579" y="126" fill="#9CA3AF" font-size="10" font-family="system-ui">接收→處理→應用→複習</text>
+    <text x="579" y="140" fill="#6B7280" font-size="9" font-family="system-ui">30% 時間應用，20% 接收</text>
+  </g>
+
+  <!-- Card 4: 學習佇列 (Green) -->
+  <g filter="url(#shadow)">
+    <rect x="527" y="168" width="225" height="75" rx="10" fill="#1B2A4A" stroke="url(#green)" stroke-width="1.5" opacity="0.95"/>
+    <rect x="527" y="168" width="225" height="75" rx="10" fill="url(#green)" opacity="0.08"/>
+    <circle cx="552" cy="205" r="18" fill="none" stroke="url(#green)" stroke-width="1.5"/>
+    <text x="552" y="210" fill="url(#green)" font-size="18" font-family="system-ui" text-anchor="middle" font-weight="bold">📋</text>
+    <text x="579" y="196" fill="#E5E7EB" font-size="14" font-family="system-ui" font-weight="bold">學習佇列管理</text>
+    <text x="579" y="214" fill="#9CA3AF" font-size="10" font-family="system-ui">CPU Scheduling 式管理</text>
+    <text x="579" y="228" fill="#6B7280" font-size="9" font-family="system-ui">完成一個先加入新嘅</text>
+  </g>
+
+  <!-- ═══ Bottom Stats Bar ═══ -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="325" width="680" height="50" rx="10" fill="#1B2A4A" stroke="url(#gold)" stroke-width="0.5" opacity="0.9"/>
+
+    <!-- Stat 1 -->
+    <text x="140" y="347" fill="url(#gold)" font-size="20" font-family="system-ui" text-anchor="middle" font-weight="bold">402億GB</text>
+    <text x="140" y="363" fill="#9CA3AF" font-size="9" font-family="system-ui" text-anchor="middle">每日數據產生量</text>
+
+    <line x1="260" y1="335" x2="260" y2="365" stroke="#374151" stroke-width="1"/>
+
+    <!-- Stat 2 -->
+    <text x="370" y="347" fill="url(#green)" font-size="20" font-family="system-ui" text-anchor="middle" font-weight="bold">3 個 Max</text>
+    <text x="370" y="363" fill="#9CA3AF" font-size="9" font-family="system-ui" text-anchor="middle">同時學習項目上限</text>
+
+    <line x1="480" y1="335" x2="480" y2="365" stroke="#374151" stroke-width="1"/>
+
+    <!-- Stat 3 -->
+    <text x="590" y="347" fill="url(#accent)" font-size="20" font-family="system-ui" text-anchor="middle" font-weight="bold">80→20</text>
+    <text x="590" y="363" fill="#9CA3AF" font-size="9" font-family="system-ui" text-anchor="middle">接收 vs 應用時間比例</text>
+  </g>
+
+  <!-- ═══ Title ═══ -->
+  <text x="60" y="420" fill="url(#gold)" font-size="18" font-family="system-ui" font-weight="bold">資訊焦慮與知識過載自救指南</text>
+  <text x="60" y="440" fill="#9CA3AF" font-size="12" font-family="system-ui">告別 FOMO · 建立有限學習系統 · 真正學得完</text>
+
+  <!-- ═══ Category Badge ═══ -->
+  <rect x="650" y="395" width="90" height="24" rx="12" fill="#1B2A4A" stroke="url(#gold)" stroke-width="1"/>
+  <text x="695" y="411" fill="url(#gold)" font-size="11" font-family="system-ui" text-anchor="middle">學習</text>
+
+  <!-- Decorative corner accents -->
+  <path d="M10 10 L50 10 M10 10 L10 50" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+  <path d="M790 440 L750 440 M790 440 L790 400" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+</svg>

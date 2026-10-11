@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A"/>
+      <stop offset="50%" style="stop-color:#1a3a5c"/>
+      <stop offset="100%" style="stop-color:#0f1e38"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90D9"/>
+      <stop offset="100%" style="stop-color:#357ABD"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
+
+  <!-- Decorative circles -->
+  <circle cx="420" cy="80" r="180" fill="none" stroke="#FB923C" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="100" cy="400" r="140" fill="none" stroke="#4A90D9" stroke-width="0.5" opacity="0.10"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#FB923C" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- Brain/Nodes network -->
+  <!-- Central node -->
+  <circle cx="256" cy="200" r="38" fill="#1B2A4A" stroke="url(#gold)" stroke-width="2.5" filter="url(#shadow)"/>
+  <text x="256" y="196" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="13" font-weight="bold">🧠</text>
+  <text x="256" y="212" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="9">Second Brain</text>
+
+  <!-- Connected nodes -->
+  <!-- P -->
+  <circle cx="156" cy="130" r="28" fill="#1B2A4A" stroke="url(#accent)" stroke-width="2"/>
+  <text x="156" y="134" text-anchor="middle" fill="#4A90D9" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">P</text>
+  <text x="156" y="148" text-anchor="middle" fill="#8899bb" font-family="system-ui, sans-serif" font-size="7">Projects</text>
+
+  <!-- A -->
+  <circle cx="356" cy="130" r="28" fill="#1B2A4A" stroke="url(#accent)" stroke-width="2"/>
+  <text x="356" y="134" text-anchor="middle" fill="#4A90D9" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">A</text>
+  <text x="356" y="148" text-anchor="middle" fill="#8899bb" font-family="system-ui, sans-serif" font-size="7">Areas</text>
+
+  <!-- R -->
+  <circle cx="130" cy="290" r="28" fill="#1B2A4A" stroke="url(#accent)" stroke-width="2"/>
+  <text x="130" y="294" text-anchor="middle" fill="#4A90D9" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">R</text>
+  <text x="130" y="308" text-anchor="middle" fill="#8899bb" font-family="system-ui, sans-serif" font-size="7">Resources</text>
+
+  <!-- A(archive) -->
+  <circle cx="382" cy="290" r="28" fill="#1B2A4A" stroke="url(#accent)" stroke-width="2"/>
+  <text x="382" y="294" text-anchor="middle" fill="#4A90D9" font-family="system-ui, sans-serif" font-size="14" font-weight="bold">A</text>
+  <text x="382" y="308" text-anchor="middle" fill="#8899bb" font-family="system-ui, sans-serif" font-size="7">Archives</text>
+
+  <!-- Connection lines -->
+  <line x1="192" y1="152" x2="228" y2="178" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+  <line x1="284" y1="178" x2="328" y2="152" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+  <line x1="192" y1="248" x2="158" y2="268" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+  <line x1="320" y1="248" x2="354" y2="268" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+  <line x1="236" y1="236" x2="236" y2="236" stroke="#FB923C" stroke-width="0" opacity="0"/>
+
+  <!-- Small decorative dots on lines -->
+  <circle cx="210" cy="165" r="2" fill="#FB923C" opacity="0.4"/>
+  <circle cx="306" cy="165" r="2" fill="#FB923C" opacity="0.4"/>
+  <circle cx="175" cy="258" r="2" fill="#FB923C" opacity="0.4"/>
+  <circle cx="337" cy="258" r="2" fill="#FB923C" opacity="0.4"/>
+
+  <!-- Bottom section - info cards -->
+  <rect x="60" y="345" width="180" height="28" rx="6" fill="#1B2A4A" stroke="#FB923C" stroke-width="1" opacity="0.8"/>
+  <text x="150" y="363" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="10">Capture → Organize</text>
+
+  <rect x="260" y="345" width="180" height="28" rx="6" fill="#1B2A4A" stroke="#FB923C" stroke-width="1" opacity="0.8"/>
+  <text x="350" y="363" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="10">Distill → Express</text>
+
+  <!-- Input/Output arrows -->
+  <path d="M256 238 L256 345" stroke="#FB923C" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+  <polygon points="252,340 256,350 260,340" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Bottom tagline -->
+  <text x="256" y="415" text-anchor="middle" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" letter-spacing="2">KNOWLEDGE MANAGEMENT</text>
+  <text x="256" y="435" text-anchor="middle" fill="#8899bb" font-family="system-ui, sans-serif" font-size="9">由零建立你嘅個人知識庫</text>
+
+  <!-- Bottom decorative line -->
+  <line x1="150" y1="448" x2="362" y2="448" stroke="#FB923C" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Category badge -->
+  <rect x="206" y="462" width="100" height="22" rx="11" fill="none" stroke="#4A90D9" stroke-width="1" opacity="0.6"/>
+  <text x="256" y="477" text-anchor="middle" fill="#4A90D9" font-family="system-ui, sans-serif" font-size="9">📖 學習</text>
+</svg>

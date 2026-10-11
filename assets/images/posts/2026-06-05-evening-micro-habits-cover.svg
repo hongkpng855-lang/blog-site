@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="moonGlow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="lampGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffb347;stop-opacity:0.25" />
+      <stop offset="100%" style="stop-color:#ffb347;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient id="teaGlow" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0" />
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景夜空 -->
+  <rect width="800" height="600" fill="url(#bgGrad)"/>
+
+  <!-- 星空 -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="80" cy="60" r="1.5"/><circle cx="200" cy="90" r="1"/>
+    <circle cx="350" cy="40" r="1.2"/><circle cx="500" cy="70" r="1.8"/>
+    <circle cx="650" cy="30" r="1"/><circle cx="720" cy="100" r="1.3"/>
+    <circle cx="150" cy="130" r="0.8"/><circle cx="600" cy="120" r="1"/>
+    <circle cx="450" cy="25" r="0.9"/><circle cx="300" cy="110" r="1.1"/>
+    <circle cx="50" cy="180" r="0.7"/><circle cx="750" cy="160" r="0.9"/>
+  </g>
+
+  <!-- 月亮 -->
+  <circle cx="620" cy="90" r="45" fill="url(#moonGlow)" opacity="0.5"/>
+  <circle cx="620" cy="90" r="35" fill="#ffe082" opacity="0.9"/>
+  <circle cx="635" cy="80" r="30" fill="#1a1a2e" opacity="0.3"/>
+
+  <!-- 窗戶畫面 - 舒適居家場景 -->
+  <!-- 窗框 -->
+  <rect x="150" y="160" width="500" height="340" rx="8" fill="#2a2a4a" stroke="#c9a84c" stroke-width="2"/>
+  
+  <!-- 窗內：舒適房間背景 -->
+  <rect x="155" y="165" width="490" height="330" rx="6" fill="#1e1e38"/>
+  
+  <!-- 牆壁和地板 -->
+  <rect x="155" y="165" width="490" height="230" rx="6" fill="#242442"/>
+  <rect x="155" y="395" width="490" height="100" fill="#1a1a30"/>
+
+  <!-- 檯燈（左側） -->
+  <rect x="220" y="320" width="80" height="8" rx="4" fill="#c9a84c" opacity="0.7"/>
+  <rect x="255" y="280" width="10" height="40" fill="#c9a84c" opacity="0.6"/>
+  <path d="M230 280 Q260 260 290 280" fill="#f0d080" opacity="0.9"/>
+  <!-- 燈光 -->
+  <path d="M240 285 Q260 350 220 390" fill="url(#lampGlow)" opacity="0.4"/>
+  <path d="M280 285 Q260 350 300 390" fill="url(#lampGlow)" opacity="0.3"/>
+
+  <!-- 茶杯（桌面中央） -->
+  <rect x="355" y="370" width="10" height="25" rx="2" fill="#c9a84c" opacity="0.7"/>
+  <path d="M340 372 Q350 395 340 398" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity="0.6"/>
+  <ellipse cx="355" cy="372" rx="18" ry="5" fill="#c9a84c" opacity="0.8"/>
+  <!-- 茶香 -->
+  <path d="M350 365 Q345 350 350 338" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.3"/>
+  <path d="M358 363 Q362 348 356 335" fill="none" stroke="#c9a84c" stroke-width="1" opacity="0.2"/>
+  <!-- 蒸汽效果 -->
+  <ellipse cx="355" cy="345" rx="15" ry="8" fill="url(#teaGlow)" opacity="0.3"/>
+
+  <!-- 書本/筆記本 -->
+  <rect x="390" y="385" width="70" height="10" rx="2" fill="#4a4a7a" transform="rotate(-5 425 390)"/>
+  <rect x="390" y="383" width="70" height="10" rx="2" fill="#5a5a8a" transform="rotate(3 425 388)"/>
+
+  <!-- 植物盆栽（右側） -->
+  <rect x="540" y="375" width="30" height="25" rx="3" fill="#8B4513" opacity="0.8"/>
+  <path d="M555 375 Q545 350 535 330" fill="none" stroke="#2d7d46" stroke-width="3" opacity="0.8"/>
+  <path d="M555 375 Q560 345 570 325" fill="none" stroke="#3a9d56" stroke-width="3" opacity="0.7"/>
+  <path d="M555 375 Q550 355 555 320" fill="none" stroke="#2d7d46" stroke-width="2.5" opacity="0.9"/>
+  <ellipse cx="535" cy="328" rx="5" ry="3" fill="#3a9d56" opacity="0.8"/>
+  <ellipse cx="570" cy="323" rx="4" ry="2.5" fill="#2d7d46" opacity="0.7"/>
+  <ellipse cx="555" cy="318" rx="4" ry="2" fill="#4abf6e" opacity="0.9"/>
+
+  <!-- 人物剪影 - 坐在沙發上放鬆 -->
+  <ellipse cx="370" cy="295" rx="55" ry="50" fill="#3a3a5a" opacity="0.5"/>
+  <circle cx="370" cy="270" r="18" fill="#4a4a6a" opacity="0.5"/>
+  
+  <!-- 沙發 -->
+  <rect x="310" y="340" width="120" height="50" rx="10" fill="#2d2d55" opacity="0.7"/>
+  <rect x="305" y="345" width="15" height="45" rx="5" fill="#3a3a65" opacity="0.6"/>
+  <rect x="420" y="345" width="15" height="45" rx="5" fill="#3a3a65" opacity="0.6"/>
+
+  <!-- 舒適光暈圍繞房間 -->
+  <ellipse cx="370" cy="350" rx="200" ry="120" fill="#ffd700" opacity="0.03"/>
+
+  <!-- 裝飾：牆上時鐘 -->
+  <circle cx="500" cy="230" r="18" fill="#2a2a4a" stroke="#c9a84c" stroke-width="1.5" opacity="0.7"/>
+  <line x1="500" y1="230" x2="500" y2="218" stroke="#c9a84c" stroke-width="1.2" opacity="0.6"/>
+  <line x1="500" y1="230" x2="510" y2="230" stroke="#c9a84c" stroke-width="0.8" opacity="0.5"/>
+
+  <!-- 底部文字區 - 漸層背景 -->
+  <rect x="0" y="520" width="800" height="80" fill="#0d0d1a" opacity="0.8"/>
+
+  <!-- 文字 -->
+  <text x="400" y="180" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="20" fill="#c9a84c" text-anchor="middle" letter-spacing="4" opacity="0.8">✦ 生 活 美 學 ✦</text>
+  
+  <text x="400" y="485" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="22" fill="#ffffff" text-anchor="middle" font-weight="bold" opacity="0.9">下班後微習慣指南</text>
+  <text x="400" y="510" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="14" fill="#c9a84c" text-anchor="middle" opacity="0.8">用 30 分鐘打造屬於自己的夜晚</text>
+
+  <!-- 底部小圖標 -->
+  <g transform="translate(0, 520)" opacity="0.5">
+    <!-- 星星裝飾 -->
+    <circle cx="100" cy="40" r="1.5" fill="#c9a84c"/>
+    <circle cx="700" cy="40" r="1.5" fill="#c9a84c"/>
+    <circle cx="300" cy="45" r="1" fill="#c9a84c"/>
+    <circle cx="500" cy="45" r="1" fill="#c9a84c"/>
+  </g>
+</svg>

@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d2137;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="eyeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#e8d48b;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="irisGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d5a4a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3d7a6a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a9a7a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a8af4;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#6ab4ff;stop-opacity:0.05" />
+    </linearGradient>
+    <linearGradient id="scanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a8af4;stop-opacity:0" />
+      <stop offset="50%" style="stop-color:#4a8af4;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#4a8af4;stop-opacity:0" />
+    </linearGradient>
+    <radialGradient id="pupilGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a1a2e;stop-opacity:1" />
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bgGrad)" />
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03" stroke="#ffffff" stroke-width="0.5">
+    <line x1="0" y1="0" x2="800" y2="0" />
+    <line x1="0" y1="50" x2="800" y2="50" />
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="150" x2="800" y2="150" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="250" x2="800" y2="250" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="350" x2="800" y2="350" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    <line x1="0" y1="450" x2="800" y2="450" />
+    <line x1="0" y1="0" x2="0" y2="450" />
+    <line x1="100" y1="0" x2="100" y2="450" />
+    <line x1="200" y1="0" x2="200" y2="450" />
+    <line x1="300" y1="0" x2="300" y2="450" />
+    <line x1="400" y1="0" x2="400" y2="450" />
+    <line x1="500" y1="0" x2="500" y2="450" />
+    <line x1="600" y1="0" x2="600" y2="450" />
+    <line x1="700" y1="0" x2="700" y2="450" />
+    <line x1="800" y1="0" x2="800" y2="450" />
+  </g>
+
+  <!-- Background glow circles -->
+  <circle cx="400" cy="200" r="250" fill="url(#glowGrad)" filter="url(#softGlow)" />
+  <circle cx="300" cy="150" r="40" fill="#4a8af4" opacity="0.04" filter="url(#softGlow)" />
+  <circle cx="500" cy="300" r="60" fill="#4a8af4" opacity="0.03" filter="url(#softGlow)" />
+
+  <!-- Main Eye - Left side -->
+  <g transform="translate(220, 195)">
+    <!-- Eye outer shape -->
+    <ellipse cx="0" cy="0" rx="80" ry="55" fill="#0d1b2a" stroke="#c9a84c" stroke-width="2" opacity="0.8" />
+    
+    <!-- Iris -->
+    <circle cx="0" cy="0" r="35" fill="url(#irisGrad)" />
+    
+    <!-- Pupil -->
+    <circle cx="0" cy="0" r="18" fill="url(#pupilGrad)" />
+    
+    <!-- Iris pattern (fibers) -->
+    <g stroke="#5a9a8a" stroke-width="0.8" opacity="0.4">
+      <line x1="0" y1="-35" x2="0" y2="-18" />
+      <line x1="18" y1="-30" x2="9" y2="-16" />
+      <line x1="30" y1="-18" x2="16" y2="-10" />
+      <line x1="35" y1="0" x2="18" y2="0" />
+      <line x1="30" y1="18" x2="16" y2="10" />
+      <line x1="18" y1="30" x2="9" y2="16" />
+      <line x1="0" y1="35" x2="0" y2="18" />
+      <line x1="-18" y1="30" x2="-9" y2="16" />
+      <line x1="-30" y1="18" x2="-16" y2="10" />
+      <line x1="-35" y1="0" x2="-18" y2="0" />
+      <line x1="-30" y1="-18" x2="-16" y2="-10" />
+      <line x1="-18" y1="-30" x2="-9" y2="-16" />
+    </g>
+    
+    <!-- Highlight on eye -->
+    <ellipse cx="-12" cy="-15" rx="10" ry="8" fill="white" opacity="0.25" />
+    <ellipse cx="-8" cy="-12" rx="5" ry="4" fill="white" opacity="0.4" />
+    <ellipse cx="15" cy="12" rx="4" ry="3" fill="white" opacity="0.1" />
+
+    <!-- Scan line on eye -->
+    <rect x="-80" y="-22" width="160" height="3" fill="url(#scanGrad)" opacity="0.3" rx="1.5">
+      <animate attributeName="y" values="-55;55;-55" dur="3s" repeatCount="indefinite" />
+    </rect>
+  </g>
+
+  <!-- Small decorative eye 2 -->
+  <g transform="translate(355, 185)" opacity="0.3">
+    <ellipse cx="0" cy="0" rx="30" ry="20" fill="#0d1b2a" stroke="#4a8af4" stroke-width="1" />
+    <circle cx="0" cy="0" r="13" fill="#2d5a4a" />
+    <circle cx="0" cy="0" r="7" fill="#000" />
+    <ellipse cx="-4" cy="-6" rx="4" ry="3" fill="white" opacity="0.2" />
+  </g>
+
+  <!-- Small decorative eye 3 -->
+  <g transform="translate(150, 170)" opacity="0.2">
+    <ellipse cx="0" cy="0" rx="20" ry="14" fill="#0d1b2a" stroke="#4a8af4" stroke-width="0.8" />
+    <circle cx="0" cy="0" r="9" fill="#2d5a4a" />
+    <circle cx="0" cy="0" r="4" fill="#000" />
+  </g>
+
+  <!-- Screen glow lines coming from eye (showing screen time) -->
+  <g opacity="0.15" stroke="#6ab4ff" stroke-width="1">
+    <line x1="300" y1="180" x2="390" y2="100" />
+    <line x1="310" y1="170" x2="420" y2="80" />
+    <line x1="280" y1="190" x2="370" y2="120" />
+  </g>
+
+  <!-- Light rays from eye (scan effect) -->
+  <g opacity="0.08" stroke="#c9a84c" stroke-width="0.8">
+    <line x1="140" y1="195" x2="10" y2="150" />
+    <line x1="140" y1="195" x2="10" y2="195" />
+    <line x1="140" y1="195" x2="10" y2="240" />
+    <line x1="220" y1="140" x2="180" y2="50" />
+    <line x1="220" y1="250" x2="180" y2="340" />
+  </g>
+
+  <!-- Title -->
+  <text x="420" y="150" fill="#c9a84c" font-family="system-ui, sans-serif" font-size="22" font-weight="800" letter-spacing="1">
+    <tspan x="420" dy="0">數碼眼睛疲勞 🦉</tspan>
+  </text>
+
+  <text x="420" y="190" fill="#e0e6f0" font-family="system-ui, sans-serif" font-size="30" font-weight="700" letter-spacing="0.5">
+    自救指南
+  </text>
+
+  <text x="420" y="230" fill="#8899bb" font-family="system-ui, sans-serif" font-size="14" letter-spacing="0.5">
+    藍光真相・乾眼預防・20-20-20 法則
+  </text>
+
+  <text x="420" y="260" fill="#6a8aaa" font-family="system-ui, sans-serif" font-size="13" letter-spacing="0.3">
+    屏幕時代嘅眼睛健康科學方案
+  </text>
+
+  <!-- Divider -->
+  <line x1="420" y1="285" x2="750" y2="285" stroke="#c9a84c" stroke-width="1" opacity="0.5" />
+
+  <!-- Key stats -->
+  <g transform="translate(420, 310)">
+    <text x="0" y="0" fill="#4a8af4" font-family="system-ui, sans-serif" font-size="24" font-weight="700">80%</text>
+    <text x="50" y="0" fill="#8899bb" font-family="system-ui, sans-serif" font-size="11">打工仔有DES</text>
+    
+    <text x="160" y="0" fill="#4a8af4" font-family="system-ui, sans-serif" font-size="24" font-weight="700">-70%</text>
+    <text x="210" y="0" fill="#8899bb" font-family="system-ui, sans-serif" font-size="11">眨眼次數</text>
+    
+    <text x="0" y="30" fill="#4a8af4" font-family="system-ui, sans-serif" font-size="24" font-weight="700">10.5</text>
+    <text x="50" y="30" fill="#8899bb" font-family="system-ui, sans-serif" font-size="11">hr 每日 Mon</text>
+    
+    <text x="160" y="30" fill="#4a8af4" font-family="system-ui, sans-serif" font-size="24" font-weight="700">60%</text>
+    <text x="210" y="30" fill="#8899bb" font-family="system-ui, sans-serif" font-size="11">港童近視率</text>
+  </g>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="435" width="800" height="15" fill="#c9a84c" opacity="0.08" />
+
+  <!-- Decorative dots -->
+  <circle cx="760" cy="50" r="3" fill="#c9a84c" opacity="0.3" />
+  <circle cx="780" cy="70" r="2" fill="#c9a84c" opacity="0.2" />
+  <circle cx="50" cy="400" r="3" fill="#4a8af4" opacity="0.2" />
+  <circle cx="70" cy="420" r="2" fill="#4a8af4" opacity="0.15" />
+</svg>

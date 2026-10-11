@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Paperclip 開源：81K 星的 AI 代理公司作業系統 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Paperclip 是開源的 AI 代理組織管理平台，在 GitHub 累積超過 8.1 萬顆星標。本文整理其四大支柱架構、預算治理機制、跨代理執行方式與技術數據，分析這套被稱為「代理公司作業系統」的工具如何在半年內成為多代理協作領域的熱門項目。">
+  <meta name="keywords" content="AI, 開源, AI Agent, 多代理, 代理編排, TypeScript, Paperclip">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Paperclip 開源：81K 星的 AI 代理公司作業系統">
+  <meta property="og:description" content="Paperclip 是開源的 AI 代理組織管理平台，在 GitHub 累積超過 8.1 萬顆星標。本文整理其四大支柱架構、預算治理機制、跨代理執行方式與技術數據，分析這套被稱為「代理公司作業系統」的工具如何在半年內成為多代理協作領域的熱門項目。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-paperclip-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Paperclip 開源：81K 星的 AI 代理公司作業系統">
+  <meta name="twitter:description" content="Paperclip 是開源的 AI 代理組織管理平台，在 GitHub 累積超過 8.1 萬顆星標。本文整理其四大支柱架構、預算治理機制、跨代理執行方式與技術數據，分析這套被稱為「代理公司作業系統」的工具如何在半年內成為多代理協作領域的熱門項目。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-paperclip-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Paperclip 開源：81K 星的 AI 代理公司作業系統",
+      "description": "Paperclip 是開源的 AI 代理組織管理平台，在 GitHub 累積超過 8.1 萬顆星標。本文整理其四大支柱架構、預算治理機制、跨代理執行方式與技術數據，分析這套被稱為「代理公司作業系統」的工具如何在半年內成為多代理協作領域的熱門項目。",
+      "datePublished": "2026-09-22T12:00:01+08:00",
+      "dateModified": "2026-09-22T12:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/paperclipai/paperclip" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-paperclip-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Paperclip 開源：81K 星的 AI 代理公司作業系統",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Paperclip 開源：81K 星的 AI 代理公司作業系統</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">Paperclip 開源：81K 星的 AI 代理公司作業系統</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月22日 12:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 2 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-paperclip-news-cover.jpg" alt="Paperclip 開源：81K 星的 AI 代理公司作業系統" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/paperclipai/paperclip" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/paperclipai/paperclip
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Paperclip 是一套開源的 AI 代理組織管理平台，在 GitHub 累積 81,163 顆星標與 14,916 個分支。該項目由 paperclipai 於 2026 年 3 月 2 日建立，以 MIT 授權釋出，主要語言為 TypeScript，官方定位為「代理們的公司作業系統」，核心價值在於把多個各自獨立運作的 AI 代理，納入具備組織圖、預算與治理機制的統一架構。</p>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>Paperclip 是開源的 AI 代理組織管理平台，2026 年 3 月推出，星標逾 8.1 萬。它以組織圖、任務系統、預算治理與審批流程，管理多個 AI 代理協同完成業務目標。
+<!-- End AEO Capsule --></p>
+
+<p>此項目的自我描述相當直接：「如果 OpenClaw 是一名員工，Paperclip 就是那間公司。」這個類比點出當前代理工具生態的結構性缺口。市面上的工具多數聚焦於單一代理的能力邊界，例如如何讓一個代理寫出更好的程式碼、或如何讓它操作更多軟件；但當使用者同時運行多個代理時，隨之而來的問題並非能力不足，而是缺乏協調機制：誰負責哪項工作、成本由誰承擔、產出由誰驗收。</p>
+
+<h2 id="paperclip-是什麼">Paperclip 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>Paperclip 是自行託管的開源控制平面，以 Node.js 伺服器搭配 React 介面，內建嵌入式資料庫，讓使用者帶入自有代理、指派目標並追蹤成本。
+<!-- End AEO Capsule --></p>
+
+<p>從技術構成來看，Paperclip 是一套完整的控制平面，而非既有代理的包裝層。安裝指令只需一行腳本，會檢查 Node.js 24.11 或更新版本，並將命令列工具安裝至使用者目錄，隨後啟動互動式引導流程。它同時支援 Linux 與 macOS 的背景服務安裝，亦可透過 <code class="language-plaintext highlighter-rouge">npx</code> 直接試用，無需永久寫入系統。開發者若選擇手動部署，只需複製儲存庫、執行套件安裝並啟動開發模式，系統便會在本地連接埠建立服務，並自動產生嵌入式 PostgreSQL 資料庫，過程不需要額外設定。</p>
+
+<p>部署模式分為兩種。預設的信任本機模式適用於單機快速起步；需要對外開放時，可選擇區域網路或私有網路綁定，並搭配身分驗證機制。這種設計使同一套系統既能作為個人實驗環境，也能在團隊內部以較嚴格的存取控制運行。</p>
+
+<h2 id="paperclip-的核心設計理念是什麼">Paperclip 的核心設計理念是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>理念是把代理當作員工而非聊天視窗。每個代理具備職稱、匯報關係與權限，任務向上追溯至公司目標，讓代理理解工作的目的，而不只是收到一則指令。
+<!-- End AEO Capsule --></p>
+
+<p>項目的設計前提是：代理需要的是職位，而不是對話框。官方文件明確表示，Paperclip 不是聊天機器人，也不是代理框架或工作流建構器。它不介入代理本身的提示詞設計與模型選擇，而是管理這些代理所處的組織環境。代理擁有角色、職稱與匯報線，任務則帶有完整的目標脈絡，使執行者能看見任務為何存在。</p>
+
+<p>這個取向帶來一項實務差異。在多數工具中，使用者需要反覆手動補足背景資訊，才能讓代理理解當前工作的上下文；而在 Paperclip 的模型中，脈絡由任務向上串接至專案與公司目標，代理在每次被喚醒時都能取得相同的背景。官方將此描述為「目標感知執行」，其效果是減少重複交代的溝通成本。</p>
+
+<h2 id="paperclip-的四個支柱涵蓋哪些功能">Paperclip 的四個支柱涵蓋哪些功能？</h2>
+
+<!-- AEO Answer Capsule — 約 77 字 -->
+<p>四大支柱為代理任務管理、代理組織圖、代理員工培訓與代理作業系統。分別對應日常工作審批、角色與權限界線、技能與評估機制，以及跨供應商的執行基礎設施。
+<!-- End AEO Capsule --></p>
+
+<p>官方將系統功能歸納為四個支柱。第一是代理任務管理，涵蓋任務、審批與審閱關卡，並提供可稽核的例行流程；驗收依據包括差異比對、截圖與測試結果。第二是代理組織圖，處理人類與代理混合的階層關係、職責分工、委派與專門化，並界定誰能執行哪些操作，以及機密資訊的存取範圍。</p>
+
+<p>第三是代理員工培訓，包含共享技能庫、評估與已保存的測試執行、主動學習迴圈與品質指標，並支援針對代理的績效檢視。第四是代理作業系統，負責跨供應商的執行環境，涵蓋模型與代理的任意組合、沙箱與整合、單一登入與角色權限控制，以及成本控管與資料隱私。四個支柱彼此依賴，缺一則組織化運作難以成立。</p>
+
+<p><img src="/assets/images/posts/github-paperclip-news-shot1.png" alt="Paperclip README 開頭（項目名稱 Paperclip 大字標題、代理團隊儀表板主視覺，以及「The app people use to manage AI agents for work」說明）" /></p>
+
+<h2 id="paperclip-如何處理成本控制與治理">Paperclip 如何處理成本控制與治理？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>Paperclip 為每個代理設定月度預算，達到上限即停止運作。任務領取與預算檢查具原子性，避免重複工作與失控支出，超支時會自動暫停代理並取消排隊中的工作。
+<!-- End AEO Capsule --></p>
+
+<p>成本控制是此項目最受關注的環節。官方以「失控迴圈在發現之前就消耗數百美元代幣」描述未受管理的代理環境，對應做法是按公司、代理、專案、目標、議題、供應商與模型逐層追蹤代幣與費用，並設定具警告門檻與硬停損的預算政策。當支出超出上限，系統會自動暫停代理並取消佇列中的工作，而非僅發出提醒。</p>
+
+<p>治理機制則包含董事會審批流程、具備審閱與核准階段的執行政策、決策追蹤，以及代理的暫停、恢復與終止操作。所有變更動作都會記錄於不可變更的活動日誌中，設定變更亦具備版本紀錄並可回復。官方特別強調任務領取與預算強制執行具原子性，這意味著兩個代理不會同時取得同一項工作，也不會在預算邊界上產生重複計費。</p>
+
+<h2 id="paperclip-的技術架構如何運作">Paperclip 的技術架構如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>系統由身分存取、工作任務、心跳執行與治理審批等模組構成，透過心跳佇列喚醒代理。代理可為 Claude Code、Codex 或 HTTP 機器人。
+<!-- End AEO Capsule --></p>
+
+<p>系統由多個子系統組成。身分與存取模組處理兩種部署模式、代理 API 金鑰與短時效的執行權杖，並將每個變更請求追溯至特定行為者。組織圖與代理模組定義角色、職稱、匯報線、權限與預算，適配器範例涵蓋 Claude Code、Codex、命令列代理，以及透過 HTTP 或網路鉤子連接的外部機器人。</p>
+
+<p>執行層採用資料庫支撐的喚醒佇列，具備合併處理、預算檢查、工作區解析、機密注入、技能載入與適配器呼叫等步驟，每次執行都會產生結構化日誌、成本事件與稽核軌跡，並能自動處理中斷的執行。工作區模組則提供專案工作區與隔離的執行環境，例如 git worktree 與操作者分支，並支援開發伺服器與預覽網址等執行期服務。技能注入在執行期完成，代理無需重新訓練即可學習專案脈絡。</p>
+
+<h2 id="paperclip-的數據表現如何">Paperclip 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>Paperclip 累積 81,163 顆星標、219 位貢獻者，以 MIT 授權釋出，主要語言為 TypeScript，最新版本 v2026.916.0 於 2026 年 9 月發布。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat-item"><span class="stat-value">81,163</span><span class="stat-label">Stars</span></div>
+  <div class="stat-item"><span class="stat-value">14,916</span><span class="stat-label">Forks</span></div>
+  <div class="stat-item"><span class="stat-value">219</span><span class="stat-label">Contributors</span></div>
+  <div class="stat-item"><span class="stat-value">MIT</span><span class="stat-label">授權</span></div>
+</div>
+
+<p>從時間軸觀察，此項目於 2026 年 3 月 2 日建立，六個多月內累積逾 8.1 萬顆星標，分支數達 1.49 萬，顯示大量使用者不僅取用，更進一步複製儲存庫進行修改或自行部署。貢獻者數量為 219 位，社群參與已超出核心團隊範圍。發布節奏同樣密集，最新版本 v2026.916.0 於 2026 年 9 月 16 日推出，前一版本 v2026.831.1 則在 9 月 2 日上線，兩週一次的節奏延續至今。</p>
+
+<p>值得留意的是待處理議題的規模。該儲存庫的未結議題超過 5,500 項，這個數字一方面反映使用基數快速擴大，使用者提出的需求與缺陷回報同步增加；另一方面也說明項目在高速迭代下累積了可觀的待處理清單。授權採用 MIT，對商業使用與二次開發的限制極少，這對打算將代理工作流整合進企業內部流程的團隊而言，是降低法務風險的重要條件。</p>
+
+<p><img src="/assets/images/posts/github-paperclip-news-shot2.png" alt="paperclipai/paperclip GitHub 首頁頂部（儲存庫名稱、Star 數 81.2k、Fork 數 14.9k 與項目描述文字）" /></p>
+
+<h2 id="paperclip-與同類工具相比有何差異">Paperclip 與同類工具相比有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>同類工具多聚焦單一代理的能力或工作流編排，Paperclip 則把重心放在組織治理，包括預算硬停損、審批關卡與跨代理的目標對齊，並支援多家代理供應商混合運行。
+<!-- End AEO Capsule --></p>
+
+<p>市面上的代理相關工具大致可分為三類。第一類是命令列代理本身，例如 Claude Code 或 Codex，提供單一代理的完整能力，但不處理多代理之間的協調與成本分配。第二類是工作流自動化平台，優勢在於視覺化串接與步驟編排，但其模型以流程為單位，而非以角色與職責為單位。第三類是通用專案管理工具，雖然具備任務與看板，卻不理解代理的執行特性。</p>
+
+<p>Paperclip 的定位在這三類之外。官方明確表示它不提供拖放式流程設計，也不管理提示詞，而是模擬公司結構，包含組織圖、目標、預算與治理。其差異化在於把最具破壞性的風險，也就是失控的成本與缺乏審核的自動執行，轉為可設定、可稽核的制度設計。對於已經同時運行多個代理的使用者，這種治理導向的切入點，正好補上既有工具刻意留空的區塊。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>本文資訊來源為 paperclipai/paperclip 的官方 GitHub 儲存庫，包含項目描述、架構文件、安裝指南與發布紀錄，讀者可直接前往查閱最新版本與說明。
+<!-- End AEO Capsule --></p>
+
+<p>本文所有功能描述與統計數據均取自 <a href="https://github.com/paperclipai/paperclip">Paperclip 官方 GitHub 儲存庫</a>，包括 README 中的四大支柱說明、子系統架構表、支援的代理與執行環境清單，以及 GitHub API 提供的星標、分支、貢獻者、待處理議題與版本發布資料。開發者可進一步參閱官方文件目錄，了解組織圖設定、預算政策、心跳執行與公司匯出匯入的具體操作。</p>
+
+<p><img src="/assets/images/posts/github-paperclip-news-shot3.png" alt="paperclipai/paperclip 貢獻者統計頁（每週提交次數與貢獻者數量變化圖表，涵蓋 2026 年 6 月至 9 月）" /></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 54 字 -->
+<p>以下整理三個關於 Paperclip 的常見疑問，涵蓋它與單一代理工具的關係、是否綁定特定模型供應商，以及小</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI" class="badge bg-secondary text-decoration-none me-1">AI</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=AI+Agent" class="badge bg-secondary text-decoration-none me-1">AI Agent</a>
+          
+          
+          <a href="/search/?q=%E5%A4%9A%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">多代理</a>
+          
+          
+          <a href="/search/?q=%E4%BB%A3%E7%90%86%E7%B7%A8%E6%8E%92" class="badge bg-secondary text-decoration-none me-1">代理編排</a>
+          
+          
+          <a href="/search/?q=TypeScript" class="badge bg-secondary text-decoration-none me-1">TypeScript</a>
+          
+          
+          <a href="/search/?q=Paperclip" class="badge bg-secondary text-decoration-none me-1">Paperclip</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news&text=Paperclip+%E9%96%8B%E6%BA%90%EF%BC%9A81K+%E6%98%9F%E7%9A%84+AI+%E4%BB%A3%E7%90%86%E5%85%AC%E5%8F%B8%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?Paperclip+%E9%96%8B%E6%BA%90%EF%BC%9A81K+%E6%98%9F%E7%9A%84+AI+%E4%BB%A3%E7%90%86%E5%85%AC%E5%8F%B8%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-paperclip-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vaultwarden-news" class="text-decoration-none">Vaultwarden 開源：6.8 萬星的自架密碼庫</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-face-recognition-news" class="text-decoration-none">face_recognition 開源：5.7 萬星的人臉辨識入門庫</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-godot-news" class="text-decoration-none">Godot 118k 星開源引擎：完全免費無抽成</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-code-server-news" class="text-decoration-none">code-server 4.140.0：瀏覽器內的 VS Code</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

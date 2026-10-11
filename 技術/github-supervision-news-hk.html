@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>49,495 星開源項目：supervision — 開源電腦視覺核心工具庫 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="supervision 是 GitHub 星標接近 5 萬的開源 Python 電腦視覺核心工具庫，由 Roboflow 團隊維護，提供物件偵測、目標追蹤、即時計數、車速估算與資料集格式轉換等可重用模組，採用 MIT 授權，可搭配 Ultralytics、Transformers 等主流模型框架無縫使用。">
+  <meta name="keywords" content="supervision, Roboflow, 電腦視覺, Computer Vision, 物件偵測, 目標追蹤, 影像處理, 開源軟體, Python">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="49,495 星開源項目：supervision — 開源電腦視覺核心工具庫">
+  <meta property="og:description" content="supervision 是 GitHub 星標接近 5 萬的開源 Python 電腦視覺核心工具庫，由 Roboflow 團隊維護，提供物件偵測、目標追蹤、即時計數、車速估算與資料集格式轉換等可重用模組，採用 MIT 授權，可搭配 Ultralytics、Transformers 等主流模型框架無縫使用。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-supervision-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="49,495 星開源項目：supervision — 開源電腦視覺核心工具庫">
+  <meta name="twitter:description" content="supervision 是 GitHub 星標接近 5 萬的開源 Python 電腦視覺核心工具庫，由 Roboflow 團隊維護，提供物件偵測、目標追蹤、即時計數、車速估算與資料集格式轉換等可重用模組，採用 MIT 授權，可搭配 Ultralytics、Transformers 等主流模型框架無縫使用。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-supervision-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "49,495 星開源項目：supervision — 開源電腦視覺核心工具庫",
+      "description": "supervision 是 GitHub 星標接近 5 萬的開源 Python 電腦視覺核心工具庫，由 Roboflow 團隊維護，提供物件偵測、目標追蹤、即時計數、車速估算與資料集格式轉換等可重用模組，採用 MIT 授權，可搭配 Ultralytics、Transformers 等主流模型框架無縫使用。",
+      "datePublished": "2026-08-18T18:09:00+08:00",
+      "dateModified": "2026-08-18T18:09:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/roboflow/supervision" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-supervision-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "supervision 可以免費使用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。supervision 採用 MIT 開源授權，個人使用、商業使用與修改再發布皆允許，且不需付費解鎖任何功能；官方亦提供詳細文件與範例協助開發者上手。" }
+        },
+        {
+          "@type": "Question",
+          "name": "supervision 需要搭配特定模型才能使用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不需要。supervision 設計為模型無關，可與 Ultralytics、Transformers、MMDetection、Roboflow Inference 與 RF-DETR 等多個主流框架搭配，只需將模型輸出轉為統一的 Detections 物件即可。" }
+        },
+        {
+          "@type": "Question",
+          "name": "supervision 支援哪些資料集格式？",
+          "acceptedAnswer": { "@type": "Answer", "text": "supervision 支援多種常見格式，包括 COCO、YOLO 與 Pascal VOC，並提供載入、切分、合併與格式互轉等功能，方便開發者準備自有訓練資料。" }
+        },
+        {
+          "@type": "Question",
+          "name": "supervision 可以做到目標追蹤與即時計數嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。supervision 內建 ByteTrack 等多種追蹤演算法，支援跨影格多物件追蹤，並提供區域計數、特定區域進出偵測、即時儀表板與車速估算等即時分析功能。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "49,495 星開源項目：supervision — 開源電腦視覺核心工具庫",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">49,495 星開源項目：supervision — 開源電腦視覺核心工具庫</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">49,495 星開源項目：supervision — 開源電腦視覺核心工具庫</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月18日 18:09
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/roboflow/supervision" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-supervision-news-hk-cover.jpg" alt="49,495 星開源項目：supervision — 開源電腦視覺核心工具庫" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/roboflow/supervision" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/roboflow/supervision
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p><strong>supervision</strong> 是 GitHub 星標接近 <strong>49,495 顆</strong>的開源 Python 電腦視覺核心工具庫，由 Roboflow 團隊維護，提供物件偵測、目標追蹤、即時計數、車速估算、資料集載入與格式轉換等可重用模組，採用 MIT 授權允許免費商用，並可與 Ultralytics、Transformers 等主流模型框架無縫搭配，是資料科學家與開發者搭建電腦視覺應用時的高效基礎工具。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 是 GitHub 近 5 萬星的開源 Python 電腦視覺工具庫，提供偵測、追蹤、計數等可重用模組，MIT 授權，可搭配 Ultralytics、Transformers 等主流框架。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-supervision-news-hk-shot1.png" alt="supervision README 開頭（項目名稱「supervision」大字 + 標語「We write your reusable computer vision tools」+ Python 3.10 以上安裝指引與 Quickstart 程式碼範例 + PyPI、下載數、MIT 授權、Python 版本等徽章）" /></p>
+
+<h2 id="supervision-是什麼">supervision 是什麼？</h2>
+
+<p>supervision 是由美國電腦視覺公司 Roboflow 開發並維護的開源 Python 程式庫，官方將其定位為「幫你撰寫可重複使用的電腦視覺工具」。與需要從零實作偵測後處理、追蹤與繪圖邏輯的傳統開發方式不同，supervision 將目標偵測結果的整理、物件追蹤、註釋繪製、影片處理、計數邏輯與資料集管理，封裝成一套標準化的高階 API，讓開發者可以專注在「用模型解決問題」，而非「處理模型的輸出」。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 是 Roboflow 開發的開源 Python 電腦視覺程式庫，將偵測後處理、追蹤、繪圖、計數與資料集管理封裝成高階 API，讓開發者專注用模型解決問題。
+<!-- End AEO Capsule --></p>
+
+<p>項目的核心價值在於「模型無關」的設計哲學。supervision 本身不綁定任何單一模型，而是提供統一的 <code class="language-plaintext highlighter-rouge">Detections</code> 資料結構，將不同模型框架輸出的一百種格式，轉換成一致的開發介面。無論底層使用的是 YOLO、Transformer 型偵測模型，還是 Roboflow 自家的 RF-DETR，開發者都只需學會一種 API 語法，即可組合偵測、追蹤與註釋模組，大幅降低電腦視覺專案的開發複雜度與維護成本。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>核心價值是模型無關的設計，透過統一 Detections 資料結構將不同模型輸出轉為一致介面，開發者只需學一種 API 即可組合偵測、追蹤與註釋模組。
+<!-- End AEO Capsule --></p>
+
+<h2 id="supervision-有哪些核心技術亮點">supervision 有哪些核心技術亮點？</h2>
+
+<p>supervision 最突出的技術亮點之一，是擁有一系列高度可客製化的註釋器（Annotators）。無論是常見的邊界框、標籤、遮罩繪製，還是更進階的追蹤軌跡、混淆矩陣、Heatmap 與速度動態視覺化，supervision 都能以幾行程式碼完成。開發者可以組合不同註釋器，產出符合產品需求的視覺化輸出，這對需要向客戶展示成果或做即時監控介面的應用特別有價值。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>核心亮點是高度可客製化的註釋器群，涵蓋邊界框、標籤、軌跡、Heatmap 與速度視覺化等，開發者以少量程式碼即可組合出符合需求的視覺化輸出。
+<!-- End AEO Capsule --></p>
+
+<p>第二項亮點是成熟的目標追蹤與即時分析能力。supervision 內建 ByteTrack 等多種追蹤演算法，可對影片中的多個物件進行跨影格追蹤，並在此基礎上提供區域計數、特定區域進出偵測（Zone）、即時儀表板與車速估算等功能。這讓開發者可以快速打造車流監測、零售人流統計或安全區域告警等即時電腦視覺應用，而不必自己實作繁複的追蹤與事件判斷邏輯。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 內建 ByteTrack 等追蹤演算法，支援跨影格多物件追蹤與區域計數、進出偵測、即時儀表板及車速估算，適合打造車流與人流等即時監控應用。
+<!-- End AEO Capsule --></p>
+
+<h2 id="supervision-支援哪些模型框架">supervision 支援哪些模型框架？</h2>
+
+<!-- AEO Answer Capsule — 約 52 字 -->
+<p>supervision 的設計刻意保持模型無關，因此提供對多個主流框架的連接器（Connectors）。
+<!-- End AEO Capsule -->
+supervision 的設計刻意保持模型無關，因此提供對多個主流框架的連接器（Connectors）。開發者可以直接使用 Ultralytics（YOLO）、Hugging Face Transformers、OpenMMLab MMDetection、Roboflow Inference 與 RF-DETR 等模型的輸出；其中部分整合如 RF-DETR，甚至可以直接回傳 <code class="language-plaintext highlighter-rouge">sv.Detections</code> 物件，省去額外的格式轉換步驟。這種廣泛的框架相容性，是 supervision 能在開源社群快速擴散的重要原因。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 提供 Ultralytics、Transformers、MMDetection、Roboflow Inference 與 RF-DETR 等框架的連接器，部分整合可直接回傳統一 Detections 物件，相容性廣泛。
+<!-- End AEO Capsule --></p>
+
+<p>在資料集處理方面，supervision 同時具備完整的載入、切分、合併與儲存能力。開發者可利用 <code class="language-plaintext highlighter-rouge">DetectionDataset</code> 以一行程式碼讀取 COCO、YOLO 或 Pascal VOC 格式的資料集，進行 7:1.5:1.5 之類的訓練驗證測試比例切分、跨資料集合併或格式互轉。對於需要為自有模型準備資料的團隊，這套工具可以省去大量手動處理不同標註格式的瑣碎工作。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 支援 COCO、YOLO、Pascal VOC 資料集的一行式載入、比例切分、合併與格式互轉，大幅減省開發者處理標註格式的瑣碎工作。
+<!-- End AEO Capsule --></p>
+
+<h2 id="supervision-的生態系統與商業化潛力如何">supervision 的生態系統與商業化潛力如何？</h2>
+
+<!-- AEO Answer Capsule — 約 53 字 -->
+<p>supervision 不只是單一程式庫，更與 Roboflow 的產品生態緊密整合，同時保持開源獨立性。
+<!-- End AEO Capsule -->
+supervision 不只是單一程式庫，更與 Roboflow 的產品生態緊密整合，同時保持開源獨立性。它與 notebooks、inference、autodistill 等 Roboflow 開源項目互相補充，並可透過 Hugging Face Spaces 直接線上試用，官方更提供詳盡文件、範例程式庫與 Cookbook。項目採用 MIT 授權，允許包含商業用途在內的各種自由使用，這大大降低了企業導入的授權風險。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 與 Roboflow 生態整合並保持開源獨立，提供詳盡文件與範例，MIT 授權允許免費商用，降低企業導入授權風險。
+<!-- End AEO Capsule --></p>
+
+<p>在商業化與應用層面，supervision 已成為電腦視覺領域的重要基礎設施。無論是獨立開發者打造智慧監控、零售分析、農業監測，還是企業整合進品質檢測與自動物流系統，皆可借助其標準化工具快速上線。搭配物件偵測模型權重與影像資料集的開放生態，supervision 讓「模型訓練」與「應用開發」兩個環節解耦，也讓電腦視覺方案的開發與交付更快速、更可靠。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 已成為電腦視覺重要基礎設施，廣泛用於智慧監控、零售分析、農業監測與品質檢測，讓模型訓練與應用開發解耦，加速視覺方案交付。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-supervision-news-hk-shot2.png" alt="supervision GitHub 首頁頂部（repo 名稱「roboflow / supervision」+ 目標星標 + 4.7k Forks + 描述「We write your reusable computer vision tools.」+ Python 主要語言 + MIT 授權 + 近期活躍更新）" /></p>
+
+<div class="ui-stat-grid">
+<div class="stat-card"><div class="stat-value">49,495</div><div class="stat-label">GitHub 星標</div></div>
+<div class="stat-card"><div class="stat-value">4,677</div><div class="stat-label">復刻數</div></div>
+<div class="stat-card"><div class="stat-value">Python</div><div class="stat-label">主要語言</div></div>
+<div class="stat-card"><div class="stat-value">MIT</div><div class="stat-label">開源許可證</div></div>
+<div class="stat-card"><div class="stat-value">2022-11</div><div class="stat-label">建立時間</div></div>
+<div class="stat-card"><div class="stat-value">3.10+</div><div class="stat-label">支援 Python</div></div>
+</div>
+
+<p>從數據面觀察，supervision 以 49,495 顆星標與 4,677 次復刻，穩居 Python 開源電腦視覺工具領域的前段班。項目於 2022 年 11 月建立，官方在 2026 年 8 月中旬仍有最新提交，顯示維護團隊持續維持穩定的開發節奏。作為 Roboflow 開源生態的核心元件，其影響力不僅反映在星標數字，更體現在全球開發者對「可重用電腦視覺工具」的廣泛採用。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 以 49,495 星標與 4,677 復刻居 Python 開源電腦視覺前段班，2026 年 8 月仍持續更新，影響力體現在全球開發者的廣泛採用。
+<!-- End AEO Capsule --></p>
+
+<h2 id="如何快速開始使用-supervision">如何快速開始使用 supervision？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>要快速開始使用 supervision，最簡單的方式是先準備 Python 3.10 以上的環境，再透過 pip 安裝套件，
+<!-- End AEO Capsule -->
+要快速開始使用 supervision，最簡單的方式是先準備 Python 3.10 以上的環境，再透過 pip 安裝套件，接著將任一款偵測模型的輸出轉成 <code class="language-plaintext highlighter-rouge">sv.Detections</code> 並繪製註釋。典型流程為：<code class="language-plaintext highlighter-rouge">pip install supervision</code>，然後以 <code class="language-plaintext highlighter-rouge">from PIL import Image</code>、<code class="language-plaintext highlighter-rouge">from rfdetr import RFDETRSmall</code> 取得模型預測結果，搭配 <code class="language-plaintext highlighter-rouge">sv.BoxAnnotator().annotate(...)</code> 即可在一張圖片上完成偵測與視覺化。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>快速入門：pip install supervision，將偵測模型輸出轉為 sv.Detections，再以 BoxAnnotator 繪製註釋即可，需 Python 3.10 以上環境。
+<!-- End AEO Capsule --></p>
+
+<p>對於想處理影片或即時畫面的開發者，supervision 提供結合偵測與追蹤的完整流程。使用者可以先以 Ultralytics 或 Inference 取得逐影格偵測結果，再透過 ByteTrack 進行物件追蹤，最後輸出標註過的畫面或計算區域內的人數、車速。官方提供 Dwell Time（停留時間分析）與 Speed Estimation（車速估算）等教學影片與範例，讓開發者可以照著逐步建構可上線的即時監控應用。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>開發者結合偵測模型與 ByteTrack 追蹤即可處理即時影片，官方提供停留時間分析與車速估算等教學範例，可逐步建構可上線的監控應用。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-supervision-news-hk-shot3.png" alt="supervision GitHub Contributors 統計頁（顯示 roboflow/supervision 的活躍開發動態與主要貢獻者，體現項目的社群協作與持續維護狀態）" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<p>本篇文章的資訊來源為 supervision 的 GitHub 官方儲存庫，包含 README 說明文件、官方教學影片、範例程式庫與社群討論。有興趣的讀者可以前往 GitHub 查看原始碼、功能更新與跨框架使用方式。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>本篇文章資訊來自 supervision 官方 GitHub 儲存庫，包含 README、教學影片、範例與社群討論，讀者可前往查看原始碼與功能更新。
+<!-- End AEO Capsule --></p>
+
+<p>出處：<a href="https://github.com/roboflow/supervision">roboflow/supervision — GitHub</a></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>可以。supervision 採用 MIT 開源授權，個人使用、商業使用與修改再發布皆允許，且不需付費解鎖任何功能；官方亦提供詳細文件與範例協助開發者上手。
+<!-- End AEO Capsule --></p>
+<div class="faq-section">
+
+### supervision 可以免費使用嗎？
+
+可以。supervision 採用 MIT 開源授權，個人使用、商業使用與修改再發布皆允許，且不需付費解鎖任何功能；官方亦提供詳細文件與範例協助開發者上手。
+
+### supervision 需要搭配特定模型才能使用嗎？
+
+不需要。supervision 設計為模型無關，可與 Ultralytics、Transformers、MMDetection、Roboflow Inference 與 RF-DETR 等多個主流框架搭配，只需將模型輸出轉為統一的 Detections 物件即可。
+
+### supervision 支援哪些資料集格式？
+
+supervision 支援多種常見格式，包括 COCO、YOLO 與 Pascal VOC，並提供載入、切分、合併與格式互轉等功能，方便開發者準備自有訓練資料。
+
+### supervision 可以做到目標追蹤與即時計數嗎？
+
+可以。supervision 內建 ByteTrack 等多種追蹤演算法，支援跨影格多物件追蹤，並提供區域計數、特定區域進出偵測、即時儀表板與車速估算等即時分析功能。
+
+</div>
+
+<h2 id="總結supervision-值得一試嗎">總結：supervision 值得一試嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 53 字 -->
+<p>supervision 以接近 5 萬顆星標證明了「可重用電腦視覺工具」的龐大需求與其技術實力的領先地位。
+<!-- End AEO Capsule -->
+supervision 以接近 5 萬顆星標證明了「可重用電腦視覺工具」的龐大需求與其技術實力的領先地位。它以模型無關的統一介面、高效率的視覺化註釋、成熟的目標追蹤與計數能力，以及完整的資料集處理工具，把過去需要大量自幹的偵測後處理與應用開發，變成一套開源、免費、可彈性組合的標準化解決方案。對於希望快速打造車流監測、人流統計、品質檢測或智慧監控等應用的開發者與產品團隊而言，supervision 提供了一套極具價值且成熟穩定的開源選擇，絕對值得一試。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>supervision 以近 5 萬星標驗證可重用電腦視覺工具需求，模型無關、視覺化成熟、追蹤計數能力強且資料集工具完整，提供開源免費標準化方案，值得一試。
+<!-- End AEO Capsule --></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=supervision" class="badge bg-secondary text-decoration-none me-1">supervision</a>
+          
+          
+          <a href="/search/?q=Roboflow" class="badge bg-secondary text-decoration-none me-1">Roboflow</a>
+          
+          
+          <a href="/search/?q=%E9%9B%BB%E8%85%A6%E8%A6%96%E8%A6%BA" class="badge bg-secondary text-decoration-none me-1">電腦視覺</a>
+          
+          
+          <a href="/search/?q=Computer+Vision" class="badge bg-secondary text-decoration-none me-1">Computer Vision</a>
+          
+          
+          <a href="/search/?q=%E7%89%A9%E4%BB%B6%E5%81%B5%E6%B8%AC" class="badge bg-secondary text-decoration-none me-1">物件偵測</a>
+          
+          
+          <a href="/search/?q=%E7%9B%AE%E6%A8%99%E8%BF%BD%E8%B9%A4" class="badge bg-secondary text-decoration-none me-1">目標追蹤</a>
+          
+          
+          <a href="/search/?q=%E5%BD%B1%E5%83%8F%E8%99%95%E7%90%86" class="badge bg-secondary text-decoration-none me-1">影像處理</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E8%BB%9F%E9%AB%94" class="badge bg-secondary text-decoration-none me-1">開源軟體</a>
+          
+          
+          <a href="/search/?q=Python" class="badge bg-secondary text-decoration-none me-1">Python</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk&text=49%2C495+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9Asupervision+%E2%80%94+%E9%96%8B%E6%BA%90%E9%9B%BB%E8%85%A6%E8%A6%96%E8%A6%BA%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E5%BA%AB" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?49%2C495+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9Asupervision+%E2%80%94+%E9%96%8B%E6%BA%90%E9%9B%BB%E8%85%A6%E8%A6%96%E8%A6%BA%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E5%BA%AB%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-supervision-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-face-recognition-news" class="text-decoration-none">face_recognition 開源：5.7 萬星的人臉辨識入門庫</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-deep-live-cam-news" class="text-decoration-none">Deep-Live-Cam 開源：一張照片實現即時換臉</a>
+              <br><small class="text-muted">2026-10-04</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-yolov5-news" class="text-decoration-none">YOLOv5 經典回顧：58,000 星視覺 AI 入門首選</a>
+              <br><small class="text-muted">2026-10-01</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ultralytics-yolo-news-hk" class="text-decoration-none">60,000 星開源項目：Ultralytics YOLO — 物件偵測的標準框架</a>
+              <br><small class="text-muted">2026-08-15</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-opencv5-news-hk" class="text-decoration-none">9萬星開源項目：OpenCV 5.0 發布 — 電腦視覺庫二十年最大革新</a>
+              <br><small class="text-muted">2026-08-13</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

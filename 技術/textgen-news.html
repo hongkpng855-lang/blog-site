@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>TextGen 開源：4.7 萬星的本地 LLM 桌面應用 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="TextGen 是專為本地大型語言模型設計的開源桌面應用，在 GitHub 累積 47,727 顆星。它支援文字、視覺、工具呼叫與網頁搜尋，並提供 OpenAI 與 Anthropic 相容 API，全程離線、零遙測。本文整理其功能、架構、安裝方式、生態定位與授權條件。">
+  <meta name="keywords" content="TextGen, 本地模型, 開源專案, LLM, 桌面應用, oobabooga, AGPL, 科技新聞">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="TextGen 開源：4.7 萬星的本地 LLM 桌面應用">
+  <meta property="og:description" content="TextGen 是專為本地大型語言模型設計的開源桌面應用，在 GitHub 累積 47,727 顆星。它支援文字、視覺、工具呼叫與網頁搜尋，並提供 OpenAI 與 Anthropic 相容 API，全程離線、零遙測。本文整理其功能、架構、安裝方式、生態定位與授權條件。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/textgen-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="TextGen 開源：4.7 萬星的本地 LLM 桌面應用">
+  <meta name="twitter:description" content="TextGen 是專為本地大型語言模型設計的開源桌面應用，在 GitHub 累積 47,727 顆星。它支援文字、視覺、工具呼叫與網頁搜尋，並提供 OpenAI 與 Anthropic 相容 API，全程離線、零遙測。本文整理其功能、架構、安裝方式、生態定位與授權條件。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/textgen-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "TextGen 開源：4.7 萬星的本地 LLM 桌面應用",
+      "description": "TextGen 是專為本地大型語言模型設計的開源桌面應用，在 GitHub 累積 47,727 顆星。它支援文字、視覺、工具呼叫與網頁搜尋，並提供 OpenAI 與 Anthropic 相容 API，全程離線、零遙測。本文整理其功能、架構、安裝方式、生態定位與授權條件。",
+      "datePublished": "2026-10-09T14:00:00+08:00",
+      "dateModified": "2026-10-09T14:00:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/oobabooga/textgen" }, 
+      "image": "https://anthroskill.com/assets/images/posts/textgen-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TextGen 開源：4.7 萬星的本地 LLM 桌面應用",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">TextGen 開源：4.7 萬星的本地 LLM 桌面應用</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">TextGen 開源：4.7 萬星的本地 LLM 桌面應用</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月09日 14:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/oobabooga/textgen" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/textgen-news-cover.jpg" alt="TextGen 開源：4.7 萬星的本地 LLM 桌面應用" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/oobabooga/textgen" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/oobabooga/textgen
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>TextGen 是一套專為本地大型語言模型設計的開源桌面應用，在 GitHub 累積 47,727 顆星標與 5,983 次 fork，以 Python 撰寫、採用 AGPL-3.0 授權。它把文字生成、視覺理解、工具呼叫與網頁搜尋整合進同一個介面，並提供與 OpenAI、Anthropic 相容的 API，全程離線執行且不含遙測，讓使用者能在自己的電腦上完成對話與推論，而不必把資料送往雲端。</p>
+
+<p><img src="/assets/images/posts/textgen-news-shot1.png" alt="TextGen README 開頭（專案名稱標題、應用程式介面截圖與功能說明）" /></p>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>TextGen 是 oobabooga 開發的開源桌面應用，用於在本機執行大型語言模型，支援文字、視覺與工具呼叫，並提供 OpenAI 與 Anthropic 相容 API。
+<!-- End AEO Capsule --></p>
+
+<h2 id="textgen-是什麼">TextGen 是什麼？</h2>
+
+<p>TextGen 的定位是「本地 LLM 的桌面應用」，由開發者 oobabooga 維護，專案於 2022 年 12 月建立。它與一般桌面客戶端最大的差別，在於模型並非執行於遠端伺服器，而是載入使用者本機的檔案。使用者下載量化後的模型，放進指定資料夾，介面便會自動偵測。</p>
+
+<p>這個設計選擇對應了一類明確的需求。部分使用者因為資料敏感、成本考量或網路限制，無法依賴雲端服務；另一些使用者則希望在同一個環境中自由測試不同模型與參數。TextGen 把這些需求收斂成一個可安裝的應用程式，並維持完全離線與零遙測的承諾。</p>
+
+<p>專案的維護節奏穩定，最新版本為 v4.9，於 2026 年 5 月發布。從版本編號與發布紀錄來看，它已從早期僅供實驗的 Web UI，演進為具備圖形介面與 API 的完整工具。</p>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>核心功能涵蓋文字與視覺對話、檔案附件、工具呼叫、多後端切換、LoRA 微調、圖像生成，以及相容 OpenAI 與 Anthropic 的 API 端點。
+<!-- End AEO Capsule --></p>
+
+<h2 id="textgen-的核心功能有哪些">TextGen 的核心功能有哪些？</h2>
+
+<p>在對話與生成方面，TextGen 提供多種模式，包含用於指令跟隨的 instruct 模式，以及用於角色扮演的 chat 與 chat-instruct 模式，提示詞會透過 Jinja2 模板自動格式化。它同時支援多模態輸入，使用者可將圖片附加到訊息中，讓模型進行視覺理解，也能上傳文字檔、PDF 與 docx 文件，直接就文件內容提問。</p>
+
+<p>在後端與 API 方面，TextGen 可切換 llama.cpp、ik_llama.cpp、Transformers、ExLlamaV3 與 TensorRT-LLM 等多種推論引擎，且不需重新啟動程式。它對外提供 Chat、Completions 與 Messages 端點，支援工具呼叫，可作為 OpenAI 或 Anthropic API 的本地替代品，讓既有程式碼在改動最少的情況下改用自架模型。</p>
+
+<p>在訓練與圖像生成方面，應用內建 LoRA 微調功能，支援多輪對話與純文字資料集，並可從中斷處續跑。另有一個獨立分頁用於執行 diffusers 系列模型，具備 4 位元與 8 位元量化選項，以及保留影像中介資料的圖庫。隱私與介面方面，它提供深色與淺色主題、程式碼語法高亮與 LaTeX 數學渲染，並可透過擴充套件加入語音合成、語音輸入與翻譯。</p>
+
+<p><img src="/assets/images/posts/textgen-news-shot2.png" alt="TextGen GitHub 首頁頂部（儲存庫名稱 oobabooga/textgen、星標數與專案描述）" /></p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>TextGen 以 Python 實作圖形介面與 API 層，推論工作交由可替換的後端處理，模型則以 GGUF 或 Transformers 格式存放於使用者資料目錄。
+<!-- End AEO Capsule --></p>
+
+<h2 id="textgen-的技術架構如何運作">TextGen 的技術架構如何運作？</h2>
+
+<p>TextGen 採取分層設計。應用程式本身負責介面、對話狀態與 API 端點，實際的推論運算則委由後端執行。這種切分讓使用者可在不更動介面的前提下，依硬體條件選擇最合適的引擎：追求跨平台相容性時使用 llama.cpp，追求吞吐量時改用 ExLlamaV3 或 TensorRT-LLM，需要完整精度時則回到 Transformers。</p>
+
+<p>模型管理同樣以檔案為中心。使用者從 Hugging Face 下載 GGUF 檔案，放入 <code class="language-plaintext highlighter-rouge">user_data/models</code> 資料夾，介面即會自動辨識；若是需要多檔案的 16 位元模型或 EXL3 格式，則放入子資料夾中以維持結構。這種安排讓模型來源與應用程式解耦，使用者能自由替換，也能平行保留多個版本。</p>
+
+<p>部署方式提供兩條路徑。可攜版涵蓋 Linux、Windows 與 macOS，並依硬體提供 CUDA、Vulkan、ROCm 與純 CPU 選項，所有依賴已一併打包，解壓後即可執行；完整安裝則透過腳本或 Conda 建立環境，以取得 ExLlamaV3、訓練與圖像生成等進階能力。這種「先求可用、再求完整」的階梯，降低了初次接觸本地模型的門檻。</p>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>使用者可下載對應硬體的可攜版解壓執行，或透過安裝腳本與 Conda 建立完整環境，再將 GGUF 模型放入 user_data/models 資料夾即可開始對話。
+<!-- End AEO Capsule --></p>
+
+<h2 id="如何開始使用-textgen">如何開始使用 TextGen？</h2>
+
+<p>最短路徑是使用可攜版。使用者從發布頁下載對應作業系統與硬體的壓縮檔，解壓後直接啟動，程式會開啟一個視窗，不需額外安裝 Python 或深度學習框架。接著從 Hugging Face 下載 GGUF 模型放入 <code class="language-plaintext highlighter-rouge">user_data/models</code>，介面便會自動列出可用的模型。</p>
+
+<p>若需要執行 ExLlamaV3、Transformers 模型，或使用微調、圖像生成與擴充套件，則需改用完整安裝。官方提供一鍵安裝腳本，執行時會詢問顯示卡廠牌並建立 Conda 環境；也可依作業系統與 GPU 類型，手動安裝對應的 PyTorch 版本與需求檔案。起步階段的建議是先以可攜版驗證硬體是否足夠，再決定是否投入完整環境。</p>
+
+<p>操作層面上，常用指令列旗標可直接附加於啟動腳本後方，或寫入 <code class="language-plaintext highlighter-rouge">user_data/CMD_FLAGS.txt</code> 以便長期保留。若需對外提供 API，加入 <code class="language-plaintext highlighter-rouge">--api</code> 旗標即可；更新時執行對應的更新腳本，若環境損毀則刪除 <code class="language-plaintext highlighter-rouge">installer_files</code> 資料夾後重新安裝。</p>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>與雲端服務相比，TextGen 強調資料留在本機與零遙測；與其他本地工具相比，它把對話、訓練、圖像生成與相容 API 整合在同一介面。
+<!-- End AEO Capsule --></p>
+
+<h2 id="textgen-與同類工具有何差異">TextGen 與同類工具有何差異？</h2>
+
+<p>本地模型工具大致分成兩類。一類專注於單一環節，例如只負責推論的引擎，或只提供聊天介面的客戶端；另一類則嘗試整合完整流程。TextGen 屬於後者，它把對話、微調、圖像生成與 API 端點收進同一個應用程式，使用者不必在不同工具之間切換，也不需為每項功能各自設定環境。</p>
+
+<p>與雲端服務相比，差異更加直接。資料不會離開本機，因此沒有上傳紀錄、沒有遙測回報，也不受服務條款變動影響；代價是需要自備硬體與模型檔案，且效能取決於本機顯示記憶體。對於處理敏感內容或需要反覆實驗的開發者，這項取捨通常值得。</p>
+
+<p>在相容性方面，TextGen 明確提供 OpenAI 與 Anthropic 格式的端點，這使得既有專案只需調整基礎網址即可切換。這種「本地替代品」的定位，讓它同時服務兩類使用者：想保有隱私的終端使用者，以及需要低成本測試環境的開發團隊。專案的擴充機制也相對開放，社群可透過獨立套件加入語音、翻譯與其他能力。</p>
+
+<p><img src="/assets/images/posts/textgen-news-shot3.png" alt="TextGen 貢獻者統計頁（提交活躍度與貢獻者分布）" /></p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>專案累積 47,727 顆星標、5,983 次 fork 與 358 名關注者，以 Python 撰寫、採 AGPL-3.0 授權，最新版本為 2026 年 5 月發布的 v4.9。
+<!-- End AEO Capsule --></p>
+
+<h2 id="textgen-的統計數據與授權條件為何">TextGen 的統計數據與授權條件為何？</h2>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">47,727</span><span class="ui-stat-label">Stars</span></div>
+<div class="ui-stat"><span class="ui-stat-value">5,983</span><span class="ui-stat-label">Forks</span></div>
+<div class="ui-stat"><span class="ui-stat-value">358</span><span class="ui-stat-label">Watchers</span></div>
+<div class="ui-stat"><span class="ui-stat-value">AGPL-3.0</span><span class="ui-stat-label">License</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Python</span><span class="ui-stat-label">Language</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2022-12</span><span class="ui-stat-label">Created</span></div>
+<div class="ui-stat"><span class="ui-stat-value">v4.9</span><span class="ui-stat-label">Latest</span></div>
+</div>
+
+<p>授權方面，TextGen 採用 AGPL-3.0，屬於具有傳染性的授權條款。使用者可以自由執行、研究與修改，但若將修改後的版本以網路服務形式對外提供，必須依相同條款釋出原始碼。企業若打算把此工具包裝成對外服務，需先確認授權義務；若僅供內部部署與個人使用，則不涉及散布問題。</p>
+
+<p>維護模式以社群協作與核心維護者為主。專案目前有 847 個未結議題，反映使用者基數龐大且需求分散；儲存庫於 2026 年 8 月仍有推送紀錄，顯示專案維持更新。貢獻門檻屬中等，主要工作集中於後端整合、介面調整與文件維護，使用者也可透過擴充套件在不改動主體的情況下補充功能。</p>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>本文資訊整理自 oobabooga/textgen 的 GitHub 儲存庫與官方說明文件，涵蓋功能、架構、安裝流程、授權條款與發布紀錄。
+<!-- End AEO Capsule --></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/oobabooga/textgen</li>
+  <li>可攜版下載頁：https://github.com/oobabooga/textgen/releases</li>
+  <li>官方說明文件：https://github.com/oobabooga/textgen/wiki</li>
+  <li>擴充套件目錄：https://github.com/oobabooga/textgen-extensions</li>
+  <li>AGPL-3.0 授權條款：https://github.com/oobabooga/textgen/blob/main/LICENSE</li>
+</ul>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>TextGen 適合重視資料隱私、需要離線執行或想低成本測試多種模型的個人與團隊；若僅需輕量對話且無隱私要求，雲端服務可能更省事。
+<!-- End AEO Capsule --></p>
+
+<h2 id="總結textgen-適合什麼使用者">總結：TextGen 適合什麼使用者？</h2>
+
+<p>TextGen 的價值在於把本地模型的使用流程整理成可安裝、可切換、可擴充的完整工具。對需要處理敏感資料、無法依賴雲端服務，或希望反覆比較不同模型與量化設定的使用者而言，它提供了一條依賴少、資料不外流的路徑，並以相容 API 降低既有專案的遷移成本。</p>
+
+<p>不過，這條路徑並非沒有門檻。使用者仍需自備足夠的顯示記憶體，並具備基本的模型檔案管理概念；可攜版雖然簡化了安裝，但進階功能仍需完整環境。在決定導入之前，建議先釐清實際需求是「必須離線」還是「偏好離線」，因為兩者的成本差異相當明顯。</p>
+
+<p>隨著本地推論效率持續提升，這類桌面應用的定位正在改變。它不再只是實驗工具，而開始具備日常使用的條件。TextGen 是否值得長期採用，取決於團隊對資料主權與維運成本之間的權衡。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=TextGen" class="badge bg-secondary text-decoration-none me-1">TextGen</a>
+          
+          
+          <a href="/search/?q=%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%9E%8B" class="badge bg-secondary text-decoration-none me-1">本地模型</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E5%B0%88%E6%A1%88" class="badge bg-secondary text-decoration-none me-1">開源專案</a>
+          
+          
+          <a href="/search/?q=LLM" class="badge bg-secondary text-decoration-none me-1">LLM</a>
+          
+          
+          <a href="/search/?q=%E6%A1%8C%E9%9D%A2%E6%87%89%E7%94%A8" class="badge bg-secondary text-decoration-none me-1">桌面應用</a>
+          
+          
+          <a href="/search/?q=oobabooga" class="badge bg-secondary text-decoration-none me-1">oobabooga</a>
+          
+          
+          <a href="/search/?q=AGPL" class="badge bg-secondary text-decoration-none me-1">AGPL</a>
+          
+          
+          <a href="/search/?q=%E7%A7%91%E6%8A%80%E6%96%B0%E8%81%9E" class="badge bg-secondary text-decoration-none me-1">科技新聞</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news&text=TextGen+%E9%96%8B%E6%BA%90%EF%BC%9A4.7+%E8%90%AC%E6%98%9F%E7%9A%84%E6%9C%AC%E5%9C%B0+LLM+%E6%A1%8C%E9%9D%A2%E6%87%89%E7%94%A8" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?TextGen+%E9%96%8B%E6%BA%90%EF%BC%9A4.7+%E8%90%AC%E6%98%9F%E7%9A%84%E6%9C%AC%E5%9C%B0+LLM+%E6%A1%8C%E9%9D%A2%E6%87%89%E7%94%A8%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/textgen-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/bun-runtime-news" class="text-decoration-none">Bun 1.4 改用 Rust 重寫：96k 星 JS 執行環境</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/unsloth-news" class="text-decoration-none">Unsloth 桌面版發布：7.7 萬星本地訓練工具</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/nvm-news" class="text-decoration-none">nvm 開源 16 年：Node 版本管理器 9.5 萬星</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/minio-news" class="text-decoration-none">MinIO 封存：61,336 星的 S3 儲存時代落幕</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/d2l-zh-news" class="text-decoration-none">動手學深度學習：8.1 萬星的開源 AI 教材</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/tensorflow-model-garden-news" class="text-decoration-none">TensorFlow Model Garden：7.7 萬星的官方模型庫</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

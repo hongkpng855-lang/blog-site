@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1a2744"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8D48B"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Grid lines -->
+  <g opacity="0.06">
+    <line x1="0" y1="80" x2="512" y2="80" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="160" x2="512" y2="160" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="512" y2="240" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="320" x2="512" y2="320" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="512" y2="400" stroke="#fff" stroke-width="0.5"/>
+    <line x1="128" y1="0" x2="128" y2="512" stroke="#fff" stroke-width="0.5"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="#fff" stroke-width="0.5"/>
+    <line x1="384" y1="0" x2="384" y2="512" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Chart background -->
+  <rect x="35" y="110" width="442" height="200" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+
+  <!-- Chart: multiple trend lines -->
+  <!-- Tech/AI line - strong uptrend -->
+  <polyline points="55,280 120,260 200,240 280,200 340,170 400,140 442,125" fill="none" stroke="url(#cyan)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Consumer line - moderate uptrend -->
+  <polyline points="55,285 120,275 200,270 280,255 340,240 400,225 442,218" fill="none" stroke="url(#green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- High dividend line - flat -->
+  <polyline points="55,240 120,242 200,245 280,243 340,248 400,250 442,252" fill="none" stroke="url(#gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Property line - slight upturn -->
+  <polyline points="55,295 120,298 200,300 280,295 340,285 400,275 442,270" fill="none" stroke="url(#red)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4,3"/>
+
+  <!-- Chart labels -->
+  <text x="55" y="100" fill="url(#cyan)" font-size="9" font-family="system-ui" opacity="0.8">AI/科技</text>
+  <text x="200" y="100" fill="url(#green)" font-size="9" font-family="system-ui" opacity="0.8">消費</text>
+  <text x="340" y="100" fill="url(#gold)" font-size="9" font-family="system-ui" opacity="0.8">高息</text>
+  <text x="400" y="100" fill="url(#red)" font-size="9" font-family="system-ui" opacity="0.8">地產</text>
+
+  <!-- Y-axis labels -->
+  <text x="30" y="115" fill="rgba(255,255,255,0.3)" font-size="8" font-family="system-ui" text-anchor="end">高</text>
+  <text x="30" y="305" fill="rgba(255,255,255,0.3)" font-size="8" font-family="system-ui" text-anchor="end">低</text>
+  <text x="240" y="325" fill="rgba(255,255,255,0.2)" font-size="8" font-family="system-ui" text-anchor="middle">H1 2026</text>
+
+  <!-- Sector rotation cycle diagram - bottom right -->
+  <text x="256" y="370" fill="rgba(255,255,255,0.5)" font-size="11" font-family="system-ui" text-anchor="middle" font-weight="600">板塊輪動週期</text>
+
+  <!-- Cycle arrows -->
+  <g transform="translate(256, 440)" filter="url(#shadow)">
+    <!-- Center circle -->
+    <circle cx="0" cy="0" r="18" fill="rgba(201,168,76,0.15)" stroke="url(#gold)" stroke-width="1.5"/>
+    <text x="0" y="4" fill="url(#gold)" font-size="10" font-family="system-ui" text-anchor="middle" font-weight="600">2026</text>
+
+    <!-- Outer ring dots -->
+    <circle cx="0" cy="-52" r="10" fill="rgba(6,182,212,0.2)" stroke="url(#cyan)" stroke-width="1.5"/>
+    <text x="0" y="-48" fill="url(#cyan)" font-size="7" font-family="system-ui" text-anchor="middle">AI</text>
+
+    <circle cx="52" cy="0" r="10" fill="rgba(34,197,94,0.2)" stroke="url(#green)" stroke-width="1.5"/>
+    <text x="52" y="4" fill="url(#green)" font-size="7" font-family="system-ui" text-anchor="middle">消費</text>
+
+    <circle cx="0" cy="52" r="10" fill="rgba(201,168,76,0.2)" stroke="url(#gold)" stroke-width="1.5"/>
+    <text x="0" y="56" fill="url(#gold)" font-size="7" font-family="system-ui" text-anchor="middle">高息</text>
+
+    <circle cx="-52" cy="0" r="10" fill="rgba(168,85,247,0.2)" stroke="url(#purple)" stroke-width="1.5"/>
+    <text x="-52" y="4" fill="url(#purple)" font-size="7" font-family="system-ui" text-anchor="middle">金融</text>
+
+    <!-- Arrows between dots -->
+    <path d="M 10,-51 A 60,60 0 0,1 51,-10" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1" marker-end="url(#arrow)"/>
+    <path d="M 51,10 A 60,60 0 0,1 10,51" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <path d="M -10,51 A 60,60 0 0,1 -51,10" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <path d="M -51,-10 A 60,60 0 0,1 -10,-51" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+  </g>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(255,255,255,0.15)"/>
+    </marker>
+  </defs>
+
+  <!-- Stats bar at bottom -->
+  <g transform="translate(35, 485)">
+    <text x="0" y="0" fill="rgba(255,255,255,0.4)" font-size="8" font-family="system-ui">港股2026上半年</text>
+    <text x="130" y="0" fill="url(#cyan)" font-size="8" font-family="system-ui" font-weight="600">AI +35-55%</text>
+    <text x="210" y="0" fill="url(#green)" font-size="8" font-family="system-ui" font-weight="600">消費 +8-15%</text>
+    <text x="290" y="0" fill="url(#gold)" font-size="8" font-family="system-ui" font-weight="600">高息 +3-8%</text>
+    <text x="360" y="0" fill="url(#red)" font-size="8" font-family="system-ui" font-weight="600">地產 -2~+5%</text>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="55" fill="#fff" font-size="18" font-family="system-ui" text-anchor="middle" font-weight="700" filter="url(#glow)">2026 下半年港股板塊輪動</text>
+  <text x="256" y="78" fill="rgba(255,255,255,0.5)" font-size="11" font-family="system-ui" text-anchor="middle">減息週期最新部署策略</text>
+</svg>

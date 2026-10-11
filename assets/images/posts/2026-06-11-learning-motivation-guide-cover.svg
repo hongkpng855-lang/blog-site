@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4B96A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#34D399"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6"/>
+      <stop offset="100%" style="stop-color:#A78BFA"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Decorative grid dots -->
+  <g opacity="0.06">
+    <pattern id="dotGrid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="white"/>
+    </pattern>
+    <rect width="800" height="450" fill="url(#dotGrid)"/>
+  </g>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#gold)"/>
+
+  <!-- Title -->
+  <text x="40" y="62" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="url(#gold)" letter-spacing="1">
+    告別三分鐘熱度
+  </text>
+  <text x="40" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="15" fill="#94A3B8" letter-spacing="0.5">
+    心理學動機科學 · 習慣系統 · 環境設計 · 30 日挑戰
+  </text>
+
+  <!-- ====== Card 1: Motivation Science ====== -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="118" width="230" height="130" rx="14" fill="#1E3A5F" opacity="0.95"/>
+    <rect x="30" y="118" width="230" height="130" rx="14" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <!-- Brain icon -->
+    <circle cx="82" cy="178" r="30" fill="none" stroke="url(#gold)" stroke-width="2.5" opacity="0.5"/>
+    <path d="M 65 168 Q 72 160 82 164 Q 92 160 99 168" fill="none" stroke="url(#gold)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 63 185 Q 72 196 82 194 Q 92 196 101 185" fill="none" stroke="url(#gold)" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 70 176 Q 75 180 82 178 Q 89 180 94 176" fill="none" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+    <!-- 3 elements -->
+    <text x="82" y="218" text-anchor="middle" font-family="system-ui" font-size="9" fill="#FB923C" opacity="0.7">動機科學</text>
+    <text x="155" y="148" font-family="system-ui" font-size="11" font-weight="600" fill="#F1F5F9">Self-Determination</text>
+    <text x="155" y="166" font-family="system-ui" font-size="9.5" fill="#94A3B8">自主性 · 勝任感 · 聯繫感</text>
+    <text x="155" y="186" font-family="system-ui" font-size="9.5" fill="#94A3B8">拖延 = 情緒調節問題</text>
+    <text x="155" y="206" font-family="system-ui" font-size="9.5" fill="#94A3B8">唔係懶，係大腦保護機制</text>
+  </g>
+
+  <!-- ====== Card 2: Two-Minute Rule ====== -->
+  <g filter="url(#shadow)">
+    <rect x="285" y="118" width="230" height="130" rx="14" fill="#1E3A5F" opacity="0.95"/>
+    <rect x="285" y="118" width="230" height="130" rx="14" fill="none" stroke="#3B82F6" stroke-width="1" opacity="0.4"/>
+    <!-- Timer icon -->
+    <circle cx="340" cy="173" r="28" fill="none" stroke="#60A5FA" stroke-width="2.5" opacity="0.4"/>
+    <text x="340" y="178" text-anchor="middle" font-family="system-ui" font-size="18" font-weight="800" fill="#60A5FA">2</text>
+    <text x="340" y="192" text-anchor="middle" font-family="system-ui" font-size="9" fill="#60A5FA" opacity="0.6">分鐘</text>
+    <text x="385" y="148" font-family="system-ui" font-size="11" font-weight="600" fill="#F1F5F9">兩分鐘法則</text>
+    <text x="385" y="166" font-family="system-ui" font-size="9.5" fill="#94A3B8">開始永遠最難</text>
+    <text x="385" y="186" font-family="system-ui" font-size="9.5" fill="#94A3B8">打開本書 = 成功一半</text>
+    <text x="385" y="206" font-family="system-ui" font-size="9.5" fill="#94A3B8">郁咗先有動力</text>
+  </g>
+
+  <!-- ====== Card 3: Environment Design ====== -->
+  <g filter="url(#shadow)">
+    <rect x="540" y="118" width="230" height="130" rx="14" fill="#1E3A5F" opacity="0.95"/>
+    <rect x="540" y="118" width="230" height="130" rx="14" fill="none" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+    <!-- Gear / environment icon -->
+    <rect x="592" y="148" width="32" height="32" rx="6" fill="none" stroke="#34D399" stroke-width="2" opacity="0.5"/>
+    <circle cx="608" cy="164" r="8" fill="none" stroke="#34D399" stroke-width="2" opacity="0.5"/>
+    <text x="608" y="210" text-anchor="middle" font-family="system-ui" font-size="9" fill="#10B981" opacity="0.7">環境設計</text>
+    <text x="640" y="148" font-family="system-ui" font-size="11" font-weight="600" fill="#F1F5F9">環境設計</text>
+    <text x="640" y="166" font-family="system-ui" font-size="9.5" fill="#94A3B8">好習慣阻力要細</text>
+    <text x="640" y="186" font-family="system-ui" font-size="9.5" fill="#94A3B8">壞習慣阻力要大</text>
+    <text x="640" y="206" font-family="system-ui" font-size="9.5" fill="#94A3B8">手機放第二間房</text>
+  </g>
+
+  <!-- ====== Bottom section: 30-Day Challenge ====== -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="268" width="740" height="80" rx="14" fill="#1E3A5F" opacity="0.9"/>
+    <rect x="30" y="268" width="740" height="80" rx="14" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.3"/>
+
+    <!-- Week blocks -->
+    <text x="55" y="298" font-family="system-ui" font-size="12" font-weight="700" fill="#F1F5F9">30 日學習動機系統建立挑戰</text>
+
+    <!-- Week 1 -->
+    <rect x="55" y="308" width="157" height="28" rx="8" fill="#FB923C" opacity="0.2"/>
+    <rect x="55" y="308" width="157" height="28" rx="8" fill="none" stroke="#FB923C" stroke-width="1.2"/>
+    <text x="133" y="327" text-anchor="middle" font-family="system-ui" font-size="10" fill="#FB923C">Week 1 搵出你嘅 Why</text>
+
+    <text x="222" y="327" font-family="system-ui" font-size="12" fill="#4B5563">→</text>
+
+    <!-- Week 2 -->
+    <rect x="240" y="308" width="157" height="28" rx="8" fill="#3B82F6" opacity="0.2"/>
+    <text x="318" y="327" text-anchor="middle" font-family="system-ui" font-size="10" fill="#60A5FA">Week 2 建立習慣系統</text>
+
+    <text x="407" y="327" font-family="system-ui" font-size="12" fill="#4B5563">→</text>
+
+    <!-- Week 3 -->
+    <rect x="425" y="308" width="157" height="28" rx="8" fill="#F59E0B" opacity="0.2"/>
+    <text x="503" y="327" text-anchor="middle" font-family="system-ui" font-size="10" fill="#FBBF24">Week 3 處理阻力</text>
+
+    <text x="592" y="327" font-family="system-ui" font-size="12" fill="#4B5563">→</text>
+
+    <!-- Week 4 -->
+    <rect x="610" y="308" width="145" height="28" rx="8" fill="#10B981" opacity="0.2"/>
+    <text x="682" y="327" text-anchor="middle" font-family="system-ui" font-size="10" fill="#34D399">Week 4 鞏固擴展</text>
+  </g>
+
+  <!-- Bottom CTA badge -->
+  <g>
+    <rect x="30" y="365" width="740" height="36" rx="18" fill="url(#gold)" opacity="0.15"/>
+    <text x="400" y="390" text-anchor="middle" font-family="system-ui" font-size="13" font-weight="700" fill="#FB923C">
+      🚀 告別三分鐘熱度 · 用心理學同行為設計，建立持久學習動力
+    </text>
+  </g>
+
+  <!-- Decorative elements -->
+  <circle cx="760" cy="60" r="25" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.1"/>
+  <circle cx="770" cy="50" r="8" fill="#FB923C" opacity="0.08"/>
+</svg>

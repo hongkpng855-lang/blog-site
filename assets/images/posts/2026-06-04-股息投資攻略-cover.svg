@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f6d365"/>
+      <stop offset="100%" style="stop-color:#fda085"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ecc71"/>
+      <stop offset="100%" style="stop-color:#27ae60"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="80" r="120" fill="#0f3460" opacity="0.4"/>
+  <circle cx="100" cy="380" r="80" fill="#16213e" opacity="0.3"/>
+
+  <!-- Grid lines -->
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <line x1="50" y1="350" x2="750" y2="350"/>
+    <line x1="50" y1="370" x2="750" y2="370"/>
+    <line x1="50" y1="390" x2="750" y2="390"/>
+    <line x1="50" y1="410" x2="750" y2="410"/>
+  </g>
+
+  <!-- Rising trend line -->
+  <polyline points="100,350 200,320 300,280 400,230 500,180 600,140 700,100"
+    fill="none" stroke="url(#green)" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Trend area fill -->
+  <polygon points="100,350 200,320 300,280 400,230 500,180 600,140 700,100 700,350"
+    fill="url(#green)" opacity="0.1"/>
+
+  <!-- Dollar coins falling -->
+  <g fill="url(#gold)" opacity="0.8">
+    <circle cx="200" cy="150" r="12"/>
+    <text x="195" y="155" font-size="14" fill="#1a1a2e" font-weight="bold">$</text>
+    <circle cx="350" cy="100" r="10"/>
+    <text x="346" y="105" font-size="12" fill="#1a1a2e" font-weight="bold">$</text>
+    <circle cx="500" cy="80" r="14"/>
+    <text x="494" y="86" font-size="16" fill="#1a1a2e" font-weight="bold">$</text>
+    <circle cx="620" cy="60" r="11"/>
+    <text x="615" y="65" font-size="13" fill="#1a1a2e" font-weight="bold">$</text>
+    <circle cx="150" cy="80" r="8"/>
+    <circle cx="450" cy="50" r="9"/>
+  </g>
+
+  <!-- Dividend calendar markers -->
+  <g fill="none" stroke="#f6d365" stroke-width="1.5" opacity="0.6">
+    <rect x="80" y="280" width="30" height="30" rx="3"/>
+    <rect x="250" y="240" width="30" height="30" rx="3"/>
+    <rect x="420" y="190" width="30" height="30" rx="3"/>
+    <rect x="590" y="140" width="30" height="30" rx="3"/>
+  </g>
+
+  <!-- Check marks on calendar -->
+  <g stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.8">
+    <polyline points="88,295 93,300 102,290"/>
+    <polyline points="258,255 263,260 272,250"/>
+    <polyline points="428,205 433,210 442,200"/>
+    <polyline points="598,155 603,160 612,150"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="400" y="200" text-anchor="middle" font-family="Arial, sans-serif"
+    font-size="38" font-weight="bold" fill="#ffffff" letter-spacing="2">
+    股息投資完全攻略
+  </text>
+
+  <!-- Subtitle -->
+  <text x="400" y="245" text-anchor="middle" font-family="Arial, sans-serif"
+    font-size="20" fill="#f6d365" letter-spacing="1">
+    打造穩定現金流的股息成長組合
+  </text>
+
+  <!-- Bottom badge -->
+  <rect x="250" y="280" width="300" height="40" rx="20" fill="#2ecc71" opacity="0.15" stroke="#2ecc71" stroke-width="1"/>
+  <text x="400" y="306" text-anchor="middle" font-family="Arial, sans-serif"
+    font-size="14" fill="#2ecc71">📊 被動收入 ｜ 現金流 ｜ 長期複利</text>
+
+  <!-- Year -->
+  <text x="400" y="410" text-anchor="middle" font-family="Arial, sans-serif"
+    font-size="14" fill="#ffffff" opacity="0.3">2026 · Sun ny 的部落格</text>
+
+  <!-- Decorative bottom line -->
+  <line x1="280" y1="425" x2="520" y2="425" stroke="#f6d365" stroke-width="1" opacity="0.3"/>
+</svg>

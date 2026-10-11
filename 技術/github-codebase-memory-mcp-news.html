@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="codebase-memory-mcp 是 DeusData 維護的開源程式碼智能引擎，GitHub 累積 45,834 顆星標。它以純 C 實作，透過 MCP 為 AI 編碼代理建立知識圖譜，官方實測 Linux 核心完整索引僅需 3 分鐘，並稱 5 次結構查詢可省下約 99.2% 的 token。">
+  <meta name="keywords" content="MCP, 程式碼智能, 知識圖譜, AI 代理, tree-sitter, 開源, GitHub, C">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘">
+  <meta property="og:description" content="codebase-memory-mcp 是 DeusData 維護的開源程式碼智能引擎，GitHub 累積 45,834 顆星標。它以純 C 實作，透過 MCP 為 AI 編碼代理建立知識圖譜，官方實測 Linux 核心完整索引僅需 3 分鐘，並稱 5 次結構查詢可省下約 99.2% 的 token。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-codebase-memory-mcp-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘">
+  <meta name="twitter:description" content="codebase-memory-mcp 是 DeusData 維護的開源程式碼智能引擎，GitHub 累積 45,834 顆星標。它以純 C 實作，透過 MCP 為 AI 編碼代理建立知識圖譜，官方實測 Linux 核心完整索引僅需 3 分鐘，並稱 5 次結構查詢可省下約 99.2% 的 token。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-codebase-memory-mcp-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘",
+      "description": "codebase-memory-mcp 是 DeusData 維護的開源程式碼智能引擎，GitHub 累積 45,834 顆星標。它以純 C 實作，透過 MCP 為 AI 編碼代理建立知識圖譜，官方實測 Linux 核心完整索引僅需 3 分鐘，並稱 5 次結構查詢可省下約 99.2% 的 token。",
+      "datePublished": "2026-10-06T10:00:01+08:00",
+      "dateModified": "2026-10-06T10:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/DeusData/codebase-memory-mcp" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-codebase-memory-mcp-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "使用 codebase-memory-mcp 需要 API 金鑰嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不需要。工具本身不內建語言模型，語意搜尋所用的嵌入模型已隨執行檔打包，理解問題的工作由既有的 MCP 客戶端負責，因此無需額外金鑰、Ollama 或 Docker。" }
+        },
+        {
+          "@type": "Question",
+          "name": "它支援哪些程式語言與代理？",
+          "acceptedAnswer": { "@type": "Answer", "text": "官方標示可解析 162 種語言，語法檔案直接編譯進執行檔；Hybrid LSP 另針對 Python、TypeScript、Go、Rust、Java、C# 等提供語意型別解析。安裝程式支援 45 種自動或條件式的代理客戶端介面。" }
+        },
+        {
+          "@type": "Question",
+          "name": "它與向量資料庫檢索有什麼不同？",
+          "acceptedAnswer": { "@type": "Answer", "text": "向量檢索回傳的是相關程式碼片段，圖查詢回傳的是精確關係，例如呼叫鏈與影響範圍。兩者互補，官方亦將自身定位為既有檢索方案的補強層，而非替代品。" }
+        },
+        {
+          "@type": "Question",
+          "name": "團隊可以共享索引結果嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。索引時開啟持久化選項會產生 .codebase-memory 目錄下的單一 zstd 壓縮檔，提交後同事首次執行即可匯入。由於每次索引都會改寫該檔案，建議依發布或里程碑控制提交頻率，避免版控歷史膨脹。" }
+        },
+        {
+          "@type": "Question",
+          "name": "索引會上傳到雲端嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不會。索引與查詢全部在本機執行，資料存放於本機快取目錄，工具不收集遙測，也不主動發出網路請求。診斷記錄須由使用者以環境變數主動開啟。" }
+        },
+        {
+          "@type": "Question",
+          "name": "如何更新到新版本？",
+          "acceptedAnswer": { "@type": "Answer", "text": "更新由安裝腳本執行，而非執行檔本身。在 macOS 與 Linux 上重新執行 install.sh 即為更新，Windows 則重跑 install.ps1；若透過 npm 或 pip 安裝，改用對應的套件管理員指令升級。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月06日 10:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 5 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-codebase-memory-mcp-news-cover.jpg" alt="codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/DeusData/codebase-memory-mcp" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/DeusData/codebase-memory-mcp
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>codebase-memory-mcp 是 DeusData 維護的開源程式碼智能引擎，在 GitHub 累積 45,834 顆星標與 3,771 次複製。它以純 C 撰寫，透過 Model Context Protocol（MCP）為 AI 編碼代理建立持久化的知識圖譜，官方實測為 Linux 核心（2,800 萬行程式碼、7.5 萬個檔案）建立完整索引僅需 3 分鐘，並宣稱能把 5 次結構查詢的 token 消耗由約 41.2 萬降至約 3,400。專案自 2026 年 2 月公開，最新版本為 2026 年 9 月 15 日發布的 v0.11.0。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>codebase-memory-mcp 是純 C 實作的開源程式碼智能引擎，為 AI 編碼代理建立知識圖譜。Linux 核心索引約 3 分鐘，結構查詢省約 99.2% token。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-codebase-memory-mcp-news-shot1.png" alt="codebase-memory-mcp 的 GitHub 儲存庫 README 開頭，顯示專案名稱、MIT 授權標記，以及「索引平均儲存庫只需毫秒、Linux 核心 3 分鐘」的定位說明，並列出 tree-sitter 語法解析與 162 種語言支援" /></p>
+
+<h2 id="codebase-memory-mcp-是什麼">codebase-memory-mcp 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>codebase-memory-mcp 是不內建語言模型的結構分析後端，負責建立並查詢程式碼知識圖譜；問題翻譯交給既有 MCP 客戶端，因此不需要額外 API 金鑰。
+<!-- End AEO Capsule --></p>
+
+<p>依照官方說明，這個專案是一套針對 AI 編碼代理設計的程式碼智能引擎，也是目前同類工具中索引速度與 token 效率較突出的實作。它把來源程式碼解析為函式、類別、呼叫鏈、HTTP 路由與跨服務關聯等節點與邊，集中存放在本機的 SQLite 資料庫，讓代理以圖查詢取代逐一讀檔。</p>
+
+<p>專案的關鍵設計取向，是把「理解問題」與「查詢圖譜」拆開。多數程式碼圖工具會在工具內部嵌入語言模型，將自然語言翻譯成圖查詢，代價是額外的 API 金鑰、額外費用與另一個需要設定的模型。codebase-memory-mcp 選擇不做這件事，因為在 MCP 架構下，正在對話的那個代理本身就是查詢翻譯器。</p>
+
+<p>專案由 DeusData 維護，2026 年 2 月 24 日建立，最新發布版本為 v0.11.0。其設計與基準測試方法整理在 arXiv 論文 2603.27277，相關的安裝檔與文件則公開於 deusdata.github.io/codebase-memory-mcp。截至目前已有 169 位貢獻者、3,436 次提交，並在 GitHub 累積 45,834 顆星標與 638 個待處理議題。</p>
+
+<p><img src="/assets/images/posts/github-codebase-memory-mcp-news-shot2.png" alt="codebase-memory-mcp 的 GitHub 儲存庫首頁頂部，顯示 repo 名稱 DeusData/codebase-memory-mcp、Public 標記、45.8k 星標、3.8k 複製數，以及 About 欄位中的專案定位描述" /></p>
+
+<h2 id="codebase-memory-mcp-的索引速度與效能表現如何">codebase-memory-mcp 的索引速度與效能表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>官方以 Apple M3 Pro 實測，Linux 核心完整索引 3 分鐘，產出 481 萬節點與 772 萬條邊；Django 全索引約 6 秒，Cypher 查詢低於 1 毫秒。
+<!-- End AEO Capsule --></p>
+
+<p>在官方公布於 Apple M3 Pro 的基準測試中，Linux 核心的完整索引耗時 3 分鐘，處理範圍為 2,800 萬行程式碼與 7.5 萬個檔案，產出 481 萬個節點與 772 萬條邊；若改用快速索引模式，同一份程式碼可在 1 分 12 秒內完成，節點數為 188 萬。中小型專案的速度差距更明顯，Django 的完整索引約 6 秒，即產生 4.9 萬個節點與 19.6 萬條邊。</p>
+
+<p>查詢端的延遲同樣壓在毫秒等級。官方數據顯示，Cypher 關係遍歷低於 1 毫秒，名稱正規表達式搜尋低於 10 毫秒，深度為 5 的呼叫路徑追蹤同樣低於 10 毫秒，而需要掃描全圖的死碼偵測約需 150 毫秒。這些數字反映的是資料庫層的查詢成本，而非代理端往返對話的總時間。</p>
+
+<p>達成這種速度的關鍵，是把索引流程設計為記憶體優先。專案以 LZ4 高壓縮讀取、記憶體內 SQLite 與單次落盤收尾，並在索引完成後把記憶體釋放回作業系統。對需要在 CI 環境或筆記型電腦上反覆重建圖譜的團隊而言，這種取捨直接決定了工具能否融入日常工作流程。</p>
+
+<h2 id="codebase-memory-mcp-如何降低-ai-代理的-token-消耗">codebase-memory-mcp 如何降低 AI 代理的 token 消耗？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>官方以 5 次結構查詢對照，透過圖查詢消耗約 3,400 個 token，改用逐檔 grep 探索則需約 41.2 萬個，減幅 99.2%，原因是單次圖查詢可取代數十輪讀檔。
+<!-- End AEO Capsule --></p>
+
+<p>專案在說明文件中以 5 次結構查詢作為對照：若透過圖查詢完成，累計消耗約 3,400 個 token；若改用逐檔 grep 與讀檔的傳統做法，同一組問題需要約 41.2 萬個 token，換算下來減少約 99.2%。這個差距並非來自摘要或壓縮技巧，而是查詢方式的根本差異。</p>
+
+<p>傳統代理要回答「誰呼叫了 ProcessOrder」，通常必須先搜尋檔名、再開啟多個候選檔案、逐段確認呼叫位置，過程中大量與問題無關的程式碼一併進入上下文。codebase-memory-mcp 則把答案預先計算成圖上的邊，代理只需一次查詢即可取得呼叫鏈，前後投入的內容量因此差距懸殊。</p>
+
+<p>這項特性對長時段、多輪次的代理工作尤其關鍵。上下文預算往往是最先耗盡的資源，減少無效讀檔不僅省下費用，也讓代理在單次工作階段內能處理更複雜的任務。官方強調，這個數字必須以相同輸入重現才具意義，因此文件同時提供量測方法供團隊在自身工作負載上驗證。</p>
+
+<h2 id="codebase-memory-mcp-的技術架構有什麼特色">codebase-memory-mcp 的技術架構有什麼特色？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>以純 C 實作，內建 158 套 tree-sitter 語法與 Hybrid LSP 型別推斷，採記憶體優先索引；對外提供 17 個 MCP 工具，並內建 3D 圖譜視覺化介面。
+<!-- End AEO Capsule --></p>
+
+<p>解析層採用 tree-sitter 抽象語法樹分析，把 158 套語法檔案直接編譯進執行檔，官方標示可解析 162 種語言，因此不需要額外安裝解析器。在此之上，專案以 Hybrid LSP 補足語意型別解析，涵蓋 Python、TypeScript 與其 JSX 變體、PHP、C#、Go、C、C++、Java、Kotlin、Rust 與 Perl，處理參數綁定、回傳型別推斷、泛型替換與方法多載等情形。</p>
+
+<p>圖譜層把常見語言概念轉為節點與邊，包括呼叫關係的 CALLS、跨服務的 HTTP_CALLS 與 ASYNC_CALLS、事件通道的 EMITS 與 LISTENS_ON、資料流的 DATA_FLOWS，以及以 MinHash 相似度計算的 SIMILAR_TO。專案亦支援跨儲存庫的 CROSS 系列邊，讓多個 repo 索引在同一儲存區時可以一併查詢與視覺化。</p>
+
+<p>對外介面共有 17 個 MCP 工具，涵蓋架構總覽、呼叫路徑追蹤、影響分析、索引覆蓋檢查、Cypher 查詢、死碼偵測與架構決策紀錄管理。搜尋能力則由三條路徑組成：以 Nomic 嵌入模型實作的語意搜尋、SQLite FTS5 的 BM25 全文檢索，以及圖上的結構化搜尋。語意搜尋的向量模型隨執行檔一同打包，不需 API 金鑰、Ollama 或 Docker。</p>
+
+<p>在部署形態上，專案以單一原生執行檔提供，不依賴 Docker、語言執行環境或對外服務，資料落盤於本機快取目錄。它同時內建 3D 圖譜視覺化介面，預設在 localhost 的 9749 埠提供，並由共用的協調常駐程序管理，避免多個代理工作階段重複啟動伺服器。</p>
+
+<h2 id="codebase-memory-mcp-有哪些實際應用場景">codebase-memory-mcp 有哪些實際應用場景？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>主要場景包括大型專案的架構導航、提交前的影響分析與風險分類、死碼清理、跨服務路由比對，以及以單一壓縮檔在團隊間共享圖譜、讓同事免去重新索引。
+<!-- End AEO Capsule --></p>
+
+<p>第一個場景是陌生或大型專案的架構導航。get_architecture 可在單次呼叫中回傳語言、套件、進入點、路由、熱點、邊界、分層與叢集，並以 Louvain 社群偵測歸納功能模組。對剛接手既有系統的代理而言，這能取代大量翻找目錄與猜測模組關係的過程。</p>
+
+<p>第二個場景是提交前的影響分析。detect_changes 會把未提交的變動對應到受影響的符號，並附上風險分類；死碼偵測則找出沒有任何呼叫者的函式，同時排除合法的進入點。這兩項能力把「改動會影響什麼」從人工推測變成可查詢的結果。</p>
+
+<p>第三個場景是跨服務與跨儲存庫的關聯分析。專案能比對 HTTP 路由與呼叫位置並附上信心分數，亦支援 gRPC、GraphQL 與 tRPC 的服務偵測。此外，團隊可以把圖譜匯出為 .codebase-memory 目錄下的單一 zstd 壓縮檔提交進儲存庫，同事首次執行時直接匯入，省下完整重建索引的成本；官方提醒這個檔案每次索引都會改寫，提交頻率需刻意控制，否則版控歷史會快速膨脹。</p>
+
+<p><img src="/assets/images/posts/github-codebase-memory-mcp-news-shot3.png" alt="codebase-memory-mcp 的貢獻者統計頁，顯示各貢獻者的提交數、新增與刪除行數，以及跨越數月的活躍時間分布" /></p>
+
+<h2 id="codebase-memory-mcp-的關鍵數據有哪些">codebase-memory-mcp 的關鍵數據有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>儲存庫累積 45,834 顆星標與 3,771 次複製，169 位貢獻者、3,436 次提交；最新版本 v0.11.0 於 2026 年 9 月 15 日發布，採 MIT 授權。
+<!-- End AEO Capsule --></p>
+
+<ul class="ui-stat-grid">
+  <li class="ui-stat"><span class="ui-stat-num">45,834</span><span class="ui-stat-label">星標</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">3,771</span><span class="ui-stat-label">複製數</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">169</span><span class="ui-stat-label">貢獻者</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">162</span><span class="ui-stat-label">支援語言</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">17</span><span class="ui-stat-label">MCP 工具</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">C</span><span class="ui-stat-label">主要語言</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">v0.11.0</span><span class="ui-stat-label">最新版本</span></li>
+</ul>
+
+<p>上述統計以 2026 年 10 月 5 日的儲存庫狀態為準。專案於 2026 年 2 月 24 日建立，至 10 月 5 日仍在持續提交，README 標示的 45 個代理介面、158 套 tree-sitter 語法與 162 種語言解析能力，均隨版本更新調整。v0.11.0 的發布頁面附有 49 個平台對應的建置資產，涵蓋 macOS、Linux 與 Windows。</p>
+
+<h2 id="codebase-memory-mcp-在開源程式碼智能生態中處於什麼位置">codebase-memory-mcp 在開源程式碼智能生態中處於什麼位置？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>它填補「AI 代理查詢程式碼結構」這一層，與 RAG 檢索互補；差異在於純 C 原生執行檔、無外部相依與遙測，也不綁定特定模型。
+<!-- End AEO Capsule --></p>
+
+<p>近兩年程式碼智能工具快速分化。一類偏向自然語言問答，把程式碼切片後交給向量資料庫檢索；另一類維持傳統搜尋與索引，強調速度與可預測性。codebase-memory-mcp 屬於後者，但把輸出物件定義為圖而非文字區塊，因此特別適合需要精確關係的查詢，例如呼叫鏈與影響範圍。</p>
+
+<p>與同類專案相較，它的差異集中在部署與信任模型。純 C 實作與靜態連結意味著不需要 Python 或 Node 執行環境，安裝後即可執行；官方文件也強調執行檔不會自行發出網路請求，不在背景檢查版本，並不收集遙測。對於受規範或離線環境，這些條件往往比功能清單更具決定性。</p>
+
+<p>值得注意的是，專案並未取代既有的檢索方案。語意搜尋在詞彙不匹配時仍有價值，而 BM25 全文檢索適合關鍵字明確的查詢，圖查詢則處理結構關係。三者互補而非互斥，官方在文件中亦將自身定位為既有生態的補強層，並以 OpenSSF Scorecard 與 SLSA 3 等級的建置流程強化供應鏈信任。</p>
+
+<h2 id="codebase-memory-mcp-如何安裝與開始使用">codebase-memory-mcp 如何安裝與開始使用？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>macOS 與 Linux 可執行官方安裝腳本，Windows 用 PowerShell；亦可透過 npm、pip、Homebrew 安裝，執行 install 即完成設定。
+<!-- End AEO Capsule --></p>
+
+<p>官方提供的一行安裝指令透過 curl 取得安裝腳本並執行，Windows 則改以下載並執行 PowerShell 版本。若偏好套件管理員，專案已上架 npm、PyPI、Homebrew、Scoop、Winget、Chocolatey 與 AUR，也可透過 go install 取得。安裝完成後執行內建的 install 命令，會自動偵測並設定本機已存在的代理客戶端。</p>
+
+<p>安裝程式支援 45 種自動或條件式客戶端介面，包含 Claude Code、Codex、Cursor、Gemini CLI、OpenCode、Windsurf、Kilo Code 與 Aider 等。對於需要額外設定檔或特定平台標記的客戶端，安裝程式只在其條件成立時才啟用，避免改動非預期項目。由於設計上不需要 API 金鑰或語言執行環境，安裝完成的判斷標準就是執行檔可執行、代理可連上 MCP。</p>
+
+<p>啟用自動索引後，新專案會在首次連線時建立圖譜，既有專案則交由背景監看程序依 git 變更增量更新。官方亦提供命令列模式，可在不安裝代理的情況下直接下達圖查詢，以及在 localhost 的 9749 埠開啟 3D 圖譜介面。設定變更如停用監看，需先停止常駐程序再重新連線，因為部分選項只在程序啟動時讀取。</p>
+
+<h2 id="codebase-memory-mcp-的授權與隱私政策如何">codebase-memory-mcp 的授權與隱私政策如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>專案以 MIT 授權開源，可免費用於商業專案。所有索引與查詢在本機執行，不收集遙測，程式碼與查詢內容不會離開使用者機器；診斷記錄須由使用者主動開啟才會產生。
+<!-- End AEO Capsule --></p>
+
+<p>授權方面，專案採用 MIT 條款，允許自由使用、修改與再散布，包含商業用途。發行檔案附有 checksums.txt 提供 SHA-256 雜湊，官方並以 OpenSSF Scorecard 與 SLSA 3 等級的建置流程標示供應鏈完整性，每次發布亦經過 VirusTotal 掃描。</p>
+
+<p>隱私方面，官方明確表示工具百分之百在本機執行且不收集遙測，程式碼、查詢內容、環境與使用情形都不會離開使用者的機器。由於執行檔不會自行發出網路請求，也不在背景檢查新版本，使用者需透過安裝腳本、套件管理員或 GitHub 得知更新。</p>
+
+<p>這項保證也帶來取捨：當使用者遇到官方無法重現的問題時，維護者手上沒有資料可分析。因此專案提供以環境變數開啟的診斷模式，把記憶體軌跡與快照寫入本機暫存目錄，由使用者自行決定是否提供。這既是隱私設計的必然結果，也意味著回報問題時需要使用者主動配合。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>本文資訊整理自 codebase-memory-mcp 的 GitHub 儲存庫、官方文件與 v0.11.0 發布說明，效能數據以專案 README 公布內容為依據。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/DeusData/codebase-memory-mcp</li>
+  <li>官方文件網站：https://deusdata.github.io/codebase-memory-mcp/</li>
+  <li>v0.11.0 發布說明：https://github.com/DeusData/codebase-memory-mcp/releases/tag/v0.11.0</li>
+  <li>設計與基準測試論文：https://arxiv.org/abs/2603.27277</li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>常見疑問集中在是否需要 API 金鑰、支援的語言與代理範圍、與既有檢索工具的差異，以及團隊共享圖譜的提交策略，多數可在官方 README 與文件中找到說明。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>使用 codebase-memory-mcp 需要 API 金鑰嗎？</h3>
+<p>不需要。工具本身不內建語言模型，語意搜尋所用的嵌入模型已隨執行檔打包，理解問題的工作由既有的 MCP 客戶端負責，因此無需額外金鑰、Ollama 或 Docker。</p>
+
+<h3>它支援哪些程式語言與代理？</h3>
+<p>官方標示可解析 162 種語言，語法檔案直接編譯進執行檔；Hybrid LSP 另針對 Python、TypeScript、Go、Rust、Java、C# 等提供語意型別解析。安裝程式支援 45 種自動或條件式的代理客戶端介面。</p>
+
+<h3>它與向量資料庫檢索有什麼不同？</h3>
+<p>向量檢索回傳的是相關程式碼片段，圖查詢回傳的是精確關係，例如呼叫鏈與影響範圍。兩者互補，官方亦將自身定位為既有檢索方案的補強層，而非替代品。</p>
+
+<h3>團隊可以共享索引結果嗎？</h3>
+<p>可以。索引時開啟持久化選項會產生 .codebase-memory 目錄下的單一 zstd 壓縮檔，提交後同事首次執行即可匯入。由於每次索引都會改寫該檔案，建議依發布或里程碑控制提交頻率，避免版控歷史膨脹。</p>
+
+<h3>索引會上傳到雲端嗎？</h3>
+<p>不會。索引與查詢全部在本機執行，資料存放於本機快取目錄，工具不收集遙測，也不主動發出網路請求。診斷記錄須由使用者以環境變數主動開啟。</p>
+
+<h3>如何更新到新版本？</h3>
+<p>更新由安裝腳本執行，而非執行檔本身。在 macOS 與 Linux 上重新執行 install.sh 即為更新，Windows 則重跑 install.ps1；若透過 npm 或 pip 安裝，改用對應的套件管理員指令升級。</p>
+
+</div>
+
+<h2 id="總結codebase-memory-mcp-適合什麼團隊">總結：codebase-memory-mcp 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>適合以 AI 代理處理中大型程式碼庫、且重視本機執行與低 token 成本的團隊；若已依賴雲端索引服務，建議先以自身工作負載實測。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案切中的問題相當具體：代理的能力上限，往往取決於它能多快取得正確的程式碼上下文。把結構關係預先計算成圖，讓查詢從多輪讀檔收斂為單次遍歷，既降低 token 成本，也縮短回應時間。純 C 原生執行檔與零外部相依的組合，則使它容易進入 CI、容器與離線環境。</p>
+
+<p>判斷是否採用時，可以從三個條件檢視。若團隊的痛點在於代理反覆讀檔、上下文快速耗盡，或需要可靠的呼叫鏈與影響分析，這套工具的方向與需求高度一致；若工作負載以關鍵字檢索為主、專案規模不大，則既有工具的收益可能有限；若既有流程已深度綁定雲端索引服務，遷移成本需要一併評估。</p>
+
+<p>以 45,834 顆星標、169 位貢獻者與半年內累積 3,436 次提交的節奏來看，專案仍處於快速迭代階段，v0.11.0 與 638 個待處理議題也反映功能與修補同步推進。對於願意跟隨版本更新、並重視本機執行的團隊而言，這是一項值得納入評估的工具。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=MCP" class="badge bg-secondary text-decoration-none me-1">MCP</a>
+          
+          
+          <a href="/search/?q=%E7%A8%8B%E5%BC%8F%E7%A2%BC%E6%99%BA%E8%83%BD" class="badge bg-secondary text-decoration-none me-1">程式碼智能</a>
+          
+          
+          <a href="/search/?q=%E7%9F%A5%E8%AD%98%E5%9C%96%E8%AD%9C" class="badge bg-secondary text-decoration-none me-1">知識圖譜</a>
+          
+          
+          <a href="/search/?q=AI+%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">AI 代理</a>
+          
+          
+          <a href="/search/?q=tree-sitter" class="badge bg-secondary text-decoration-none me-1">tree-sitter</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+          
+          <a href="/search/?q=C" class="badge bg-secondary text-decoration-none me-1">C</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news&text=codebase-memory-mcp+%E9%96%8B%E6%BA%90%EF%BC%9ALinux+%E6%A0%B8%E5%BF%83%E7%B4%A2%E5%BC%95%E5%83%85+3+%E5%88%86%E9%90%98" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?codebase-memory-mcp+%E9%96%8B%E6%BA%90%EF%BC%9ALinux+%E6%A0%B8%E5%BF%83%E7%B4%A2%E5%BC%95%E5%83%85+3+%E5%88%86%E9%90%98%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/penpot-open-source-design-news" class="text-decoration-none">Penpot 開源：Figma 的自架替代方案</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/public-apis-news" class="text-decoration-none">public-apis 開源：2038 個免費 API 總表</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ai-engineering-from-scratch-news" class="text-decoration-none">AI Engineering from Scratch 開源：523 課從零實作</a>
+              <br><small class="text-muted">2026-10-03</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%95%99%E5%AD%B8/2026/10/02/mcp-server-tutorial.html" class="text-decoration-none">MCP Server 入門實戰：由零開始打造屬於你的 AI 工具</a>
+              <br><small class="text-muted">2026-10-02</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-opencut-news" class="text-decoration-none">OpenCut 開源：9.1 萬星的免費剪輯替代方案</a>
+              <br><small class="text-muted">2026-10-01</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-cli-anything-news" class="text-decoration-none">CLI-Anything 開源：把專業軟件變成代理原生</a>
+              <br><small class="text-muted">2026-09-28</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

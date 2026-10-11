@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>RAGFlow 開源：90K 星的企業級 RAG 引擎 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="RAGFlow 是 InfiniFlow 開源的檢索增強生成引擎，GitHub 星標達 90,458，將深度文件理解與 Agent 能力融合，支援 PDF、掃描件等異質資料，提供模板化切塊、可視化引用標註與多路召回重排，並可透過 Docker Compose 自架。本文解析其架構、部署需求與適用場景。">
+  <meta name="keywords" content="RAGFlow, RAG, 檢索增強生成, InfiniFlow, DeepDoc, 開源, 文件理解, Agent, 知識庫, 上下文引擎">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="RAGFlow 開源：90K 星的企業級 RAG 引擎">
+  <meta property="og:description" content="RAGFlow 是 InfiniFlow 開源的檢索增強生成引擎，GitHub 星標達 90,458，將深度文件理解與 Agent 能力融合，支援 PDF、掃描件等異質資料，提供模板化切塊、可視化引用標註與多路召回重排，並可透過 Docker Compose 自架。本文解析其架構、部署需求與適用場景。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-ragflow-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="RAGFlow 開源：90K 星的企業級 RAG 引擎">
+  <meta name="twitter:description" content="RAGFlow 是 InfiniFlow 開源的檢索增強生成引擎，GitHub 星標達 90,458，將深度文件理解與 Agent 能力融合，支援 PDF、掃描件等異質資料，提供模板化切塊、可視化引用標註與多路召回重排，並可透過 Docker Compose 自架。本文解析其架構、部署需求與適用場景。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-ragflow-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "RAGFlow 開源：90K 星的企業級 RAG 引擎",
+      "description": "RAGFlow 是 InfiniFlow 開源的檢索增強生成引擎，GitHub 星標達 90,458，將深度文件理解與 Agent 能力融合，支援 PDF、掃描件等異質資料，提供模板化切塊、可視化引用標註與多路召回重排，並可透過 Docker Compose 自架。本文解析其架構、部署需求與適用場景。",
+      "datePublished": "2026-09-11T10:00:01+08:00",
+      "dateModified": "2026-09-11T10:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/infiniflow/ragflow" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-ragflow-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "RAGFlow 開源：90K 星的企業級 RAG 引擎",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">RAGFlow 開源：90K 星的企業級 RAG 引擎</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">RAGFlow 開源：90K 星的企業級 RAG 引擎</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月11日 10:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/infiniflow/ragflow" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-ragflow-news-cover.jpg" alt="RAGFlow 開源：90K 星的企業級 RAG 引擎" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/infiniflow/ragflow" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/infiniflow/ragflow
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>RAGFlow 是 InfiniFlow 於 2023 年底開源的檢索增強生成引擎，GitHub 星標已達 90,458，fork 數 10,684，採用 Apache-2.0 授權。該專案將深度文件理解與 Agent 能力融合，為大型語言模型建立一層更高品質的上下文，使開發者能夠把格式複雜的原始資料轉化為可上線、可溯源的 AI 系統。在檢索增強生成工具鏈快速擴張的當下，它的差異化並非模型本身，而是對「資料進得去、答案說得清」這件事的執著。</p>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>RAGFlow 是 InfiniFlow 開源的檢索增強生成引擎，GitHub 星標 90,458，主打深度文件理解與代理式檢索。
+<!-- End AEO Capsule --></p>
+
+<h2 id="ragflow-是什麼">RAGFlow 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>RAGFlow 是 InfiniFlow 於 2023 年底開源的 RAG 引擎，將檢索增強生成與 Agent 能力融合，為大型語言模型建立上下文層。
+<!-- End AEO Capsule --></p>
+
+<p>RAGFlow 的定位是一個開源的檢索增強生成引擎，其核心主張是將前沿的 RAG 技術與 Agent 能力加以融合，形成一層「上下文引擎」（context engine）。傳統 RAG 流程多半止於向量檢索與提示組合，而 RAGFlow 試圖把文件解析、切塊、檢索、重排與答案溯源納入同一套可編排的架構，並以預建的 Agent 模板降低落地門檻。專案由 InfiniFlow 團隊維護，主儲存庫於 2023 年 12 月建立，至今仍維持高頻更新。</p>
+
+<p>在生態整合方面，該專案展現出明確的企業導向。README 的最新更新記錄顯示，2025 年 8 月加入代理式工作流與 MCP 支援，10 月支援 MinerU 與 Docling 兩種文件解析方式並推出可編排的資料攝取流程，11 月加入 Confluence、S3、Notion、Discord 與 Google Drive 的資料同步，12 月為 Agent 加入記憶能力；2026 年 3 月登上 OpenClaw 技能市集，4 月支援 DeepSeek v4，6 月進一步支援飛書、Discord、Telegram 與 Line 等多種對話通道。這樣的更新節奏反映其目標並非單一示範專案，而是可長期維運的企業基礎設施。</p>
+
+<h2 id="ragflow-的架構與文件理解有何特別之處">RAGFlow 的架構與文件理解有何特別之處？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>RAGFlow 以 DeepDoc 模組解析複雜格式，搭配模板化切塊與可視化引用標註，讓檢索結果可人工干預與追溯。
+<!-- End AEO Capsule --></p>
+
+<p>RAGFlow 的技術核心是名為 DeepDoc 的深度文件理解模組。多數開源 RAG 方案在文件解析階段採通用文字抽取，遇到雙欄排版、跨頁表格、掃描件或簡報時便容易遺失結構，導致後續檢索品質大幅下降。DeepDoc 則針對非結構化資料進行版面分析與語意抽取，讓 PDF、Word、Excel、簡報、圖片、掃描件與網頁等異質來源都能被轉換為可用的知識片段。</p>
+
+<p>第二項關鍵設計是模板化切塊。專案強調切塊過程應「智慧且可解釋」，提供多種模板選項供使用者依文件型態選擇，而非以固定字數硬切。切塊結果會以視覺化方式呈現，允許人工介入調整，這對於法律、財務等對段落完整性要求嚴格的場景格外重要。搭配多路召回與融合重排，系統能在海量片段中定位關鍵資訊，並支援可追溯的引用，讓生成答案附上明確來源，藉此降低幻覺風險。</p>
+
+<p>第三項設計是 Agent 與工作流的整合。RAGFlow 將檢索能力包裝為可編排的元件，內建 Python 與 JavaScript 程式碼執行器，並支援 MCP 協定，使開發者能組裝出多步驟的檢索與推理流程。2026 年 6 月新增的多通道支援，則讓同一套知識庫可同時服務飛書、Discord、Telegram 與 Line 等平台。</p>
+
+<h2 id="ragflow-的系統需求與部署方式如何">RAGFlow 的系統需求與部署方式如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>RAGFlow 以 Docker Compose 自架，建議四核心 CPU、16GB 記憶體與 50GB 磁碟，檢索引擎可選 Elasticsearch 或 Infinity。
+<!-- End AEO Capsule --></p>
+
+<p>部署方面，RAGFlow 提供官方 Docker 映像與 Docker Compose 設定，是目前最主流的啟動方式。官方列出的最低需求為四核心以上 CPU、16GB 以上記憶體、50GB 以上磁碟空間，以及 Docker 24.0.0 與 Docker Compose v2.26.1 以上版本；若需使用沙盒程式碼執行器，另需安裝 gVisor。此外，系統要求 <code class="language-plaintext highlighter-rouge">vm.max_map_count</code> 至少為 262144，且該設定需寫入 <code class="language-plaintext highlighter-rouge">/etc/sysctl.conf</code> 才能永久生效。官方映像以 x86 平台為主，ARM64 環境需自行建置。</p>
+
+<p>檢索引擎的選擇是部署時的重要決策。RAGFlow 預設使用 Elasticsearch 儲存全文與向量資料，使用者亦可切換為同團隊開發的 Infinity，以追求更輕量的部署結構。值得注意的是，官方提醒所有 Docker 映像皆為 x86 平台建置，且自 v0.22.0 起只提供不含內嵌模型的精簡版本，使用者在部署時需自行設定外部的大型語言模型與嵌入服務。</p>
+
+<p>前端與後端分離的架構，也讓二次開發相對直接。開發者可透過 <code class="language-plaintext highlighter-rouge">uv</code> 建立 Python 3.13 虛擬環境，搭配 <code class="language-plaintext highlighter-rouge">docker-compose-base.yml</code> 啟動 MinIO、Elasticsearch、Redis 與 MySQL 等依賴服務，再分別啟動後端 <code class="language-plaintext highlighter-rouge">ragflow_server.py</code> 與前端 npm 服務進行開發。</p>
+
+<h2 id="ragflow-有哪些實際應用場景">RAGFlow 有哪些實際應用場景？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>RAGFlow 適用於企業知識庫問答、合約與財報檢索、客服輔助與研究資料彙整，特別是需要答案可溯源與資料私有化的場景。
+<!-- End AEO Capsule --></p>
+
+<p>最典型的場景是企業內部知識庫。當文件散落於 Word、Excel、簡報與掃描件之中，且格式長期不一致，通用 RAG 方案往往難以維持檢索精度。RAGFlow 的深度文件理解與可視化切塊，讓這類專案能在解析階段就修正結構錯誤，避免錯誤一路傳導到最終答案。</p>
+
+<p>第二類場景是需要高度可追溯性的專業領域。法律與財務工作對引用來源有嚴格要求，答案若不附出處幾乎無法採用。RAGFlow 的可追溯引用與人工干預切塊機制，正好回應這種「寧可慢、不可錯」的需求，並可透過私有化部署滿足資料合規要求。</p>
+
+<p>第三類場景是跨平台的問答服務。隨著對話通道支援擴大，同一套知識庫可以同時掛載在飛書、Discord、Telegram 與 Line 上，對於已有多元溝通渠道的團隊而言，可省下重複建置的成本。此外，結合 MCP 與 Agent 模板後，系統亦能被組裝成自動化的工作流節點，串接內部的其他工具與服務。</p>
+
+<h2 id="ragflow-的數據表現如何">RAGFlow 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>RAGFlow 在 GitHub 累積 90,458 星標與 10,684 次複製，採 Apache-2.0 授權，主要語言為 Go，2023 年 12 月建立並持續更新。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat"><div class="stat-num">90.5K</div><div class="stat-label">GitHub 星標</div></div>
+  <div class="stat"><div class="stat-num">10.7K</div><div class="stat-label">Forks</div></div>
+  <div class="stat"><div class="stat-num">Apache-2.0</div><div class="stat-label">開源授權</div></div>
+  <div class="stat"><div class="stat-num">Go</div><div class="stat-label">主要語言</div></div>
+  <div class="stat"><div class="stat-num">16GB</div><div class="stat-label">建議記憶體</div></div>
+  <div class="stat"><div class="stat-num">2023-12</div><div class="stat-label">創建時間</div></div>
+</div>
+
+<p><img src="assets/images/posts/github-ragflow-news-shot1.png" alt="RAGFlow README 開頭（專案名稱與「RAGFlow is a leading open-source Retrieval-Augmented Generation engine」定位說明）" /></p>
+
+<p><img src="assets/images/posts/github-ragflow-news-shot2.png" alt="RAGFlow GitHub 首頁頂部（repo 名 infiniflow/ragflow、專案描述與 Star 90.5k 統計）" /></p>
+
+<p><img src="assets/images/posts/github-ragflow-news-shot3.png" alt="RAGFlow 專案 About 側欄統計（Star 90.5k、Fork 10.7k、Watch 363 與專案描述）" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>本文資訊來源為 RAGFlow 的 GitHub 儲存庫與官方文件站，內容涵蓋星標、授權、系統架構、部署需求與版本更新記錄等公開資料。
+<!-- End AEO Capsule --></p>
+
+<p>出處連結：<a href="https://github.com/infiniflow/ragflow">RAGFlow GitHub 儲存庫</a>。專案另提供官方文件站、雲端試用服務、Roadmap 討論串與 Discord 社群；同團隊亦維護 Infinity 檢索引擎，可作為 Elasticsearch 之外的替代方案。RAGFlow 的 README 以多語版本發布，反映其社群已延伸至華語、日語、韓語與多個歐洲語系。</p>
+
+<h2 id="總結ragflow-適合什麼團隊">總結：RAGFlow 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>RAGFlow 適合需要私有化部署、文件格式複雜且要求答案可溯源的團隊，包括金融、法律、製造與中大型企業的知識管理部門。
+<!-- End AEO Capsule --></p>
+
+<p>RAGFlow 的價值在於把 RAG 專案中最容易被低估的環節——文件解析與切塊——當成核心問題來解決。它沒有試圖以更大的模型取勝，而是透過 DeepDoc 與可視化切塊提升輸入資料的品質，再以可追溯引用回應企業對可靠性的要求。對於正在評估自架 RAG 方案的團隊而言，Apache-2.0 授權、完整的 Docker 部署路徑，以及持續兩年半以上的高頻更新，構成相對穩健的採用基礎；不過 16GB 記憶體與 50GB 磁碟的門檻，也意味它更適合有一定基礎設施資源的組織，而非輕量個人專案。以 90,458 星標的社群規模觀察，該專案已在開源 RAG 生態佔據穩定位置，後續值得關注的是其 Agent 能力與多通道支援能否進一步擴大應用邊界。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=RAGFlow" class="badge bg-secondary text-decoration-none me-1">RAGFlow</a>
+          
+          
+          <a href="/search/?q=RAG" class="badge bg-secondary text-decoration-none me-1">RAG</a>
+          
+          
+          <a href="/search/?q=%E6%AA%A2%E7%B4%A2%E5%A2%9E%E5%BC%B7%E7%94%9F%E6%88%90" class="badge bg-secondary text-decoration-none me-1">檢索增強生成</a>
+          
+          
+          <a href="/search/?q=InfiniFlow" class="badge bg-secondary text-decoration-none me-1">InfiniFlow</a>
+          
+          
+          <a href="/search/?q=DeepDoc" class="badge bg-secondary text-decoration-none me-1">DeepDoc</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=%E6%96%87%E4%BB%B6%E7%90%86%E8%A7%A3" class="badge bg-secondary text-decoration-none me-1">文件理解</a>
+          
+          
+          <a href="/search/?q=Agent" class="badge bg-secondary text-decoration-none me-1">Agent</a>
+          
+          
+          <a href="/search/?q=%E7%9F%A5%E8%AD%98%E5%BA%AB" class="badge bg-secondary text-decoration-none me-1">知識庫</a>
+          
+          
+          <a href="/search/?q=%E4%B8%8A%E4%B8%8B%E6%96%87%E5%BC%95%E6%93%8E" class="badge bg-secondary text-decoration-none me-1">上下文引擎</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news&text=RAGFlow+%E9%96%8B%E6%BA%90%EF%BC%9A90K+%E6%98%9F%E7%9A%84%E4%BC%81%E6%A5%AD%E7%B4%9A+RAG+%E5%BC%95%E6%93%8E" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?RAGFlow+%E9%96%8B%E6%BA%90%EF%BC%9A90K+%E6%98%9F%E7%9A%84%E4%BC%81%E6%A5%AD%E7%B4%9A+RAG+%E5%BC%95%E6%93%8E%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-ragflow-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llmapp-news" class="text-decoration-none">Pathway LLM App 開源：5.8 萬星的實時 RAG 模板</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-generative-ai-beginners-news" class="text-decoration-none">微軟 12 萬星 GenAI 課程：21 課全開源</a>
+              <br><small class="text-muted">2026-09-28</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-anydoc-news" class="text-decoration-none">22K 星 anydoc 開源：14 種文件一鍵轉 Markdown</a>
+              <br><small class="text-muted">2026-09-26</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-pathway-news" class="text-decoration-none">62K 星 Pathway 開源：Rust 引擎即時資料框架</a>
+              <br><small class="text-muted">2026-09-25</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ai-agent-book-news" class="text-decoration-none">AI Agent 開源教科書：10 章 109 個實戰實驗</a>
+              <br><small class="text-muted">2026-09-25</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/volcengine-openviking-news" class="text-decoration-none">OpenViking 開源：AI 代理的上下文資料庫</a>
+              <br><small class="text-muted">2026-09-25</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

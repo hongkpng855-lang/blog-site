@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>港股技術分析入門：2026 年必學 5 大技術指標實戰指南 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="想學睇圖但唔知從何入手？呢篇用香港股票嘅實例，教你 5 大必學技術指標：移動平均線、RSI、MACD、布林通道、成交量分析，由新手到識睇圖嘅完整實戰指南。">
+  <meta name="keywords" content="技術分析, 港股, 投資入門, 技術指標, K線, RSI, MACD, 移動平均線, 股票分析, 2026">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="港股技術分析入門：2026 年必學 5 大技術指標實戰指南">
+  <meta property="og:description" content="想學睇圖但唔知從何入手？呢篇用香港股票嘅實例，教你 5 大必學技術指標：移動平均線、RSI、MACD、布林通道、成交量分析，由新手到識睇圖嘅完整實戰指南。">
+  <meta property="og:url" content="https://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/2026-06-07-hk-stock-technical-analysis-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="港股技術分析入門：2026 年必學 5 大技術指標實戰指南">
+  <meta name="twitter:description" content="想學睇圖但唔知從何入手？呢篇用香港股票嘅實例，教你 5 大必學技術指標：移動平均線、RSI、MACD、布林通道、成交量分析，由新手到識睇圖嘅完整實戰指南。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/2026-06-07-hk-stock-technical-analysis-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "港股技術分析入門：2026 年必學 5 大技術指標實戰指南",
+      "description": "想學睇圖但唔知從何入手？呢篇用香港股票嘅實例，教你 5 大必學技術指標：移動平均線、RSI、MACD、布林通道、成交量分析，由新手到識睇圖嘅完整實戰指南。",
+      "datePublished": "2026-06-07T23:30:00+08:00",
+      "dateModified": "2026-06-07T23:30:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html" },
+      
+      "image": "https://anthroskill.com/assets/images/posts/2026-06-07-hk-stock-technical-analysis-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "investment",
+          "item": "https://anthroskill.com/categories/investment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "港股技術分析入門：2026 年必學 5 大技術指標實戰指南",
+          "item": "https://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/investment/">investment</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">港股技術分析入門：2026 年必學 5 大技術指標實戰指南</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">港股技術分析入門：2026 年必學 5 大技術指標實戰指南</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年06月07日 23:30
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/2026-06-07-hk-stock-technical-analysis-cover.jpg" alt="港股技術分析入門：2026 年必學 5 大技術指標實戰指南" class="img-fluid rounded">
+        </div>
+        
+
+        
+
+        <div class="post-content">
+          <p>你有冇試過：打開報價 app，見到一堆花花綠綠嘅線同數字，完全唔知佢哋代表咩？或者聽人講「黃金交叉」、「RSI 超賣」，但心入面諗「呢啲係咪好犀利㗎？」</p>
+
+<p><strong>技術分析冇你想像中咁神秘。</strong></p>
+
+<p>我由 2020 年開始玩港股，最開始都係靠基本分析（睇 PE、睇財務報表），但發現中伏嘅次數仲多過賺錢。後來開始認真學技術分析，唔係為咗短線炒賣，而係為咗<strong>搵到更好嘅買賣時機</strong>。</p>
+
+<p>呢篇文章我會用香港股票嘅實際例子，由淺入深教你 5 個必學嘅技術指標：<strong>移動平均線、RSI、MACD、布林通道、成交量分析</strong>。學完之後，你至少識得點樣分析一隻股票嘅走勢，唔使再靠感覺買賣。</p>
+
+<blockquote>
+  <p><strong>一句講晒</strong>：技術分析係幫你「睇路況」，唔係「預測未來」。佢話你知而家係咪塞車、條路順唔順，但唔會 100% 準確話你知幾時會到目的地。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="1-技術分析係咩點解咁多人用">1. 技術分析係咩？點解咁多人用？</h2>
+
+<p>技術分析嘅核心概念好簡單：<strong>歷史會重演</strong>。</p>
+
+<p>人類嘅貪婪同恐懼千百萬年嚟都冇變過。當股價升到某個位，好多人會忍唔住追貨；當跌到某個位，好多人會驚到沽貨。呢啲人性行為會喺圖表上形成重複嘅 pattern，技術分析就係透過研究呢啲 pattern 嚟推測未來嘅走勢。</p>
+
+<h3 id="技術分析嘅三大假設">技術分析嘅三大假設</h3>
+
+<ol>
+  <li><strong>市場行為消化一切</strong>：所有消息、業績、新聞都已經反映喺股價度</li>
+  <li><strong>股價以趨勢方式移動</strong>：升開嘅嘢通常會繼續升，直到有嘢改變佢</li>
+  <li><strong>歷史會重演</strong>：人性唔變，所以圖表 pattern 會重複出現</li>
+</ol>
+
+<h3 id="基本分析-vs-技術分析">基本分析 vs 技術分析</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>基本分析</th>
+      <th>技術分析</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>睇咩</td>
+      <td>財務報表、經濟數據</td>
+      <td>股價、成交量、圖表</td>
+    </tr>
+    <tr>
+      <td>時間</td>
+      <td>中長線（月/年）</td>
+      <td>短中線（日/週）</td>
+    </tr>
+    <tr>
+      <td>問題</td>
+      <td>應該買邊隻</td>
+      <td>幾時買、幾時賣</td>
+    </tr>
+    <tr>
+      <td>難度</td>
+      <td>需要會計知識</td>
+      <td>需要經驗同紀律</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>兩者唔係敵對，係互補。</strong> 基本分析幫你揀好股票，技術分析幫你揀好時機。</p>
+
+<hr />
+
+<h2 id="2-移動平均線ma最基本但又最有用嘅指標">2. 移動平均線（MA）：最基本但又最有用嘅指標</h2>
+
+<p>移動平均線係技術分析嘅基本功，亦係最多人用嘅指標。佢嘅原理好簡單：<strong>計出過去 N 日嘅平均收市價，然後連成一條線。</strong></p>
+
+<h3 id="常用嘅移動平均線">常用嘅移動平均線</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>週期</th>
+      <th>名稱</th>
+      <th>用途</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>5 日線</td>
+      <td>週線</td>
+      <td>短線趨勢</td>
+    </tr>
+    <tr>
+      <td>10 日線</td>
+      <td>雙週線</td>
+      <td>短線支撐/阻力</td>
+    </tr>
+    <tr>
+      <td>20 日線</td>
+      <td>月線</td>
+      <td>短中期趨勢</td>
+    </tr>
+    <tr>
+      <td>50 日線</td>
+      <td>季線</td>
+      <td>中期趨勢</td>
+    </tr>
+    <tr>
+      <td>250 日線</td>
+      <td>年線</td>
+      <td>長期趨勢（牛熊分界）</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="點樣用移動平均線">點樣用移動平均線？</h3>
+
+<p><strong>用法 1：趨勢方向</strong></p>
+
+<p>最簡單嘅用法：睇條線係向上定向下。</p>
+<ul>
+  <li><strong>MA 向上</strong> = 趨勢偏好，可以考慮買入或持有</li>
+  <li><strong>MA 向下</strong> = 趨勢偏淡，考慮減持或觀望</li>
+</ul>
+
+<p><strong>用法 2：支撐與阻力</strong></p>
+
+<ul>
+  <li>股價喺 MA 上面：MA 係<strong>支撐位</strong>（股價回落到呢度通常會彈起）</li>
+  <li>股價喺 MA 下面：MA 係<strong>阻力位</strong>（股價升到呢度通常會跌返）</li>
+</ul>
+
+<blockquote>
+  <p><strong>實戰貼士</strong>：我用 50 日線做中期趨勢分界。股價企穩喺 50 日線上面，我會考慮加倉；跌穿 50 日線，我會減持或 set 止蝕。</p>
+</blockquote>
+
+<p><strong>用法 3：黃金交叉 vs 死亡交叉</strong></p>
+
+<p>呢個係最多人聽過嘅訊號：</p>
+
+<ul>
+  <li><strong>黃金交叉</strong>：短線 MA（如 20 日）由下向上穿長線 MA（如 50 日）→ <strong>利好訊號</strong></li>
+  <li><strong>死亡交叉</strong>：短線 MA 由上向下穿長線 MA → <strong>利淡訊號</strong></li>
+</ul>
+
+<blockquote>
+  <p><strong>真實經歷</strong>：2023 年底我睇住騰訊（0700）出黃金交叉，當時股價由 250 蚊升到 300 蚊，足足升咗 20%。雖然唔係次次準，但呢個訊號嘅參考價值好高。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="3-rsi相對強弱指數搵出超買超賣時機">3. RSI（相對強弱指數）：搵出超買超賣時機</h2>
+
+<p>RSI（Relative Strength Index）係一個<strong>動能指標</strong>，用嚟衡量股價嘅升跌力度，幫你判斷而家係咪「買得太多」（超買）或者「沽得太多」（超賣）。</p>
+
+<h3 id="rsi-嘅基本用法">RSI 嘅基本用法</h3>
+
+<ul>
+  <li><strong>RSI &gt; 70</strong>：超買區，股價可能短期見頂，考慮減持</li>
+  <li><strong>RSI &lt; 30</strong>：超賣區，股價可能短期見底，考慮買入</li>
+  <li><strong>RSI = 50</strong>：中性，冇明顯方向</li>
+</ul>
+
+<h3 id="rsi-進階技巧">RSI 進階技巧</h3>
+
+<p><strong>背馳（Divergence）— 最準嘅訊號</strong></p>
+
+<p>背馳係 RSI 最強大嘅用法，佢嘅意思係：<strong>股價同 RSI 行相反方向</strong>。</p>
+
+<ul>
+  <li><strong>底背馳</strong>：股價創新低，但 RSI 冇創新低 → <strong>即將反彈</strong></li>
+  <li><strong>頂背馳</strong>：股價創新高，但 RSI 冇創新高 → <strong>即將回調</strong></li>
+</ul>
+
+<blockquote>
+  <p><strong>失敗經驗分享</strong>：我 2021 年買美團（3690），見到 RSI &gt; 80 都仲覺得「唔怕，仲有得升」，結果一個月跌咗 30%。之後我學識咗：<strong>RSI 嘅高位低位唔係 exact sell/buy signal，而係「提醒你要留意」</strong>。</p>
+</blockquote>
+
+<h3 id="各時間框架嘅-rsi-設定">各時間框架嘅 RSI 設定</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>時間框架</th>
+      <th>RSI 週期</th>
+      <th>特點</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>日線圖</td>
+      <td>14 日</td>
+      <td>標準設定，適合中期</td>
+    </tr>
+    <tr>
+      <td>小時圖</td>
+      <td>9 小時</td>
+      <td>短線交易用</td>
+    </tr>
+    <tr>
+      <td>週線圖</td>
+      <td>14 週</td>
+      <td>長線趨勢判斷</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="4-macd趨勢同動能一齊睇嘅全能指標">4. MACD：趨勢同動能一齊睇嘅全能指標</h2>
+
+<p>MACD（Moving Average Convergence Divergence）係一個結合<strong>趨勢</strong>同<strong>動能</strong>嘅指標，由三部分組成：</p>
+
+<ul>
+  <li><strong>MACD 線</strong>（快線）：12 日 EMA - 26 日 EMA</li>
+  <li><strong>訊號線</strong>（慢線）：MACD 嘅 9 日 EMA</li>
+  <li><strong>柱狀圖</strong>（Histogram）：MACD 線 - 訊號線</li>
+</ul>
+
+<h3 id="macd-三大用法">MACD 三大用法</h3>
+
+<p><strong>用法 1：線的交叉</strong></p>
+
+<ul>
+  <li>MACD 線向上穿訊號線 → <strong>買入訊號</strong></li>
+  <li>MACD 線向下穿訊號線 → <strong>賣出訊號</strong></li>
+</ul>
+
+<p><strong>用法 2：零軸（0 線）嘅位置</strong></p>
+
+<ul>
+  <li>MACD 喺零軸<strong>上面</strong> → 趨勢向好</li>
+  <li>MACD 喺零軸<strong>下面</strong> → 趨勢向淡</li>
+</ul>
+
+<p><strong>用法 3：柱狀圖嘅變化</strong></p>
+
+<ul>
+  <li>柱狀圖由負轉正（由紅轉綠）→ 動能轉強</li>
+  <li>柱狀圖由正轉負（由綠轉紅）→ 動能轉弱</li>
+</ul>
+
+<blockquote>
+  <p><strong>實戰經驗</strong>：MACD 喺趨勢市（明顯上升/下跌）表現最好，但喺橫行市（上上落落冇方向）會不停出假訊號。<strong>唔好 MACD 一出交叉就即刻買賣，要配合其他指標一齊睇。</strong></p>
+</blockquote>
+
+<hr />
+
+<h2 id="5-布林通道bollinger-bands量度波動性">5. 布林通道（Bollinger Bands）：量度波動性</h2>
+
+<p>布林通道係 John Bollinger 發明嘅指標，由三條線組成：</p>
+
+<ul>
+  <li><strong>中線</strong>：20 日簡單移動平均線（SMA）</li>
+  <li><strong>上通道</strong>：中線 + （2 × 標準差）</li>
+  <li><strong>下通道</strong>：中線 - （2 × 標準差）</li>
+</ul>
+
+<h3 id="布林通道嘅解讀">布林通道嘅解讀</h3>
+
+<p><strong>通道擴張與收窄</strong></p>
+
+<ul>
+  <li><strong>通道擴張</strong>：波幅加大，可能有大行情（升或跌）</li>
+  <li><strong>通道收窄</strong>：波幅收細，通常係爆邊前嘅醞釀期</li>
+</ul>
+
+<blockquote>
+  <p><strong>呢個就係出名嘅「布林通道 squeeze」</strong>：當通道收窄到一個極致，通常隨後就會有大方向突破。</p>
+</blockquote>
+
+<p><strong>股價觸及通道邊緣</strong></p>
+
+<ul>
+  <li>觸及<strong>上通道</strong>：股價偏離平均值較遠，可能超買</li>
+  <li>觸及<strong>下通道</strong>：股價偏離平均值較遠，可能超賣</li>
+</ul>
+
+<blockquote>
+  <p><strong>注意</strong>：股價觸及通道邊緣<strong>唔代表即刻反轉</strong>！喺強勢趨勢中，股價可以一直貼住上通道行好耐。呢個時候要配合 RSI 或其他指標確認。</p>
+</blockquote>
+
+<p><strong>實戰組合：布林通道 + RSI</strong></p>
+
+<p>呢個係我最常用嘅組合：</p>
+<ul>
+  <li>股價觸及下通道 + RSI &lt; 30 → <strong>反彈機會高，留意買入</strong></li>
+  <li>股價觸及上通道 + RSI &gt; 70 → <strong>回調風險大，考慮減持</strong></li>
+</ul>
+
+<hr />
+
+<h2 id="6-成交量分析確認趨勢嘅可信度">6. 成交量分析：確認趨勢嘅可信度</h2>
+
+<p>成交量係技術分析中最被低估嘅指標。佢嘅作用係<strong>確認趨勢嘅強度</strong>。</p>
+
+<h3 id="核心口訣">核心口訣</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>情況</th>
+      <th>解讀</th>
+      <th>可信度</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>上升 + 成交量增加</td>
+      <td>買盤強勁，升勢健康</td>
+      <td>高</td>
+    </tr>
+    <tr>
+      <td>上升 + 成交量減少</td>
+      <td>升勢乏力，可能見頂</td>
+      <td>中</td>
+    </tr>
+    <tr>
+      <td>下跌 + 成交量增加</td>
+      <td>沽壓沉重，仲有得跌</td>
+      <td>高</td>
+    </tr>
+    <tr>
+      <td>下跌 + 成交量減少</td>
+      <td>跌勢減弱，可能見底</td>
+      <td>中</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="成交量嘅進階用法">成交量嘅進階用法</h3>
+
+<p><strong>價量背馳</strong>：</p>
+<ul>
+  <li>股價創新高但成交量比之前低 → 買盤唔夠力，小心見頂</li>
+  <li>股價創新高同時成交量同步放大 → 升勢健康，可以繼續持有</li>
+</ul>
+
+<p><strong>爆量突破</strong>：</p>
+<ul>
+  <li>股價突破重要阻力位（如 50 日線、前期高位）+ <strong>成交量明顯放大</strong> → 確認突破有效</li>
+  <li>股價突破但成交量冇跟進 → 可能係「假突破」（fakeout）</li>
+</ul>
+
+<blockquote>
+  <p><strong>真實案例</strong>：2024 年港交所（0388）突破 300 蚊阻力位當日，成交量大增 50%，之後一個月升到 340 蚊。呢啲就係有成交確認嘅突破，可信度高好多。</p>
+</blockquote>
+
+<hr />
+
+<h2 id="7-綜合實戰用騰訊0700做例子">7. 綜合實戰：用騰訊（0700）做例子</h2>
+
+<p>等我用騰訊嘅<strong>日線圖</strong>（假設數據）示範點樣綜合運用以上指標：</p>
+
+<h3 id="步驟-1睇大方向移動平均線">步驟 1：睇大方向（移動平均線）</h3>
+<ul>
+  <li>股價喺 50 日線上面 → 中期趨勢向好</li>
+  <li>50 日線向上 → 確認上升趨勢</li>
+</ul>
+
+<h3 id="步驟-2睇動能macd">步驟 2：睇動能（MACD）</h3>
+<ul>
+  <li>MACD 喺零軸上面 → 確認趨勢向好</li>
+  <li>MACD 線向上 → 動能持續</li>
+</ul>
+
+<h3 id="步驟-3睇超買超賣rsi">步驟 3：睇超買超賣（RSI）</h3>
+<ul>
+  <li>RSI = 55 → 中性偏強，未到超買</li>
+  <li>冇背馳 → 趨勢健康</li>
+</ul>
+
+<h3 id="步驟-4睇波動性布林通道">步驟 4：睇波動性（布林通道）</h3>
+<ul>
+  <li>通道輕微擴張 → 波幅正常</li>
+  <li>股價喺中線同上通道之間 → 上升趨勢</li>
+</ul>
+
+<h3 id="步驟-5確認成交量">步驟 5：確認（成交量）</h3>
+<ul>
+  <li>近日成交量平穩 → 冇異常沽壓</li>
+</ul>
+
+<p><strong>綜合判斷</strong>：多個指標一致向好，可以考慮持有或小注加倉。但如果 RSI 升到 70 以上 + 布林觸及上通道，就要開始考慮部分獲利。</p>
+
+<hr />
+
+<h2 id="8-技術分析常見錯誤我犯過嘅">8. 技術分析常見錯誤（我犯過嘅）</h2>
+
+<h3 id="錯誤-1用太多指標">錯誤 1：用太多指標</h3>
+<p>我初學嘅時候，一個 chart 放晒 RSI、MACD、布林通道、KDJ、威廉指標、CCI⋯⋯結果眼花繚亂，乜都睇唔到。</p>
+
+<p><strong>解決</strong>：<strong>最多 3-4 個指標</strong>，一個 trend、一個 momentum、一個 volume 就夠。</p>
+
+<h3 id="錯誤-2死跟訊號">錯誤 2：死跟訊號</h3>
+<p>見到「RSI 超賣」就即刻買，結果股價繼續跌。</p>
+
+<p><strong>解決</strong>：技術指標係<strong>參考</strong>，唔係<strong>命令</strong>。要配合趨勢判斷同風險管理。</p>
+
+<h3 id="錯誤-3唔-set-止蝕">錯誤 3：唔 set 止蝕</h3>
+<p>「技術分析係長線嘅」呢句說話害死人。技術分析幫你入市，但<strong>止蝕係保護你</strong>。</p>
+
+<p><strong>解決</strong>：每次買入前，set 好止蝕位（例如跌穿 50 日線或低過買入價 5-8%）。</p>
+
+<h3 id="錯誤-4喺橫行市用趨勢指標">錯誤 4：喺橫行市用趨勢指標</h3>
+<p>MACD、移動平均線呢啲趨勢指標喺上上落落嘅市況會不停出假訊號。</p>
+
+<p><strong>解決</strong>：首先判斷係趨勢市定橫行市。橫行市可以用 RSI 或布林通道嘅「低買高賣」策略。</p>
+
+<hr />
+
+<h2 id="常見問題-faq">常見問題 FAQ</h2>
+
+<h3 id="q1技術分析對港股有用嗎">Q1：技術分析對港股有用嗎？</h3>
+<p>有用，但要注意港股有「仙股」同「莊家股」，呢啲股票嘅圖表容易被操控。建議專注<strong>成交量大</strong>嘅藍籌股（騰訊、美團、港交所、滙豐等），圖表可信度較高。</p>
+
+<h3 id="q2用手機-app-可以做到技術分析嗎">Q2：用手機 app 可以做到技術分析嗎？</h3>
+<p>可以。大部分券商 app（富途、IBKR、eToro）都有基本嘅技術指標。不過電腦畫面大啲，睇多幾個指標會方便啲。我通常用 TradingView 做詳細分析。</p>
+
+<h3 id="q3要學幾耐先睇得明">Q3：要學幾耐先睇得明？</h3>
+<p>基本嘅移動平均線同 RSI，<strong>一星期</strong>就學得識。但要真正用得熟、建立自己嘅交易系統，至少需要 <strong>3-6 個月</strong>嘅實戰經驗。</p>
+
+<h3 id="q4技術分析準確率有幾高">Q4：技術分析準確率有幾高？</h3>
+<p>冇一個指標係 100% 準確嘅。<strong>技術分析嘅目的係提高勝率（probability），唔係保證賺錢。</strong> 就算只得 60% 準確率，配合好嘅資金管理（止蝕 + 倉位控制），已經可以長線獲利。</p>
+
+<h3 id="q5邊個技術指標最適合新手">Q5：邊個技術指標最適合新手？</h3>
+<p>我推薦由 <strong>移動平均線（MA）</strong> 開始學。佢最直觀、最容易理解，而且好多進階指標都係建基於 MA 嘅概念。</p>
+
+<hr />
+
+<h2 id="總結">總結</h2>
+
+<p>技術分析唔係「睇圖畫線」咁簡單，而係一套<strong>系統化嘅分析框架</strong>，幫你做更理性嘅買賣決定。</p>
+
+<p>5 個必學指標嘅重點 recap：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>指標</th>
+      <th>核心功能</th>
+      <th>一句總結</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>移動平均線</td>
+      <td>趨勢方向 + 支撐阻力</td>
+      <td>最基本但最有用，分清趨勢先</td>
+    </tr>
+    <tr>
+      <td>RSI</td>
+      <td>超買超賣 + 背馳</td>
+      <td>搵轉折位，留意背馳訊號</td>
+    </tr>
+    <tr>
+      <td>MACD</td>
+      <td>趨勢 + 動能</td>
+      <td>確認趨勢強度，趨勢市最準</td>
+    </tr>
+    <tr>
+      <td>布林通道</td>
+      <td>波動性</td>
+      <td>量度波幅，配合 RSI 用</td>
+    </tr>
+    <tr>
+      <td>成交量</td>
+      <td>確認趨勢可信度</td>
+      <td>冇成交確認嘅突破，多數係假</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>入門三步曲</strong>：</p>
+<ol>
+  <li>先學移動平均線，分清趨勢</li>
+  <li>加入 RSI 或 MACD 做確認</li>
+  <li>一定要配合成交量同止蝕</li>
+</ol>
+
+<p>記住：<strong>技術分析係幫你提高勝率，唔係 guarantee 你贏錢。</strong> 學識之後，再用自己去實踐、犯錯、修正，先係真正嘅成長。</p>
+
+<hr />
+
+<p><em>本文章由親身經歷者撰寫，內容僅供參考，不構成任何投資建議。投資涉及風險，過去表現不代表將來回報。</em></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=%E6%8A%80%E8%A1%93%E5%88%86%E6%9E%90" class="badge bg-secondary text-decoration-none me-1">技術分析</a>
+          
+          
+          <a href="/search/?q=%E6%B8%AF%E8%82%A1" class="badge bg-secondary text-decoration-none me-1">港股</a>
+          
+          
+          <a href="/search/?q=%E6%8A%95%E8%B3%87%E5%85%A5%E9%96%80" class="badge bg-secondary text-decoration-none me-1">投資入門</a>
+          
+          
+          <a href="/search/?q=%E6%8A%80%E8%A1%93%E6%8C%87%E6%A8%99" class="badge bg-secondary text-decoration-none me-1">技術指標</a>
+          
+          
+          <a href="/search/?q=K%E7%B7%9A" class="badge bg-secondary text-decoration-none me-1">K線</a>
+          
+          
+          <a href="/search/?q=RSI" class="badge bg-secondary text-decoration-none me-1">RSI</a>
+          
+          
+          <a href="/search/?q=MACD" class="badge bg-secondary text-decoration-none me-1">MACD</a>
+          
+          
+          <a href="/search/?q=%E7%A7%BB%E5%8B%95%E5%B9%B3%E5%9D%87%E7%B7%9A" class="badge bg-secondary text-decoration-none me-1">移動平均線</a>
+          
+          
+          <a href="/search/?q=%E8%82%A1%E7%A5%A8%E5%88%86%E6%9E%90" class="badge bg-secondary text-decoration-none me-1">股票分析</a>
+          
+          
+          <a href="/search/?q=2026" class="badge bg-secondary text-decoration-none me-1">2026</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html&text=%E6%B8%AF%E8%82%A1%E6%8A%80%E8%A1%93%E5%88%86%E6%9E%90%E5%85%A5%E9%96%80%EF%BC%9A2026+%E5%B9%B4%E5%BF%85%E5%AD%B8+5+%E5%A4%A7%E6%8A%80%E8%A1%93%E6%8C%87%E6%A8%99%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?%E6%B8%AF%E8%82%A1%E6%8A%80%E8%A1%93%E5%88%86%E6%9E%90%E5%85%A5%E9%96%80%EF%BC%9A2026+%E5%B9%B4%E5%BF%85%E5%AD%B8+5+%E5%A4%A7%E6%8A%80%E8%A1%93%E6%8C%87%E6%A8%99%E5%AF%A6%E6%88%B0%E6%8C%87%E5%8D%97%0Ahttps://anthroskill.com/investment/2026/06/07/hk-stock-technical-analysis-guide-2026.html" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%95%E8%B3%87/2026/09/04/dividend-reinvestment-guide-hk.html" class="text-decoration-none">2026 股息再投資實戰指南：如何用股息滾出複利？</a>
+              <br><small class="text-muted">2026-09-04</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%95%E8%B3%87/2026/08/19/index-investing-guide-hk.html" class="text-decoration-none">2026 指數投資實戰指南：ETF 定期定額與被動投資如何開始？</a>
+              <br><small class="text-muted">2026-08-19</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%95%E8%B3%87/2026/08/05/hk-reit-investment-guide-2026.html" class="text-decoration-none">2026 香港 REIT 投資實戰指南：房地產信託基金收息入門、派息比較與風險管理</a>
+              <br><small class="text-muted">2026-08-05</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/investment/2026/07/10/hk-stock-sector-rotation-guide-2026.html" class="text-decoration-none">2026 下半年港股板塊輪動攻略：減息週期最新部署、AI科技股 vs 高息股 vs 消費復甦</a>
+              <br><small class="text-muted">2026-07-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/investment/2026/06/11/dca-monthly-stock-guide-hk.html" class="text-decoration-none">月供股票與平均成本法（DCA）實戰指南：每月一小步，財富一大步嘅香港人投資攻略</a>
+              <br><small class="text-muted">2026-06-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/investment/2026/06/09/bond-investing-rate-cut-guide.html" class="text-decoration-none">2026 減息週期債券投資終極指南：由零開始建立穩健收息組合</a>
+              <br><small class="text-muted">2026-06-09</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

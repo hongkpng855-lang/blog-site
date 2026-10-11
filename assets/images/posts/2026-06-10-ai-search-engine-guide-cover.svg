@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="gold1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#e2c96e"/>
+    </linearGradient>
+    <linearGradient id="blue1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a90d9"/>
+      <stop offset="100%" style="stop-color:#357abd"/>
+    </linearGradient>
+    <linearGradient id="cyan1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00b4d8"/>
+      <stop offset="100%" style="stop-color:#48cae4"/>
+    </linearGradient>
+    <linearGradient id="green1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b894"/>
+      <stop offset="100%" style="stop-color:#00cec9"/>
+    </linearGradient>
+    <linearGradient id="purple1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c5ce7"/>
+      <stop offset="100%" style="stop-color:#a29bfe"/>
+    </linearGradient>
+    <linearGradient id="card1g" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:0.92"/>
+      <stop offset="100%" style="stop-color:#152238;stop-opacity:0.92"/>
+    </linearGradient>
+    <linearGradient id="card2g" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2d4a;stop-opacity:0.88"/>
+      <stop offset="100%" style="stop-color:#0f1f38;stop-opacity:0.88"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4a90d9"/>
+      <stop offset="100%" style="stop-color:#FB923C"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid dots pattern -->
+  <g opacity="0.04">
+    <circle cx="40" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="120" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="200" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="280" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="360" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="440" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="520" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="600" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="680" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="760" cy="40" r="1" fill="#FB923C"/>
+    <circle cx="40" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="120" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="200" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="280" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="360" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="440" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="520" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="600" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="680" cy="110" r="1" fill="#FB923C"/>
+    <circle cx="760" cy="110" r="1" fill="#FB923C"/>
+  </g>
+
+  <!-- Central AI Search icon - magnifying glass with AI sparkle -->
+  <g transform="translate(400, 68)">
+    <circle cx="0" cy="0" r="38" fill="none" stroke="url(#blue1)" stroke-width="3" opacity="0.3"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="url(#cyan1)" stroke-width="2.5" opacity="0.6"/>
+    <!-- Magnifying glass -->
+    <circle cx="-4" cy="-4" r="16" fill="none" stroke="url(#gold1)" stroke-width="3.5"/>
+    <line x1="8" y1="8" x2="20" y2="20" stroke="url(#gold1)" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Sparkle dots -->
+    <circle cx="22" cy="-18" r="2.5" fill="#FB923C" filter="url(#glow)"/>
+    <circle cx="28" cy="6" r="1.8" fill="#48cae4" filter="url(#glow)"/>
+    <circle cx="-18" cy="20" r="2" fill="#00cec9" filter="url(#glow)"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="125" text-anchor="middle" fill="url(#gold1)" font-family="system-ui,sans-serif" font-size="22" font-weight="bold">AI 搜尋引擎與資訊整理</text>
+  <text x="400" y="148" text-anchor="middle" fill="#c0c0c0" font-family="system-ui,sans-serif" font-size="14">Perplexity · Google AI Overview · ChatGPT Search · NotebookLM</text>
+
+  <!-- Card 1: Perplexity -->
+  <g transform="translate(20, 172)" filter="url(#shadow)">
+    <rect width="180" height="110" rx="8" fill="url(#card1g)" stroke="#0f3460" stroke-width="1"/>
+    <rect x="0" y="0" width="180" height="4" rx="2" fill="url(#blue1)"/>
+    <text x="90" y="26" text-anchor="middle" fill="#4a90d9" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">🔍 Perplexity</text>
+    <text x="90" y="43" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">Pro Search 深度研究</text>
+    <text x="90" y="58" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">Collections 分類整理</text>
+    <text x="90" y="73" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">File Upload 分析</text>
+    <text x="90" y="90" text-anchor="middle" fill="#48cae4" font-family="system-ui,sans-serif" font-size="9.5">每日自動 Monitor</text>
+  </g>
+
+  <!-- Card 2: Google AI Overview -->
+  <g transform="translate(210, 172)" filter="url(#shadow)">
+    <rect width="180" height="110" rx="8" fill="url(#card1g)" stroke="#0f3460" stroke-width="1"/>
+    <rect x="0" y="0" width="180" height="4" rx="2" fill="url(#gold1)"/>
+    <text x="90" y="26" text-anchor="middle" fill="#FB923C" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">🌐 Google AI Overview</text>
+    <text x="90" y="43" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">SERP AI 摘要</text>
+    <text x="90" y="58" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">多步驟推理</text>
+    <text x="90" y="73" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">完全免費</text>
+    <text x="90" y="90" text-anchor="middle" fill="#FB923C" font-family="system-ui,sans-serif" font-size="9.5">中文支援有限</text>
+  </g>
+
+  <!-- Card 3: ChatGPT Search -->
+  <g transform="translate(400, 172)" filter="url(#shadow)">
+    <rect width="180" height="110" rx="8" fill="url(#card1g)" stroke="#0f3460" stroke-width="1"/>
+    <rect x="0" y="0" width="180" height="4" rx="2" fill="url(#green1)"/>
+    <text x="90" y="26" text-anchor="middle" fill="#00cec9" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">💬 ChatGPT Search</text>
+    <text x="90" y="43" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">混合搜尋 + 寫作</text>
+    <text x="90" y="58" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">Source Citation</text>
+    <text x="90" y="73" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">GPTs 特定領域</text>
+    <text x="90" y="90" text-anchor="middle" fill="#00cec9" font-family="system-ui,sans-serif" font-size="9.5">Voice Mode</text>
+  </g>
+
+  <!-- Card 4: NotebookLM -->
+  <g transform="translate(590, 172)" filter="url(#shadow)">
+    <rect width="190" height="110" rx="8" fill="url(#card1g)" stroke="#0f3460" stroke-width="1"/>
+    <rect x="0" y="0" width="190" height="4" rx="2" fill="url(#purple1)"/>
+    <text x="95" y="26" text-anchor="middle" fill="#a29bfe" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">📓 NotebookLM</text>
+    <text x="95" y="43" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">Source Grounding</text>
+    <text x="95" y="58" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">Audio Overview</text>
+    <text x="95" y="73" text-anchor="middle" fill="#a0a0a0" font-family="system-ui,sans-serif" font-size="9.5">零幻覺風險</text>
+    <text x="95" y="90" text-anchor="middle" fill="#a29bfe" font-family="system-ui,sans-serif" font-size="9.5">完全免費</text>
+  </g>
+
+  <!-- Bottom comparison bar -->
+  <g transform="translate(20, 300)" filter="url(#shadow)">
+    <rect width="760" height="50" rx="8" fill="#1e3a5f" stroke="#0f3460" stroke-width="1" opacity="0.9"/>
+    <text x="380" y="316" text-anchor="middle" fill="#FB923C" font-family="system-ui,sans-serif" font-size="10" font-weight="bold">2026 AI 搜尋引擎功能對比</text>
+    <line x1="40" y1="326" x2="760" y2="326" stroke="#0f3460" stroke-width="0.5"/>
+    <text x="95" y="342" text-anchor="middle" fill="#4a90d9" font-family="system-ui,sans-serif" font-size="9">Perplexity</text>
+    <text x="280" y="342" text-anchor="middle" fill="#FB923C" font-family="system-ui,sans-serif" font-size="9">Google AIO</text>
+    <text x="490" y="342" text-anchor="middle" fill="#00cec9" font-family="system-ui,sans-serif" font-size="9">ChatGPT S.</text>
+    <text x="680" y="342" text-anchor="middle" fill="#a29bfe" font-family="system-ui,sans-serif" font-size="9">NotebookLM</text>
+    <!-- Rating bars -->
+    <rect x="40" y="346" width="110" height="4" rx="2" fill="#0f3460"/>
+    <rect x="40" y="346" width="105" height="4" rx="2" fill="url(#blue1)"/>
+    <rect x="230" y="346" width="100" height="4" rx="2" fill="#0f3460"/>
+    <rect x="230" y="346" width="70" height="4" rx="2" fill="url(#gold1)"/>
+    <rect x="440" y="346" width="100" height="4" rx="2" fill="#0f3460"/>
+    <rect x="440" y="346" width="90" height="4" rx="2" fill="url(#green1)"/>
+    <rect x="630" y="346" width="100" height="4" rx="2" fill="#0f3460"/>
+    <rect x="630" y="346" width="95" height="4" rx="2" fill="url(#purple1)"/>
+  </g>
+
+  <!-- Stats badges -->
+  <g transform="translate(20, 370)">
+    <circle cx="100" cy="20" r="22" fill="#4a90d9" opacity="0.12"/>
+    <text x="100" y="24" text-anchor="middle" fill="#4a90d9" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">5x</text>
+    <text x="100" y="40" text-anchor="middle" fill="#777" font-family="system-ui,sans-serif" font-size="7.5">搜尋效率</text>
+  </g>
+  <g transform="translate(210, 370)">
+    <circle cx="100" cy="20" r="22" fill="#FB923C" opacity="0.12"/>
+    <text x="100" y="24" text-anchor="middle" fill="#FB923C" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">80%</text>
+    <text x="100" y="40" text-anchor="middle" fill="#777" font-family="system-ui,sans-serif" font-size="7.5">Source 可信度</text>
+  </g>
+  <g transform="translate(400, 370)">
+    <circle cx="100" cy="20" r="22" fill="#00cec9" opacity="0.12"/>
+    <text x="100" y="24" text-anchor="middle" fill="#00cec9" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">50</text>
+    <text x="100" y="40" text-anchor="middle" fill="#777" font-family="system-ui,sans-serif" font-size="7.5">Source 上限</text>
+  </g>
+  <g transform="translate(590, 370)">
+    <circle cx="100" cy="20" r="22" fill="#a29bfe" opacity="0.12"/>
+    <text x="100" y="24" text-anchor="middle" fill="#a29bfe" font-family="system-ui,sans-serif" font-size="11" font-weight="bold">$0</text>
+    <text x="100" y="40" text-anchor="middle" fill="#777" font-family="system-ui,sans-serif" font-size="7.5">NotebookLM 免費</text>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="400" y="445" text-anchor="middle" fill="#555" font-family="system-ui,sans-serif" font-size="8">ESGov Blog · 科技類 #auto-publish · 第七輪</text>
+</svg>

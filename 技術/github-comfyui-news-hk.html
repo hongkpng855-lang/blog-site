@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="ComfyUI 是 GitHub 上逾 13 萬星標的開源節點式 AI 創作引擎，以圖形化節點介面整合圖像、影片、3D、音訊與文字生成。本文解析其核心架構、模型支援範圍、與 WebUI 等工具的差異、安裝起步方式與生態發展，幫助創作者與開發者快速掌握這套生成式 AI 基礎設施的價值。">
+  <meta name="keywords" content="ComfyUI, AI 繪圖, 開源, 節點式, 生成式 AI, Stable Diffusion">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析">
+  <meta property="og:description" content="ComfyUI 是 GitHub 上逾 13 萬星標的開源節點式 AI 創作引擎，以圖形化節點介面整合圖像、影片、3D、音訊與文字生成。本文解析其核心架構、模型支援範圍、與 WebUI 等工具的差異、安裝起步方式與生態發展，幫助創作者與開發者快速掌握這套生成式 AI 基礎設施的價值。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-comfyui-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析">
+  <meta name="twitter:description" content="ComfyUI 是 GitHub 上逾 13 萬星標的開源節點式 AI 創作引擎，以圖形化節點介面整合圖像、影片、3D、音訊與文字生成。本文解析其核心架構、模型支援範圍、與 WebUI 等工具的差異、安裝起步方式與生態發展，幫助創作者與開發者快速掌握這套生成式 AI 基礎設施的價值。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-comfyui-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析",
+      "description": "ComfyUI 是 GitHub 上逾 13 萬星標的開源節點式 AI 創作引擎，以圖形化節點介面整合圖像、影片、3D、音訊與文字生成。本文解析其核心架構、模型支援範圍、與 WebUI 等工具的差異、安裝起步方式與生態發展，幫助創作者與開發者快速掌握這套生成式 AI 基礎設施的價值。",
+      "datePublished": "2026-09-06T04:00:01+08:00",
+      "dateModified": "2026-09-06T04:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/Comfy-Org/ComfyUI" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-comfyui-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月06日 04:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/Comfy-Org/ComfyUI" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-comfyui-news-hk-cover.jpg" alt="13 萬星開源項目：ComfyUI — 節點式 AI 創作引擎全解析" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/Comfy-Org/ComfyUI" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/Comfy-Org/ComfyUI
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>ComfyUI 是一個以節點式圖形介面為核心的開源 AI 內容創作引擎，截至 2026 年 9 月初在 GitHub 累積超過 13 萬星標與 1.5 萬次分叉，是生成式 AI 開源生態中最具影響力的基礎設施項目之一。該項目定位為「最強大且最具模組化的 AI 內容創作引擎」，讓使用者透過視覺化節點串接的方式，組合圖像、影片、3D 模型、音訊與文字生成工作流程，無需編寫程式碼即可實現高度精細的生成控制。本文將從核心架構、模型支援、市場定位與入門方式等角度，完整解析這個現象級開源項目。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>ComfyUI 是逾 13 萬星標的開源節點式 AI 創作引擎，以圖形化節點介面整合圖像、影片、3D、音訊與文字生成，無需寫程式即可精細控制每個參數與模型。
+<!-- End AEO Capsule --></p>
+
+<h2 id="comfyui-是什麼">ComfyUI 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>ComfyUI 由開發者 comfyanonymous 於 2023 年 1 月發起，最初以 Stable Diffusion 的圖像生成介面為定位，
+<!-- End AEO Capsule -->
+ComfyUI 由開發者 comfyanonymous 於 2023 年 1 月發起，最初以 Stable Diffusion 的圖像生成介面為定位，如今已交由 Comfy Org 組織維護，並發展為橫跨多模態內容創作的全方位引擎。與傳統一體化介面不同，ComfyUI 將每個處理步驟抽象為一個節點，使用者透過拖曳與連線，即可建立從模型載入、提示詞處理、擴散取樣到後製輸出的完整工作流程，所有參數皆可視覺化調整，也可以將整個流程保存為 JSON 檔案重複使用。</p>
+
+<p><img src="assets/images/posts/github-comfyui-news-hk-shot1.png" alt="ComfyUI README 開頭（Comfy-Org/ComfyUI 專案名稱、「The most powerful and modular AI engine for content creation」標語與節點式圖形介面定位說明）" /></p>
+
+<p>從官方定位來看，ComfyUI 服務的對象是「對每個模型、每個參數、每個輸出都要求完全掌控」的視覺專業人士。其介面提供可重用的子圖（Subgraphs）、工作流程範本、App Mode 與本地 API，讓最複雜的生成流程也能包裝成簡單易用的介面，甚至直接嵌入生產管線。這使得 ComfyUI 不只是個人創作工具，更成為許多團隊將生成式 AI 導入產品流程的技術基礎。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>ComfyUI 於 2023 年 1 月由 comfyanonymous 創建，現由 Comfy Org 維護，把每個處理步驟抽象為節點，拖曳連線即可建立多模態生成工作流程。
+<!-- End AEO Capsule --></p>
+
+<h2 id="comfyui-的核心技術亮點有哪些">ComfyUI 的核心技術亮點有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 61 字 -->
+<p>ComfyUI 的技術優勢首先體現在其異步佇列與部分圖重執行（Partial Graph Re-execution）機制。
+<!-- End AEO Capsule -->
+ComfyUI 的技術優勢首先體現在其異步佇列與部分圖重執行（Partial Graph Re-execution）機制。當使用者調整工作流程中某個節點時，系統只會重新執行受影響的部分，而非整條管線，這在複雜的多階段生成流程中能顯著節省運算時間。其次，其智能 VRAM 與 RAM 管理、模型卸載（Model Offloading）以及量化模型支援，讓中低階顯示卡也能運行大型擴散模型，大幅降低硬體門檻。</p>
+
+<p><img src="assets/images/posts/github-comfyui-news-hk-shot2.png" alt="ComfyUI GitHub 首頁頂部（Comfy-Org/ComfyUI 儲存庫名稱、約 131k 星標數與「The most powerful and modular diffusion model GUI」描述）" /></p>
+
+<p>另一個亮點是其在媒體格式上的完整度。ComfyUI 支援 16-bit PNG、32-bit EXR、10-bit AVIF 等高階影像格式，以及 HDR 影片的讀寫，符合電影後製與專業設計的工作需求。同時，項目內建 inpainting、outpainting、遮罩合成、模型合併、超解析度、幀插值、分割、深度估計等影像處理工具，許多原本需要額外軟體的工作都能在節點圖中一站式完成。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>核心亮點包括部分圖重執行節省算力、智能 VRAM 管理與模型卸載降低硬體門檻，並支援 16-bit PNG、EXR、HDR 等專業格式與內建完整影像處理工具。
+<!-- End AEO Capsule --></p>
+
+<h2 id="comfyui-支援哪些模型與內容類型">ComfyUI 支援哪些模型與內容類型？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>ComfyUI 的模型支援範圍在開源工具中首屈一指。圖像生成方面，原生支援 Stable Diffusion 1.5、SDXL、SD3.5、FLUX.1 與 F
+<!-- End AEO Capsule -->
+ComfyUI 的模型支援範圍在開源工具中首屈一指。圖像生成方面，原生支援 Stable Diffusion 1.5、SDXL、SD3.5、FLUX.1 與 FLUX.2、Qwen Image、Hunyuan Image 2.1、Kandinsky 5、Ideogram 4 等主流模型；圖像編輯則涵蓋 FLUX Kontext、Qwen Image Edit、OmniGen2 等。影片生成方面，支援 Wan 2.1 與 2.2、LTX-Video 2 與 2.3、HunyuanVideo 1.5、CogVideoX、Cosmos Predict2 等，覆蓋目前開源影片生成的主要陣營。</p>
+
+<p><img src="assets/images/posts/github-comfyui-news-hk-shot3.png" alt="ComfyUI GitHub 儲存庫星標與下載統計（顯示 131k 星標、約 15.5k fork 與專案授權資訊）" /></p>
+
+<p>audio 與 3D 領域同樣完整，包括 ACE-Step 1.5、Stable Audio 3、MiniMax Music 3 等音訊生成模型，以及 Hunyuan3D 2.1、TripoSplat 等 3D 生成模型；文字生成則支援 Gemma 3 與 4、Qwen3、Qwen3.5 等，並具備多模態輸入能力。此外，使用者可以載入完整的 checkpoint 或分離的 VAE、文字編碼器、LoRA、ControlNet、adapter 與 upscaler，透過合作節點（Partner Nodes）還能接入 Nano Banana、Seedance 等閉源商業模型。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>支援圖像（SD、FLUX）、影片（Wan、LTX-Video、HunyuanVideo）、3D 與文字模型，並可載入 LoRA、ControlNet 等附加元件。
+<!-- End AEO Capsule --></p>
+
+<h2 id="comfyui-與其他-ai-繪圖工具相比有何優勢">ComfyUI 與其他 AI 繪圖工具相比有何優勢？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>相較於 WebUI 這類一體化介面，ComfyUI 的最大差異在於控制的精細度與流程的可重用性。WebUI 以表單填寫的方式調整參數，適合快速出圖；
+<!-- End AEO Capsule -->
+相較於 WebUI 這類一體化介面，ComfyUI 的最大差異在於控制的精細度與流程的可重用性。WebUI 以表單填寫的方式調整參數，適合快速出圖；ComfyUI 則將所有參數攤開為節點，使用者可以自由組合、儲存與分享完整工作流程，甚至將流程以 JSON 格式嵌入其他應用，這種「流程即代碼」的特性讓它成為開發者與專業工作室的首選。</p>
+
+<p>在生態層面，ComfyUI 採取每週發布週期，核心儲存庫約每兩週推出一個穩定版本，並透過 ComfyUI Core、Comfy Desktop 與 ComfyUI Frontend 三個儲存庫分工維護。其跨平台支援涵蓋 Windows、Linux、macOS，並兼容 NVIDIA、AMD、Intel、Apple Silicon 與 Ascend 等不同 GPU 陣營；同時提供桌面應用程式、可攜版、comfy-cli 命令列安裝與官方雲端服務等多種部署方式，適應從個人到企業的不同場景。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>相較 WebUI 的表單式操作，ComfyUI 以節點化流程提供更精細控制與可重用性，流程可存為 JSON 嵌入生產管線，並採每週發布與跨 GPU 陣營支援。
+<!-- End AEO Capsule --></p>
+
+<h2 id="如何快速開始使用-comfyui">如何快速開始使用 ComfyUI？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>對一般使用者而言，最快的方式是下載官方桌面應用程式，適用於 Windows 與 macOS，安裝後即可透過圖形介面開始建立工作流程；
+<!-- End AEO Capsule -->
+對一般使用者而言，最快的方式是下載官方桌面應用程式，適用於 Windows 與 macOS，安裝後即可透過圖形介面開始建立工作流程；進階使用者可選擇 Windows 可攜版，解壓縮後將模型放入對應資料夾即可運行，或透過 git clone 手動安裝，支援所有作業系統與 GPU 類型。開發者亦可使用 comfy-cli，以 <code class="language-plaintext highlighter-rouge">pip install comfy-cli</code> 與 <code class="language-plaintext highlighter-rouge">comfy install</code> 兩條指令完成安裝與啟動。</p>
+
+<p>新手入門時，官方提供了工作流程範本庫（comfy.org/workflows），內含大量已維護、可直接執行的範本，涵蓋文生圖、圖生圖、影片生成等常見任務；也能在節點圖中雙擊開啟節點搜尋面板，快速找到需要的功能節點。若本地硬體不足以運行大型模型，Comfy Cloud 提供了官方付費雲端版本，而核心功能預設完全離線運作，不會主動下載任何內容，對重視資料隱私的使用者尤其友好。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>最簡單是安裝官方桌面應用程式；亦可使用 Windows 可攜版、git clone 或 comfy-cli 安裝，官方並提供範本工作流與 Comfy Cloud 雲端方案。
+<!-- End AEO Capsule --></p>
+
+<h2 id="comfyui-的開源生態發展如何">ComfyUI 的開源生態發展如何？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>項目於 2023 年開源，目前累積 131,524 星標與 15,504 次 fork，採用 GPL-3.0 授權，主要語言為 Python，至今仍維持每週高頻更新。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat"><div class="stat-num">131,524</div><div class="stat-label">Star</div></div>
+  <div class="stat"><div class="stat-num">15,504</div><div class="stat-label">Fork</div></div>
+  <div class="stat"><div class="stat-num">GPL-3.0</div><div class="stat-label">授權</div></div>
+  <div class="stat"><div class="stat-num">Python</div><div class="stat-label">主要語言</div></div>
+</div>
+
+<p>從生態角度觀察，ComfyUI 已從單一工具發展為完整的開源創作平台。圍繞核心儲存庫，Comfy Org 建立了桌面版、前端介面、雲端服務與商業 API 節點，社群則貢獻了大量自訂節點與工作流程模板，形成內容創作生態的良性循環。其商業化路徑以雲端訂閱與 API 服務為主，核心功能維持開源，這種模式讓項目在保持社群活力的同時具備可持續的發展資金。</p>
+
+<p>值得一提的是，ComfyUI 的應用場景已從單純的 AI 繪圖擴展至專業影視後製、遊戲資產生產與 3D 建模等領域，其對高階媒體格式與多模態模型的原生支援，使它成為連接開源生成模型與專業工作流程之間的關鍵橋樑。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>本文資訊來源為 ComfyUI 的官方 GitHub 儲存庫，讀者可前往查看完整原始碼、文件與發布紀錄；相關資源亦包括官方網站與工作流程範本庫。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/Comfy-Org/ComfyUI</li>
+  <li>官方網站：https://www.comfy.org/</li>
+  <li>工作流程範本庫：https://comfy.org/workflows</li>
+</ul>
+
+<h2 id="總結comfyui-適合什麼團隊">總結：ComfyUI 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>ComfyUI 適合需要對生成流程擁有完整控制力的視覺創作者、研究最新開源模型的 AI 工程師，以及希望將生成式 AI 整合進產品管線的開發團隊。
+<!-- End AEO Capsule -->
+ComfyUI 適合需要對生成流程擁有完整控制力的視覺創作者、研究最新開源模型的 AI 工程師，以及希望將生成式 AI 整合進產品管線的開發團隊。其節點式介面雖然存在學習曲線，但官方範本、大量社群資源與桌面應用程式已將入門門檻大幅降低；對於重視資料隱私、需要完全離線運作的企業，它亦提供了成熟的自託管方案。</p>
+
+<p>綜合而言，ComfyUI 以 13 萬星標的社群背書、極廣的模型相容性與完整的生態體系，成為開源生成式 AI 領域最具代表性的創作引擎。對於追求生成品質與控制力的使用者，這是一個值得深入投資時間學習的工具；而官方持續的發布節奏與商業化的穩定推進，也為長期採用提供了信心基礎。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>ComfyUI 適合需要精細控制生成流程的創作者、研究開源模型的工程師與整合 AI 管線的團隊；雖有學習曲線，但官方範本、社群資源與離線能力顯著降低入門門檻。
+<!-- End AEO Capsule --></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=ComfyUI" class="badge bg-secondary text-decoration-none me-1">ComfyUI</a>
+          
+          
+          <a href="/search/?q=AI+%E7%B9%AA%E5%9C%96" class="badge bg-secondary text-decoration-none me-1">AI 繪圖</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=%E7%AF%80%E9%BB%9E%E5%BC%8F" class="badge bg-secondary text-decoration-none me-1">節點式</a>
+          
+          
+          <a href="/search/?q=%E7%94%9F%E6%88%90%E5%BC%8F+AI" class="badge bg-secondary text-decoration-none me-1">生成式 AI</a>
+          
+          
+          <a href="/search/?q=Stable+Diffusion" class="badge bg-secondary text-decoration-none me-1">Stable Diffusion</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk&text=13+%E8%90%AC%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AComfyUI+%E2%80%94+%E7%AF%80%E9%BB%9E%E5%BC%8F+AI+%E5%89%B5%E4%BD%9C%E5%BC%95%E6%93%8E%E5%85%A8%E8%A7%A3%E6%9E%90" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?13+%E8%90%AC%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AComfyUI+%E2%80%94+%E7%AF%80%E9%BB%9E%E5%BC%8F+AI+%E5%89%B5%E4%BD%9C%E5%BC%95%E6%93%8E%E5%85%A8%E8%A7%A3%E6%9E%90%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-comfyui-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vaultwarden-news" class="text-decoration-none">Vaultwarden 開源：6.8 萬星的自架密碼庫</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-godot-news" class="text-decoration-none">Godot 118k 星開源引擎：完全免費無抽成</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-code-server-news" class="text-decoration-none">code-server 4.140.0：瀏覽器內的 VS Code</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-codebase-memory-mcp-news" class="text-decoration-none">codebase-memory-mcp 開源：Linux 核心索引僅 3 分鐘</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

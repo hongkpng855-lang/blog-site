@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="moon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fde68a"/>
+      <stop offset="100%" style="stop-color:#fbbf24"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Stars -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="50" cy="60" r="2"/><circle cx="120" cy="30" r="1.5"/>
+    <circle cx="200" cy="80" r="1"/><circle cx="300" cy="45" r="2"/>
+    <circle cx="380" cy="70" r="1.5"/><circle cx="450" cy="35" r="1"/>
+    <circle cx="80" cy="140" r="1"/><circle cx="160" cy="120" r="1.5"/>
+    <circle cx="400" cy="130" r="2"/><circle cx="470" cy="100" r="1"/>
+    <circle cx="30" cy="200" r="1.5"/><circle cx="490" cy="180" r="1.5"/>
+    <circle cx="350" cy="160" r="1"/><circle cx="260" cy="100" r="1.5"/>
+    <circle cx="440" cy="220" r="1"/>
+  </g>
+  <!-- Moon -->
+  <circle cx="380" cy="100" r="40" fill="url(#moon)" filter="url(#glow)"/>
+  <circle cx="395" cy="90" r="35" fill="url(#bg)"/>
+  <!-- Mountain silhouette -->
+  <path d="M0 420 Q80 320 160 360 Q200 340 260 300 Q320 280 370 320 Q430 290 512 340 L512 512 L0 512Z" fill="#1e293b" opacity="0.8"/>
+  <path d="M0 460 Q100 400 200 420 Q280 390 350 410 Q420 380 512 400 L512 512 L0 512Z" fill="#0f172a" opacity="0.9"/>
+  <!-- Zzz text -->
+  <text x="120" y="180" font-family="system-ui,sans-serif" font-size="28" font-weight="bold" fill="#818cf8" opacity="0.3" transform="rotate(-15,120,180)">z</text>
+  <text x="150" y="160" font-family="system-ui,sans-serif" font-size="34" font-weight="bold" fill="#818cf8" opacity="0.45" transform="rotate(-12,150,160)">z</text>
+  <text x="190" y="135" font-family="system-ui,sans-serif" font-size="42" font-weight="bold" fill="#a5b4fc" opacity="0.6" transform="rotate(-8,190,135)">z</text>
+  <!-- Title text -->
+  <text x="256" y="380" font-family="system-ui,sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle" letter-spacing="1">睡眠品質完全指南</text>
+  <text x="256" y="415" font-family="system-ui,sans-serif" font-size="14" fill="#94a3b8" text-anchor="middle">7 步驟告別失眠・科學驗證方法</text>
+  <!-- Decorative line -->
+  <line x1="156" y1="430" x2="356" y2="430" stroke="#fbbf24" stroke-width="2" opacity="0.6"/>
+</svg>

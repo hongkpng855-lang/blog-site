@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="50%" style="stop-color:#141b4d"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <linearGradient id="glow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#00d4ff;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="glow2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7b2ff7;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#7b2ff7;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#0099cc"/>
+    </linearGradient>
+    <linearGradient id="purpleAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7b2ff7"/>
+      <stop offset="100%" style="stop-color:#5200cc"/>
+    </linearGradient>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect width="512" height="512" fill="url(#glow1)"/>
+  <rect width="512" height="512" fill="url(#glow2)"/>
+
+  <!-- Circuit board lines -->
+  <g stroke="#1a2a6c" stroke-width="1" fill="none" opacity="0.4">
+    <path d="M0,128 Q128,64 256,128 Q384,192 512,128"/>
+    <path d="M0,256 Q128,192 256,256 Q384,320 512,256"/>
+    <path d="M0,384 Q128,320 256,384 Q384,448 512,384"/>
+  </g>
+
+  <!-- Grid dots -->
+  <g fill="#1a2a6c" opacity="0.5">
+    <circle cx="64" cy="64" r="1.5"/><circle cx="128" cy="64" r="1.5"/>
+    <circle cx="192" cy="64" r="1.5"/><circle cx="256" cy="64" r="1.5"/>
+    <circle cx="320" cy="64" r="1.5"/><circle cx="384" cy="64" r="1.5"/>
+    <circle cx="448" cy="64" r="1.5"/>
+    <circle cx="64" cy="128" r="1.5"/><circle cx="448" cy="128" r="1.5"/>
+    <circle cx="64" cy="192" r="1.5"/><circle cx="448" cy="192" r="1.5"/>
+    <circle cx="64" cy="320" r="1.5"/><circle cx="448" cy="320" r="1.5"/>
+    <circle cx="64" cy="384" r="1.5"/><circle cx="448" cy="384" r="1.5"/>
+    <circle cx="64" cy="448" r="1.5"/><circle cx="128" cy="448" r="1.5"/>
+    <circle cx="192" cy="448" r="1.5"/><circle cx="320" cy="448" r="1.5"/>
+    <circle cx="384" cy="448" r="1.5"/><circle cx="448" cy="448" r="1.5"/>
+  </g>
+
+  <!-- Central processor icon -->
+  <g transform="translate(256,200)">
+    <rect x="-45" y="-45" width="90" height="90" rx="8" fill="#0d1117" stroke="#00d4ff" stroke-width="2" filter="url(#neonGlow)"/>
+    <!-- Inner circuit -->
+    <rect x="-25" y="-25" width="50" height="50" rx="4" fill="none" stroke="#7b2ff7" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="8" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+    <circle cx="0" cy="0" r="3" fill="#00d4ff" opacity="0.8"/>
+    <!-- Connection lines -->
+    <g stroke="#00d4ff" stroke-width="1.5" opacity="0.6">
+      <line x1="-45" y1="-25" x2="-60" y2="-25"/>
+      <line x1="-45" y1="0" x2="-60" y2="0"/>
+      <line x1="-45" y1="25" x2="-60" y2="25"/>
+      <line x1="45" y1="-25" x2="60" y2="-25"/>
+      <line x1="45" y1="0" x2="60" y2="0"/>
+      <line x1="45" y1="25" x2="60" y2="25"/>
+      <line x1="-25" y1="-45" x2="-25" y2="-60"/>
+      <line x1="0" y1="-45" x2="0" y2="-60"/>
+      <line x1="25" y1="-45" x2="25" y2="-60"/>
+      <line x1="-25" y1="45" x2="-25" y2="60"/>
+      <line x1="0" y1="45" x2="0" y2="60"/>
+      <line x1="25" y1="45" x2="25" y2="60"/>
+    </g>
+    <!-- Floating data dots -->
+    <circle cx="-55" cy="-25" r="2.5" fill="#00d4ff" filter="url(#neonGlow)"/>
+    <circle cx="-55" cy="0" r="2.5" fill="#00d4ff" filter="url(#neonGlow)"/>
+    <circle cx="-55" cy="25" r="2.5" fill="#00d4ff" filter="url(#neonGlow)"/>
+    <circle cx="55" cy="-25" r="2.5" fill="#7b2ff7" filter="url(#neonGlow)"/>
+    <circle cx="55" cy="0" r="2.5" fill="#7b2ff7" filter="url(#neonGlow)"/>
+    <circle cx="55" cy="25" r="2.5" fill="#7b2ff7" filter="url(#neonGlow)"/>
+  </g>
+
+  <!-- Orbiting particles -->
+  <g opacity="0.6">
+    <circle cx="256" cy="115" r="2" fill="#00d4ff" filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="340" cy="155" r="2" fill="#7b2ff7" filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="330" cy="245" r="2" fill="#00d4ff" filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="172" cy="155" r="2" fill="#7b2ff7" filter="url(#neonGlow)">
+      <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Title text -->
+  <text x="256" y="330" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="bold" fill="#00d4ff" filter="url(#softGlow)">2026 科技趨勢</text>
+  <text x="256" y="360" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#8b9dc3" opacity="0.9">十大科技趨勢完整指南</text>
+
+  <!-- Bottom accent bar -->
+  <rect x="180" y="378" width="152" height="2" rx="1" fill="url(#cyanAccent)" opacity="0.7"/>
+
+  <!-- Small tech tags -->
+  <g font-family="system-ui, sans-serif" font-size="8" fill="#4a6fa5" opacity="0.7">
+    <text x="80" y="430" text-anchor="middle">AI 代理</text>
+    <text x="155" y="430" text-anchor="middle">量子運算</text>
+    <text x="256" y="430" text-anchor="middle">邊緣 AI</text>
+    <text x="356" y="430" text-anchor="middle">人形機器人</text>
+    <text x="432" y="430" text-anchor="middle">低軌衛星</text>
+  </g>
+  <g font-family="system-ui, sans-serif" font-size="8" fill="#3a5a85" opacity="0.5">
+    <text x="80" y="445" text-anchor="middle">Agent</text>
+    <text x="155" y="445" text-anchor="middle">Quantum</text>
+    <text x="256" y="445" text-anchor="middle">Edge AI</text>
+    <text x="356" y="445" text-anchor="middle">Humanoid</text>
+    <text x="432" y="445" text-anchor="middle">Satellite</text>
+  </g>
+</svg>

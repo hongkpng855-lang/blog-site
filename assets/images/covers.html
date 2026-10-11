@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=630">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        .cover {
+            width: 1200px;
+            height: 630px;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Microsoft JhengHei', 'PingFang TC', sans-serif;
+        }
+        
+        /* 投資類 - 深藍金 */
+        .investment {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+        }
+        
+        /* 學習類 - 深灰綠 */
+        .learning {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        }
+        
+        /* 技術類 - 極深藍 */
+        .tech {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+        }
+        
+        .accent-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+        }
+        
+        .investment .accent-bar { background: #ffd700; }
+        .learning .accent-bar { background: #48bb78; }
+        .tech .accent-bar { background: #4299e1; }
+        
+        .side-line {
+            position: absolute;
+            left: 60px;
+            top: 200px;
+            width: 8px;
+            height: 230px;
+            border-radius: 4px;
+        }
+        
+        .investment .side-line { background: #ffd700; }
+        .learning .side-line { background: #48bb78; }
+        .tech .side-line { background: #4299e1; }
+        
+        .category-tag {
+            position: absolute;
+            left: 100px;
+            top: 180px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .investment .category-tag { color: #ffd700; }
+        .learning .category-tag { color: #48bb78; }
+        .tech .category-tag { color: #4299e1; }
+        
+        .title {
+            position: absolute;
+            left: 100px;
+            top: 250px;
+            font-size: 52px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1.3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            position: absolute;
+            left: 100px;
+            top: 380px;
+            font-size: 28px;
+            color: #a0aec0;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            padding: 0 100px;
+        }
+        
+        .footer-text {
+            color: #e2e8f0;
+            font-size: 18px;
+        }
+        
+        /* 裝飾元素 */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        
+        .circle-1 {
+            width: 400px;
+            height: 400px;
+            right: -100px;
+            top: -100px;
+            background: currentColor;
+        }
+        
+        .circle-2 {
+            width: 300px;
+            height: 300px;
+            right: 100px;
+            bottom: -150px;
+            background: currentColor;
+        }
+        
+        .investment .circle { color: #ffd700; }
+        .learning .circle { color: #48bb78; }
+        .tech .circle { color: #4299e1; }
+    </style>
+</head>
+<body style="background: #333;">
+    <!-- 封面 1：被動收入入門 -->
+    <div class="cover investment" id="cover1">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="accent-bar"></div>
+        <div class="side-line"></div>
+        <div class="category-tag">#投資理財</div>
+        <div class="title">被動收入入門</div>
+        <div class="subtitle">從零開始建立你的第一個收入來源</div>
+        <div class="footer">
+            <div class="footer-text">Sun ny 的部落格</div>
+        </div>
+    </div>
+    
+    <!-- 封面 2：提升工作效率 -->
+    <div class="cover learning" id="cover2" style="margin-top: 20px;">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="accent-bar"></div>
+        <div class="side-line"></div>
+        <div class="category-tag">#學習成長</div>
+        <div class="title">提升工作效率的五個技巧</div>
+        <div class="subtitle">讓你的工作事半功倍</div>
+        <div class="footer">
+            <div class="footer-text">Sun ny 的部落格</div>
+        </div>
+    </div>
+    
+    <!-- 封面 3：GitHub Pages 教學 -->
+    <div class="cover tech" id="cover3" style="margin-top: 20px;">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="accent-bar"></div>
+        <div class="side-line"></div>
+        <div class="category-tag">#技術教學</div>
+        <div class="title">GitHub Pages 部落格教學</div>
+        <div class="subtitle">從零開始建立個人網站</div>
+        <div class="footer">
+            <div class="footer-text">Sun ny 的部落格</div>
+        </div>
+    </div>
+</body>
+</html>

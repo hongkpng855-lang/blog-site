@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>65,763 星開源項目：Prometheus — 雲原生監控的事實標準 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Prometheus 是雲原生計算基金會（CNCF）畢業的開源監控系統與時序資料庫，GitHub 獲 65,763 顆星標。它以多維度資料模型、PromQL 查詢語言與 HTTP 拉取模型著稱，自 2012 年誕生以來已成 Kubernetes 生態的事實監控標準，企業可經 Apache-2.0 授權自由商用。">
+  <meta name="keywords" content="Prometheus, 監控, DevOps, 雲原生, 開源, CNCF">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="65,763 星開源項目：Prometheus — 雲原生監控的事實標準">
+  <meta property="og:description" content="Prometheus 是雲原生計算基金會（CNCF）畢業的開源監控系統與時序資料庫，GitHub 獲 65,763 顆星標。它以多維度資料模型、PromQL 查詢語言與 HTTP 拉取模型著稱，自 2012 年誕生以來已成 Kubernetes 生態的事實監控標準，企業可經 Apache-2.0 授權自由商用。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-prometheus-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="65,763 星開源項目：Prometheus — 雲原生監控的事實標準">
+  <meta name="twitter:description" content="Prometheus 是雲原生計算基金會（CNCF）畢業的開源監控系統與時序資料庫，GitHub 獲 65,763 顆星標。它以多維度資料模型、PromQL 查詢語言與 HTTP 拉取模型著稱，自 2012 年誕生以來已成 Kubernetes 生態的事實監控標準，企業可經 Apache-2.0 授權自由商用。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-prometheus-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "65,763 星開源項目：Prometheus — 雲原生監控的事實標準",
+      "description": "Prometheus 是雲原生計算基金會（CNCF）畢業的開源監控系統與時序資料庫，GitHub 獲 65,763 顆星標。它以多維度資料模型、PromQL 查詢語言與 HTTP 拉取模型著稱，自 2012 年誕生以來已成 Kubernetes 生態的事實監控標準，企業可經 Apache-2.0 授權自由商用。",
+      "datePublished": "2026-08-21T14:00:01+08:00",
+      "dateModified": "2026-08-21T14:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/prometheus/prometheus" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-prometheus-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "65,763 星開源項目：Prometheus — 雲原生監控的事實標準",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">65,763 星開源項目：Prometheus — 雲原生監控的事實標準</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">65,763 星開源項目：Prometheus — 雲原生監控的事實標準</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月21日 14:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-prometheus-news-hk-cover.jpg" alt="65,763 星開源項目：Prometheus — 雲原生監控的事實標準" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/prometheus/prometheus" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/prometheus/prometheus
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Prometheus 是雲原生計算基金會（Cloud Native Computing Foundation，CNCF）畢業的開源監控系統與時序資料庫，GitHub 星標數達 65,763 顆。這個於 2012 年誕生、以 Go 語言撰寫的項目，定義了現代雲原生監控的基本樣貌：多維度資料模型、PromQL 查詢語言與 HTTP 拉取模型，讓它成為 Kubernetes 生態系統中最被廣泛採用的監控方案，被業界視為可觀測性領域的事實標準。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>Prometheus 是 CNCF 畢業的開源監控系統與時序資料庫，GitHub 獲 65,763 顆星標。它以多維度資料模型、PromQL 查詢語言與 HTTP 拉取模型為核心，是 Kubernetes 生態的事實監控標準，支援警示規則、服務發現與聯邦架構，企業可經 Apache-2.0 授權自由商用。
+<!-- End AEO Capsule --></p>
+
+<h2 id="prometheus-是什麼">Prometheus 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>Prometheus 是一套系統與服務監控解決方案，負責從設定的目標以固定間隔收集指標、評估規則表達式、顯示結果，並在特定條件被觀察到時觸發警示。
+<!-- End AEO Capsule -->
+Prometheus 是一套系統與服務監控解決方案，負責從設定的目標以固定間隔收集指標、評估規則表達式、顯示結果，並在特定條件被觀察到時觸發警示。它同時具備監控系統與時序資料庫的雙重身份，指標資料以「指標名稱加上一組鍵值維度」的形式儲存，構成多維度資料模型，這是它與傳統監控工具最根本的差異。</p>
+
+<p>項目的誕生源於 2012 年，最初由 SoundCloud 內部開發，隨後於 2016 年加入 CNCF，成為該基金會第二個畢業項目，僅次於 Kubernetes。其核心程式以 Go 撰寫，Apache-2.0 授權，任何組織都可以自由使用、修改與商業化部署，無需支付授權費用。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Prometheus 是一套開源監控系統與時序資料庫，2012 年由 SoundCloud 開發，2016 年加入 CNCF 並成為第二個畢業項目。它以指標名稱加鍵值維度構成多維度資料模型，支援警示規則與服務發現，Apache-2.0 授權允許自由商用。
+<!-- End AEO Capsule --></p>
+
+<h2 id="prometheus-與其他監控系統有何不同">Prometheus 與其他監控系統有何不同？</h2>
+
+<!-- AEO Answer Capsule — 約 50 字 -->
+<p>Prometheus 與傳統監控系統的關鍵差異，在於其 HTTP 拉取模型與多維度資料模型兩項設計。
+<!-- End AEO Capsule -->
+Prometheus 與傳統監控系統的關鍵差異，在於其 HTTP 拉取模型與多維度資料模型兩項設計。傳統方案如 Nagios 多採用推送與輪詢的健康檢查模式，著重於主機與服務的可用狀態；Prometheus 則主動向目標端點拉取指標，每個監控伺服器節點保持自主，不依賴分散式儲存，單一節點即可獨立運作，大幅降低部署與維護的複雜度。</p>
+
+<p>多維度資料模型讓同一指標可以攜帶任意組合的標籤，例如 HTTP 請求數可以按方法、狀態碼、端點等維度拆分查詢。配合 PromQL 查詢語言，使用者可以即時聚合、計算比率與執行複雜的時間序列分析，這是以往監控工具難以達到的靈活性。批次任務則可透過中介閘道（Pushgateway）推送指標，兼顧拉取與推送兩種場景。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Prometheus 以 HTTP 拉取模型與多維度資料模型與傳統監控系統區隔：監控節點自主運作、不依賴分散式儲存，指標可按任意標籤維度拆分，配合 PromQL 即時聚合與分析，批次任務則經 Pushgateway 推送，兼顧兩種收集場景。
+<!-- End AEO Capsule --></p>
+
+<h2 id="prometheus-的核心架構如何運作">Prometheus 的核心架構如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>Prometheus 的架構由數個協作組件構成：伺服器本身負責指標收集、儲存與查詢；服務發現機制自動找出需要監控的目標，
+<!-- End AEO Capsule -->
+Prometheus 的架構由數個協作組件構成：伺服器本身負責指標收集、儲存與查詢；服務發現機制自動找出需要監控的目標，支援 Kubernetes、Consul、DNS 等多種來源，也可以使用靜態設定；警示規則引擎根據 PromQL 表達式評估條件，觸發時將警示送至 Alertmanager 進行去重、分組與路由。多種圖表與儀表板模式則負責將資料視覺化。</p>
+
+<p>聯邦（Federation）架構讓 Prometheus 可以分層部署，上層伺服器從下層伺服器拉取彙總指標，適合大規模或多租戶環境。針對 Go 開發者，生態中的 client_golang 等函式庫提供指標埋點能力；Remote Write 協定則允許將資料轉送至長期儲存方案，其 protobuf 定義獨立發布於 buf.build，供第三方整合。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Prometheus 架構由伺服器、服務發現、警示規則引擎與 Alertmanager 等組件構成，支援 Kubernetes 等多種服務發現來源。聯邦架構允許分層部署與彙總，client_golang 提供埋點能力，Remote Write 協定可將資料轉送至長期儲存。
+<!-- End AEO Capsule --></p>
+
+<h2 id="promql-為什麼是-prometheus-的核心競爭力">PromQL 為什麼是 Prometheus 的核心競爭力？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>PromQL 是 Prometheus 內建的查詢語言，設計目標是充分利用多維度資料模型。它支援即時查詢與範圍查詢，
+<!-- End AEO Capsule -->
+PromQL 是 Prometheus 內建的查詢語言，設計目標是充分利用多維度資料模型。它支援即時查詢與範圍查詢，使用者可以用一行表達式計算每秒請求率、錯誤率、百分位數等指標，例如以 rate 函數搭配時間範圍選擇器，即可得到某個服務的請求吞吐量。語法設計讓維度聚合、數學運算與布林邏輯可以組合使用。</p>
+
+<p>PromQL 的強大之處在於其表達力與可組合性，監控工程師可以將查詢結果直接餵給警示規則、儀表板或臨時探索工具，同一套語法貫穿整個監控工作流程。正因如此，PromQL 已成為可觀測性領域的通用語言，許多其他監控產品與雲服務都相容或借鑒其語法，進一步鞏固了 Prometheus 在生態系統中的核心位置。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>PromQL 是 Prometheus 的查詢語言，一行表達式即可計算請求率、錯誤率與百分位數，支援維度聚合與數學運算。其表達力與可組合性讓查詢結果直接應用於警示規則、儀表板與探索工具，並成為可觀測性領域的通用語言。
+<!-- End AEO Capsule --></p>
+
+<h2 id="prometheus-的生態系統如何發展">Prometheus 的生態系統如何發展？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>Prometheus 圍繞核心伺服器建立了龐大的生態系統，包括官方與社群維護的 exporter（指標匯出器），
+<!-- End AEO Capsule -->
+Prometheus 圍繞核心伺服器建立了龐大的生態系統，包括官方與社群維護的 exporter（指標匯出器），涵蓋資料庫、訊息佇列、作業系統與硬體等數百種目標；Grafana 將 Prometheus 作為最主流的資料來源之一，形成「Prometheus 收集、Grafana 呈現」的標準組合。此外，Thanos 與 Cortex 等社群項目擴展了長期儲存與高可用能力，Alertmanager 則負責警示的生命週期管理。</p>
+
+<p>在商業化路徑上，CNCF 的治理框架與 Apache-2.0 授權讓 Prometheus 可以嵌入各種商業產品，雲端供應商提供的受管監控服務大多相容 PromQL 與 Remote Write 協定。項目至今仍維持活躍開發，最近一次程式碼更新為 2026 年 8 月 20 日，持續加入安全性修補與效能改進，顯示其作為基礎設施元件的長期穩定性。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Prometheus 生態涵蓋數百種 exporter、Grafana 整合、Thanos 與 Cortex 長期儲存方案，以及 Alertmanager 警示管理。CNCF 治理與 Apache-2.0 授權支持其嵌入商業產品，雲端受管監控服務大多相容 PromQL 與 Remote Write 協定，項目至今仍每日活躍更新。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="stat-card"><div class="stat-value">65,763</div><div class="stat-label">GitHub 星標</div></div>
+<div class="stat-card"><div class="stat-value">10,777</div><div class="stat-label">復刻數</div></div>
+<div class="stat-card"><div class="stat-value">Go</div><div class="stat-label">主要語言</div></div>
+<div class="stat-card"><div class="stat-value">Apache-2.0</div><div class="stat-label">開源許可證</div></div>
+<div class="stat-card"><div class="stat-value">2012-11</div><div class="stat-label">建立時間</div></div>
+<div class="stat-card"><div class="stat-value">2026-08-20</div><div class="stat-label">最近更新</div></div>
+</div>
+
+<p><img src="/assets/images/posts/github-prometheus-news-hk-shot1.png" alt="Prometheus README 開頭（項目名稱 Prometheus 大字 + 描述「systems and service monitoring system」+ CNCF 徽章列）" /></p>
+
+<h2 id="如何快速開始使用-prometheus">如何快速開始使用 Prometheus？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>對初次接觸的使用者，Prometheus 提供多條安裝路徑，最直接的方式是下載官方預編譯二進位檔，或使用 Docker 映像檔啟動。
+<!-- End AEO Capsule -->
+對初次接觸的使用者，Prometheus 提供多條安裝路徑，最直接的方式是下載官方預編譯二進位檔，或使用 Docker 映像檔啟動。以 Docker 為例，執行 <code class="language-plaintext highlighter-rouge">docker run --name prometheus -d -p 127.0.0.1:9090:9090 prom/prometheus</code>，Prometheus 即可在 http://localhost:9090/ 存取，內建網頁介面與指標瀏覽器。進階使用者可以從原始碼以 <code class="language-plaintext highlighter-rouge">make build</code> 建置，編譯過程會將網頁資源內嵌至二進位檔，讓執行檔可以獨立運行；<code class="language-plaintext highlighter-rouge">make test</code> 則提供完整的測試流程。</p>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>快速開始 Prometheus 最直接的方式是下載預編譯二進位檔或使用 Docker 映像檔，例如 <code class="language-plaintext highlighter-rouge">docker run -d -p 127.0.0.1:9090:9090 prom/prometheus</code> 即可啟動。原始碼建置可選 <code class="language-plaintext highlighter-rouge">make build</code> 內嵌網頁資源，<code class="language-plaintext highlighter-rouge">make test</code> 提供完整測試流程。
+<!-- End AEO Capsule --></p>
+
+<p>配置方面，Prometheus 以 YAML 檔案定義收集目標、服務發現與警示規則，官方提供範例設定檔供參考。收集目標可以透過靜態設定指定，也可以啟用 Kubernetes、Consul 等服務發現外掛自動偵測；建置時可以使用 Go build tags 精簡服務發現功能，例如 <code class="language-plaintext highlighter-rouge">remove_all_sd</code> 保留檔案、靜態與 HTTP 三種基礎發現，再以 <code class="language-plaintext highlighter-rouge">enable_kubernetes_sd</code> 重新啟用特定外掛，適合需要控制二進位檔體積的部署場景。</p>
+
+<p><img src="/assets/images/posts/github-prometheus-news-hk-shot2.png" alt="Prometheus GitHub 首頁頂部（repo 名 prometheus/prometheus + Star 數 65.8k + 描述「The Prometheus monitoring system and time series database」+ topics）" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<p>本文資訊來源為 prometheus/prometheus 的 GitHub 儲存庫，完整 README、原始碼與文件可參考：<a href="https://github.com/prometheus/prometheus">Prometheus GitHub 儲存庫</a>。官方文件、安裝指南與下載頁面則位於 <a href="https://prometheus.io">prometheus.io</a>。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>本文資訊來源為 prometheus/prometheus 的 GitHub 儲存庫，該儲存庫提供完整 README、原始碼與安裝文件；官方文件、下載頁面與社群資源則集中在 prometheus.io 網站。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-prometheus-news-hk-shot3.png" alt="Prometheus Contributors 統計頁（主要貢獻者的提交分布圖與每週提交趨勢）" /></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Prometheus 以多維度資料模型與 PromQL 查詢語言著稱，支援拉取與推送兩種指標收集方式，可經服務發現自動偵測目標，並以聯邦架構分層部署。它適用於容器、微服務與傳統基礎設施，Apache-2.0 授權允許自由商用。
+<!-- End AEO Capsule --></p>
+
+<h3 id="prometheus-需要分散式儲存嗎">Prometheus 需要分散式儲存嗎？</h3>
+
+<p>不需要。Prometheus 的單一伺服器節點保持自主，內建本地時序資料庫，不依賴分散式儲存即可運作；需要長期保留或大規模部署時，可以透過 Remote Write 協定整合 Thanos、Cortex 等外部儲存方案。</p>
+
+<h3 id="prometheus-只能監控-kubernetes-嗎">Prometheus 只能監控 Kubernetes 嗎？</h3>
+
+<p>不是。Prometheus 最初誕生於雲原生環境，但其服務發現機制與數百種 exporter 讓它可以監控傳統伺服器、資料庫、應用程式與硬體，Kubernetes 只是最常見的部署場景之一。</p>
+
+<h3 id="prometheus-適合企業生產環境嗎">Prometheus 適合企業生產環境嗎？</h3>
+
+<p>適合。Prometheus 是 CNCF 畢業項目，Apache-2.0 授權允許商業使用，具備警示管理、聯邦架構與 Remote Write 擴展能力，並持續獲得安全性修補，已被大量企業作為生產監控基礎設施。</p>
+
+<h2 id="總結prometheus-如何鞏固其監控地位">總結：Prometheus 如何鞏固其監控地位？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Prometheus 以多維度資料模型、PromQL 與拉取架構確立了雲原生監控的事實標準地位，憑藉 CNCF 治理、Apache-2.0 授權與活躍生態持續演進。對追求可觀測性的團隊而言，它仍是評估監控方案時不可忽視的基準。
+<!-- End AEO Capsule --></p>
+
+<p>Prometheus 的成功來自設計哲學與生態策略的結合：多維度資料模型與 PromQL 提供了前所未有的查詢靈活性，HTTP 拉取模型與節點自主性簡化了部署，而 CNCF 的治理與 Apache-2.0 授權則確保了項目的中立性與可商用性。歷經超過十三年的演進，它從 SoundCloud 的內部工具成長為雲原生監控的事實標準，Kubernetes 生態的蓬勃發展更讓其地位不斷鞏固。對於任何正在規劃可觀測性架構的團隊而言，Prometheus 依然是值得優先評估的基準方案，其生態系統的深度與持續活躍的開發節奏，為長期採用提供了穩固的基礎。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Prometheus" class="badge bg-secondary text-decoration-none me-1">Prometheus</a>
+          
+          
+          <a href="/search/?q=%E7%9B%A3%E6%8E%A7" class="badge bg-secondary text-decoration-none me-1">監控</a>
+          
+          
+          <a href="/search/?q=DevOps" class="badge bg-secondary text-decoration-none me-1">DevOps</a>
+          
+          
+          <a href="/search/?q=%E9%9B%B2%E5%8E%9F%E7%94%9F" class="badge bg-secondary text-decoration-none me-1">雲原生</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=CNCF" class="badge bg-secondary text-decoration-none me-1">CNCF</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk&text=65%2C763+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9APrometheus+%E2%80%94+%E9%9B%B2%E5%8E%9F%E7%94%9F%E7%9B%A3%E6%8E%A7%E7%9A%84%E4%BA%8B%E5%AF%A6%E6%A8%99%E6%BA%96" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?65%2C763+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9APrometheus+%E2%80%94+%E9%9B%B2%E5%8E%9F%E7%94%9F%E7%9B%A3%E6%8E%A7%E7%9A%84%E4%BA%8B%E5%AF%A6%E6%A8%99%E6%BA%96%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-prometheus-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/gitea-news" class="text-decoration-none">Gitea 開源：5.8 萬星自架 Git 平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-grafana-news" class="text-decoration-none">Grafana 開源：7.7 萬星可觀測性平台</a>
+              <br><small class="text-muted">2026-09-25</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-act-news" class="text-decoration-none">71,595 星開源項目：act — 本地執行 GitHub Actions</a>
+              <br><small class="text-muted">2026-08-24</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-awesome-selfhosted-news-hk" class="text-decoration-none">31萬星開源項目：Awesome-Selfhosted 自架服務完整指南</a>
+              <br><small class="text-muted">2026-08-21</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-netdata-news-hk" class="text-decoration-none">8 萬星開源項目：Netdata — 實時全棧可觀測性監控平台</a>
+              <br><small class="text-muted">2026-08-18</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-uptime-kuma-news-hk" class="text-decoration-none">90,205 星開源項目：Uptime Kuma — 自架網站監控工具</a>
+              <br><small class="text-muted">2026-08-16</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

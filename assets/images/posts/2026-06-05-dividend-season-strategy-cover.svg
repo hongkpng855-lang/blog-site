@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1a2e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1b2a4a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8c86a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#27ae60;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="16"/>
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="140" fill="rgba(255,255,255,0.02)"/>
+  <circle cx="420" cy="420" r="180" fill="rgba(255,255,255,0.02)"/>
+  <circle cx="380" cy="80" r="50" fill="rgba(201,168,76,0.06)"/>
+  <!-- Upward trend line (stock chart) -->
+  <polyline points="80,380 160,340 240,280 320,240 400,160 440,140" fill="none" stroke="url(#green)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <polyline points="80,390 160,350 240,290 320,250 400,170 440,150" fill="none" stroke="url(#green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
+  <!-- Dividend coin stacks -->
+  <!-- Coin stack 1 -->
+  <rect x="160" y="240" width="60" height="10" rx="5" fill="url(#gold)" opacity="0.9"/>
+  <rect x="165" y="228" width="50" height="12" rx="5" fill="url(#gold)" opacity="0.85"/>
+  <rect x="170" y="218" width="40" height="10" rx="5" fill="url(#gold)" opacity="0.7"/>
+  <!-- Coin stack 2 -->
+  <rect x="300" y="200" width="60" height="10" rx="5" fill="url(#gold)" opacity="0.9"/>
+  <rect x="305" y="188" width="50" height="12" rx="5" fill="url(#gold)" opacity="0.85"/>
+  <rect x="310" y="178" width="40" height="10" rx="5" fill="url(#gold)" opacity="0.7"/>
+  <rect x="315" y="168" width="30" height="10" rx="5" fill="url(#gold)" opacity="0.55"/>
+  <!-- Dollar sign on coins -->
+  <text x="190" y="238" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1b2a4a" text-anchor="middle">$</text>
+  <text x="330" y="198" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" fill="#1b2a4a" text-anchor="middle">$</text>
+  <!-- Calendar icon -->
+  <rect x="380" y="320" width="70" height="60" rx="8" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"/>
+  <line x1="380" y1="340" x2="450" y2="340" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"/>
+  <line x1="395" y1="320" x2="395" y2="308" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"/>
+  <line x1="435" y1="320" x2="435" y2="308" stroke="rgba(255,255,255,0.3)" stroke-width="2.5"/>
+  <!-- Calendar date marker -->
+  <text x="415" y="375" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="rgba(255,255,255,0.5)" text-anchor="middle">6-9月</text>
+  <!-- Document icon -->
+  <rect x="70" y="290" width="55" height="70" rx="4" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2.5"/>
+  <line x1="82" y1="310" x2="113" y2="310" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <line x1="82" y1="325" x2="113" y2="325" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <line x1="82" y1="340" x2="103" y2="340" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  <!-- Tax badge -->
+  <text x="97" y="335" font-family="system-ui, sans-serif" font-size="10" fill="rgba(201,168,76,0.4)" text-anchor="middle">稅務</text>
+  <!-- Floating sparkles -->
+  <circle cx="120" cy="180" r="3" fill="#c9a84c" opacity="0.5"/>
+  <circle cx="400" cy="280" r="2" fill="#c9a84c" opacity="0.4"/>
+  <circle cx="200" cy="150" r="2" fill="#c9a84c" opacity="0.35"/>
+  <circle cx="350" cy="130" r="3" fill="#c9a84c" opacity="0.45"/>
+  <circle cx="140" cy="420" r="2" fill="#c9a84c" opacity="0.3"/>
+  <!-- Percentage symbol -->
+  <text x="240" y="340" font-family="system-ui, sans-serif" font-size="28" fill="rgba(255,255,255,0.12)" text-anchor="middle">▲ 8.5%</text>
+  <!-- Title text -->
+  <text x="256" y="80" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#c9a84c" text-anchor="middle" letter-spacing="2">除權息旺季</text>
+  <text x="256" y="455" font-family="system-ui, sans-serif" font-size="13" fill="rgba(255,255,255,0.6)" text-anchor="middle" letter-spacing="1">股利稅務 • 操作時機 • 填息股解構</text>
+</svg>

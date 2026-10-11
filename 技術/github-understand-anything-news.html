@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Understand Anything 開源：83K 星程式碼知識圖譜 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Understand Anything 是以 TypeScript 撰寫的開源外掛，能把程式碼庫、知識庫與文件轉換成可互動探索的知識圖譜。本文整理其多代理分析流程、Tree-sitter 與 LLM 混合架構、跨平台安裝方式、最新版本數據，以及它與同類程式碼理解工具的差異。">
+  <meta name="keywords" content="AI, 開源, Understand Anything, 知識圖譜, Claude Code, 程式碼理解, TypeScript, 開發者工具">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Understand Anything 開源：83K 星程式碼知識圖譜">
+  <meta property="og:description" content="Understand Anything 是以 TypeScript 撰寫的開源外掛，能把程式碼庫、知識庫與文件轉換成可互動探索的知識圖譜。本文整理其多代理分析流程、Tree-sitter 與 LLM 混合架構、跨平台安裝方式、最新版本數據，以及它與同類程式碼理解工具的差異。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-understand-anything-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Understand Anything 開源：83K 星程式碼知識圖譜">
+  <meta name="twitter:description" content="Understand Anything 是以 TypeScript 撰寫的開源外掛，能把程式碼庫、知識庫與文件轉換成可互動探索的知識圖譜。本文整理其多代理分析流程、Tree-sitter 與 LLM 混合架構、跨平台安裝方式、最新版本數據，以及它與同類程式碼理解工具的差異。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-understand-anything-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Understand Anything 開源：83K 星程式碼知識圖譜",
+      "description": "Understand Anything 是以 TypeScript 撰寫的開源外掛，能把程式碼庫、知識庫與文件轉換成可互動探索的知識圖譜。本文整理其多代理分析流程、Tree-sitter 與 LLM 混合架構、跨平台安裝方式、最新版本數據，以及它與同類程式碼理解工具的差異。",
+      "datePublished": "2026-09-21T16:00:01+08:00",
+      "dateModified": "2026-09-21T16:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/Egonex-AI/Understand-Anything" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-understand-anything-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "使用 Understand Anything 需要什麼前置條件？",
+          "acceptedAnswer": { "@type": "Answer", "text": "需要一個支援外掛的 AI 編碼平台，以及 Node.js 18 以上版本。Claude Code 使用者可直接由外掛市集安裝；其他平台以官方安裝腳本建立連結，安裝後重新啟動對應的命令列工具或編輯器即可使用。" }
+        },
+        {
+          "@type": "Question",
+          "name": "如何控制分析過程的 token 消耗？",
+          "acceptedAnswer": { "@type": "Answer", "text": "初次分析整個專案是最耗費 token 的階段，官方建議在訂閱方案或本地模型環境下執行。之後的執行預設改為增量模式，只重新分析變更過的檔案；亦可透過參數限定特定子目錄，縮小分析範圍。" }
+        },
+        {
+          "@type": "Question",
+          "name": "沒有安裝 AI 工具的團隊成員能用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。只要圖譜已產生並提交至儲存庫，任何成員都能以單一指令開啟互動儀表板，不需要 Claude Code、不需要模型、也不需要 API 金鑰，全程由本機磁碟讀取資料。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Understand Anything 開源：83K 星程式碼知識圖譜",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Understand Anything 開源：83K 星程式碼知識圖譜</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">Understand Anything 開源：83K 星程式碼知識圖譜</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年09月21日 16:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/Egonex-AI/Understand-Anything" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-understand-anything-news-cover.jpg" alt="Understand Anything 開源：83K 星程式碼知識圖譜" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/Egonex-AI/Understand-Anything" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/Egonex-AI/Understand-Anything
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Understand Anything 是由 Egonex-AI 維護的開源專案，能把程式碼庫、知識庫或文件轉換成可互動探索的知識圖譜。專案於 2026 年 3 月建立，在 GitHub 累積 83,416 顆星標與 7,041 個分支，以 MIT 授權釋出，主要語言為 TypeScript，是程式碼理解類工具中成長速度最快的一個。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Understand Anything 是以 TypeScript 撰寫的開源外掛，2026 年 3 月發布，能把程式碼庫轉成可互動的知識圖譜，星標逾 8.3 萬，採 MIT 授權。
+<!-- End AEO Capsule --></p>
+
+<p>這個需求源自軟體團隊的結構性痛點。新人加入專案時，面對的往往是數十萬行缺乏說明的程式碼，而傳統做法只有兩種：逐檔閱讀，或依賴同事口頭講解，兩者都無法規模化。專案的做法是以多代理流程先建立結構化圖譜，再讓使用者以視覺化方式探索，把理解成本從線性閱讀轉為圖形導航。</p>
+
+<h2 id="understand-anything-是什麼">Understand Anything 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>Understand Anything 是一個 Claude Code 外掛，以多代理流程分析專案，建立涵蓋檔案、函式、類別與依賴關係的知識圖譜，並提供互動儀表板。
+<!-- End AEO Capsule --></p>
+
+<p>專案的自我定位十分清楚：把任何程式碼庫變成互動式知識圖譜，讓使用者探索、搜尋並針對內容提問。它以 Claude Code 外掛形式發布，同時相容 Claude Code 以外的多個 AI 編碼平台，分析結果則儲存為專案目錄下的 JSON 檔案。</p>
+
+<p>對剛接手陌生專案的開發者而言，圖譜提供的是全景視角而非逐檔閱讀。專案說明中提到，其目標並非做出一張展示複雜度的圖，而是一張能安靜地教會使用者每個部分如何拼在一起的圖。這個取向決定了它在架構與功能上的多項設計選擇。</p>
+
+<h2 id="understand-anything-的核心架構如何運作">Understand Anything 的核心架構如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>專案以 Tree-sitter 確定性抽取匯入與定義，再由 LLM 生成白話摘要、架構分層與導覽，令圖譜結構可重現同時捕捉程式意圖。
+<!-- End AEO Capsule --></p>
+
+<p>架構的核心是把靜態分析與大型語言模型的分工切開。Tree-sitter 以確定性方式解析原始碼，抽取匯入、匯出、函式與類別定義、呼叫位置與繼承關係，同樣的輸入每次都會產生同樣的結構邊。這部分預先解析成匯入映射表，再交給檔案分析器使用，避免重複由原始碼推導依賴。</p>
+
+<p>語意層則由模型負責，讀取解析後的結構與原始碼，產出解析器無法判斷的內容，包括白話摘要、標籤、架構層歸屬、業務領域對應與導覽說明。基於指紋的變更偵測讓後續執行只重新分析改動過的檔案，這是它能在大專案上反覆使用而 token 成本可控的關鍵。整個流程由多個專責代理組成，檔案分析器以最多五個並行工作、每批二十至三十個檔案的方式執行。</p>
+
+<p><img src="/assets/images/posts/github-understand-anything-news-shot1.png" alt="Understand Anything README 開頭（項目名稱 Understand Anything 標題、標語與多平台徽章列）" /></p>
+
+<h2 id="understand-anything-有哪些主要功能">Understand Anything 有哪些主要功能？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>功能涵蓋結構圖譜探索、業務領域視圖、知識庫分析、引導式導覽、語意搜尋、差異影響分析與新人上手導覽，並可把圖譜提交至儲存庫供團隊共用。
+<!-- End AEO Capsule --></p>
+
+<p>結構圖譜是基礎功能，每個檔案、函式與類別都是一個節點，可點擊、搜尋與展開。節點會顯示白話摘要、關聯關係與引導式說明，使用者亦可依架構層瀏覽，由專案自動分成 API、服務、資料、介面與工具等類別並以顏色標示。</p>
+
+<p>業務領域視圖則把程式碼映射到真實流程，以水平圖呈現領域、流程與步驟，適合非工程背景的成員理解系統行為。知識庫分析針對特定格式的 wiki 目錄，以確定性解析器抽取連結與分類，再由模型發掘隱含關聯、實體與主張。此外，差異影響分析可在提交前顯示改動波及的範圍，引導式導覽則依相依順序自動生成學習路徑。</p>
+
+<h2 id="understand-anything-支援哪些-ai-編碼平台">Understand Anything 支援哪些 AI 編碼平台？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>官方支援 Claude Code、Cursor、VS Code Copilot、Codex 與 Gemini CLI 等十餘個平台，多數以安裝腳本建立符號連結整合。
+<!-- End AEO Capsule --></p>
+
+<p>平台覆蓋範圍是同類工具中較廣的一個。Claude Code 為原生支援，透過外掛市集安裝；Cursor 與 VS Code 加 Copilot 採用自動探索機制，複製儲存庫後開啟即可辨識；其餘平台則以官方安裝腳本處理，支援的識別名稱包括 Codex、OpenCode、OpenClaw、Antigravity、Gemini CLI、Cline、Kimi CLI、Trae 與 Kiro 等。</p>
+
+<p>呼叫方式在不同平台略有差異，多數平台使用斜線指令，Codex 則改用貨幣符號前綴。專案亦提供不依賴模型的檢視方式，只要圖譜已產生並提交至儲存庫，團隊成員可在不安裝 AI 工具的環境下以單一指令開啟儀表板，全程由本機磁碟讀取，資料不會離開使用者的機器。</p>
+
+<h2 id="understand-anything-的數據表現如何">Understand Anything 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>專案累積 83,416 星標與 7,041 分支，約 59 位貢獻者、846 次提交，採 MIT 授權，最新版本 v2.9.0 於 2026 年 7 月 10 日發布。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat-item"><span class="stat-value">83,416</span><span class="stat-label">Stars</span></div>
+  <div class="stat-item"><span class="stat-value">7,041</span><span class="stat-label">Forks</span></div>
+  <div class="stat-item"><span class="stat-value">59</span><span class="stat-label">Contributors</span></div>
+  <div class="stat-item"><span class="stat-value">MIT</span><span class="stat-label">授權</span></div>
+</div>
+
+<p>從時間軸觀察，專案於 2026 年 3 月建立，六個月內成長至八萬三千顆星標，分支數超過七千，反映大量使用者選擇在地端實際部署。提交總數約 846 次，程式碼主體以 TypeScript 為主，另有 JavaScript 與 Python 元件。</p>
+
+<p>授權採用 MIT，對商業整合與內部部署限制極少。需要注意的是，初次分析整個程式碼庫會消耗可觀的 token，官方建議在訂閱方案或本地模型環境下執行初始化，後續執行才預設改為只分析變更檔案，這也是評估導入時最需要留意的成本項。</p>
+
+<p><img src="/assets/images/posts/github-understand-anything-news-shot2.png" alt="Egonex-AI/Understand-Anything GitHub 首頁頂部（repo 名稱、83.4k 星標、7k 分支與專案描述）" /></p>
+
+<h2 id="understand-anything-與同類工具相比有何差異">Understand Anything 與同類工具相比有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>多數程式碼理解工具只做靜態索引或問答，本專案同時產出結構圖譜、業務領域圖與引導導覽，並可把圖譜提交至儲存庫供團隊共用。
+<!-- End AEO Capsule --></p>
+
+<p>市面上的替代方案大致分為兩類。第一類是編輯器內建的索引與問答功能，優點是隨手可用，但輸出偏向即時回答，缺乏可累積的全景結構；第二類是獨立的程式碼搜尋服務，通常需要上傳原始碼或維持雲端連線。</p>
+
+<p>Understand Anything 的差異在於把圖譜視為可提交的專案資產。由於輸出是純 JSON，團隊可以只提交一次，之後的成員不必重跑分析流程，直接開啟儀表板就能閱讀；搭配提交後自動更新的機制，圖譜可與程式碼同步演進。加上可切換本地模型供應商，對於重視原始碼不外流的團隊，這種設計具有實質吸引力。</p>
+
+<p><img src="/assets/images/posts/github-understand-anything-news-shot3.png" alt="Egonex-AI/Understand-Anything 貢獻者統計頁（每週提交次數柱狀圖與貢獻者分佈）" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>本文資訊來源為 Egonex-AI/Understand-Anything 的官方 GitHub 儲存庫，涵蓋 README、平台相容列表與 GitHub API 統計數據。
+<!-- End AEO Capsule --></p>
+
+<p>本文所有功能描述與統計數據均取自 <a href="https://github.com/Egonex-AI/Understand-Anything">Understand Anything 官方 GitHub 儲存庫</a>，包括 README 中的功能說明、多平台安裝指引、架構與代理流程文件，以及 GitHub API 提供的星標、分支、貢獻者、提交與版本資料。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>以下整理三項關於 Understand Anything 的常見疑問，涵蓋安裝前置需求、token 消耗控制，以及非工程成員能否共用圖譜。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>使用 Understand Anything 需要什麼前置條件？</h3>
+
+需要一個支援外掛的 AI 編碼平台，以及 Node.js 18 以上版本。Claude Code 使用者可直接由外掛市集安裝；其他平台以官方安裝腳本建立連結，安裝後重新啟動對應的命令列工具或編輯器即可使用。
+
+<h3>如何控制分析過程的 token 消耗？</h3>
+
+初次分析整個專案是最耗費 token 的階段，官方建議在訂閱方案或本地模型環境下執行。之後的執行預設改為增量模式，只重新分析變更過的檔案；亦可透過參數限定特定子目錄，縮小分析範圍。
+
+<h3>沒有安裝 AI 工具的團隊成員能用嗎？</h3>
+
+可以。只要圖譜已產生並提交至儲存庫，任何成員都能以單一指令開啟互動儀表板，不需要 Claude Code、不需要模型、也不需要 API 金鑰，全程由本機磁碟讀取資料。
+
+</div>
+
+<h2 id="總結understand-anything-適合什麼團隊">總結：Understand Anything 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>它適合經常接手陌生專案、需要快速建立全景理解的開發團隊，也適合把架構知識以圖譜形式沉澱、供新人與非工程成員共用的組織。
+<!-- End AEO Capsule --></p>
+
+<p>把程式碼理解從個人經驗轉為可累積的專案資產，是 Understand Anything 最值得注意的定位。多代理流程負責產出結構化的知識圖譜，混合架構確保結構邊可重現、語意說明可讀，而純 JSON 的輸出則讓圖譜能進入版本控制與團隊流程。六個月內累積八萬三千顆星標，說明這個切入點切中了不少團隊的實際需要。</p>
+
+<p>導入時需要留意的主要是成本與時機。初次全量分析在大專案上消耗可觀，建議安排在訂閱方案或本地模型環境執行，並在之後改用增量模式維持圖譜新鮮度。對於長期維護大型程式碼庫、又希望降低新人上手成本的團隊，這套流程提供了傳統文件之外的另一種選擇。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI" class="badge bg-secondary text-decoration-none me-1">AI</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=Understand+Anything" class="badge bg-secondary text-decoration-none me-1">Understand Anything</a>
+          
+          
+          <a href="/search/?q=%E7%9F%A5%E8%AD%98%E5%9C%96%E8%AD%9C" class="badge bg-secondary text-decoration-none me-1">知識圖譜</a>
+          
+          
+          <a href="/search/?q=Claude+Code" class="badge bg-secondary text-decoration-none me-1">Claude Code</a>
+          
+          
+          <a href="/search/?q=%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%90%86%E8%A7%A3" class="badge bg-secondary text-decoration-none me-1">程式碼理解</a>
+          
+          
+          <a href="/search/?q=TypeScript" class="badge bg-secondary text-decoration-none me-1">TypeScript</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E7%99%BC%E8%80%85%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開發者工具</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news&text=Understand+Anything+%E9%96%8B%E6%BA%90%EF%BC%9A83K+%E6%98%9F%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%9F%A5%E8%AD%98%E5%9C%96%E8%AD%9C" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?Understand+Anything+%E9%96%8B%E6%BA%90%EF%BC%9A83K+%E6%98%9F%E7%A8%8B%E5%BC%8F%E7%A2%BC%E7%9F%A5%E8%AD%98%E5%9C%96%E8%AD%9C%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-understand-anything-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vaultwarden-news" class="text-decoration-none">Vaultwarden 開源：6.8 萬星的自架密碼庫</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-face-recognition-news" class="text-decoration-none">face_recognition 開源：5.7 萬星的人臉辨識入門庫</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-godot-news" class="text-decoration-none">Godot 118k 星開源引擎：完全免費無抽成</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-code-server-news" class="text-decoration-none">code-server 4.140.0：瀏覽器內的 VS Code</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

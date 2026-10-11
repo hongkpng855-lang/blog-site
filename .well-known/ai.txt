@@ -1,0 +1,22 @@
+# AI / LLM Policy for anthroskill.com
+# Last updated: 2026-10-09
+
+User-agent: *
+Allow: /
+
+# 引用政策
+# 允許 AI 引擎（ChatGPT、Claude、Perplexity、Gemini、Copilot 等）擷取與引用本站內容。
+# 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com/）
+# 內容語言：zh-Hant
+
+# 機器可讀索引
+# llms.txt        https://anthroskill.com/llms.txt
+# llms-full.txt   https://anthroskill.com/llms-full.txt
+# sitemap         https://anthroskill.com/sitemap.xml
+# RSS             https://anthroskill.com/feed.xml
+# AI summary      https://anthroskill.com/ai/summary.json
+# AI FAQ          https://anthroskill.com/ai/faq.json
+# AI service      https://anthroskill.com/ai/service.json
+
+# 禁止
+# 請勿將本站內容用於誤導性、誹謗性或侵權用途。

@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Caddy 2.11.7 發布：RFC 10036 串流標頭標準化 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Caddy 是 caddyserver 維護的開源網頁伺服器，GitHub 累積 76,987 顆星標，以自動 HTTPS 與單一設定檔著稱。2026 年 10 月 3 日發布的 v2.11.7 修復串流與逾時問題，並率先支援 RFC 10036 的 Incremental 標頭。本文整理更新內容、技術架構、市場...">
+  <meta name="keywords" content="Caddy, 網頁伺服器, HTTPS, HTTP3, 開源, GitHub, Go">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Caddy 2.11.7 發布：RFC 10036 串流標頭標準化">
+  <meta property="og:description" content="Caddy 是 caddyserver 維護的開源網頁伺服器，GitHub 累積 76,987 顆星標，以自動 HTTPS 與單一設定檔著稱。2026 年 10 月 3 日發布的 v2.11.7 修復串流與逾時問題，並率先支援 RFC 10036 的 Incremental 標頭。本文整理更新內容、技術架構、市場...">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-caddy-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Caddy 2.11.7 發布：RFC 10036 串流標頭標準化">
+  <meta name="twitter:description" content="Caddy 是 caddyserver 維護的開源網頁伺服器，GitHub 累積 76,987 顆星標，以自動 HTTPS 與單一設定檔著稱。2026 年 10 月 3 日發布的 v2.11.7 修復串流與逾時問題，並率先支援 RFC 10036 的 Incremental 標頭。本文整理更新內容、技術架構、市場...">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-caddy-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Caddy 2.11.7 發布：RFC 10036 串流標頭標準化",
+      "description": "Caddy 是 caddyserver 維護的開源網頁伺服器，GitHub 累積 76,987 顆星標，以自動 HTTPS 與單一設定檔著稱。2026 年 10 月 3 日發布的 v2.11.7 修復串流與逾時問題，並率先支援 RFC 10036 的 Incremental 標頭。本文整理更新內容、技術架構、市場定位與安裝方式。",
+      "datePublished": "2026-10-06T08:00:02+08:00",
+      "dateModified": "2026-10-06T08:00:02+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/caddyserver/caddy" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-caddy-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Caddy 是免費的嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "是。Caddy 以 Apache-2.0 授權開源，可免費用於商業專案。企業若需要商業支援，官方建議透過 Ardan Labs 簽訂支援合約。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Caddy 與 NGINX 有什麼主要差異？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Caddy 預設自動取得並更新 TLS 憑證，設定集中於單一文件並以 API 為主要入口；NGINX 則以設定檔為核心，憑證管理通常需額外工具協助。" }
+        },
+        {
+          "@type": "Question",
+          "name": "應該選擇哪個 Caddy 版本？",
+          "acceptedAnswer": { "@type": "Answer", "text": "建議使用最新的 v2.11.7。官方明確表示，若部署仍為 2.11.6，應儘速升級，以修復 HTTP/2 代理崩潰與串流中斷問題。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Incremental 標頭需要手動設定嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "上游應用需在回應加上 Incremental: ?1，Caddy 才會立即轉發；若設定中的緩衝選項會阻止增量轉發，Caddy 會回傳 501 而非默默緩衝。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Caddy 的憑證由誰簽發？",
+          "acceptedAnswer": { "@type": "Answer", "text": "公開網域預設由 ZeroSSL 與 Let's Encrypt 簽發，並支援多發行者備援；內部名稱與 IP 則由本機 CA 管理，無需對外連線。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Caddy 適合大型部署嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "官方指出 Caddy 已在生產環境處理數兆次請求、管理數百萬張憑證，並可擴展至數十萬個站台，具備大型部署的實績。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Caddy 2.11.7 發布：RFC 10036 串流標頭標準化",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Caddy 2.11.7 發布：RFC 10036 串流標頭標準化</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">Caddy 2.11.7 發布：RFC 10036 串流標頭標準化</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月06日 08:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/caddyserver/caddy" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-caddy-news-cover.jpg" alt="Caddy 2.11.7 發布：RFC 10036 串流標頭標準化" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/caddyserver/caddy" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/caddyserver/caddy
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Caddy 是由 caddyserver 社群維護的開源網頁伺服器，在 GitHub 累積 76,987 顆星標與 5,069 次複製。2026 年 10 月 3 日，專案發布 v2.11.7 修補版本，修復 2.11.6 引入的 HTTP/2 代理崩潰與串流中斷問題，同時新增對 RFC 10036「Incremental」標頭的支援，把原先由 NGINX 專有的 X-Accel-Buffering 做法納入公開標準。此次更新延續 Caddy 以自動 HTTPS 為預設、以單一設定文件為核心的技術路線。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Caddy v2.11.7 於 2026 年 10 月 3 日發布，修復 HTTP/2 代理崩潰與串流中斷，並新增 RFC 10036 的 Incremental 標頭支援。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-caddy-news-shot1.png" alt="Caddy 的 GitHub 儲存庫 README 開頭，顯示 Caddy 標誌、ZeroSSL 專案字樣、Every site on HTTPS 標語，以及自動 HTTPS、Caddyfile 設定等特性說明" /></p>
+
+<h2 id="caddy-是什麼">Caddy 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>Caddy 是 Go 語言撰寫的開源網頁伺服器平台，預設自動取得並更新 TLS 憑證，支援 HTTP/1.1、HTTP/2 與 HTTP/3，採 Apache-2.0 授權。
+<!-- End AEO Capsule --></p>
+
+<p>依照官方說明，Caddy 是一套可擴充的伺服器平台，最大特點是預設啟用 TLS，所有站台在未經額外設定下即會自動取得憑證。它支援公開網域由 ZeroSSL 與 Let’s Encrypt 簽發憑證，內部名稱與 IP 則由本機 CA 管理，並可在多台 Caddy 執行個體之間協調簽發，具備多發行者備援能力。</p>
+
+<p>Caddy 提供兩種設定方式。Caddyfile 以簡潔的區塊語法描述站台，適合快速上手；原生 JSON 設定則提供完整控制，可涵蓋處理器、TLS 握手與儲存後端等所有細節。專案同時提供 JSON API 進行線上設定變更，以及設定適配器，把 Caddyfile、YAML、TOML、JSON 5 甚至 NGINX 設定轉換為原生格式。</p>
+
+<p>專案由 Matthew Holt 於 2014 年在楊百翰大學就讀期間開始開發，名稱取自協助處理繁瑣事務的意涵。Caddy 是第一個預設自動使用 HTTPS 的網頁伺服器，至今有逾四百位貢獻者，累計處理數兆次 HTTPS 請求。名稱「Caddy」已註冊商標，專案隸屬於 ZeroSSL 母公司 HID Global 旗下的 Stack Holdings GmbH。</p>
+
+<h2 id="caddy-2117-發布了哪些重點更新">Caddy 2.11.7 發布了哪些重點更新？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>v2.11.7 修復 2.11.6 造成的 HTTP/2 代理崩潰、SSE 串流滿 60 秒中斷與 Cookie 佔位符為空等問題，並新增 RFC 10036 標頭支援。
+<!-- End AEO Capsule --></p>
+
+<p>本次修補的核心，是修正 2.11.6 引入閒置逾時機制後產生的連帶問題。在 HTTP/2 環境下，若反向代理仍在讀取請求主體而處理常式已經返回，Caddy 可能因空指標而崩潰；在 HTTP/1.1 環境下，以 POST 開啟串流的 SSE 用戶端，會在主體讀取完成後恰好 60 秒被截斷。兩項問題已於對應的提交中修復，官方建議仍在使用 2.11.6 的部署儘速升級。</p>
+
+<p>另一個問題是 Cookie 佔位符的行為。自 2.11.6 起，保留未知佔位符的指令如 respond 標頭，會在 Cookie 不存在時直接輸出 <code class="language-plaintext highlighter-rouge">{http.request.cookie.*}</code> 字面文字，純 HTTP 請求的 TLS 佔位符也有相同情況。此版本讓這些欄位恢復為空值。此外，設定中多個 Set-Cookie 值過去會被合併為單一欄位，導致用戶端無法解析，現已改為分開傳送。</p>
+
+<p>效能方面，當沒有事件訂閱者且除錯記錄關閉時，CertMagic 不再為每次握手建立事件資料，憑證查找速度約提升一倍，配置次數由 15 次降至 10 次。Unix 通訊端在重新載入後會立即關閉並移除舊檔案，不再讓用戶端等待約兩分鐘的回收週期。命令列工具 caddy fmt 亦修正了輸入結尾大括號被刪除的問題。</p>
+
+<h2 id="rfc-10036-的-incremental-標頭是什麼">RFC 10036 的 Incremental 標頭是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>Incremental 是 RFC 10036 定義的回應標頭，用來指示代理與伺服器立即轉發串流內容，取代 NGINX 專有的 X-Accel-Buffering 做法。
+<!-- End AEO Capsule --></p>
+
+<p>Incremental 是 IETF 發布的 RFC 10036 中所定義的新標準標頭，用途是告知中介層與伺服器：這段回應應該邊產生邊送出，不應在緩衝區累積後才轉發。過去要做同樣的事，實務上依賴 NGINX 專有的 X-Accel-Buffering 標頭，該做法並非公開標準，其他伺服器與代理無法通用，跨元件部署時容易出現行為差異。</p>
+
+<p>在 Caddy 的實作中，若上游回應帶有 <code class="language-plaintext highlighter-rouge">Incremental: ?1</code>，reverse_proxy 會立即轉發，效果等同於原本的 <code class="language-plaintext highlighter-rouge">flush_interval -1</code>；encode 指令也會改為串流輸出，而非先壓縮後整批送出。這對 Mercure、伺服器推送事件與其他即時串流應用特別有利，因為延遲取決於第一個位元組送出的時間。</p>
+
+<p>若設定中的 request_buffers 或 response_buffers 會阻止增量轉發，Caddy 會依 RFC 要求回應 <code class="language-plaintext highlighter-rouge">501 Not Implemented</code>，而非默默改為緩衝；新增的 proxy_status_name 選項則會在該回應加上 Proxy-Status 標頭，說明拒絕轉發的原因。這項功能由社群貢獻者 dunglas 提交，也是 v2.11.7 最具標準意義的改動。</p>
+
+<p><img src="/assets/images/posts/github-caddy-news-shot2.png" alt="Caddy 的 GitHub 儲存庫首頁頂部，顯示 repo 名稱 caddyserver/caddy、Public 標記、repo 描述、76.9k 星標、868 位關注者，以及最新版本 v2.11.7" /></p>
+
+<h2 id="caddy-的架構與技術特色有哪些">Caddy 的架構與技術特色有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>Caddy 採模組化架構，內建 tls 與 http 兩個應用，以 JSON 為原生設定格式，並可透過設定適配器轉換 Caddyfile、YAML 或 NGINX 設定。
+<!-- End AEO Capsule --></p>
+
+<p>Caddy 本質上是一個執行 Go 應用程式的平台，所謂的 Caddy app 就是以模組形式實作的 Go 程式。標準發行版內建 tls 與 http 兩個應用，所有應用共用線上設定變更、自動產生文件與其他應用整合等能力。這種設計讓擴充不必更動核心，社群可透過外掛補上快取、身分驗證或特定後端整合。</p>
+
+<p>在設定管理上，Caddy 幾乎把所有組態集中於單一文件中，而非分散在命令列旗標、環境變數與設定檔之間。官方指出這種做法可降低隱藏變數與隱性因素，讓伺服器狀態更容易掌握。相較於多數伺服器以設定檔為唯一入口，Caddy 以 API 為主要設定途徑，設定檔則由命令列工具載入。</p>
+
+<p>執行特性方面，Caddy 沒有外部相依，連 C 標準函式庫都不需要，可在各種平台直接執行。它預設同時支援 HTTP/1.1、HTTP/2 與 HTTP/3，官方表示已在生產環境中服務數兆次請求、管理數百萬張 TLS 憑證，並能擴展至數十萬個站台。憑證事件、TLS 設定與 OCSP 相關問題發生時，Caddy 仍會持續運作，不會因單一環節異常而中斷服務。</p>
+
+<h2 id="caddy-在市場與生態中扮演什麼角色">Caddy 在市場與生態中扮演什麼角色？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>Caddy 與 NGINX、Apache 並列主流網頁伺服器，以自動 HTTPS 與簡潔設定在容器與邊緣部署場景取得份額，並帶動 CertMagic 等周邊生態。
+<!-- End AEO Capsule --></p>
+
+<p>在網頁伺服器市場中，Caddy 的定位不是替換既有伺服器的通用方案，而是以設定簡潔與憑證自動化切入特定場景。對於站台數量多、憑證輪換頻繁、或部署環境以容器為主的團隊，自動 HTTPS 省下的維運成本相當直接；相對地，需要高度客製模組或既有 NGINX 設定的組織，遷移成本仍是主要考量。</p>
+
+<p>生態層面上，Caddy 帶動了憑證管理函式庫 CertMagic 的發展，該函式庫獨立供應，也被其他 Go 專案採用。專案同時提供 xcaddy 建置工具，讓使用者能把自選外掛編譯進單一執行檔，這是 Caddy 有別於多數伺服器的擴充路徑。套件託管由 Cloudsmith 提供，企業若需商業支援，官方建議透過 Ardan Labs 簽訂支援合約。</p>
+
+<p>商業模式方面，Caddy 以開源專案搭配贊助與支援服務運作，專案為 ZeroSSL 及 HID Global 旗下資產。官方文件提到，企業若因 Caddy 受益，可考慮贊助以支持全職維護，並換取私人協助與資源。這種由公司持有商標、社群維持開發的模式，與多數大型開源基礎設施的治理方式一致。</p>
+
+<p><img src="/assets/images/posts/github-caddy-news-shot3.png" alt="Caddy 的 GitHub 貢獻者統計頁，顯示 Contributors 標題與熱門貢獻者名稱 steadytiao、mohammed90，以及 Contributions per week 圖表" /></p>
+
+<h2 id="如何安裝與開始使用-caddy">如何安裝與開始使用 Caddy？</h2>
+
+<!-- AEO Answer Capsule — 約 67 字 -->
+<p>使用者可從 GitHub Releases 下載執行檔並放入 PATH，或以 Go 1.26.0 以上版本自行編譯；官方建議先完成 Getting Started 教學以熟悉設定。
+<!-- End AEO Capsule --></p>
+
+<p>最簡單的跨平台安裝方式，是從 GitHub Releases 下載對應平台的執行檔，放入系統 PATH 後即可執行。官方網站另提供各作業系統的安裝說明，涵蓋套件管理器與容器映像等途徑。首次使用時，官方建議不論經驗程度都先完成 Getting Started 教學，以理解 Caddy 的運作方式。</p>
+
+<p>若需自行編譯，專案要求 Go 1.26.0 或更新版本。開發用途可直接在 <code class="language-plaintext highlighter-rouge">cmd/caddy</code> 目錄執行建置，但官方提醒這種方式不會嵌入正確的版本資訊；若需要版本資訊或加入外掛，應改用 xcaddy 建置工具，它會自動完成建立目錄、初始化模組、鎖定版本與編譯等步驟。</p>
+
+<p>在 Linux 上，Caddy 可能嘗試綁定低連接埠，若系統要求較高權限，可透過 setcap 指令授予網路綁定能力，或使用專案附帶的 setcap.sh 配合 go run 執行。官方特別提醒，相關權限設定僅為便利而提供，使用者應自行理解系統工具的行為與風險。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 61 字 -->
+<p>本文資訊整理自 Caddy 的 GitHub 儲存庫、v2.11.7 發布說明與官方網站文件，內容涵蓋版本更新、技術架構與安裝方式。
+<!-- End AEO Capsule --></p>
+
+<ul class="ui-stat-grid">
+  <li class="ui-stat"><span class="ui-stat-num">76,987</span><span class="ui-stat-label">GitHub 星標</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">5,069</span><span class="ui-stat-label">複製次數</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">447</span><span class="ui-stat-label">貢獻者</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">2,729</span><span class="ui-stat-label">提交次數</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">Go</span><span class="ui-stat-label">主要語言</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">Apache-2.0</span><span class="ui-stat-label">授權條款</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">v2.11.7</span><span class="ui-stat-label">最新版本</span></li>
+</ul>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/caddyserver/caddy</li>
+  <li>v2.11.7 發布說明：https://github.com/caddyserver/caddy/releases/tag/v2.11.7</li>
+  <li>官方網站與文件：https://caddyserver.com/docs/</li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>Caddy 的常見疑問集中在授權條款、版本選擇、與 NGINX 的差異及憑證簽發方式，多數可從官方文件與發布說明找到答案。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>Caddy 是免費的嗎？</h3>
+<p>是。Caddy 以 Apache-2.0 授權開源，可免費用於商業專案。企業若需要商業支援，官方建議透過 Ardan Labs 簽訂支援合約。</p>
+
+<h3>Caddy 與 NGINX 有什麼主要差異？</h3>
+<p>Caddy 預設自動取得並更新 TLS 憑證，設定集中於單一文件並以 API 為主要入口；NGINX 則以設定檔為核心，憑證管理通常需額外工具協助。</p>
+
+<h3>應該選擇哪個 Caddy 版本？</h3>
+<p>建議使用最新的 v2.11.7。官方明確表示，若部署仍為 2.11.6，應儘速升級，以修復 HTTP/2 代理崩潰與串流中斷問題。</p>
+
+<h3>Incremental 標頭需要手動設定嗎？</h3>
+<p>上游應用需在回應加上 `Incremental: ?1`，Caddy 才會立即轉發；若設定中的緩衝選項會阻止增量轉發，Caddy 會回傳 501 而非默默緩衝。</p>
+
+<h3>Caddy 的憑證由誰簽發？</h3>
+<p>公開網域預設由 ZeroSSL 與 Let's Encrypt 簽發，並支援多發行者備援；內部名稱與 IP 則由本機 CA 管理，無需對外連線。</p>
+
+<h3>Caddy 適合大型部署嗎？</h3>
+<p>官方指出 Caddy 已在生產環境處理數兆次請求、管理數百萬張憑證，並可擴展至數十萬個站台，具備大型部署的實績。</p>
+
+</div>
+
+<h2 id="總結caddy-適合什麼樣的團隊">總結：Caddy 適合什麼樣的團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>Caddy 適合希望以最簡設定取得自動 HTTPS、串流代理與 HTTP/3 支援的團隊，尤其適合容器化與多站台部署情境。
+<!-- End AEO Capsule --></p>
+
+<p>Caddy 這次更新的價值，在於把長年存在於特定伺服器的私有做法，推進為可互通的新標準。Incremental 標頭進入 RFC 之後，即時串流與伺服器推送事件的轉發行為不再需要依賴單一實作，跨元件的部署組合也能維持一致。同時，2.11.7 迅速修補前一版的逾時迴歸問題，反映專案在引入新機制後仍維持密集的修補節奏。</p>
+
+<p>對正在評估網頁伺服器的團隊而言，Caddy 的判斷點相對清楚：若維運痛點在於憑證輪換與設定複雜度，其自動 HTTPS 與單一設定文件能直接降低負擔；若既有架構已深度綁定其他伺服器的模組或設定，遷移成本則需要一併評估。以 76,987 顆星標、447 位貢獻者與十年的維護紀錄來看，Caddy 已具備作為長期基礎設施的成熟度。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Caddy" class="badge bg-secondary text-decoration-none me-1">Caddy</a>
+          
+          
+          <a href="/search/?q=%E7%B6%B2%E9%A0%81%E4%BC%BA%E6%9C%8D%E5%99%A8" class="badge bg-secondary text-decoration-none me-1">網頁伺服器</a>
+          
+          
+          <a href="/search/?q=HTTPS" class="badge bg-secondary text-decoration-none me-1">HTTPS</a>
+          
+          
+          <a href="/search/?q=HTTP3" class="badge bg-secondary text-decoration-none me-1">HTTP3</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+          
+          <a href="/search/?q=Go" class="badge bg-secondary text-decoration-none me-1">Go</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news&text=Caddy+2.11.7+%E7%99%BC%E5%B8%83%EF%BC%9ARFC+10036+%E4%B8%B2%E6%B5%81%E6%A8%99%E9%A0%AD%E6%A8%99%E6%BA%96%E5%8C%96" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?Caddy+2.11.7+%E7%99%BC%E5%B8%83%EF%BC%9ARFC+10036+%E4%B8%B2%E6%B5%81%E6%A8%99%E9%A0%AD%E6%A8%99%E6%BA%96%E5%8C%96%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-caddy-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/clickhouse-26-9-news" class="text-decoration-none">ClickHouse 26.9 發布：預設壓縮改用 ZSTD</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

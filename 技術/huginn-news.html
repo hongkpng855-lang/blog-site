@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Huginn 開源：50K 星的自架自動化代理 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Huginn 是 GitHub 上累積 50,033 顆星標的自架自動化代理系統，以 Ruby on Rails 撰寫並採 MIT 授權。本文整理其 Agent 與 Event 事件圖架構、v2026.10.04 的 JSON 3 與 MySQL 8.4 更新，以及它與 IFTTT、Zapier 等雲端服務的路線差異。">
+  <meta name="keywords" content="Huginn, 自動化, 開源項目, Ruby, 自架服務, IFTTT, Webhook, Agent, GitHub, AnIskill">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Huginn 開源：50K 星的自架自動化代理">
+  <meta property="og:description" content="Huginn 是 GitHub 上累積 50,033 顆星標的自架自動化代理系統，以 Ruby on Rails 撰寫並採 MIT 授權。本文整理其 Agent 與 Event 事件圖架構、v2026.10.04 的 JSON 3 與 MySQL 8.4 更新，以及它與 IFTTT、Zapier 等雲端服務的路線差異。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/huginn-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Huginn 開源：50K 星的自架自動化代理">
+  <meta name="twitter:description" content="Huginn 是 GitHub 上累積 50,033 顆星標的自架自動化代理系統，以 Ruby on Rails 撰寫並採 MIT 授權。本文整理其 Agent 與 Event 事件圖架構、v2026.10.04 的 JSON 3 與 MySQL 8.4 更新，以及它與 IFTTT、Zapier 等雲端服務的路線差異。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/huginn-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Huginn 開源：50K 星的自架自動化代理",
+      "description": "Huginn 是 GitHub 上累積 50,033 顆星標的自架自動化代理系統，以 Ruby on Rails 撰寫並採 MIT 授權。本文整理其 Agent 與 Event 事件圖架構、v2026.10.04 的 JSON 3 與 MySQL 8.4 更新，以及它與 IFTTT、Zapier 等雲端服務的路線差異。",
+      "datePublished": "2026-10-11T08:00:00+08:00",
+      "dateModified": "2026-10-11T08:00:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/huginn/huginn" }, 
+      "image": "https://anthroskill.com/assets/images/posts/huginn-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Huginn 開源：50K 星的自架自動化代理",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Huginn 開源：50K 星的自架自動化代理</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">Huginn 開源：50K 星的自架自動化代理</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月11日 08:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/huginn/huginn" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/huginn-news-cover.jpg" alt="Huginn 開源：50K 星的自架自動化代理" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/huginn/huginn" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/huginn/huginn
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Huginn 是一套可在自有伺服器上運作的自動化代理系統，在 GitHub 累積 50,033 顆星標與 4,304 次複製，以 Ruby on Rails 撰寫並採用 MIT 授權。它讓使用者建立能夠讀取網頁、監看事件並代為執行操作的 Agent，並以事件在代理之間傳遞構成有向圖。專案於 2026 年 10 月 4 日發布 v2026.10.04，更新 JSON 解析、自動檢查去重與內建資料庫版本，本文將從官方儲存庫與發布說明出發，分析其架構取向、近期改動與生態定位。</p>
+
+<p><img src="/assets/images/posts/huginn-news-shot1.png" alt="Huginn 的 GitHub 儲存庫 README 開頭，顯示 Huginn 專案標誌與「Your agents are standing by」標語，以及 What is Huginn 章節對自動化代理系統的定位說明" /></p>
+
+<h2 id="huginn-是什麼">Huginn 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>Huginn 是一套自架的自動化代理系統，以 Ruby on Rails 撰寫，讓使用者在自有伺服器建立事件驅動的 Agent，GitHub 累積 50,033 顆星標。
+<!-- End AEO Capsule --></p>
+
+<p>專案的官方定位是「建立代替使用者執行線上任務的代理」。這些代理可以讀取網頁、監看事件變化，並依設定採取行動；代理之間透過產生與消費事件互相串連，事件沿著有向圖傳遞，形成可視化的流程。官方說明把它描述為「可以自行改造的 IFTTT 或 Zapier」，差別在於整套系統安裝在使用者自己的伺服器上。</p>
+
+<p>專案由開發者 Andrew Cantino 與社群於 2013 年 3 月建立，其後長期由志工維護，並以 GitHub Sponsors 與 Open Collective 的捐款支持運作。儲存庫的授權為 MIT，允許商業使用、修改與再散布，這讓它常被納入企業內部的自動化基礎建設。</p>
+
+<p>目標受眾涵蓋重視資料主權的個人、需要長期監看外部變化的團隊，以及希望把爬取、摘要與通知流程自動化的開發者。由於所有事件與憑證都存放於自架環境，這類需求通常不會交由第三方雲端服務處理。</p>
+
+<h2 id="huginn-的核心架構如何運作">Huginn 的核心架構如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Huginn 以 Agent 與 Event 為核心，Agent 產生並消費事件，事件沿有向圖傳遞；可組合 RSS、Webhook 與通知類代理建立流程。
+<!-- End AEO Capsule --></p>
+
+<p>系統的基本單位是 Agent 與 Event。每個 Agent 負責一種能力，例如監看網頁變動、解析 RSS、發送郵件或執行自訂 JavaScript；當 Agent 偵測到新資訊便產生 Event，並把它交給下游 Agent 消費。這種事件驅動模型讓流程可以拆解為多個小步驟，逐步組合成複雜的自動化行為。</p>
+
+<p>內建能力涵蓋範圍相當廣泛。儲存庫目前收錄 73 種 Agent，包含天氣、網站變更偵測、資料去重、延遲執行、摘要彙整、Dropbox 檔案監看等類型，並可連接到 Slack、Twilio、Pushover、MQTT、IMAP 以及翻譯與通知 API。官方亦提供 Webhook 代理，讓系統能接收外部服務推送的事件。</p>
+
+<p>擴充機制則以 gem 為單位。專案鼓勵把複雜且特定領域的 Agent 寫成外部 gem，透過環境變數載入既有安裝，核心儲存庫則持續維護通用型代理。這種分工讓社群能各自維護垂直場景的能力，同時保持核心程式的可維護性，也讓企業可在私有環境中發展不對外公開的內部代理。</p>
+
+<h2 id="huginn-v20261004-帶來哪些更新">Huginn v2026.10.04 帶來哪些更新？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>v2026.10.04 升級至 JSON 3 嚴格解析、為排程與控制器代理加入自動檢查去重、導覽標籤改用翻譯鍵，並把內建 MySQL 升至 8.4 LTS。
+<!-- End AEO Capsule --></p>
+
+<p>本版最值得注意的是相依套件的收斂。專案升級至 json 3.0.2，該版本預設拒絕重複的物件鍵與 JavaScript 風格註解；官方升級指引提醒使用者檢查外部 JSON 輸入，並確認自訂 Agent gem 是否相容，此項變更不需要資料庫遷移。對長期維運的安裝而言，這類嚴格化通常能提前暴露格式錯誤。</p>
+
+<p>執行行為也獲得改善。版本針對排程與控制器代理產生的自動檢查加入去重機制，當檢查已排入佇列、執行中或等待重試時，不會重複觸發相同工作，這對設有密集排程的安裝可減少重複事件。介面層則把導覽標籤移到翻譯鍵，同時保留英文原文，為後續多語系介面鋪路。</p>
+
+<p>基礎環境同步推進。內建資料庫與 Docker Compose 的 MySQL 服務升級至 MySQL 8.4 LTS，並為 amd64 與 arm64 提供內建伺服器支援。官方提醒升級前須先備份，且從 MySQL 5.7 出發的安裝需先經 8.0 再升至 8.4，顯示專案在維持長期支援版本上採取較保守的路線。</p>
+
+<h2 id="huginn-的統計數據與授權條件為何">Huginn 的統計數據與授權條件為何？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>專案累積 50,033 顆星標、4,304 次複製與超過四千次提交，貢獻者逾 265 人，主要語言為 Ruby，採 MIT 授權，目前仍有 702 個未結議題。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">50,033</span><span class="ui-stat-label">Stars</span></div>
+<div class="ui-stat"><span class="ui-stat-value">4,304</span><span class="ui-stat-label">Forks</span></div>
+<div class="ui-stat"><span class="ui-stat-value">MIT</span><span class="ui-stat-label">License</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Ruby</span><span class="ui-stat-label">Language</span></div>
+<div class="ui-stat"><span class="ui-stat-value">v2026.10.04</span><span class="ui-stat-label">Latest</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2013</span><span class="ui-stat-label">Created</span></div>
+</div>
+
+<p><img src="/assets/images/posts/huginn-news-shot2.png" alt="Huginn 的 GitHub 儲存庫首頁頂部，顯示儲存庫名稱 huginn/huginn、專案描述「Create agents that monitor and act on your behalf」與累積星標數字" /></p>
+
+<p>授權條款屬寬鬆類型。MIT 授權允許使用、修改與再散布，也允許整合進商業產品，僅要求在副本中保留著作權與授權聲明。對企業內部部署而言，這種條款少有法務顧慮，也解釋了它為何能長期出現在自架服務的推薦清單之中。</p>
+
+<p>維護活躍度可從提交與發行節奏觀察。儲存庫累計約 4,226 次提交，貢獻者逾 265 人，目前仍有 702 個未結議題待處理，另累積 739 位關注者。專案維持約每月一次的版本發布，最近三個版本分別為 2026 年 9 月 20 日、9 月 21 日與 10 月 4 日，日常提交則以相依套件更新與小型修正為主。</p>
+
+<h2 id="huginn-在自動化工具生態中扮演什麼角色">Huginn 在自動化工具生態中扮演什麼角色？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Huginn 相當於自架版的 IFTTT 與 Zapier，主打資料留在自有伺服器；相較雲端服務可控性更高，但需自行處理部署、備份與升級。
+<!-- End AEO Capsule --></p>
+
+<p>分工上，它與常見的自動化服務處於不同路線。IFTTT 與 Zapier 以訂閱制提供大量現成整合，設定門檻低且免維運，代價是流程與資料都經過第三方；Huginn 則把引擎、資料庫與憑證都放在使用者伺服器上，流程以圖形化方式組合，適合需要留存紀錄或處理敏感資訊的場景。</p>
+
+<p>在自架生態中，它常與 n8n、Node-RED 等工具並列討論。n8n 偏向以節點連接 API 的工作流程自動化，Node-RED 常見於物聯網與事件串流，Huginn 的差異在於以代理為單位、以事件為傳遞媒介，並內建網頁變更偵測等偏向「監看」的能力。選擇取決於團隊需要的是流程編排，還是持續監看與通知。</p>
+
+<p>商業化路徑相對單純。專案本身不以託管服務或授權費變現，運作依賴社群貢獻與捐款，價值主要體現在把自動化能力留在自有基礎設施。對企業而言，這種結構意味著採用時少有授權顧慮，但服務保證與維運能力仍須自行建立。</p>
+
+<h2 id="如何快速開始使用-huginn">如何快速開始使用 Huginn？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>可透過官方 Docker 映像快速啟動，或安裝 Ruby 與 MySQL 後複製 .env.example，執行 rake 任務建立資料庫與範例 Agent，再啟動服務。
+<!-- End AEO Capsule --></p>
+
+<p>部署路徑分為兩種。最簡便的方式是使用官方 Docker 映像，適合先體驗完整介面；若要在正式環境長期運行，官方另有手動安裝與各平台部署指南，包含 Heroku 與 OpenShift 的樣板。以下為本機安裝的關鍵步驟：</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 取得原始碼並設定環境</span>
+<span class="nb">cp</span> .env.example .env      <span class="c"># 至少設定 APP_SECRET_TOKEN</span>
+bundle                    <span class="c"># 安裝相依套件</span>
+
+<span class="c"># 建立資料庫與範例 Agent</span>
+bundle <span class="nb">exec </span>rake db:create
+bundle <span class="nb">exec </span>rake db:migrate
+bundle <span class="nb">exec </span>rake db:seed
+
+<span class="c"># 啟動服務</span>
+bundle <span class="nb">exec </span>foreman start
+</code></pre></div></div>
+
+<p>啟動後可於本機連接埠進入介面，並以種子資料產生的管理員帳號登入，預設密碼由 rake 任務輸出，亦可透過環境變數指定。實務上建議先設定備份與排程，再逐步加入代理，因為長期運行的安裝會累積大量事件與憑證，維運規劃往往比流程設計更關鍵。</p>
+
+<p><img src="/assets/images/posts/huginn-news-shot3.png" alt="Huginn 的 GitHub 貢獻者統計頁，顯示歷年提交分佈柱狀圖與貢獻者清單，反映專案由逾 265 位社群成員共同維護" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>本文資訊整理自 huginn/huginn 的 GitHub 儲存庫、官方 v2026.10.04 發布說明與專案文件，涵蓋架構、版本更新與統計數據。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/huginn/huginn</li>
+  <li>v2026.10.04 發布說明：https://github.com/huginn/huginn/releases/tag/v2026.10.04</li>
+  <li>專案 Wiki：https://github.com/huginn/huginn/wiki</li>
+  <li>Docker 安裝文件：https://github.com/huginn/huginn/blob/master/doc/docker/install.md</li>
+  <li>手動安裝指南：https://github.com/huginn/huginn/blob/master/doc/manual/README.md</li>
+  <li>升級說明：https://github.com/huginn/huginn/blob/master/UPGRADING.md</li>
+  <li>MIT 授權條款：https://github.com/huginn/huginn/blob/master/LICENSE</li>
+</ul>
+
+<h2 id="總結huginn-適合什麼團隊">總結：Huginn 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Huginn 適合重視資料主權、具備 Rails 與資料庫維運能力，並需要長期監看與通知流程的團隊；若追求免維運或大量現成整合，雲端服務更合適。
+<!-- End AEO Capsule --></p>
+
+<p>Huginn 的價值在於把自動化引擎與資料一起留在自有伺服器。透過 73 種內建 Agent、事件驅動的圖形化流程與 MIT 授權，它讓監看網頁、彙整資訊與發送通知不必依賴第三方平台；v2026.10.04 對 JSON 解析與 MySQL 8.4 的推進，也顯示專案仍在維護長期支援的基礎環境。</p>
+
+<p>採用前仍須衡量現實條件。自架意味著部署、備份、升級與憑證管理都由團隊承擔，Ruby on Rails 的維運能力是基本前提；官方文件亦提醒 MySQL 升級需逐版進行，顯示基礎環境的維護有一定門檻。若需求偏向少量、免維運的服務整合，雲端工具能更快達到目的；若流程涉及敏感資料或需要完整留存紀錄，Huginn 的自架路線則具備明確優勢。適合與否，最終取決於團隊在資料主控權與維運投入之間的取捨。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Huginn" class="badge bg-secondary text-decoration-none me-1">Huginn</a>
+          
+          
+          <a href="/search/?q=%E8%87%AA%E5%8B%95%E5%8C%96" class="badge bg-secondary text-decoration-none me-1">自動化</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE" class="badge bg-secondary text-decoration-none me-1">開源項目</a>
+          
+          
+          <a href="/search/?q=Ruby" class="badge bg-secondary text-decoration-none me-1">Ruby</a>
+          
+          
+          <a href="/search/?q=%E8%87%AA%E6%9E%B6%E6%9C%8D%E5%8B%99" class="badge bg-secondary text-decoration-none me-1">自架服務</a>
+          
+          
+          <a href="/search/?q=IFTTT" class="badge bg-secondary text-decoration-none me-1">IFTTT</a>
+          
+          
+          <a href="/search/?q=Webhook" class="badge bg-secondary text-decoration-none me-1">Webhook</a>
+          
+          
+          <a href="/search/?q=Agent" class="badge bg-secondary text-decoration-none me-1">Agent</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+          
+          <a href="/search/?q=AnIskill" class="badge bg-secondary text-decoration-none me-1">AnIskill</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news&text=Huginn+%E9%96%8B%E6%BA%90%EF%BC%9A50K+%E6%98%9F%E7%9A%84%E8%87%AA%E6%9E%B6%E8%87%AA%E5%8B%95%E5%8C%96%E4%BB%A3%E7%90%86" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?Huginn+%E9%96%8B%E6%BA%90%EF%BC%9A50K+%E6%98%9F%E7%9A%84%E8%87%AA%E6%9E%B6%E8%87%AA%E5%8B%95%E5%8C%96%E4%BB%A3%E7%90%86%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/huginn-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/public-apis-news" class="text-decoration-none">public-apis 開源：2038 個免費 API 總表</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/jellyfin-12-news" class="text-decoration-none">Jellyfin 12.0 發布：自架媒體系統大改版</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-mole-news" class="text-decoration-none">Mole 開源：69k 星 macOS 清理工具 V1.58</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/build-your-own-x-news" class="text-decoration-none">55萬星開源清單：build-your-own-x 從零重造技術</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/free-claude-code-news" class="text-decoration-none">free-claude-code 開源：1.3B 免費 Token 統一代理層</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

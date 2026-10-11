@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="whisper.cpp 是 GitHub 星標逾 5 萬的開源項目，將 OpenAI Whisper 語音辨識模型以純 C/C++ 無依賴方式重新實作，支援 CPU 與 Apple Silicon 原生推理，可離線運行，MIT 授權，2022 年發布至今持續更新。">
+  <meta name="keywords" content="whisper.cpp, 語音辨識, ASR, 語音轉文字, 開源軟體, C++, ggml, 本機端 AI, 離線語音">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎">
+  <meta property="og:description" content="whisper.cpp 是 GitHub 星標逾 5 萬的開源項目，將 OpenAI Whisper 語音辨識模型以純 C/C++ 無依賴方式重新實作，支援 CPU 與 Apple Silicon 原生推理，可離線運行，MIT 授權，2022 年發布至今持續更新。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-whisper-cpp-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎">
+  <meta name="twitter:description" content="whisper.cpp 是 GitHub 星標逾 5 萬的開源項目，將 OpenAI Whisper 語音辨識模型以純 C/C++ 無依賴方式重新實作，支援 CPU 與 Apple Silicon 原生推理，可離線運行，MIT 授權，2022 年發布至今持續更新。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-whisper-cpp-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎",
+      "description": "whisper.cpp 是 GitHub 星標逾 5 萬的開源項目，將 OpenAI Whisper 語音辨識模型以純 C/C++ 無依賴方式重新實作，支援 CPU 與 Apple Silicon 原生推理，可離線運行，MIT 授權，2022 年發布至今持續更新。",
+      "datePublished": "2026-08-18T00:10:00+08:00",
+      "dateModified": "2026-08-18T00:10:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/ggml-org/whisper.cpp" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-whisper-cpp-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "whisper.cpp 可以免費使用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。whisper.cpp 採用 MIT 開源授權，個人使用、商業使用與修改再發布都允許，且不需付費解鎖任何功能；OpenAI Whisper 模型本身亦屬可自由下載使用的開源模型。" }
+        },
+        {
+          "@type": "Question",
+          "name": "whisper.cpp 需要什麼硬體才能運行？",
+          "acceptedAnswer": { "@type": "Answer", "text": "項目支援純 CPU 運行，最入門的 tiny 模型僅需約 273 MB 記憶體；若要追求更高速度，可啟用 NVIDIA CUDA、AMD ROCm、Apple Silicon Metal／Core ML、Vulkan 或 OpenVINO 等硬體加速。" }
+        },
+        {
+          "@type": "Question",
+          "name": "whisper.cpp 支援哪些語言？",
+          "acceptedAnswer": { "@type": "Answer", "text": "由於其底層是 OpenAI 的 Whisper 模型，支援近 100 種語言的語音辨識，包括中文、英文、粵語與其他亞洲語言；同時提供翻譯模式，可將音訊翻譯為英文文字。" }
+        },
+        {
+          "@type": "Question",
+          "name": "whisper.cpp 與官方 Whisper 有何不同？",
+          "acceptedAnswer": { "@type": "Answer", "text": "whisper.cpp 以純 C/C++ 重新實作，不依賴 Python 與深度學習框架，因此更輕量、啟動更快、更適合嵌入與離線部署；官方版則提供較完整的 Python API 與較便利的生態。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月18日 00:10
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 5 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-whisper-cpp-news-hk-cover.jpg" alt="52,957 星開源項目：whisper.cpp — 本機端語音辨識引擎" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/ggml-org/whisper.cpp" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/ggml-org/whisper.cpp
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p><strong>whisper.cpp</strong> 是 GitHub 星標超過 <strong>52,957 顆</strong>的開源語音辨識項目，將 OpenAI 的 Whisper 自動語音辨識模型以純 C/C++ 無第三方依賴的方式重新實作，支援 CPU 與 Apple Silicon 原生推理，可完全離線運行在 PC、手機、單板電腦甚至網頁瀏覽器等各種裝置，MIT 開源授權免費開放，2022 年 9 月發布至今持續更新，是開源社群中部署語音轉文字功能最輕量、最通用的實現之一。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>whisper.cpp 是 GitHub 逾 5 萬星的開源項目，以純 C/C++ 重新實作 OpenAI Whisper 語音辨識，零依賴、支援 CPU 與 Apple Silicon 原生推理，可離線運行於多種裝置，MIT 授權免費使用。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-whisper-cpp-news-hk-shot1.png" alt="whisper.cpp README 開頭（項目名稱「whisper.cpp」大字 + 標語「High-performance inference of OpenAI's Whisper automatic speech recognition (ASR) model」+ CI 徽章 + MIT 授權徽章 + Stable v1.9.2 版本資訊 + 純 C/C++ 零依賴與 Apple Silicon 原生優化等功能清單）" /></p>
+
+<h2 id="whispercpp-是什麼">whisper.cpp 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 59 字 -->
+<p>whisper.cpp 是由開發者 Georgi Gerganov 發起、現由 ggml-org 組織維護的開源項目，
+<!-- End AEO Capsule -->
+whisper.cpp 是由開發者 Georgi Gerganov 發起、現由 <code class="language-plaintext highlighter-rouge">ggml-org</code> 組織維護的開源項目，核心目標是將 OpenAI Whisper 這套功能強大的自動語音辨識（ASR）模型，以極度輕量且可移植的方式重新實作。與官方 Python 版不同，whisper.cpp 幾乎完全以 C/C++ 撰寫，不依賴 Python 執行環境或任何第三方深度學習框架，整個高層模型的實作都集中在 <code class="language-plaintext highlighter-rouge">whisper.h</code> 與 <code class="language-plaintext highlighter-rouge">whisper.cpp</code> 兩個檔案之中，其餘部分則是基於自家 <code class="language-plaintext highlighter-rouge">ggml</code> 機器學習函式庫。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>whisper.cpp 是 Georgi Gerganov 發起、ggml-org 維護的開源項目，以 C/C++ 重新實作 OpenAI Whisper 語音辨識，不依賴 Python 或第三方框架，僅靠 whisper.h 與 ggml 實現。
+<!-- End AEO Capsule --></p>
+
+<p>項目的核心價值在於「把語音辨識從雲端搬回本地」。官方 Whisper 模型需要較高的運算資源，而 whisper.cpp 透過 ggml 函式庫針對常見硬件進行深度優化，讓 Apple Silicon 成為「頭等公民」——利用 ARM NEON、Accelerate 框架與 Metal 進行加速，也支援 x86 的 AVX 指令集、POWER 架構的 VSX 指令集，以及 NVIDIA CUDA、AMD ROCm、Vulkan、OpenVINO、Ascend NPU 等各種硬體平台，最終達到無需網路連線、無需付費即可在個人設備上完成語音轉文字的目標。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>項目核心是將語音辨識從雲端搬回本地，透過 ggml 針對 Apple Silicon、x86、NVIDIA、AMD 及 Arm 等硬件深度優化，實現離線、免費的語音轉文字。
+<!-- End AEO Capsule --></p>
+
+<h2 id="whispercpp-有哪些核心技術亮點">whisper.cpp 有哪些核心技術亮點？</h2>
+
+<p>whisper.cpp 最突出的技術亮點之一就是「純 C/C++、零依賴」的設計哲學。整個模型不需要額外安裝 Python、PyTorch 或 CUDA 環境，只要編譯一次即可將語音辨識能力嵌入任何應用程式，這對嵌入式開發、桌面工具與跨平台應用特別有價值。內建的 ggml 函式庫支援混合 F16／F32 精度與整數量化，一個量化後的模型檔案會比原版佔用更少的磁碟與記憶體，同時在部分硬體上還能提升處理效率。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>核心亮點是純 C/C++ 零依賴設計，不需 Python 或深度學習框架即可嵌入任何應用；支援混合精度與整數量化，減少記憶體與磁碟佔用並提升部分硬體效率。
+<!-- End AEO Capsule --></p>
+
+<p>在運行效能方面，whisper.cpp 對 Apple Silicon 提供第一等支援，透過 Core ML 將 Encoder 推理交由 Apple 神經網路引擎（ANE）執行，官方指出可比純 CPU 快超過三倍；同時維持「運行時零記憶體分配」的特性，適合在資源受限的裝置上穩定執行。此外，模型支援多種尺寸——從僅 75 MiB 磁碟空間的 tiny 模型到 2.9 GiB 的 large 模型，記憶體需求約在 273 MB 至 3.9 GB 之間，讓用戶可以依照硬體條件自由取捨準確度與速度。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>Apple Silicon 透過 Core ML 讓推理比純 CPU 快逾三倍，並實現運行時零記憶體分配；提供 tiny 至 large 多種模型尺寸，記憶體需求 273 MB 至 3.9 GB，可按硬體彈性選擇。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-whisper-cpp-news-hk-shot2.png" alt="whisper.cpp GitHub 首頁頂部（repo 名稱「ggml-org / whisper.cpp」+ 53k 星標 + 6.1k Forks + 描述「Port of OpenAI's Whisper model in C/C++」+ C++ 主要語言 + MIT 授權 + 984 位貢獻者 + v1.9.2 最新版本資訊）" /></p>
+
+<h2 id="whispercpp-支援哪些平台與硬體加速">whisper.cpp 支援哪些平台與硬體加速？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>whisper.cpp 的跨平台支援範圍在開源語音辨識項目中名列前茅。官方支援清單涵蓋 macOS（Intel 與 Arm）、Linux、
+<!-- End AEO Capsule -->
+whisper.cpp 的跨平台支援範圍在開源語音辨識項目中名列前茅。官方支援清單涵蓋 macOS（Intel 與 Arm）、Linux、Windows（MSVC 與 MinGW）、FreeBSD，以及 iOS、Android、Java、Raspberry Pi 等單板電腦，更可透過 WebAssembly 在網頁瀏覽器內直接運行。這種「一次編譯、處處運行」的特性，使開發者能用同一套程式碼同時覆蓋桌面、行動裝置與嵌入式的部署需求。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>官方支援 macOS、Linux、Windows、FreeBSD、iOS、Android、Raspberry Pi，並可透過 WebAssembly 在瀏覽器中運行，是跨平台覆蓋最廣的開源語音辨識項目之一。
+<!-- End AEO Capsule --></p>
+
+<p>在硬體加速方面，項目針對 NVIDIA GPU 提供 CUDA／cuBLAS 加速，針對 AMD GPU 提供 HIP／ROCm 加速，並支援跨廠商的 Vulkan 方案；Intel 平台的 OpenVINO、華為昇騰 NPU、摩爾線程 GPU 等也都有對應支援。透過 CMake 的多個開關，開發者只需改變建置參數即可針對特定硬件啟用加速，例如 <code class="language-plaintext highlighter-rouge">-DGGML_CUDA=1</code> 啟用 NVIDIA、<code class="language-plaintext highlighter-rouge">-DWHISPER_OPENVINO=1</code> 啟用 OpenVINO，彈性極高。官方同時提供多個 Docker 鏡像，包含一般版、CUDA 版與 MUSA 版，方便伺服器端部署。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>硬體加速支援 CUDA、ROCm、Vulkan、OpenVINO、昇騰 NPU 與摩爾線程 GPU，透過 CMake 開關即可啟用；官方提供多個 Docker 鏡像方便伺服器部署。
+<!-- End AEO Capsule --></p>
+
+<h2 id="whispercpp-如何做到即時語音轉文字">whisper.cpp 如何做到即時語音轉文字？</h2>
+
+<p>除了批次處理音訊檔案，whisper.cpp 也提供即時語音辨識的範例工具 <code class="language-plaintext highlighter-rouge">whisper-stream</code>，可以接上麥克風，每半秒取樣一次音訊並持續輸出轉錄結果，即時顯示在終端機上。此外，內建的 Voice Activity Detection（VAD）功能會先以 Silero-VAD 等輕量模型偵測語音片段，只將含有人聲的段落送入 Whisper 模型處理，大幅減少無意義音訊的運算量，從而顯著加快轉錄速度。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>whisper-stream 可接麥克風每半秒取樣持續轉錄；Voice Activity Detection 先以輕量模型偵測語音片段，只處理含人聲的段落，顯著加快轉錄速度。
+<!-- End AEO Capsule --></p>
+
+<p>在輸出格式上，項目具備豐富的進階能力：<code class="language-plaintext highlighter-rouge">--print-colors</code> 可用顏色標示每個字詞的辨識信心度、<code class="language-plaintext highlighter-rouge">--max-len</code> 可輸出逐字時間戳記、<code class="language-plaintext highlighter-rouge">tinydiarize</code> 提供實驗性的說話者分段功能、<code class="language-plaintext highlighter-rouge">-owts</code> 參數更能產出卡拉 OK 風格的逐字高亮影片。這些工具讓語音轉文字不僅是「跑出文字」，還能應用在字幕製作、逐字稿校對、互動語音助理與影音內容後製等更專業的場景。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>輸出支援信心度顏色標示、逐字時間戳記、說話者分段與卡拉 OK 風格拉片，適用於字幕製作、逐字稿校對與影音後製等專業場景。
+<!-- End AEO Capsule --></p>
+
+<h2 id="whispercpp-的生態系統與商業化潛力如何">whisper.cpp 的生態系統與商業化潛力如何？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>whisper.cpp 不只是一個單一工具，更圍繞著完整的生態系統。官方社群提供了 Rust、JavaScript、Go、Java、Ruby、.NET、Pyth
+<!-- End AEO Capsule -->
+whisper.cpp 不只是一個單一工具，更圍繞著完整的生態系統。官方社群提供了 Rust、JavaScript、Go、Java、Ruby、.NET、Python、Swift、Unity 等多種語言的綁定，讓不同技術背景的開發者都能夠在自己的專案中呼叫語音辨識功能；常見的 React Native 套件、Swift 套件與 Python 封裝讓它非常容易整合。加上 <code class="language-plaintext highlighter-rouge">whisper-server</code> 提供與 OpenAI 相容的 HTTP 轉錄 API，開發者可以輕鬆將其部署為自家的語音辨識服務端點。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>社群提供 Rust、JS、Go、Java、.NET、Python、Swift、Unity 等多語言綁定，whisper-server 提供 OpenAI 相容 API，生態成熟且易於整合至自有服務。
+<!-- End AEO Capsule --></p>
+
+<p>在商業化與應用層面，MIT 授權允許完全免費的商用，加上離線運行的隱私優勢，使其成為需要處理敏感語音資料公司、或者在雲端成本高企場景下的理想選擇。結合即時辨識、逐字時間戳記與說話者分段等能力，whisper.cpp 已被大量應用於會議轉錄、VoIP 語音客服、字幕生成與語音控制等產品之中，在本機端 AI 的浪潮下，其地位與日俱增。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>MIT 授權允許免費商用，離線運行具隱私優勢，廣泛應用於會議轉錄、語音客服、字幕生成與語音控制等產品，在本機端 AI 浪潮中地位日增。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-whisper-cpp-news-hk-shot3.png" alt="whisper.cpp Contributors 統計頁（GitHub Insights 頁面，顯示 2026 年 5 月中至 8 月初的每週提交趨勢圖，貢獻者 ggerganov 排名第一共 74 次提交、danbev 排名第二共 36 次提交，以及各貢獻者近三個月的提交柱狀圖）" /></p>
+
+<h2 id="如何快速開始使用-whispercpp">如何快速開始使用 whisper.cpp？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>要開始使用 whisper.cpp，最快的方式是直接從 GitHub 複製儲存庫，下載官方轉換好的模型，再編譯命令列工具並轉錄一段音訊。
+<!-- End AEO Capsule -->
+要開始使用 whisper.cpp，最快的方式是直接從 GitHub 複製儲存庫，下載官方轉換好的模型，再編譯命令列工具並轉錄一段音訊。具體步驟為：先用 <code class="language-plaintext highlighter-rouge">git clone</code> 取得源碼，再用 <code class="language-plaintext highlighter-rouge">sh ./models/download-ggml-model.sh base.en</code> 下載 <code class="language-plaintext highlighter-rouge">base.en</code> 模型，接著以 CMake 建置專案，最後以 <code class="language-plaintext highlighter-rouge">./build/bin/whisper-cli -f samples/jfk.wav</code> 完成一次轉錄。整個過程不需 Python 環境，只要具備 C++ 編譯工具鏈即可。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>快速入門：git clone 源碼、下載 base.en 模型、CMake 建置，再以 whisper-cli -f 轉錄音訊，不需 Python 環境，只要 C++ 編譯工具鏈即可。
+<!-- End AEO Capsule --></p>
+
+<p>對於想立即體驗效果的開發者，<code class="language-plaintext highlighter-rouge">make base.en</code> 一條指令就會自動下載模型並對內建範例音訊進行推理；若輸入的是其他格式音訊，官方建議先用 <code class="language-plaintext highlighter-rouge">ffmpeg</code> 轉換為 16-bit WAV。需要以服務形式整合的人可以啟動 <code class="language-plaintext highlighter-rouge">whisper-server</code>，而希望做性能評估的則可運用 <code class="language-plaintext highlighter-rouge">whisper-bench</code> 進行基準測試。整體而言，whisper.cpp 提供了從單機測試到伺服器部署的一條龍輕量方案。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>make base.en 可一鍵體驗，ffmpeg 可轉換其他格式；whisper-server 提供服務化整合，whisper-bench 提供基準測試，提供從單機到伺服器的一條龍方案。
+<!-- End AEO Capsule --></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<p>本篇文章的資訊來源為 whisper.cpp 的 GitHub 官方儲存庫，包含 README 說明文件、版本發布紀錄、官方範例與社群討論。有興趣的讀者可以前往 GitHub 查看原始碼、功能更新與跨平台使用方式。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>本篇文章資訊來自 whisper.cpp 官方 GitHub 儲存庫，包含 README、版本發布紀錄、官方範例與社群討論，讀者可前往查看原始碼與功能更新。
+<!-- End AEO Capsule --></p>
+
+<p>出處：<a href="https://github.com/ggml-org/whisper.cpp">ggml-org/whisper.cpp — GitHub</a></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>可以。whisper.cpp 採用 MIT 開源授權，個人使用、商業使用與修改再發布都允許，且不需付費解鎖任何功能；
+<!-- End AEO Capsule --></p>
+<div class="faq-section">
+
+### whisper.cpp 可以免費使用嗎？
+
+可以。whisper.cpp 採用 MIT 開源授權，個人使用、商業使用與修改再發布都允許，且不需付費解鎖任何功能；OpenAI Whisper 模型本身亦屬可自由下載使用的開源模型。
+
+### whisper.cpp 需要什麼硬體才能運行？
+
+項目支援純 CPU 運行，最入門的 tiny 模型僅需約 273 MB 記憶體；若要追求更高速度，可啟用 NVIDIA CUDA、AMD ROCm、Apple Silicon Metal／Core ML、Vulkan 或 OpenVINO 等硬體加速。
+
+### whisper.cpp 支援哪些語言？
+
+由於其底層是 OpenAI 的 Whisper 模型，支援近 100 種語言的語音辨識，包括中文、英文、粵語與其他亞洲語言；同時提供翻譯模式，可將音訊翻譯為英文文字。
+
+### whisper.cpp 與官方 Whisper 有何不同？
+
+whisper.cpp 以純 C/C++ 重新實作，不依賴 Python 與深度學習框架，因此更輕量、啟動更快、更適合嵌入與離線部署；官方版則提供較完整的 Python API 與較便利的生態。
+
+</div>
+
+<h2 id="總結whispercpp-值得一試嗎">總結：whisper.cpp 值得一試嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 51 字 -->
+<p>whisper.cpp 以 5.2 萬顆星標證明了「本機端語音辨識」的龐大需求與其技術實力的領先地位。
+<!-- End AEO Capsule -->
+whisper.cpp 以 5.2 萬顆星標證明了「本機端語音辨識」的龐大需求與其技術實力的領先地位。它以純 C/C++ 的零依賴設計、橫跨桌面、行動與瀏覽器的廣闊平台支援，以及對 Apple Silicon 等多種硬體的深度優化，把過去需要雲端算力與付費服務的語音轉文字，壓縮到「一支離線、免費、可嵌入任何裝置」的解決方案。對於希望控制隱私、節省雲端成本的開發者與產品團隊而言，whisper.cpp 提供了一套極具價值且成熟穩定的開源選擇，絕對值得一試。</p>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>whisper.cpp 以 5.2 萬星標驗證本機端語音辨識需求，零依賴設計、平台覆蓋廣、硬體優化深，提供離線免費可嵌入的語音轉文字方案，值得一試。
+<!-- End AEO Capsule --></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=whisper.cpp" class="badge bg-secondary text-decoration-none me-1">whisper.cpp</a>
+          
+          
+          <a href="/search/?q=%E8%AA%9E%E9%9F%B3%E8%BE%A8%E8%AD%98" class="badge bg-secondary text-decoration-none me-1">語音辨識</a>
+          
+          
+          <a href="/search/?q=ASR" class="badge bg-secondary text-decoration-none me-1">ASR</a>
+          
+          
+          <a href="/search/?q=%E8%AA%9E%E9%9F%B3%E8%BD%89%E6%96%87%E5%AD%97" class="badge bg-secondary text-decoration-none me-1">語音轉文字</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E8%BB%9F%E9%AB%94" class="badge bg-secondary text-decoration-none me-1">開源軟體</a>
+          
+          
+          <a href="/search/?q=C%2B%2B" class="badge bg-secondary text-decoration-none me-1">C++</a>
+          
+          
+          <a href="/search/?q=ggml" class="badge bg-secondary text-decoration-none me-1">ggml</a>
+          
+          
+          <a href="/search/?q=%E6%9C%AC%E6%A9%9F%E7%AB%AF+AI" class="badge bg-secondary text-decoration-none me-1">本機端 AI</a>
+          
+          
+          <a href="/search/?q=%E9%9B%A2%E7%B7%9A%E8%AA%9E%E9%9F%B3" class="badge bg-secondary text-decoration-none me-1">離線語音</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk&text=52%2C957+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9Awhisper.cpp+%E2%80%94+%E6%9C%AC%E6%A9%9F%E7%AB%AF%E8%AA%9E%E9%9F%B3%E8%BE%A8%E8%AD%98%E5%BC%95%E6%93%8E" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?52%2C957+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9Awhisper.cpp+%E2%80%94+%E6%9C%AC%E6%A9%9F%E7%AB%AF%E8%AA%9E%E9%9F%B3%E8%BE%A8%E8%AD%98%E5%BC%95%E6%93%8E%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-whisper-cpp-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/meta-muse-voice-transcribe-news" class="text-decoration-none">Meta 推 Muse Voice Transcribe：即時語音轉錄模型</a>
+              <br><small class="text-muted">2026-09-02</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vibevoice-news-hk" class="text-decoration-none">52,713 星開源項目：VibeVoice — 微軟開源語音 AI 家族</a>
+              <br><small class="text-muted">2026-08-16</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/deepmind-sl2t-sign-language-news" class="text-decoration-none">DeepMind 推出手語轉文字模型，Pixel 11 率先支援</a>
+              <br><small class="text-muted">2026-08-13</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-whisper-news-hk" class="text-decoration-none">10.7 萬星開源項目：Whisper — OpenAI 通用語音識別模型</a>
+              <br><small class="text-muted">2026-08-07</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

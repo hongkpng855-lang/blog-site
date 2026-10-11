@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2332"/>
+      <stop offset="100%" style="stop-color:#2d4059"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8C547"/>
+      <stop offset="100%" style="stop-color:#D4A82A"/>
+    </linearGradient>
+    <linearGradient id="upGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a8c6f"/>
+      <stop offset="100%" style="stop-color:#357a5c"/>
+    </linearGradient>
+    <linearGradient id="cardBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d5a80"/>
+      <stop offset="100%" style="stop-color:#293b5a"/>
+    </linearGradient>
+    <linearGradient id="cardOrange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ee6c4d"/>
+      <stop offset="100%" style="stop-color:#d45a3e"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="75" x2="800" y2="75" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="225" x2="800" y2="225" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="375" x2="800" y2="375" stroke="#fff" stroke-width="0.5"/>
+    <line x1="100" y1="0" x2="100" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="300" y1="0" x2="300" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="500" y1="0" x2="500" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="700" y1="0" x2="700" y2="450" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="680" cy="55" r="90" fill="#4a8c6f" opacity="0.12"/>
+  <circle cx="100" cy="410" r="110" fill="#3d5a80" opacity="0.1"/>
+  <circle cx="500" cy="380" r="60" fill="#ee6c4d" opacity="0.06"/>
+
+  <!-- Chart line decoration -->
+  <polyline points="100,350 200,310 300,330 400,280 500,260 550,200 620,220 700,170" fill="none" stroke="#4a8c6f" stroke-width="3" opacity="0.3"/>
+  <polyline points="100,350 200,310 300,330 400,280 500,260 550,200 620,220 700,170" fill="none" stroke="#4a8c6f" stroke-width="1.5" opacity="0.5" stroke-dasharray="4 4">
+    <animate attributeName="stroke-dashoffset" from="100" to="0" dur="3s" repeatCount="indefinite"/>
+  </polyline>
+
+  <!-- Title -->
+  <text x="400" y="72" text-anchor="middle" font-family="system-ui, sans-serif" font-size="34" font-weight="bold" fill="#fff" letter-spacing="1">港股 ETF 投資入門</text>
+  <text x="400" y="105" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#a0b4c8" letter-spacing="0.5">每月 $1000 開始嘅被動收入策略</text>
+
+  <!-- Investment cards -->
+  <!-- Card 1 - ETF -->
+  <rect x="60" y="145" width="200" height="120" rx="12" fill="url(#cardBlue)" filter="url(#shadow)"/>
+  <text x="160" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28">📊</text>
+  <text x="160" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#fff">盈富基金 2800</text>
+  <text x="160" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0c4d8">恒生指數 ETF</text>
+  <text x="160" y="250" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0c4d8">管理費 0.08%</text>
+
+  <!-- Arrow 1 -->
+  <text x="280" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#E8C547" opacity="0.6">→</text>
+
+  <!-- Card 2 - Global -->
+  <rect x="300" y="145" width="200" height="120" rx="12" fill="url(#upGreen)" filter="url(#shadow)"/>
+  <text x="400" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28">🌍</text>
+  <text x="400" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#fff">VT</text>
+  <text x="400" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0d4c0">全球股市 ETF</text>
+  <text x="400" y="250" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0d4c0">管理費 0.07%</text>
+
+  <!-- Arrow 2 -->
+  <text x="520" y="208" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#E8C547" opacity="0.6">→</text>
+
+  <!-- Card 3 - Tech -->
+  <rect x="540" y="145" width="200" height="120" rx="12" fill="url(#cardOrange)" filter="url(#shadow)"/>
+  <text x="640" y="178" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28">🚀</text>
+  <text x="640" y="212" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#fff">QQQ</text>
+  <text x="640" y="232" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ffd4c8">Nasdaq 100 ETF</text>
+  <text x="640" y="250" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ffd4c8">管理費 0.20%</text>
+
+  <!-- Strategy box -->
+  <rect x="130" y="298" width="540" height="50" rx="25" fill="url(#gold)" opacity="0.15" stroke="#E8C547" stroke-width="1.5"/>
+  <text x="400" y="322" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="bold" fill="#E8C547">📈 月供策略：一出糧自動扣錢，唔睇市唔操作</text>
+
+  <!-- Stats row -->
+  <text x="200" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#8a9cb0">每月最低</text>
+  <text x="200" y="388" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" fill="#E8C547">$1,000</text>
+
+  <text x="400" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#8a9cb0">年化管理費</text>
+  <text x="400" y="388" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" fill="#E8C547">&lt; 0.2%</text>
+
+  <text x="600" y="368" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#8a9cb0">長期年化回報</text>
+  <text x="600" y="388" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" fill="#4a8c6f">7-10%</text>
+
+  <!-- Tags -->
+  <rect x="230" y="412" width="70" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="265" y="427" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#ETF</text>
+  <rect x="310" y="412" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="350" y="427" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#被動收入</text>
+  <rect x="400" y="412" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="440" y="427" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#月供策略</text>
+  <rect x="490" y="412" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="530" y="427" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#退休規劃</text>
+</svg>

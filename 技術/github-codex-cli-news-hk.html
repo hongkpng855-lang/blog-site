@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="OpenAI Codex CLI 是 GitHub 星標逾 10.5 萬的開源終端機 AI 編程代理，以 Rust 開發，支援 ChatGPT 帳號登入、本地沙箱執行與 Skills 技能擴充，可整合主流 IDE，採用 Apache 2.0 許可證，是 2026 年 AI 程式開發領域最具代表性的開源項目之一。">
+  <meta name="keywords" content="AI 編程, Codex, OpenAI, 開發者工具, 開源, LLM, Rust, CLI, AI 代理">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理">
+  <meta property="og:description" content="OpenAI Codex CLI 是 GitHub 星標逾 10.5 萬的開源終端機 AI 編程代理，以 Rust 開發，支援 ChatGPT 帳號登入、本地沙箱執行與 Skills 技能擴充，可整合主流 IDE，採用 Apache 2.0 許可證，是 2026 年 AI 程式開發領域最具代表性的開源項目之一。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-codex-cli-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理">
+  <meta name="twitter:description" content="OpenAI Codex CLI 是 GitHub 星標逾 10.5 萬的開源終端機 AI 編程代理，以 Rust 開發，支援 ChatGPT 帳號登入、本地沙箱執行與 Skills 技能擴充，可整合主流 IDE，採用 Apache 2.0 許可證，是 2026 年 AI 程式開發領域最具代表性的開源項目之一。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-codex-cli-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理",
+      "description": "OpenAI Codex CLI 是 GitHub 星標逾 10.5 萬的開源終端機 AI 編程代理，以 Rust 開發，支援 ChatGPT 帳號登入、本地沙箱執行與 Skills 技能擴充，可整合主流 IDE，採用 Apache 2.0 許可證，是 2026 年 AI 程式開發領域最具代表性的開源項目之一。",
+      "datePublished": "2026-08-12T19:30:00+08:00",
+      "dateModified": "2026-08-12T19:30:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/openai/codex" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-codex-cli-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月12日 19:30
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/openai/codex" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-codex-cli-news-hk-cover.jpg" alt="105K 星開源項目：OpenAI Codex — 終端機 AI 編程代理" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/openai/codex" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/openai/codex
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p><strong>OpenAI Codex CLI</strong> 是 OpenAI 官方推出的開源 AI 編程代理，GitHub 星標超過 <strong>105,000 顆</strong>，以 Rust 語言開發，直接在開發者的終端機中本地運行，可讀取、修改與執行專案程式碼。該項目採用 Apache 2.0 許可證，支援 ChatGPT 訂閱帳號登入與 API 金鑰兩種認證方式，自 2025 年 4 月創建以來已累積超過 15,900 次復刻，是 2026 年全球最受開發者關注的 AI 編程開源項目之一。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>OpenAI Codex CLI 是 OpenAI 官方推出的開源 AI 編程代理，GitHub 星標逾 10.5 萬，以 Rust 開發並在終端機本地運行，支援 ChatGPT 帳號登入，採用 Apache 2.0 許可證。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-codex-cli-news-hk-shot1.png" alt="OpenAI Codex CLI README 開頭（「Codex CLI」項目名稱 + 標語「Lightweight coding agent that runs in your terminal」+ Codex CLI 產品主視覺圖）" /></p>
+
+<h2 id="openai-codex-cli-是什麼">OpenAI Codex CLI 是什麼？</h2>
+
+<p>OpenAI Codex CLI 是 OpenAI 於 2025 年 4 月開源發布的指令列編程代理，定位為「在你的終端機中運行的輕量級編碼代理」。與依賴瀏覽器或雲端介面的編程助手不同，Codex CLI 以原生指令列工具的形式安裝於開發者本機，直接在專案目錄中運作，可以自行讀取檔案、編輯程式碼、執行指令並根據執行結果迭代修正，整個過程都在開發者的終端機環境中完成。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 是 OpenAI 開源的指令列編程代理，安裝於開發者本機，可直接在專案目錄讀取、編輯與執行程式碼，整個工作流程都在終端機中完成，定位為輕量級本地編碼代理。
+<!-- End AEO Capsule --></p>
+
+<p>項目最初以命令行工具形式推出，隨後 OpenAI 逐步擴展其產品形態，包括整合至 VS Code、Cursor、Windsurf 等主流編輯器的 IDE 擴充功能，以及 macOS 桌面應用與雲端網頁版 Codex Web。其中 CLI 版本保持開源，採用 Apache 2.0 許可證，任何開發者都可以自由使用、修改與分發，這是其短時間內累積逾 10.5 萬星標的重要基礎。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>項目從指令列工具擴展至 IDE 擴充、桌面應用與雲端網頁版，CLI 核心保持開源並採用 Apache 2.0 許可證，任何開發者均可自由使用與修改。
+<!-- End AEO Capsule --></p>
+
+<h2 id="codex-cli-與其他-ai-編程代理有何不同">Codex CLI 與其他 AI 編程代理有何不同？</h2>
+
+<p>Codex CLI 的核心差異在於其「本地優先」的執行架構。市面上多數 AI 編程工具將程式碼上傳至雲端處理，而 Codex CLI 將代理執行環境建置於開發者本機，配合沙箱（Sandbox）機制限制代理的系統存取權限，程式碼與文件無需離開使用者機器。這種設計兼顧了隱私安全與執行效率，尤其適合處理包含敏感商業邏輯或未公開程式碼的專案。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 採用本地優先架構，代理在開發者本機的沙箱中執行，程式碼無需上傳雲端，配合存取權限控管，兼顧隱私安全與執行效率，這是其與雲端編程代理的最大差異。
+<!-- End AEO Capsule --></p>
+
+<p>在認證方式上，Codex CLI 提供兩條路徑：使用者可以透過 ChatGPT 訂閱帳號登入，將代理用量計入 Plus、Pro、Business、Edu 或 Enterprise 方案，也可以設定 OpenAI API 金鑰獨立計費。這種彈性讓個人開發者與企業團隊可以根據用量與預算選擇最合適的方案，亦是其相較於僅支援單一計費模式的競品的一大優勢。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 支援 ChatGPT 訂閱帳號與 API 金鑰兩種認證，個人與企業可依用量選擇計費方案，彈性設計是相較於單一計費模式競品的優勢。
+<!-- End AEO Capsule --></p>
+
+<h2 id="codex-cli-有哪些核心技術亮點">Codex CLI 有哪些核心技術亮點？</h2>
+
+<p>Codex CLI 的技術架構圍繞「安全、可控、可擴充」三個原則設計。在安全層面，代理執行的每一條指令都經過沙箱隔離，系統依風險等級分類管理檔案寫入、指令執行與網路存取等操作，並要求使用者批准高風險動作，讓開發者對代理行為保持完全掌控。非互動模式（Non-interactive mode）則允許將代理嵌入自動化管線，在無人值守的環境中執行任務。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 以安全、可控、可擴充為設計原則，指令經沙箱隔離並依風險分級審批，非互動模式可嵌入自動化管線，讓開發者對代理行為保持完全掌控。
+<!-- End AEO Capsule --></p>
+
+<p>在擴充性方面，Codex CLI 支援 Skills 技能體系，開發者可以為代理安裝預先定義的技能包，賦予其特定領域的專業能力；同時支援 AGENTS.md 專案規範文件，讓代理在進入專案時自動讀取團隊設定的開發慣例、架構約束與編碼準則，確保生成程式碼符合既有工程標準。Slash 指令系統則提供快速呼叫常用操作的捷徑，提升日常使用效率。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 支援 Skills 技能擴充、AGENTS.md 專案規範自動載入與 Slash 指令捷徑，讓代理具備領域專業能力並遵循團隊工程標準，擴充性是其技術亮點之一。
+<!-- End AEO Capsule --></p>
+
+<p>在模型層面，Codex 家族以 GPT-5-Codex 為旗艦模型，該模型同時作為雲端任務與程式碼審查的預設引擎，開發者亦可在 Codex CLI 與 IDE 擴充中為本地任務選擇使用。模型持續迭代的特性，加上 Rust 開發帶來的低延遲與高穩定性，使 Codex CLI 在大型專案上的表現受到開發者社群廣泛討論。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex 家族以 GPT-5-Codex 為旗艦模型，作為雲端任務與程式碼審查的預設引擎，配合 Rust 開發的低延遲特性，在大型專案上表現受到社群廣泛討論。
+<!-- End AEO Capsule --></p>
+
+<h2 id="如何快速開始使用-codex-cli">如何快速開始使用 Codex CLI？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>開始使用 Codex CLI 只需三個步驟。首先安裝工具，macOS 與 Linux 使用者可以執行 curl -fsSL https://chatgpt.co
+<!-- End AEO Capsule -->
+開始使用 Codex CLI 只需三個步驟。首先安裝工具，macOS 與 Linux 使用者可以執行 <code class="language-plaintext highlighter-rouge">curl -fsSL https://chatgpt.com/codex/install.sh | sh</code>，Windows 使用者則執行對應的 PowerShell 安裝指令；此外亦支援透過 npm（<code class="language-plaintext highlighter-rouge">npm install -g @openai/codex</code>）或 Homebrew（<code class="language-plaintext highlighter-rouge">brew install --cask codex</code>）安裝，亦可直接從 GitHub Releases 下載對應平台的二進位檔案。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>安裝 Codex CLI 可透過官方安裝指令、npm、Homebrew 或 GitHub Releases 完成，macOS、Linux 與 Windows 皆有對應安裝方式，執行安裝指令後即可開始使用。
+<!-- End AEO Capsule --></p>
+
+<p>其次完成認證設定，執行 <code class="language-plaintext highlighter-rouge">codex</code> 指令後選擇「Sign in with ChatGPT」登入帳號，即可將代理用量計入既有訂閱方案；若偏好獨立計費，亦可設定 API 金鑰。最後即可在專案目錄中啟動代理，透過自然語言描述需求，Codex CLI 便會開始讀取專案結構、規劃修改方案並逐步執行。需要圖形介面的使用者，可執行 <code class="language-plaintext highlighter-rouge">codex app</code> 啟動桌面應用，或安裝對應編輯器的擴充功能。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>執行 codex 指令後選擇登入 ChatGPT 帳號或設定 API 金鑰即可開始使用，代理會讀取專案結構並逐步執行任務，亦可透過 codex app 或 IDE 擴充取得圖形介面。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-codex-cli-news-hk-shot2.png" alt="OpenAI Codex GitHub 首頁頂部（repo 名稱「openai/codex」+ 105k 星標 + 16k Forks + 描述「Lightweight coding agent that runs in your terminal」+ Apache-2.0 許可標籤 + Rust 語言標籤）" /></p>
+
+<h2 id="codex-對-ai-編程生態有什麼影響">Codex 對 AI 編程生態有什麼影響？</h2>
+
+<p>OpenAI 於 2026 年 7 月底至 8 月初密集調整 Codex 產品線，包括模型棄用公告、瀏覽器產品調整與新功能發布，並於 8 月 11 日推出支援 Codex 的 ChatGPT Linux 桌面版，顯示 OpenAI 正將 Codex 定位為跨平台、跨介面的核心編程產品。這一系列動作對 AI 編程工具市場產生直接影響，也確立了「本地 CLI 代理」作為主流產品形態的地位。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>OpenAI 於 2026 年 7 至 8 月密集調整 Codex 產品線並推出 Linux 桌面支援，將 Codex 定位為跨平台核心編程產品，確立本地 CLI 代理的主流產品形態。
+<!-- End AEO Capsule --></p>
+
+<p>在生態層面，Codex CLI 的開源策略與 Skills 技能標準，使其成為眾多第三方工具整合的基礎。開發者可以將 Codex CLI 嵌入 CI/CD 管線進行自動化程式碼審查，亦可搭配各類技能包擴充其能力邊界。其採用 Apache 2.0 許可證的開放態度，與 OpenAI 一貫的封閉產品策略形成對比，被業界解讀為 OpenAI 在開源開發者生態中建立信任與影響力的關鍵布局。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 的開源策略與 Skills 標準成為第三方整合基礎，可嵌入 CI/CD 管線與擴充技能，Apache 2.0 授權被視為 OpenAI 在開源生態建立影響力的關鍵布局。
+<!-- End AEO Capsule --></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<p>本文章內容取材自 OpenAI Codex 官方倉庫的 README 文件、docs 目錄下的安裝與使用文件，以及 OpenAI 官方發布的產品說明。原始資料來源為 GitHub 上的 openai/codex 儲存庫，其中包含完整的安裝指引、認證設定、沙箱安全說明、Skills 與 AGENTS.md 使用教學，以及開源基金（Open Source Fund）等相關資訊，讀者可以前往該倉庫查看完整內容。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>本文資料來源為 GitHub 的 openai/codex 官方倉庫，包含安裝指引、認證設定、沙箱安全說明與 Skills 教學，官方開發者文件站點 developers.openai.com 提供更詳盡的技術文件。
+<!-- End AEO Capsule --></p>
+
+<p><strong>出處：</strong><a href="https://github.com/openai/codex">openai/codex GitHub 官方倉庫</a>（星標 105,490 · Apache-2.0 · 最後更新 2026-08-12）</p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-label">星標數</span><span class="ui-stat-value">105,490</span></div>
+<div class="ui-stat"><span class="ui-stat-label">復刻數</span><span class="ui-stat-value">15,992</span></div>
+<div class="ui-stat"><span class="ui-stat-label">建立日期</span><span class="ui-stat-value">2025-04</span></div>
+<div class="ui-stat"><span class="ui-stat-label">最後更新</span><span class="ui-stat-value">2026-08</span></div>
+<div class="ui-stat"><span class="ui-stat-label">開源許可證</span><span class="ui-stat-value">Apache-2.0</span></div>
+<div class="ui-stat"><span class="ui-stat-label">主要語言</span><span class="ui-stat-value">Rust</span></div>
+</div>
+
+<p><img src="/assets/images/posts/github-codex-cli-news-hk-shot3.png" alt="OpenAI Codex 儲存庫統計頁（「Contributors」標題 + 貢獻者頭像牆 + Rust 99.2% 等語言佔比分布，顯示項目的開發規模與技術棧）" /></p>
+
+<h2 id="總結codex-cli-值得一試嗎">總結：Codex CLI 值得一試嗎？</h2>
+
+<p>Codex CLI 的價值在於將 OpenAI 的編程模型能力以開源、本地、可控制的形式交到開發者手中。對於重視程式碼隱私的團隊，本地沙箱架構確保原始碼不會外流；對於需要自動化的工程團隊，非互動模式與 CI/CD 整合能力讓 AI 代理可以無縫嵌入既有流程；對於個人開發者，ChatGPT 訂閱帳號即可使用，無需額外負擔 API 費用。Apache 2.0 許可證亦消除了供應商鎖定的顧慮。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Codex CLI 以開源、本地、可控制的形式提供 OpenAI 編程能力，本地沙箱保障隱私，非互動模式支援自動化，ChatGPT 訂閱即可使用，Apache 2.0 授權無供應商鎖定。
+<!-- End AEO Capsule --></p>
+
+<p>從長期視角觀察，OpenAI 以開源方式釋出旗艦編程代理的 CLI 核心，代表大型模型廠商在開發者工具領域的策略轉向：以開放生態換取採用率與標準制定權。對於開發者而言，這套 10.5 萬星標的工具提供了一個零成本、可深度定制的 AI 編程代理起點，無論是日常輔助編碼、程式碼審查還是自動化流程整合，都值得實際安裝評估，是 2026 年 AI 開發者工具領域不可忽視的選項。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI+%E7%B7%A8%E7%A8%8B" class="badge bg-secondary text-decoration-none me-1">AI 編程</a>
+          
+          
+          <a href="/search/?q=Codex" class="badge bg-secondary text-decoration-none me-1">Codex</a>
+          
+          
+          <a href="/search/?q=OpenAI" class="badge bg-secondary text-decoration-none me-1">OpenAI</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E7%99%BC%E8%80%85%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開發者工具</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=LLM" class="badge bg-secondary text-decoration-none me-1">LLM</a>
+          
+          
+          <a href="/search/?q=Rust" class="badge bg-secondary text-decoration-none me-1">Rust</a>
+          
+          
+          <a href="/search/?q=CLI" class="badge bg-secondary text-decoration-none me-1">CLI</a>
+          
+          
+          <a href="/search/?q=AI+%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">AI 代理</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk&text=105K+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AOpenAI+Codex+%E2%80%94+%E7%B5%82%E7%AB%AF%E6%A9%9F+AI+%E7%B7%A8%E7%A8%8B%E4%BB%A3%E7%90%86" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?105K+%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AOpenAI+Codex+%E2%80%94+%E7%B5%82%E7%AB%AF%E6%A9%9F+AI+%E7%B7%A8%E7%A8%8B%E4%BB%A3%E7%90%86%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-codex-cli-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-math-corpus-news" class="text-decoration-none">OpenAI 開源 722 篇數學手稿：AI 證明成果公開</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-textgrain-watermark-news" class="text-decoration-none">OpenAI 推 textGrain：歐盟文本浮水印的取捨</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-chatgpt-visual-ads-news" class="text-decoration-none">OpenAI 為 ChatGPT 加入視覺廣告格式</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-warp-news" class="text-decoration-none">Warp 開源：65k 星的 AI 原生終端機</a>
+              <br><small class="text-muted">2026-10-04</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-model-guide-news" class="text-decoration-none">OpenAI 發布 GPT-6 實戰指南：三大模型怎麼選</a>
+              <br><small class="text-muted">2026-10-04</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

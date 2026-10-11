@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="50%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#0d0a1a"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#0088ff"/>
+    </linearGradient>
+    <linearGradient id="shieldFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1b3d"/>
+      <stop offset="100%" style="stop-color:#0a0f2a"/>
+    </linearGradient>
+    <linearGradient id="goldAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c"/>
+      <stop offset="100%" style="stop-color:#ffd700"/>
+    </linearGradient>
+    <linearGradient id="redAlert" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff4444"/>
+      <stop offset="100%" style="stop-color:#cc0000"/>
+    </linearGradient>
+    <linearGradient id="greenSecure" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff88"/>
+      <stop offset="100%" style="stop-color:#00cc66"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowStrong">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowRed">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Matrix-style code rain background -->
+  <g fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.04">
+    <line x1="30" y1="0" x2="30" y2="512"/>
+    <line x1="80" y1="0" x2="80" y2="512"/>
+    <line x1="130" y1="0" x2="130" y2="512"/>
+    <line x1="180" y1="0" x2="180" y2="512"/>
+    <line x1="230" y1="0" x2="230" y2="512"/>
+    <line x1="280" y1="0" x2="280" y2="512"/>
+    <line x1="330" y1="0" x2="330" y2="512"/>
+    <line x1="380" y1="0" x2="380" y2="512"/>
+    <line x1="430" y1="0" x2="430" y2="512"/>
+    <line x1="480" y1="0" x2="480" y2="512"/>
+  </g>
+  <!-- Binary dots -->
+  <g fill="#00d4ff" opacity="0.06">
+    <circle cx="30" cy="40" r="1.5"/><circle cx="80" cy="120" r="1.5"/>
+    <circle cx="130" cy="70" r="1.5"/><circle cx="180" cy="200" r="1.5"/>
+    <circle cx="230" cy="50" r="1.5"/><circle cx="330" cy="180" r="1.5"/>
+    <circle cx="380" cy="90" r="1.5"/><circle cx="430" cy="220" r="1.5"/>
+    <circle cx="480" cy="60" r="1.5"/><circle cx="55" cy="300" r="1.5"/>
+    <circle cx="105" cy="420" r="1.5"/><circle cx="155" cy="350" r="1.5"/>
+    <circle cx="205" cy="460" r="1.5"/><circle cx="305" cy="400" r="1.5"/>
+    <circle cx="355" cy="470" r="1.5"/><circle cx="405" cy="340" r="1.5"/>
+    <circle cx="455" cy="430" r="1.5"/><circle cx="500" cy="380" r="1.5"/>
+  </g>
+  <!-- Shield outline (larger, central) -->
+  <path d="M256 76 L380 130 L380 270 Q380 360 256 440 Q132 360 132 270 L132 130 Z" 
+        fill="url(#shieldFill)" stroke="url(#shieldGrad)" stroke-width="3" filter="url(#glow)"/>
+  <!-- Shield inner border -->
+  <path d="M256 96 L360 142 L360 265 Q360 340 256 410 Q152 340 152 265 L152 142 Z" 
+        fill="none" stroke="url(#shieldGrad)" stroke-width="1" opacity="0.4"/>
+  <!-- Lock icon inside shield -->
+  <rect x="226" y="230" width="60" height="50" rx="6" fill="none" stroke="url(#greenSecure)" stroke-width="2.5" filter="url(#glow)"/>
+  <path d="M240 230 L240 210 Q240 185 256 185 Q272 185 272 210 L272 230" 
+        fill="none" stroke="url(#greenSecure)" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="256" cy="255" r="6" fill="url(#greenSecure)" opacity="0.8"/>
+  <!-- Checkmark -->
+  <path d="M246 255 L253 264 L267 245" fill="none" stroke="url(#greenSecure)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Alert triangle on right side (threat indicator) -->
+  <polygon points="370,170 385,200 355,200" fill="none" stroke="url(#redAlert)" stroke-width="1.5" opacity="0.6" filter="url(#glowRed)"/>
+  <line x1="370" y1="182" x2="370" y2="194" stroke="url(#redAlert)" stroke-width="1" opacity="0.6"/>
+  <circle cx="370" cy="198" r="1" fill="url(#redAlert)" opacity="0.6"/>
+  <!-- Detection rings -->
+  <circle cx="256" cy="270" r="90" fill="none" stroke="#00d4ff" stroke-width="0.4" opacity="0.15" stroke-dasharray="4,8"/>
+  <circle cx="256" cy="270" r="115" fill="none" stroke="#00d4ff" stroke-width="0.3" opacity="0.1" stroke-dasharray="3,10"/>
+  <circle cx="256" cy="270" r="140" fill="none" stroke="#00d4ff" stroke-width="0.2" opacity="0.07" stroke-dasharray="2,12"/>
+  <!-- Small threat indicators (scattered) -->
+  <g fill="none" stroke="#ff4444" stroke-width="0.8" opacity="0.25">
+    <circle cx="155" cy="195" r="8"/>
+    <line x1="150" y1="195" x2="160" y2="195"/>
+    <line x1="155" y1="190" x2="155" y2="200"/>
+    <circle cx="360" cy="310" r="6"/>
+    <line x1="356" y1="310" x2="364" y2="310"/>
+    <line x1="360" y1="306" x2="360" y2="314"/>
+    <circle cx="175" cy="350" r="5"/>
+    <line x1="172" y1="350" x2="178" y2="350"/>
+    <line x1="175" y1="347" x2="175" y2="353"/>
+  </g>
+  <!-- Firewall/wave lines at bottom -->
+  <path d="M100 390 Q150 375 200 390 T300 390 T400 390" fill="none" stroke="url(#shieldGrad)" stroke-width="1" opacity="0.2"/>
+  <path d="M110 400 Q160 385 210 400 T310 400 T410 400" fill="none" stroke="url(#shieldGrad)" stroke-width="0.5" opacity="0.1"/>
+  <!-- Title text -->
+  <text x="256" y="475" text-anchor="middle" fill="url(#goldAccent)" font-family="system-ui, sans-serif" font-size="16" font-weight="bold" filter="url(#glowStrong)">網路安全完全指南</text>
+  <text x="256" y="498" text-anchor="middle" fill="#a0aec0" font-family="system-ui, sans-serif" font-size="10" opacity="0.6">AI 驅動攻擊時代的生存之道</text>
+</svg>

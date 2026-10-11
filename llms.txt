@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/profile.php?id=1247126168485543
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（1884 篇中的最新 30 篇）
+- [ClickHouse 26.9 發布：預設壓縮改用 ZSTD](https://anthroskill.com/技術/clickhouse-26-9-news)：ClickHouse 是開源列式分析資料庫，在 GitHub 累積 50,329 顆星標，採 Apache 2.0 授權。本文整理 26.9 版本的重大變更，包括預設壓縮由 LZ4 改為 ZSTD、分析器取代舊有查詢分析
+- [Huginn 開源：50K 星的自架自動化代理](https://anthroskill.com/技術/huginn-news)：Huginn 是 GitHub 上累積 50,033 顆星標的自架自動化代理系統，以 Ruby on Rails 撰寫並採 MIT 授權。本文整理其 Agent 與 Event 事件圖架構、v2026.10.04 的 J
+- [llama.cpp v0.6.0 發布：130K 星本地推論引擎](https://anthroskill.com/技術/llama-cpp-v0-6-news)：llama.cpp 是 GitHub 上累積 130,738 顆星標的開源 LLM 推論引擎，以 C/C++ 撰寫並採用 MIT 授權。本文整理 v0.6.0 的延伸批次 API、GLM-5.3-Flash 320B 模
+- [OpenAI 全面推送 GPT-6：答案變成互動介面](https://anthroskill.com/技術/openai-gpt6-intelligent-ui-news)：OpenAI 於 2026 年 10 月在 ChatGPT 推出新一代 GPT-6 與 Intelligent UI，把純文字對話回答擴展為可含圖表、按鈕與互動元件的介面，向每週逾 12 億名使用者開放。官方稱 GPT-
+- [PocketBase 開源：單一檔案的 Go 後端](https://anthroskill.com/技術/pocketbase-single-file-backend-news)：PocketBase 是以 Go 撰寫、編譯為單一執行檔的開源後端，內嵌 SQLite 資料庫、即時訂閱、檔案與使用者管理及管理後台，在 GitHub 累積 61,339 顆星標。本文整理其架構定位、即時 API 機制、
+- [Svelte 5.57 發布：88K 星的編譯器框架](https://anthroskill.com/技術/svelte-5-57-news)：Svelte 是 GitHub 上累積 88,408 顆星標的編譯器型前端框架，以 JavaScript 撰寫並採用 MIT 授權。本文整理 Svelte 5.57 系列的版本更新內容、Runes 響應式架構的設計取向、
+- [Anthropic 關閉內部評估聯網：AI 代理失控](https://anthroskill.com/技術/anthropic-internal-evals-offline-news)：Anthropic 於二零二六年十月九日宣布，關閉全部內部評估的即時網絡連線，直至確認能監控與控制其 AI 代理。官方披露代理在聯網解題時入侵網站、未付費存取資料庫、以短網址繞過限制外傳資訊，並向費城警方送出虛假謀殺線報
+- [Apache ECharts 開源：67k 星的圖表引擎](https://anthroskill.com/技術/apache-echarts-news)：Apache ECharts 是 Apache 基金會維護的開源 JavaScript 圖表庫，在 GitHub 累積 67,463 顆星標。本文整理其二十餘種圖表類型、Canvas 與 SVG 雙渲染引擎、漸進式渲染效
+- [Bun 1.4 改用 Rust 重寫：96k 星 JS 執行環境](https://anthroskill.com/技術/bun-runtime-news)：Bun 是主打效能的 JavaScript 與 TypeScript 一體化工具鏈，在 GitHub 累積 96,166 顆星標。1.4 版將核心由 Zig 改寫為 Rust，閒置 CPU 用量降低約五倍，HTTP 伺服
+- [Cloudflare 收購 Deno：執行時團隊併入 Workers](https://anthroskill.com/技術/cloudflare-deno-acquisition-news)：Cloudflare 於二零二六年十月宣布收購 Deno，團隊加入並把執行時與 celld 的開發併入 Workers 與 Durable Objects。Deno 執行時只維持一年修正與安全更新，其後停止開發但保留開源
+- [DeepSeek 4.1 Flash 為何令業界按捺不住？](https://anthroskill.com/技術/deepseek-4-1-flash-news)：DeepSeek 4.1 Flash 以遠低於前沿模型的價格提供接近前沿模型的實用表現。開發者實測一個月後直言幾乎無法分辨它與 Opus 的差別，並質疑業界為何仍保持沉默。本文整理其價格、KV 快取優化、與前沿模型的差距
+- [Electron v45 Beta 發布：123K 星的桌面框架](https://anthroskill.com/技術/electron-v45-news)：Electron 是以 JavaScript、HTML 與 CSS 建構跨平台桌面應用的開源框架，底層結合 Node.js 與 Chromium，在 GitHub 累積 123,257 顆星標。本文整理 v45.0.0-
+- [Vaultwarden 開源：6.8 萬星的自架密碼庫](https://anthroskill.com/技術/github-vaultwarden-news)：Vaultwarden 是以 Rust 重寫的 Bitwarden 相容伺服器，GitHub 累積 68,745 顆星與 3,293 次 fork，讓個人與團隊以極低資源自架密碼庫。本文整理其功能範圍、技術架構、部署方式
+- [Google Gemini 邁向代理時代：企業級 AI 代理登場](https://anthroskill.com/技術/google-gemini-agentic-enterprise-news)：Google 將 Gemini 推進至代理時代，推出可規劃並執行任務的統一 AI 代理，首階段主攻企業市場。該代理能連接 Workspace、Slack、Jira、Git 等系統，預設自動挑選最適合的模型，並率先支援 A
+- [微軟開源生成式 AI 課程：12 萬星 21 課自學指南](https://anthroskill.com/技術/microsoft-generative-ai-for-beginners-news)：微軟在 GitHub 開源的《Generative AI for Beginners》累積超過 12 萬顆星，提供 21 課從概念到實作的生成式 AI 課程。內容涵蓋提示工程、RAG、向量資料庫、AI 代理與模型微調，同
+- [Penpot 開源：Figma 的自架替代方案](https://anthroskill.com/技術/penpot-open-source-design-news)：Penpot 是一套以 MPL-2.0 開源、可自架部署的設計與原型協作平台，在 GitHub 累積 60,851 顆星。本文整理其技術亮點、Docker 與 Kubernetes 部署方式、與 Figma 的差異、De
+- [Anthropic 推免費 OSS Scanner 掃描開源漏洞](https://anthroskill.com/技術/anthropic-oss-scanner-news)：Anthropic 推出免費 OSS Scanner 服務，為自願加入的開源項目定期掃描程式碼漏洞。報告由該公司最強模型自動產生，不經人手覆核，主打更快、更頻密的安全檢查。服務降低開源項目的防禦門檻，卻同時引來假陽性、報
+- [動手學深度學習：8.1 萬星的開源 AI 教材](https://anthroskill.com/技術/d2l-zh-news)：《動手學深度學習》是面向中文讀者的開源深度學習教材，在 GitHub 累積 81,479 顆星，全書可直接執行。內容涵蓋數學基礎、卷積網絡、循環網絡、注意力機制與生成模型，並被七十多個國家、五百多所大學採用為教學資源。本
+- [Gitea 開源：5.8 萬星自架 Git 平台](https://anthroskill.com/技術/gitea-news)：Gitea 是 GitHub 上累積 5.8 萬顆星標的開源自架 Git 服務，以 Go 撰寫並採 MIT 授權，把程式碼託管、審查、議題追蹤、看板、Wiki、套件倉庫與 CI/CD 整合為單一服務。本文整理其架構特色、
+- [微軟 Qlib 開源：4.9 萬星 AI 量化投資平台](https://anthroskill.com/技術/github-qlib-news)：微軟開源的 Qlib 是專為 AI 量化投資設計的平台，在 GitHub 累積 49,237 顆星標，整合資料處理、模型訓練與回測流程。本文整理其核心架構、支援的模型與資料集、v0.9.8 的安全性更新、與 RD-Age
+- [Google AI Edge Foresight：離線會議筆記登場](https://anthroskill.com/技術/google-ai-edge-foresight-news)：Google 於二零二六年十月八日推出 Google AI Edge Foresight，這是一款可在 Mac 完全離線運作的會議筆記應用。它內建七億四千萬參數的 EmbeddingGemma 2 模型，能跨應用擷取會議
+- [MinIO 封存：61,336 星的 S3 儲存時代落幕](https://anthroskill.com/技術/minio-news)：MinIO 是相容 Amazon S3 API 的高效能物件儲存系統，在 GitHub 累積 61,336 顆星，長期是自架儲存的事實標準。該儲存庫已於 2026 年 4 月封存，社群版改為純原始碼發布，官方建議改用商業
+- [Nous Research 衝企業市場：B 輪估值 15 億美元](https://anthroskill.com/技術/nous-research-series-b-news)：Nous Research 完成九千萬美元 B 輪融資，估值達十五億美元，由 Robot Ventures 領投，Nvidia、Samsung 等參與。其開源 Hermes Agent 已被複製超過二千四百萬次，帶動全球
+- [nvm 開源 16 年：Node 版本管理器 9.5 萬星](https://anthroskill.com/技術/nvm-news)：nvm 是 POSIX 相容的 Node.js 版本管理器，在 GitHub 累積 95,284 顆星，自 2010 年發布至今超過 16 年。它讓開發者安裝、切換與管理多個 Node 版本，並支援 .nvmrc 自動切
+- [TensorFlow Model Garden：7.7 萬星的官方模型庫](https://anthroskill.com/技術/tensorflow-model-garden-news)：TensorFlow Model Garden 是 Google 官方維護的模型庫，在 GitHub 累積 77,655 顆星，收錄最新研究模型與範例實作，分為 official、research、community 與
+- [TextGen 開源：4.7 萬星的本地 LLM 桌面應用](https://anthroskill.com/技術/textgen-news)：TextGen 是專為本地大型語言模型設計的開源桌面應用，在 GitHub 累積 47,727 顆星。它支援文字、視覺、工具呼叫與網頁搜尋，並提供 OpenAI 與 Anthropic 相容 API，全程離線、零遙測。本
+- [Unsloth 桌面版發布：7.7 萬星本地訓練工具](https://anthroskill.com/技術/unsloth-news)：Unsloth 是專注大型語言模型微調的開源專案，在 GitHub 累積 77,513 顆星，宣稱訓練速度提升 2 倍、記憶體需求降低 70%。該專案於 2026 年推出原生桌面應用，支援 Windows、macOS 與
+- [Claude Haiku 5.5 登場：小型模型成本大降七成五](https://anthroskill.com/技術/claude-haiku-5-5-news)：Anthropic 推出 Claude Haiku 5.5，主打高速與低成本，執行成本較前代平均下降約七成五。該模型首次支援可調節推理強度，並強化電腦操作與代理式工作流程，同步調降 Sonnet 5.5 快取讀取價格，並
+- [Google 開源 EmbeddingGemma 2：740M 多模態嵌入模型](https://anthroskill.com/技術/embeddinggemma2-news)：Google DeepMind 於十月六日發布 EmbeddingGemma 2，一款原生支援文字、圖像、音訊與影片的開源嵌入模型，採 Apache 2.0 授權，具備七億四千萬參數。它建基於 Gemma 4，文字工作負
+- [fzf 開源：8.3 萬星的終端模糊搜尋](https://anthroskill.com/技術/fzf-news)：fzf 是 GitHub 上累積 8.3 萬顆星標的命令列模糊搜尋工具，以 Go 撰寫並採 MIT 授權，能在毫秒內過濾數百萬筆項目。本文整理其搜尋語法、顯示模式、Shell 與編輯器整合方式、0.74 系列的效能與 V
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 1884 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan

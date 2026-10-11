@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Strata 開源：家用 PC 跑 125B 模型 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Strata 是 GitHub 上累積 12,526 顆星標的開源推論引擎，能以一般家用電腦運行 1250 億參數的 Qwen3.8-Flash-Next 模型，硬體門檻為 12GB 顯示記憶體與 32GB 系統記憶體。本文整理其專案背景、混合專家架構、實測推論速度、模型選擇、安裝步驟、API 整合能力與授權條款。">
+  <meta name="keywords" content="Strata, Qwen, 本地 AI, 推論引擎, 開源, LLM, GitHub">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Strata 開源：家用 PC 跑 125B 模型">
+  <meta property="og:description" content="Strata 是 GitHub 上累積 12,526 顆星標的開源推論引擎，能以一般家用電腦運行 1250 億參數的 Qwen3.8-Flash-Next 模型，硬體門檻為 12GB 顯示記憶體與 32GB 系統記憶體。本文整理其專案背景、混合專家架構、實測推論速度、模型選擇、安裝步驟、API 整合能力與授權條款。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-strata-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Strata 開源：家用 PC 跑 125B 模型">
+  <meta name="twitter:description" content="Strata 是 GitHub 上累積 12,526 顆星標的開源推論引擎，能以一般家用電腦運行 1250 億參數的 Qwen3.8-Flash-Next 模型，硬體門檻為 12GB 顯示記憶體與 32GB 系統記憶體。本文整理其專案背景、混合專家架構、實測推論速度、模型選擇、安裝步驟、API 整合能力與授權條款。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-strata-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Strata 開源：家用 PC 跑 125B 模型",
+      "description": "Strata 是 GitHub 上累積 12,526 顆星標的開源推論引擎，能以一般家用電腦運行 1250 億參數的 Qwen3.8-Flash-Next 模型，硬體門檻為 12GB 顯示記憶體與 32GB 系統記憶體。本文整理其專案背景、混合專家架構、實測推論速度、模型選擇、安裝步驟、API 整合能力與授權條款。",
+      "datePublished": "2026-10-06T04:00:01+08:00",
+      "dateModified": "2026-10-06T04:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/Niko1221/Strata" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-strata-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Strata 是免費的嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "是。專案以 MIT 授權開源，可自由使用與修改；若運行順利，開發者接受贊助以維持後續維護。" }
+        },
+        {
+          "@type": "Question",
+          "name": "運行 Strata 需要什麼硬體？",
+          "acceptedAnswer": { "@type": "Answer", "text": "需要 NVIDIA RTX 20 至 50 系列或指定 AMD Radeon 型號、12GB 以上顯示記憶體、32GB 以上系統記憶體，以及約 80GB 硬碟空間，六十四 GB 記憶體可運行所有尺寸。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Strata 支援中文嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "支援。完整專家版本如 Q20、IQ2XS 與 IQ3_S 可處理中文與其他東亞文字；移除半數專家的 Coder 版本在中文表現較弱。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Strata 的對話資料會上傳嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不會。推論完全在本機完成，對話內容不離開使用者硬體；首次啟動需下載模型，之後可離線運行。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Strata 可以給多個應用同時使用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。它提供 OpenAI 與 Anthropic 相容端點供多個應用連接，但預設一次處理一個請求，其餘排隊，可調整設定開放並行。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Strata 開源：家用 PC 跑 125B 模型",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Strata 開源：家用 PC 跑 125B 模型</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">Strata 開源：家用 PC 跑 125B 模型</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月06日 04:00
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/Niko1221/Strata" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-strata-news-cover.jpg" alt="Strata 開源：家用 PC 跑 125B 模型" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/Niko1221/Strata" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/Niko1221/Strata
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Strata 是一套以 C++ 撰寫的開源推論引擎，讓 1250 億參數的 Qwen3.8-Flash-Next 模型在配備 12GB 顯示記憶體的家用電腦上運行。截至二零二六年十月，專案在 GitHub 累積 12,526 顆星標與 1,058 次複製，於二零二六年九月二十四日建立後迅速受到關注，並在 Hacker News 累積逾八百點討論。它的核心主張相當明確：大型模型的推論不必依賴伺服器，一台搭載消費級顯示卡的個人電腦即可勝任。</p>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>Strata 是一套開源推論引擎，讓 1250 億參數的 Qwen3.8-Flash-Next 模型在 12GB 顯示記憶體的家用電腦上運行，支援 Windows 與 Linux。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-strata-news-shot1.png" alt="Strata 的 GitHub 儲存庫 README 開頭，顯示專案名稱 Strata、標語「Run a 125-billion-parameter AI model on your own gaming PC」，以及硬體需求說明" /></p>
+
+<h2 id="strata-是什麼">Strata 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>Strata 是一套開源推論引擎，讓 1250 億參數的 Qwen3.8-Flash-Next 模型在 12GB 顯示記憶體的家用電腦上運行，支援 Windows 與 Linux。
+<!-- End AEO Capsule --></p>
+
+<p>依照專案自述，Strata 的定位是「在你自己的遊戲電腦上運行 1250 億參數的模型」。它本身不是模型，而是模型之上的推論層，負責把一個原本需要伺服器等級顯示記憶體的大型模型，重新切分到個人電腦的顯示卡、記憶體、處理器與固態硬碟之中。</p>
+
+<p>專案支援 NVIDIA 的 GeForce RTX 20、30、40 與 50 系列，以及 AMD 的 Radeon RX 7800、7900、9060、9070 等型號，顯示記憶體須達 12GB 以上，系統記憶體建議 32GB 起，並預留約 80GB 硬碟空間。安裝完成後，模型以本機網頁介面 http://127.0.0.1:8080 提供服務，並可作為 OpenAI 或 Anthropic 相容端點供其他應用呼叫。</p>
+
+<h2 id="strata-由誰開發為何在-hacker-news-掀起討論">Strata 由誰開發，為何在 Hacker News 掀起討論？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>專案由開發者 Niko1221 於二零二六年九月建立，以 C++ 撰寫，採用 MIT 授權，推出數日即在 Hacker News 累積逾八百點討論。
+<!-- End AEO Capsule --></p>
+
+<p>專案由開發者 Niko1221 於二零二六年九月二十四日建立，以 C++ 為主要語言，採用 MIT 授權。截至撰稿時，專案擁有 12,526 顆星標、1,058 次複製與八十一項訂閱，最近一次程式碼提交落在二零二六年十月四日，顯示活躍維護節奏。</p>
+
+<p>討論熱度來自一個明確的技術門檻突破。過去要在本地運行千億參數等級的模型，通常需要多張高階顯示卡或伺服器等級的記憶體，成本與技術門檻皆高。Strata 把這個門檻壓到單張 12GB 顯示卡即可起步，因而在開發者社群引起廣泛關注。專案亦提供多語言說明文件，涵蓋中文、日文、德文、法文、西班牙文與葡萄牙文，降低了非英語使用者的進入障礙。</p>
+
+<h2 id="strata-如何在-12gb-顯示記憶體上運行-125b-模型">Strata 如何在 12GB 顯示記憶體上運行 125B 模型？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>Strata 把混合專家的負載分散到整台電腦：顯示卡保留最常用的專家，系統記憶體容納全部，處理器分擔其餘運算，固態硬碟存放查找表。
+<!-- End AEO Capsule --></p>
+
+<p>關鍵在於模型本身的架構。Qwen3.8-Flash-Next 採用混合專家設計，內部由 24,576 個小型專家網路組成，而每個詞元僅需其中十個專家參與運算。Strata 便把這些專家依使用頻率分層擺放：最常被取用的數千個專家常駐顯示卡，全部專家保留在系統記憶體，其餘由處理器同步運算，固態硬碟則存放一份大型查找表。</p>
+
+<p>第二項機制是加速取樣。小型輔助模型先猜測接下來數個詞元，再由大型模型一次核對並保留正確者，藉此在不改變輸出結果的前提下，把回應速度提升約 1.6 至 1.8 倍。長文本則以每批最多 8,192 個詞元的方式讀入，讀取速度可超過每秒一千個詞元。專案強調，這些做法讓模型「以廚房作比喻」——常用的器具留在檯面，其餘收納於儲藏室，需要時再取用。</p>
+
+<p><img src="/assets/images/posts/github-strata-news-shot2.png" alt="Strata 的 GitHub 儲存庫首頁頂部，顯示專案名稱 Niko1221/Strata、主要語言 C++、星標數 12,526 與專案描述" /></p>
+
+<h2 id="strata-的推論速度表現如何">Strata 的推論速度表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>在 RTX 5070 搭配 64GB 記憶體的實測中，Q2_0 量化版本每秒可輸出 94 個詞元，IQ3_S 為 53 個；讀取長提示每秒超過一千個詞元。
+<!-- End AEO Capsule --></p>
+
+<p>專案在兩台一般遊戲電腦上公布實測數據。配備 RTX 5070、十二 GB 顯示記憶體與六十四 GB 記憶體的 NVIDIA 平台，Q2_0 量化版本每秒輸出 94 個詞元，IQ2_XS 為 79 個，IQ3_S 為 53 個，Coder 版本為 55 個；讀取提示的速度介於每秒 1,620 至 2,650 個詞元。至於配備 RX 9070 XT 與十六 GB 顯示記憶體的 AMD 平台，Q2_0 每秒輸出 60 個詞元，IQ2_XS 為 52 個。</p>
+
+<p>專案說明，一般閱讀速度約為每秒數個詞元，因此每秒 60 個詞元已快於人工閱讀。顯示記憶體容量直接影響速度，擁有二十四 GB 顯示記憶體的 RTX 3090，預期可達每秒一百至一百四十個詞元。首次啟動時，Strata 會把三十五至五十五 GB 的模型載入系統記憶體並鎖定部分供顯示卡使用，過程中電腦可能遲滯一至三分鐘，這屬於正常現象。</p>
+
+<h2 id="strata-提供哪些模型選擇">Strata 提供哪些模型選擇？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>Strata 提供多種量化版本，包括適合 32GB 記憶體的 Coder 版本、平衡品質的 IQ2_XS 與 IQ3_S，以及 Unsloth 四位元版本。
+<!-- End AEO Capsule --></p>
+
+<p>安裝程式會依系統記憶體推薦合適版本。三十二 GB 記憶體的使用者可選 Coder 版本，它移除半數專家以縮減體積，在 SWE-bench Verified 測試中達到完整模型 91% 的分數，適合程式碼任務，但在中文等非程式領域表現較弱。四十八 GB 記憶體建議使用 IQ2_XS，六十四 GB 則推薦 IQ2_XS，並可選用 IQ3_XXS 或品質最佳的 IQ3_S。</p>
+
+<p>此外，專案列出數個由社群維護的變體。Swift 1.5 是縮短思考時間的微調版本，輸出更快而品質相近；Unsloth 的 UD-IQ4_XS 約為四位元，品質介於 IQ3_S 與 UD-Q4_K_XL 之間，下載約九十四 GB，需要較大記憶體；UD-Q4_K_XL 最接近完整模型，但多數資料需即時從固態硬碟讀取，在六十四 GB 電腦上僅能每秒輸出七至八點五個詞元。專案建議使用固態硬碟，以縮短首次啟動時間。</p>
+
+<h2 id="如何開始使用-strata">如何開始使用 Strata？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>Windows 使用者雙擊 START-HERE.bat，Linux 使用者執行 setup.sh；安裝程式會偵測硬體並下載約 70GB 模型，完成後於瀏覽器開啟本機服務。
+<!-- End AEO Capsule --></p>
+
+<p>安裝方式分為兩種。若使用 Claude Code、Cursor、Codex 或 GitHub Copilot 等工具，可直接把專案的設定指示貼入其中，由 AI 助理依照 docs/AI_SETUP.md 檢查顯示卡、記憶體與硬碟，挑選合適模型後完成安裝與啟動。若不採用此方式，則下載或複製專案後，Windows 使用者雙擊 START-HERE.bat，Linux 使用者於資料夾中執行 setup.sh。</p>
+
+<p>安裝程式會詢問模型與尺寸、上下文長度，以及是否啟用圖片輸入，多數情況直接按 Enter 採用建議值即可。接著下載約七十 GB 的模型，過程中斷可重新執行續傳。啟動後，瀏覽器會開啟 Strata 應用，內含聊天、即時監控模型與顯示卡狀態的 Monitor 分頁，以及顯示設定與位址的 About 分頁。關閉視窗即停止模型，日常只需重新執行啟動檔，更新則執行 UPDATE.bat 或 update.sh。</p>
+
+<h2 id="strata-的-api-與工具整合能力如何">Strata 的 API 與工具整合能力如何？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>Strata 在本地提供 OpenAI 相容端點與 Anthropic 訊息端點，可接入 Claude Code、Codex CLI 等工具，並以 MCP 伺服器支援自行啟停。
+<!-- End AEO Capsule --></p>
+
+<p>整合能力是此專案的另一個重點。使用者可在任何支援「OpenAI 相容供應商」的應用中，填入基底位址 http://127.0.0.1:8080/v1，任意 API 金鑰與模型名稱皆可接受。使用 Anthropic API 的應用則指向 http://127.0.0.1:8080/v1/messages，Claude Code 只需設定 ANTHROPIC_BASE_URL；Codex CLI 等使用 OpenAI Responses API 的應用則對應至 /v1/responses。</p>
+
+<p>專案同時內建 MCP 伺服器，讓 AI 工具能自行安裝、啟動與停止 Strata。思考深度可選擇關閉、低、中或高，關閉最快，高適合困難問題。圖片輸入在設定時選擇啟用後即可使用，AMD 顯示卡在 Linux 透過處理器讀取圖片，Windows 則尚未支援。預設一次處理一個請求，其餘排隊等待，若需並行可調整設定，但在十二 GB 顯示卡上會使每次回應變慢。</p>
+
+<p><img src="/assets/images/posts/github-strata-news-shot3.png" alt="Strata 的 GitHub 提交統計頁，顯示自二零二六年七月至十月的每週提交長條圖與專案活躍程度" /></p>
+
+<h2 id="strata-與雲端模型服務有何差異">Strata 與雲端模型服務有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>差異在於資料主權與成本結構。Strata 的推論完全在使用者硬體上完成，對話不離開本機，亦無需按用量付費，但需自行負擔硬體與電力。
+<!-- End AEO Capsule --></p>
+
+<p>兩者的取捨集中在三個面向。第一是資料主權，雲端服務需把提示與對話傳送至第三方，Strata 則全部在本機處理，適合對資料外流敏感的個人與團隊。第二是成本結構，雲端採訂閱或按用量計費，Strata 為一次性硬體投入，長期高用量下可能更為經濟。第三是取得門檻，雲端服務註冊即可使用，Strata 需要十二 GB 以上顯示記憶體與三十二 GB 以上記憶體的中高階電腦，並須完成約八十 GB 的下載。</p>
+
+<p>效能與品質亦是考量因素。消費級硬體上的量化模型，與雲端完整精度模型之間仍存在差距，專案亦坦言較小的量化版本較快、較大的版本較聰明。對於需要最高推論品質、或硬體條件有限的使用者，雲端服務仍是更直接的選擇；而對於重視隱私、具備合適硬體，並願意投入設定時間者，本地推論提供了另一條路徑。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>本文資訊來源為 Strata 的 GitHub 儲存庫與官方文件，內容涵蓋專案定位、硬體需求、安裝方式與授權條款，讀者可透過下列連結查證。
+<!-- End AEO Capsule --></p>
+
+<ul class="ui-stat-grid">
+  <li class="ui-stat"><span class="ui-stat-num">12,526</span><span class="ui-stat-label">GitHub 星標</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">1,058</span><span class="ui-stat-label">複製次數</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">81</span><span class="ui-stat-label">訂閱者</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">C++</span><span class="ui-stat-label">主要語言</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></li>
+  <li class="ui-stat"><span class="ui-stat-num">125B</span><span class="ui-stat-label">模型參數</span></li>
+</ul>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/Niko1221/Strata</li>
+  <li>模型（Qwen3.8-Flash-Next）：https://huggingface.co/Qwen/Qwen3.8-Flash-Next</li>
+  <li>安裝文件：https://github.com/Niko1221/Strata/blob/main/docs/INSTALL.md</li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Strata 的常見疑問集中在硬體門檻、收費、語言支援與安全性；專案開源免費，建議配備 12GB 顯示記憶體與 64GB 系統記憶體，模型下載約需 80GB 空間。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+<h3>Strata 是免費的嗎？</h3>
+<p>是。專案以 MIT 授權開源，可自由使用與修改；若運行順利，開發者接受贊助以維持後續維護。</p>
+
+<h3>運行 Strata 需要什麼硬體？</h3>
+<p>需要 NVIDIA RTX 20 至 50 系列或指定 AMD Radeon 型號、12GB 以上顯示記憶體、32GB 以上系統記憶體，以及約 80GB 硬碟空間，六十四 GB 記憶體可運行所有尺寸。</p>
+
+<h3>Strata 支援中文嗎？</h3>
+<p>支援。完整專家版本如 Q2_0、IQ2_XS 與 IQ3_S 可處理中文與其他東亞文字；移除半數專家的 Coder 版本在中文表現較弱。</p>
+
+<h3>Strata 的對話資料會上傳嗎？</h3>
+<p>不會。推論完全在本機完成，對話內容不離開使用者硬體；首次啟動需下載模型，之後可離線運行。</p>
+
+<h3>Strata 可以給多個應用同時使用嗎？</h3>
+<p>可以。它提供 OpenAI 與 Anthropic 相容端點供多個應用連接，但預設一次處理一個請求，其餘排隊，可調整設定開放並行。</p>
+
+</div>
+
+<h2 id="總結strata-適合什麼使用者">總結：Strata 適合什麼使用者？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Strata 適合重視資料主權、擁有中高階顯示卡且願意調整設定的開發者與進階使用者；若追求即開即用或需要頂級推論品質，雲端服務仍是更簡單的選擇。
+<!-- End AEO Capsule --></p>
+
+<p>Strata 的價值在於把千億參數等級的模型推論，從伺服器機房帶回個人電腦，並以混合專家分層、加速取樣與批次讀取等機制，在十二 GB 顯示記憶體的硬體上維持可用的速度。專案在二零二六年九月建立後迅速累積 12,526 顆星標與 1,058 次複製，以 C++ 撰寫、採用 MIT 授權，並持續更新。對於擁有中高階顯示卡、重視資料不離開本機，且願意依記憶體容量挑選量化版本的使用者，它提供了一條低門檻且可自行掌握的本地推論路徑。</p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Strata" class="badge bg-secondary text-decoration-none me-1">Strata</a>
+          
+          
+          <a href="/search/?q=Qwen" class="badge bg-secondary text-decoration-none me-1">Qwen</a>
+          
+          
+          <a href="/search/?q=%E6%9C%AC%E5%9C%B0+AI" class="badge bg-secondary text-decoration-none me-1">本地 AI</a>
+          
+          
+          <a href="/search/?q=%E6%8E%A8%E8%AB%96%E5%BC%95%E6%93%8E" class="badge bg-secondary text-decoration-none me-1">推論引擎</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=LLM" class="badge bg-secondary text-decoration-none me-1">LLM</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news&text=Strata+%E9%96%8B%E6%BA%90%EF%BC%9A%E5%AE%B6%E7%94%A8+PC+%E8%B7%91+125B+%E6%A8%A1%E5%9E%8B" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?Strata+%E9%96%8B%E6%BA%90%EF%BC%9A%E5%AE%B6%E7%94%A8+PC+%E8%B7%91+125B+%E6%A8%A1%E5%9E%8B%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-strata-news" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ollama-news-hk" class="text-decoration-none">17.8 萬星開源項目：Ollama — 本地大模型運行平台</a>
+              <br><small class="text-muted">2026-08-07</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

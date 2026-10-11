@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網 - AnthroSkill 人類學｜由痛點到實測，日日更新</title>
+  <meta name="description" content="Agent Reach 是 GitHub 星標逾 7 萬的開源 AI Agent 互聯網接入層，以單一 CLI 讓 Claude Code、OpenClaw、Cursor 等 AI 助手零 API 費用讀取與搜尋 Twitter、Reddit、YouTube 等平台，是 2026 年 AI Agent 基建的矚目項目。">
+  <meta name="keywords" content="AI, 開源, Agent Reach, AI Agent, MCP, 網絡爬蟲, 開發工具, CLI, Claude Code">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網">
+  <meta property="og:description" content="Agent Reach 是 GitHub 星標逾 7 萬的開源 AI Agent 互聯網接入層，以單一 CLI 讓 Claude Code、OpenClaw、Cursor 等 AI 助手零 API 費用讀取與搜尋 Twitter、Reddit、YouTube 等平台，是 2026 年 AI Agent 基建的矚目項目。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-agent-reach-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網">
+  <meta name="twitter:description" content="Agent Reach 是 GitHub 星標逾 7 萬的開源 AI Agent 互聯網接入層，以單一 CLI 讓 Claude Code、OpenClaw、Cursor 等 AI 助手零 API 費用讀取與搜尋 Twitter、Reddit、YouTube 等平台，是 2026 年 AI Agent 基建的矚目項目。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-agent-reach-news-hk-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.3" rel="stylesheet">
+  
+  <!-- 網站圖標 -->
+  <link rel="shortcut icon" href="/assets/images/anthroskill-icon.svg">
+  <link rel="apple-touch-icon" href="/assets/images/anthroskill-icon.svg">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-11T10:00:01+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/"]
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              更多
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+              <li><a class="dropdown-item" href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+              <li><a class="dropdown-item" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+              <li><a class="dropdown-item" href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+            <a class="author-chip d-flex align-items-center" href="/about/">
+              <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan" class="author-avatar rounded-circle me-2" width="30" height="30">
+              <span class="author-name">Eric Chan</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網",
+      "description": "Agent Reach 是 GitHub 星標逾 7 萬的開源 AI Agent 互聯網接入層，以單一 CLI 讓 Claude Code、OpenClaw、Cursor 等 AI 助手零 API 費用讀取與搜尋 Twitter、Reddit、YouTube 等平台，是 2026 年 AI Agent 基建的矚目項目。",
+      "datePublished": "2026-08-11T11:30:00+08:00",
+      "dateModified": "2026-08-11T11:30:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/Panniantong/Agent-Reach" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-agent-reach-news-hk-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Agent Reach 需要付費嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不需要。Agent Reach 以 MIT 授權完全開源發布，所有工具與 API 皆免費；唯一可能的開支是伺服器部署時的代理費用（約每月 1 美元），本地電腦使用則完全免費。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Agent Reach 支援哪些 AI Agent？",
+          "acceptedAnswer": { "@type": "Answer", "text": "支援所有能執行命令列的 Agent，包括 Claude Code、OpenClaw、Cursor、Windsurf 等；OpenClaw 用戶需先確認 exec 權限已開啟。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Agent Reach 會上傳我的 Cookie 嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不會。Cookie 與 Token 只儲存在本機 config.yaml（檔案權限 600），不上傳不外傳，程式碼完全開源可隨時審查。" }
+        },
+        {
+          "@type": "Question",
+          "name": "使用 Twitter、小紅書等平台有封號風險嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "有。透過 Cookie 登入的平台存在被偵測並封號的風險，官方建議使用專用小號而非主帳號，以限制憑據外洩時的影響範圍。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Agent Reach 與自行撰寫爬蟲有何不同？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Agent Reach 以「首選＋備選」多後端路由機制封裝接入方式的折舊，平台風控或 API 變更時自動更換有效工具，用戶不需要自行維護爬蟲。" }
+        },
+        {
+          "@type": "Question",
+          "name": "安裝 Agent Reach 需要哪些前置條件？",
+          "acceptedAnswer": { "@type": "Answer", "text": "需要 Python 3.10 以上與 Node.js、gh CLI、mcporter 等基礎工具；安裝指令會自動檢查並提示缺失項目。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        
+        <h1 class="mb-3">7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網</h1>
+        
+        
+        <div class="post-meta d-flex align-items-center mb-4">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年08月11日 11:30
+              <span class="mx-2">•</span>
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 6 分鐘
+            </p>
+            
+            <p class="mb-0 text-muted">
+              <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/Panniantong/Agent-Reach" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+            </p>
+            
+          </div>
+        </div>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-agent-reach-news-hk-cover.jpg" alt="7 萬星開源項目：Agent Reach — AI Agent 一鍵接入全互聯網" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/Panniantong/Agent-Reach" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/Panniantong/Agent-Reach
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p><strong>Agent Reach</strong> 是 GitHub 上星標超過 <strong>70,000 顆</strong>的開源 AI Agent 互聯網接入層，定位為「給 AI Agent 一鍵裝上互聯網能力」，由 Panniantong 團隊於 2026 年 2 月建立。該項目以 Python 開發、採用 MIT 授權，透過單一 CLI 讓 Claude Code、OpenClaw、Cursor 等 AI 助手讀取與搜尋 Twitter、Reddit、YouTube、GitHub、Bilibili、小紅書等平台內容，全程零 API 費用，並曾登上 GitHub Trending 單日第一名，是 2026 年 AI Agent 基礎設施領域最具新聞價值的開源項目之一。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 是 GitHub 星標逾 7 萬的開源 AI Agent 互聯網接入層，以單一 CLI 讓 AI 助手零 API 費用讀取與搜尋 Twitter、Reddit、YouTube、GitHub、Bilibili、小紅書等平台，2026 年 2 月建立、MIT 授權。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-agent-reach-news-hk-shot1.png" alt="Agent Reach README 開頭（項目名稱「Agent Reach」H1 大字 + 標語「给你的 AI Agent 一键装上互联网能力」+ GitHub Trending 單日第一徽章 + MIT/Python 徽章）" /></p>
+
+<h2 id="agent-reach-是什麼">Agent Reach 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 79 字 -->
+<p>Agent Reach 是一個開源的 AI Agent 能力層（capability layer），由 Panniantong 於 2026 年 2 月建立，
+<!-- End AEO Capsule -->
+Agent Reach 是一個開源的 AI Agent 能力層（capability layer），由 Panniantong 於 2026 年 2 月建立，旨在解決 AI Agent「能寫程式卻無法自主上網」的結構性缺口。傳統上，AI 助手要讀取社群平台內容，需要開發者逐一申請付費 API、繞過反爬蟲封鎖、處理登入驗證，光是讓 Agent 讀一條推文就可能耗費半天；Agent Reach 將這一切濃縮為一句安裝指令，讓 Agent 在幾分鐘內獲得讀取全互聯網的能力。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 是 2026 年 2 月建立的開源 AI Agent 能力層，將付費 API 申請、反爬蟲繞過與登入設定濃縮為一句安裝指令，讓 AI 助手幾分鐘內獲得讀取全互聯網的能力。
+<!-- End AEO Capsule --></p>
+
+<p>項目的核心承諾是「接入方式會換代，用戶不用操心」。官方文件以 2026 年 6 月的真實案例說明：yt-dlp 被 Bilibili 的風控機制封鎖後，Agent Reach 即時切換至 bili-cli 作為替代後端，用戶完全無感。截至 2026 年 8 月，該項目已累積逾 7 萬星標、5,900 次復刻與 34 位貢獻者，並獲選為 GitHub Trending 單日第一名。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 承諾「接入方式會換代，用戶不用操心」：2026 年 6 月 yt-dlp 被 Bilibili 風控封鎖後即時切換 bili-cli，用戶無感；項目累積逾 7 萬星標、5,900 次復刻與 34 位貢獻者。
+<!-- End AEO Capsule --></p>
+
+<h2 id="agent-reach-解決了什麼痛點">Agent Reach 解決了什麼痛點？</h2>
+
+<p>AI Agent 在網路上讀取資訊時面對的痛點層出不窮：YouTube 教學影片無法取得字幕、Twitter 搜尋需要付費 API、Reddit 匿名介面被封鎖導致 403、小紅書必須登入才能瀏覽、Bilibili 的通用下載工具被風控全面攔截，而一般網頁抓取回來的又是一堆難以閱讀的 HTML 標籤。Agent Reach 將這些「每個平台都有自己的門檻」逐一拆解，並以統一介面提供解決方案。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 解決 AI Agent 上網讀取資訊的結構性痛點：付費 API、平台封鎖、登入牆與雜亂 HTML 等門檻，全部以統一 CLI 介面拆解，無需開發者逐一繞過。
+<!-- End AEO Capsule --></p>
+
+<p>更關鍵的是，這些能力過去「不難實現，但需要自己折騰配置」。Twitter 用什麼工具讀、Reddit 如何登入、小紅書 CLI 停更後換什麼，每一次環境設定都要重新踩坑。Agent Reach 以能力層的角色承擔選型、安裝、體檢與路由，Agent 只需依照 SKILL.md 的指引呼叫對應工具，使用者無需記憶任何命令。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>過去這些能力不難實現但需自行折騰配置；Agent Reach 承擔選型、安裝、體檢與路由，Agent 依 SKILL.md 自動呼叫對應工具，使用者無需記憶命令。
+<!-- End AEO Capsule --></p>
+
+<h2 id="agent-reach-支援哪些平台與功能">Agent Reach 支援哪些平台與功能？</h2>
+
+<!-- AEO Answer Capsule — 約 51 字 -->
+<p>Agent Reach 目前支援超過 15 個平台與資訊來源，並區分「裝好即用」與「配置後解鎖」兩類。
+<!-- End AEO Capsule -->
+Agent Reach 目前支援超過 15 個平台與資訊來源，並區分「裝好即用」與「配置後解鎖」兩類。零配置即可使用的包括：任意網頁閱讀（Jina Reader）、YouTube 字幕提取與影片搜尋（yt-dlp）、RSS/Atom 訂閱源解析（feedparser）、GitHub 公開儲存庫讀取與搜尋（gh CLI）、Bilibili 搜尋與影片詳情（bili-cli）、V2EX 熱門帖子與雪球股票行情；配置後解鎖的則包括 Twitter/X 搜尋、Reddit 帖子與評論、Facebook 搜尋、Instagram 用戶資料、小紅書搜尋閱讀、LinkedIn 職位搜尋與小宇宙播客轉錄。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 支援逾 15 個平台：零配置可用網頁、YouTube、RSS、GitHub、Bilibili、V2EX、雪球；配置後解鎖 Twitter、Reddit、Facebook、Instagram、小紅書、LinkedIn 與小宇宙播客。
+<!-- End AEO Capsule --></p>
+
+<p>此外，Agent Reach 提供「全网搜尋」能力，透過 MCP 接入 Exa 進行 AI 語義搜尋，無需 API Key；亦支援 RSS 訂閱監控，讓 Agent 主動追蹤指定來源的更新。安裝完成後執行 <code class="language-plaintext highlighter-rouge">agent-reach doctor</code>，一條命令即可檢查每個渠道的狀態、目前走哪條後端路線，以及故障時的修復建議。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 另提供 Exa 全网語義搜尋（MCP 接入、免 Key）與 RSS 訂閱監控；agent-reach doctor 一條命令檢查各渠道狀態、當前後端路線與修復建議。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-agent-reach-news-hk-shot2.png" alt="Agent Reach GitHub 首頁頂部（repo 名稱 Panniantong/Agent-Reach + 70.4k Star 數 + 5.9k Fork 數 + 項目描述「Give your AI agent eyes to see the entire internet」+ Topics 標籤）" /></p>
+
+<h2 id="agent-reach-的設計理念是什麼">Agent Reach 的設計理念是什麼？</h2>
+
+<p>Agent Reach 的設計理念是「能力層（capability layer），不是又一個工具」。它比任何具體實現高一層，負責選型、安裝、體檢與路由，而不負責底層讀取本身——實際讀取由 Agent 直接呼叫上游工具完成，沒有包裝層。每個平台對應一個渠道檔案，內部維護「首選＋備選」的有序後端列表，換接入方式等於調整列表順序，而不是重寫程式碼。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 定位為能力層而非工具本身：它負責選型、安裝、體檢與路由，實際讀取由 Agent 直接呼叫上游工具；每個平台以「首選＋備選」後端列表，換接入方式只是調整順序。
+<!-- End AEO Capsule --></p>
+
+<p>渠道檔案的設計強調「真實探測」：每個渠道會依序實測各候選後端是否存在且可用（不只是檢查命令存在與否），第一個完整可用的當選，壞掉的會給出修復處方。以 Twitter 為例，首選 twitter-cli、備選 OpenCLI；小紅書則依序為 OpenCLI、xiaohongshu-mcp 與 xhs-cli。官方並以真機實測定期複核選型，確保「agent-reach doctor 永遠告訴你現在走的是哪條路」。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>渠道檔案會真實探測各候選後端（而非只檢查命令存在），第一個完整可用者當選；Twitter 以 twitter-cli 為首選、小紅書以 OpenCLI 為首選，官方真機實測定期複核。
+<!-- End AEO Capsule --></p>
+
+<h2 id="agent-reach-如何確保安全性">Agent Reach 如何確保安全性？</h2>
+
+<p>安全性是 Agent Reach 設計上的核心考量。Cookie 與 Token 等憑據只儲存在本機 <code class="language-plaintext highlighter-rouge">~/.agent-reach/config.yaml</code>，檔案權限設定為 600（僅所有者可讀寫），不會上傳或外傳；安裝指令預設只檢查環境，不會自動安裝系統套件或寫入配置，只有顯式傳入 <code class="language-plaintext highlighter-rouge">--system</code> 參數才修改系統，並提供 <code class="language-plaintext highlighter-rouge">--dry-run</code> 預覽所有操作而不做任何變更。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 將憑據只存於本機 config.yaml（權限 600），預設安裝不修改系統、僅顯式 –system 才變更，並提供 –dry-run 預覽；程式碼完全開源可審查。
+<!-- End AEO Capsule --></p>
+
+<p>項目同時強調 Cookie 使用風險：使用 Twitter、小紅書等需要 Cookie 登入的平台時，存在被平台偵測並封號的風險，官方建議使用專用小號而非主帳號，並說明 Cookie 等同於完整登入權限，小號可在憑據外洩時限制影響範圍。此外，Agent Reach 不替用戶執行小紅書登入，也不讀取瀏覽器 Cookie，僅使用用戶明確控制且已存在的 Chrome 工作階段。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>官方建議使用專用小號應對平台封號風險，因 Cookie 等同完整登入權限；Agent Reach 不替用戶登入小紅書、不讀取瀏覽器 Cookie，僅用用戶明確控制的既有工作階段。
+<!-- End AEO Capsule --></p>
+
+<h2 id="如何快速開始使用-agent-reach">如何快速開始使用 Agent Reach？</h2>
+
+<p>快速開始 Agent Reach 只需一個步驟：將安裝指令貼給 AI Agent。使用者只要對 Claude Code、OpenClaw、Cursor 等助手說「幫我安裝 Agent Reach」，並附上官方 install.md 的連結，Agent 便會自動完成 CLI 安裝、系統基礎設施檢查、環境偵測與 SKILL.md 註冊；已安裝的用戶更新也只需一句「幫我更新 Agent Reach」。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>快速開始只需把官方安裝指令貼給 AI Agent，它會自動完成 CLI 安裝、系統檢查與 SKILL.md 註冊；更新同樣只需一句指令，Agent 自行處理。
+<!-- End AEO Capsule --></p>
+
+<p>安裝完成後，<code class="language-plaintext highlighter-rouge">agent-reach doctor</code> 會逐一檢查每個渠道的可用狀態與目前使用的後端路線。預設只啟動六個零配置渠道，需要登入態的小紅書、Twitter、Reddit、Facebook、Instagram 等平台，Agent 會列出選單詢問用戶是否需要，點名才安裝；需要配置的平台只需對 Agent 說「幫我配 Twitter」等指令，它會一步一步引導完成設定。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>安裝後以 agent-reach doctor 檢查渠道狀態；預設只啟動六個零配置渠道，需登入的平台由 Agent 列出選單詢問，說「幫我配 XXX」即引導完成設定。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/github-agent-reach-news-hk-shot3.png" alt="Agent Reach GitHub Contributors 統計頁（Panniantong/Agent-Reach + 70.4k Star + 6k Fork + Commits over time 圖表 + Insights 側欄）" /></p>
+
+<div class="ui-stat-grid">
+  <div class="stat-item"><div class="stat-value">70.4k</div><div class="stat-label">Star</div></div>
+  <div class="stat-item"><div class="stat-value">5.9k</div><div class="stat-label">Fork</div></div>
+  <div class="stat-item"><div class="stat-value">2026-08-06</div><div class="stat-label">最近更新</div></div>
+  <div class="stat-item"><div class="stat-value">Python</div><div class="stat-label">主要語言</div></div>
+</div>
+
+<h2 id="agent-reach-與其他方案相比有何優勢">Agent Reach 與其他方案相比有何優勢？</h2>
+
+<!-- AEO Answer Capsule — 約 51 字 -->
+<p>與自行串接各平台 API 或撰寫爬蟲相比，Agent Reach 的優勢在於「封裝了接入方式的折舊」。
+<!-- End AEO Capsule -->
+與自行串接各平台 API 或撰寫爬蟲相比，Agent Reach 的優勢在於「封裝了接入方式的折舊」。單平台 CLI 可能因平台風控或 API 政策變更而集體停更（官方文件提及 2026 年 3 月一批單平台 CLI 集體停更的事件），Agent Reach 以多後端路由機制持續更換有效接入方式，用戶不需要自行維護任何爬蟲或 API 整合。與 BrowserAct、CoreClaw 等商業抓取平台相比，Agent Reach 完全開源且免費，唯一的潛在開支是伺服器部署時的代理費用（約每月 1 美元），本地電腦則完全不需要。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 的優勢在於封裝接入方式的折舊：多後端路由自動更換失效工具，用戶無需維護爬蟲或 API；相比商業抓取平台完全開源免費，本地使用零成本。
+<!-- End AEO Capsule --></p>
+
+<p>項目的開放性亦體現在可插拔架構上：不信任某個元件時，直接替換對應的渠道檔案即可，不影響其他平台。所有依賴工具同樣是開源專案（OpenCLI、twitter-cli、yt-dlp、Jina Reader、Exa 等），程式碼完全透明、隨時可審查，並在 README 中逐一標明各渠道的選型理由與真機實測依據。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 採可插拔架構，不信任的元件可直接替換渠道檔案；所有依賴工具皆開源，README 逐一標明各渠道選型理由與真機實測依據，程式碼透明可審查。
+<!-- End AEO Capsule --></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>本文資料來源為 Agent Reach 官方 GitHub 儲存庫，包含項目簡介、支援平台清單、設計理念、安全性說明、安裝與更新指引及版本紀錄。
+<!-- End AEO Capsule -->
+本文資料來源為 Agent Reach 官方 GitHub 儲存庫，包含項目簡介、支援平台清單、設計理念、安全性說明、安裝與更新指引及版本紀錄。讀者可前往原始儲存庫查閱最新資訊與完整文件：<a href="https://github.com/Panniantong/Agent-Reach">Agent Reach GitHub Repository</a>。項目另提供英文、日文與韓文等多語言文件，以及官方聯絡信箱與 X（Twitter）帳號，供開發者取得技術支援與交流。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>本文資料來源為 Agent Reach 官方 GitHub 儲存庫，內含平台清單、設計理念、安全性說明與安裝指引；另提供多語言文件與 X 帳號供開發者取得支援。
+<!-- End AEO Capsule --></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<div class="faq-section">
+<h2>常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+Agent Reach 需要付費嗎？ 不需要。Agent Reach 以 MIT 授權完全開源發布，所有工具與 API 皆免費；
+<!-- End AEO Capsule -->
+
+**Agent Reach 需要付費嗎？** 不需要。Agent Reach 以 MIT 授權完全開源發布，所有工具與 API 皆免費；唯一可能的開支是伺服器部署時的代理費用（約每月 1 美元），本地電腦使用則完全免費。
+
+**Agent Reach 支援哪些 AI Agent？** 支援所有能執行命令列的 Agent，包括 Claude Code、OpenClaw、Cursor、Windsurf 等；OpenClaw 用戶需先確認 exec 權限已開啟。
+
+**Agent Reach 會上傳我的 Cookie 嗎？** 不會。Cookie 與 Token 只儲存在本機 config.yaml（檔案權限 600），不上傳不外傳，程式碼完全開源可隨時審查。
+
+**使用 Twitter、小紅書等平台有封號風險嗎？** 有。透過 Cookie 登入的平台存在被偵測並封號的風險，官方建議使用專用小號而非主帳號，以限制憑據外洩時的影響範圍。
+
+**Agent Reach 與自行撰寫爬蟲有何不同？** Agent Reach 以「首選＋備選」多後端路由機制封裝接入方式的折舊，平台風控或 API 變更時自動更換有效工具，用戶不需要自行維護爬蟲。
+
+**安裝 Agent Reach 需要哪些前置條件？** 需要 Python 3.10 以上與 Node.js、gh CLI、mcporter 等基礎工具；安裝指令會自動檢查並提示缺失項目。
+</div>
+
+<h2 id="總結agent-reach-的前景如何">總結：Agent Reach 的前景如何？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>Agent Reach 以「給 AI Agent 一鍵裝上互聯網能力」切入 AI Agent 基礎設施市場，在不到半年的時間內累積逾 7 萬星標，
+<!-- End AEO Capsule -->
+Agent Reach 以「給 AI Agent 一鍵裝上互聯網能力」切入 AI Agent 基礎設施市場，在不到半年的時間內累積逾 7 萬星標，成為該領域星標數最高的開源項目之一。其能力層設計、多後端路由機制與零 API 費用策略，讓個人開發者與企業用戶都能以極低門檻為 AI 助手擴展網路讀取能力；贊助商的加入與 Agent 落地合作服務，更顯示項目正從個人工具走向商業化生態，是 2026 年 AI Agent 生態中值得密切關注的項目。</p>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Agent Reach 半年內累積逾 7 萬星標，以能力層設計、多後端路由與零 API 費用成為 AI Agent 接入層領先項目，並透過贊助與落地合作走向商業化生態。
+<!-- End AEO Capsule --></p>
+
+        </div>
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=AI" class="badge bg-secondary text-decoration-none me-1">AI</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=Agent+Reach" class="badge bg-secondary text-decoration-none me-1">Agent Reach</a>
+          
+          
+          <a href="/search/?q=AI+Agent" class="badge bg-secondary text-decoration-none me-1">AI Agent</a>
+          
+          
+          <a href="/search/?q=MCP" class="badge bg-secondary text-decoration-none me-1">MCP</a>
+          
+          
+          <a href="/search/?q=%E7%B6%B2%E7%B5%A1%E7%88%AC%E8%9F%B2" class="badge bg-secondary text-decoration-none me-1">網絡爬蟲</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E7%99%BC%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開發工具</a>
+          
+          
+          <a href="/search/?q=CLI" class="badge bg-secondary text-decoration-none me-1">CLI</a>
+          
+          
+          <a href="/search/?q=Claude+Code" class="badge bg-secondary text-decoration-none me-1">Claude Code</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕 -->
+        <div class="share-buttons mt-4">
+          <span class="me-2">分享到：</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk" target="_blank" class="btn btn-outline-primary btn-sm me-1">
+            </a>
+          <a href="https://twitter.com/intent/tweet?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk&text=7+%E8%90%AC%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AAgent+Reach+%E2%80%94+AI+Agent+%E4%B8%80%E9%8D%B5%E6%8E%A5%E5%85%A5%E5%85%A8%E4%BA%92%E8%81%AF%E7%B6%B2" target="_blank" class="btn btn-outline-info btn-sm me-1">
+            </a>
+          <a href="https://line.me/R/msg/text/?7+%E8%90%AC%E6%98%9F%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE%EF%BC%9AAgent+Reach+%E2%80%94+AI+Agent+%E4%B8%80%E9%8D%B5%E6%8E%A5%E5%85%A5%E5%85%A8%E4%BA%92%E8%81%AF%E7%B6%B2%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-agent-reach-news-hk" target="_blank" class="btn btn-outline-success btn-sm">
+            </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-vaultwarden-news" class="text-decoration-none">Vaultwarden 開源：6.8 萬星的自架密碼庫</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-qlib-news" class="text-decoration-none">微軟 Qlib 開源：4.9 萬星 AI 量化投資平台</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-face-recognition-news" class="text-decoration-none">face_recognition 開源：5.7 萬星的人臉辨識入門庫</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-godot-news" class="text-decoration-none">Godot 118k 星開源引擎：完全免費無抽成</a>
+              <br><small class="text-muted">2026-10-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-code-server-news" class="text-decoration-none">code-server 4.140.0：瀏覽器內的 VS Code</a>
+              <br><small class="text-muted">2026-10-06</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/huginn-news" class="text-decoration-none">Huginn 開源：50K 星的自架自動化代理</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/svelte-5-57-news" class="text-decoration-none">Svelte 5.57 發布：88K 星的編譯器框架</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/pocketbase-single-file-backend-news" class="text-decoration-none">PocketBase 開源：單一檔案的 Go 後端</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-gpt6-intelligent-ui-news" class="text-decoration-none">OpenAI 全面推送 GPT-6：答案變成互動介面</a>
+            <br><small class="text-muted">2026-10-11</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">101</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">83</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">489</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">63</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>

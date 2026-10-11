@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e27"/>
+      <stop offset="50%" style="stop-color:#0f1b4d"/>
+      <stop offset="100%" style="stop-color:#0d1028"/>
+    </linearGradient>
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff"/>
+      <stop offset="100%" style="stop-color:#0088ff"/>
+    </linearGradient>
+    <linearGradient id="neonPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a855f7"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c"/>
+      <stop offset="100%" style="stop-color:#ffd700"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowStrong">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a3a"/>
+      <stop offset="100%" style="stop-color:#0d0d2a"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Circuit lines background -->
+  <g opacity="0.08" stroke="#00d4ff" stroke-width="1" fill="none">
+    <path d="M0 256 Q100 200 150 256 T300 256 T450 200"/>
+    <path d="M0 300 Q120 350 200 300 T400 300 T512 350"/>
+    <path d="M0 180 Q80 150 180 200 T350 150 T512 200"/>
+  </g>
+  <!-- Grid dots background -->
+  <g fill="#00d4ff" opacity="0.06">
+    <circle cx="60" cy="60" r="2"/><circle cx="160" cy="80" r="2"/>
+    <circle cx="260" cy="50" r="2"/><circle cx="380" cy="70" r="2"/>
+    <circle cx="450" cy="100" r="2"/><circle cx="80" cy="180" r="2"/>
+    <circle cx="420" cy="200" r="2"/><circle cx="50" cy="350" r="2"/>
+    <circle cx="460" cy="380" r="2"/><circle cx="120" cy="440" r="2"/>
+    <circle cx="380" cy="450" r="2"/>
+  </g>
+  <!-- Central chip/processor icon -->
+  <rect x="156" y="156" width="200" height="200" rx="20" fill="url(#chipGrad)" stroke="url(#neonCyan)" stroke-width="2" filter="url(#glow)"/>
+  <!-- Chip inner pattern -->
+  <rect x="180" y="180" width="152" height="152" rx="10" fill="none" stroke="url(#neonPurple)" stroke-width="1" opacity="0.5"/>
+  <!-- Chip core -->
+  <rect x="216" y="216" width="80" height="80" rx="8" fill="none" stroke="url(#goldGradient)" stroke-width="1.5"/>
+  <!-- Neural network dots inside chip -->
+  <g fill="#00d4ff" opacity="0.8">
+    <circle cx="236" cy="236" r="4"/>
+    <circle cx="276" cy="236" r="4"/>
+    <circle cx="256" cy="256" r="4"/>
+    <circle cx="236" cy="276" r="4"/>
+    <circle cx="276" cy="276" r="4"/>
+  </g>
+  <!-- Neural connections -->
+  <g stroke="#00d4ff" stroke-width="0.8" opacity="0.5">
+    <line x1="236" y1="236" x2="276" y2="236"/>
+    <line x1="236" y1="236" x2="256" y2="256"/>
+    <line x1="276" y1="236" x2="256" y2="256"/>
+    <line x1="236" y1="276" x2="256" y2="256"/>
+    <line x1="276" y1="276" x2="256" y2="256"/>
+    <line x1="236" y1="236" x2="236" y2="276"/>
+    <line x1="276" y1="236" x2="276" y2="276"/>
+  </g>
+  <!-- Pins -->
+  <g stroke="#00d4ff" stroke-width="1.5" opacity="0.6">
+    <line x1="196" y1="146" x2="196" y2="156"/>
+    <line x1="256" y1="146" x2="256" y2="156"/>
+    <line x1="316" y1="146" x2="316" y2="156"/>
+    <line x1="196" y1="356" x2="196" y2="366"/>
+    <line x1="256" y1="356" x2="256" y2="366"/>
+    <line x1="316" y1="356" x2="316" y2="366"/>
+    <line x1="146" y1="196" x2="156" y2="196"/>
+    <line x1="146" y1="256" x2="156" y2="256"/>
+    <line x1="146" y1="316" x2="156" y2="316"/>
+    <line x1="356" y1="196" x2="366" y2="196"/>
+    <line x1="356" y1="256" x2="366" y2="256"/>
+    <line x1="356" y1="316" x2="366" y2="316"/>
+  </g>
+  <!-- Data flow arrows -->
+  <g fill="none" stroke="url(#neonPurple)" stroke-width="1.5" opacity="0.4" filter="url(#glow)">
+    <path d="M100 128 L130 128 L140 148"/>
+    <polygon points="136,144 140,148 134,148" fill="#a855f7"/>
+    <path d="M412 128 L382 128 L372 148"/>
+    <polygon points="376,144 372,148 378,148" fill="#a855f7"/>
+    <path d="M100 384 L130 384 L140 364"/>
+    <polygon points="136,368 140,364 134,364" fill="#a855f7"/>
+    <path d="M412 384 L382 384 L372 364"/>
+    <polygon points="376,368 372,364 378,364" fill="#a855f7"/>
+  </g>
+  <!-- Edge device icons - phone -->
+  <rect x="60" y="130" width="50" height="90" rx="8" fill="none" stroke="url(#neonCyan)" stroke-width="1.2" opacity="0.5"/>
+  <rect x="67" y="138" width="36" height="72" rx="3" fill="none" stroke="url(#neonCyan)" stroke-width="0.6" opacity="0.3"/>
+  <circle cx="85" cy="222" r="3" fill="url(#neonCyan)" opacity="0.5"/>
+  <!-- Edge device icons - laptop -->
+  <rect x="398" y="160" width="55" height="38" rx="4" fill="none" stroke="url(#neonCyan)" stroke-width="1.2" opacity="0.5"/>
+  <line x1="395" y1="208" x2="456" y2="208" stroke="url(#neonCyan)" stroke-width="1.5" opacity="0.4"/>
+  <rect x="400" y="168" width="50" height="25" rx="2" fill="none" stroke="url(#neonCyan)" stroke-width="0.6" opacity="0.3"/>
+  <!-- Edge device icons - cloud -->
+  <path d="M80 310 Q80 290 100 290 Q105 270 125 275 Q135 260 155 270 Q160 255 175 265 L175 310 Z" fill="none" stroke="url(#neonPurple)" stroke-width="1.2" opacity="0.4"/>
+  <!-- Connection lines phone-to-chip-to-cloud -->
+  <path d="M110 175 L156 200" stroke="#00d4ff" stroke-width="0.8" opacity="0.2" stroke-dasharray="3,3"/>
+  <path d="M356 200 L398 185" stroke="#00d4ff" stroke-width="0.8" opacity="0.2" stroke-dasharray="3,3"/>
+  <path d="M110 300 L156 310" stroke="#a855f7" stroke-width="0.8" opacity="0.2" stroke-dasharray="3,3"/>
+  <!-- Title text -->
+  <text x="256" y="420" text-anchor="middle" fill="url(#goldGradient)" font-family="system-ui, sans-serif" font-size="17" font-weight="bold" filter="url(#glowStrong)">EDGE AI &amp; SLM</text>
+  <text x="256" y="445" text-anchor="middle" fill="#a0aec0" font-family="system-ui, sans-serif" font-size="11" opacity="0.7">從雲端巨頭到口袋 AI</text>
+  <text x="256" y="465" text-anchor="middle" fill="#00d4ff" font-family="system-ui, sans-serif" font-size="10" opacity="0.5" filter="url(#glow)">2026 終端 AI 革命</text>
+</svg>
