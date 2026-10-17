@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="50%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <linearGradient id="cyber-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0066ff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="neon-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#00d4ff" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#7b2ff7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7b2ff7" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="neon-glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="900" cy="200" r="450" fill="url(#cyber-glow)"/>
+  <circle cx="300" cy="450" r="350" fill="url(#cyber-glow)" opacity="0.5"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06" stroke="#00d4ff" stroke-width="0.5">
+    <line x1="0" y1="80" x2="1200" y2="80"/><line x1="0" y1="160" x2="1200" y2="160"/>
+    <line x1="0" y1="240" x2="1200" y2="240"/><line x1="0" y1="320" x2="1200" y2="320"/>
+    <line x1="0" y1="400" x2="1200" y2="400"/><line x1="0" y1="480" x2="1200" y2="480"/>
+    <line x1="0" y1="560" x2="1200" y2="560"/>
+    <line x1="150" y1="0" x2="150" y2="630"/><line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="450" y1="0" x2="450" y2="630"/><line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="750" y1="0" x2="750" y2="630"/><line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1050" y1="0" x2="1050" y2="630"/>
+  </g>
+
+  <!-- AI Neural Network nodes illustration -->
+  <g filter="url(#neon-glow)">
+    <!-- Central hexagon -->
+    <polygon points="300,280 370,260 440,280 440,350 370,370 300,350" fill="none" stroke="#00d4ff" stroke-width="2.5" opacity="0.8"/>
+    <circle cx="370" cy="315" r="18" fill="#00d4ff" opacity="0.15"/>
+    <circle cx="370" cy="315" r="8" fill="#00d4ff" opacity="0.6"/>
+    <text x="370" y="320" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="14" fill="#fff" opacity="0.9">AI</text>
+
+    <!-- Connected nodes -->
+    <circle cx="200" cy="200" r="10" fill="#7b2ff7" opacity="0.7"/>
+    <circle cx="280" cy="180" r="7" fill="#00d4ff" opacity="0.6"/>
+    <circle cx="440" cy="190" r="8" fill="#7b2ff7" opacity="0.5"/>
+    <circle cx="520" cy="240" r="6" fill="#00d4ff" opacity="0.5"/>
+    <circle cx="200" cy="430" r="7" fill="#7b2ff7" opacity="0.5"/>
+    <circle cx="500" cy="420" r="9" fill="#00d4ff" opacity="0.6"/>
+    <circle cx="540" cy="350" r="6" fill="#7b2ff7" opacity="0.5"/>
+    <circle cx="250" cy="130" r="5" fill="#00d4ff" opacity="0.4"/>
+
+    <!-- Connection lines -->
+    <line x1="200" y1="200" x2="280" y2="180" stroke="#00d4ff" stroke-width="1.2" opacity="0.4"/>
+    <line x1="280" y1="180" x2="370" y2="297" stroke="#7b2ff7" stroke-width="1.2" opacity="0.4"/>
+    <line x1="370" y1="333" x2="440" y2="190" stroke="#00d4ff" stroke-width="1.2" opacity="0.4"/>
+    <line x1="440" y1="190" x2="520" y2="240" stroke="#7b2ff7" stroke-width="1.2" opacity="0.3"/>
+    <line x1="200" y1="200" x2="200" y2="430" stroke="#00d4ff" stroke-width="1.2" opacity="0.3"/>
+    <line x1="200" y1="430" x2="370" y2="333" stroke="#7b2ff7" stroke-width="1.2" opacity="0.4"/>
+    <line x1="370" y1="333" x2="500" y2="420" stroke="#00d4ff" stroke-width="1.2" opacity="0.4"/>
+    <line x1="500" y1="420" x2="540" y2="350" stroke="#7b2ff7" stroke-width="1.2" opacity="0.3"/>
+    <line x1="520" y1="240" x2="540" y2="350" stroke="#00d4ff" stroke-width="1.2" opacity="0.3"/>
+    <line x1="250" y1="130" x2="280" y2="180" stroke="#00d4ff" stroke-width="1" opacity="0.3"/>
+    <line x1="250" y1="130" x2="200" y2="200" stroke="#7b2ff7" stroke-width="1" opacity="0.3"/>
+  </g>
+
+  <!-- Flow diagram / automation pipeline icons on the right -->
+  <g filter="url(#soft-glow)" transform="translate(760, 180)">
+    <!-- Pipeline boxes -->
+    <rect x="0" y="0" width="70" height="50" rx="6" fill="#1B2A4A" stroke="#00d4ff" stroke-width="1.5" opacity="0.9"/>
+    <text x="35" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#00d4ff">DATA</text>
+
+    <path d="M70,25 L90,25" stroke="#FB923C" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="88,20 98,25 88,30" fill="#FB923C" opacity="0.6"/>
+
+    <rect x="100" y="0" width="70" height="50" rx="6" fill="#1B2A4A" stroke="#7b2ff7" stroke-width="1.5" opacity="0.9"/>
+    <text x="135" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#7b2ff7">AGENT</text>
+
+    <path d="M170,25 L190,25" stroke="#FB923C" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="188,20 198,25 188,30" fill="#FB923C" opacity="0.6"/>
+
+    <rect x="200" y="0" width="70" height="50" rx="6" fill="#1B2A4A" stroke="#00d4ff" stroke-width="1.5" opacity="0.9"/>
+    <text x="235" y="30" text-anchor="middle" font-family="sans-serif" font-size="11" fill="#00d4ff">AUTO</text>
+
+    <!-- Arrow down to output -->
+    <path d="M235,50 L235,75" stroke="#FB923C" stroke-width="1.5" opacity="0.6"/>
+    <polygon points="230,73 235,83 240,73" fill="#FB923C" opacity="0.6"/>
+
+    <!-- Output box -->
+    <rect x="170" y="85" width="130" height="45" rx="8" fill="#FB923C" opacity="0.12" stroke="#FB923C" stroke-width="1" stroke-dasharray="4,3"/>
+    <text x="235" y="112" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#FB923C" font-weight="bold">10x OUTPUT</text>
+  </g>
+
+  <!-- Automation icons row -->
+  <g filter="url(#shadow)" transform="translate(0, 0)">
+    <!-- Email icon -->
+    <rect x="140" y="470" width="55" height="40" rx="4" fill="#1B2A4A" stroke="#00d4ff" stroke-width="1.5" opacity="0.7"/>
+    <text x="167" y="495" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#00d4ff">@</text>
+
+    <!-- Meeting icon -->
+    <rect x="260" y="470" width="55" height="40" rx="4" fill="#1B2A4A" stroke="#7b2ff7" stroke-width="1.5" opacity="0.7"/>
+    <text x="287" y="495" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#7b2ff7">📋</text>
+
+    <!-- Research icon -->
+    <rect x="380" y="470" width="55" height="40" rx="4" fill="#1B2A4A" stroke="#00d4ff" stroke-width="1.5" opacity="0.7"/>
+    <text x="407" y="495" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#00d4ff">🔍</text>
+
+    <!-- Data icon -->
+    <rect x="500" y="470" width="55" height="40" rx="4" fill="#1B2A4A" stroke="#7b2ff7" stroke-width="1.5" opacity="0.7"/>
+    <text x="527" y="495" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#7b2ff7">📊</text>
+
+    <!-- Line connecting icons -->
+    <line x1="195" y1="490" x2="260" y2="490" stroke="#FB923C" stroke-width="0.8" opacity="0.3"/>
+    <line x1="315" y1="490" x2="380" y2="490" stroke="#FB923C" stroke-width="0.8" opacity="0.3"/>
+    <line x1="435" y1="490" x2="500" y2="490" stroke="#FB923C" stroke-width="0.8" opacity="0.3"/>
+  </g>
+
+  <!-- Title text -->
+  <g filter="url(#shadow)">
+    <text x="600" y="100" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-weight="bold" font-size="42" fill="#00d4ff" letter-spacing="2">
+      AI 工作流自動化實戰指南
+    </text>
+    <text x="600" y="145" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-size="22" fill="#B8C5D6" letter-spacing="1">
+      由零開始用 AI Agent 提升 10 倍生產力
+    </text>
+  </g>
+
+  <!-- Divider line -->
+  <line x1="300" y1="165" x2="900" y2="165" stroke="url(#neon-line)" stroke-width="1.5"/>
+
+  <!-- Feature labels -->
+  <g font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-size="16" fill="#8899B0">
+    <circle cx="300" cy="210" r="4" fill="#00d4ff"/>
+    <text x="315" y="215">5 個即用場景</text>
+    <circle cx="460" cy="210" r="4" fill="#7b2ff7"/>
+    <text x="475" y="215">RCTF Prompt 框架</text>
+    <circle cx="640" cy="210" r="4" fill="#00d4ff"/>
+    <text x="655" y="215">4 級進階路線圖</text>
+  </g>
+
+  <!-- Bottom info bar -->
+  <rect x="350" y="560" width="500" height="40" rx="20" fill="#00d4ff" opacity="0.08"/>
+  <text x="600" y="585" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-size="14" fill="#00d4ff" opacity="0.7">
+    #AI自動化 #AIAgent #生產力 #Workflow #香港科技 #2026
+  </text>
+</svg>

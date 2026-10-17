@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#2d6a4f;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#40916c;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#d4b85a;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#52b788;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#74c69d;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d6a4f;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#40916c;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e9c46a;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#f4d35e;stop-opacity:0.9"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Heart beat line -->
+  <g transform="translate(0,60)" opacity="0.15">
+    <polyline points="0,30 40,30 50,10 65,50 80,30 120,30 130,10 145,50 160,30 200,30 210,10 225,50 240,30 280,30 290,10 305,50 320,30 360,30 370,10 385,50 400,30 440,30 450,10 465,50 480,30 512,30"
+      stroke="#52b788" stroke-width="3" fill="none"/>
+  </g>
+
+  <!-- Central human silhouette -->
+  <g transform="translate(196,130)">
+    <!-- Head -->
+    <circle cx="60" cy="25" r="25" fill="#d8f3dc" opacity="0.7"/>
+    <!-- Body -->
+    <rect x="35" y="50" width="50" height="65" rx="10" fill="#95d5b2" opacity="0.6"/>
+    <!-- Heart icon in chest -->
+    <path d="M48 72 C48 65 56 60 60 68 C64 60 72 65 72 72 C72 80 60 88 60 88 C60 88 48 80 48 72Z" fill="#e63946" opacity="0.7" filter="url(#glow)"/>
+    <!-- Arms -->
+    <rect x="8" y="60" width="30" height="10" rx="5" fill="#b7e4c7" opacity="0.5"/>
+    <rect x="82" y="60" width="30" height="10" rx="5" fill="#b7e4c7" opacity="0.5"/>
+    <!-- Legs -->
+    <rect x="40" y="115" width="16" height="30" rx="5" fill="#b7e4c7" opacity="0.5"/>
+    <rect x="64" y="115" width="16" height="30" rx="5" fill="#b7e4c7" opacity="0.5"/>
+  </g>
+
+  <!-- Upward arrow next to figure -->
+  <g transform="translate(310,90)" opacity="0.6">
+    <path d="M20 60 L20 10 L8 20 M20 10 L32 20" stroke="#52b788" stroke-width="3" fill="none"/>
+    <rect x="8" y="60" width="24" height="4" rx="2" fill="#52b788"/>
+    <rect x="12" y="65" width="16" height="4" rx="2" fill="#52b788"/>
+    <rect x="14" y="70" width="12" height="4" rx="2" fill="#52b788"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="256" y="270" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" fill="#ffffff" letter-spacing="1">
+    代謝症候群
+  </text>
+  <text x="256" y="292" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#d8f3dc" letter-spacing="1">
+    逆轉實戰指南
+  </text>
+
+  <!-- 4 info cards -->
+  <!-- Card 1: 飲食調整 -->
+  <g transform="translate(30,320)">
+    <rect width="210" height="70" rx="10" fill="url(#card1)"/>
+    <circle cx="25" cy="25" r="16" fill="#1B2A4A" opacity="0.3"/>
+    <text x="25" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#1B2A4A" font-weight="bold">🥗</text>
+    <text x="50" y="25" font-family="system-ui, sans-serif" font-size="13" fill="#1B2A4A" font-weight="bold">飲食逆轉</text>
+    <text x="50" y="45" font-family="system-ui, sans-serif" font-size="10" fill="#1B2A4A" opacity="0.8">進食次序法 + 時間限制</text>
+    <text x="50" y="59" font-family="system-ui, sans-serif" font-size="10" fill="#1B2A4A" opacity="0.8">+ 減糖減精製碳水</text>
+  </g>
+
+  <!-- Card 2: 運動燃脂 -->
+  <g transform="translate(272,320)">
+    <rect width="210" height="70" rx="10" fill="url(#card2)"/>
+    <circle cx="25" cy="25" r="16" fill="#1B2A4A" opacity="0.2"/>
+    <text x="25" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#ffffff" font-weight="bold">🏃</text>
+    <text x="50" y="25" font-family="system-ui, sans-serif" font-size="13" fill="#ffffff" font-weight="bold">運動增肌</text>
+    <text x="50" y="45" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.8">有氧 × 阻力 × NEAT</text>
+    <text x="50" y="59" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.8">每週 3-5 次混合訓練</text>
+  </g>
+
+  <!-- Card 3: 睡眠修復 -->
+  <g transform="translate(30,402)">
+    <rect width="210" height="70" rx="10" fill="url(#card3)"/>
+    <circle cx="25" cy="25" r="16" fill="#ffffff" opacity="0.2"/>
+    <text x="25" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#d8f3dc" font-weight="bold">😴</text>
+    <text x="50" y="25" font-family="system-ui, sans-serif" font-size="13" fill="#ffffff" font-weight="bold">睡眠優先</text>
+    <text x="50" y="45" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.8">每晚 7-8 小時</text>
+    <text x="50" y="59" font-family="system-ui, sans-serif" font-size="10" fill="#ffffff" opacity="0.8">胰島素敏感度提升 40%</text>
+  </g>
+
+  <!-- Card 4: 壓力管理 -->
+  <g transform="translate(272,402)">
+    <rect width="210" height="70" rx="10" fill="url(#card4)"/>
+    <circle cx="25" cy="25" r="16" fill="#1B2A4A" opacity="0.2"/>
+    <text x="25" y="30" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#1B2A4A" font-weight="bold">🧘</text>
+    <text x="50" y="25" font-family="system-ui, sans-serif" font-size="13" fill="#1B2A4A" font-weight="bold">壓力釋放</text>
+    <text x="50" y="45" font-family="system-ui, sans-serif" font-size="10" fill="#1B2A4A" opacity="0.8">冥想 × 過渡儀式</text>
+    <text x="50" y="59" font-family="system-ui, sans-serif" font-size="10" fill="#1B2A4A" opacity="0.8">降低皮質醇</text>
+  </g>
+
+  <!-- Bottom stats bar -->
+  <g transform="translate(30,485)">
+    <rect width="452" height="24" rx="6" fill="#1B2A4A" opacity="0.6"/>
+    <text x="226" y="17" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#d8f3dc">
+      🏥 每4人有1人 | ⏱️ 3-6個月逆轉 | 📉 降低心血管風險60%
+    </text>
+  </g>
+</svg>

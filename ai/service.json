@@ -1,0 +1,39 @@
+{
+  "schema": "ai-service/v1",
+  "name": "AnthroSkill 人類學",
+  "url": "https://anthroskill.com/",
+  "type": "ContentPublication",
+  "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+  "services": [
+    {
+      "name": "痛點雷達",
+      "url": "https://anthroskill.com/pain-radar/",
+      "description": "每日由 Reddit、Hacker News、美國／台灣／香港討論區挖掘高質量真實痛點，可搜尋條目。"
+    },
+    {
+      "name": "開發日誌",
+      "url": "https://anthroskill.com/devlog/",
+      "description": "自研應用開發進度，與 AI 工具一手實測記錄。"
+    },
+    {
+      "name": "科技新聞",
+      "url": "https://anthroskill.com/news/",
+      "description": "每日精選 AI、開源項目與科技消息。"
+    }
+  ],
+  "capabilities": [
+    "AI 工具實測",
+    "前端開發",
+    "UI 設計",
+    "自動化",
+    "生產力",
+    "投資理財"
+  ],
+  "author": {
+    "name": "Eric Chan",
+    "jobTitle": "IT 顧問・科技內容創作者",
+    "url": "https://anthroskill.com/author/"
+  },
+  "contact": "https://anthroskill.com/contact/",
+  "updated": "2026-10-09"
+}

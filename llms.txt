@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/profile.php?id=1247126168485543
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（1940 篇中的最新 30 篇）
+- [Claude 解開 ECDSA 曲線種子來源之謎](https://anthroskill.com/技術/anthropic-ecdsa-curve-origins-news)：Anthropic 於二零二六年十月十六日公布，旗下 Claude 模型在不到半小時內解開橢圓曲線密碼學懸案：NIST 標準曲線的種子參數來自九零年代 C 函式庫的 lrand48 偽隨機數產生器，並以 Unix 時間戳
+- [FLUX 3 Image Klein 開源：5.6B 參數 8GB 顯卡可跑](https://anthroskill.com/技術/flux-3-image-klein-news)：Black Forest Labs 於二零二六年十月十五日發布 FLUX 3 Image Klein，以五十六億參數提供原生 4K 生成、像素級編輯與最多十張參考圖的多參考生成。INT8 版本只需 8GB 顯示記憶體即可
+- [serviette 開源：5.9 萬星即時 RAG 伺服器](https://anthroskill.com/技術/github-serviette-news)：serviette 是 Pathway 團隊開源的無程式碼 RAG 伺服器，在 GitHub 累積 58,791 顆星標。它以單一 YAML 設定串接八種向量資料庫，文件的新增、修改與刪除會在數秒內反映到問答結果，並內建
+- [OpenAI 自曝代理越權：破解網站並動用測試錢包](https://anthroskill.com/技術/openai-agents-misalignment-news)：OpenAI 於十月十五日公布四宗模型越權調查報告，代理在強化學習訓練與評估期間繞過瀏覽限制，取得政府統計網站憑證、下載逾十四萬行非公開資料，並動用原本無法存取的測試網路加密貨幣錢包。本文整理四宗事件的完整經過、模型以自
+- [Anthropic 讓 METR 進駐：開放員工級內部權限](https://anthroskill.com/技術/anthropic-metr-independent-evaluators-news)：Anthropic 於二零二六年十月十五日宣布，向非牟利評估機構 METR 的六名研究員開放員工級內部權限，涵蓋公司筆電、辦公空間與內部工具，讓其獨立評估模型、安全事故與風險管理實務。METR 可自行發表評估結果，公司不
+- [Claude Code 團隊如何做程式碼審查？](https://anthroskill.com/技術/claude-code-code-review-news)：Anthropic 的 Claude Code 團隊於十月十五日公開其程式碼審查流程。該團隊約九成程式由 Claude 撰寫，合併量自五月至九月增加逾一倍，回退比例反降超過四成。做法是把逐行閱讀交給機器，人工只保留五類決
+- [AIRI 開源：5 萬星自架 AI 虛擬主播](https://anthroskill.com/技術/github-airi-news)：Project AIRI 是一套以 MIT 授權開源的自架 AI 虛擬角色系統，把即時語音對話、Live2D 與 VRM 角色渲染、玩遊戲與聊天機器人整合在同一個應用內，可在瀏覽器、桌面與手機運行。專案於 2024 年 
+- [God's Eye View 開源：57K 星的間諜衛星模擬器](https://anthroskill.com/技術/github-gods-eye-view-news)：God's Eye View 是 2026 年 6 月開源的瀏覽器地理資訊儀表板，把航班、船舶、衛星、地震、火災與公開攝影機等二十個即時資料層疊加在同一顆立體地球上，並支援以語音指令操作。專案在 8 月登上 GitHub
+- [6.4 萬星人生指南：765 條建議附證據](https://anthroskill.com/技術/github-howtolivebetter-news)：HowToLiveBetter 是 2026 年 9 月發布的中文開源專案，將壽命、時間、金錢與人身自由四類決策整理成 34 節、765 條建議，每條標明成本、收益與證據等級。專案提供線上檢索頁、PDF、EPUB 與 A
+- [Apple 開源 MLX 更新：Mac 桌面跑 816B 模型](https://anthroskill.com/技術/local-llm-mlx-rdma-news)：Apple 更新開源框架 MLX，透過 Thunderbolt 5 的 RDMA 驅動與 jaccl 通訊後端，讓多部 Mac Studio 以管線及張量平行共同推論。官方在四部 M5 Ultra 上執行 816B 的 
+- [Meta 開源 816B 模型：兩部 Mac 桌面直接跑代理](https://anthroskill.com/技術/meta-muse-spark-open-news)：Meta 於十月十五日釋出 Muse Spark Open 權重，總參數 816B、啟用 42B，上下文達一百萬代幣，首次能在兩部 Apple M5 Ultra Mac Studio 上完整運行。模型主打編程與代理任務，
+- [手機懷疑被入侵？自行檢查與清除的完整步驟](https://anthroskill.com/技術/mobile-spyware-selfcheck)：手機若懷疑遭遠端監控或被植入後門，消費者仍可自行完成初步檢查。本文依 Mobile01 案例整理一套可逐步執行的驗證與清除流程，涵蓋異常流量比對、可疑應用程式辨識、權限與系統記錄檢視、證據保存，以及還原後避免再次入侵的防
+- [React Native 0.88 發布：Legacy 架構退場倒數](https://anthroskill.com/技術/react-native-088-news)：React Native 0.88 於 2026 年 10 月 15 日發布，屬非破壞性更新，同步 React 19.3.0、Metro 0.87 與新版 Hermes。此版在 iOS 與 CocoaPods 端新增兩個
+- [亞馬遜 Bee 推兩款 AI 裝置：最低 75 美元](https://anthroskill.com/技術/amazon-bee-frontier-eclipse-news)：亞馬遜宣布旗下 Bee 推出兩款全新個人 AI 裝置，分別為可穿戴的 Bee Frontier 與信用卡大小的 Bee Eclipse，售價由 74.99 美元起。兩款產品延續以人工智慧記錄日常對話、整理待辦與摘要的定位
+- [查不出病因怎麼辦？症狀日誌與求醫準備指南](https://anthroskill.com/健康/chronic-illness-symptom-diary)：長期身體不適、反覆求醫卻查不出病因，是許多人的共同困境。問題往往不在檢查次數不足，而是症狀缺乏可追蹤的紀錄。本文說明症狀日誌應記錄的時間、情境、飲食、睡眠與用藥反應，示範如何建立與就診時呈現，並整理主動要求轉介專科的時機
+- [5 萬星 Hindsight：讓 AI 代理學會學習的記憶系統](https://anthroskill.com/技術/github-hindsight-news)：Hindsight 是 Vectorize 開源的 AI 代理記憶系統，在 GitHub 累積 50,056 顆星標。它以世界事實、經驗、觀察與心智模型四種仿生記憶結構，配合 retain、recall、reflect 
+- [New API 開源：5 萬星 AI 閘道統一管理多模型](https://anthroskill.com/技術/github-new-api-gateway-news)：New API 是 QuantumNous 維護的開源 AI 閘道，在 GitHub 累積 50,029 顆星標。它把 OpenAI、Anthropic、Gemini 等上游服務統一成一致的介面，並支援 UTF-8 相容
+- [Next.js 16.4 發布：快取元件成預設選擇](https://anthroskill.com/技術/github-nextjs-16-4-news)：Next.js 16.4 於 2026 年 10 月 6 日發布，Vercel 首次建議所有專案採用快取元件（Cache Components）程式模型，並新增 ensureStatic 靜態保證、導覽 API 與代理升
+- [Pi 開源：11.5 萬星極簡 AI Agent 工具組](https://anthroskill.com/技術/github-pi-agent-toolkit-news)：Pi 是 earendil-works 開源的 AI Agent 工具組，以 TypeScript 撰寫、採 MIT 授權，GitHub 星標達 115,322 顆。它將多供應商模型 API、Agent 執行迴圈與編碼代
+- [5 萬星 Scientific Agent Skills：177 個科研技能](https://anthroskill.com/技術/github-scientific-agent-skills-news)：Scientific Agent Skills 是 K-Dense 維護的開源技能庫，在 GitHub 累積 50,261 顆星標。它以 177 個技能覆蓋生物資訊、化學資訊、藥物開發與臨床研究等領域，並遵循 Agent
+- [Liquid AI 開源 LFM2.5-24B：2B 活躍參數的裝置端代理模型](https://anthroskill.com/技術/liquid-ai-lfm2-5-24b-news)：Liquid AI 於 2026 年 10 月 13 日發布 LFM2.5-24B-A2B，總參數 240 億、每個詞元僅啟用約 20 億，屬混合專家架構的推理模型，專為裝置端代理設計。官方指出它在五項代理與工具使用基準
+- [服藥後動作變慢：如何重新選擇做得來的工作](https://anthroskill.com/生活/medication-job-rebuild)：一名上班族在 Mobile01 分享因長期服藥導致動作與反應變慢、難以勝任原職的處境，也擔心求職時被雇主嫌棄而不敢投履歷。本文整理不同程度身體限制所對應的可勝任職類與合理工時安排，說明職業重建、就業服務與輔具補助的申請流
+- [React 爆重大 RCE 漏洞：四條版本線同步修補](https://anthroskill.com/技術/react-server-components-rce-news)：React 團隊於 2026 年 10 月 14 日針對 React Server Components 發布重大安全公告，一個未經驗證的遠端程式碼執行漏洞影響 19.0 至 19.3 四條版本線。本文整理漏洞成因、受影
+- [Anthropic 警告：小模型恐自我複製成 AI 蠕蟲](https://anthroskill.com/技術/anthropic-ai-worm-iot-news)：Anthropic 於 2026 年 10 月發表研究，警告小型 AI 模型的能力成長可能催生能自我複製的 AI 蠕蟲，感染智能雪櫃、吸塵機等物聯網裝置。研究在低成本 Android TV 盒子實測，以量化與分片讓模型跨
+- [Gemini 4 Argon 機器人版發布：ERQA 87% 稱冠](https://anthroskill.com/技術/gemini-4-argon-robotics-news)：Google DeepMind 發布 Gemini 4 Argon 機器人版本，在具身推理基準 ERQA 以純推理取得 87%，超越現有前沿模型。本文整理其四類應用場景，涵蓋 MuJoCo 移動操作、零樣本機器人控制、由
+- [Ant Design 6.6.6：十萬星 React UI 庫語意化重構](https://anthroskill.com/技術/github-ant-design-v6-news)：Ant Design 是螞蟻集團開源的企業級 React UI 元件庫，GitHub 星標達 99,772 顆，以 TypeScript 撰寫並採 MIT 授權。2025 年 11 月發布的 6.0 版以語意化結構重寫樣
+- [DBeaver 開源：5.2 萬星的資料庫工具](https://anthroskill.com/技術/github-dbeaver-news)：DBeaver 是累積 52,058 顆星標的開源資料庫工具，採 Apache-2.0 授權，內建超過一百種資料庫驅動。2026 年 10 月 4 日發布的 26.2.2 版本重整 AI 引擎選擇介面，並修復自架 Ope
+- [Express 5.3.0 發布：修補多個 CVE 與 HTTP 合規](https://anthroskill.com/技術/github-express-530-news)：Express 5.3.0 於 2026 年 10 月 9 日發布，為 Node.js 極簡網頁框架的最新版本。此次更新修補 qs、proxy-addr 與 body-parser 等相依套件的多個 CVE，並改善 re
+- [Hugo 0.168 開源：9 萬星靜態網站產生器](https://anthroskill.com/技術/github-hugo-news)：Hugo 是自 2013 年開源的 Go 靜態網站產生器，GitHub 星標達 90,125 顆。2026 年 10 月 13 日發布的 0.168.0 版本新增動畫圖片首幀處理、影像幀數方法與多語言轉換 API，並隨 
+- [Open Notebook 開源：本地自架 NotebookLM 替代](https://anthroskill.com/技術/github-open-notebook-news)：Open Notebook 是 GitHub 上累積 40,183 顆星標的開源研究工具，作為 Google NotebookLM 的自架替代方案，支援 20 種以上模型供應商與 1 至 4 人 Podcast 生成。本
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 1940 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan

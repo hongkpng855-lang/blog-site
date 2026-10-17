@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chain" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#ffaa00;stop-opacity:0.9" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
+  
+  <!-- Circles background decoration -->
+  <circle cx="80" cy="80" r="120" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="430" cy="400" r="160" fill="rgba(255,255,255,0.03)"/>
+  <circle cx="450" cy="50" r="80" fill="rgba(255,255,255,0.02)"/>
+  
+  <!-- Main icon - chain links representing habit chain -->
+  <g transform="translate(256, 160)">
+    <!-- Chain link 1 -->
+    <rect x="-60" y="-20" width="50" height="40" rx="8" fill="none" stroke="url(#chain)" stroke-width="4"/>
+    <rect x="-10" y="-20" width="50" height="40" rx="8" fill="none" stroke="url(#chain)" stroke-width="4"/>
+    <rect x="40" y="-20" width="50" height="40" rx="8" fill="none" stroke="url(#chain)" stroke-width="4"/>
+  </g>
+  
+  <!-- Checkmark icons -->
+  <g transform="translate(180, 160)" opacity="0.7">
+    <circle cx="0" cy="0" r="18" fill="rgba(255,255,255,0.15)"/>
+    <polyline points="-8,0 -3,6 8,-6" fill="none" stroke="#ffd700" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <g transform="translate(256, 160)" opacity="0.7">
+    <circle cx="0" cy="0" r="18" fill="rgba(255,255,255,0.15)"/>
+    <polyline points="-8,0 -3,6 8,-6" fill="none" stroke="#ffd700" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <g transform="translate(332, 160)" opacity="0.7">
+    <circle cx="0" cy="0" r="18" fill="rgba(255,255,255,0.15)"/>
+    <polyline points="-8,0 -3,6 8,-6" fill="none" stroke="#ffd700" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Calendar / streak visual -->
+  <g transform="translate(256, 280)">
+    <!-- Calendar base -->
+    <rect x="-100" y="-15" width="200" height="130" rx="12" fill="rgba(255,255,255,0.08)"/>
+    <rect x="-100" y="-15" width="200" height="35" rx="12" fill="rgba(255,255,255,0.12)"/>
+    
+    <!-- Week grid -->
+    <g fill="rgba(255,255,255,0.2)" font-family="system-ui,sans-serif" font-size="12" text-anchor="middle">
+      <!-- Row 1 -->
+      <text x="-70" y="45">M</text><text x="-40" y="45">T</text>
+      <text x="-10" y="45">W</text><text x="20" y="45">T</text>
+      <text x="50" y="45">F</text><text x="80" y="45">S</text>
+      <!-- Row 2 - checked days -->
+      <text x="-70" y="70" fill="#ffd700">✓</text>
+      <text x="-40" y="70" fill="#ffd700">✓</text>
+      <text x="-10" y="70" fill="#ffd700">✓</text>
+      <text x="20" y="70" fill="#ffd700">✓</text>
+      <text x="50" y="70" fill="#ffd700">✓</text>
+      <text x="80" y="70" fill="#ffd700">✓</text>
+      <!-- Row 3 -->
+      <text x="-70" y="95" fill="#ffd700">✓</text>
+      <text x="-40" y="95" fill="#ffd700">✓</text>
+      <text x="-10" y="95" fill="#ffd700">✓</text>
+      <text x="20" y="95" fill="#ffd700">✓</text>
+      <text x="50" y="95" fill="#ffd700">✓</text>
+      <text x="80" y="95" fill="rgba(255,215,0,0.4)">○</text>
+    </g>
+  </g>
+  
+  <!-- Title text -->
+  <text x="256" y="450" fill="white" font-family="system-ui,sans-serif" font-size="28" font-weight="bold" text-anchor="middle" letter-spacing="2">
+    習慣系統
+  </text>
+  <text x="256" y="480" fill="rgba(255,255,255,0.6)" font-family="system-ui,sans-serif" font-size="14" text-anchor="middle">
+    從微行動到持續改變
+  </text>
+</svg>
