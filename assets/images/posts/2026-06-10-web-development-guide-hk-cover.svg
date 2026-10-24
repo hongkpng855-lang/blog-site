@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f1a30"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2a1a3a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#e8c84a"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#152a45;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a4a6a;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#1a3055;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a2a6a;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#2a1a50;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a4a3a;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#0f3025;stop-opacity:0.8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05" stroke="#FB923C" stroke-width="0.5">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- Floating code brackets decoration -->
+  <g opacity="0.08" fill="#FB923C">
+    <text x="60" y="80" font-family="monospace" font-size="60">&lt;/&gt;</text>
+    <text x="650" y="400" font-family="monospace" font-size="40">{ }</text>
+    <text x="720" y="80" font-family="monospace" font-size="35">JS</text>
+  </g>
+
+  <!-- Browser window frame -->
+  <rect x="80" y="35" width="640" height="30" rx="4" fill="#2a3a4a" opacity="0.9"/>
+  <rect x="80" y="65" width="640" height="2" fill="#1B2A4A" opacity="0.5"/>
+  <!-- Browser dots -->
+  <circle cx="100" cy="50" r="5" fill="#ff5f5f"/>
+  <circle cx="120" cy="50" r="5" fill="#ffbd2e"/>
+  <circle cx="140" cy="50" r="5" fill="#28c840"/>
+
+  <!-- Main browser content area -->
+  <rect x="80" y="67" width="640" height="340" rx="0 0 8 8" fill="#1a2a3a" opacity="0.7"/>
+
+  <!-- Title -->
+  <text x="400" y="115" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="22" font-weight="bold" fill="#FB923C" filter="url(#glow)">Web 開發入門</text>
+
+  <!-- Code line decorations -->
+  <g font-family="monospace" font-size="11" opacity="0.3" fill="#88aacc">
+    <text x="105" y="140">&lt;!DOCTYPE html&gt;</text>
+    <text x="105" y="158">&lt;html&gt;</text>
+    <text x="120" y="176">&lt;head&gt;</text>
+    <text x="135" y="194">&lt;title&gt;My Website&lt;/title&gt;</text>
+    <text x="120" y="212">&lt;/head&gt;</text>
+    <text x="120" y="230">&lt;body&gt;</text>
+    <text x="135" y="248">&lt;h1&gt;Hello World&lt;/h1&gt;</text>
+    <text x="120" y="266">&lt;/body&gt;</text>
+    <text x="105" y="284">&lt;/html&gt;</text>
+  </g>
+
+  <!-- 4 Info cards -->
+  <!-- Card 1: HTML -->
+  <g filter="url(#shadow)">
+    <rect x="95" y="180" width="145" height="95" rx="8" fill="url(#card1)" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="168" y="205" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" fill="#e8c84a">&lt;/&gt;</text>
+    <text x="168" y="225" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">HTML</text>
+    <text x="168" y="243" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="10" fill="#8899bb">網站嘅骨架</text>
+    <text x="168" y="262" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="9" fill="#FB923C" opacity="0.7">結構 + 內容</text>
+  </g>
+
+  <!-- Card 2: CSS -->
+  <g filter="url(#shadow)">
+    <rect x="258" y="180" width="145" height="95" rx="8" fill="url(#card2)" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="331" y="205" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" fill="#88ddff"># { }</text>
+    <text x="331" y="225" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">CSS</text>
+    <text x="331" y="243" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="10" fill="#8899bb">網站嘅衫</text>
+    <text x="331" y="262" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="9" fill="#FB923C" opacity="0.7">樣式 + 排版</text>
+  </g>
+
+  <!-- Card 3: JavaScript -->
+  <g filter="url(#shadow)">
+    <rect x="421" y="180" width="145" height="95" rx="8" fill="url(#card3)" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="494" y="205" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" fill="#ffd866">JS</text>
+    <text x="494" y="225" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">JavaScript</text>
+    <text x="494" y="243" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="10" fill="#8899bb">網站嘅腦袋</text>
+    <text x="494" y="262" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="9" fill="#FB923C" opacity="0.7">互動 + 邏輯</text>
+  </g>
+
+  <!-- Card 4: AI -->
+  <g filter="url(#shadow)">
+    <rect x="584" y="180" width="121" height="95" rx="8" fill="url(#card4)" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.3"/>
+    <text x="644" y="205" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="16" font-weight="bold" fill="#88ffaa">AI</text>
+    <text x="644" y="225" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">AI 助手</text>
+    <text x="644" y="243" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="10" fill="#8899bb">生成 + Debug</text>
+    <text x="644" y="262" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="9" fill="#FB923C" opacity="0.7">加速開發</text>
+  </g>
+
+  <!-- Connecting arrow between cards -->
+  <g opacity="0.4">
+    <line x1="240" y1="228" x2="255" y2="228" stroke="#FB923C" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <polygon points="258,228 252,224 252,232" fill="#FB923C"/>
+    <line x1="403" y1="228" x2="418" y2="228" stroke="#FB923C" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <polygon points="421,228 415,224 415,232" fill="#FB923C"/>
+  </g>
+
+  <!-- Deploy section at bottom -->
+  <g filter="url(#shadow)">
+    <rect x="95" y="295" width="610" height="95" rx="10" fill="#0f1a30" stroke="#FB923C" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="400" y="322" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="14" font-weight="bold" fill="#FB923C">🚀 Deploy — 放上網俾全世界睇到</text>
+
+    <!-- Deploy step icons -->
+    <g>
+      <!-- Git -->
+      <rect x="120" y="338" width="110" height="38" rx="6" fill="#1e3a5f" opacity="0.8"/>
+      <text x="175" y="362" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">📦 GitHub</text>
+    </g>
+    <g>
+      <rect x="248" y="338" width="110" height="38" rx="6" fill="#2a4a6a" opacity="0.8"/>
+      <text x="303" y="362" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">🌐 Pages</text>
+    </g>
+    <g>
+      <rect x="376" y="338" width="110" height="38" rx="6" fill="#3a2a6a" opacity="0.8"/>
+      <text x="431" y="362" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">🔗 Custom Domain</text>
+    </g>
+    <g>
+      <rect x="504" y="338" width="180" height="38" rx="6" fill="#1a4a3a" opacity="0.8"/>
+      <text x="594" y="362" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="12" fill="#aaccee">🌍 Share with World</text>
+    </g>
+
+    <!-- Small right-pointing arrows -->
+    <g opacity="0.5" fill="#FB923C">
+      <polygon points="233,357 237,354 237,360"/>
+      <polygon points="361,357 365,354 365,360"/>
+      <polygon points="489,357 493,354 493,360"/>
+    </g>
+  </g>
+
+  <!-- Stats bar at bottom -->
+  <g opacity="0.7">
+    <rect x="95" y="400" width="610" height="25" rx="4" fill="#0a1220" opacity="0.6"/>
+    <text x="120" y="416" font-family="monospace" font-size="10" fill="#FB923C">由零開始</text>
+    <text x="230" y="416" font-family="monospace" font-size="10" fill="#8899bb">|</text>
+    <text x="250" y="416" font-family="monospace" font-size="10" fill="#88ccaa">完全免費</text>
+    <text x="360" y="416" font-family="monospace" font-size="10" fill="#8899bb">|</text>
+    <text x="380" y="416" font-family="monospace" font-size="10" fill="#88aadd">AI 輔助學習</text>
+    <text x="500" y="416" font-family="monospace" font-size="10" fill="#8899bb">|</text>
+    <text x="520" y="416" font-family="monospace" font-size="10" fill="#ddaa88">即日 deploy</text>
+  </g>
+</svg>

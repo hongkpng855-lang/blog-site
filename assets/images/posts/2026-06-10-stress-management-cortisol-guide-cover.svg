@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="40%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#152238"/>
+    </linearGradient>
+    <linearGradient id="gold-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FB923C" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="green-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4CAF50" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#4CAF50" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="neon-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4CAF50" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#4CAF50" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#FB923C" stop-opacity="0.5"/>
+      <stop offset="70%" stop-color="#ff6b6b" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff6b6b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="card-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="stress-red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff4757" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#c0392b" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="calm-green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2ecc71" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#27ae60" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="900" cy="200" r="350" fill="url(#gold-glow)"/>
+  <circle cx="300" cy="450" r="250" fill="url(#green-glow)"/>
+
+  <!-- Grid lines -->
+  <g opacity="0.04" stroke="#FB923C" stroke-width="0.5">
+    <line x1="0" y1="90" x2="1200" y2="90"/><line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/><line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="200" y1="0" x2="200" y2="630"/><line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/><line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Main title -->
+  <text x="600" y="215" text-anchor="middle" font-family="system-ui, sans-serif" font-size="52" font-weight="900" fill="#FB923C" filter="url(#soft-glow)">
+    壓力管理與皮質醇平衡
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="275" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="400" fill="#a0b4d0">
+    高壓都市嘅科學減壓生活系統
+  </text>
+
+  <!-- Stress wave (red zigzag line left side) -->
+  <polyline points="60,320 80,300 100,340 120,290 140,350 160,280 180,330 200,295"
+    fill="none" stroke="#ff4757" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <polyline points="60,350 80,330 100,370 120,320 140,380 160,310 180,360 200,325"
+    fill="none" stroke="#ff4757" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Calm wave (green smooth curve right side) -->
+  <path d="M1000,320 Q1020,300 1040,320 Q1060,340 1080,320 Q1100,300 1120,320 Q1140,340 1160,320"
+    fill="none" stroke="#2ecc71" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M1000,350 Q1020,335 1040,350 Q1060,365 1080,350 Q1100,335 1120,350 Q1140,365 1160,350"
+    fill="none" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Info cards -->
+  <!-- Card 1: 高壓警示（紅色） -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="400" width="240" height="140" rx="12" fill="url(#card-bg)" stroke="#ff4757" stroke-width="1.5" stroke-opacity="0.5"/>
+    <circle cx="96" cy="430" r="16" fill="url(#stress-red)"/>
+    <text x="96" y="436" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#fff">⚠</text>
+    <text x="130" y="437" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#ff6b6b">86% 打工仔壓力過大</text>
+    <text x="80" y="470" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">
+      香港高於全球平均 25%
+    </text>
+    <text x="80" y="495" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">
+      每年 23% 皮質醇上升
+    </text>
+    <text x="80" y="520" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">
+      每 4 人就有 1 人有焦慮症狀
+    </text>
+  </g>
+
+  <!-- Card 2: 飲食減壓 -->
+  <g filter="url(#shadow)">
+    <rect x="320" y="400" width="240" height="140" rx="12" fill="url(#card-bg)" stroke="#FB923C" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="340" y="437" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#FB923C">🥗 飲食減壓 3 寶</text>
+    <text x="340" y="470" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">鎂 (Magnesium) — 放鬆神經</text>
+    <text x="340" y="495" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Omega-3 — 抗發炎護腦</text>
+    <text x="340" y="520" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">B雜 — 神經系統燃料</text>
+  </g>
+
+  <!-- Card 3: 運動與呼吸 -->
+  <g filter="url(#shadow)">
+    <rect x="580" y="400" width="240" height="140" rx="12" fill="url(#card-bg)" stroke="#4CAF50" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="600" y="437" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#4CAF50">🧘‍♂️ 運動＋呼吸</text>
+    <text x="600" y="470" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">4-7-8 呼吸法急救 chill</text>
+    <text x="600" y="495" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">溫和運動更有效降皮質醇</text>
+    <text x="600" y="520" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">10 分鐘 reset 過渡儀式</text>
+  </g>
+
+  <!-- Card 4: 7日挑戰 -->
+  <g filter="url(#shadow)">
+    <rect x="840" y="400" width="300" height="140" rx="12" fill="url(#card-bg)" stroke="#E8D48B" stroke-width="1" stroke-opacity="0.3"/>
+    <text x="860" y="437" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#E8D48B">📋 7 日減壓挑戰</text>
+    <text x="860" y="470" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Day 1: 4-7-8 呼吸法</text>
+    <text x="860" y="495" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Day 3: 睡前 30 分鐘放低電話</text>
+    <text x="860" y="520" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Day 7: 回顧 &amp; 持續計劃</text>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="565" width="1200" height="3" fill="url(#neon-line)"/>
+
+  <!-- Bottom info bar -->
+  <rect x="420" y="580" width="360" height="34" rx="17" fill="#ffffff" fill-opacity="0.06"/>
+  <text x="600" y="602" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#FB923C">
+    ESGov · 2026 香港人壓力管理指南
+  </text>
+</svg>

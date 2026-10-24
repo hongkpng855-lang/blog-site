@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Hugo 0.168 開源：9 萬星靜態網站產生器 - AnthroSkill</title>
+  <meta name="description" content="Hugo 是自 2013 年開源的 Go 靜態網站產生器，GitHub 星標達 90,125 顆。2026 年 10 月 13 日發布的 0.168.0 版本新增動畫圖片首幀處理、影像幀數方法與多語言轉換 API，並隨 Go 1.27.2 帶入多項安全性修補。本文整理其版本演進、技術架構、安裝方式與授權條款。">
+  <meta name="keywords" content="Hugo, 開源項目, 靜態網站產生器, Go, 網站開發, GitHub">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Hugo 0.168 開源：9 萬星靜態網站產生器">
+  <meta property="og:description" content="Hugo 是自 2013 年開源的 Go 靜態網站產生器，GitHub 星標達 90,125 顆。2026 年 10 月 13 日發布的 0.168.0 版本新增動畫圖片首幀處理、影像幀數方法與多語言轉換 API，並隨 Go 1.27.2 帶入多項安全性修補。本文整理其版本演進、技術架構、安裝方式與授權條款。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-hugo-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hugo 0.168 開源：9 萬星靜態網站產生器">
+  <meta name="twitter:description" content="Hugo 是自 2013 年開源的 Go 靜態網站產生器，GitHub 星標達 90,125 顆。2026 年 10 月 13 日發布的 0.168.0 版本新增動畫圖片首幀處理、影像幀數方法與多語言轉換 API，並隨 Go 1.27.2 帶入多項安全性修補。本文整理其版本演進、技術架構、安裝方式與授權條款。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-hugo-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-10-25T00:04:39+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Hugo 0.168 開源：9 萬星靜態網站產生器",
+      "description": "Hugo 是自 2013 年開源的 Go 靜態網站產生器，GitHub 星標達 90,125 顆。2026 年 10 月 13 日發布的 0.168.0 版本新增動畫圖片首幀處理、影像幀數方法與多語言轉換 API，並隨 Go 1.27.2 帶入多項安全性修補。本文整理其版本演進、技術架構、安裝方式與授權條款。",
+      "datePublished": "2026-10-15T08:00:06+08:00",
+      "dateModified": "2026-10-15T08:00:06+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/gohugoio/hugo" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-hugo-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Hugo 0.168 開源：9 萬星靜態網站產生器",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Hugo 0.168 開源：9 萬星靜態網站產生器</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">Hugo 0.168 開源：9 萬星靜態網站產生器</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月15日 08:00
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/gohugoio/hugo" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-hugo-news-cover.jpg" alt="Hugo 0.168 開源：9 萬星靜態網站產生器" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/gohugoio/hugo" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/gohugoio/hugo
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Hugo 是一套以 Go 語言撰寫的開源靜態網站產生器，在 GitHub 累積 90,125 顆星標與 8,390 次複製。專案於 2013 年 7 月建立，2026 年 10 月 13 日發布 0.168.0 版本，新增動畫圖片的首幀處理選項、影像幀數方法與多語言轉換 API，同時因改用 Go 1.27.2 建置而納入多項安全性修補。本文整理其版本演進、技術架構、資產管線、維護模式、安裝方式與授權條款。</p>
+
+<p><img src="/assets/images/posts/github-hugo-news-shot1.png" alt="Hugo 儲存庫 README 開頭，顯示專案標誌、測試狀態徽章，以及「A fast and flexible static site generator built with love by bep, spf13, and friends in Go」的定位說明，下方為 Overview 章節開頭" /></p>
+
+<h2 id="hugo-是什麼">Hugo 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Hugo 是一套以 Go 語言撰寫的靜態網站產生器，2013 年 7 月建立，可在數秒內把內容與樣板編譯成純靜態檔案，無需資料庫，並以 Apache 2.0 授權釋出。
+<!-- End AEO Capsule --></p>
+
+<p>該專案的定位是把內容管理與網站交付拆開。使用者以 Markdown 撰寫內容，用樣板定義版型，Hugo 在本地端完成渲染，輸出結果是一組純 HTML、CSS 與 JavaScript 檔案，可直接放到任何靜態主機、物件儲存或內容傳遞網路上。資料庫、應用伺服器與執行階段依賴都不在部署清單內，因此維運面相對單純。</p>
+
+<p>官方說明指出，這套架構適合企業、政府、非營利、教育、新聞與活動網站，也用於文件站、影像作品集、著陸頁、部落格與個人履歷。開發期間可使用內建的網頁伺服器即時預覽變更，完成後再推送至代管服務，或交由 Git 供應商自動建置與部署。</p>
+
+<h2 id="hugo-01680-發布了哪些重點功能">Hugo 0.168.0 發布了哪些重點功能？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>0.168.0 於 2026 年 10 月 13 日發布，新增動畫圖片首幀處理選項、影像幀數方法與多語言轉換 API，並為 js.Build 與 css.Build 加入字元集設定。
+<!-- End AEO Capsule --></p>
+
+<p>官方版本說明列出數項新增能力。影像處理方面，新增 <code class="language-plaintext highlighter-rouge">imaging.firstFrameOnly</code> 設定與對應的處理旗標，可只解碼與編碼動畫圖片的第一幀；當目標格式不支援動畫時，系統也會自動只處理首幀，若處理全部幀數會超出 WebAssembly 記憶體上限，則提早回報明確錯誤。同一批變更也為影像資源加入 <code class="language-plaintext highlighter-rouge">FrameCount</code> 方法，讓樣板能判斷一張圖片是否為動畫。</p>
+
+<p>多語言支援同樣有進展。<code class="language-plaintext highlighter-rouge">site.Language</code> 新增 <code class="language-plaintext highlighter-rouge">Translate</code> 與 <code class="language-plaintext highlighter-rouge">Format*</code> 方法，樣板可以走訪 <code class="language-plaintext highlighter-rouge">site.Languages</code>，再針對每一種語言做翻譯與格式化，減少過去需要自行拼接字串的處理。前端資產方面，<code class="language-plaintext highlighter-rouge">js.Build</code> 與 <code class="language-plaintext highlighter-rouge">css.Build</code> 兩個函式新增 <code class="language-plaintext highlighter-rouge">charset</code> 選項。終端機介面則加入對 OSC 7501 程式狀態協定的基本支援，可在相容的終端機顯示工作、完成、閒置與錯誤狀態。</p>
+
+<h2 id="hugo-01680-修補了哪些安全性問題">Hugo 0.168.0 修補了哪些安全性問題？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>該版本以 Go 1.27.2 建置，連帶修補樣板跳脫、HTTP/2 連線與記憶體耗用等問題，並升級壓縮函式庫以修正行內腳本跳脫缺陷。
+<!-- End AEO Capsule --></p>
+
+<p>安全性是這次更新的實質重點。版本說明指出，0.168.0 以 Go 1.27.2 建置，該版 Go 包含十五項安全性修正，其中與 Hugo 直接相關的有兩項 <code class="language-plaintext highlighter-rouge">html/template</code> 跳脫問題：一項是連續運算式在 JavaScript 樣板字串中未重設上下文追蹤，另一項是 <code class="language-plaintext highlighter-rouge">yield</code> 未被辨識為正規表示式的先行關鍵字，兩者都可能導致行內 JavaScript 被不正確地跳脫。由於 Hugo 使用自行維護的樣板套件分支，這兩項修正同樣適用。</p>
+
+<p>其餘修正集中在網路層與檔案系統。多項 <code class="language-plaintext highlighter-rouge">net/http</code> 修正涵蓋 HTTP/2 伺服器崩潰與記憶體耗用、連線不同步，以及無上限的 Range 標頭解析，這些問題對 <code class="language-plaintext highlighter-rouge">hugo server</code> 與遠端資源取得都有影響；<code class="language-plaintext highlighter-rouge">golang.org/x/net</code> 同步升級至 0.61.0。另有一項 <code class="language-plaintext highlighter-rouge">os.Root.Mkdir</code> 在 Windows 上可能跟隨連結跳脫根目錄的修正。此外，專案使用的壓縮函式庫 minify 升級至 2.24.19，修正行內腳本中 <code class="language-plaintext highlighter-rouge">&lt;/script&gt;</code> 未被正確跳脫的問題。版本說明同時提醒，Hugo 現在會忽略主題中定義的 <code class="language-plaintext highlighter-rouge">module.replacements</code>，只有專案本身可以定義取代規則。</p>
+
+<h2 id="hugo-的資產管線與模組系統如何運作">Hugo 的資產管線與模組系統如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>Hugo 內建 CSS、影像、JavaScript、Sass 與 Tailwind 處理管線，可完成打包、壓縮、轉譯與子資源完整性雜湊，並透過模組系統共享內容與樣板。
+<!-- End AEO Capsule --></p>
+
+<p>資產管線是這套工具與單純樣板引擎的分界線。官方說明列出五類處理能力：CSS 管線可打包、轉換、壓縮、產生原始碼對應並整合 PostCSS 與子資源完整性雜湊；影像管線可轉檔、縮放、裁切、旋轉、調色、套用濾鏡、疊加文字與擷取中介資料；JavaScript 管線可把 TypeScript 與 JSX 轉譯成瀏覽器可執行的程式碼，並支援打包、樹狀搖晃、壓縮與雜湊。</p>
+
+<p>Sass 與 Tailwind 各有一條對應管線，同樣具備打包、壓縮、最佳化與雜湊能力。這代表前端資產不需要額外掛上另一套建置工具，即可在網站產生階段完成處理。</p>
+
+<p>Hugo Modules 則處理跨專案的重用問題。使用者可透過公開或私有 Git 儲存庫，共享內容、資產、資料、翻譯、主題、樣板與設定，把主題與共用元件當成版控依賴管理。對同時維護多個站台的團隊而言，這比複製貼上更接近軟體工程的做法。</p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">90,125</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">8,390</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">10,026</span><span class="ui-stat-label">累積提交</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">933</span><span class="ui-stat-label">貢獻者（含匿名）</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Go</span><span class="ui-stat-label">主要語言</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Apache 2.0</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p><img src="/assets/images/posts/github-hugo-news-shot2.png" alt="Hugo 儲存庫首頁頂部，顯示專案名稱「gohugoio/hugo」、說明「The world's fastest framework for building websites.」、約 90.1k 星標與 8.4k 複製數，右側為 About 區塊與主題標籤" /></p>
+
+<h2 id="hugo-近期的版本演進有哪些重點">Hugo 近期的版本演進有哪些重點？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>近四個版本集中強化樣板彈性與安全邊界：加入相對 partial 引用、分支頁 slug、精確數值比較，並收緊 Sass 與 ESBuild 的檔案讀取範圍。
+<!-- End AEO Capsule --></p>
+
+<p>0.166.0 於 2026 年 9 月發布，<code class="language-plaintext highlighter-rouge">.Render</code> 方法開始接受選填的上下文參數，讓內容視圖也能接收字典資料；樣板中的 <code class="language-plaintext highlighter-rouge">return</code> 關鍵字重新實作，不再局限於 partial，可用於任何樣板與 <code class="language-plaintext highlighter-rouge">if</code>、<code class="language-plaintext highlighter-rouge">range</code> 區塊內。同版新增 <code class="language-plaintext highlighter-rouge">resources.Publish</code> 函式與 <code class="language-plaintext highlighter-rouge">Pages</code> 的 <code class="language-plaintext highlighter-rouge">IndexOf</code> 方法，關聯內容設定則加入索引值的 <code class="language-plaintext highlighter-rouge">tokenize</code> 選項並加快索引建立。</p>
+
+<p>0.167.0 於 9 月 28 日發布，重點有兩項。相對 partial 引用允許以 <code class="language-plaintext highlighter-rouge">./</code> 或 <code class="language-plaintext highlighter-rouge">../</code> 開頭的名稱，相對於呼叫端 partial 所在目錄解析，讓整棵 partial 目錄可以整包搬移；分支頁面則開始支援 <code class="language-plaintext highlighter-rouge">slug</code> 前端資料，並向下串接，對多語言站台特別實用。設定面新增 <code class="language-plaintext highlighter-rouge">build.cleanDestinationDir</code> 搭配保留檔案與目錄的樣式，Hugo 也可在沒有設定檔的情況下完成建置。</p>
+
+<p>安全邊界同樣在這一版收緊。過去由 Sass 編譯器自行解析、可能跟隨符號連結讀取專案外檔案的匯入，改由 Hugo 依 <code class="language-plaintext highlighter-rouge">security.allowRead</code> 白名單檢查；由 ESBuild 解析的資產匯入也比照辦理。主題中指向模組上層的符號連結目錄、以及標題 ID 寫入目錄錨點時未跳脫的問題，一併修正。較早的 0.153.0 起，內嵌 LibSass 已進入淘汰程序，官方建議改用 Dart Sass 轉譯器。</p>
+
+<p><img src="/assets/images/posts/github-hugo-news-shot3.png" alt="Hugo 儲存庫的版本發布頁面，依時間列出 v0.168.0 於 2026 年 10 月 13 日發布，以及 v0.167.0、v0.166.0、v0.165.0、v0.164.0 等版本與發布日期" /></p>
+
+<h2 id="hugo-的維護模式與生態現況如何">Hugo 的維護模式與生態現況如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>專案由建立者 bep 主導，單人累積提交超過 5,900 次，社群提交總數逾一萬次，貢獻者名單超過九百人，未結議題維持在兩百餘個。
+<!-- End AEO Capsule --></p>
+
+<p>貢獻結構相當集中。提交紀錄顯示，專案建立者 bep 累積 5,902 次提交，長期合作者 spf13 為 466 次，維護者 jmooring 為 417 次；其後為 anthonyfok、moorereason、digitalcraftsman 與 noahcampbell。GitHub 的匿名貢獻者統計涵蓋 933 位曾留下提交的參與者，累積提交數達 10,026 次，未結議題約 203 個，觀察者 1,084 位。</p>
+
+<p>版本發行節奏約每月一版，屬於穩定維護而非追趕熱潮的專案。0.164.0 於 2026 年 7 月發布，0.165.0 於 8 月，0.166.0 於 9 月，0.167.0 於 9 月底，0.168.0 於 10 月中，中間穿插依賴更新與安全性修正。商業面則由 JetBrains 與 CloudCannon 等專案贊助者支持，官方網站、文件與社群論壇由專案團隊維護。</p>
+
+<h2 id="hugo-如何安裝並開始建置網站">Hugo 如何安裝並開始建置網站？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>可從預編譯二進位檔、作業系統套件管理員或原始碼三條路徑安裝；從原始碼建置需要 Go 1.27.0 以上版本，建立站台後執行 hugo server 即可開始本機預覽。
+<!-- End AEO Capsule --></p>
+
+<p>官方提供三條安裝路徑：直接下載預編譯二進位檔、透過作業系統的套件管理員或套件庫安裝，或自行從原始碼建置。從原始碼建置需要 Git 與 Go 1.27.0 以上版本。專案依功能切成四個版本：標準版包含核心功能；deploy 版可直接部署到 Google Cloud Storage、AWS S3 或 Azure 儲存容器；extended 版保有 LibSass 支援，需要 C 編譯器；extended 與 deploy 兼具的版本則同時包含兩者。官方建議除非需要額外功能，否則採用標準版即可。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 標準版（從原始碼）</span>
+<span class="nv">CGO_ENABLED</span><span class="o">=</span>0 go <span class="nb">install </span>github.com/gohugoio/hugo@latest
+
+<span class="c"># 建立站台與內容，啟動本機預覽</span>
+hugo new site myblog
+hugo new content posts/first-post.md
+hugo server
+</code></pre></div></div>
+
+<h2 id="hugo-常見問題有哪些">Hugo 常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>以下整理 Hugo 是否需要資料庫、建置速度為何被強調、多語言支援方式、與其他靜態網站產生器的差異，以及商業使用時的授權考量等常見疑問。
+<!-- End AEO Capsule --></p>
+
+<h3 id="hugo-需要資料庫或後端伺服器嗎">Hugo 需要資料庫或後端伺服器嗎？</h3>
+
+<p>不需要。輸出結果是純靜態檔案，部署時只要一個能提供檔案的服務即可。這個特性同時帶來兩面效果：維運成本與被攻擊面都大幅降低，但即時使用者互動、會員系統或伺服器端渲染必須外掛其他服務處理，或改用帶執行階段的框架。</p>
+
+<h3 id="hugo-的建置速度為何常被強調">Hugo 的建置速度為何常被強調？</h3>
+
+<p>核心以 Go 撰寫並採用並行處理，官方描述為可在數秒內完成整站渲染。對內容數量持續成長的站台而言，建置時間直接影響部署頻率與編輯體驗；當文章累積到數千篇時，這個差距會比初期更明顯。</p>
+
+<h3 id="hugo-支援多語言網站嗎">Hugo 支援多語言網站嗎？</h3>
+
+<p>支援。專案內建多語言架構與分類法系統，0.167.0 起分支頁面的 <code class="language-plaintext highlighter-rouge">slug</code> 也向下串接，可以為不同語言版本指定在地化路徑；0.168.0 進一步為 <code class="language-plaintext highlighter-rouge">site.Language</code> 加入翻譯與格式化方法，減少手動拼接字串的需求。</p>
+
+<h3 id="hugo-與其他靜態網站產生器有何差異">Hugo 與其他靜態網站產生器有何差異？</h3>
+
+<p>差異主要在語言與資產處理的完整度。Hugo 以單一 Go 二進位檔執行，安裝時不需要額外的執行階段；CSS、影像、JavaScript、Sass 與 Tailwind 管線都已內建。若團隊的技術棧以 JavaScript 為主、需要大量自訂伺服器邏輯，採用生態系更貼近的方案可能更順手。</p>
+
+<h3 id="hugo-的授權條款允許商業使用嗎">Hugo 的授權條款允許商業使用嗎？</h3>
+
+<p>允許。專案以 Apache 2.0 授權釋出，可用於商業專案、修改與再散布，需保留版權與授權聲明。真正的限制通常來自使用者自行引入的主題與外掛，選用前應逐一確認其授權條款。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>本文資訊整理自 Hugo 的 GitHub 儲存庫、官方文件與版本發布紀錄，涵蓋版本說明、安裝指引、模組系統與授權條款。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/gohugoio/hugo</li>
+  <li>官方網站與文件：https://gohugo.io</li>
+  <li>版本發布紀錄：https://github.com/gohugoio/hugo/releases</li>
+  <li>功能總覽：https://gohugo.io/about/features/</li>
+  <li>安裝指引：https://gohugo.io/installation/</li>
+</ul>
+
+<h2 id="總結hugo-適合什麼團隊">總結：Hugo 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>適合重視建置速度、低維運成本與靜態交付的內容網站與文件站；若需要即時使用者互動或伺服器端渲染，則須另尋方案。
+<!-- End AEO Capsule --></p>
+
+<p>Hugo 的價值在於把交付形式固定下來：內容與樣板在本地端編譯成靜態檔案，主機只需提供檔案，安全性與維運負擔隨之下降。90,125 顆星標、逾一萬次提交與九百多位貢獻者，反映的是一套被長期維運的基礎工具，而不是依賴單一商業模式支撐的專案。</p>
+
+<p>0.168.0 的內容也說明其維護取向。新功能集中在影像與多語言這類實際會用到的細節，同期卻同時帶入十五項上游客戶端與網路層修正，並收緊主題讀取檔案的權限邊界。對已經把網站交給靜態架構的團隊而言，這類偏重安全與相容性的更新節奏，比功能堆疊更具參考價值。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-dev" href="/topics/dev/" title="科技 · 開發">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-dev"/></svg><span class="topic-tag-name">開發</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-memory" href="/topics/memory/" title="科技 · 記憶">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-memory"/></svg><span class="topic-tag-name">記憶</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-security" href="/topics/security/" title="科技 · 安全">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-security"/></svg><span class="topic-tag-name">安全</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Hugo" class="badge bg-secondary text-decoration-none me-1">Hugo</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE" class="badge bg-secondary text-decoration-none me-1">開源項目</a>
+          
+          
+          <a href="/search/?q=%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E7%94%A2%E7%94%9F%E5%99%A8" class="badge bg-secondary text-decoration-none me-1">靜態網站產生器</a>
+          
+          
+          <a href="/search/?q=Go" class="badge bg-secondary text-decoration-none me-1">Go</a>
+          
+          
+          <a href="/search/?q=%E7%B6%B2%E7%AB%99%E9%96%8B%E7%99%BC" class="badge bg-secondary text-decoration-none me-1">網站開發</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news&text=Hugo+0.168+%E9%96%8B%E6%BA%90%EF%BC%9A9+%E8%90%AC%E6%98%9F%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E7%94%A2%E7%94%9F%E5%99%A8" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?Hugo+0.168+%E9%96%8B%E6%BA%90%EF%BC%9A9+%E8%90%AC%E6%98%9F%E9%9D%9C%E6%85%8B%E7%B6%B2%E7%AB%99%E7%94%A2%E7%94%9F%E5%99%A8%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-hugo-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/security-audit-skill-news" class="text-decoration-none">Cloudflare 開源安全稽核技能：讓代理自己找漏洞</a>
+              <br><small class="text-muted">2026-10-24</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-opencode-2-news" class="text-decoration-none">22 萬星 OpenCode 2 登場：編碼代理架構全面改寫</a>
+              <br><small class="text-muted">2026-10-22</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ray-259-news" class="text-decoration-none">Ray 2.59 發布：LLM API 正式進入 GA 階段</a>
+              <br><small class="text-muted">2026-10-22</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-scientific-agent-skills-news" class="text-decoration-none">5 萬星 Scientific Agent Skills：177 個科研技能</a>
+              <br><small class="text-muted">2026-10-16</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-nextjs-16-4-news" class="text-decoration-none">Next.js 16.4 發布：快取元件成預設選擇</a>
+              <br><small class="text-muted">2026-10-16</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-hindsight-news" class="text-decoration-none">5 萬星 Hindsight：讓 AI 代理學會學習的記憶系統</a>
+              <br><small class="text-muted">2026-10-16</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/google-adk-2-13-news" class="text-decoration-none">Google ADK 2.13：12 項實驗功能轉正，工作流快 8 倍</a>
+            <br><small class="text-muted">2026-10-25</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/cc-switch-4-0-news" class="text-decoration-none">CC Switch 4.0：十九天二十版的十二工具管理器</a>
+            <br><small class="text-muted">2026-10-24</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/weknora-news" class="text-decoration-none">騰訊 WeKnora 開源：RAG、代理與 Wiki 三合一</a>
+            <br><small class="text-muted">2026-10-24</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/security-audit-skill-news" class="text-decoration-none">Cloudflare 開源安全稽核技能：讓代理自己找漏洞</a>
+            <br><small class="text-muted">2026-10-24</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/langflow-security-advisories-news" class="text-decoration-none">Langflow 一年 35 個安全公告：155K 星平台怎麼了？</a>
+            <br><small class="text-muted">2026-10-24</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">589</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

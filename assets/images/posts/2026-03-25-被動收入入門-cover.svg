@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 封面圖 1：被動收入入門 -->
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d"/>
+      <stop offset="100%" style="stop-color:#2c5282"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  
+  <!-- 頂部金色條 -->
+  <rect width="1200" height="8" fill="#ffd700"/>
+  
+  <!-- 左側裝飾線 -->
+  <rect x="60" y="200" width="8" height="230" rx="4" fill="#ffd700"/>
+  
+  <!-- 裝飾圓形 -->
+  <circle cx="1100" cy="100" r="200" fill="#ffd700" opacity="0.1"/>
+  <circle cx="1050" cy="550" r="150" fill="#ffd700" opacity="0.08"/>
+  
+  <!-- 分類標籤 -->
+  <text x="100" y="195" font-family="sans-serif" font-size="24" font-weight="600" fill="#ffd700">#投資理財</text>
+  
+  <!-- 標題 -->
+  <text x="100" y="300" font-family="sans-serif" font-size="52" font-weight="700" fill="#ffffff">被動收入入門</text>
+  
+  <!-- 副標題 -->
+  <text x="100" y="360" font-family="sans-serif" font-size="28" fill="#a0aec0">從零開始建立你的第一個收入來源</text>
+  
+  <!-- 底部區域 -->
+  <rect y="570" width="1200" height="60" fill="rgba(0,0,0,0.3)"/>
+  <text x="100" y="608" font-family="sans-serif" font-size="18" fill="#e2e8f0">Sun ny 的部落格</text>
+</svg>

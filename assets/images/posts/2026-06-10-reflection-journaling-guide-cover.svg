@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1F3D"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#E8C86A"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E3A5F"/>
+      <stop offset="100%" style="stop-color:#152B4A"/>
+    </linearGradient>
+    <linearGradient id="cardAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#E8C86A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- 柔和光點 -->
+  <circle cx="100" cy="50" r="2" fill="white" opacity="0.15"/>
+  <circle cx="350" cy="40" r="1.5" fill="white" opacity="0.1"/>
+  <circle cx="600" cy="60" r="2" fill="white" opacity="0.12"/>
+  <circle cx="720" cy="35" r="1" fill="white" opacity="0.08"/>
+  <circle cx="200" cy="80" r="1.2" fill="white" opacity="0.1"/>
+  <circle cx="500" cy="75" r="1.5" fill="white" opacity="0.12"/>
+
+  <!-- 頂線 -->
+  <rect x="30" y="140" width="440" height="4" rx="2" fill="url(#gold)" opacity="0.6"/>
+
+  <!-- 標題 -->
+  <text x="35" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700" fill="url(#gold)">
+    用 Journaling 梳理內心
+  </text>
+  <text x="35" y="225" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="600" fill="white">
+    反思日記習慣
+  </text>
+  <text x="35" y="258" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#A0B4D0">
+    每日 5 分鐘，提升自我覺察同心理健康
+  </text>
+
+  <!-- 裝飾線 -->
+  <rect x="30" y="278" width="300" height="2" rx="1" fill="url(#gold)" opacity="0.3"/>
+
+  <!-- 日記本 icon（中央右側裝飾） -->
+  <rect x="590" y="155" width="100" height="120" rx="6" fill="#1E3A5F" stroke="#FB923C" stroke-width="1.5" opacity="0.8"/>
+  <rect x="595" y="160" width="90" height="110" rx="4" fill="#2C4A6E" opacity="0.6"/>
+  <line x1="605" y1="180" x2="675" y2="180" stroke="#FB923C" stroke-width="1.5" opacity="0.5"/>
+  <line x1="605" y1="195" x2="655" y2="195" stroke="#FB923C" stroke-width="1" opacity="0.35"/>
+  <line x1="605" y1="210" x2="670" y2="210" stroke="#FB923C" stroke-width="1" opacity="0.35"/>
+  <line x1="605" y1="225" x2="640" y2="225" stroke="#FB923C" stroke-width="1" opacity="0.35"/>
+  <line x1="605" y1="240" x2="665" y2="240" stroke="#FB923C" stroke-width="1" opacity="0.35"/>
+  <!-- 筆 -->
+  <line x1="695" y1="165" x2="710" y2="210" stroke="#D4953A" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="712" cy="215" r="4" fill="#FB923C" opacity="0.7"/>
+
+  <!-- 4 張資訊卡 -->
+  <!-- Card 1: Morning Pages -->
+  <rect x="30" y="295" width="170" height="135" rx="10" fill="url(#card1)" stroke="#3A6FA0" stroke-width="1" opacity="0.95"/>
+  <text x="48" y="322" font-family="system-ui" font-size="22">🌅</text>
+  <text x="48" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">晨間書寫</text>
+  <text x="48" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">起身寫 3 頁自由流</text>
+  <text x="48" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">清空大腦垃圾</text>
+  <text x="48" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">喚醒創造力</text>
+  <rect x="48" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Card 2: Evening Reflection -->
+  <rect x="215" y="295" width="170" height="135" rx="10" fill="url(#card1)" stroke="#3A6FA0" stroke-width="1" opacity="0.95"/>
+  <text x="233" y="322" font-family="system-ui" font-size="22">🌙</text>
+  <text x="233" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">晚間回顧</text>
+  <text x="233" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">今日 3 件好事</text>
+  <text x="233" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">學到嘅教訓</text>
+  <text x="233" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">聽日優先事項</text>
+  <rect x="233" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Card 3: Prompt Templates -->
+  <rect x="400" y="295" width="170" height="135" rx="10" fill="url(#card1)" stroke="#3A6FA0" stroke-width="1" opacity="0.95"/>
+  <text x="418" y="322" font-family="system-ui" font-size="22">📝</text>
+  <text x="418" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">引導提問</text>
+  <text x="418" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">我今日感覺點解？</text>
+  <text x="418" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">咩事觸發咗我？</text>
+  <text x="418" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">我可以點樣做得更好？</text>
+  <rect x="418" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Card 4: Progress Tracker -->
+  <rect x="585" y="295" width="185" height="135" rx="10" fill="url(#card1)" stroke="#3A6FA0" stroke-width="1" opacity="0.95"/>
+  <text x="603" y="322" font-family="system-ui" font-size="22">📊</text>
+  <text x="603" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">習慣追蹤</text>
+  <text x="603" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Week 1：每日 2 分鐘</text>
+  <text x="603" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Week 2：加入 prompts</text>
+  <text x="603" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Week 4：自成習慣</text>
+  <rect x="603" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- 底部標示 -->
+  <text x="35" y="440" font-family="system-ui" font-size="9" fill="#4A6A8A">esgov.org | 生活類</text>
+</svg>

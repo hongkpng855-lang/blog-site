@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a365d"/>
+      <stop offset="100%" style="stop-color:#2c5282"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#ffd700"/>
+  <rect x="50" y="80" width="8" height="230" fill="#ffd700" opacity="0.9"/>
+  <circle cx="1050" cy="150" r="120" fill="#ffd700" opacity="0.1"/>
+  <circle cx="1100" cy="480" r="150" fill="#ffd700" opacity="0.08"/>
+  <text x="100" y="200" font-family="Arial, sans-serif" font-size="18" fill="#ffd700" font-weight="bold">#投資</text>
+  <text x="100" y="280" font-family="Arial, sans-serif" font-size="48" fill="#ffffff" font-weight="bold">資產配置入門</text>
+  <text x="100" y="340" font-family="Arial, sans-serif" font-size="32" fill="#e2e8f0">建立你的投資組合</text>
+  <rect x="100" y="380" width="200" height="3" fill="#ffd700" opacity="0.6"/>
+  <text x="100" y="450" font-family="Arial, sans-serif" font-size="16" fill="#a0aec0">分散風險 • 找到適合自己的配置比例</text>
+  <rect x="0" y="570" width="1200" height="60" fill="#0d2137"/>
+  <text x="100" y="608" font-family="Arial, sans-serif" font-size="18" fill="#718096">hongkpng855-lang.github.io/blog</text>
+</svg>

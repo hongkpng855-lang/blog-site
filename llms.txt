@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/profile.php?id=1247126168485543
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（1990 篇中的最新 30 篇）
+- [Google ADK 2.13：12 項實驗功能轉正，工作流快 8 倍](https://anthroskill.com/技術/google-adk-2-13-news)：Google 於 2026 年 10 月 23 日發布 Agent Development Kit 2.13.0，把 12 項實驗功能轉為正式，字串模型代理執行回合提速最多 8 倍。此版新增分類器節點、即時語音插話與 M
+- [CC Switch 4.0：十九天二十版的十二工具管理器](https://anthroskill.com/技術/cc-switch-4-0-news)：CC Switch 4.0 於 2026 年 10 月 4 日發布，十九天內推進至 v4.0.19，支援十二款 AI 編程工具的供應商切換。專案累積 148,111 顆星標與約 2,163 萬次下載，4.0 版把配置寫入
+- [Claude 為 123 個開源庫寫出零崩潰證明](https://anthroskill.com/技術/claude-formal-verification-news)：Anthropic 與 Theorem 合作，以 Claude 為 123 個開源程式庫、239 個 OSS-Fuzz 進入點產生形式化證明，合計約一億八千萬行 Rocq 證明碼，證明程式在六十四 MB 以內輸入下不會崩
+- [Dify 1.18：代理自行選路，應用打包成單一檔案](https://anthroskill.com/技術/dify-1-18-agent-routing-news)：Dify 於 2026 年 10 月 23 日發布 1.18.0，讓代理在流程中自行選擇輸出路由，並把應用連同代理、技能與檔案打包成單一 .ifpkg 套件。此版加入巢狀工作流逐階追蹤、Agent 知識庫 Beta 與 
+- [Langflow 一年 35 個安全公告：155K 星平台怎麼了？](https://anthroskill.com/技術/langflow-security-advisories-news)：Langflow 在 GitHub 累積 155,921 顆星，是視覺化 AI Agent 工作流平台的代表項目。過去十二個月，該專案發布 35 份安全公告，其中 16 份屬嚴重等級，涵蓋 MCP 通道遠端執行、公開流程
+- [Cloudflare 開源安全稽核技能：讓代理自己找漏洞](https://anthroskill.com/技術/security-audit-skill-news)：Cloudflare 將內部漏洞探索系統的起點版本開源為 security-audit 技能，GitHub 星標三萬九千餘顆。它以六階段流程把通用寫碼代理改造成安全稽核員：偵察、覆蓋導向搜尋、對抗式驗證、結構化輸出、獨立
+- [騰訊 WeKnora 開源：RAG、代理與 Wiki 三合一](https://anthroskill.com/技術/weknora-news)：騰訊開源的 WeKnora 以三萬五千餘顆星標成為企業知識平台焦點，同一套知識庫同時提供 RAG 問答、代理推理與自動 Wiki 三種模式，支援 29 家模型供應商、8 種向量資料庫與 10 餘種 IM 頻道。本文拆解其
+- [Claude Duet 發布：主動式代理接手日常雜務](https://anthroskill.com/技術/claude-duet-news)：Anthropic 於二零二六年十月二十一日開放 Claude Duet 研究預覽，這款以 Opus 5.5 為核心的主動式代理會在每天早上送上簡報，代為處理日程、帳務與文件草稿，並在發送訊息、付款或簽署前等待批准。本文
+- [OmniRoute 開源：一個端點打通 375 個 AI 供應商](https://anthroskill.com/技術/github-omniroute-news)：OmniRoute 是採 MIT 授權的開源 AI 閘道，以單一端點接上 375 個供應商、1,475 個模型識別碼，內建 20 種路由策略、三層容錯與 12 引擎權杖壓縮。本文拆解其架構、免費額度數字的正確讀法、與 L
+- [MPF 退休決策指南：整合、配置與 TVC 節稅](https://anthroskill.com/投資/mpf-retirement-decision-guide/)：把退休規劃、強積金帳戶整合、基金配置與可扣稅自願性供款整合成一條決策路徑，取代過去分散的三篇舊文。以月入三萬、距離退休三十年的在職人士為基準案例，先計出退休缺口，再依次決定供款金額、基金類型與節稅配置，附年齡股債配置表、
+- [OpenAI Symphony 開源：把代碼代理變成排程系統](https://anthroskill.com/技術/openai-symphony-news)：OpenAI 於 2026 年 2 月開源 Symphony，以 2,312 行規格書定義一套語言無關的代理排程服務，將 Linear、GitHub Issues、Jira 等工單轉為隔離工作區內的自動執行單元。本文拆解
+- [PageIndex 開源：捨棄向量資料庫的推理式檢索](https://anthroskill.com/技術/pageindex-news)：VectifyAI 開源的 PageIndex 以階層樹狀索引取代向量資料庫，讓語言模型沿目錄推理定位章節，在 FinanceBench 取得 98.7% 準確率，索引成本約每頁 0.001 美元。本文拆解兩段式檢索架構
+- [FastMCP 4 正式版：28k 星 MCP 框架轉向新協議](https://anthroskill.com/技術/fastmcp-4-news)：FastMCP 4 於 2026 年 8 月 31 日發布，是首個建構在 MCP 2026-07-28 協議與 Python SDK v2 之上的版本。本文整理無狀態請求、協議版本協商、互動式工具與背景任務等架構變化，並
+- [Diffusers 0.41 發布：Qwen-Image 2.1 進駐影像管線](https://anthroskill.com/技術/github-diffusers-041-news)：Hugging Face 於 2026 年 10 月 6 日發布 Diffusers 0.41.0，把 Qwen-Image 2.1 納入官方管線，支援多參考圖編輯、原生透明通道與 LoRA 訓練，並改用以新模型整合為核
+- [22 萬星 OpenCode 2 登場：編碼代理架構全面改寫](https://anthroskill.com/技術/github-opencode-2-news)：OpenCode 2 於 2026 年 9 月 11 日推出，GitHub 星標增至 219,545 顆。本文整理 V2 的三大破壞性變更、新的插件與伺服器 API、終端體驗改動，以及 Zen 與 Go 訂閱的商業模式，
+- [Ray 2.59 發布：LLM API 正式進入 GA 階段](https://anthroskill.com/技術/github-ray-259-news)：Ray 2.59 於 2026 年 10 月 2 日發布，Ray Data 與 Ray Serve 的 LLM API 正式進入 GA，並升級至 vLLM 0.27.0。本文整理外部 shuffle、預設權杖認證、429
+- [Transformers 5.20：七款新模型與統一量化匯出](https://anthroskill.com/技術/github-transformers-520-news)：Hugging Face Transformers 於 2026 年 10 月 15 日發布 5.20.0 版，一次接入 Muse Spark Open、Ling 3.0 Flash、MiniCPM-V 4.7、Unli
+- [OpenAI 開源 Codex Security：1.1 萬星的漏洞掃描](https://anthroskill.com/技術/openai-codex-security-news)：OpenAI 於 2026 年 7 月開源 Codex Security，這個以 TypeScript 撰寫的 CLI 與 SDK 累積 11,163 顆星標，可掃描儲存庫與 Git 差異、驗證候選漏洞、產生修補並匯出 
+- [OpenAI 開放 GPT-Rosalind：學術實驗室免費用](https://anthroskill.com/技術/openai-rosalind-academic-plan-news)：OpenAI 於二零二六年十月十五日推出 Rosalind 學術方案，讓符合資格的美國大學實驗室免費使用生命科學專用模型 GPT-Rosalind 與 Rosalind 工作台，每間實驗室可獲最多三十個席位、為期最長十二
+- [Mistral 發布 Voxtral 3：語音代理 SDK 進軍 50 種語言](https://anthroskill.com/技術/voxtral-3-voice-agent-news)：Mistral 於 2026 年 10 月 20 日發布 Voxtral 3，包含 50 種語言的轉錄模型、支援 35 種語言與 50 種方言的語音合成模型，以及建構於 LiveKit 的語音代理 SDK。本文整理基準表
+- [Gemini CLI 十萬星之後：Antigravity CLI 接棒](https://anthroskill.com/技術/gemini-cli-antigravity-transition-news)：Gemini CLI 累積 10.7 萬星標、701 位貢獻者，卻在 2026 年 6 月 18 日起停止為個人與 Pro 用戶提供服務，由 Go 編寫的 Antigravity CLI 接手。本文整理官方時間表、技術改
+- [MarkText 回歸：6.2 萬星編輯器支援 GitHub Alerts](https://anthroskill.com/技術/github-marktext-v022-news)：沉寂近四年的 Markdown 編輯器 MarkText 於 2026 年 10 月 18 日發布 v0.22.0，新增 GitHub Alerts 五種提示區塊，並完成編輯器核心 Muya 的 TypeScript 重
+- [Obsidian 技能庫開源：49K 星的六大 AI Skill](https://anthroskill.com/技術/github-obsidian-skills-news)：Obsidian 團隊成員 Steph Ango 開源的 obsidian-skills 已累積 49,807 星，六個遵循 Agent Skills 規範的技能讓 Claude Code、Codex 與 OpenCod
+- [Traefik 6.5 萬星：NGINX Ingress 退場後的接管方案](https://anthroskill.com/技術/github-traefik-nginx-migration-news)：Traefik 累積 65,293 顆星標，3.7 系列新增 Kubernetes Ingress NGINX 提供者，直接翻譯 nginx.ingress.kubernetes.io 註解，既有 Ingress 無需改
+- [Jev Ultrafast：2.3 萬星瀏覽器代理 7 秒完成搜尋](https://anthroskill.com/技術/jev-ultrafast-browser-agent-news)：Browser Use 於 2026 年 9 月開源的 jev-ultrafast 累積 23,328 顆星標，以 TypeSafe 的決策模型取代逐步呼叫大型語言模型，把 Google Flights 搜尋任務從 9.
+- [Qwen Code 開源：28k 星終端編碼代理對標 Claude Code](https://anthroskill.com/技術/qwen-code-news)：阿里雲 qwen-code 累積 28,624 顆星標，以終端編碼代理對標 Claude Code，並補上多協定支援、Daemon 模式與 IM 頻道整合。本文整理 SWE-bench Verified 成績 76.40
+- [RAGFlow 1.0 以 Go 重寫：9.2 萬星引擎瘦身](https://anthroskill.com/技術/ragflow-v1-go-rewrite-news)：RAGFlow 於 2026 年 9 月底發布 v1.0.0-rc1，以 Go 全面重寫核心，訊息佇列改採 NATS、快取與檢查點改由 Kvrocks 承載，取代原本重量級部署架構。10 月 16 日的 rc2 補上代理
+- [TorchNeuron 開源：PyTorch 一行改動跑上 Trainium](https://anthroskill.com/技術/torchneuron-trainium-news)：AWS 於 2026 年 10 月 19 日發布 TorchNeuron，這是 Trainium 晶片的原生 PyTorch 後端，開發者把模型指向 neuron 裝置，既有程式即可在 Trainium 上訓練與推論。專
+- [Google 開源 TorchTPU：PyTorch 原生跑上 TPU](https://anthroskill.com/技術/torchtpu-news)：Google 於 2026 年 4 月開源 TorchTPU，讓 PyTorch 模型以原生方式在 TPU 上執行。專案以 PrivateUse1 介面實作，提供三種 Eager 模式、跨主機編譯快取、Dynamo 轉 
+- [uv 0.13.4 緊急修補：emSign 根憑證全面撤除](https://anthroskill.com/技術/uv-013-emsign-ca-news)：uv 於 2026 年 10 月 20 日發布 0.13.4，緊急撤除內建憑證包中的 emSign ECC Root CA G3，因其中繼憑證私鑰已外洩。本文整理事件範圍、受影響套件、0.13 系列的破壞性變更與升級驗證
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 1990 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan

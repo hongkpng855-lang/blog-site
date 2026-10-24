@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0B1926"/>
+      <stop offset="100%" style="stop-color:#1B2A4A"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#FB923C;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E3A5F;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#152A45;stop-opacity:0.9"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4B96A"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="24"/>
+  <!-- Subtle decorative circles -->
+  <circle cx="400" cy="100" r="120" fill="url(#glow)"/>
+  <circle cx="100" cy="400" r="80" fill="url(#glow)"/>
+
+  <!-- Title -->
+  <text x="256" y="65" font-family="system-ui,sans-serif" font-size="22" font-weight="900" fill="#FB923C" text-anchor="middle" letter-spacing="1">營養補充品</text>
+  <text x="256" y="92" font-family="system-ui,sans-serif" font-size="15" fill="#E8D5A3" text-anchor="middle" letter-spacing="0.5">終極指南</text>
+
+  <!-- Supplement icon grid - 4 cards -->
+  <!-- Card 1: Vitamin D -->
+  <rect x="30" y="115" width="210" height="80" rx="12" fill="url(#card1)" stroke="#2A4A6A" stroke-width="1"/>
+  <circle cx="62" cy="155" r="20" fill="#FB923C" opacity="0.2"/>
+  <text x="62" y="162" font-family="system-ui,sans-serif" font-size="22" text-anchor="middle" fill="#FB923C">☀️</text>
+  <text x="95" y="148" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#FB923C">維他命D</text>
+  <text x="95" y="168" font-family="system-ui,sans-serif" font-size="11" fill="#8899B0">D3 2000 IU 每日基礎</text>
+  <text x="95" y="183" font-family="system-ui,sans-serif" font-size="10" fill="#5A7A9A">68% 港人不足 ⚠️</text>
+
+  <!-- Card 2: Omega-3 -->
+  <rect x="270" y="115" width="210" height="80" rx="12" fill="url(#card1)" stroke="#2A4A6A" stroke-width="1"/>
+  <circle cx="302" cy="155" r="20" fill="#4A8A6A" opacity="0.2"/>
+  <text x="302" y="162" font-family="system-ui,sans-serif" font-size="22" text-anchor="middle" fill="#6ABA8A">🐟</text>
+  <text x="335" y="148" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#6ABA8A">奧米加3</text>
+  <text x="335" y="168" font-family="system-ui,sans-serif" font-size="11" fill="#8899B0">EPA+DHA ≥1000mg</text>
+  <text x="335" y="183" font-family="system-ui,sans-serif" font-size="10" fill="#5A7A9A">心臟+腦部+抗炎</text>
+
+  <!-- Card 3: Magnesium -->
+  <rect x="30" y="210" width="210" height="80" rx="12" fill="url(#card1)" stroke="#2A4A6A" stroke-width="1"/>
+  <circle cx="62" cy="250" r="20" fill="#8A5AAA" opacity="0.2"/>
+  <text x="62" y="257" font-family="system-ui,sans-serif" font-size="22" text-anchor="middle" fill="#BA8ADA">🧘</text>
+  <text x="95" y="243" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#BA8ADA">鎂</text>
+  <text x="95" y="263" font-family="system-ui,sans-serif" font-size="11" fill="#8899B0">放鬆神經+改善睡眠</text>
+  <text x="95" y="278" font-family="system-ui,sans-serif" font-size="10" fill="#5A7A9A">壓力大必備</text>
+
+  <!-- Card 4: Probiotics -->
+  <rect x="270" y="210" width="210" height="80" rx="12" fill="url(#card1)" stroke="#2A4A6A" stroke-width="1"/>
+  <circle cx="302" cy="250" r="20" fill="#AA5A3A" opacity="0.2"/>
+  <text x="302" y="257" font-family="system-ui,sans-serif" font-size="22" text-anchor="middle" fill="#DA8A5A">🦠</text>
+  <text x="335" y="243" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#DA8A5A">益生菌</text>
+  <text x="335" y="263" font-family="system-ui,sans-serif" font-size="11" fill="#8899B0">揀菌種唔係品牌</text>
+  <text x="335" y="278" font-family="system-ui,sans-serif" font-size="10" fill="#5A7A9A">IBS/抗生素後</text>
+
+  <!-- Bottom section: tips -->
+  <rect x="30" y="310" width="450" height="50" rx="10" fill="#FB923C" opacity="0.1" stroke="#FB923C" stroke-width="0.5"/>
+  <text x="256" y="332" font-family="system-ui,sans-serif" font-size="13" font-weight="700" fill="#FB923C" text-anchor="middle">💡 黃金法則：先驗血 → 後補充 → 揀單方 → 計 cost per serve</text>
+  <text x="256" y="350" font-family="system-ui,sans-serif" font-size="11" fill="#8899B0" text-anchor="middle">唔好俾 marketing 牽住鼻子走</text>
+
+  <!-- Warning note -->
+  <text x="256" y="385" font-family="system-ui,sans-serif" font-size="10" fill="#5A7A9A" text-anchor="middle">⚠️ 唔係越貴越好 • 唔係越多越好 • 天然唔一定好過合成</text>
+
+  <!-- Bottom money saver -->
+  <rect x="60" y="405" width="390" height="70" rx="14" fill="url(#gold)" opacity="0.9"/>
+  <text x="256" y="432" font-family="system-ui,sans-serif" font-size="14" font-weight="800" fill="#0B1926" text-anchor="middle">💰 每月低至 $50 就得</text>
+  <text x="256" y="452" font-family="system-ui,sans-serif" font-size="12" font-weight="600" fill="#1B2A4A" text-anchor="middle">入門：D3  |  標準：D3+魚油  |  進階：D3+魚油+鎂</text>
+  <text x="256" y="468" font-family="system-ui,sans-serif" font-size="10" fill="#2A4A6A" text-anchor="middle">唔好嘥錢喺 miracle product 上面</text>
+</svg>

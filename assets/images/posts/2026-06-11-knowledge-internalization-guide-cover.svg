@@ -1,0 +1,192 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="40%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#152238"/>
+    </linearGradient>
+    <linearGradient id="gold-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FB923C" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="brain-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="green-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="neon-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#3b82f6" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#FB923C" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#22c55e" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="card-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.03"/>
+    </linearGradient>
+    <linearGradient id="blue-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="gold-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FB923C" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#FB923C" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="green-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22c55e" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22c55e" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="purple-card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#a855f7" stop-opacity="0.05"/>
+    </linearGradient>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow-pulse">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="850" cy="200" r="300" fill="url(#gold-glow)"/>
+  <circle cx="350" cy="420" r="250" fill="url(#green-glow)"/>
+  <circle cx="600" cy="200" r="220" fill="url(#brain-glow)"/>
+
+  <!-- Decorative grid lines -->
+  <g opacity="0.035" stroke="#FB923C" stroke-width="0.5">
+    <line x1="0" y1="90" x2="1200" y2="90"/><line x1="0" y1="180" x2="1200" y2="180"/>
+    <line x1="0" y1="270" x2="1200" y2="270"/><line x1="0" y1="360" x2="1200" y2="360"/>
+    <line x1="0" y1="450" x2="1200" y2="450"/><line x1="0" y1="540" x2="1200" y2="540"/>
+    <line x1="200" y1="0" x2="200" y2="630"/><line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/><line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- ===== Brain Outline (Center) ===== -->
+  <g transform="translate(600, 230)" opacity="0.12">
+    <!-- Brain left hemisphere -->
+    <path d="M -5,-60 Q -20,-65 -35,-55 Q -50,-45 -48,-30 Q -46,-15 -40,-5
+             Q -38,0 -40,8 Q -42,16 -38,25 Q -34,34 -28,38
+             Q -22,42 -15,40 Q -8,38 -5,32"
+          fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+    <!-- Brain right hemisphere -->
+    <path d="M 5,-60 Q 20,-65 35,-55 Q 50,-45 48,-30 Q 46,-15 40,-5
+             Q 38,0 40,8 Q 42,16 38,25 Q 34,34 28,38
+             Q 22,42 15,40 Q 8,38 5,32"
+          fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round"/>
+    <!-- Brain center line -->
+    <line x1="0" y1="-62" x2="0" y2="38" stroke="#3b82f6" stroke-width="1.5" opacity="0.5"/>
+    <!-- Neural connections -->
+    <circle cx="-25" cy="-35" r="2" fill="#3b82f6"/>
+    <circle cx="25" cy="-35" r="2" fill="#3b82f6"/>
+    <circle cx="-38" cy="-15" r="2" fill="#3b82f6"/>
+    <circle cx="38" cy="-15" r="2" fill="#3b82f6"/>
+    <circle cx="-30" cy="15" r="2" fill="#3b82f6"/>
+    <circle cx="30" cy="15" r="2" fill="#3b82f6"/>
+    <line x1="-25" y1="-35" x2="-38" y2="-15" stroke="#3b82f6" stroke-width="0.8" opacity="0.4"/>
+    <line x1="25" y1="-35" x2="38" y2="-15" stroke="#3b82f6" stroke-width="0.8" opacity="0.4"/>
+    <line x1="-38" y1="-15" x2="-30" y2="15" stroke="#3b82f6" stroke-width="0.8" opacity="0.4"/>
+    <line x1="38" y1="-15" x2="30" y2="15" stroke="#3b82f6" stroke-width="0.8" opacity="0.4"/>
+    <line x1="-25" y1="-35" x2="0" y2="-50" stroke="#3b82f6" stroke-width="0.5" opacity="0.3"/>
+    <line x1="25" y1="-35" x2="0" y2="-50" stroke="#3b82f6" stroke-width="0.5" opacity="0.3"/>
+  </g>
+
+  <!-- ===== Pipeline Diagram: Input → Process → Internalize ===== -->
+  <g transform="translate(600, 260)">
+    <!-- Input box -->
+    <rect x="-220" y="-15" width="110" height="36" rx="18" fill="#3b82f6" opacity="0.15" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="-165" y="9" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#3b82f6" font-weight="600">📥 輸入</text>
+
+    <!-- Arrow 1 -->
+    <text x="-95" y="8" font-family="system-ui, sans-serif" font-size="16" fill="#FB923C" opacity="0.5">→</text>
+
+    <!-- Process box -->
+    <rect x="-70" y="-15" width="120" height="36" rx="18" fill="#FB923C" opacity="0.12" stroke="#FB923C" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="-10" y="9" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#FB923C" font-weight="600">🧠 處理</text>
+
+    <!-- Arrow 2 -->
+    <text x="65" y="8" font-family="system-ui, sans-serif" font-size="16" fill="#FB923C" opacity="0.5">→</text>
+
+    <!-- Internalize box -->
+    <rect x="90" y="-15" width="140" height="36" rx="18" fill="#22c55e" opacity="0.12" stroke="#22c55e" stroke-width="1" stroke-opacity="0.4"/>
+    <text x="160" y="9" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#22c55e" font-weight="600">💡 內化</text>
+  </g>
+
+  <!-- ===== Main Title ===== -->
+  <text x="600" y="145" text-anchor="middle" font-family="system-ui, sans-serif" font-size="44" font-weight="900" fill="#FB923C" filter="url(#soft-glow)">
+    資訊消化與知識內化實戰指南
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="180" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" font-weight="400" fill="#a0b4d0">
+    告別「睇過=學過」· 將輸入轉為真正能力
+  </text>
+
+  <!-- ===== 4 Info Cards ===== -->
+
+  <!-- Card 1: 主動回憶（藍色） -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="410" width="260" height="145" rx="12" fill="url(#blue-card)" stroke="#3b82f6" stroke-width="1.2" stroke-opacity="0.5"/>
+    <text x="65" y="448" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#3b82f6">🔍 主動回憶</text>
+    <text x="65" y="478" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">合埋書，用自己話講返出嚟</text>
+    <text x="65" y="500" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">效果 = 被動閱讀 3-5x</text>
+    <text x="65" y="522" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">空白頁測試（Blank Page Test）</text>
+    <text x="65" y="544" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">需要適度困難（Desirable Difficulty）</text>
+  </g>
+
+  <!-- Card 2: 間隔重複（金色） -->
+  <g filter="url(#shadow)">
+    <rect x="320" y="410" width="260" height="145" rx="12" fill="url(#gold-card)" stroke="#FB923C" stroke-width="1" stroke-opacity="0.5"/>
+    <text x="345" y="448" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#FB923C">⏰ 間隔重複</text>
+    <text x="345" y="478" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Anki：最佳免費工具</text>
+    <text x="345" y="500" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">每日 10-20 張新卡片</text>
+    <text x="345" y="522" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Minimum Information Principle</text>
+    <text x="345" y="544" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">1 個月後保留率 80% vs 20%</text>
+  </g>
+
+  <!-- Card 3: 費曼技巧（綠色） -->
+  <g filter="url(#shadow)">
+    <rect x="600" y="410" width="260" height="145" rx="12" fill="url(#green-card)" stroke="#22c55e" stroke-width="1.2" stroke-opacity="0.5"/>
+    <text x="625" y="448" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#22c55e">🎓 費曼技巧</text>
+    <text x="625" y="478" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">解釋俾 12 歲細路聽</text>
+    <text x="625" y="500" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">解唔清楚 = 你未明</text>
+    <text x="625" y="522" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">簡單語言測試理解度</text>
+    <text x="625" y="544" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">教授他人 = 保留率 90%</text>
+  </g>
+
+  <!-- Card 4: 輸出強制（紫色） -->
+  <g filter="url(#shadow)">
+    <rect x="880" y="410" width="280" height="145" rx="12" fill="url(#purple-card)" stroke="#a855f7" stroke-width="1.2" stroke-opacity="0.5"/>
+    <text x="905" y="448" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#a855f7">📝 輸出強制</text>
+    <text x="905" y="478" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Level 1：寫 notes / summary</text>
+    <text x="905" y="500" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Level 2：寫短文 / thread</text>
+    <text x="905" y="522" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Level 3：教人 / 討論</text>
+    <text x="905" y="544" font-family="system-ui, sans-serif" font-size="13" fill="#8899bb">Level 4：建立系統 / 產品</text>
+  </g>
+
+  <!-- ===== Bottom accent line ===== -->
+  <rect x="0" y="578" width="1200" height="3" fill="url(#neon-line)"/>
+
+  <!-- ===== Bottom stats bar ===== -->
+  <g transform="translate(600, 598)">
+    <rect x="-420" y="-14" width="840" height="28" rx="14" fill="#ffffff" fill-opacity="0.06"/>
+    <text x="-390" y="6" font-family="system-ui, sans-serif" font-size="12" fill="#ff6b6b" font-weight="600">1 小時後忘記 56%</text>
+    <circle cx="-200" cy="0" r="2" fill="#FB923C" opacity="0.4"/>
+    <text x="-175" y="6" font-family="system-ui, sans-serif" font-size="12" fill="#3b82f6" font-weight="600">主動回憶 &gt; 被動 5x</text>
+    <circle cx="-25" cy="0" r="2" fill="#FB923C" opacity="0.4"/>
+    <text x="0" y="6" font-family="system-ui, sans-serif" font-size="12" fill="#22c55e" font-weight="600">教學保留率 90%</text>
+    <circle cx="175" cy="0" r="2" fill="#FB923C" opacity="0.4"/>
+    <text x="200" y="6" font-family="system-ui, sans-serif" font-size="12" fill="#FB923C" font-weight="600">30 日挑戰建立系統</text>
+  </g>
+</svg>

@@ -1,0 +1,1429 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://anthroskill.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://anthroskill.com/" rel="alternate" type="text/html" /><updated>2026-10-25T01:31:05+08:00</updated><id>https://anthroskill.com/feed.xml</id><title type="html">AnthroSkill 人類學｜由痛點到實測，日日更新</title><subtitle>由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</subtitle><author><name>Eric Chan</name></author><entry><title type="html">Google ADK 2.13：12 項實驗功能轉正，工作流快 8 倍</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/google-adk-2-13-news" rel="alternate" type="text/html" title="Google ADK 2.13：12 項實驗功能轉正，工作流快 8 倍" /><published>2026-10-25T00:04:39+08:00</published><updated>2026-10-25T00:04:39+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/google-adk-2-13-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/google-adk-2-13-news"><![CDATA[<p>Google 於二零二六年十月二十三日發布 Agent Development Kit 2.13.0，把十二項成熟的實驗功能轉為正式，並讓字串模型代理的執行回合提速最多八倍。此版同時引入分類器節點、即時語音插話與 MongoDB 工作階段服務，遙測預設則切換至 OpenTelemetry GenAI v2。</p>
+
+<p><img src="/assets/images/posts/google-adk-2-13-news-shot1.png" alt="Google ADK 儲存庫 README 開頭畫面，顯示 Agent Development Kit (ADK) 2.0 標題、Apache 授權與 PyPI 版本徽章，以及「開源、程式碼優先的 Python 框架，用於建構、評估與部署 AI 代理」的定位說明" /></p>
+
+<h2 id="google-adk-213-是什麼">Google ADK 2.13 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Google ADK 是開源的程式碼優先 Python 代理框架，二零二五年四月建立，採 Apache-2.0 授權。2.13.0 於二零二六年十月二十三日發布。
+<!-- End AEO Capsule --></p>
+
+<p>專案全名為 Agent Development Kit，儲存庫以 ADK 2.0 稱呼目前的架構。其定位是把軟體工程原則套用到代理開發，核心由兩個類別構成：<code class="language-plaintext highlighter-rouge">Agent</code> 定義模型、指令與工具，<code class="language-plaintext highlighter-rouge">Workflow</code> 以圖形邊界把多個代理與任務串成可預期的執行流程。這種分工讓開發者可以用節點描述分支、扇出與扇入、迴圈、重試、狀態管理與人工介入，而不必把控制邏輯寫散在提示詞裡。</p>
+
+<p>框架自稱模型無關、部署無關。雖然對 Gemini 系列做最佳化，實際可搭配其他模型供應商與第三方框架，並提供 Java、Kotlin、Go 與 TypeScript 的移植版本。部署路徑包含本機 Docker 容器、Cloud Run 與 Vertex AI Agent Engine，指令分別為 <code class="language-plaintext highlighter-rouge">adk deploy docker</code> 與 <code class="language-plaintext highlighter-rouge">adk deploy cloud_run</code>。</p>
+
+<p>使用規模已超出實驗階段。PyPI 套件 google-adk 近三十日下載一千零一十萬次，近七日二百三十一萬次，單日四十萬次。對一個 2025 年 4 月才建立的專案而言，這個下載量說明它已被放進實際的建置流程，而非僅停留在範例階段。</p>
+
+<h2 id="這次有哪些實驗功能轉為正式">這次有哪些實驗功能轉為正式？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>2.13.0 把十二項實驗階段功能升為正式，涵蓋工作流節點、工具確認與部署整合。清單集中在官方功能註冊表頁面，升級後不再觸發實驗警告。
+<!-- End AEO Capsule --></p>
+
+<p>版本說明把這一步列為首要亮點，措辭是穩定核心功能。ADK 過去一年採用「先以實驗旗號推出、再依使用回饋調整介面、最後轉正」的節奏，實驗狀態的功能會在執行時輸出警告，並可能在後續版本改變行為。十二項同時轉正意味著這批介面已定案，企業可以把它們納入長期維護的程式碼，不必每次升級都重新驗證。</p>
+
+<p>配套改動是警告抑制機制。環境變數 <code class="language-plaintext highlighter-rouge">ADK_SUPPRESS_EXPERIMENTAL_FEATURE_WARNINGS</code> 現在會被正確尊重，先前對應的問題編號為 5114。對於仍使用其他實驗功能的團隊，這條路徑讓日誌保持乾淨，同時保留選擇性啟用的能力。</p>
+
+<p>值得注意的是轉正清單的性質。工作流節點、工具確認流程與部署整合都屬於生產環境才會碰到的環節，而非單純的模型呼叫封裝。把這些環節定案，等於承認框架的主要使用者已從個人實驗轉向團隊維運。</p>
+
+<h2 id="八倍加速是怎麼做到的">八倍加速是怎麼做到的？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>官方量測顯示字串模型代理的執行回合提速最多八倍，並降低事件載入開銷。改動集中在事件處理路徑與工作流節點的工具執行緒池設定。
+<!-- End AEO Capsule --></p>
+
+<p>加速的適用範圍寫得具體：字串模型代理。在 ADK 中宣告代理時可以直接填入模型名稱字串，也可以傳入 <code class="language-plaintext highlighter-rouge">BaseLlm</code> 實例。前者路徑在 2.13.0 之前的實作每次回合都重新解析模型資訊，長對話累積後成為固定開銷，此次改動把這層重複工作移除，官方給出的上限是八倍。</p>
+
+<p>第二項是事件載入。代理執行時每一步都會產生事件並寫入工作階段，恢復長對話需要把事件序列讀回。2.13.0 降低了這段的處理成本，對動輒上百回合的代理任務影響明顯。第三項是工作流層：同步節點現在會尊重 <code class="language-plaintext highlighter-rouge">tool_thread_pool_config</code>，先前這個設定只對非同步路徑生效，導致同步節點的工具呼叫被迫序列執行。</p>
+
+<p>觀測能力同步補上。評估結果中的呼叫耗時被拆成模型、工具與框架三段，先前只知道總時間，無法判斷延遲來自模型推理、外部工具或框架本身。搭配前一版 2.12.0 在長工作階段中把首次模型請求時間削減四成的改動，可以看出連續兩個版本都在處理同一個問題：代理執行時間越長，框架自身的固定成本佔比越高。</p>
+
+<h2 id="分類器節點如何改變工作流路由">分類器節點如何改變工作流路由？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>新增 BaseClassifier、ClassifierNode 與 LlmClassifier，並整合 TypeSafe Jev 模型。Jev 以單次前向傳遞輸出校準機率。
+<!-- End AEO Capsule --></p>
+
+<p>多代理系統的常見瓶頸是路由。使用者輸入進來後，要判斷交給哪個子代理、走哪條分支，傳統做法是請大型語言模型輸出一個標籤，代價是每次路由都要一次完整推理，延遲與費用隨流量線性上升。</p>
+
+<p>2.13.0 引入的分類器把這件事拆成獨立抽象。<code class="language-plaintext highlighter-rouge">BaseClassifier</code> 定義帶型別的問題與答案，<code class="language-plaintext highlighter-rouge">ClassifierNode</code> 把分類器接進工作流的圖形邊界，官方同時提供 <code class="language-plaintext highlighter-rouge">LlmClassifier</code> 作為以語言模型為後端的基準實作。真正的新意在整合層：<code class="language-plaintext highlighter-rouge">TypesafeClassifier</code> 直接呼叫 TypeSafe 的 Jev 模型系列，這類模型以單次前向傳遞回傳校準過的機率分佈。</p>
+
+<p>校準機率的價值在於可設定門檻。語言模型輸出的標籤只有對錯，沒有信心程度；校準機率讓工作流可以設定「低於某個信心值就轉人工」的規則，這正是人工介入機制能自動化的前提。對每天處理數萬次請求的客服或工單分流場景，把路由從大型模型換成小型分類器，是最直接的成本結構調整。</p>
+
+<p>同一版還加入 <code class="language-plaintext highlighter-rouge">ForceEscalationPlugin</code>，用於決定性諮詢，並可量測升級次數、權杖與費用。這兩項改動指向同一個設計取向：把「昂貴的判斷」與「例行的判斷」分層，由框架負責調度。</p>
+
+<h2 id="即時語音與-mongodb-整合帶來什麼">即時語音與 MongoDB 整合帶來什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>CascadeLive 連線加入插話支援，並串接 Gemini 語音轉文字與文字轉語音。MongoDB 工作階段與記憶服務讓多個執行個體共用對話狀態。
+<!-- End AEO Capsule --></p>
+
+<p>語音部分補上的是打斷能力。CascadeLiveConnection 現在支援插話，使用者在模型說話途中開口，連線會中止目前的語音輸出並切換到監聽。這在客服與語音助理場景是基本要求，缺了這一項，對話節奏就會僵在「你講完我才講」。同一版把 Gemini 的語音轉文字與文字轉語音接進這條連線，並加入以 ZIP_STORED 打包視覺影格的方法，供需要同步畫面的場景使用。</p>
+
+<p>資料層的改動更值得企業留意。<code class="language-plaintext highlighter-rouge">MongoDbSessionService</code> 把工作階段存進 MongoDB，多個執行個體可共用同一份對話狀態，這是水平擴展時的必要條件，先前使用記憶體內工作階段的部署只能靠黏性路由。<code class="language-plaintext highlighter-rouge">MongoDbMemoryService</code> 則處理長期記憶，做法是關鍵字比對而非向量相似度，因此不需要嵌入模型，也不需要建立向量索引，任何 MongoDB 部署都能執行。</p>
+
+<p>工具層同步調整。<code class="language-plaintext highlighter-rouge">MongoDbToolset</code> 現在可被序列化，部署到 Agent Engine 時不必把連線字串放進封裝；搜尋查詢可交給 Atlas 的自動化嵌入在伺服器端處理，省掉一次 Google 嵌入呼叫與相應憑證。這幾項合起來，把「以 MongoDB 作為代理記憶體」從可能變成可部署的方案。</p>
+
+<p>安全與沙箱也在同版推進。<code class="language-plaintext highlighter-rouge">RestApiTool</code> 加入 SSRF 防護，沙箱資源改為每次工具呼叫綁定，而非整個電腦層級共用；新增的 OpenSandbox 環境與 <code class="language-plaintext highlighter-rouge">AgentEngineEnvironment</code> 讓程式碼執行可以落在隔離環境。工具層同時支援 Gemini 3.x 的電腦操作瀏覽器動作結構，這是把瀏覽器自動化納入同一套工具定義的前置工作。</p>
+
+<h2 id="升級到-213-有哪些破壞性變更">升級到 2.13 有哪些破壞性變更？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>遙測預設改用 OpenTelemetry GenAI v2，call_llm 跨度被移除。要保留舊格式，可設定環境變數切回 1.36 版語意慣例。
+<!-- End AEO Capsule --></p>
+
+<p>版本說明把這一項單獨列為破壞性變更。舊版發出名為 <code class="language-plaintext highlighter-rouge">call_llm</code> 的跨度，新版改用語意慣例 1.44 的標準屬性，模型呼叫的資訊掛在通用跨度上。任何依賴跨度名稱建立的儀表板、告警規則或成本統計腳本，升級後都會收不到資料，而且不會拋出錯誤，只會安靜地歸零。</p>
+
+<p>保留舊格式的方法已寫在版本說明：設定 <code class="language-plaintext highlighter-rouge">ADK_TELEMETRY_SCHEMA_VERSION_OPT_IN</code> 為 <code class="language-plaintext highlighter-rouge">otel_semconv_1_36</code>。這是過渡手段，官方把預設值往前推，意味著舊格式的支援期有限，較穩妥的做法是升級前先匯出一段真實流量，在新格式下重建面板並比對數字。</p>
+
+<p>其餘修正同樣值得掃過一遍。<code class="language-plaintext highlighter-rouge">adk eval</code> 的結束碼現在會反映通過或失敗，先前一律回傳成功，把它接進持續整合管線的團隊在升級後才會真正擋下失敗的評估。本機程式碼執行器不再無限等待，Bigtable 與 LiteLLM 相關的相容問題也有處理，其中 <code class="language-plaintext highlighter-rouge">litellm</code> 被限制在 1.106.3 以下。安裝層面要求 Python 3.11 以上，官方另提供 3.11 至 3.15 的約束檔，用以固定間接相依版本。</p>
+
+<h2 id="google-adk-的數據表現如何">Google ADK 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>星標 21,983、分支 4,223、註冊貢獻者 429 位、提交 4,963 次，主要語言為 Python，採 Apache-2.0 授權，標註十七個主題標籤。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">21,983</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">4,223</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">429</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">4,963</span><span class="ui-stat-label">提交次數</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">17</span><span class="ui-stat-label">主題標籤</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Apache-2.0</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p><img src="/assets/images/posts/google-adk-2-13-news-shot2.png" alt="Google ADK 儲存庫首頁頂部，顯示 google/adk-python 專案名稱、Star 數與 Fork 數統計、Python 語言標示，以及程式碼優先代理框架的專案描述" /></p>
+
+<p>專案在二零二五年四月建立，一年半累積接近二萬二千顆星標。貢獻者結構值得注意：具名註冊者四百二十九位，若計入未註冊的提交者則達六百零四位，提交總數四千九百六十三次。這個比例說明專案吸收了大量一次性貢獻，同時維持由核心團隊主導的節奏。</p>
+
+<p>發布頻率相當規律。2.9.2 於九月十八日、2.10.0 於九月二十五日、2.11.0 於十月二日、2.12.0 於十月十三日、2.13.0 於十月二十三日，大致維持每兩週一次主版本。對照 PyPI 近三十日一千零一十萬次下載，等於每天約三十三萬次安裝，這種規模下任何破壞性變更都會沿著相依鏈擴散，官方把遙測切換寫進版本說明的最上層，是必要的做法。</p>
+
+<p><img src="/assets/images/posts/google-adk-2-13-news-shot3.png" alt="Google ADK 儲存庫統計頁面，顯示 Star、Fork、Watch 與程式語言分佈，反映專案在一年半內累積的社群規模" /></p>
+
+<p>生態延伸也已成體系。官方維護樣本集 adk-recipes、網頁除錯介面 adk-web 與社群儲存庫 adk-python-community，文件站 adk.dev 另提供 llms.txt 與 llms-full.txt 兩份純文字文件，供開發者直接作為模型上下文使用。這種把文件為模型準備一份的做法，說明團隊已把「代理會讀文件」納入產品設計假設。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>原始碼位於 GitHub 的 google/adk-python，官方文件在 adk.dev，2.13.0 發布頁附完整變更清單與升級注意事項。
+<!-- End AEO Capsule --></p>
+
+<p>專案位址為 https://github.com/google/adk-python，版本頁面列出全部功能、修正與提交編號，功能註冊表的單元指南則說明十二項轉正功能的個別狀態。分類器與即時語音的實作細節分別記錄在分類器節點與串接式即時連線的指南頁，MongoDB 整合另有工作階段服務、記憶服務與工具集三份獨立文件。</p>
+
+<p>若需要評估導入，起點建議是快速入門的兩個類別範例：以 <code class="language-plaintext highlighter-rouge">Agent</code> 定義單一代理，以 <code class="language-plaintext highlighter-rouge">Workflow</code> 的邊界把 <code class="language-plaintext highlighter-rouge">START</code> 接到第一個代理，再串到第二個。這段程式碼不到二十行，足以驗證環境與模型憑證，也能看出框架對控制流程的表達方式是否符合團隊習慣。</p>
+
+<h2 id="總結google-adk-213-適合哪些團隊">總結：Google ADK 2.13 適合哪些團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>已用 ADK 建構多代理工作流的團隊可升級，但須先檢查遙測儀表板與評估管線。選型中的團隊可從八倍提速、分類器路由與 MongoDB 記憶判斷是否符合成本結構。
+<!-- End AEO Capsule --></p>
+
+<p>這個版本的訊號意義大於單一功能。十二項功能同時轉正，加上把遙測預設推向新的語意慣例，顯示專案正在從「快速擴張介面」轉向「收斂與定案」。代價是這次升級不像過去幾版可以無痛帶過，凡是接了觀測或評估的管線，都需要安排一次驗證。</p>
+
+<p>適用判斷可以落在兩個條件上。若團隊的核心需求是讓多個代理依固定流程協作、並需要人工介入節點，ADK 的圖形工作流與任務委派提供了比提示詞堆疊更可維護的路徑。若團隊只是需要單次模型呼叫與工具封裝，框架帶來的抽象層反而是負擔，直接使用模型供應商的軟體開發套件更輕。</p>
+
+<p>值得留意的方向是分類器。把例行路由從大型模型剝離到校準機率模型，是目前代理系統成本結構最直接的調整點，而 ADK 把它做成了工作流的一個節點，而不是另一套需要自行拼接的外部服務。這項設計在下一輪實驗功能轉正時，很可能成為主要賣點。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Google ADK" /><category term="AI Agent" /><category term="開源框架" /><category term="多代理系統" /><category term="Gemini" /><category term="工作流" /><category term="Python" /><category term="科技新聞" /><summary type="html"><![CDATA[Google 於 2026 年 10 月 23 日發布 Agent Development Kit 2.13.0，把 12 項實驗功能轉為正式，字串模型代理執行回合提速最多 8 倍。此版新增分類器節點、即時語音插話與 MongoDB 工作階段服務，遙測預設改採 OpenTelemetry GenAI v2。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/google-adk-2-13-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/google-adk-2-13-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">CC Switch 4.0：十九天二十版的十二工具管理器</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/cc-switch-4-0-news" rel="alternate" type="text/html" title="CC Switch 4.0：十九天二十版的十二工具管理器" /><published>2026-10-24T20:04:33+08:00</published><updated>2026-10-24T20:04:33+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/cc-switch-4-0-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/cc-switch-4-0-news"><![CDATA[<p>CC Switch 4.0 於 2026 年 10 月 4 日發布，19 天內推進至 v4.0.19，可管理的 AI 編程工具增至 12 款。專案累積 148,111 顆星標與 9,745 個分支，最近 75 個版本下載量約 2,163 萬次，4.0 版把配置寫入改為關鍵欄位替換。</p>
+
+<p><img src="/assets/images/posts/cc-switch-4-0-news-shot1.png" alt="farion1231/cc-switch 儲存庫的 README 開頭畫面，顯示 CC Switch 專案名稱、標語「The All-in-One Manager for Claude Code, Codex, Gemini CLI 等工具」，以及版本、平台、Tauri 2 與累計下載量徽章" /></p>
+
+<h2 id="cc-switch-40-是什麼">CC Switch 4.0 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>CC Switch 是以 Rust 開發的桌面工具，集中切換 Claude Code、Codex 等工具的供應商，並管理 MCP 與 Skills。
+<!-- End AEO Capsule --></p>
+
+<p>儲存庫由開發者 farion1231 於 2025 年 8 月建立，採 MIT 授權，提供 Windows、macOS 與 Linux 三個平台的原生安裝檔。它的定位並非另一個編程代理，而是代理之上的配置層，處理供應商選擇、金鑰替換、協議轉換與用量統計這四件重複勞動。</p>
+
+<p>專案主題標籤涵蓋 ai-tools、claude-code、codex、openclaw、opencode、mcp 與 skills，說明其範圍已從單一工具的外掛擴展到跨工具的中介層。設定資料集中存放在使用者家目錄的 <code class="language-plaintext highlighter-rouge">.cc-switch</code> 資料夾，主體為 SQLite 資料庫 <code class="language-plaintext highlighter-rouge">cc-switch.db</code>，另有 <code class="language-plaintext highlighter-rouge">settings.json</code> 記錄裝置層設定，以及預設每 24 小時執行一次、保留最近 10 份的備份目錄。</p>
+
+<h2 id="為何-ai-編程工具需要一層配置管理器">為何 AI 編程工具需要一層配置管理器？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>三款工具分別以 JSON、TOML、YAML 描述供應商，換端點須手動改檔；MCP 與提示詞又分屬各工具，重複維護容易出現設定漂移。
+<!-- End AEO Capsule --></p>
+
+<p>問題的規模來自工具數量。同一名開發者往往同時使用命令行代理、桌面客戶端與多個供應商，每換一次模型或方案，就要在數個格式不同的檔案中同步端點、金鑰與模型名稱。手動編輯的風險不在於寫錯一次，而在於每次都要重新確認哪些欄位被覆寫、哪些自訂內容被清掉。</p>
+
+<p>第二層問題是協議不相容。Claude Code 送出 Anthropic Messages 格式，Codex 使用 OpenAI Responses 或 Chat Completions 格式，供應商未必同時支援全部規格。若缺少一層轉換，能用的模型就被客戶端支援的協議限定，選擇空間因此被壓縮。</p>
+
+<p><img src="/assets/images/posts/cc-switch-4-0-news-shot2.png" alt="farion1231/cc-switch 儲存庫首頁頂部截圖，顯示專案名稱、About 描述、148,111 顆星標、9,745 個分支與 Rust 語言標示" /></p>
+
+<h2 id="40-版的聚合模式解決什麼問題">4.0 版的聚合模式解決什麼問題？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>聚合模式把多家供應商的模型併入同一份模型清單，開發者選中哪個模型，請求就送往該供應商，不必離開客戶端回切換供應商，適用於單一工作階段內混用多家模型。
+<!-- End AEO Capsule --></p>
+
+<p>舊版的操作路徑是切換再工作：想用另一家的模型，必須回到 CC Switch 換供應商，再回到客戶端繼續。聚合模式把這個順序倒轉，模型清單直接出現在 Claude Code 或 Codex 的選擇器裡，每個模型名後標示來源供應商，說明欄列出上游真實模型識別碼與上下文視窗長度。</p>
+
+<p>代價寫在官方文件裡。聚合模式本身不提供故障轉移，Claude Code 需 2.1.243 或更新版本，Codex 在模型清單變動後必須完整重啟。更關鍵的是工作階段中途換模型時，新模型要重建提示詞快取，切換後的第一輪費用會明顯上升，這個成本在長對話中尤其明顯。</p>
+
+<h2 id="配置寫入機制改動有何實際影響">配置寫入機制改動有何實際影響？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>4.0 把切換供應商時的全量配置重寫改為關鍵欄位替換，只覆蓋端點、金鑰與模型，使用者自行加入的插件、鉤子、MCP 設定與註解得以保留，並在首次改寫前自動備份。
+<!-- End AEO Capsule --></p>
+
+<p>全量重寫的邏輯是「以新檔取代舊檔」，好處是實作簡單，代價是任何未經工具識別的欄位都會消失。當工具只在單一供應商之間輪替時，這個代價不明顯；但開發者在配置檔加入自訂鉤子、專案層級覆寫或註解時，每次切換都等於一次小型資料丟失。</p>
+
+<p>關鍵欄位替換把影響面收窄到三個欄位，並在編輯器中預覽切換後的配置樣貌。備份策略同時提供兩層保障：改寫前的即時備份，以及每 24 小時一次、保留 10 份的週期備份。對長期在多個供應商之間切換的團隊，這個改動比任何新增功能都更直接地降低維護成本。</p>
+
+<h2 id="十二款工具的支援程度有何差異">十二款工具的支援程度有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>Claude Code、Codex 與 Gemini CLI 支援路由及托盤切換；OpenCode、Hermes 採共存模式，多家供應商同時寫入。
+<!-- End AEO Capsule --></p>
+
+<p>README 以「One App, Eleven Tools」列出十一款工具，而版本說明把 v4.0.18 加入的 Antigravity CLI 與 v4.0.19 加入的 Kimi Code 分別標為第十一與第十二個應用，兩處計數因此相差一項。這個細節反映專案的擴張速度：文件更新落後於版本發布，已成常態。</p>
+
+<p>支援深度分兩層。第一層是可切換供應商的工具，切換會直接改寫配置，Claude Code 支援熱切換而無須重啟，Codex、Gemini CLI 與 Grok Build 需重啟終端或應用。第二層是共存模式，工具允許把多家供應商同時寫入自身配置，CC Switch 只負責新增、移除與設定預設，實際選擇在客戶端完成。</p>
+
+<h2 id="用量與額度統計如何運作">用量與額度統計如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>用量頁在未開路由時掃描各工具的本機日誌，統計請求數、Token、快取命中率與花費；開啟路由後，相關請求一併計入。
+<!-- End AEO Capsule --></p>
+
+<p>統計分為三類。第一類是消耗量，涵蓋輸入、輸出、快取讀寫與首字延遲；第二類是額度，卡片與托盤直接顯示官方訂閱或編程方案的剩餘比例與重置倒數，例如「5 小時剩餘 94%」；第三類是帳戶餘額，適用於按量計費的供應商。</p>
+
+<p>自訂價格是這套統計的必要條件。官方僅內建部分模型的價目，其餘可手動設定或從 models.dev 匯入；若不校準單價，花費欄位只能反映相對比例，無法用於預算控制。對以專案為單位計價的團隊，這一步不能省略。</p>
+
+<h2 id="十九天二十版與-2163-萬次下載反映什麼">十九天二十版與 2,163 萬次下載反映什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>從 v4.0.0 到 v4.0.19 共二十個版本，集中於十九天內發布，平均每日超過一版，反映更新頻率已跟上上游工具與供應商的變動速度。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">148,111</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">9,745</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">297</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">3,213</span><span class="ui-stat-label">累計提交</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">2,163 萬</span><span class="ui-stat-label">下載次數</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p>這個節奏可以從版本內容讀出原因。v4.0.17 修復 4.0.16 帶來的托盤與記憶體問題，v4.0.18 加入 Antigravity CLI 支援並處理 macOS 金鑰圈讀取錯誤，v4.0.19 加入 Kimi Code 與多帳號登入。改版主軸並非新功能堆疊，而是追著上游工具與供應商的變動修正配置格式。</p>
+
+<p>對使用者的實際含義是升級成本。桌面應用具備自動更新，但資料庫結構與設定檔格式會隨版本演進；官方文件明言命令列版本與桌面版共用資料目錄，若資料庫版本較新，命令列工具會提示需要升級或等待相容。跨版本降級因此不是可靠選項。</p>
+
+<h2 id="本地路由與故障轉移有什麼風險">本地路由與故障轉移有什麼風險？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>本地路由在本機轉發請求並轉換協議格式，可設定故障轉移佇列、斷路器與供應商健康檢查；風險在於金鑰與請求內容經過第三方程式處理，且多數官方供應商不支援此模式。
+<!-- End AEO Capsule --></p>
+
+<p>路由模式的價值在協議相容。它讓 Claude Code 使用 OpenAI 或 Gemini 格式的供應商，也讓 Codex 使用 Chat Completions 或 Anthropic Messages 的供應商，並在請求失敗時依佇列切換到下一家。這個能力解決了「模型可用但客戶端不支援」的斷層。</p>
+
+<p>限制同樣明確。官方供應商多數不能經過本地路由，Codex 的 OpenAI 官方帳號是例外；路由服務需常駐執行，退出應用時會先寫回直連配置。此外，帳號功能處於測試階段，把 GitHub Copilot、ChatGPT 或 xAI 訂閱當作供應商使用，可能違反供應商條款，風險由使用者自行承擔。</p>
+
+<p><img src="/assets/images/posts/cc-switch-4-0-news-shot3.png" alt="farion1231/cc-switch 儲存庫統計頁面截圖，顯示專案累計貢獻者頭像與提交活躍度分佈，反映 297 位貢獻者的分散式開發規模" /></p>
+
+<h2 id="如何快速開始使用-cc-switch">如何快速開始使用 CC Switch？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>macOS 用 Homebrew 安裝，Windows 取 MSI，Linux 需 WebKitGTK 4.1；首次啟動選供應商並填金鑰即可。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brew <span class="nb">install</span> <span class="nt">--cask</span> cc-switch
+brew upgrade <span class="nt">--cask</span> cc-switch
+</code></pre></div></div>
+
+<p>先確認平台條件。Linux 需 x86_64 或 ARM64、glibc 2.35 以上與 WebKitGTK 4.1，對應 Ubuntu 22.04、Debian 12 與較新的 Fedora；RHEL、Rocky 與 AlmaLinux 8 至 9 尚未支援。Windows 支援 Windows 10 以上，macOS 支援 12 Monterey 以上，並通過簽章與公證。</p>
+
+<p>首次啟動的順序建議由小到大。先新增一個供應商並填入金鑰，確認工具能正常回應；再開啟路由模式，驗證協議轉換是否符合預期；最後才設定故障轉移與聚合，並在每個階段確認備份目錄已生成。這個順序能把問題侷限在單一環節，避免一次導入全部功能後難以定位。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 52 字 -->
+<p>本文資料來源為 CC Switch 儲存庫、v4.0 與 v4.0.19 版本說明、官方網站文件，以及 GitHub API 取得的星標、下載與提交統計。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/farion1231/cc-switch</li>
+  <li>官方網站：https://ccswitch.io</li>
+  <li>v4.0 版本說明：https://github.com/farion1231/cc-switch/blob/main/docs/release-notes/v4.0.0-en.md</li>
+</ul>
+
+<h2 id="總結cc-switch-適合哪些開發者">總結：CC Switch 適合哪些開發者？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>適合同時使用多款 AI 編程工具、且經常更換供應商或方案的開發者與小團隊；若只固定使用單一工具與單一供應商，手動編輯配置檔仍是最低成本方案。
+<!-- End AEO Capsule --></p>
+
+<p>148,111 顆星標與十九天二十版的節奏，說明這個專案已站在 AI 編程工具生態的交會點。它解決的不是模型能力問題，而是工具碎片化帶來的配置成本；當生態中的工具數量繼續增加，這層中介的價值會同步上升。</p>
+
+<p>需要留意的風險集中在兩處。其一是版本節奏快於文件，升級前應先確認資料庫相容性與備份狀態；其二是路由與帳號功能涉及金鑰與訂閱條款，採用前須評估合規與信任邊界。</p>
+
+<p>對正在評估的團隊，務實做法是先以直連模式導入，觀察一個版本週期內的穩定性，再決定是否開啟路由與聚合。MIT 授權降低了試用成本，但長期成本取決於團隊能否跟上它的更新速度。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="CC Switch" /><category term="AI 編程工具" /><category term="Claude Code" /><category term="Codex" /><category term="Tauri" /><category term="Rust" /><category term="開源" /><category term="開發工具" /><category term="科技新聞" /><summary type="html"><![CDATA[CC Switch 4.0 於 2026 年 10 月 4 日發布，十九天內推進至 v4.0.19，支援十二款 AI 編程工具的供應商切換。專案累積 148,111 顆星標與約 2,163 萬次下載，4.0 版把配置寫入改為關鍵欄位替換，並新增聚合模式。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/cc-switch-4-0-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/cc-switch-4-0-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">騰訊 WeKnora 開源：RAG、代理與 Wiki 三合一</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/weknora-news" rel="alternate" type="text/html" title="騰訊 WeKnora 開源：RAG、代理與 Wiki 三合一" /><published>2026-10-24T16:04:26+08:00</published><updated>2026-10-24T16:04:26+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/weknora-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/weknora-news"><![CDATA[<p>騰訊開源的 WeKnora 在 2026 年 10 月 23 日累積三萬五千零七十九顆星標，主要語言為 Go。它把企業文件處理拆成三個介面：以檢索增強生成回答問題、以代理執行多步任務、把文件整理成可瀏覽的 Wiki，三者共用同一套知識庫。最新版 v0.8.3 於 10 月 14 日發布，距上一版僅三週。</p>
+
+<p><img src="/assets/images/posts/weknora-news-shot1.png" alt="Tencent/WeKnora 儲存庫 README 開頭畫面，顯示 WeKnora 專案標誌、專案名稱與「找答案、把知識用起來」的英文標語，下方為官方網站、文件、版本與授權徽章" /></p>
+
+<h2 id="weknora-是什麼">WeKnora 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>WeKnora 是騰訊開源的企業知識框架，以同一套知識庫同時支援 RAG 問答、代理推理與自動生成 Wiki，可部署於本地或私有雲，採 MIT 授權。
+<!-- End AEO Capsule --></p>
+
+<p>專案的自我定位是「以大型語言模型驅動的知識框架」，處理的對象是企業內部文件的理解、語意檢索與推理。它不把自己包裝成單一聊天應用，而是把文件解析、向量化、檢索與推論組成一條可替換元件的管線，並在這條管線上提供三種使用介面。</p>
+
+<p>這個定位決定了它的設計取向。多數開源知識庫問答工具以「上傳文件、提出問題」為終點，WeKnora 則把後續的維護工作納入範圍：文件被檢索的同時，其中的實體與概念會被抽成 Wiki 條目，條目之間以知識圖譜連結，每次修改都可回滾。對於知識會持續變動的組織，這一點比單次問答的準確度更關鍵。</p>
+
+<p>專案掛在騰訊的 GitHub 組織之下，官方網站使用 weixin.qq.com 網域，並同時提供微信對話開放平台的託管問答服務、企業微信與微信小程式的接入方式，顯示其設計場景與微信生態高度相關。儲存庫以 MIT 授權釋出，GitHub 的授權識別欄位顯示為「其他」，屬於系統未能自動歸類的情況，實際條款以儲存庫內的 LICENSE 檔為準。</p>
+
+<h2 id="weknora-為何把問答代理與-wiki-放在一起">WeKnora 為何把問答、代理與 Wiki 放在一起？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>三者解決知識生命週期的不同階段：問答處理取用、代理處理執行、Wiki 處理整理。共用同一知識庫可避免文件重複上傳與版本分裂，答案、任務與條目都指向同一份來源。
+<!-- End AEO Capsule --></p>
+
+<p>知識管理系統的典型失敗並非檢索不準，而是文件進入系統後失去維護。問答層把文件當成只讀的語料，回答完即結束；文件改版之後，舊答案仍留在快取與對話記錄裡，錯誤於是被反覆引用。</p>
+
+<p>WeKnora 的做法是讓三種模式共用一條解析管線。同一批文件在問答模式提供帶引用的答案，在代理模式作為工具與背景知識，在 Wiki 模式被拆解成有目錄結構的頁面。當文件更新，三處同時受影響，版本只有一份。</p>
+
+<p>Wiki 模式值得單獨說明。系統從知識庫抽取人物、產品與概念，生成帶來源引用的頁面，頁面按目錄組織，並以知識圖譜呈現彼此的關係。使用者可以直接編輯頁面，每次變更都有差異比對與回滾。這使 Wiki 不只是文件的另一個視圖，而是一層由模型起草、由人校訂的中間結構。</p>
+
+<p>代理模式則把知識庫接到工具鏈上。代理可以呼叫網路搜尋、MCP 服務、技能與使用者本機的瀏覽器，在需要時回頭查閱知識庫。官方文件把這個組合稱為推理式問答，與單純的檢索問答分開，差別在於代理會根據中間結果調整下一步，而不是一次取回就作答。</p>
+
+<h2 id="weknora-的技術架構有什麼特點">WeKnora 的技術架構有什麼特點？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>架構以可替換元件為原則：模型、向量資料庫、物件儲存與解析器皆可獨立更換。核心服務以 Go 撰寫，前端以 TypeScript 開發，資料存於 PostgreSQL。
+<!-- End AEO Capsule --></p>
+
+<p>儲存庫語言組成反映出這個分工：Go 約三千六百萬位元組，TypeScript 約三千五百萬位元組，其餘為樣式、Rust 與前端資源。後端承擔解析、檢索與代理執行，前端承擔知識庫管理、對話與 Wiki 編輯介面，兩者規模相當，說明這是一個完整的應用而非函式庫。</p>
+
+<p>可替換性是架構敘述中最反覆出現的主張。模型層內建 29 家供應商，包含 OpenAI、Azure OpenAI、Anthropic、DeepSeek、通義千問、智譜、混元、豆包、Gemini、MiniMax、NVIDIA、SiliconFlow、OpenRouter、LiteLLM 與 Ollama；嵌入層支援 Ollama、BGE、GTE、智譜與 OpenAI 相容介面；向量層可選 PostgreSQL 的 pgvector、Elasticsearch、OpenSearch、Milvus、Weaviate、Qdrant、Apache Doris 與騰訊自有的 VectorDB。</p>
+
+<p>物件儲存同樣開放，涵蓋本地檔案系統、騰訊雲 COS、MinIO、AWS S3、火山引擎 TOS、阿里雲 OSS、金山雲 KS3 與華為雲 OBS。這種全面開放的做法在中國廠商主導的專案中並不常見，通常自建知識平台會把儲存與模型層綁定自家雲服務，WeKnora 則把綁定降為預設值而非唯一選項。</p>
+
+<p>檢索層的設計值得細看。系統提供關鍵詞與向量的混合檢索、重排序、父子區塊切分，以及基於 Neo4j 的 GraphRAG。混合檢索解決的是單一向量檢索在專有名詞與編號上的弱點，父子切分則讓檢索以子區塊為單位提高精度，同時以父區塊為單位保留上下文。專案另附端到端評估，指標包含召回率與 BLEU、ROUGE，讓團隊可以在自己的語料上量化調整效果，而不是倚賴通用基準。</p>
+
+<h2 id="weknora-的-v083-帶來了哪些更新">WeKnora 的 v0.8.3 帶來了哪些更新？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>v0.8.3 加入多模態向量檢索、引用段落跳轉至原始檔，並補上平台使用者管理、邀請註冊、模型目錄主控台與繁體中文介面。
+<!-- End AEO Capsule --></p>
+
+<p>多模態檢索是這次更新中最具結構意義的一項。系統開始支援把文字與圖像編碼到同一向量空間的嵌入模型，包含騰訊自家的 WeMM-Embedding 與 Qwen3-VL-Embedding，並允許選擇性啟用圖像向量檢索、圖像感知重排序，以及為視覺模型提供圖像上下文。既有知識庫維持關閉，需明確開啟並重新解析文件才會生效，掃描版 PDF 頁面暫不納入。</p>
+
+<p>引用導航解決的是另一個長期痛點。過去點擊引用只會顯示文字片段，現在可以直接在原始 PDF、Office 文件、Markdown、TXT 與 EPUB 中定位到被引用的段落，音訊引用會跳到對應時間戳。舊文件在重新解析前仍以文字比對退回，這種漸進式遷移減少了升級阻力。</p>
+
+<p>維運面的補強同樣明顯。平台使用者管理讓管理員可以列出使用者、建立帳號、停用帳號、重設密碼與指派系統管理員，停用會即時撤銷工作階段，並拒絕自我停用與停用最後一位管理員。邀請註冊模式則把「僅限邀請」與「邀請可註冊」兩種語義分開，解決舊版本中邀請制與公開註冊混用的問題。</p>
+
+<p>介面語系新增繁體中文，範圍包含 Seafile 連接器的翻譯。對繁體中文使用團隊而言，這是一個實際的採用門檻降低，因為知識庫產品的設定項密集，英文介面會讓非技術成員難以參與維護。</p>
+
+<h2 id="weknora-支援哪些部署方式與模型選擇">WeKnora 支援哪些部署方式與模型選擇？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>支援 Docker Compose、Helm 與單一執行檔的 Lite 版三種部署，可完全離線。模型可接 29 家雲端供應商，也可用 Ollama 本地模型，資料留在自有環境。
+<!-- End AEO Capsule --></p>
+
+<p>最簡部署路徑是三個步驟：複製儲存庫、複製環境變數範本、啟動容器。啟動後開啟本機位址即可進入引導流程，Web 介面位於 80 埠，後端 API 位於 8080 埠，選用的 Langfuse 追蹤服務位於 3000 埠。官方另提供 Helm 章程供 Kubernetes 叢集部署，以及單一二進位檔的 Lite 版與桌面應用程式。</p>
+
+<p>模型配置是採用過程中最容易低估的一環。專案文件覆蓋約一百五十個環境變數與約三百六十個 API 端點，官方也坦言設定項密集。對只想快速驗證的團隊，建議先以單一雲端模型與 pgvector 起步，確認解析與檢索流程順暢後再擴充；對資料不能出境的組織，則可用 Ollama 搭配本地嵌入模型，整套流程在內網完成。</p>
+
+<p>資料來源的接入範圍決定了導入成本。系統支援飛書 Wiki 與雲端硬碟、Confluence、GitLab、騰訊 IMA、Notion、語雀、釘釘文件、Seafile 與 RSS 的自動同步，其中 Confluence 支援目錄層級與私有圖片，語雀支援目錄樹層級，Seafile 支援增量檢查點與可選的刪除對帳。對文件散落在多個協作平台的組織，這一層往往比模型選擇更影響實際成效。</p>
+
+<p>頻道整合則處理最後一哩。問答可直接在企業微信、飛書、Slack、Telegram、釘釘、Mattermost、QQ 機器人與微信中進行，另有網站嵌入元件、內建 MCP 伺服器供 Cursor 與 Claude 等工具取用知識庫，以及附範圍控制的 API 金鑰供程式化存取。</p>
+
+<h2 id="weknora-與同類知識平台有何分別">WeKnora 與同類知識平台有何分別？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>同類方案多以工作流程編排或純檢索為核心，WeKnora 的重心在文件生命週期：同一知識庫同時產出答案、任務與可編輯條目，並具備四角色權限與稽核記錄。
+<!-- End AEO Capsule --></p>
+
+<p>開源知識庫領域大致分成三類路線。第一類以工作流程編排為核心，讓使用者以視覺化方式串接節點，優點是彈性高，缺點是知識庫本身較薄。第二類以純檢索為核心，專注解析與召回品質，不做應用層。第三類是應用型方案，功能完整但綁定特定模型或雲服務。</p>
+
+<p>WeKnora 站在第三類但試圖避開綁定。它的差異點在於把企業維運需求當成第一等公民：四種角色的工作區權限、逐資源的擁有者、逐工作區的稽核記錄、AES-256-GCM 憑證加密、帶白名單模式的 SSRF 防護出站請求，以及可同時掛載多個儲存實例。這些功能在個人專案導向的開源工具中通常缺席。</p>
+
+<p>另一個差異是任務佇列的可觀測性。系統提供文件解析時間軸，逐階段顯示進度與失敗原因，並有任務佇列儀表板列出排隊與失敗的任務，搭配 worker pool 治理。當知識庫規模上升到數萬份文件，解析失敗若無從定位，整個專案就會停擺；把這層做成介面而非日誌，是企業場景的必要條件。</p>
+
+<p>需要說明的是，功能廣度本身也構成取捨。同類方案在單一環節的深度可能更高，例如專注解析品質的工具在複雜表格與掃描檔上更成熟，專注編排的工具在流程分支上更靈活。WeKnora 的優勢在於把這些環節串成可維運的整體，代價是每個環節的預設值未必是市場最強。</p>
+
+<h2 id="weknora-有哪些限制與風險">WeKnora 有哪些限制與風險？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>設定項密集，約一百五十個環境變數對小團隊形成門檻；七百七十二個待處理議題反映節奏緊湊；商用前應核對授權條款；完整文件以中文為主。
+<!-- End AEO Capsule --></p>
+
+<p>第一項限制是複雜度。完整部署涉及關聯式資料庫、快取、物件儲存與向量引擎，官方雖提供 Lite 版與桌面應用，但企業功能如多工作區權限、稽核與資料來源同步仍以完整部署為前提。對只有數百份文件的小團隊，這套架構的多數能力處於閒置狀態。</p>
+
+<p>第二項是專案節奏帶來的穩定性成本。v0.8.2 到 v0.8.3 之間有二百八十二次提交，版本說明列出大量行為變更，其中包含邀請註冊語義調整、工具清單空值的語義改變，以及資料庫遷移編號的推進。這種速度對跟進最新功能有利，但對需要長期穩定的生產環境，升級前必須詳讀升級說明並先在測試環境驗證。</p>
+
+<p>第三項是議題負荷。儲存庫目前有七百七十二個待處理議題與約三百一十三位貢獻者，核心維護集中在少數帳號。專案同時提供託管服務與雲端部署範本，商業模式清晰，但也意味著部分需求會優先服務雲端路線。</p>
+
+<p>第四項是文件語言分佈。完整產品文件以中文為主，英文 README 只覆蓋概覽與快速開始，日文、韓文與俄文版本更精簡。對非中文團隊，深入設定仍需依賴翻譯或原始碼閱讀，這是採用時應預留的時間成本。</p>
+
+<p><img src="/assets/images/posts/weknora-news-shot2.png" alt="Tencent/WeKnora 儲存庫首頁頂部，顯示 Tencent/WeKnora 專案名稱、公開狀態、三萬五千餘顆星標與四千七百餘個分支的統計，以及主要語言 Go 與授權標示" /></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">35,079</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">4,701</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">313</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">772</span><span class="ui-stat-label">待處理議題</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Go</span><span class="ui-stat-label">主要語言</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<h2 id="weknora-適合哪些團隊使用">WeKnora 適合哪些團隊使用？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>適合文件量大、來源分散且需要內部問答的組織，例如法務、技術支援與研究團隊；資料不能出境的機構亦適用。文件量少於數百份時，輕量工具更划算。
+<!-- End AEO Capsule --></p>
+
+<p>最直接對應的場景是技術支援與客服。產品手冊、故障排除文件與歷史工單散落在多個平台，值班人員需要在一分鐘內找到正確條款；帶引用的檢索問答能把答案與出處一併給出，Wiki 模式則讓重複出現的問題逐步沉澱為條目。</p>
+
+<p>法務與合規是第二類場景，需求集中在引用精度與權限控管。四角色權限與稽核記錄讓敏感文件只對特定角色可見，逐資源擁有者則避免文件在工作區之間被無意共享；引用跳轉至原始檔的功能，讓每次回答都能回到條文核對。</p>
+
+<p>研究與顧問團隊的需求偏向長篇文件的交叉比對。GraphRAG 與知識圖譜在這一類場景提供額外價值，因為答案往往藏在實體關係裡，而非單一頁面。多模態檢索開啟後，簡報與掃描圖表中的資訊也能進入檢索範圍。</p>
+
+<p>反向來看，三類團隊應先評估其他方案。文件量在數百份以內、且只需偶爾問答的團隊，導入成本高於收益；完全沒有維運人力的團隊，難以承擔資料庫、向量引擎與升級維護；需要廠商 SLA 與責任承擔的關鍵業務，則應直接考慮官方託管服務，而非自建。</p>
+
+<h2 id="如何快速開始使用-weknora">如何快速開始使用 WeKnora？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>以 Docker Compose 複製儲存庫、複製環境變數範本並啟動容器，開啟本機位址即進入引導。先接一個雲端模型與 pgvector 驗證流程，再擴充資料來源。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Tencent/WeKnora.git
+<span class="nb">cd </span>WeKnora
+<span class="nb">cp</span> .env.example .env    <span class="c"># 依檔案註解調整</span>
+docker compose pull
+docker compose up <span class="nt">-d</span>
+</code></pre></div></div>
+
+<p>啟動後開啟本機位址，依引導建立第一個知識庫並上傳文件。若使用本機 Ollama 模型，需先啟動服務，並在設定中把基礎位址指向主機；容器內的 localhost 指向容器本身，連線到主機服務時需改用主機閘道位址。</p>
+
+<p>驗證順序建議由小到大：先上傳一份結構清晰的 PDF，確認解析、切塊與引用都正常，再導入整個資料夾並觀察解析時間軸；接著接入一個真實資料來源，確認增量同步與刪除對帳的行為符合預期；最後才調整向量引擎與重排序參數。這個順序能把問題侷限在單一環節，避免一次導入全部元件後難以定位。</p>
+
+<p>對需要在程式中呼叫的團隊，官方提供 Go SDK 與 agent-first 的 CLI。CLI 每個指令預設輸出穩定的 JSON 封套，錯誤碼對應退出碼，適合放進自動化流程；另有內建 MCP 伺服器，可把知識庫發佈給 Cursor、Claude 等支援 MCP 的工具。</p>
+
+<p><img src="/assets/images/posts/weknora-news-shot3.png" alt="Tencent/WeKnora 儲存庫統計頁面，顯示專案貢獻者頭像牆與累計提交活躍度，反映約三百位貢獻者的分散式開發規模" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 54 字 -->
+<p>本文資料來源為騰訊的 WeKnora 儲存庫、v0.8.3 版本說明與更新日誌，以及官方網站上的產品文件與架構說明。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/Tencent/WeKnora</li>
+  <li>官方網站：https://weknora.weixin.qq.com</li>
+  <li>產品文件：https://weknora.weixin.qq.com/docs/</li>
+  <li>v0.8.3 版本說明：https://weknora.weixin.qq.com/docs/07-releases/v0.8.3</li>
+  <li>命令列工具：https://github.com/Tencent/WeKnora/tree/main/cli</li>
+</ul>
+
+<h2 id="總結weknora-適合什麼團隊">總結：WeKnora 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>WeKnora 把知識的取用、執行與整理放在同一條管線上，適合已有文件規模且具備維運能力的組織。若只求快速問答或缺乏維運人力，輕量工具更合適。
+<!-- End AEO Capsule --></p>
+
+<p>三萬五千餘顆星標與每三至四週一個版本的節奏，說明這個專案已走出實驗階段。它選擇的路線並非在單一環節追求極致，而是把解析、檢索、代理、Wiki 與企業維運串成一個可替換元件的整體；這個選擇讓它在同類方案中具備少見的完整度，也讓導入門檻相應提高。</p>
+
+<p>真正的評估重點不在功能清單，而在知識的更新頻率。若組織的文件一年只更新數次，任何檢索方案都能應付；若文件每週變動、且答案錯誤會帶來實際成本，那麼把 Wiki 與回滾機制納入設計的價值就會顯現。這也是 WeKnora 與多數開源知識庫問答工具最根本的分野。</p>
+
+<p>對正在評估自建知識平台的團隊，務實的做法是先以 Docker Compose 跑一遍真實語料，量測解析成功率與引用準確度，再決定是否投入維運人力。專案的 MIT 授權降低了試用成本，但長期成本取決於團隊能否跟上它的版本節奏。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="WeKnora" /><category term="騰訊" /><category term="RAG" /><category term="知識庫" /><category term="AI Agent" /><category term="檢索增強生成" /><category term="開源" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[騰訊開源的 WeKnora 以三萬五千餘顆星標成為企業知識平台焦點，同一套知識庫同時提供 RAG 問答、代理推理與自動 Wiki 三種模式，支援 29 家模型供應商、8 種向量資料庫與 10 餘種 IM 頻道。本文拆解其架構設計、v0.8.3 的多模態檢索更新、與同類方案的差異，以及自建的實際限制。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/weknora-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/weknora-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cloudflare 開源安全稽核技能：讓代理自己找漏洞</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/security-audit-skill-news" rel="alternate" type="text/html" title="Cloudflare 開源安全稽核技能：讓代理自己找漏洞" /><published>2026-10-24T12:04:40+08:00</published><updated>2026-10-24T12:04:40+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/security-audit-skill-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/security-audit-skill-news"><![CDATA[<p>Cloudflare 於 2026 年 6 月開源的 security-audit 技能，在 GitHub 累積三萬九千九百餘顆星標，把通用寫碼代理改造成六階段安全稽核流程：偵察、覆蓋導向搜尋、候選驗證、結構化輸出、獨立複核與中立報告。它是該公司漏洞探索系統的起點版本，採 MIT 授權。</p>
+
+<p><img src="/assets/images/posts/security-audit-skill-news-shot1.png" alt="Cloudflare/security-audit-skill 儲存庫 README 開頭畫面，顯示專案名稱 security-audit、說明文字「A coding-agent skill that turns your agent into a security auditor」，以及六階段稽核流程的編號清單" /></p>
+
+<h2 id="這個技能是什麼">這個技能是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>它是一套寫給寫碼代理的指令集與驗證腳本，並非獨立掃描器。代理讀取專案後依六個階段產生架構文件、覆蓋帳本與結構化發現，最後輸出人類可讀報告。
+<!-- End AEO Capsule --></p>
+
+<p>技能的定位與常見靜態分析工具不同。它不解析語法樹，也不依賴規則庫比對，而是讓具備工具調用能力的代理實際閱讀、編譯與執行目標程式，再由另一批代理審查前一批代理的結論。儲存庫內的 <code class="language-plaintext highlighter-rouge">SKILL.md</code> 負責設定與原則，其餘十多份文件分別對應不同攻擊類別，涵蓋記憶體安全、提示注入、HTTP 協定框架、客戶端注入、供應鏈與雲端部署等面向。</p>
+
+<p>這種設計的前提假設相當明確：模型本身會產生看似合理但實質空洞的發現，因此流程的可信度必須建立在對抗結構上，而非單一模型的判斷力。專案文件把三種結論嚴格區分為已確認、待驗證與已否證，其中待驗證狀態必須附上一個尚未解決的具體事實，且不得標註嚴重程度。</p>
+
+<h2 id="cloudflare-為什麼把它開源">Cloudflare 為什麼把它開源？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>官方部落格說明，這份約四百五十行的技能是整個漏洞探索系統的種子。把它單獨開源，等於公開一套可直接執行的起點，而非企業級編排平台的完整原始碼。
+<!-- End AEO Capsule --></p>
+
+<p>根據 Cloudflare 於官方部落格發表的技術說明，團隊最初在一份儲存庫上手寫約四百五十行的 security-audit 技能，反覆調整提示語直到找出真實缺陷。後來才在其上加入編排層，把每個階段獨立成代理、背後接上資料庫、前方加上協調器，六週內擴展成可覆蓋一百二十八個儲存庫的艦隊掃描系統。</p>
+
+<p>值得留意的是專案對價值的判斷。文件明確指出真正的資產在提示語本身，攻擊情境、缺陷類別與反模式偵測幾乎原封不動地沿用到後來的系統；編排層則被視為可替換的管線。這種切割讓開源版本保持輕量，也讓外部團隊能在不承擔平台複雜度的情況下，先取得最核心的部分。</p>
+
+<h2 id="六個階段如何運作">六個階段如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>流程依序為偵察、覆蓋導向搜尋、候選驗證、結構化輸出、獨立複核與中立報告。前三階段產出與攻擊嘗試並行，後三階段負責把候選轉成可稽核的紀錄。
+<!-- End AEO Capsule --></p>
+
+<p>第一階段由多個平行代理測繪架構、信任邊界與輸入面，產出 <code class="language-plaintext highlighter-rouge">architecture.md</code> 與 <code class="language-plaintext highlighter-rouge">coverage-ledger.json</code>。第二階段依帳本切分單位，指派隔離的搜尋代理逐格嘗試，並由覆蓋審查者找出尚未觸及的空白區域。</p>
+
+<p>第三階段是整個流程的分水嶺。每個唯一候選都交給一個全新的驗證代理，其任務不是確認，而是盡力否證；只有無法被推翻的候選才進入第四階段，寫入 <code class="language-plaintext highlighter-rouge">findings.json</code> 並依 <code class="language-plaintext highlighter-rouge">report-schema.json</code> 校驗。第五階段再由未參與前序工作的代理複核原始碼主張，若涉及實質替換，還要再交給另一位獨立驗證者。第六階段純粹由紀錄推導報告，不含模型判斷。</p>
+
+<p>儲存庫附帶兩支零依賴的 Node.js 校驗腳本，分別檢查覆蓋帳本與發現檔案的結構。這種機械檢查只能保證格式與行號指向存在，無法保證結論正確，專案文件對此有明確區分。</p>
+
+<h2 id="為什麼同一個發現要交給另一個代理推翻">為什麼同一個發現要交給另一個代理推翻？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>因為代理會為了讓攻擊成立而修改原始碼，再回報自己製造的缺陷。由未參與發現的代理重新驗證，可過濾這類自我實現的假陽性，也讓結論由不同模型交叉檢視。
+<!-- End AEO Capsule --></p>
+
+<p>專案點出三種典型失敗模式：代理改動目標程式使漏洞成立、寫出「執行函式會執行東西」這類同義反覆的證明、以及建構出可運行卻無法證明任何事情的攻擊腳本。對抗式驗證是針對這三種失敗的結構性回應。</p>
+
+<p>更進一步的要求體現在輸出格式。搜尋代理在提交任何發現之前，必須先聲明威脅模型，說明攻擊者是誰、跨越了哪一條邊界或破壞了哪一項假設；欄位順序在結構定義中強制執行這項要求。專案文件指出，這條規則直接淘汰了「若使用者具備資料庫寫入權限即可寫入資料庫」這種空洞結論。</p>
+
+<p>在艦隊層級，Cloudflare 進一步把探索與驗證拆成兩套系統，並刻意使用不同供應商的模型。驗證端以另一組權重與訓練資料審視探索端的輸出，同時讓整個架構對模型版本變動保持鈍感。</p>
+
+<h2 id="實際運行規模與數據如何">實際運行規模與數據如何？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>儲存庫累積三萬九千九百餘顆星標、二千四百九十個分支，但提交僅十四次。實際運行層面，願望清單工具累計被寫入二萬五千餘次，跨一百二十八個儲存庫。
+<!-- End AEO Capsule --></p>
+
+<p>專案自 2026 年 6 月 18 日建立至今，提交次數僅十四次，版本節奏平緩，但社群關注度快速累積。官方部落格披露的運行數據則揭示另一種規模：願望清單工具在加入後累計被寫入二萬五千四百七十二次，跨一百二十八個儲存庫；搜尋代理自行分叉出的同類任務約佔整體任務的百分之九，比例隨模型不同在近乎零到五分之一之間浮動。</p>
+
+<p><img src="/assets/images/posts/security-audit-skill-news-shot2.png" alt="Cloudflare/security-audit-skill 儲存庫頁面頂部，顯示專案名稱、About 描述、星標與分支計數，以及 README 中的六階段流程說明" /></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">39,907</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">2,490</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">79</span><span class="ui-stat-label">待處理議題</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">14</span><span class="ui-stat-label">提交次數</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">JavaScript</span><span class="ui-stat-label">主要語言</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p><img src="/assets/images/posts/security-audit-skill-news-shot3.png" alt="Cloudflare/security-audit-skill 儲存庫的統計與貢獻者區塊，顯示專案累計提交活躍度與參與開發者規模" /></p>
+
+<h2 id="使用前需要哪些條件">使用前需要哪些條件？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>需要支援工具調用與平行子代理的寫碼代理、用於校驗腳本的 Node.js，以及具備網路隔離與資源限制的沙箱。缺少沙箱時結論只停留在待驗證。
+<!-- End AEO Capsule --></p>
+
+<p>安裝方式相當輕量，透過 Skills CLI 一行指令即可加入，並可選擇全域安裝。實際觸發靠自然語言請求，例如要求代理對指定目錄進行安全稽核，技能會在請求符合觸發條件時自動啟用；直接要求稽核或滲透測試會進入完整模式，一般性提問則走指引模式。</p>
+
+<p>沙箱條件是整套流程的硬性前提。專案要求沙箱必須關閉外部網路、使用經過清理的允許清單環境、實施資源上限，且只允許寫入指派的暫存路徑。若缺乏這些控制，流程不會執行由目標專案控制的建置、測試、程序、瀏覽器或模糊測試，而是把線索保留為待驗證狀態，並記錄尚未解決的具體事實。</p>
+
+<h2 id="這個做法有哪些限制">這個做法有哪些限制？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>單次執行大約只能找出重複執行總量的一半缺陷，且偏向較簡單的問題。流程也不會自動修補，只產出報告；覆蓋率偏低或噪音過多時，仍需要人工判斷是否值得繼續。
+<!-- End AEO Capsule --></p>
+
+<p>官方在部落格中給出相當直白的自評：觀察覆蓋指標後發現，單次執行找到的缺陷大約只有多次執行總和的一半，且問題偏向表層。當流程退化為「執行十次再人工比對差異」，就代表需要更完整的編排架構。</p>
+
+<p>其他限制包括重複發現的整併。專案指出，判斷兩個複雜邏輯缺陷是否源於同一個根因需要大量推理，因此艦隊版本必須部署專門的整併代理，而非依賴字串比對或路徑檢查。另一個反直覺的觀察是靜態分析工具的實際使用率：團隊把 Semgrep 接入管線後，搜尋代理在一個月內完全沒有調用它，寧願自行閱讀與執行程式碼。</p>
+
+<p>對單一儲存庫的小型團隊而言，這些限制意味著此技能的價值在於流程紀律，而不在於取代既有掃描工具。它產出的是可追蹤的稽核軌跡，不是一份完整的安全清單。</p>
+
+<h2 id="與一般-ai-程式碼審查有何不同">與一般 AI 程式碼審查有何不同？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>一般審查由單一代理一次讀完程式碼並列出問題；此技能把工作切成隔離任務，記錄每個覆蓋單位，並要求發現必須通過機械校驗與獨立複核才能成立。
+<!-- End AEO Capsule --></p>
+
+<p>差異首先在狀態管理。單一代理的上下文窗口很快填滿，一旦觸發壓縮便會遺忘先前追蹤的線索；技能把狀態外置成架構文件與覆蓋帳本，讓每次執行可接續前次的缺口，同一儲存庫的多次執行屬於累加關係，變更過的原始碼會重新驗證。</p>
+
+<p>其次是責任分離。發現者不得擔任驗證者，驗證者也不得提交自己的發現，這種設計在傳統人工流程中屬常規，在代理流程中卻需要刻意以結構強制。最後是結論的顆粒度：一般審查傾向輸出一段建議，此技能輸出三種狀態明確的紀錄，其中待驗證狀態必須攜帶一個精確的未解事實，方便後續補齊。</p>
+
+<h2 id="資料來源有哪些">資料來源有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>本文資料來源為 Cloudflare 的 security-audit-skill 儲存庫與流程文件，以及官方部落格關於漏洞探索系統架構的技術文章。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/cloudflare/security-audit-skill</li>
+  <li>技術說明文章：https://blog.cloudflare.com/build-your-own-vulnerability-harness</li>
+  <li>技能安裝入口：https://skills.sh</li>
+  <li>授權條款：MIT</li>
+</ul>
+
+<h2 id="總結值得團隊採用嗎">總結：值得團隊採用嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>具備沙箱環境與維運能力、且需要可追蹤稽核紀錄的團隊值得一試；只想要快速清單或缺乏隔離環境者，導入成本高於效益。
+<!-- End AEO Capsule --></p>
+
+<p>三萬九千餘顆星標與二千四百餘個分支，反映市場對「代理做安全稽核」這個題目的高度興趣，但專案本身的提交節奏與文件規模，說明它仍是一份精煉的起點而非成熟產品。它真正提供的是一套可驗證的方法論：把不可靠的模型輸出，透過隔離、對抗與機械校驗層層收斂成可審查的紀錄。</p>
+
+<p>評估時值得注意兩個實際門檻。其一是沙箱，沒有網路隔離與資源限制的環境，流程會退回只讀模式，價值大幅下降。其二是人力，重複執行的成本、待驗證項目的追蹤與整併，都需要具備安全背景的人員介入，模型只承擔蒐集與初步篩選。</p>
+
+<p>對於正在建立內部安全流程的組織，務實的做法是先以單一儲存庫跑完整一輪，檢查產出的覆蓋帳本是否真實反映測試範圍，再決定是否擴大。專案的 MIT 授權降低了試用成本，但紀律帶來的額外工時才是長期成本所在。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Cloudflare" /><category term="安全稽核" /><category term="AI Agent" /><category term="開源項目" /><category term="漏洞挖掘" /><category term="Skills" /><category term="代理編排" /><category term="科技新聞" /><summary type="html"><![CDATA[Cloudflare 將內部漏洞探索系統的起點版本開源為 security-audit 技能，GitHub 星標三萬九千餘顆。它以六階段流程把通用寫碼代理改造成安全稽核員：偵察、覆蓋導向搜尋、對抗式驗證、結構化輸出、獨立複核與中立報告，並要求每個發現先聲明威脅模型。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/security-audit-skill-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/security-audit-skill-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Langflow 一年 35 個安全公告：155K 星平台怎麼了？</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/langflow-security-advisories-news" rel="alternate" type="text/html" title="Langflow 一年 35 個安全公告：155K 星平台怎麼了？" /><published>2026-10-24T08:00:00+08:00</published><updated>2026-10-24T08:00:00+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/langflow-security-advisories-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/langflow-security-advisories-news"><![CDATA[<p>Langflow 是累積 155,921 顆星的視覺化 AI Agent 工作流平台，以拖拉節點建立 RAG 流程、多代理協作與工具呼叫，並可發布為 API 或 MCP 伺服器。星數背後有一組較少被討論的數字：過去十二個月發布 35 份安全公告，其中 16 份為嚴重等級、12 份高風險，與官方所稱的企業級安全存在落差。</p>
+
+<p><img src="/assets/images/posts/langflow-security-advisories-news-shot1.png" alt="Langflow 儲存庫 README 開頭畫面，顯示 Langflow 標誌、版本與授權徽章，以及「Build and deploy AI-powered agents and workflows」的專案描述" /></p>
+
+<h2 id="langflow-是什麼">Langflow 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Langflow 是開源視覺化 AI 工作流平台，以節點畫布建立 RAG 與多代理流程，可輸出為 API 或 MCP 伺服器。專案以 Python 撰寫、MIT 授權，星標 15.5 萬。
+<!-- End AEO Capsule --></p>
+
+<p>專案由 Langflow 團隊於 2023 年 2 月建立，目前主要語言為 Python，授權條款為 MIT，累積 10,237 次分支與 376 位貢獻者。它的核心價值在於把「流程編排」這件事從程式碼搬到畫布上：使用者拉入模型節點、向量資料庫節點、工具節點，以連線定義資料流向，再透過互動式測試面板逐步檢視每個節點的輸入與輸出。</p>
+
+<p>這個設計讓原型開發的速度大幅提升，也讓非工程背景的成員能參與流程設計。代價是所有節點都必須在同一個執行環境內具備實際能力，包括執行 Python 程式碼、發出網路請求、讀寫本機檔案與啟動子程序。當這些能力被包裝成可視化元件，安全邊界就不再由開發者逐行把關，而是由平台的權限模型決定。</p>
+
+<p>Langflow 同時提供三種使用形態：本機安裝的 Python 套件、內含相依環境的桌面版，以及部署在伺服器上的多人協作執行個體。第三種形態正是多數安全公告的觸發場景，因為一旦執行個體暴露在網路之上，畫布上的每個節點都成為潛在的攻擊入口。</p>
+
+<h2 id="langflow-這一年出了哪些安全公告">Langflow 這一年出了哪些安全公告？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>過去十二個月共 35 份公告，16 份嚴重、12 份高風險。主要類型為遠端程式碼執行、權限繞過、路徑穿越與弱金鑰，修補版本集中於 1.9.0 至 1.12.7。
+<!-- End AEO Capsule --></p>
+
+<p>依照 GitHub 安全公告資料庫的紀錄，Langflow 自 2025 年 6 月起累計 37 份公告，其中 35 份落在最近十二個月之內。嚴重等級的 16 份公告中，有多份具備相同的技術輪廓：攻擊者只要取得一般使用者權限，就能透過平台內建的能力升級為作業系統層級的執行權。</p>
+
+<p>其中最具代表性的三份，分別對應三種不同的失效模式。CVE-2026-105740 涉及 MCP 的標準輸入輸出通道，任何已驗證使用者都能藉由設定指令執行任意系統命令，修補版本為 1.9.0。CVE-2026-33017 則是公開流程建置端點的未授權遠端程式碼執行，屬於典型的暴露面配置問題。另一份編號 GHSA-jxw3-mjmx-3pqm 的公告更為隱蔽：金鑰產生流程誤用亂數種子，導致 Fernet 金鑰可被預測，連帶使加密保護形同虛設，修補版本為 1.10.1。</p>
+
+<p>其餘公告涵蓋路徑穿越、跨專案檔案揭露、IDOR 越權存取、SSRF 與提示注入導致的程式碼執行。值得注意的是公告的時間分佈並不平均：2026 年 3 月與 6 月各有 8 份，2026 年 9 月則有 7 份。這種集中並非偶然，而是外部研究者在同一時期對同類平台展開系統性審查的結果。</p>
+
+<h2 id="為什麼一個視覺化-ai-平台會累積-16-個嚴重漏洞">為什麼一個視覺化 AI 平台會累積 16 個嚴重漏洞？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>視覺化節點本身具備執行程式碼、發網路請求與讀寫檔案的能力，任何權限疏漏都會升級為系統層級風險。流程可分享與公開建置，暴露面遠大於一般應用。
+<!-- End AEO Capsule --></p>
+
+<p>根本原因在於能力與權限的耦合方式。一般 Web 應用若出現權限檢查疏漏，攻擊者取得的通常是資料；Langflow 若出現同類疏漏，攻擊者取得的是執行環境。當一個平台同時提供 Python 直譯節點、Shell 指令節點與檔案讀寫節點，任何一個節點的授權檢查失效，都等於把伺服器的命令列交出去。</p>
+
+<p>第二個因素是流程的可分享性。Langflow 鼓勵使用者把流程發布成公開連結或公開建置端點，方便同儕試用；但公開與可執行一旦重疊，任何能觸及該網址的人就取得觸發整條流程的能力。官方後續的修補方向正好對應這一點：1.12.7 的多項修正集中在「限制非擁有者的圖譜覆寫」、「在公開元件建置上強制管理策略」與「拒絕執行期載入器與環境變數能力」。</p>
+
+<p>第三個因素來自生態複雜度。Langflow 支援數十種模型供應商、向量資料庫與外部工具連接器，每個連接器都是一段需要自行處理 URL 驗證、憑證隔離與錯誤清理的程式碼。SSRF 公告特別指出，保護機制預設關閉且僅發出警告，且未涵蓋 RSS、SearXNG、網路搜尋、Home Assistant、Glean 與 Docling 等元件；這種「同一類風險分散在多個連接器」的結構，使修補難以一次到位。</p>
+
+<h2 id="這些漏洞對實際部署造成什麼風險">這些漏洞對實際部署造成什麼風險？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>風險等級取決於部署形態。桌面版與單人本機執行個體暴露面有限；一旦部署為多人協作的公開服務，嚴重漏洞可導致伺服器命令執行、跨專案資料讀取與雲端憑證外洩。
+<!-- End AEO Capsule --></p>
+
+<p>單人本機使用的情境風險最低。桌面版把相依環境一併封裝，服務預設只監聽本機位址，攻擊者必須先取得本機存取權，才有機會利用平台漏洞；在這種形態下，漏洞的實際影響大致等同於使用者自己的操作權限。</p>
+
+<p>真正的風險集中在團隊部署。官方文件建議的入門方式是安裝 Python 套件後執行服務，預設監聽 127.0.0.1 的 7860 埠；但實務上為了讓同事或外部系統存取，往往會被放到反向代理之後並開放公網。此時公告中的 IDOR 與跨專案檔案揭露類問題，會讓同一個執行個體上的不同專案彼此可見；而遠端程式碼執行類問題，則可能被用來讀取環境變數中的模型 API 金鑰、資料庫密碼與雲端憑證。</p>
+
+<p>另一個容易被忽略的面向是流程本身即為攻擊載體。提示注入類公告顯示，惡意內容可以誘導 Smart Transform 之類的節點產出可執行的程式碼；當流程處理來自網頁、郵件或使用者上傳文件的內容時，輸入面等同於網際網路。對把 Langflow 用作對外服務後端的團隊而言，這意味著必須同時考慮傳統 Web 攻擊與模型層的輸入操控。</p>
+
+<h2 id="langflow-官方如何回應與修補">Langflow 官方如何回應與修補？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>官方以版本線分批修補，並為舊版回溯安全修正。1.12.7 的十五項修正有十項標記為安全性，1.12.5 亦有九項涉及權限收緊。
+<!-- End AEO Capsule --></p>
+
+<p>修補節奏呈現兩條並行的線。第一條是新版本的即時修正：1.12.5 於 2026 年 10 月 6 日發布，內容包括限制內建程式碼執行僅限管理員、把儲存的對話附件限制在授權範圍、強制 A2A 執行採用驗證策略，以及從管理回應中遮蔽伺服器憑證。這些都屬於權限模型層級的調整，而非單點修補。</p>
+
+<p>第二條是針對既有版本線的回溯。1.12.6 的發布說明直接寫明包含「1.13.0 的安全性回溯」，1.12.7 則把範圍擴大到 OpenSearch 連接器 URL 驗證、S3 上傳範圍限制、拒絕程序與程式碼載入器能力、封鎖執行期物件還原、在獨立建置器中強制模型策略，以及把已儲存的流程與公開歷史識別碼分離。十五項修正中十項標記為安全性，比例之高說明當期重心確實放在收斂攻擊面。</p>
+
+<p>官方同時在部署文件中加入明確提醒：正式發行版與標記版本的原始碼壓縮檔預設關閉自動登入，使用者必須先設定超級使用者密碼才能啟動。這項改動等於承認早期版本在預設配置上過於寬鬆，也把安全責任部分移轉給部署者。</p>
+
+<h2 id="自架-langflow-的團隊應該做哪些防護">自架 Langflow 的團隊應該做哪些防護？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>先確認版本不低於 1.12.7，並在啟動前設定超級使用者密碼。把服務限制在內部網路或加上驗證層，停用非必要的程式碼與 Shell 節點，並定期檢視公告資料庫。
+<!-- End AEO Capsule --></p>
+
+<p>第一項是版本紀律。公告中所有嚴重問題都已在特定版本修補，把執行個體升到 1.12.7 或更新的版本，即可覆蓋已披露的攻擊路徑。若因相依套件衝突無法升級，至少應逐項核對自己使用到的節點類型，確認對應的修補是否已進入目前版本。</p>
+
+<p>第二項是網路邊界。Langflow 的設計預期在受信任網路內運作，公開暴露時應在前面加上具備身分驗證的反向代理，並以白名單限制可存取的來源。文件中提到的伺服器金鑰與超級使用者密碼，都不應沿用預設值或範例值。</p>
+
+<p>第三項是最小能力原則。Python 直譯節點、Shell 指令節點與檔案讀寫節點，只應開放給確實需要的人員；對外提供的流程應避免包含可直接執行任意程式碼的元件。官方在 1.12.5 之後已把內建程式碼執行限制為管理員專屬，這也說明能力分級是可行的收斂方向。</p>
+
+<p>第四項是監控與更新習慣。Langflow 的公告密度意味著每季都可能出現新的修補版本；把 GitHub 安全公告加入訂閱、把版本更新納入例行維護，比事後追查入侵痕跡更符合成本。</p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">155,921</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">10,237</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">376</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">35</span><span class="ui-stat-label">近一年公告</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">16</span><span class="ui-stat-label">嚴重等級</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p><img src="/assets/images/posts/langflow-security-advisories-news-shot2.png" alt="Langflow 儲存庫首頁頂部，顯示 langflow-ai/langflow 專案名稱、公開狀態、Star 15.5 萬與 Fork 1 萬的統計，以及 MIT 授權與 Python 語言標示" /></p>
+
+<h2 id="langflow-的數據表現如何">Langflow 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>星標 155,921、分支 10,237、貢獻者 376 位，採 MIT 授權。專案自 2023 年 2 月建立，2026 年 10 月仍每日提交，最新版 1.12.7。
+<!-- End AEO Capsule --></p>
+
+<p>星數與貢獻者規模說明專案的社群基礎穩固，376 位貢獻者的分布也解釋了為何程式碼審查需要依賴自動化與外部研究者回報。372 個貢獻者分頁對應的是一個高度分散的提交歷史，這類專案很難靠少數維護者逐行掌握每個連接器的安全假設。</p>
+
+<p>提交活躍度同樣值得記錄。專案在 2026 年 10 月 22 日仍有新的推送，版本節奏約為每週一次修補版本、每月一次功能版本。這種節奏對安全有利，因為修補能較快落地；但也意味著部署者若長期凍結版本，就會逐步落後於公告。</p>
+
+<div class="ui-stat"><span class="ui-stat-num">2026-10-21</span><span class="ui-stat-label">最新版本 1.12.7 發布日</span></div>
+
+<p><img src="/assets/images/posts/langflow-security-advisories-news-shot3.png" alt="Langflow 儲存庫貢獻者頁面，顯示 376 位貢獻者的頭像列表與各人提交次數，反映專案由大量外部貢獻者共同維護" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 52 字 -->
+<p>完整原始碼、版本發布與安全公告均可在 GitHub 的 langflow-ai/langflow 儲存庫查閱，公告頁面另列 CVE 編號與修補版本。
+<!-- End AEO Capsule --></p>
+
+<p>專案位址為 https://github.com/langflow-ai/langflow，安全公告集中於儲存庫的 Security Advisories 頁面，每份公告均標示受影響版本範圍、修補版本與 CVE 編號。版本發布紀錄則可在 Releases 頁面逐項核對，最近的 1.12.5、1.12.6 與 1.12.7 都已公開完整變更清單。</p>
+
+<h2 id="總結langflow-還值得用嗎">總結：Langflow 還值得用嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>值得用，但必須當作具備執行能力的內部服務來對待。版本維持在 1.12.7 以上、關閉公開暴露、限制程式碼節點權限，即可在保留便利性的同時把風險壓回可接受範圍。
+<!-- End AEO Capsule --></p>
+
+<p>三十五份公告不必然代表專案品質低落，而是反映它所承擔的能力範圍。一個能執行 Python、發出網路請求、串接數十種外部服務的視覺化平台，本來就會吸引系統性的安全審查；真正需要檢視的是回應速度與修補覆蓋率，而 Langflow 在最近三個版本中把過半修正額度用於安全，說明維護方已把這件事放在優先位置。</p>
+
+<p>對個人與小型團隊而言，桌面版或本機執行個體仍是低風險且高效的選擇。對把 Langflow 部署為內部服務的組織而言，關鍵動作是把預設配置當作不安全的起點：先設密碼、再限網路、然後關閉不必要的執行能力。把這三步做完，十五萬顆星所代表的生態價值才真正可用。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Langflow" /><category term="資安漏洞" /><category term="開源專案" /><category term="AI Agent" /><category term="MCP" /><category term="RCE" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[Langflow 在 GitHub 累積 155,921 顆星，是視覺化 AI Agent 工作流平台的代表項目。過去十二個月，該專案發布 35 份安全公告，其中 16 份屬嚴重等級，涵蓋 MCP 通道遠端執行、公開流程端點未授權執行與弱金鑰等問題。本文整理公告結構、修補節奏與自架團隊的防護要點。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/langflow-security-advisories-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/langflow-security-advisories-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Dify 1.18：代理自行選路，應用打包成單一檔案</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/dify-1-18-agent-routing-news" rel="alternate" type="text/html" title="Dify 1.18：代理自行選路，應用打包成單一檔案" /><published>2026-10-24T04:00:01+08:00</published><updated>2026-10-24T04:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/dify-1-18-agent-routing-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/dify-1-18-agent-routing-news"><![CDATA[<p>Dify 於二零二六年十月二十三日發布 1.18.0，讓代理在流程中自行決定下一個分支，並把整份應用連同技能與檔案打包成單一 .ifpkg 套件。此版同時開放巢狀工作流的逐階追蹤與 Agent 知識庫 Beta，並以 difyctl 命令列工具取代舊有 OpenAPI 路徑，屬於架構層級的版本變動。</p>
+
+<p><img src="/assets/images/posts/dify-1-18-agent-routing-news-shot1.png" alt="Dify 儲存庫 README 開頭畫面，顯示 Dify 標誌、多語言文件入口徽章，以及「Dify is an open-source LLM app development platform」的專案定位描述" /></p>
+
+<h2 id="dify-是什麼">Dify 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>Dify 是開源 LLM 應用開發平台，以視覺化畫布建立工作流、RAG 管線與代理，支援數百種模型與 MCP 工具，採修改版 Apache 2.0 授權。
+<!-- End AEO Capsule --></p>
+
+<p>專案由 LangGenius 團隊於二零二三年四月建立，主要語言為 Python，前端為 Next.js，授權條款為修改版 Apache 2.0：商業使用與自架均開放，但不得以原始碼經營多租戶服務，亦不得移除主控台標誌。儲存庫主題標籤涵蓋 agent、agentic-workflow、low-code、mcp 與 rag，說明其定位介於低程式碼工具與代理執行環境之間。</p>
+
+<p>平台的組成由七個部分構成：視覺化工作流、模型供應商管理、提示詞 IDE、RAG 管線、具備沙箱的自主代理、LLMOps 觀測，以及涵蓋所有功能的後端 API。最低部署需求為二核心 CPU 與 4 GiB 記憶體，以 Docker Compose 啟動，官方同時提供雲端版本與企業自架版本。</p>
+
+<p>這種設計把「模型能力」與「流程編排」分開處理。使用者拉入節點定義資料流，再把模型、工具與知識庫接上，最後發布為聊天應用、API 或工作流中的一個步驟。1.18.0 的四項改動，正好分別對應這條路徑上的編排、搬移、觀測與知識四個環節。</p>
+
+<h2 id="dify-1180-帶來了哪些改動">Dify 1.18.0 帶來了哪些改動？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>四個主軸為代理輸出路由、.ifpkg 可攜式應用套件、巢狀工作流逐階追蹤與 Agent 知識庫 Beta，另附 difyctl 命令列與 OpenAPI 目錄。
+<!-- End AEO Capsule --></p>
+
+<p>官方發布說明把 1.18.0 的改動歸為四類。第一類是讓代理決定下一步：啟用 Output Routes 之後，每個分支可設定選取條件，代理在執行期判斷要走哪一條，例如直接解決請求或轉交專門代理。第二類是可攜式應用，把工作流、聊天流程連同內嵌的代理、技能與檔案收進單一 .ifpkg 檔案。第三類是巢狀工作流的可觀測性，工具呼叫會以子圖形式執行，並可在執行紀錄中逐階展開。第四類是 Agent 知識庫，以 Beta 形式提供獨立的知識空間。</p>
+
+<p>發布說明同時列出多項開發者層面的變更。OpenAPI 目錄擴大涵蓋範圍，新增的 difyctl 客戶端可從伺服器探索可用命令，支援工作流與聊天流程的建立、DSL 匯入匯出、環境變數管理、發布與版本還原，並以草稿雜湊處理並行編輯。原有的模式無關路徑 <code class="language-plaintext highlighter-rouge">/openapi/v1/apps/{app_id}:run</code> 已改為依模式分流的操作，硬編碼舊路徑的腳本需要更新。</p>
+
+<p>伴隨功能而來的是一次協定層的調整。<code class="language-plaintext highlighter-rouge">/runs</code> 端點只接受 composition v2 請求，既有工作階段快照在讀取時轉換並以 v2 儲存，舊版執行環境無法讀取新格式。舊的代理專用 AskHuman 工具與延遲繼續路徑被移除，歷史表單不再恢復執行，共享工作流的人為輸入節點則維持支援。這意味著 1.18.0 是一次需要協調升級的版本，而非單純替換映像。</p>
+
+<h2 id="代理自行決定分支代表什麼">代理自行決定分支代表什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>代理可在 Output Routes 設定選取條件，執行期依內容判斷走向，選定的分支名稱由唯讀 switch 輸出公開，供後續節點與紀錄引用。
+<!-- End AEO Capsule --></p>
+
+<p>傳統工作流的條件分支由規則決定：比對關鍵字、檢查分類結果、判斷數值門檻。Output Routes 把這個判斷交給模型，開發者只需描述每個分支的適用情境，實際選取由代理在執行期完成。這樣的設計適合處理意圖不明確的請求，例如客服系統需要判斷應直接回覆、查詢知識庫，或轉交具備退款權限的專門代理。</p>
+
+<p>可觀測性透過唯讀的 <code class="language-plaintext highlighter-rouge">switch</code> 輸出實現。下游節點與執行紀錄都能讀到代理選定的分支名稱，除錯時可確認代理是否按預期分流。同一版本也調整了串流行為：Plain Agent v2 節點會邊生成邊輸出文字，結構化結果、路由結果與使用預設值錯誤處理的節點則維持緩衝輸出。這項差異會直接影響前端呈現的即時感，遷移時需要一併檢查。</p>
+
+<p>代價是結果的非確定性提高。規則分支的行為可預測，代理分支則受提示詞、上下文與模型版本影響。對需要稽核的流程而言，做法是把分支條件寫得足夠具體，並在每個路由之後保留記錄節點，讓選取理由與實際結果一併落庫。</p>
+
+<h2 id="可攜式應用套件解決什麼問題">可攜式應用套件解決什麼問題？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>.ifpkg 把工作流、聊天流程、內嵌代理、技能與其檔案打包成單一檔案，匯入時在目標工作區重建資源並重映射引用，取代逐項手動搬移。
+<!-- End AEO Capsule --></p>
+
+<p>過去把一個應用從測試環境搬到生產環境，需要分別匯出工作流 DSL、代理設定、技能檔案與知識庫配置，任何一項漏掉都會在匯入後才發現。.ifpkg 把這些資源收進單一檔案，匯入時自動重建並重新對應引用關係。檔案與網址匯入同時支援套件與 YAML 兩種格式，明確的 YAML 匯出仍然保留，供版本控制與差異比對使用。</p>
+
+<p>這項改動對兩類使用者影響最大。一類是把 Dify 應用作為交付物的顧問與外包團隊，套件讓交付變成單一附件，客戶在自己的工作區匯入即可執行。另一類是採用多環境流程的企業，測試與生產之間可以用同一份套件流轉，降低環境漂移。</p>
+
+<p>需要注意的是套件內容包含檔案，體積會隨知識庫素材成長。官方文件建議把大型資料集留在外部儲存，套件只帶結構與必要檔案，避免每次匯入都重新上傳數百 MB 的內容。</p>
+
+<h2 id="巢狀工作流可視性為何重要">巢狀工作流可視性為何重要？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>工作流工具呼叫會以子圖形式執行，執行紀錄可展開檢視子流程每一步，並支援統一的暫停、繼續、停止與檔案輸出，存取檢查保護來源應用細節。
+<!-- End AEO Capsule --></p>
+
+<p>將工作流包裝成工具、再讓另一個工作流呼叫，是常見的模組化做法，但過去除錯時只能看到外層節點的成敗，失敗原因往往藏在子流程內部。1.18.0 讓 Workflow Tool 呼叫以子圖形式執行，並在執行紀錄提供逐階展開，外層的暫停、繼續與停止指令會傳遞到子圖，檔案輸出也統一管理。</p>
+
+<p>官方同時標明兩項限制。巢狀用量的統計在暫停或停止之後可能仍為近似值，不能當作計費依據；主控台的下鑽檢視與外部追蹤匯出的範圍不同，需要完整鏈路時仍要接上外部觀測工具。存取檢查會確保子流程的細節不會越權暴露給沒有權限的成員。</p>
+
+<p>對多團隊共用平台而言，這項改動的實際價值在於責任邊界。子流程的擁有者可以獨立維護與除錯，呼叫方只需關心輸入與輸出契約，平台則負責把兩邊的執行紀錄串起來。</p>
+
+<h2 id="agent-知識庫目前有哪些限制">Agent 知識庫目前有哪些限制？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>Agent 知識庫為 Beta，需獨立服務與資料庫，預設 Compose 不安裝，映像目前僅支援 amd64，且尚未在雲端版本上線。
+<!-- End AEO Capsule --></p>
+
+<p>Agent 知識庫提供一個集中的知識空間，可加入檔案或連接外部來源，並在同一介面檢視文件處理進度、中繼資料、檢索軌跡與品質評估。新的知識檢索節點與代理整合共用受存取控制的 KnowledgeFS 空間，既有的傳統知識庫功能維持不變。</p>
+
+<p>部署門檻寫得相當明確。這是可選整合，需要獨立資料庫與遷移、Capability v2 公開驗證器、Dify 簽署金鑰、模型設定（嵌入、推理與重排），以及工作區切換閘門。預設 Compose 安裝保持關閉，本機社群版開發需要明確開啟。健康檢查必須通過 <code class="language-plaintext highlighter-rouge">/ready</code>，而非只有 <code class="language-plaintext highlighter-rouge">/health</code>。官方發布的 KnowledgeFS API 映像目前僅提供 amd64 版本，標準 Dify API 映像則不含該引擎。</p>
+
+<p>這些條件說明 Beta 標籤並非形式。對已在生產環境運行 Dify 的團隊而言，較穩妥的做法是先以獨立環境驗證知識庫流程，確認嵌入模型與重排模型的品質符合預期，再考慮切換工作區。急著在主要工作區啟用，會同時承擔資料遷移與服務穩定性的風險。</p>
+
+<h2 id="difyctl-與-openapi-改變了什麼">difyctl 與 OpenAPI 改變了什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>difyctl 從伺服器的操作目錄探索命令，支援建立工作流、DSL 匯入匯出、設定與版本還原，v2 客戶端不沿用 v1 登入狀態，需重新登入。
+<!-- End AEO Capsule --></p>
+
+<p>命令列工具的價值在於把重複操作變成腳本。difyctl 的設計並非硬編碼一組固定命令，而是從伺服器的操作目錄探索可用介面，因此不同版本的伺服器可以對應不同的命令集合，說明文件也隨之更新。草稿雜湊機制處理並行編輯，避免兩人同時修改同一份 DSL 時互相覆蓋。</p>
+
+<p>舊有整合需要調整的地方有兩處。其一，模式無關的執行路徑已由依模式分流的操作取代，直接呼叫舊路徑的腳本會失效，應改為查詢目錄取得對應操作。其二，v2 客戶端不重用 v1 的登入狀態，升級後必須重新登入。工具本身也附帶代理技能，可用 <code class="language-plaintext highlighter-rouge">difyctl install skills &lt;目錄&gt;</code> 安裝，讓建構 Dify 應用的代理取得對應的操作知識。</p>
+
+<p>對平台團隊而言，這代表自動化流程需要一次整理。把建立應用、匯出 DSL、發布與還原這幾步寫成腳本之後，環境複製與版本回溯都能進入 CI 流程，而不再依賴人工點擊。</p>
+
+<h2 id="dify-的數據表現如何">Dify 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>星標 159,353、分支 25,175、註冊貢獻者 456 位，最近七日提交 208 次，授權為修改版 Apache 2.0，後端以 Python 撰寫、前端為 Next.js。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">159,353</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">25,175</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">456</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">208</span><span class="ui-stat-label">近七日提交</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">6</span><span class="ui-stat-label">版本間隔週數</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Apache 2.0</span><span class="ui-stat-label">修改版授權</span></div>
+</div>
+
+<p><img src="/assets/images/posts/dify-1-18-agent-routing-news-shot2.png" alt="Dify 儲存庫首頁頂部，顯示 langgenius/dify 專案名稱、公開狀態、Star 15.9 萬與 Fork 2.5 萬的統計，以及 Python 語言與授權標示" /></p>
+
+<p>專案自二零二三年四月建立，兩年半累積十五萬九千顆星標，分支數超過二萬五千，說明大量團隊把 Dify 當作起點而非終點：分支之後的修改多半圍繞自家模型、自家工具與自家合規要求。註冊貢獻者四百五十六位，最近七日提交二百零八次，活躍度維持在每天約三十次提交。</p>
+
+<p><img src="/assets/images/posts/dify-1-18-agent-routing-news-shot3.png" alt="Dify 儲存庫貢獻者統計頁面，顯示每週提交曲線與主要貢獻者排名，反映專案近期的開發節奏" /></p>
+
+<p>版本節奏同樣值得注意。1.17.1 於九月十日發布，1.18.0 於十月二十三日發布，相隔六週；在此之前，1.16.1 到 1.17.0 相隔約一個月。這種節奏對自架團隊意味著每季需要安排一次升級窗口，而 1.18.0 涉及執行協定變更，窗口內必須一次更新所有相關元件。</p>
+
+<h2 id="升級到-1180-需要注意什麼">升級到 1.18.0 需要注意什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>API、worker、Agent Backend 與執行映像須同步升級，沙箱要設高熵權杖，來源安裝改用 Python 3.13，並保留 PASSWORD_PEPPER。
+<!-- End AEO Capsule --></p>
+
+<p>官方升級指南列出六項前置動作。第一，先備份資料庫、向量庫資料、上傳檔案、代理快照與所有部署密鑰。第二，代理相關元件必須一起升級，<code class="language-plaintext highlighter-rouge">/runs</code> 只接受 v2 請求，舊執行環境無法讀取新快照。第三，讓進行中的執行完成後再替換舊 worker，避免舊消費者處理共享佇列。第四，在重啟前設定 Local 沙箱的高熵權杖，並確認映像版本對應 1.18.0。第五，保留既有的 <code class="language-plaintext highlighter-rouge">PASSWORD_PEPPER</code>，升級時新設並非透明遷移，需要另行規劃密碼重設。第六，檢查代理邊界設定，內建 Nginx 會以解析出的用戶端位址取代 <code class="language-plaintext highlighter-rouge">X-Forwarded-For</code>，若前方另有負載平衡器或 CDN，需在該層設定真實 IP 處理，否則訪客會共用同一個限流桶。</p>
+
+<p>資料層面有三項需要事後處理。已在升級前被移除的發布觸發器不會自動修復，需要重新綁定並重新發布；文件抽取的修正只對重新匯入或重建索引的內容生效；內建文件中繼資料的切換只改寫已啟用且索引完成的文件，其餘舊資料需要日後再處理。自架團隊若同時使用 Weaviate，仍停留在 1.27 的環境須先完成 1.17.1 的階段式升級。</p>
+
+<p>這些條件構成一個明確結論：1.18.0 適合有維護窗口與備份流程的團隊，不適合在沒有測試環境的情況下直接對生產實例操作。Docker Compose 使用者至少要先在副本上驗證代理執行與知識檢索兩條路徑。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 57 字 -->
+<p>原始碼、版本發布說明與升級指南均位於 GitHub 的 langgenius/dify 儲存庫，1.18.0 頁面另列六項升級前置條件與資料修復說明。
+<!-- End AEO Capsule --></p>
+
+<p>專案位址為 https://github.com/langgenius/dify，1.18.0 的發布說明包含功能亮點、升級指南與部署指令三段，並附上相關拉取請求編號供追溯。官方文件站 docs.dify.ai 提供自架安裝、模型供應商與工作流節點的中文說明，繁簡中文版本均在儲存庫內同步維護。</p>
+
+<h2 id="總結dify-1180-值得升級嗎">總結：Dify 1.18.0 值得升級嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>值得升級，前提是先備份並安排協調窗口。輸出路由與可攜式套件直接改善交付與除錯流程，Beta 的知識庫則建議在獨立環境先行驗證。
+<!-- End AEO Capsule --></p>
+
+<p>1.18.0 的四項改動分別回應了平台使用者的四個實際痛點：分支判斷不够靈活、應用搬移容易漏件、巢狀流程難以除錯、知識管理散落各處。其中輸出路由與可攜式套件屬於完成度較高的功能，能立即投入使用；巢狀追蹤已可用但統計仍有近似值；Agent 知識庫則是明確的 Beta，需要獨立服務與額外設定。</p>
+
+<p>升級判斷可以簡化為一個問題：團隊是否有能力在一個維護窗口內同步更新 API、worker、代理後端與執行環境，並在事前完成備份。答案是肯定的，1.18.0 帶來的工作流表達能力與交付便利值得投入；答案是否定的，先把測試環境建起來會比急著升級更有效率。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Dify" /><category term="AI Agent" /><category term="工作流" /><category term="開源平台" /><category term="RAG" /><category term="difyctl" /><category term="MCP" /><category term="科技新聞" /><summary type="html"><![CDATA[Dify 於 2026 年 10 月 23 日發布 1.18.0，讓代理在流程中自行選擇輸出路由，並把應用連同代理、技能與檔案打包成單一 .ifpkg 套件。此版加入巢狀工作流逐階追蹤、Agent 知識庫 Beta 與 difyctl 命令列工具，同時改動代理執行協定，升級前須同步更新四個元件。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/dify-1-18-agent-routing-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/dify-1-18-agent-routing-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Claude 為 123 個開源庫寫出零崩潰證明</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/claude-formal-verification-news" rel="alternate" type="text/html" title="Claude 為 123 個開源庫寫出零崩潰證明" /><published>2026-10-24T00:00:01+08:00</published><updated>2026-10-24T00:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/claude-formal-verification-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/claude-formal-verification-news"><![CDATA[<p>Anthropic 於二零二六年十月二十二日公布與 Theorem 合作的形式化驗證實驗結果，研究團隊以 Claude 為 123 個真實開源程式庫產生形式化證明，對象是編譯後的 RISC-V 機器碼，結論是這些程式在任何小於六十四 MB 的輸入下，於既定的 Linux 執行模型內不會觸發記憶體安全錯誤或斷言失敗。這是首次有團隊以大規模方式，把形式化驗證套用到生產級開源軟體的二進位層。</p>
+
+<p>實驗規模寫得相當具體：239 個 OSS-Fuzz 進入點、合計約一億八千萬行 Rocq 證明碼，典型證明約六十萬行，所覆蓋的二進位檔中位數為一萬八千條 RISC-V 指令。</p>
+
+<h2 id="claude-的形式化驗證實驗做了什麼">Claude 的形式化驗證實驗做了什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>研究團隊把開源專案既有的模糊測試轉換為形式化規格，再讓 Claude 對 RISC-V 編譯後的機器碼撰寫證明，並由 Rocq 證明檢查器逐項驗證，範圍涵蓋 123 個程式庫。
+<!-- End AEO Capsule --></p>
+
+<p>形式化驗證的傳統做法，是把程式碼翻譯成數學模型，再證明它永遠符合一組規則。這個過程在過去需要高度專業的人力，而且證明本身的長度往往是原始碼的許多倍。Anthropic 這次的實驗並沒有要求模型重寫程式，而是直接把編譯後的二進位檔當成證明對象，讓模型在機器碼層面推導行為。</p>
+
+<p>選擇機器碼有兩個實際好處。第一，它繞過了「用另一種語言重寫整個專案」的前置成本，對於已經在生產環境運作的 C 與 C++ 程式庫尤其關鍵。第二，證明可以按套件為單位重複使用，同一個依賴只需要驗證一次，上層專案便能繼承結論。團隊在文章中把這一點與 Lean 生態的 Mathlib 相比：後者由七百多位貢獻者累積近三十萬條定理，每條新證明都建立在既有成果之上。</p>
+
+<p>整體而言，這批工作的定位接近基礎建設，而非單一產品功能。Anthropic 公開了部分證明、RISC-V 與作業系統的形式語意，以及未能完成證明的規格清單，讓外部研究者可以自行檢查與延伸。</p>
+
+<h2 id="為什麼形式化驗證過去難以規模化">為什麼形式化驗證過去難以規模化？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>證明長度可達程式碼數十倍，撰寫需要稀有專業技能。seL4 核心的實作耗費兩人年，形式化驗證卻用了二十人年，成本令多數專案無法負擔。
+<!-- End AEO Capsule --></p>
+
+<p>成本結構是主要障礙。文章引用 seL4 作業系統核心的例子：實作階段投入約兩個人年，形式化驗證階段則需要二十個人年。這種比例使得形式化方法長期只出現在航空電子、醫療器材與少數安全核心等領域，一般商業軟體難以採用。</p>
+
+<p>第二個障礙是規格本身。要證明程式正確，首先必須定義「正確」是什麼。PNG 解碼器的行為可以依 RFC 2083 精確描述，但文字編輯器或瀏覽器的正確行為難以用單一形式規格涵蓋。規格不明確，後續所有證明都失去意義。</p>
+
+<p>團隊處理規格問題的方式相當務實：把開發者已經寫好的模糊測試當成規格。OSS-Fuzz 的進入點本身就是一種宣告，任何導致崩潰的輸入都屬於缺陷。於是「這個進入點永遠不會崩潰」成為一條可證明的命题，而它同時覆蓋了壓縮解壓後還原、冪等性、差分測試等各種高階性質。</p>
+
+<h2 id="從測試到證明這套流程如何運作">從測試到證明：這套流程如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>流程先把程式與模糊測試編譯成 RISC-V 執行檔，結合作業系統語意產生規格，Claude 撰寫 Rocq 證明，檢查器若不通過便回頭修正，直到規格被滿足。
+<!-- End AEO Capsule --></p>
+
+<p>具體步驟可以分成四層。第一層是編譯，程式庫與它的模糊測試一併編譯為 RISC-V 執行檔，並以 AddressSanitizer 插樁，使不當記憶體存取直接觸發崩潰。第二層是建模，Theorem 提供 RISC-V 指令集與 Linux 行程的形式語意，把二進位檔轉換成可供推理的數學物件。</p>
+
+<p>第三層是撰寫，Claude 在規格約束下產生 Rocq 證明。若證明失敗，失敗的性質本身會指向可能的缺陷位置，模型可以修改程式碼、重新產生規格、再繼續證明。第四層是檢查，Rocq 核心獨立驗證證明是否真的滿足規格，開發者不需要逐行閱讀那六十萬行證明碼。</p>
+
+<p>需要信任的環節因此被壓縮到三項：RISC-V 與 Linux 行程的形式模型、被證明的定理敘述、以及 Rocq 檢查器本身。這個設計承認了信任基礎無法完全消除，但把它從「每一行業務程式碼」縮小到「少數共用元件」，而共用元件只需強化一次，就能服務任意數量的專案。</p>
+
+<h2 id="claude-在這個過程中找到哪些錯誤">Claude 在這個過程中找到哪些錯誤？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>模型在證明過程中發現數百個缺陷，包括需要約二十 MB 特定佈局輸入的越界寫入、需要六十四 MB 輸入的越界讀取，以及 libexpat 的 CVE-2026-56132。
+<!-- End AEO Capsule --></p>
+
+<p>這些缺陷的共同特徵是難以被模糊測試觸及。團隊指出，模糊測試的輸入通常上限為一百萬位元組，並依賴覆蓋率引導，因此對「需要極大輸入且佈局罕見」的路徑幾乎無效。其中一個案例發生在某個解壓縮器的副本中：計數器下溢導致越界寫入，只有在約二十 MB、具備特定結構的輸入下才會出現。</p>
+
+<p>另一個案例出現在影像解碼器，越界讀取需要六十四 MB 輸入與超過 2 GB 記憶體才會觸發。還有程式庫需要對同一個檔案建立兩個控制代碼，並以特定順序呼叫才會出錯。團隊亦在 libexpat 重新發現 CVE-2026-56132，該缺陷需要深度嵌套的輸入。</p>
+
+<p>並非所有發現都會造成崩潰。Claude 在證明某個程式庫的記憶體安全時注意到，一項限制應用程式可載入檔案的功能並沒有在所有路徑上生效。這類邏輯缺陷不會被記憶體檢查工具捕捉，卻直接影響安全邊界。團隊的結論是：即使最終證明未能完成，嘗試證明的過程本身就會產出真實可修的錯誤。</p>
+
+<h2 id="這項成果有什麼限制">這項成果有什麼限制？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>證明僅覆蓋單執行緒、靜態連結的 RISC-V 二進位檔，實際部署多用 x86 或 ARM 並動態連結 glibc；ASan 也無法偵測所有記憶體缺陷，並非每個進入點都已驗證。
+<!-- End AEO Capsule --></p>
+
+<p>最直接的落差在執行環境。證明假設程式是單執行緒、靜態連結的 RISC-V 二進位檔，配固定的記憶體預算；現實中多數使用者執行的是 x86 或 ARM 版本，並動態連結 glibc。要收窄這個差距，需要為更多架構與作業系統行程建立精確語意，這是可以逐步補上的工程，但目前尚未完成。</p>
+
+<p>第二項限制關於覆蓋範圍。團隊證明了許多進入點在六十四 MB 以內輸入下不會崩潰，但沒有驗證每個程式庫的所有進入點，也無法涵蓋未被呼叫的死碼。AddressSanitizer 本身也無法偵測所有記憶體安全問題，因此「通過證明」並不等於「沒有缺陷」。</p>
+
+<p>第三項限制涉及呼叫端。證明只描述程式庫自身的行為，若上層程式誤用介面，仍可能在呼叫端造成記憶體損壞。要處理這一點，必須為每個公開函式訂明呼叫者義務，並要求呼叫端嚴格遵守。</p>
+
+<p>成本則是第四項限制。單一證明的生成可能消耗數億個 token。團隊量測了 36 個小型驗證任務，發現 Opus 5.5 在 token 用量比 Opus 5 少約四成的條件下，能完成其中一半的任務；多個代理共用同一份證明工作區時，整體 token 需求再降約一成七。趨勢指向成本下降，但現階段仍屬昂貴操作。</p>
+
+<h2 id="開發者可以如何開始">開發者可以如何開始？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>Theorem 提供代跑流程的服務，並公開一個 Claude skill 協助開發者驗證自家程式碼。Anthropic 亦釋出部分證明與形式語意，供外部檢查與重用。
+<!-- End AEO Capsule --></p>
+
+<p>對於想嘗試的團隊，最實際的入口是從既有的模糊測試開始。若專案已經有 OSS-Fuzz 進入點，表示「什麼算錯誤」已被明確定義，這正是形式化驗證最需要的規格基礎。反之，若專案連模糊測試都沒有，先補上測試會比直接進入證明划算。</p>
+
+<p>第二個建議是從依賴鏈下手。文章提到依賴呈冪律分佈，驗證少量共用程式庫就能覆蓋大量上層軟體。Theorem 的長期路線圖以 Nix 生態為對象，優先處理 glibc、OpenSSL、cURL 等關鍵基礎元件，這個順序值得其他團隊參考。</p>
+
+<p>第三個建議關乎心態。團隊明確指出，「已形式化驗證」不等於「沒有缺陷」，它只表示程式在既定規格與機器模型下符合要求。若規格與現實脫節，缺陷仍會存在，只是位置轉移到模型假設裡。把驗證當成縮小搜尋範圍的工具，而不是終點，會更接近實際情況。</p>
+
+<h2 id="這對軟體供應鏈安全意味著什麼">這對軟體供應鏈安全意味著什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>形式化證明可在二進位層為依賴項提供可檢查的安全保證，並容許按套件重用，令上游一次驗證、下游繼承結論，降低整體稽核成本。
+<!-- End AEO Capsule --></p>
+
+<p>軟體供應鏈的風險往往集中在少數被廣泛引用的底層程式庫。當這些程式庫能以套件為單位取得證明，下游專案就不需要重複稽核同一份程式碼，只需確認自己使用的版本與被證明的版本一致。這種模式在數學生態已運行多年，搬到系統軟體上是合理的延伸。</p>
+
+<p>不過，證明的有效期取決於版本管理。任何原始碼變更都會使證明失效，因此需要把證明生成納入發布流程，而非一次性的專案。團隊在實驗中觀察到代理會複製彼此已完成的證明並改寫，這種重用行為正是把成本攤平的關鍵。</p>
+
+<p>對企業而言，短期內較可行的做法，是針對最關鍵的依賴要求供應商提供驗證狀態，並把「是否具備形式化保證」納入採購評估。長期來看，若工具鏈成熟到能自動化整個流程，驗證狀態可能成為套件metadata的一部分，如同今日的簽章與雜湊值。</p>
+
+<h2 id="總結形式化驗證會成為標準流程嗎">總結：形式化驗證會成為標準流程嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>短期內不會全面普及，成本與環境假設仍是門檻。但證明可重用、模型效率持續改善，關鍵基礎元件最可能先被納入驗證流程。
+<!-- End AEO Capsule --></p>
+
+<p>這次實驗的意義，在於把形式化驗證從「專家數年的人工投入」推進到「模型數週的自動產出」。一億八千萬行證明碼本身不是重點，重點是其中絕大多數不需要人手審閱，開發者只需信任少數共用元件。這種分工讓驗證的邊際成本隨著生態成熟而下降。</p>
+
+<p>同時必須看清界限。證明覆蓋的是特定架構、特定執行模型與特定輸入上限，規格與現實之間的落差仍然是缺陷的來源。把形式化方法視為測試的補強，而非取代，才不會對安全保證產生錯誤期待。</p>
+
+<p>對於關注供應鏈風險的團隊，現在值得做的是盤點依賴、確認既有測試的品質，並追蹤 Theorem 與 Anthropic 釋出的工具。等到流程穩定，先行者已經具備可重用的證明資產。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<ul>
+  <li>Anthropic 研究文章：<a href="https://www.anthropic.com/research/formal-verification">https://www.anthropic.com/research/formal-verification</a></li>
+  <li>Theorem 官方網站：<a href="https://theorem.dev">https://theorem.dev</a></li>
+  <li>Google OSS-Fuzz 專案：<a href="https://github.com/google/oss-fuzz">https://github.com/google/oss-fuzz</a></li>
+  <li>Rocq 證明助理：<a href="https://rocq-prover.org">https://rocq-prover.org</a></li>
+</ul>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Anthropic" /><category term="Claude" /><category term="形式化驗證" /><category term="資安" /><category term="RISC-V" /><category term="Rocq" /><category term="OSS-Fuzz" /><category term="開源" /><category term="科技新聞" /><summary type="html"><![CDATA[Anthropic 與 Theorem 合作，以 Claude 為 123 個開源程式庫、239 個 OSS-Fuzz 進入點產生形式化證明，合計約一億八千萬行 Rocq 證明碼，證明程式在六十四 MB 以內輸入下不會崩潰。實驗同時挖出模糊測試多年未見的缺陷。本文整理流程、發現的錯誤與實際限制。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/claude-formal-verification-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/claude-formal-verification-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">PageIndex 開源：捨棄向量資料庫的推理式檢索</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/pageindex-news" rel="alternate" type="text/html" title="PageIndex 開源：捨棄向量資料庫的推理式檢索" /><published>2026-10-23T12:00:01+08:00</published><updated>2026-10-23T12:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/pageindex-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/pageindex-news"><![CDATA[<p>VectifyAI 開源的 PageIndex 在 2026 年 10 月 22 日累積三萬九千餘顆星標，主要語言為 Python，採 MIT 授權。它對檢索增強生成提出另一條路線：不建向量索引、不切分區塊，而是為每份文件生成階層樹，讓模型沿樹枝推理，找出應讀章節。</p>
+
+<p><img src="/assets/images/posts/pageindex-news-shot1.png" alt="PageIndex 儲存庫 README 開頭畫面，顯示專案橫幅、Trendshift 徽章、PageIndex 標題與「Vectorless, Reasoning-based RAG」標語" /></p>
+
+<h2 id="pageindex-是什麼">PageIndex 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>PageIndex 是 VectifyAI 開源的檢索框架，以階層樹狀索引取代向量資料庫，讓模型沿目錄推理定位章節，並提供本地與雲端兩種模式。
+<!-- End AEO Capsule --></p>
+
+<p>專案的自我定位寫得相當直接：一套「無向量、以推理為本」的檢索框架，不依賴向量資料庫，不做固定長度切塊，檢索結果可追溯至明確章節。這三個特徵構成它與主流方案的差異邊界。</p>
+
+<p>開發團隊為 VectifyAI，儲存庫建立於 2025 年 4 月，官方網站為 pageindex.ai。專案在 2025 年 9 月發表技術文章，並以 Mafin2.5 之名在金融文件問答基準測試中提交成績；同一團隊亦公開 Mafin2.5-FinanceBench 的完整評估資料。這種把評估過程一併開源的做法，讓外部研究者可以複核數字，而不是只接受宣傳頁上的結論。</p>
+
+<p>目標受眾相當明確：手上有一批長篇專業文件的團隊，例如財務報告、法律合約、監管申報、技術手冊、醫學文獻與教科書。這些文件的共同點是結構嚴謹、章節分明，但單份長度往往超出模型一次可讀的範圍。</p>
+
+<h2 id="pageindex-為何捨棄向量資料庫">PageIndex 為何捨棄向量資料庫？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>向量檢索按語意相似度排序，但相似不等於相關。專業文件需要依上下文與領域知識判斷，PageIndex 改用推理替代相似度，避免取回語意接近卻答不上問題的段落。
+<!-- End AEO Capsule --></p>
+
+<p>專案文件把問題講得很清楚：向量式檢索以語意相似度作為排序依據，而檢索真正需要的是相關性，相關性則需要推理。在需要上下文理解、領域專業與多步推斷的專業文件上，相似度搜尋會漏掉那些相關但不相似的段落，同時取回一堆相似卻無用的段落。</p>
+
+<p>這個批評並非空泛。固定長度切塊會切斷表格、註腳與跨頁論證；嵌入模型只保留語意向量，丟棄章節層級與位置資訊；top-k 取回之後，模型拿到的是一堆彼此無關的片段，只能憑片段拼湊答案。當問題涉及「第三季毛利率相對前一年同期變化」這類需要跨章節比對的查詢，片段化檢索的失敗率明顯上升。</p>
+
+<p>PageIndex 的替代方案是把文件的結構保留下來。它假設長篇專業文件本身已有目錄與層級，這層人為結構正是人類專家檢索時使用的路徑；與其用向量壓縮掉結構，不如把結構顯式化，讓模型的推理沿著它走。</p>
+
+<h2 id="pageindex-的樹狀索引如何運作">PageIndex 的樹狀索引如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>流程分兩段：先為每份文件生成階層樹狀索引，節點對應章節與頁碼；檢索時模型在樹上逐步推理，選定分支後才讀取內容，因此結果可追溯至具體章節。
+<!-- End AEO Capsule --></p>
+
+<p>第一階段是索引。系統從文件版面抽取標題層級、段落歸屬與頁碼對應，建立樹狀結構；官方強調這一步主要依賴版面解析而非語言模型，索引模型只負責摘要與修飾節點描述。這解釋了為何索引階段可以用較便宜的模型而不明顯損害品質。</p>
+
+<p>第二階段是檢索。使用者提出問題後，模型不是搜尋向量空間，而是在樹上做選擇：先判斷哪個章節標題與問題相關，進入該分支後再判斷子章節，直到抵達足以回答問題的葉節點，然後讀取原文作答。官方把這個過程類比為 AlphaGo 在搜尋樹上權衡路徑，只展開值得展開的分支。</p>
+
+<p>由於每次只讀取推理實際走過的路徑，上下文用量不隨文件長度線性增長。這也是後續成本比較能夠成立的技術前提：索引建立一次可重複使用，每次提問只支付走過那條路徑的費用。</p>
+
+<p>2026 年 8 月加入的 PageIndex Flash 進一步壓縮索引時間，並成為 SDK 本地模式下處理文字型 PDF 的預設方法。同一時期推出的檔案系統層，則把單文件樹擴展為語料層級的樹，讓檢索可以在整個文件庫上推理，而非局限於單一檔案。</p>
+
+<h2 id="pageindex-的檢索成本與準確度表現如何">PageIndex 的檢索成本與準確度表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>官方在 FinanceBench 錄得 98.7% 準確率。本地索引成本約每頁 0.001 美元；420 頁文件的單次提問，比原生 PDF 輸入便宜十六點六倍。
+<!-- End AEO Capsule --></p>
+
+<p>索引成本的量測涵蓋 9 頁至 1,098 頁共九份 PDF。以 gpt-5.6-luna 建立索引，平均每頁約 0.001 美元，偏離參考線的幅度主要來自文字密度而非文件長度；索引耗時由約 13 秒至 4.5 分鐘，與頁數呈可預測的增長關係。對一本千頁教科書而言，一次性投入略高於一美元與數分鐘，之後每次提問都重用同一棵樹。</p>
+
+<p>檢索成本的比較基準是「把整份 PDF 直接交給模型」。在兩條路線得出相同答案的文件上，原生 PDF 輸入在 52 頁時貴 2.1 倍，85 頁貴 3.4 倍，198 頁貴 7.8 倍，420 頁貴 16.6 倍；到 805 頁，文件本身已超出模型的上下文窗口，比較無從成立。這個數列清楚說明優勢來源：PageIndex 的成本取決於推理路徑長度，而非文件總長度。</p>
+
+<p>準確度方面，專案在 FinanceBench 取得 98.7% 的成績，並把向量式 RAG 的約 50% 並列對照。另一組公開測試 PageIndex-OSS-Benchmark 使用 62 條查找型問題、34 份 PDF 共 1,945 頁，題目答案均為正文直接陳述的事實，因此答錯可歸因於檢索或閱讀失敗，而非推理能力不足。這種刻意限制題型的設計，讓測試指向框架本身而非模型能力。</p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">39,449</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">3,424</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">16</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">151</span><span class="ui-stat-label">待處理議題</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Python</span><span class="ui-stat-label">主要語言</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p><img src="/assets/images/posts/pageindex-news-shot2.png" alt="PageIndex 儲存庫首頁頂部，顯示 VectifyAI/PageIndex 專案名稱、公開狀態、Star 3.9 萬與 Fork 3.4 千的統計數字，以及最新版本與分支資訊" /></p>
+
+<h2 id="如何快速開始使用-pageindex">如何快速開始使用 PageIndex？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>安裝 pageindex 套件後，以客戶端指定索引與對話模型，提交文件取得編號即可提問。持有 Claude 訂閱者可加 claude-code 前綴免 API 金鑰。
+<!-- End AEO Capsule --></p>
+
+<p>本地模式的入門路徑只有三個步驟：安裝套件、建立客戶端、提交文件。官方範例以 gpt-6-luna 建立樹狀索引，以 gpt-6-sol 負責檢索與作答，提交後取得文件編號，之後每次提問都帶上該編號。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pageindex</span> <span class="kn">import</span> <span class="n">PageIndexClient</span>
+
+<span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">[</span><span class="s">"OPENAI_API_KEY"</span><span class="p">]</span> <span class="o">=</span> <span class="s">"your-openai-key"</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">PageIndexClient</span><span class="p">(</span>
+    <span class="n">index</span><span class="o">=</span><span class="s">"gpt-6-luna"</span><span class="p">,</span>
+    <span class="n">chat</span><span class="o">=</span><span class="s">"gpt-6-sol"</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">doc_id</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">submit_document</span><span class="p">(</span><span class="s">"report.pdf"</span><span class="p">)[</span><span class="s">"doc_id"</span><span class="p">]</span>
+
+<span class="n">answer</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="n">chat</span><span class="p">(</span><span class="s">"What was the 2023 operating margin?"</span><span class="p">,</span> <span class="n">doc_id</span><span class="o">=</span><span class="n">doc_id</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">answer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>模型選擇的策略值得注意。官方建議索引階段用基本模型即可，因為樹狀結構來自版面解析，索引模型只做摘要修飾；對話階段則應該用能力範圍內最好的模型，因為檢索決策的品質直接決定答案品質。這種不對稱配置，讓整體成本壓在索引便宜、提問精準的組合上。</p>
+
+<p>另一個差異化設計是訂閱整合。持有 Claude 訂閱的使用者可安裝 pageindex[claude] 擴充，並在模型名稱前加 claude-code 前綴，例如以 claude-code/haiku 建立索引、以 claude-code/opus 檢索，用量計入既有方案而不需另外申請 API 金鑰。對於已經為訂閱付費的個人開發者，這條路徑把試驗成本降到接近零。</p>
+
+<p>雲端模式則把索引與儲存搬到 PageIndex 的服務端，處理掃描檔與圖文混排文件，並提供區塊級引用、中繼資料、資料夾與 MCP 伺服器。切換方式僅是把索引參數改為 cloud 並設定服務金鑰，檢索層仍可沿用使用者原本的模型供應商。這種分離設計讓團隊可以只把重活外包，同時保留對答案生成的控制權。</p>
+
+<h2 id="pageindex-與向量式-rag-有何分別">PageIndex 與向量式 RAG 有何分別？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>兩者在索引、檢索與可追溯性三個層面不同：向量式建立向量索引並以相似度搜尋，結果不透明；PageIndex 建立樹狀索引並以模型推理檢索，可回溯至明確章節與頁碼。
+<!-- End AEO Capsule --></p>
+
+<p>索引層的差別最根本。向量式方案把文件切塊後轉為嵌入向量，原始結構在轉換中流失；PageIndex 保留章節層級，節點本身承載語意標籤與位置資訊。前者是壓縮，後者是提綱。</p>
+
+<p>檢索層的差別在決策方式。相似度搜尋是一次性排序，檢索過程沒有中間判斷；樹上推理則是多步決策，每一步都可以根據已讀內容調整方向。官方把後者的輸出形容為可追溯至明確引用，因為模型必須指出它選擇了哪個節點，而非只回傳一串相似度分數。</p>
+
+<p>上下文層的差別體現在個人化程度。向量檢索的輸入基本上只有查詢向量，對話歷史與領域知識難以介入排序；樹上推理則可以把對話脈絡、使用者背景與領域假設一併納入判斷，這也是官方所稱「完整上下文」的含義。</p>
+
+<p>值得注意的是，兩條路線並非互斥。實務上常見的折衷，是以關鍵詞或向量先做粗篩，再用樹狀推理做精讀；PageIndex 的節點描述本身也可作為嵌入對象。專案文件並未主張全面取代向量資料庫，而是主張在長篇專業文件這一類場景，推理式檢索的邊際效益更高。</p>
+
+<h2 id="pageindex-有哪些實際應用場景">PageIndex 有哪些實際應用場景？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>適用於財務報告、法律文件、監管申報、技術手冊、醫學文獻與學術教科書等長篇專業文件，特別是問題需要跨章節比對、且答案必須附上明確出處的場合。
+<!-- End AEO Capsule --></p>
+
+<p>財務分析是最直接對應的場景。年報與季報的關鍵數字散布在管理層討論、附註與財務報表之間，單一問題往往需要跨三個章節才能回答；FinanceBench 的成績正是針對這類查詢。對需要標示數據來源的分析工作，可追溯的引用比答案本身更重要。</p>
+
+<p>法律與合規領域的需求類似，但更重視引用精度。合約審閱要回答的是「這條條款在哪些文件出現過、上下文如何」，樹狀索引的節點與頁碼對應，讓每一次引用都可以回到原文核對。監管申報的解讀亦同，條文之間的層級關係本身就是答案的一部分。</p>
+
+<p>技術手冊與醫學文獻則受益於結構穩定。手冊通常有清楚的章節與索引，醫學文獻有固定的摘要、方法、結果分段，兩者都適合直接轉為樹狀結構。學術教科書的優勢在於一次性索引成本可被長期分攤，一本千頁教材索引成本約一美元，之後所有提問共用。</p>
+
+<p>至於聊天型應用，專案的定位較為保守。它解決的是「在長文件中找到正確段落」的問題，而非「與文件對話」的體驗設計；後者需要額外的對話管理與答案組裝層，官方把這部分留給 SDK 與整合方處理。</p>
+
+<h2 id="pageindex-有哪些限制">PageIndex 有哪些限制？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>本地模式僅支援文字型 PDF，掃描檔需改用雲端；檢索品質高度依賴對話模型能力，弱模型會在樹上走錯分支；專案貢獻者僅十六人，長期維護與企業級支援仍需觀察。
+<!-- End AEO Capsule --></p>
+
+<p>第一項限制是輸入格式。本地模式處理文字型 PDF，掃描檔、圖表密集文件與 Office 格式需交由雲端模式，才能取得 OCR 與圖像理解能力。引用粒度亦有差異：本地為頁級，雲端為區塊級。</p>
+
+<p>第二項限制是模型依賴。索引階段可以用便宜模型，但檢索階段的能力直接影響路徑選擇；官方在基準測試中把不同模型畫成近乎垂直的推理強度階梯，跨越一個模型等級就換來一個數量級的成本變化。對預算受限的團隊，這意味著要在準確度與每次提問成本之間明確取捨。</p>
+
+<p>第三項是專案治理。儲存庫目前有 151 個待處理議題與十六位貢獻者，核心團隊規模小，商業模式依賴雲端服務與企業部署。MIT 授權讓程式碼可以自由使用與分支，但授權並不包含支援承諾；把這套框架放進生產流程的團隊，需要自行承擔版本跟進與問題修補的工作。</p>
+
+<p><img src="/assets/images/posts/pageindex-news-shot3.png" alt="PageIndex 儲存庫貢獻者統計頁面，顯示十六位貢獻者的頭像與提交次數分佈" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 53 字 -->
+<p>本文資料來源為 VectifyAI 的 PageIndex 儲存庫、官方文件與技術文章，以及團隊公開的 FinanceBench 評估資料。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/VectifyAI/PageIndex</li>
+  <li>官方網站：https://pageindex.ai</li>
+  <li>開發者文件：https://docs.pageindex.ai</li>
+  <li>FinanceBench 評估：https://github.com/VectifyAI/Mafin2.5-FinanceBench</li>
+  <li>OSS 基準測試：https://github.com/VectifyAI/PageIndex-OSS-Benchmark</li>
+</ul>
+
+<h2 id="總結pageindex-適合什麼團隊">總結：PageIndex 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>適合手上有大量長篇專業文件、需要可追溯引用的團隊，例如財務分析、法務合規與技術文件管理。若文件以掃描檔為主或需要企業級支援，則應先評估雲端方案與維護成本。
+<!-- End AEO Capsule --></p>
+
+<p>PageIndex 的價值不在於否定向量資料庫，而在於指出一個長期被忽略的維度：檢索的本質是判斷相關，而非計算相似。當文件長度增長到數百頁，切塊與嵌入所流失的結構資訊，會成為答案品質的天花板；把結構保留為樹，並讓模型在樹上推理，是一條成本可控的替代路徑。</p>
+
+<p>三萬九千餘顆星標與穩定的每兩週版本節奏，說明這條路線已獲得開發者社群認可。2026 年 10 月 19 日發布的 0.4.4 版把「比向量索引便宜」與「可用 Claude 訂閱執行」寫進版本說明，等於把成本與門檻兩個障礙同時處理。</p>
+
+<p>真正需要評估的是適用邊界。若檢索對象是新聞、論壇或短篇網頁，向量方案成熟且生態完整；若對象是動輒數百頁的專業文件，且答案必須附上可核對的出處，樹狀推理的優勢才成立。對正在為長文件問答苦惱的團隊，這個專案值得排進評估清單。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="PageIndex" /><category term="VectifyAI" /><category term="RAG" /><category term="向量資料庫" /><category term="檢索增強生成" /><category term="AI Agent" /><category term="樹狀索引" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[VectifyAI 開源的 PageIndex 以階層樹狀索引取代向量資料庫，讓語言模型沿目錄推理定位章節，在 FinanceBench 取得 98.7% 準確率，索引成本約每頁 0.001 美元。本文拆解兩段式檢索架構、成本基準、Claude 訂閱支援與實際限制。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/pageindex-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/pageindex-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">OpenAI Symphony 開源：把代碼代理變成排程系統</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/openai-symphony-news" rel="alternate" type="text/html" title="OpenAI Symphony 開源：把代碼代理變成排程系統" /><published>2026-10-23T08:00:02+08:00</published><updated>2026-10-23T08:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/openai-symphony-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/openai-symphony-news"><![CDATA[<p>OpenAI 於 2026 年 2 月 26 日開源 Symphony，專案在 GitHub 累積 27,772 顆星標，主要語言為 Elixir，採 Apache 2.0 授權。它的定位不是另一個編碼代理，而是一層排程服務：持續讀取工單系統的待辦工作，為每張工單建立隔離工作區，再啟動 Codex 會話直到完成。</p>
+
+<p><img src="/assets/images/posts/openai-symphony-news-shot1.png" alt="OpenAI Symphony 儲存庫 README 開頭畫面，顯示專案名稱、Symphony 定位標語與示範影片預覽縮圖" /></p>
+
+<h2 id="openai-symphony-是什麼">OpenAI Symphony 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>Symphony 是 OpenAI 開源的代理排程服務，持續讀取工單系統的待辦項目，為每張工單建立獨立工作區並啟動 Codex 執行。專案採 Apache 2.0 授權。
+<!-- End AEO Capsule --></p>
+
+<p>專案的核心概念是把手動執行轉為常駐流程。傳統做法由工程師逐項指派任務給編碼代理，並在旁邊確認輸出；Symphony 則把排程、併發控制、重試與狀態回收集中到一個常駐服務，工程師改為在較高層次管理待辦清單。</p>
+
+<p>值得注意的是專案的分發形態。儲存庫根目錄的 <code class="language-plaintext highlighter-rouge">SPEC.md</code> 長達 2,312 行，以語言無關的方式定義服務契約；實際可執行的 Elixir 實作只是其中一個參考版本。README 明確建議團隊依規格自行實作硬化版本，這種「規格優先、實作其次」的釋出方式，在大型機構的開源專案中並不常見。</p>
+
+<p>官方同時標註此專案屬於低調的工程預覽，僅建議在受信任環境中測試。這句提示決定了後續所有評估的基準線：它是一份可遵循的設計藍圖，而不是可以直接搬上生產線的成品。</p>
+
+<h2 id="symphony-為何要解決代理監督問題">Symphony 為何要解決代理監督問題？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>代理執行成本低，監督成本高。Symphony 把重複的派工、隔離、重試與狀態追蹤自動化，讓團隊管理待辦工作，而不是逐次監督代理的每一個動作。
+<!-- End AEO Capsule --></p>
+
+<p>專案在規格書中列出四項營運問題。第一是把工單執行從手動腳本轉為可重複的常駐流程；第二是把代理指令限制在每張工單專屬的工作區目錄內；第三是把流程策略寫進儲存庫的 <code class="language-plaintext highlighter-rouge">WORKFLOW.md</code>，讓提示與執行設定跟程式碼一起版控；第四是提供足夠的可觀測性，讓多個併發執行可以同時被操作與除錯。</p>
+
+<p>這四項問題對應到實務上的具體痛點。當代理數量從一個增加到十個，人工切換工作區、確認分支、追蹤哪個任務卡住，很快就會吃掉工程師大部分時間。規格書把這類工作定義為協調層職責，並要求由單一權威元件序列化所有狀態變更，避免重複派工。</p>
+
+<p>專案亦明確劃出非目標：不提供豐富的網頁介面、不做多租戶控制平面、不是通用工作流程引擎或分散式任務排程器、不內建工單編輯的業務邏輯。這種削減範圍的做法，讓規格可以在數千行內保持可實作。</p>
+
+<h2 id="symphony-的架構由哪些元件組成">Symphony 的架構由哪些元件組成？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>架構分為八個元件：工作流程載入器、設定層、工單轉接器、編排器、工作區管理器、代理執行器、狀態介面與日誌。編排器是唯一能變更排程狀態的元件。
+<!-- End AEO Capsule --></p>
+
+<p>工作流程載入器負責讀取 <code class="language-plaintext highlighter-rouge">WORKFLOW.md</code>，解析 YAML front matter 與提示本文，回傳設定與提示模板兩部分。設定層把原始設定轉為具型別的取值介面，處理預設值、環境變數間接引用與路徑正規化，並在派工前完成驗證。</p>
+
+<p>工單轉接器把不同平台的資料正規化為統一的工作項模型，包含編號、標題、描述、優先級、狀態、標籤與阻塞關係。規格把工作項編號定義為不透明字串，避免核心邏輯依賴特定平台的欄位語意，這個設計讓同一套編排邏輯可以跨平台運作。</p>
+
+<p>編排器持有輪詢節奏與記憶體內的執行狀態，決定哪些工作要派工、重試、停止或釋放。工作區管理器把工作項編號映射為目錄路徑，處理目錄建立、生命週期掛鉤與終止狀態的清理。代理執行器負責建立工作區、組裝提示、啟動代理的子程序通訊，並把更新串流回編排器。</p>
+
+<p>規格另把抽象層次切成政策層、設定層、協調層、執行層、整合層與可觀測性層，並指出這種分層是為了讓實作容易移植到其他語言。對於考慮以 TypeScript 或 Go 重寫的團隊，這份分層說明等同於一份實作路線圖。</p>
+
+<h2 id="workflowmd-如何定義團隊流程">WORKFLOW.md 如何定義團隊流程？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>WORKFLOW.md 以 YAML front matter 描述工單來源、輪詢間隔、工作區路徑與掛鉤，Markdown 本文則是每張工單的提示模板，與程式碼一同版控。
+<!-- End AEO Capsule --></p>
+
+<p>設定分為五個區塊。<code class="language-plaintext highlighter-rouge">tracker</code> 指定工單來源種類與必要標籤、活動狀態與終止狀態；<code class="language-plaintext highlighter-rouge">polling</code> 控制輪詢間隔，預設 30,000 毫秒；<code class="language-plaintext highlighter-rouge">workspace</code> 指定工作區根目錄，預設落在系統暫存目錄；<code class="language-plaintext highlighter-rouge">hooks</code> 定義工作區建立、執行前、執行後與移除前的四段 shell 腳本；<code class="language-plaintext highlighter-rouge">agent</code> 與 <code class="language-plaintext highlighter-rouge">codex</code> 則控制併發數量、輪次上限與代理執行參數。</p>
+
+<p>提示模板使用嚴格的模板語意，只允許已定義的變數與過濾器，遇到未知變數會直接讓渲染失敗，而不是默默輸出空白。規格對這點的堅持有其道理：一份安靜失敗的提示，會讓代理在錯誤資訊下持續執行，事後極難追查。</p>
+
+<p>載入器對錯誤的分級同樣值得注意。檔案缺失、YAML 解析失敗或 front matter 不是映射結構，都會阻擋新的派工直到修正；模板錯誤則只讓該次執行失敗。這種分級讓設定錯誤不會一次拖垮整個服務，同時保留明確的修復訊號。</p>
+
+<h2 id="symphony-的排程與重試機制怎樣運作">Symphony 的排程與重試機制怎樣運作？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>每次輪詢先核對執行中的工作，再驗證設定、抓取候選工單、依優先級派工。失敗重試採指數退避，上限預設五分鐘；正常結束後另排一秒延續重試以複查狀態。
+<!-- End AEO Capsule --></p>
+
+<p>派工條件相當嚴格。工作項必須具備編號、識別碼、標題與狀態，狀態需落在活動清單且不在終止清單，必須含有全部必要標籤，且未被執行中或已聲明，同時仍有全域與分狀態的併發空位。排序依優先級一至四優先、其後依建立時間由舊到新，最後以識別碼作穩定排序。</p>
+
+<p>併發控制分兩層。全域上限由 <code class="language-plaintext highlighter-rouge">agent.max_concurrent_agents</code> 決定，預設十個；分狀態上限由 <code class="language-plaintext highlighter-rouge">agent.max_concurrent_agents_by_state</code> 指定，未設定時回退至全域值。這種設計讓團隊可以限制同時修改同一狀態的代理數量，例如只允許兩個代理同時處理待驗證項目。</p>
+
+<p>重試策略區分兩種情況。代理正常結束後，服務安排約一秒的延續重試，用來複查工單是否仍為活動狀態，若仍是活動狀態便在同一執行緒上開始新一輪，最多二十輪。異常結束則採指數退避，延遲為十秒乘以二的嘗試次數次方，並以五分鐘為上限。</p>
+
+<p>停滯偵測是另一道保險。若某個執行中的工作超過五分鐘沒有收到代理事件，服務會終止該工作並排入重試。這項機制針對的是代理卡在無回應的工具呼叫或等待輸入的情境，規格要求將這類狀態明確標記為受阻，而不是讓它無聲佔用併發名額。</p>
+
+<h2 id="symphony-如何處理多平台工單整合">Symphony 如何處理多平台工單整合？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>內建轉接器涵蓋 Linear、GitHub Issues、Jira Cloud、Asana 與 GitLab。代理透過平台原生工具回寫工單，不需額外登入或持有憑證。
+<!-- End AEO Capsule --></p>
+
+<p>轉接器的職責包括抓取候選工作、刷新特定工作狀態、在啟動時清理終止狀態，以及把平台資料正規化為統一模型。規格另外允許轉接器向代理提供平台原生工具，例如 Linear 提供 GraphQL 介面、GitHub Issues 提供 API 介面、Jira Cloud 提供 REST 介面。</p>
+
+<p>這個設計解決了憑證散落的問題。轉接器由服務端以主機側的授權執行工具呼叫，並在啟動代理子程序前移除已宣告的工單憑證環境變數，因此代理本身不需要第二次登入，也無法直接讀取權杖。規格在邊界說明中特別強調這點，因為把權杖寫進儲存庫的工作流程檔，正是最常見的洩漏途徑。</p>
+
+<p>工作區命名亦有防碰撞設計。目錄名由工作項識別碼推導，非英數字元一律替換為底線；若替換後與原識別碼不同，需附加原識別碼的雜湊後綴，確保兩個不同識別碼不會因為正規化而指向同一個目錄。這類細節在單人使用時無感，在多團隊共用工作區根目錄時卻直接影響資料隔離。</p>
+
+<h2 id="symphony-有哪些可觀測性與部署介面">Symphony 有哪些可觀測性與部署介面？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>服務提供終端狀態輸出、可選的 Phoenix 儀表板與 JSON API。<code class="language-plaintext highlighter-rouge">/api/v1/state</code> 回傳執行中會話、重試佇列、累計詞元與運行秒數，便於外部監控接入。
+<!-- End AEO Capsule --></p>
+
+<p>儀表板掛載於根路徑，顯示活動會話、重試延遲、詞元消耗、累計運行時間與近期事件。JSON 介面則提供狀態摘要與單一工作項的除錯細節，回應包含會話編號、輪次計數、最近事件、起訖時間與詞元分解。</p>
+
+<p>詞元統計的規則寫得相當具體。代理事件可能以多種負載形態回報用量，規格要求優先採用執行緒的絕對總量，忽略增量型負載，並在絕對總量更新時以差值累計，避免重複計算。對於需要對代理成本做內部計價的團隊，這段規則直接決定了帳務數字的可信度。</p>
+
+<p>部署形態有三種。第一種是依規格自行實作；第二種是使用 Elixir 參考實作，透過版本管理工具安裝 Erlang 與 Elixir 後啟動；第三種是下載打包好的自帶執行檔，涵蓋 macOS 與 Linux 的兩種架構，但仍需在目標機器上具備代理執行檔、Git 與工單憑證。專案目前有九位貢獻者，版本停在 0.0.3，並持續產出每日建置的快照版本。</p>
+
+<h2 id="symphony-的主要數據有哪些">Symphony 的主要數據有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>儲存庫累積 27,772 顆星標與 2,883 個分支，採 Apache 2.0 授權，主要語言為 Elixir。專案建立於 2026 年 2 月，最新版本為 0.0.3。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div><strong>27,772</strong><span>星標</span></div>
+  <div><strong>2,883</strong><span>分支</span></div>
+  <div><strong>0.0.3</strong><span>最新版本</span></div>
+  <div><strong>Apache 2.0</strong><span>授權</span></div>
+  <div><strong>Elixir</strong><span>主要語言</span></div>
+  <div><strong>2026-02</strong><span>建立時間</span></div>
+</div>
+
+<p><img src="/assets/images/posts/openai-symphony-news-shot2.png" alt="OpenAI Symphony 儲存庫首頁頂部畫面，顯示 openai/symphony 專案名稱、專案描述與約 27.8k 星標數" /></p>
+
+<p><img src="/assets/images/posts/openai-symphony-news-shot3.png" alt="OpenAI Symphony 儲存庫的貢獻者統計頁面，顯示九位貢獻者的提交分佈" /></p>
+
+<p>星標與分支的比例值得留意。分支數接近星標數的一成，在僅有九位貢獻者的專案中屬於偏高水位，通常反映外部團隊正在複製規格進行實驗，而非單純的關注收藏。這種使用形態與一般工具型專案不同：多數分支不會合併回主線，而是各自演化為內部版本。</p>
+
+<p>版本節奏亦反映專案的預覽定位。從 7 月的 0.0.1 到 9 月的 0.0.3，兩個月內三次發布，之後進入每日快照節奏，主線提交在 9 月中旬後明顯放緩。對評估者而言，這代表專案的價值主要集中在規格本身，而非參考實作的成熟度。</p>
+
+<h2 id="如何開始使用-symphony">如何開始使用 Symphony？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>先確認專案已具備良好代理協作條件，再取得工單平台的個人存取權杖，複製 WORKFLOW.md 並依專案調整欄位，最後安裝 Erlang 與 Elixir 環境啟動服務。
+<!-- End AEO Capsule --></p>
+
+<p>啟動流程的第一步不在工具本身。官方建議先讓程式庫具備適合代理作業的結構，也就是清楚的建置指令、可重現的測試與明確的目錄邊界，否則代理在缺乏回饋訊號的環境中只會反覆嘗試。</p>
+
+<p>第二步是憑證與流程檔。以 Linear 為例，需在帳號設定中建立個人 API 權杖並設為環境變數，再把參考實作中的 <code class="language-plaintext highlighter-rouge">WORKFLOW.md</code> 複製到目標儲存庫，調整專案代號與狀態名稱。參考流程依賴三個非標準狀態，分別代表待重做、待人審與合併中，這些狀態需要在平台的團隊設定中先行建立。</p>
+
+<p>第三步是執行環境。使用版本管理工具安裝對應的 Erlang 與 Elixir 版本後，執行初始化與建置指令，再以工作流程檔作為參數啟動服務。若只需要觀察行為，可以加上連接埠參數啟動儀表板，先以小規模工單驗證派工、重試與清理三條路徑，再逐步放寬併發上限。</p>
+
+<h2 id="symphony-的安全邊界如何設計">Symphony 的安全邊界如何設計？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>工單憑證留在主機側，代理子程序不繼承；工作區限制在每張工單的目錄內，代理預設採工作區寫入權限，並在需要核准時標記為受阻而非靜默等待。
+<!-- End AEO Capsule --></p>
+
+<p>規格對信任姿態採取明確但不強制的立場。文件要求實作必須說明自身的信任與安全設定，但不規定單一的核准、沙箱或人工確認政策，理由是部分實作面向高信任的內部環境，部分則需要更嚴格的核准流程。</p>
+
+<p>參考實作選了較保守的預設值。代理的核准政策預設拒絕沙箱升級、規則變更與工具誘導請求，執行緒沙箱設為工作區寫入，單輪沙箱政策以當前工單工作區為根目錄。若工作流程需要執行套件管理或解析外部主機，必須在沙箱政策中明確開啟網路存取，否則域名解析會被拒絕。</p>
+
+<p>受阻狀態的處理方式同樣值得記錄。當代理回報需要人工輸入、核准或工具誘導時，服務會保留該工單的聲明並在儀表板與介面中標示為受阻，而不是放行或丟棄。這類狀態僅存在於記憶體，重啟後會清空，仍處活動狀態的工單將重新成為派工候選，因此重啟期間可能出現重複提交，維運上需要預留對應的檢查流程。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>本文數據取自 openai/symphony 官方儲存庫、SPEC.md 規格書、Elixir 參考實作說明與版本頁，資料讀取時間為 2026 年 10 月 22 日。
+<!-- End AEO Capsule --></p>
+
+<p>官方儲存庫：https://github.com/openai/symphony</p>
+
+<p>服務規格刊載於儲存庫根目錄的 <code class="language-plaintext highlighter-rouge">SPEC.md</code>，全文 2,312 行，涵蓋領域模型、工作流程契約、設定規格、編排狀態機、輪詢與協調、工作區管理、代理通訊協定、工單整合契約與可觀測性。參考實作說明位於 <code class="language-plaintext highlighter-rouge">elixir/README.md</code>，另有官方部落格文章說明開源背景與設計取向。</p>
+
+<h2 id="總結symphony-適合什麼團隊">總結：Symphony 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>已在多專案間管理多個編碼代理、且具備工單系統與容器化隔離能力的團隊最適合評估。單人或缺乏審核流程的團隊，建議先以規格理解概念再考慮導入。
+<!-- End AEO Capsule --></p>
+
+<p>Symphony 的真正產出是一份可執行的設計文件。它把代理排程中被視為常識卻很少被寫下來的細節，例如工作區命名防碰撞、憑證不得進入子程序、停滯偵測的判定基準、重試與延續的差別，全部寫成可驗證的條款。對正在自建代理流程的團隊，這份規格能省下大量試錯。</p>
+
+<p>限制亦同樣清楚。專案僅有九位貢獻者與三個修補版本，參考實作以 Elixir 撰寫，對多數以 Python 或 TypeScript 為主的團隊意味著額外的維運成本；官方明言只建議在受信任環境測試，並不提供多租戶隔離或完整的權限模型。</p>
+
+<p>評估的判斷標準可以收斂為兩點。若團隊已在多個專案間調度多個代理，並具備工單系統與可重現的建置流程，這份規格提供了直接可用的骨架。若目前仍處於單人試用階段，先理解其中關於工作區隔離與憑證邊界的設計思路，會比直接部署參考實作更有價值。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="OpenAI" /><category term="Symphony" /><category term="Codex" /><category term="AI Agent" /><category term="開源專案" /><category term="Elixir" /><category term="工作流程" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[OpenAI 於 2026 年 2 月開源 Symphony，以 2,312 行規格書定義一套語言無關的代理排程服務，將 Linear、GitHub Issues、Jira 等工單轉為隔離工作區內的自動執行單元。本文拆解其架構、設定契約與安全邊界。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/openai-symphony-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/openai-symphony-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">MPF 退休決策指南：整合、配置與 TVC 節稅</title><link href="https://anthroskill.com/%E6%8A%95%E8%B3%87/mpf-retirement-decision-guide/" rel="alternate" type="text/html" title="MPF 退休決策指南：整合、配置與 TVC 節稅" /><published>2026-10-23T07:00:00+08:00</published><updated>2026-10-23T07:00:00+08:00</updated><id>https://anthroskill.com/%E6%8A%95%E8%B3%87/mpf-retirement-decision-guide</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%95%E8%B3%87/mpf-retirement-decision-guide/"><![CDATA[<p>退休規劃、強積金帳戶整合、基金配置與可扣稅自願性供款（TVC）向來被分開討論，於是想認真處理的人往往不知從何開始。這份指南把四者串成一條決策路徑：先確認退休缺口，再決定供款金額、基金類型與節稅工具。全文以月入三萬港元、距離退休三十年的在職人士為基準案例。</p>
+
+<h2 id="這份指南適合什麼人">這份指南適合什麼人？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>適合三類在職人士：轉工多次、帳戶散落不同受託人；長期停留在預設基金、不清楚實際收費；邊際稅率達百分之十二以上、考慮以自願性供款節稅。
+<!-- End AEO Capsule --></p>
+
+<p>第一類是帳戶過多的人。每次轉工都開一個新戶口，十年下來可能累積四至五個，每個都在收取管理費，而持有人無法一眼看清整體股債比例。</p>
+
+<p>第二類是從未檢視收費的人。預設基金不一定最差，但收費高低與基金類型無關，同一年齡層可以相差三倍以上，長期複利下差距會放大。</p>
+
+<p>第三類是稅階較高、開始思考節稅的人。強制性供款與自願性供款的扣稅安排完全不同，混淆兩者是申報時最常見的錯誤。</p>
+
+<h2 id="你現在的-mpf-有幾個帳戶">你現在的 MPF 有幾個帳戶？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>可向積金局「個人帳戶查詢」查閱，或致電熱線 2918 0102，需提供身份證號碼及姓名。轉工四次以上者普遍有三至五個帳戶，整合一般需四至六星期。
+<!-- End AEO Capsule --></p>
+
+<p>查詢完成後，會收到一份列明各受託人名稱與帳戶結餘的清單。多數人第一次看到這份清單時，才會發現某個舊戶口已經多年沒有檢視。</p>
+
+<p>整合時應保留收費最低、基金種類最多、平台功能最完整的一個帳戶，其餘全部轉移過去。轉移過程由接收方的受託人代辦，持有人只需簽署一次文件。</p>
+
+<h2 id="為什麼要整合-mpf-帳戶">為什麼要整合 MPF 帳戶？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>整合的核心好處是可見度：集中在同一平台才能計算整體股債比例、比較實際收費、執行再平衡。分散四五個帳戶時各自扣費，配置偏離無從察覺。
+<!-- End AEO Capsule --></p>
+
+<p>分散帳戶最直接的損失是管理成本。每個戶口即使只收百分之一，四個戶口加起來就是一筆固定支出，而這筆支出不會因為餘額小而減免。</p>
+
+<p>第二層損失是決策能力。資產分散之後，持有人無法判斷自己整體持有多少股票、多少債券，於是任何再平衡都變成猜測。</p>
+
+<h2 id="如何挑選低收費基金">如何挑選低收費基金？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>先看基金開支比率，再看回報。被動指數基金普遍在百分之零點三至零點五，主動基金多數超過百分之一點五。百分之一差距三十年會吃掉約四分之一總回報。
+<!-- End AEO Capsule --></p>
+
+<p>判斷收費應看基金開支比率（FER），而非單看管理費。FER 已包含管理費、受託人費、保管費與行政費，是唯一可比較的總成本數字。</p>
+
+<p>低收費不等於低回報。指數基金跟隨市場，長期而言多數主動基金難以持續跑贏基準，而收費是唯一可以事先確定的變數。</p>
+
+<h2 id="按年齡應該如何配置資產">按年齡應該如何配置資產？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>可用「一百一十減年齡」作股票比例起點：三十歲約八成、四十歲七成、五十歲六成、六十歲五成。年紀越輕時間越能吸收波動，接近退休則提高債券比重。
+<!-- End AEO Capsule --></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>年齡</th>
+      <th>股票基金</th>
+      <th>債券及保守基金</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>25</td>
+      <td>85%</td>
+      <td>15%</td>
+    </tr>
+    <tr>
+      <td>30</td>
+      <td>80%</td>
+      <td>20%</td>
+    </tr>
+    <tr>
+      <td>35</td>
+      <td>75%</td>
+      <td>25%</td>
+    </tr>
+    <tr>
+      <td>40</td>
+      <td>70%</td>
+      <td>30%</td>
+    </tr>
+    <tr>
+      <td>45</td>
+      <td>65%</td>
+      <td>35%</td>
+    </tr>
+    <tr>
+      <td>50</td>
+      <td>60%</td>
+      <td>40%</td>
+    </tr>
+    <tr>
+      <td>55</td>
+      <td>55%</td>
+      <td>45%</td>
+    </tr>
+    <tr>
+      <td>60 以上</td>
+      <td>50%</td>
+      <td>50%</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>比例只是起點。若持有人的工作收入穩定、另有物業或現金儲備，可以較進取；若收入波動較大或家庭負擔重，則應提早降低股票比重。</p>
+
+<p>執行上，每年檢視一次即可。股票升幅較大時比例自然偏高，此時賣出部分股票基金轉入債券，即完成再平衡；多數受託人每年提供二至四次免費轉換。</p>
+
+<h2 id="預設投資策略dis適合誰">預設投資策略（DIS）適合誰？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>DIS 適合完全不打算管理強積金的人。收費上限百分之零點七五，隨年齡自動降低風險。缺點是股票比例上限六成，四十歲以下想進取者會覺得不足。
+<!-- End AEO Capsule --></p>
+
+<p>DIS 於二零一七年推出，作用是為沒有選擇基金的成員提供自動導航。若成員從未作出投資指示，帳戶會自動投入 DIS，而非停留在個別預設基金。</p>
+
+<p>比較三者：完全不想管理的人用 DIS；四十歲以下、願意每年花半小時的人自選低收費環球指數基金；五十五歲以上、接近提取階段的人可考慮 DIS 的六十五歲後基金，讓風險自動下降。</p>
+
+<h2 id="tvc-可以節省多少稅">TVC 可以節省多少稅？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>TVC 每年扣稅上限六萬港元，與合資格延期年金合計。按邊際稅率百分之十七計最多節稅一萬零二百；百分之十二為七千二百；百分之十為六千。
+<!-- End AEO Capsule --></p>
+
+<p>節稅金額取決於邊際稅率，而非供款總額。同一筆六萬港元供款，對高稅階人士的實際成本約四萬九千八百港元，對低稅階人士則接近全額。</p>
+
+<p>需要留意的是這筆節稅屬於遞延性質。供款本金在提取時仍受強積金規則約束，因此 TVC 的定位是長期退休儲蓄，而非短期節稅工具。</p>
+
+<h2 id="tvc-與-qdap-應該如何選擇">TVC 與 QDAP 應該如何選擇？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>兩者共用六萬港元扣稅上限。TVC 投入強積金基金，收費低、無保證回報；QDAP 屬保險產品，提供保證現金價值，鎖定期至少五年。需要彈性選 TVC。
+<!-- End AEO Capsule --></p>
+
+<p>選擇時應先問一個問題：需要的是資產增長，還是退休後的確定收入。需要增長且能承受波動，TVC 的成本結構明顯較有利；需要穩定現金流，QDAP 的年金設計更直接。</p>
+
+<p>兩者可以並存，但合計扣除額不得超過六萬港元。若同時使用，建議按稅階與現金流需求分配比例，而非平均攤分。</p>
+
+<h2 id="如何計算退休所需金額">如何計算退休所需金額？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>以年支出二十五倍作粗略目標：每年支出二十四萬港元需要約六百萬資產。計算須扣通脹，百分之三通脹下三十年後一千萬的購買力約等於今天四百萬。
+<!-- End AEO Capsule --></p>
+
+<p>計算分三步。第一步估算退休後每年支出，包括居住、醫療、飲食與旅遊；第二步乘以二十五，得出所需資產總額；第三步確認這個數字是今日購買力，再按通脹調整。</p>
+
+<p>醫療支出常被低估。公立醫院排期延長、私家醫院收費上升，退休預算應獨立列出醫療一項，而非併入日常開支。</p>
+
+<h2 id="常見錯誤有哪些">常見錯誤有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>最常見五項是太遲開始、全部放定存、忽略強積金、沒有計算通脹、沒有應變方案。其中忽略強積金影響最大，資金無法提前動用，損失在退休時一次呈現。
+<!-- End AEO Capsule --></p>
+
+<p>第一項是太遲開始。二十五歲開始每月三千元，與三十五歲開始每月六千元，在同樣回報假設下，前者退休結餘通常更高。</p>
+
+<p>第二項是過度保守。定存利率若低於通脹，實際回報為負，資產表面上沒有減少，購買力卻持續下降。</p>
+
+<p>第三項是完全不理強積金。由於資金鎖定至六十五歲，持有人往往假設無法處理，實際上基金選擇、轉換與整合完全在掌控之內。</p>
+
+<p>第四項是忽略通脹，把今天的金額當作未來的金額。第五項是沒有應變方案，一旦失業或家人需要長期照顧，整個計劃立即中斷。</p>
+
+<h2 id="行動清單應該如何執行">行動清單應該如何執行？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>每年生日月執行六項：整合帳戶至最多兩個、檢查總收費低於百分之零點八、按年齡重設股債比例、以環球指數基金作主力、設定年度檢討提醒、偏離一成時再平衡。
+<!-- End AEO Capsule --></p>
+
+<p>第一次執行會較費時，主要用於帳戶查詢與轉移文件。之後每年只需檢視收費通告與比例偏離，其餘步驟可以沿用。</p>
+
+<p>若同時考慮 TVC，應在完成帳戶整合之後才開立，避免在同一年處理過多轉移手續。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>整合一般需四至六星期；可集中一個受託人簡化管理；部分受託人提供環球指數基金；四十歲以下建議自選指數基金，四十五歲以上可用 DIS；強制供款與 TVC 扣稅分開計算。
+<!-- End AEO Capsule --></p>
+
+<p><strong>整合帳戶需要多長時間？</strong> 一般四至六星期，由接收的受託人代辦，持有人簽署一次即可。</p>
+
+<p><strong>可以整合到不同受託人嗎？</strong> 可以，但集中一個較方便管理，亦較容易計算整體收費。</p>
+
+<p><strong>強積金有美股基金嗎？</strong> 部分受託人提供北美或環球指數基金，需向所屬受託人查詢基金列表。</p>
+
+<p><strong>應該用 DIS 還是自選？</strong> 四十五歲以上或完全不打算管理者用 DIS；四十歲以下想進取者自選環球指數基金。</p>
+
+<p><strong>強制供款可以扣稅嗎？</strong> 可以，每年最高一萬八千港元，與 TVC 的六萬港元上限屬不同項目。</p>
+
+<p><strong>TVC 資金何時可以提取？</strong> 一般須年滿六十五歲，或符合提早退休、永久離開香港、完全喪失工作能力等法定情況。</p>
+
+<hr />
+
+<p><em>本文僅供參考，不構成任何投資建議。投資涉及風險，退休規劃需因應個人情況調整。</em></p>]]></content><author><name>Eric Chan</name></author><category term="投資" /><category term="強積金" /><category term="MPF" /><category term="退休規劃" /><category term="TVC" /><category term="自願性供款" /><category term="基金配置" /><category term="扣稅" /><category term="香港" /><summary type="html"><![CDATA[把退休規劃、強積金帳戶整合、基金配置與可扣稅自願性供款整合成一條決策路徑，取代過去分散的三篇舊文。以月入三萬、距離退休三十年的在職人士為基準案例，先計出退休缺口，再依次決定供款金額、基金類型與節稅配置，附年齡股債配置表、DIS 適用判斷、TVC 與年金差異比較，以及每年三十分鐘可完成的六項行動清單。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/2026-10-23-mpf-retirement-decision-guide-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/2026-10-23-mpf-retirement-decision-guide-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

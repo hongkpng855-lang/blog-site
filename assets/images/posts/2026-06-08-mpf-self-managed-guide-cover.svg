@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1629"/>
+      <stop offset="50%" stop-color="#1a2744"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8D48B"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#b8962e"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a73e8"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.03">
+    <line x1="0" y1="50" x2="800" y2="50" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="100" x2="800" y2="100" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="250" x2="800" y2="250" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="350" x2="800" y2="350" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="white" stroke-width="0.5"/>
+  </g>
+
+  <!-- Left decorative line -->
+  <line x1="40" y1="80" x2="40" y2="370" stroke="url(#gold)" stroke-width="3" opacity="0.4"/>
+
+  <!-- Title -->
+  <text x="65" y="100" font-family="system-ui, sans-serif" font-size="16" fill="#FB923C" font-weight="600" letter-spacing="2" opacity="0.8">📊 退休投資</text>
+  <text x="65" y="145" font-family="system-ui, sans-serif" font-size="32" fill="white" font-weight="700">強積金自選管理完整攻略</text>
+  <text x="65" y="180" font-family="system-ui, sans-serif" font-size="18" fill="#94a3b8">整合帳戶 · 基金配置 · 降低收費 · 每年檢討</text>
+
+  <!-- Decorative line under title -->
+  <line x1="65" y1="200" x2="350" y2="200" stroke="url(#gold)" stroke-width="2" opacity="0.5"/>
+
+  <!-- Chart area - Bar chart showing fee impact -->
+  <g transform="translate(60, 230)">
+    <text x="0" y="0" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">管理費對 30 年回報嘅影響</text>
+
+    <!-- Y-axis label -->
+    <text x="0" y="35" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">$200 萬</text>
+    <text x="0" y="65" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">$150 萬</text>
+    <text x="0" y="95" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">$100 萬</text>
+    <text x="0" y="125" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">$50 萬</text>
+    <text x="0" y="150" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">$0</text>
+
+    <!-- Grid lines -->
+    <line x1="45" y1="30" x2="340" y2="30" stroke="#334155" stroke-width="0.5"/>
+    <line x1="45" y1="60" x2="340" y2="60" stroke="#334155" stroke-width="0.5"/>
+    <line x1="45" y1="90" x2="340" y2="90" stroke="#334155" stroke-width="0.5"/>
+    <line x1="45" y1="120" x2="340" y2="120" stroke="#334155" stroke-width="0.5"/>
+    <line x1="45" y1="150" x2="340" y2="150" stroke="#334155" stroke-width="0.5"/>
+
+    <!-- Bar 1: 0.5% fee -> ~$191萬 -->
+    <rect x="55" y="22" width="50" height="128" rx="4" fill="url(#bar3)" opacity="0.85"/>
+    <text x="80" y="16" font-family="system-ui, sans-serif" font-size="11" fill="#22c55e" text-anchor="middle" font-weight="600">$191 萬</text>
+    <text x="80" y="163" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">0.5%</text>
+
+    <!-- Bar 2: 1.0% fee -> ~$164萬 -->
+    <rect x="130" y="42" width="50" height="108" rx="4" fill="url(#bar2)" opacity="0.85"/>
+    <text x="155" y="36" font-family="system-ui, sans-serif" font-size="11" fill="#60a5fa" text-anchor="middle" font-weight="600">$164 萬</text>
+    <text x="155" y="163" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">1.0%</text>
+
+    <!-- Bar 3: 1.5% fee -> ~$141萬 -->
+    <rect x="205" y="64" width="50" height="86" rx="4" fill="url(#gold)" opacity="0.85"/>
+    <text x="230" y="58" font-family="system-ui, sans-serif" font-size="11" fill="#E8D48B" text-anchor="middle" font-weight="600">$141 萬</text>
+    <text x="230" y="163" font-family="system-ui, sans-serif" font-size="11" fill="#94a3b8" text-anchor="middle">1.5%</text>
+  </g>
+
+  <!-- Right side - Key stats cards -->
+  <g transform="translate(460, 85)">
+    <!-- Card 1: Checkmark -->
+    <rect x="0" y="0" width="300" height="65" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <circle cx="25" cy="32" r="16" fill="#16a34a" opacity="0.2"/>
+    <text x="25" y="38" font-family="system-ui, sans-serif" font-size="16" fill="#22c55e" text-anchor="middle">✓</text>
+    <text x="55" y="28" font-family="system-ui, sans-serif" font-size="15" fill="white" font-weight="600">整合帳戶</text>
+    <text x="55" y="48" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">最多 2 個戶口就夠</text>
+
+    <!-- Card 2: Fee -->
+    <rect x="0" y="80" width="300" height="65" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <circle cx="25" cy="112" r="16" fill="#FB923C" opacity="0.2"/>
+    <text x="25" y="118" font-family="system-ui, sans-serif" font-size="16" fill="#E8D48B" text-anchor="middle">%</text>
+    <text x="55" y="108" font-family="system-ui, sans-serif" font-size="15" fill="white" font-weight="600">降低管理費</text>
+    <text x="55" y="128" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">目標：總體 &lt; 0.8%</text>
+
+    <!-- Card 3: Age -->
+    <rect x="0" y="160" width="300" height="65" rx="10" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+    <circle cx="25" cy="192" r="16" fill="#1a73e8" opacity="0.2"/>
+    <text x="25" y="198" font-family="system-ui, sans-serif" font-size="16" fill="#60a5fa" text-anchor="middle">◉</text>
+    <text x="55" y="188" font-family="system-ui, sans-serif" font-size="15" fill="white" font-weight="600">年齡配置</text>
+    <text x="55" y="208" font-family="system-ui, sans-serif" font-size="12" fill="#94a3b8">100 - 年齡 = 股票比例</text>
+  </g>
+
+  <!-- Bottom: Category tag -->
+  <rect x="65" y="395" width="120" height="28" rx="14" fill="#FB923C" opacity="0.15"/>
+  <text x="125" y="414" font-family="system-ui, sans-serif" font-size="13" fill="#E8D48B" text-anchor="middle" font-weight="500"># 投資系列</text>
+
+  <!-- Bottom right date -->
+  <text x="680" y="414" font-family="system-ui, sans-serif" font-size="11" fill="#64748b">2026-06-08</text>
+
+  <!-- Decorative circles -->
+  <circle cx="750" cy="60" r="30" fill="#FB923C" opacity="0.05"/>
+  <circle cx="760" cy="50" r="15" fill="#22c55e" opacity="0.05"/>
+  <circle cx="30" cy="420" r="25" fill="#1a73e8" opacity="0.05"/>
+</svg>
