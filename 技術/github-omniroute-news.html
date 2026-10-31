@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>OmniRoute 開源：一個端點打通 375 個 AI 供應商 - AnthroSkill</title>
+  <meta name="description" content="OmniRoute 是採 MIT 授權的開源 AI 閘道，以單一端點接上 375 個供應商、1,475 個模型識別碼，內建 20 種路由策略、三層容錯與 12 引擎權杖壓縮。本文拆解其架構、免費額度數字的正確讀法、與 LiteLLM 等競品的差異，以及實際部署前的風險。">
+  <meta name="keywords" content="OmniRoute, AI Gateway, 開源, LLM, 路由, 權杖壓縮, MCP, TypeScript, 科技新聞">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="OmniRoute 開源：一個端點打通 375 個 AI 供應商">
+  <meta property="og:description" content="OmniRoute 是採 MIT 授權的開源 AI 閘道，以單一端點接上 375 個供應商、1,475 個模型識別碼，內建 20 種路由策略、三層容錯與 12 引擎權杖壓縮。本文拆解其架構、免費額度數字的正確讀法、與 LiteLLM 等競品的差異，以及實際部署前的風險。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-omniroute-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OmniRoute 開源：一個端點打通 375 個 AI 供應商">
+  <meta name="twitter:description" content="OmniRoute 是採 MIT 授權的開源 AI 閘道，以單一端點接上 375 個供應商、1,475 個模型識別碼，內建 20 種路由策略、三層容錯與 12 引擎權杖壓縮。本文拆解其架構、免費額度數字的正確讀法、與 LiteLLM 等競品的差異，以及實際部署前的風險。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-omniroute-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-01T00:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "OmniRoute 開源：一個端點打通 375 個 AI 供應商",
+      "description": "OmniRoute 是採 MIT 授權的開源 AI 閘道，以單一端點接上 375 個供應商、1,475 個模型識別碼，內建 20 種路由策略、三層容錯與 12 引擎權杖壓縮。本文拆解其架構、免費額度數字的正確讀法、與 LiteLLM 等競品的差異，以及實際部署前的風險。",
+      "datePublished": "2026-10-23T04:00:01+08:00",
+      "dateModified": "2026-10-23T04:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/cheaper-inference/OmniRoute" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-omniroute-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "OmniRoute 開源：一個端點打通 375 個 AI 供應商",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">OmniRoute 開源：一個端點打通 375 個 AI 供應商</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">OmniRoute 開源：一個端點打通 375 個 AI 供應商</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月23日 04:00
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/cheaper-inference/OmniRoute" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-omniroute-news-cover.jpg" alt="OmniRoute 開源：一個端點打通 375 個 AI 供應商" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/cheaper-inference/OmniRoute" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/cheaper-inference/OmniRoute
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>OmniRoute 是 2026 年 2 月建立的開源 AI 閘道專案，在 GitHub 累積 79,690 顆星標與 11,597 個分支，主要語言為 TypeScript，採 MIT 授權。它把 375 個模型供應商收進同一個本機端點，開發者只要把工具指向 <code class="language-plaintext highlighter-rouge">http://localhost:20128/v1</code>，即可在 Claude Code、Codex、Cursor、Cline 與 Copilot 等客戶端之間共用同一套憑證、路由與額度管理。</p>
+
+<p><img src="/assets/images/posts/github-omniroute-news-shot1.png" alt="OmniRoute 儲存庫 README 開頭畫面，顯示專案儀表板截圖、專案名稱 OmniRoute、The Free AI Gateway 標語，以及 375 個供應商與 150 個以上免費層級的橫幅說明" /></p>
+
+<p>這個專案切入的痛點相當具體。多數團隊在同時使用三至五家模型供應商之後，會遇到三類反覆出現的問題：各家 SDK 與認證方式不同、免費額度分散在十幾個後台無人查看、以及單一供應商限流時整個工作流程中斷。OmniRoute 的答案是把這些差異全部收斂到一個 OpenAI 相容介面之後，讓上層工具完全不需要知道下游換了哪一家。</p>
+
+<h2 id="omniroute-是什麼">OmniRoute 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>OmniRoute 是 MIT 授權的開源 AI 閘道，以單一 OpenAI 相容端點連接 375 個供應商，內建容錯路由、權杖壓縮與本機憑證管理。
+<!-- End AEO Capsule --></p>
+
+<p>專案自我定位為「免費 AI 閘道」，核心主張是讓開發者不再因為額度、限流或帳單而中斷編碼流程。它在本機執行，控制平面同樣留在使用者自己的機器上，提示內容只會送往當次請求所選定的上游供應商，專案本身不加入額外的託管轉發層，遙測預設關閉，憑證以 AES-256-GCM 加密保存。</p>
+
+<p>與單純的代理伺服器不同，OmniRoute 在轉發之外還包含路由決策、壓縮、快取、記憶體、護欄與審計等模組。這些模組可以獨立開關，也可以按不同路由組合分別設定，形成一層介於客戶端與供應商之間的中介層。這種設計讓它更接近一個可程式化的控制平面，而非一個只做位址轉換的通道。</p>
+
+<h2 id="omniroute-的項目背景與維護狀況如何">OmniRoute 的項目背景與維護狀況如何？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>專案於 2026 年 2 月建立，由開發者 diegosouzapw 主導，八個月內累積 79,690 顆星標，貢獻者超過八百人，推送紀錄與本文取材同日。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫建立至今約八個月，星標成長速度在基礎設施類開源專案中屬於異常。分支數達 11,597，星標與分支比例約七比一，顯示相當比例的使用者不只是收藏，而是實際複製程式碼並在其上調整設定。貢獻者端點的分頁資訊顯示參與人數超過八百，與 README 所稱的九百餘位貢獻者大致吻合，這種分散程度在單一維護者主導的專案中並不常見。</p>
+
+<p>維護節奏同樣密集。倉庫最近一次推送時間為 2026 年 10 月 22 日，與本文取材同日；版本線已推進至 v3.8.53 之後，並公布通往 v3.9.0 長期支援版本的藍圖。專案同時發佈 npm 套件、Docker 映像與 Electron 桌面版，並在文件中列出七千八百餘個受追蹤的測試檔案，試圖以測試規模回應外界對其穩定性的疑慮。</p>
+
+<p><img src="/assets/images/posts/github-omniroute-news-shot2.png" alt="OmniRoute 儲存庫首頁頂部，顯示儲存庫名稱、專案描述、約七萬九千顆星標與一萬一千個分支的統計，以及主要語言標示" /></p>
+
+<h2 id="omniroute-如何處理供應商故障與限流">OmniRoute 如何處理供應商故障與限流？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>它採三層獨立容錯：供應商層的斷路器、連線層的冷卻與指數退避、模型層的單模型鎖定。任一層失敗只影響對應範圍，其餘健康目標繼續服務。
+<!-- End AEO Capsule --></p>
+
+<p>第一層是供應商斷路器，作用範圍為整個供應商。它只在接收到 408 或 5xx 回應時跳脫，不同認證方式設有不同門檻：OAuth 連線為連續八次、API 金鑰為十二次、本機服務為兩次。跳脫後進入半開狀態進行探測，重設時間分別為六十秒、三十秒與十五秒，恢復過程採惰性策略，避免大量請求同時湧回。</p>
+
+<p>第二層是連線冷卻，作用範圍為單一金鑰或帳號。基礎等待時間為 OAuth 五秒、API 金鑰三秒，之後以二倍指數退避，並設有防止驚群效應的保護；遇到 429 回應時會遵循上游給出的 Retry-After 指示。單一金鑰冷卻期間，同帳號的其他金鑰仍可繼續服務，成功請求會清除所有錯誤狀態。</p>
+
+<p>第三層是模型鎖定，作用範圍最小，只針對單一模型。當某個模型出現 429、上游 404 或模式拒絕時，僅該模型被鎖定，不會波及整個連線。專案在文件中特別區分暫時性錯誤與終止狀態：被封禁、憑證過期或額度耗盡屬於需要人工處理的終止狀態，不會以冷卻機制自動重試。這三層之外，路由層另設四級降級順序，依序為訂閱額度、API 金鑰、低價模型與免費層級。</p>
+
+<h2 id="omniroute-的-20-種路由策略有什麼分別">OmniRoute 的 20 種路由策略有什麼分別？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>策略涵蓋優先順序、填滿優先、加權隨機、輪詢、二分選擇、最少使用、成本最佳化、重置視窗感知、上下文接力與配額加權等，可按每個路由步驟混搭。
+<!-- End AEO Capsule --></p>
+
+<p>最基本的用法不需要建立任何組合。使用者把模型名稱設為 <code class="language-plaintext highlighter-rouge">auto</code>，系統便依已連接的供應商即時評分並組成虛擬組合，預設行為帶有「上次良好供應商」的黏著性，避免同一段對話在不同模型之間反覆跳轉。在此之上另有多個變體，例如偏重程式碼品質的 <code class="language-plaintext highlighter-rouge">auto/coding</code>、偏重延遲的 <code class="language-plaintext highlighter-rouge">auto/fast</code>、只使用已付費訂閱額度且失敗即止的 <code class="language-plaintext highlighter-rouge">auto/subscription</code>，以及允許平行向多個模型提問再取一則回應的 <code class="language-plaintext highlighter-rouge">auto/chaos</code>。</p>
+
+<p>需要精細控制時，開發者可以自行組合二十種策略，包括優先順序、填滿優先、加權隨機、輪詢、二分選擇、最少使用、成本最佳化、重置視窗感知、上下文接力、快取最佳化與配額加權等。最新加入的配額加權策略會先跳過已耗盡的帳號，再按剩餘額度與在途負載的比例於其餘帳號之間抽取，同時保持既有對話綁定在同一條連線上。</p>
+
+<p>路由透明性是這套機制的配套設計。每個回應都附帶 <code class="language-plaintext highlighter-rouge">X-OmniRoute-Decision</code> 標頭，標明當次由哪個策略、哪個供應商、花費多少延遲完成；另有唯讀端點公開某個 <code class="language-plaintext highlighter-rouge">auto</code> 通道當下的候選池，便於排查為何某次請求流向特定模型。</p>
+
+<h2 id="omniroute-如何節省-15-至-95-的權杖">OmniRoute 如何節省 15% 至 95% 的權杖？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>它把十二個可組合壓縮引擎串成管線，預設執行 RTK 與 Caveman 兩級，官方給出的平均節省比例為 89.2%，程式碼與結構化資料受保護。
+<!-- End AEO Capsule --></p>
+
+<p>壓縮管線由十二個引擎組成，依序為跨回合去重、大區塊歸檔、空白與圖片網址精簡、工具結果過濾、Responses 工具輸出壓縮、表格緊湊化、相關性抽取、散文壓縮、漸進式老化摘要、語意剪枝、啟發式剪枝，以及實驗性的上下文轉圖編碼。每個引擎可獨立開關，也可按不同路由組合分別配置。</p>
+
+<p>預設堆疊只執行其中兩級：RTK 負責工具結果的過濾、去重與截斷，會依指令類型判斷保留內容；Caveman 負責散文層的規則式壓縮。兩者作用於同一份內容時節省比例會複合，官方文件給出的計算方式為一減去兩者剩餘比例相乘，代入 80% 與 46% 後得出 89.2%，區間落在 78.4% 至 94.6%。專案同時強調，程式碼區塊、網址、JSON 與結構化資料一律由保護機制逐位元保留，避免壓縮破壞可執行內容。</p>
+
+<p>對於風險承受度較低的場景，專案提供四種預設模式：輕度約節省 15%、標準約 30%、積極約 50%、極致約 75%，並附有防膨脹保護，當壓縮後長度反而增加時會回退原文。這組數字屬於文件記載的示例，實際效果取決於工作負載結構，工具輸出佔比愈高的專案，收益愈明顯。</p>
+
+<h2 id="omniroute-的免費額度數字應該怎樣理解">OmniRoute 的免費額度數字應該怎樣理解？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>每月約 16.2 億權杖是第三方免費層級聚合的估算值，並非 OmniRoute 發放的額度；使用者須自行註冊並提供憑證，各供應商保留調整權利。
+<!-- End AEO Capsule --></p>
+
+<p>這是全篇最容易被誤讀的數字。專案在 README 中以顯著篇幅說明，該數字是把三十四個可重複取得的額度池去重後，對其中十七個公布正向月度預算的池子加上五項按模型計算的 Groq 上限所得的估算總和，並非 OmniRoute 發放的權杖補助。使用者必須自行註冊帳號、取得憑證並連接可用的供應商，每家供應商各自控制其上限、可用性與條款。</p>
+
+<p>口徑差異同樣需要留意。專案並列多組分母：375 個已登記供應商、153 個帶有免費標記的中繼資料、239 個聊天供應商對應 3,059 組供應商與模型配對、1,475 個原始模型識別碼，以及免費額度目錄中的 467 筆按模型列出的紀錄。這些數字分屬不同定義，不能互相換算。此外，需要地區身分驗證才能開通的額度（目前為 ModelScope）被單獨列出，不計入主標題。</p>
+
+<p>專案亦主動標示風險。目錄中有十二家供應商被列為條款高風險，其中 Kiro 預設被排除於自動路由之外，即使使用者主動連接帳號也不會覆蓋該設定。文件中反覆出現一句提醒：這些數字每兩週重新稽核一次，供應商結束免費層級時數字會下降，新供應商加入時則上升。這種寫法在行銷導向的 README 中並不常見，某種程度上也解釋了專案為何能取得高分信任。</p>
+
+<h2 id="omniroute-支援哪些-ai-工具與整合方式">OmniRoute 支援哪些 AI 工具與整合方式？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>它相容三十七款命令列工具與代理，並提供 MCP、A2A、REST、Webhook 與遠端 CLI 五種控制介面，代理可自行操作閘道本身的路由、金鑰與壓縮設定。
+<!-- End AEO Capsule --></p>
+
+<p>客戶端覆蓋面相當廣。文件列出 Claude Code、Codex CLI、Cline、Kilo Code、Zoo Code、Continue、Aider、OpenCode、Copilot CLI、Cursor CLI、Goose、Open Interpreter 與 OpenClaw 等三十七款工具，全部透過同一個端點接入。專案另提供 <code class="language-plaintext highlighter-rouge">omniroute run</code> 指令，可在不修改工具設定的前提下，以指定模型啟動其中七款命令列工具，憑證按程序注入，Qwen 與 Gemini 會取得隔離的臨時家目錄。</p>
+
+<p>控制面同樣開放。MCP 以標準輸入輸出與 HTTP 串流兩種形式提供，HTTP 版本包含一百一十個工具與三十三個權限範圍；A2A 介面採 JSON-RPC 2.0 加 SSE，對外公布六項技能；其餘包括 OpenAI 相容的 REST 端點、可推送額度事件的 Webhook，以及帶範圍權杖的遠端 CLI 模式。這種設計意味著一個具備工具呼叫能力的代理，可以直接管理閘道本身，例如新增供應商、調整路由組合或查詢剩餘額度。</p>
+
+<p>命令列本身亦非附屬功能。專案提供八十餘個指令，涵蓋供應商管理、OAuth 授權、金鑰池、組合設定、成本統計、壓縮模式、健康檢查、稽核日誌、備份與模擬等面向，並內建互動式聊天客戶端與診斷指令，用於排查連接埠、原生依賴與供應商狀態。</p>
+
+<h2 id="omniroute-的數據表現如何">OmniRoute 的數據表現如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>倉庫累積 79,690 顆星標、11,597 個分支與 444 個開放議題，以 TypeScript 撰寫，採 MIT 授權，體積約 1.9 GB。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat-item"><span class="stat-value">79,690</span><span class="stat-label">Stars</span></div>
+  <div class="stat-item"><span class="stat-value">11,597</span><span class="stat-label">Forks</span></div>
+  <div class="stat-item"><span class="stat-value">444</span><span class="stat-label">Open Issues</span></div>
+  <div class="stat-item"><span class="stat-value">MIT</span><span class="stat-label">授權</span></div>
+</div>
+
+<p>這組數據需要放在專案壽命裡閱讀。八個月取得近八萬顆星標，成長曲線接近話題型專案，但分支數同樣偏高，說明實際部署量並不低。倉庫體積約 1.9 GB，在 TypeScript 專案中屬於偏大，反映其包含桌面版、文件鏡像與多語言資源；主要語言單一，沒有跨語言拼裝的痕跡，對審計原始碼相對有利。</p>
+
+<p>開放議題 444 項則是另一面訊號。對一個每兩週更新一次的大型專案而言，這個數字不算離譜，卻也說明使用者回報量已經超出小型維護團隊的即時處理能力。專案以測試規模作為品質背書，文件聲稱覆蓋七千八百餘個測試檔案與五萬六千餘條靜態測試宣告，實際覆蓋率仍待第三方驗證。</p>
+
+<p><img src="/assets/images/posts/github-omniroute-news-shot3.png" alt="OmniRoute 貢獻者統計頁，顯示每週提交折線圖與貢獻者清單，反映專案在八個月內累積超過八百名貢獻者" /></p>
+
+<h2 id="omniroute-值得一試嗎與-litellm-有何差異">OmniRoute 值得一試嗎？與 LiteLLM 有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>若需求是統一多家供應商並壓低權杖成本，它提供的路由與壓縮模組比多數同類專案完整；若需求是企業級審計與穩定保證，仍應先自行壓測，並留意免費層級的條款風險。
+<!-- End AEO Capsule --></p>
+
+<p>專案在文件末尾附上與 9router、OpenRouter、CLIProxyAPI 及 LiteLLM 的功能對照，宣稱在供應商數量、免費層級內建、路由策略、壓縮引擎、MCP 工具數、A2A 支援、記憶體與護欄等十三個面向取得領先。這類對照表由專案自行維護，日期與計數方式均可能變動，閱讀時宜視為功能盤點而非獨立評測。</p>
+
+<p>真正的分野在設計取向。LiteLLM 以 Python 生態與企業部署為核心，強調一致的 SDK 介面與虛擬金鑰管理；OmniRoute 則以本機優先、壓縮與多代理協定為重心，並把控制面本身開放給代理操作。兩者並非互斥，同時部署的團隊亦所在多有。</p>
+
+<p>適用判斷可以從三個問題出發。第一，團隊是否同時持有多家供應商的免費或訂閱額度而無力管理，若是，路由與額度池的價值最直接。第二，工作負載是否以工具呼叫與長上下文為主，若是，權杖壓縮的收益會被放大，反之在短問答場景的效果有限。第三，是否能接受相對年輕的程式庫與高頻更新節奏，若資安審查流程較長，宜先以獨立環境驗證，並確認所連接供應商的服務條款允許此類轉發。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>原始碼、文件與版本紀錄位於 GitHub 的 cheaper-inference/OmniRoute 倉庫，採 MIT 授權釋出，可自行部署或審計。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫位址為 https://github.com/cheaper-inference/OmniRoute ，文件包含供應商參考、免費層級方法論、路由與容錯指南、壓縮引擎說明，以及與同類專案的對照方法。專案另設官方網站、Discord 與 Telegram 社群，並在 npm 與 Docker Hub 同步發佈安裝包，桌面版則透過 GitHub Releases 提供。</p>
+
+<h2 id="總結omniroute-適合什麼團隊">總結：OmniRoute 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>它適合已持有多家模型額度、需要統一入口與成本控制的開發團隊，以及大量依賴工具呼叫的代理工作流；追求長期穩定支援的企業宜先評估其更新節奏。
+<!-- End AEO Capsule --></p>
+
+<p>OmniRoute 的實際貢獻，是把供應商差異、限流處理與權杖成本這三件長期困擾開發團隊的雜務，收斂成一個可設定、可觀測、可由代理操作的中介層；它宣稱的免費權杖數量只是行銷層的引子，並非產品本體。三層容錯與二十種路由策略解決的是中斷問題，十二引擎壓縮解決的是成本問題，而本機優先與加密憑證解決的是信任問題。</p>
+
+<p>同時必須看清它的邊界。免費額度是第三方供應商條款的聚合結果，隨時可能變動，其中十二家被專案自身列為高風險；八個月八萬星標的成長速度帶來關注，也帶來維護壓力與四百餘項未結議題。把 OmniRoute 當作降低實驗成本的工具，而非保證可用性的基礎設施，是比較務實的定位。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-dev" href="/topics/dev/" title="科技 · 開發">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-dev"/></svg><span class="topic-tag-name">開發</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-model" href="/topics/model/" title="科技 · 模型">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-model"/></svg><span class="topic-tag-name">模型</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-agent" href="/topics/agent/" title="科技 · 代理">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-agent"/></svg><span class="topic-tag-name">代理</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=OmniRoute" class="badge bg-secondary text-decoration-none me-1">OmniRoute</a>
+          
+          
+          <a href="/search/?q=AI+Gateway" class="badge bg-secondary text-decoration-none me-1">AI Gateway</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90" class="badge bg-secondary text-decoration-none me-1">開源</a>
+          
+          
+          <a href="/search/?q=LLM" class="badge bg-secondary text-decoration-none me-1">LLM</a>
+          
+          
+          <a href="/search/?q=%E8%B7%AF%E7%94%B1" class="badge bg-secondary text-decoration-none me-1">路由</a>
+          
+          
+          <a href="/search/?q=%E6%AC%8A%E6%9D%96%E5%A3%93%E7%B8%AE" class="badge bg-secondary text-decoration-none me-1">權杖壓縮</a>
+          
+          
+          <a href="/search/?q=MCP" class="badge bg-secondary text-decoration-none me-1">MCP</a>
+          
+          
+          <a href="/search/?q=TypeScript" class="badge bg-secondary text-decoration-none me-1">TypeScript</a>
+          
+          
+          <a href="/search/?q=%E7%A7%91%E6%8A%80%E6%96%B0%E8%81%9E" class="badge bg-secondary text-decoration-none me-1">科技新聞</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news&text=OmniRoute+%E9%96%8B%E6%BA%90%EF%BC%9A%E4%B8%80%E5%80%8B%E7%AB%AF%E9%BB%9E%E6%89%93%E9%80%9A+375+%E5%80%8B+AI+%E4%BE%9B%E6%87%89%E5%95%86" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?OmniRoute+%E9%96%8B%E6%BA%90%EF%BC%9A%E4%B8%80%E5%80%8B%E7%AB%AF%E9%BB%9E%E6%89%93%E9%80%9A+375+%E5%80%8B+AI+%E4%BE%9B%E6%87%89%E5%95%86%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-omniroute-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/google-skills-news" class="text-decoration-none">Google 開源 175 個 Agent Skills：雲端知識變代理技能</a>
+              <br><small class="text-muted">2026-10-25</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/cc-switch-4-0-news" class="text-decoration-none">CC Switch 4.0：十九天二十版的十二工具管理器</a>
+              <br><small class="text-muted">2026-10-24</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/weknora-news" class="text-decoration-none">騰訊 WeKnora 開源：RAG、代理與 Wiki 三合一</a>
+              <br><small class="text-muted">2026-10-24</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/claude-formal-verification-news" class="text-decoration-none">Claude 為 123 個開源庫寫出零崩潰證明</a>
+              <br><small class="text-muted">2026-10-24</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/rust-199-news" class="text-decoration-none">Rust 1.99 開源：C 語言可變參數正式穩定</a>
+              <br><small class="text-muted">2026-10-14</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/neovim-nvim-core-news" class="text-decoration-none">Neovim 0.12 開源：終端編輯器重構核心 UI 與 LSP</a>
+              <br><small class="text-muted">2026-10-13</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news" class="text-decoration-none">Anthropic IPO 後恐被評垃圾級 發債成本升</a>
+            <br><small class="text-muted">2026-11-01</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news" class="text-decoration-none">46K 星 CleanYourTV：免 root 移除電視廣告與追蹤</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/agno-agentos-news" class="text-decoration-none">Agno 開源：4.3 萬星的自駕代理平台</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news" class="text-decoration-none">官方 Claude Code 擴充遭植入 SSH 後門</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news" class="text-decoration-none">41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">630</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

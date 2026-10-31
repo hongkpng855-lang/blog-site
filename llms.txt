@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/profile.php?id=1247126168485543
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（2031 篇中的最新 30 篇）
+- [Anthropic IPO 後恐被評垃圾級 發債成本升](https://anthroskill.com/技術/anthropic-junk-rating-news)：《金融時報》報導，Blackstone 向參與 630 億美元算力融資案的投資人表示，預期 Anthropic 完成 IPO 後取得雙 B 區間的垃圾級信用評級，與其早前投資級的預測相反。評級若按此落地，發債與租賃算力的
+- [Agno 開源：4.3 萬星的自駕代理平台](https://anthroskill.com/技術/agno-agentos-news)：Agno 於 2026 年 10 月 29 日發布 v3.1.12，GitHub 累積 4.3 萬星、621 位貢獻者。專案以 AgentOS 把代理變成可長期運行的服務，內建 API、MCP、持久執行、人工審批與排程，
+- [41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡](https://anthroskill.com/技術/airllm-tiny-gpu-news)：AirLLM 於 2026 年 10 月 30 日累積約 4.1 萬星。專案以逐層串流把權重從磁碟載入顯示卡，讓 671B 的 DeepSeek-V3 在約 12GB 顯存運行，2.8T 的 Kimi K3 更壓到 3.
+- [官方 Claude Code 擴充遭植入 SSH 後門](https://anthroskill.com/技術/claude-code-vsx-backdoor-news)：資安公司 Phorion 於 2026 年 10 月 30 日公布，官方 Claude Code 擴充的 2.1.313 版本在 Cursor Marketplace 被換成含後門組建。載入後即寫入攻擊者公鑰、建立反向 
+- [46K 星 CleanYourTV：免 root 移除電視廣告與追蹤](https://anthroskill.com/技術/cleanyourtv-debloat-news)：CleanYourTV 於 2026 年 10 月 17 日開源，十三日內累積 4.6 萬星。專案透過 Android 內建的除錯橋接，以 pm disable-user 停用智能電視的廣告服務與廠商預載程式，不 roo
+- [免費模型外掛 5.2 萬星：無需 API Key 用前沿模型](https://anthroskill.com/技術/dsh-free-model-plugin-news)：dsh-our-free-model 是 DeepSeek Harness 的第三方外掛，安裝後無需登入或填入 API Key，即可呼叫 DeepSeek V4.1 Flash、Kimi K3 等模型。專案九月底建立，G
+- [Meta 推 Style Sketch：用 Instagram 舊相建衣櫥](https://anthroskill.com/技術/style-sketch-meta-fashion-news)：Meta 於 2026 年 10 月底低調推出 AI 穿搭應用 Style Sketch，可讀取 Instagram 已發布的相片建立虛擬衣櫥，再依身型與膚色生成試身效果，並按行程與天氣排出每日配搭。應用目前僅在印尼、新
+- [Anthropic 推成本報告：企業看得到錢花在哪](https://anthroskill.com/技術/anthropic-enterprise-roi-reports-news)：Anthropic 於 2026 年 10 月 28 日推出一組企業報告工具，讓管理層查看團隊的代理用量、產出內容、實際成本與流程卡點，並提供改善建議與共用預算池。官方表示資料預設不用於模型訓練，背景是企業對 AI 投資
+- [browser-use 改寫引擎：Pi 接手、砍 5.5 萬行程式碼](https://anthroskill.com/技術/browser-use-pi-engine-news)：browser-use 是 GitHub 上 11.9 萬星標的開源瀏覽器代理框架，2026 年 10 月提出以 Pi 取代 Python 規劃器的引擎改寫草案，估計刪減 55,184 行程式碼，同時保留 pip 安裝與
+- [Claude Code 插件市集擴至 315 個 版本號上線](https://anthroskill.com/技術/claude-plugins-marketplace-315-news)：Anthropic 官方維護的 Claude Code 插件目錄於 2026 年 10 月底達 45,224 星標，收錄插件增至 315 個，其中 53 個由內部維護。10 月 27 日的合併把 14 個插件納入明確版本
+- [DeerFlow 2.1 開源：位元組跳動超級代理框架](https://anthroskill.com/技術/deer-flow-superagent-news)：位元組跳動開源的 DeerFlow 於 2026 年 10 月底累積 84,685 個星標，9 月 24 日發布 2.1.0，自 2.0.0 以來合併 772 個拉取請求。2.1 加入可驗證的工具回執、可續跑的批次任務、
+- [Mistral 釋出 1T 權重：主權資安新選項](https://anthroskill.com/技術/mistral-large-4-open-weights-news)：Mistral AI 於 2026 年 10 月 29 日釋出 Mistral Large 4 權重，總參數一兆、每次推理啟用約五百二十億，權重已上架 Hugging Face 並同步開放 API。官方以網路安全為首要場
+- [Paperless-ngx 47K 星：自架文件庫內建 AI 檢索](https://anthroskill.com/技術/paperless-ngx-documents-news)：Paperless-ngx 於 2026 年 10 月底累積 47,297 個星標，以 Python 與 Angular 建構，把掃描、光學字元辨識與全文檢索整合在同一介面。10 月 6 日推出的 3.3.0 加入可切換
+- [11 萬星開源：Addy Osmani 的 25 個工程技能](https://anthroskill.com/技術/addyosmani-agent-skills-news)：Addy Osmani 開源的 agent-skills 把資深工程師流程寫成 25 個技能檔，GitHub 累積 111,349 顆星標與 11,643 個分支，採 MIT 授權。本文拆解九個斜線指令、四個人格審查角色
+- [Anthropic 用 Claude 造藥：六間夥伴交出實測數據](https://anthroskill.com/技術/anthropic-claude-drug-discovery-news)：Anthropic 公布生命科學團隊半年成果，六間合作機構交出可量化數據：CAR-T 設計縮短約七成、抗體親和力提升逾十倍、製造文件審查時間減 89%。本文整理各項實驗數字、自研罕見病項目進度、臨床前階段的限制，以及藥廠
+- [claude-mem 15.5 開源：代理記憶變成工作台](https://anthroskill.com/技術/claude-mem-v15-workbench-news)：claude-mem 是 GitHub 星標逾 10.4 萬的開源代理記憶系統，採 Apache 2.0 授權，以 TypeScript 撰寫。2026 年 10 月下旬，專案連續發布 v15.0 至 v15.5 六個版
+- [Hallmark 開源：4 萬星的防 AI 味設計技能](https://anthroskill.com/技術/hallmark-design-skill-news)：Hallmark 是 Together AI 推出的開源設計技能，GitHub 累積 40,319 顆星標，採 MIT 授權。它為 Claude Code、Codex 與 Cursor 提供五十套主題素材、三層品質檢查與
+- [herdr 開源：46k 星的代理終端執行層](https://anthroskill.com/技術/herdr-agent-runtime-news)：herdr 是以 Rust 撰寫的終端執行層，GitHub 累積 46,333 顆星標，採 Apache 2.0 授權。它把編碼代理的終端交予背景伺服器持有，客戶端關閉或 SSH 斷線後代理仍持續執行，並以狀態標記、跨機
+- [Genie 4 世界模型：即時模擬加入原生音訊](https://anthroskill.com/技術/genie-4-world-model-news)：Google DeepMind 於二零二六年十月二十七日發表 Genie 4 世界模型，首次在即時互動模擬中原生生成環境音效與角色對話，並由 Gemini 3.8 Flash 在迴圈中擔任規劃代理維持場景連貫。模型現以研
+- [Grafana 13.3 修補 11 個 CVE：五分支同步更新](https://anthroskill.com/技術/grafana-13-3-security-release-news)：Grafana 13.3.0 於二零二六年十月二十七日發佈，內含十項安全性修補、一百一十一項功能改進與三十五項錯誤修正，另有一項破壞性變更涉及外掛市集設定段落改名。同日官方同步推出 13.2.5、13.1.9、13.0.
+- [Magpie 開源閘道：一個入口接管所有 AI Agent](https://anthroskill.com/技術/magpie-agent-model-gateway-news)：Magpie 是二零二六年九月發佈的開源本機閘道，GitHub 累積 23,904 顆星標，以 Go 撰寫、採 MIT 授權。它在 127.0.0.1:3425 提供 OpenAI、Anthropic 與 Gemini 
+- [微軟開源代理框架：14K 星整合 AutoGen 與語意核心](https://anthroskill.com/技術/microsoft-agent-framework-news)：Microsoft Agent Framework 是微軟開源的代理開發框架，GitHub 累積 14,326 顆星標與 2,517 個分支，採 MIT 授權，整合語意核心與 AutoGen 的編排設計，支援 Pytho
+- [Codex CLI 0.164：13 萬星的權限與沙箱改造](https://anthroskill.com/技術/openai-codex-0164-news)：OpenAI 開源的 Codex CLI 於 2026 年 10 月 23 日推出 0.164.0 版，這個以 Rust 撰寫的終端編程代理累積 131,143 顆星標與 20,711 個分支。本文整理行內指令、企業級 
+- [VoxCPM2 免分詞語音合成：40,734 星開源 TTS](https://anthroskill.com/技術/voxcpm2-tokenizer-free-tts-news)：OpenBMB 的 VoxCPM2 以 40,734 顆星標成為中文圈受注目的開源語音合成項目，2B 參數在兩百萬小時多語語音上訓練，支援三十種語言與九種中文方言，原生輸出 48kHz。本文整理免分詞架構的意義、聲音設計
+- [Anthropic 遞交 S-1：半年收入 163 億美元、代號 ANT](https://anthroskill.com/技術/anthropic-s1-ipo-news)：Anthropic 於 2026 年 10 月 26 日向美國證交會遞交 S-1，計劃以代號 ANT 在納斯達克上市。文件披露上半年收入 162.86 億美元、按年增長 1,300%，第二季營運利潤率轉正至 8%，淨虧損
+- [DSPy 開源框架：38K 星把提示詞寫成程式](https://anthroskill.com/技術/dspy-prompt-programming-news)：DSPy 是史丹佛團隊主導的開源提示詞編程框架，GitHub 累積 38,813 顆星標、3,455 個分支與 411 位貢獻者，採 MIT 授權。它以 Python 程式碼取代手寫提示詞，透過 GEPA 與 MIPRO
+- [llama.cpp v0.7.0 發布：MoE 專家快取提速推論](https://anthroskill.com/技術/llama-cpp-v0-7-news)：llama.cpp v0.7.0 於十月十五日發布，GitHub 累積 132,503 顆星標與 24,856 個分支，採 MIT 授權。本次加入 MoE 專家主機記憶體快取、LiliCorr 投機解碼與 GLM5-Ne
+- [大模型 API 減價八成：背後原因與實際影響](https://anthroskill.com/技術/llm-api-price-collapse-analysis)：2026 年 6 月至 10 月，OpenAI 與 Anthropic 的主力模型 API 定價累計下調最高八成，快取讀取成本更跌至原本的四分之一。本文整理價格時間線、開源權重模型的競爭壓力、推理服務商數量變化，並評估補
+- [Page Agent 開源：一行腳本為網頁注入 AI 代理](https://anthroskill.com/技術/page-agent-inpage-news)：Page Agent 是阿里巴巴於 2025 年 9 月開源的頁內 GUI 代理，GitHub 累積 29,563 顆星標、2,641 個分支與 33 位貢獻者，採 MIT 授權。它以純頁面內 JavaScript 注入
+- [3 萬星騰訊開源：Agent Memory 團隊記憶中樞](https://anthroskill.com/技術/tencentdb-agent-memory-news)：TencentDB Agent Memory 是騰訊雲開源的團隊級記憶中樞，把對話、文件與程式碼整理成可複用資產。專案累積 29,972 顆星標與 2,911 個分支，採 MIT 授權，於二零二六年十月二十六日發布 v2
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 2031 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan

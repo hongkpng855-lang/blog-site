@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D1B2A;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1B3A4B;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="arrowUp" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#4A90D9;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#4A90D9;stop-opacity:0.8"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5A623;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#F5A623;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="circle1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7ED321;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#7ED321;stop-opacity:0.02"/>
+    </linearGradient>
+    <linearGradient id="goldText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#F5A623;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#FFD700;stop-opacity:1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="20"/>
+
+  <!-- Decorative circles -->
+  <circle cx="400" cy="100" r="150" fill="url(#glow)"/>
+  <circle cx="100" cy="420" r="120" fill="url(#circle1)"/>
+
+  <!-- Grid lines -->
+  <line x1="80" y1="380" x2="432" y2="380" stroke="#4A90D9" stroke-opacity="0.15" stroke-width="1"/>
+  <line x1="80" y1="350" x2="432" y2="350" stroke="#4A90D9" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="80" y1="320" x2="432" y2="320" stroke="#4A90D9" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="80" y1="290" x2="432" y2="290" stroke="#4A90D9" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- Upward trend arrow -->
+  <polyline points="120,370 200,340 280,310 360,280 400,250" fill="none" stroke="#4A90D9" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="400,250 390,265 410,262" fill="#4A90D9" opacity="0.8"/>
+  
+  <!-- Arrow glow -->
+  <polyline points="120,370 200,340 280,310 360,280 400,250" fill="none" stroke="#4A90D9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.2"/>
+
+  <!-- Second arrow (shorter, gold) -->
+  <polyline points="200,380 280,345 360,315 420,270" fill="none" stroke="url(#goldText)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,3"/>
+  <polygon points="420,270 408,283 410,270" fill="#F5A623" opacity="0.6"/>
+
+  <!-- Dollar sign icon -->
+  <circle cx="150" cy="150" r="45" fill="none" stroke="url(#goldText)" stroke-width="2.5" opacity="0.3"/>
+  <text x="150" y="162" text-anchor="middle" fill="#F5A623" font-family="Arial, sans-serif" font-size="44" font-weight="bold" opacity="0.3">$</text>
+
+  <!-- Percentage sign -->
+  <text x="380" cy="140" text-anchor="middle" fill="#4A90D9" font-family="Arial, sans-serif" font-size="36" font-weight="bold" opacity="0.2">%</text>
+
+  <!-- Candlestick (mini chart element) -->
+  <rect x="100" y="310" width="8" height="60" fill="#7ED321" opacity="0.4" rx="1"/>
+  <rect x="120" y="340" width="8" height="30" fill="#FF6B6B" opacity="0.4" rx="1"/>
+  <rect x="140" y="320" width="8" height="50" fill="#7ED321" opacity="0.4" rx="1"/>
+  <rect x="160" y="350" width="8" height="20" fill="#7ED321" opacity="0.4" rx="1"/>
+
+  <!-- Title text -->
+  <text x="256" y="440" text-anchor="middle" fill="#FFFFFF" font-family="'Noto Sans TC', 'Source Han Sans SC', 'Microsoft YaHei', Arial, sans-serif" font-size="20" font-weight="bold" letter-spacing="1">
+    降息循環投資全攻略
+  </text>
+  
+  <text x="256" y="468" text-anchor="middle" fill="#8899AA" font-family="'Noto Sans TC', 'Source Han Sans SC', 'Microsoft YaHei', Arial, sans-serif" font-size="13" letter-spacing="0.5">
+    聯準會政策轉向下的資產配置與風險管理
+  </text>
+
+  <!-- Bottom decorative line -->
+  <line x1="180" y1="486" x2="332" y2="486" stroke="#F5A623" stroke-width="1.5" opacity="0.4"/>
+</svg>

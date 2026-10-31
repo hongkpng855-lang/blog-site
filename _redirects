@@ -1,0 +1,33 @@
+# Cloudflare Pages _redirects
+# 用途：9 個分類頁別名 → 正式中文分類頁（301 永久重定向）
+# 背景：別名頁原本 noindex + canonical 互相矛盾，noindex 會阻止權重合併
+# 建立：2026-10-30
+# 注意：CF Pages 會在建置後讀取此檔，規則優先於靜態資產
+
+# 技術
+/categories/tech/     /categories/%E6%8A%80%E8%A1%93/   301
+/categories/tech      /categories/%E6%8A%80%E8%A1%93/   301
+/categories/technology/  /categories/%E6%8A%80%E8%A1%93/  301
+/categories/technology   /categories/%E6%8A%80%E8%A1%93/  301
+/categories/%E7%A7%91%E6%8A%80/  /categories/%E6%8A%80%E8%A1%93/  301
+/categories/%E7%A7%91%E6%8A%80   /categories/%E6%8A%80%E8%A1%93/  301
+
+# 健康
+/categories/health/   /categories/%E5%81%A5%E5%BA%B7/   301
+/categories/health    /categories/%E5%81%A5%E5%BA%B7/   301
+
+# 學習
+/categories/learning/ /categories/%E5%AD%B8%E7%BF%92/   301
+/categories/learning  /categories/%E5%AD%B8%E7%BF%92/   301
+
+# 生活
+/categories/life/     /categories/%E7%94%9F%E6%B4%BB/   301
+/categories/life      /categories/%E7%94%9F%E6%B4%BB/   301
+/categories/%E9%81%8A%E6%88%B2/  /categories/%E7%94%9F%E6%B4%BB/  301
+/categories/%E9%81%8A%E6%88%B2   /categories/%E7%94%9F%E6%B4%BB/  301
+
+# 投資
+/categories/investment/  /categories/%E6%8A%95%E8%B3%87/  301
+/categories/investment   /categories/%E6%8A%95%E8%B3%87/  301
+/categories/%E7%90%86%E8%B2%A1/  /categories/%E6%8A%95%E8%B3%87/  301
+/categories/%E7%90%86%E8%B2%A1   /categories/%E6%8A%95%E8%B3%87/  301

@@ -1,0 +1,53 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg-gradient-health" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0fff4"/>
+      <stop offset="100%" style="stop-color:#c6f6d5"/>
+    </linearGradient>
+    <linearGradient id="accent-gradient-health" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#38a169"/>
+      <stop offset="100%" style="stop-color:#68d391"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg-gradient-health)"/>
+  
+  <!-- 頂部強調色條 -->
+  <rect x="0" y="0" width="1200" height="8" fill="url(#accent-gradient-health)"/>
+  
+  <!-- 左側裝飾線 -->
+  <rect x="50" y="120" width="8" height="230" fill="#38a169"/>
+  
+  <!-- 分類標籤 -->
+  <rect x="80" y="120" width="100" height="36" rx="18" fill="#38a169" fill-opacity="0.2"/>
+  <text x="130" y="145" font-family="Microsoft YaHei, PingFang TC, sans-serif" font-size="18" fill="#38a169" text-anchor="middle">#健康</text>
+  
+  <!-- 主標題 -->
+  <text x="80" y="220" font-family="Microsoft YaHei, PingFang TC, sans-serif" font-size="52" font-weight="bold" fill="#1a202c">健康飲食入門</text>
+  <text x="80" y="290" font-family="Microsoft YaHei, PingFang TC, sans-serif" font-size="36" fill="#2d3748">吃出健康與活力</text>
+  
+  <!-- 副標題 -->
+  <text x="80" y="360" font-family="Microsoft YaHei, PingFang TC, sans-serif" font-size="24" fill="#4a5568">均衡飲食 × 營養攝取 × 健康習慣</text>
+  
+  <!-- 裝飾圓形 -->
+  <circle cx="1000" cy="400" r="180" fill="#38a169" fill-opacity="0.08"/>
+  <circle cx="1100" cy="200" r="120" fill="#68d391" fill-opacity="0.1"/>
+  <circle cx="900" cy="150" r="80" fill="#38a169" fill-opacity="0.05"/>
+  
+  <!-- 水果裝飾 - 蘋果形狀 -->
+  <circle cx="950" cy="420" r="60" fill="#e53e3e" fill-opacity="0.6"/>
+  <ellipse cx="950" cy="360" rx="8" ry="15" fill="#38a169"/>
+  <ellipse cx="940" cy="350" rx="15" ry="10" fill="#38a169" fill-opacity="0.8"/>
+  
+  <!-- 蔬菜裝飾 -->
+  <circle cx="1050" cy="450" r="40" fill="#48bb78" fill-opacity="0.5"/>
+  <circle cx="880" cy="480" r="35" fill="#f6e05e" fill-opacity="0.6"/>
+  
+  <!-- 底部網站名稱 -->
+  <rect x="0" y="570" width="1200" height="60" fill="#f7fafc"/>
+  <text x="80" y="608" font-family="Microsoft YaHei, PingFang TC, sans-serif" font-size="20" fill="#4a5568">Sun ny 的部落格</text>
+  
+  <!-- 日期 -->
+  <text x="1050" y="608" font-family="Arial, sans-serif" font-size="16" fill="#718096" text-anchor="end">2026.03.27</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="50%" stop-color="#16213e"/>
+      <stop offset="100%" stop-color="#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#f5a623"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- 裝飾圓圈 - 極簡風格 -->
+  <circle cx="150" cy="150" r="120" fill="none" stroke="rgba(233,69,96,0.08)" stroke-width="2"/>
+  <circle cx="150" cy="150" r="80" fill="none" stroke="rgba(233,69,96,0.12)" stroke-width="1"/>
+  <circle cx="1050" cy="480" r="180" fill="none" stroke="rgba(245,166,35,0.06)" stroke-width="2"/>
+  <circle cx="1050" cy="480" r="120" fill="none" stroke="rgba(245,166,35,0.1)" stroke-width="1"/>
+
+  <!-- 簡約幾何裝飾 -->
+  <rect x="80" y="450" width="60" height="60" rx="4" fill="none" stroke="rgba(233,69,96,0.15)" stroke-width="1.5" transform="rotate(15, 110, 480)"/>
+  <rect x="1060" y="100" width="50" height="50" rx="4" fill="none" stroke="rgba(245,166,35,0.15)" stroke-width="1.5" transform="rotate(-10, 1085, 125)"/>
+
+  <!-- 主標題 -->
+  <text x="600" y="210" text-anchor="middle" font-family="'Noto Sans TC', 'Microsoft YaHei', 'PingFang TC', sans-serif" font-size="52" font-weight="700" fill="#ffffff" letter-spacing="3">
+    斷捨離與極簡生活
+  </text>
+
+  <text x="600" y="270" text-anchor="middle" font-family="'Noto Sans TC', 'Microsoft YaHei', 'PingFang TC', sans-serif" font-size="28" font-weight="300" fill="rgba(255,255,255,0.7)" letter-spacing="2">
+    2026 實踐指南
+  </text>
+
+  <!-- 分隔線 -->
+  <line x1="400" y1="310" x2="800" y2="310" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 副標題 -->
+  <text x="600" y="370" text-anchor="middle" font-family="'Noto Sans TC', 'Microsoft YaHei', 'PingFang TC', sans-serif" font-size="22" font-weight="400" fill="rgba(255,255,255,0.55)" letter-spacing="1">
+    少即是多：從雜物堆到心靈自由
+  </text>
+
+  <!-- 三條水平裝飾線（極簡視覺） -->
+  <line x1="450" y1="410" x2="480" y2="410" stroke="rgba(233,69,96,0.4)" stroke-width="2" stroke-linecap="round"/>
+  <line x1="485" y1="410" x2="510" y2="410" stroke="rgba(245,166,35,0.4)" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- 底部標籤 -->
+  <rect x="520" y="460" width="160" height="36" rx="18" fill="rgba(233,69,96,0.15)" stroke="rgba(233,69,96,0.3)" stroke-width="1"/>
+  <text x="600" y="484" text-anchor="middle" font-family="'Noto Sans TC', 'Microsoft YaHei', 'PingFang TC', sans-serif" font-size="16" font-weight="400" fill="rgba(233,69,96,0.7)">生活 · 極簡</text>
+
+  <!-- 圖示：一個簡化的房子/方塊 -->
+  <g transform="translate(600, 540)" opacity="0.15">
+    <rect x="-20" y="-15" width="40" height="30" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/>
+    <polygon points="0,-25 -25,-15 25,-15" fill="none" stroke="#fff" stroke-width="1.5"/>
+  </g>
+</svg>

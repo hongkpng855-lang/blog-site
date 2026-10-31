@@ -1,0 +1,1368 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://anthroskill.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://anthroskill.com/" rel="alternate" type="text/html" /><updated>2026-11-01T01:32:14+08:00</updated><id>https://anthroskill.com/feed.xml</id><title type="html">AnthroSkill 人類學｜由痛點到實測，日日更新</title><subtitle>由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</subtitle><author><name>Eric Chan</name></author><entry><title type="html">Anthropic IPO 後恐被評垃圾級 發債成本升</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news" rel="alternate" type="text/html" title="Anthropic IPO 後恐被評垃圾級 發債成本升" /><published>2026-11-01T00:00:02+08:00</published><updated>2026-11-01T00:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news"><![CDATA[<p>《金融時報》於 2026 年 10 月 30 日報導，Blackstone 向參與 630 億美元算力融資案的投資人表示，預期 Anthropic 完成 IPO 後取得雙 B 區間的垃圾級信用評級，與早前承諾的投資級預測相反。評級屬預測而非定論，但方向一旦落實，發債與算力租賃成本都會上升，供應商與企業客戶的長約定價亦會跟著調整。</p>
+
+<h2 id="這次評級預測的消息內容是什麼">這次評級預測的消息內容是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>《金融時報》引述消息指，Blackstone 預期 Anthropic 上市後取得雙 B 區間評級，屬投機級最高一層，與早前向投資人表示的投資級預測相反。
+<!-- End AEO Capsule --></p>
+
+<p>報導的核心是一份投資人溝通紀錄。Blackstone 是 630 億美元晶片融資案的錨定投資人，它在募資階段向其他出資方提供的評級預測，由原本的投資級改為雙 B 區間。雙 B 屬於投機級評級的最上層，距離投資級只差一至兩級，但在債券市場的定價邏輯裡，這一兩級足以改變整條資金曲線。</p>
+
+<p>TechCrunch 就報導內容分別向 Anthropic 與 Blackstone 查詢，兩方均拒絕評論。這意味著目前公開的只有投資人端的說法，評級機構本身尚未表態，正式評級通常要到上市定價前後才會公布。</p>
+
+<h2 id="垃圾級評級對這家公司有什麼實際影響">垃圾級評級對這家公司有什麼實際影響？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>評級決定借錢的價格。雙 B 區間的企業發債利率通常比投資級高出數個百分點，租賃算力與簽署長期採購合約時，對手方也會要求更高的保證金或更短的付款周期。
+<!-- End AEO Capsule --></p>
+
+<p>影響首先出現在資金成本。同一筆十億美元的債務，投資級與投機級之間的利差可以達到三至五個百分點，換算成年利息就是數億美元的差距。對一家每年把過半收入投回算力採購的公司，這個差距會直接壓縮可用現金。</p>
+
+<p>其次是合約條款。晶片供應商與資料中心營運商在簽長約時，會參考對手方的信用狀況設定擔保、預付款比例與違約條款。評級下調之後，同樣的算力合約可能需要更多前期現金，或更短的帳期。</p>
+
+<p>第三是投資人結構。部分退休基金與保險資金的投資章程明文限制持有投機級債券，評級一旦落入該區間，這批長期資金會被排除在買方名單之外，需求端隨之收窄。</p>
+
+<h2 id="為什麼評級預測會在上市前出現轉向">為什麼評級預測會在上市前出現轉向？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>轉向反映的是支出速度與現金流之間的落差。該公司在十二個月內簽下多筆大型算力合約，資本承諾遠高於同期收入，評級機構與債權人因此重新評估其償債緩衝。
+<!-- End AEO Capsule --></p>
+
+<p>《金融時報》的報導把時間點說得清楚。Blackstone 在融資案募資時仍預期投資級，之後才改口。這種改動通常不是單一事件觸發，而是連續幾季的支出數據累積到某個門檻。</p>
+
+<p>Anthropic 過去一年的採購節奏相當密集。晶片、資料中心與電力合約屬於多年期承諾，一旦簽下就變成資產負債表上的固定支出，收入則要跟隨模型需求逐季實現。當承諾增長快於收入，緩衝空間自然被壓縮。</p>
+
+<p>評級機構看的正是這個比例。它們不在乎單季是否賺錢，而在乎未來數年的現金義務能否被可預期收入覆蓋。支出曲線變陡，評級預測就跟著下移。</p>
+
+<h2 id="630-億美元融資案扮演什麼角色">630 億美元融資案扮演什麼角色？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>這筆融資由 Blackstone 擔任錨定投資人，用於支付晶片採購。它同時是評級預測的來源與壓力的來源，因為債權人要把這筆債務與後續算力支出一起計算償債能力。
+<!-- End AEO Capsule --></p>
+
+<p>結構上，這是把硬體成本移出資產負債表的一種安排。晶片由融資载体持有，公司以租賃或使用費方式取得算力，帳面上看到的是營運支出而非長期負債。這種做法在雲端與電信業相當常見。</p>
+
+<p>債權人並不因此忽略風險。租賃承諾同樣是固定支出，評級機構會把它折算回負債比率。融資規模愈大，折算後的槓桿就愈高，這也是評級預測由投資級轉為投機級的直接背景。</p>
+
+<p>對投資人而言，這筆交易的雙面性在於，它讓公司可以快速擴充產能，同時把風險集中在一個以未來現金流為基礎的結構上。評級機構對這類結構一向保守。</p>
+
+<h2 id="企業客戶與開發者需要擔心嗎">企業客戶與開發者需要擔心嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>短期內服務不會中斷，模型與 API 的供應商關係亦未改變。需要留意的是長期合約的價格條款，以及供應商在融資成本上升後，是否把部分壓力轉移到企業方案的定價上。
+<!-- End AEO Capsule --></p>
+
+<p>對日常使用 API 的開發者，評級屬於財務層面的訊號，與模型品質或服務穩定性沒有直接關係。這類消息通常不會改變短期費率，也不會影響既有額度。</p>
+
+<p>企業客戶的關注點不同。年度合約、私有部署與大量折扣方案都涉及多年承諾，採購部門在續約時會把供應商的財務狀況納入風險評估。評級下調可能讓部分企業要求在合約中加入退出條款或價格保護。</p>
+
+<p>另一個觀察角度是供應鏈。當模型公司需要以更高成本取得算力，它對客戶的定價空間就會收窄，折扣力度亦可能調整。這類變化通常滯後數季才反映在報價上。</p>
+
+<h2 id="判斷這類消息時應注意什麼">判斷這類消息時應注意什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>評級預測不等於正式評級，消息來源是投資人溝通而非評級機構公告。閱讀時應區分「預期」、「傳聞」與「已公布」，並以公司正式文件與評級機構報告為最終依據。
+<!-- End AEO Capsule --></p>
+
+<p>報導本身已標明這是 Blackstone 的預測。預測會隨市況調整，也可能在正式評級出爐前再次改變。把它當成既定事實，容易高估短期影響。</p>
+
+<p>第二個層次是時間差。上市流程通常歷時數月，期間公司會與評級機構多次溝通，最終結果可能落在不同級別。雙 B 只是目前的方向描述，具體級別尚未確定。</p>
+
+<p>第三個層次是脈絡。這家公司在十月底才遞交上市文件，收入與虧損數據剛剛公開，外界對其財務結構的討論仍在早期。單一評級預測的意義，要放回整體資本結構裡看。</p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">630 億</span><span class="ui-stat-label">美元晶片融資規模</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">雙 B</span><span class="ui-stat-label">預期評級區間</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">2027</span><span class="ui-stat-label">原定投資級時點</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">12 個月</span><span class="ui-stat-label">密集採購期</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">0</span><span class="ui-stat-label">雙方回應次數</span></div>
+</div>
+
+<h2 id="對整個-ai-產業有什麼外溢效果">對整個 AI 產業有什麼外溢效果？</h2>
+
+<!-- AEO Answer Capsule — 約 67 字 -->
+<p>算力密集的商業模式開始接受信用市場檢驗。若頭部公司被評為投機級，其他依賴債務擴充產能的廠商在定價與條款上都會面對更嚴格的審視，融資節奏可能放慢。
+<!-- End AEO Capsule --></p>
+
+<p>過去兩年，AI 公司的擴張故事主要由股權融資支撐。當規模擴大到需要債務與租賃結構配合，信用市場的語言就會介入，評價標準也從成長率轉向現金流覆蓋倍數。</p>
+
+<p>這套標準對產業不算友善。多數模型公司仍處於支出大於收入的階段，能以投資級發債的寥寥可數。一旦頭部企業被歸入投機級，後續跟進者在談判桌上的籌碼會更少。</p>
+
+<p>反過來說，評級也提供了一種外部紀律。當借錢變貴，公司會更謹慎地評估每一筆算力承諾，產業的產能擴張速度可能因此放緩，供需錯配的風險亦隨之下降。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>原始報導出自 TechCrunch 2026 年 10 月 30 日，內容引述《金融時報》消息。另可對照本站早前整理的 S-1 財務拆解，理解支出結構與收入規模的比例關係。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>報導原文：<a href="https://techcrunch.com/2026/10/30/anthropic-expected-to-receive-high-junk-rating-from-credit-agencies-following-ipo-report-says/">Anthropic expected to receive high ‘junk’ rating from credit agencies following IPO, FT report says</a></li>
+  <li>《金融時報》相關報導：<a href="https://www.ft.com/">ft.com</a></li>
+  <li>本站相關整理：<a href="/技術/anthropic-s1-ipo-news">Anthropic 遞交 S-1：半年收入 163 億美元、代號 ANT</a></li>
+</ul>
+
+<h2 id="總結這則消息的關鍵在哪裡">總結：這則消息的關鍵在哪裡？</h2>
+
+<!-- AEO Answer Capsule — 約 63 字 -->
+<p>關鍵在於資金成本的方向。評級由投資級轉向投機級，意味著未來擴充算力要付更高利息，這種壓力會沿著合約、定價與產能規劃，逐步傳導到產品與客戶端。
+<!-- End AEO Capsule --></p>
+
+<p>這則消息的重要性不在於某個具體級別，而在於評價框架的轉換。當一家公司從「成長故事」進入「信用分析」，外界看它的方式就從收入曲線變成償債能力。</p>
+
+<p>對讀者而言，值得追蹤的是正式評級公布的時間點，以及公司是否調整算力採購節奏。這兩項數據比任何單一預測都更能說明實際處境。</p>
+
+<p>評級預測會變，支出承諾已經簽下。這之間的差距，才是後續幾季需要觀察的地方。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Anthropic" /><category term="IPO" /><category term="信用評級" /><category term="垃圾債" /><category term="算力融資" /><category term="Claude" /><category term="科技新聞" /><summary type="html"><![CDATA[《金融時報》報導，Blackstone 向參與 630 億美元算力融資案的投資人表示，預期 Anthropic 完成 IPO 後取得雙 B 區間的垃圾級信用評級，與其早前投資級的預測相反。評級若按此落地，發債與租賃算力的資金成本都會上升，也可能改變供應商與企業客戶對長期合約的定價方式。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/anthropic-junk-rating-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/anthropic-junk-rating-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">46K 星 CleanYourTV：免 root 移除電視廣告與追蹤</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news" rel="alternate" type="text/html" title="46K 星 CleanYourTV：免 root 移除電視廣告與追蹤" /><published>2026-10-31T20:00:01+08:00</published><updated>2026-10-31T20:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news"><![CDATA[<p>CleanYourTV 於 2026 年 10 月 17 日開源，十三日內累積約 4.6 萬星。專案透過 Android 電視內建的除錯橋接，以 <code class="language-plaintext highlighter-rouge">pm disable-user</code> 停用廠商廣告服務與預載程式，不 root、不刷機、也不解除安裝，並可一行指令還原。專案同時提供 572 KB 的自家啟動器，取代原廠首頁。</p>
+
+<h2 id="cleanyourtv-是什麼">CleanYourTV 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>它是一個開源的智能電視清理工具，透過 Android 除錯橋接停用廣告服務與廠商預載程式，另附 572 KB 自家啟動器，可完全還原，不修改系統分割區。
+<!-- End AEO Capsule --></p>
+
+<p>專案由開發者 Gathin 於 2026 年 10 月 17 日發布，原始名稱是 tv-vibehack，十九日後改為現名，舊連結仍然有效。它並非單一應用程式，而是一組腳本、一份份按機型整理的停用清單，以及一個獨立編譯的啟動器。</p>
+
+<p>技術路徑建立在一個被忽略的事實上：Android 電視與 Android 手機共用同一套除錯橋接。使用者在電視的開發者選項開啟 USB 除錯，於電腦端授權一次，之後就能以標準 Android 工具操作電視。</p>
+
+<p>這個路徑的關鍵在於可逆。專案動用 <code class="language-plaintext highlighter-rouge">pm disable-user</code>，等同於電視設定頁的「停用應用程式」，只在使用者設定檔層級關閉套件。系統映像不變，資料不刪，因此還原腳本能逐步倒帶。</p>
+
+<h2 id="為什麼智能電視的廣告無法關閉">為什麼智能電視的廣告無法關閉？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>廠商把廣告與推薦列寫進預載系統應用，設定頁不提供關閉選項。這些服務在出廠時已取得簽章權限，一般使用者無法移除，只能停用，而停用入口同樣被隱藏。
+<!-- End AEO Capsule --></p>
+
+<p>智能電視的商業模式與手機不同。硬體利潤被壓縮之後，廠商轉向首頁推薦位、開機廣告與跨應用追蹤，把使用者注意力當作第二次銷售的庫存。這些收益寫進財報，自然不會提供關閉開關。</p>
+
+<p>以 Google TV 為例，首頁的贊助列由系統層級的推薦服務提供，與帳號的個人化資料相連。使用者在設定頁能找到廣告 ID 的重設選項，卻找不到停用整個推薦服務的按鈕。</p>
+
+<p>第三方啟動器是繞道方案，但也常被系統阻擋。部分中國市場的 TCL 機型直接拒絕安裝任何第三方啟動器，清單檔案在開頭就註明這一點。專案的做法是先停用廣告服務，再處理首頁歸屬。</p>
+
+<h2 id="它如何在不-root-的情況下清理電視">它如何在不 root 的情況下清理電視？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>流程分三步：備份套件清單，以 pm disable-user 停用廣告與遙測服務，再安裝啟動器並設為首頁。全程不 root、不刪除資料，還原腳本按紀錄復原。
+<!-- End AEO Capsule --></p>
+
+<p>第一步是備份。<code class="language-plaintext highlighter-rouge">tools/disable.sh</code> 在改動任何項目之前，會把電視目前的套件狀態寫入 <code class="language-plaintext highlighter-rouge">~/.cleanyourtv/</code>，包含哪些套件原本就是停用狀態。這份紀錄是日後還原的唯一依據。</p>
+
+<p>第二步是停用。專案按品牌整理清單，社群累積了 360 款機型、97 個品牌，覆蓋 TCL 78 款、Sony 41 款、小米 34 款等主要出貨機種。清單以純文字列出套件名稱，可自行增減。</p>
+
+<p>第三步是首頁接手。啟動器以原生 Java 編寫，發行版約 572 KB，不使用模糊特效、不播放影片、不申請網路權限、也沒有背景服務，明顯針對只有 1 GB 記憶體的入門機型設計。</p>
+
+<h2 id="572-kb-的啟動器解決了什麼問題">572 KB 的啟動器解決了什麼問題？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>原廠首頁佔用記憶體且持續連網回傳行為，入門電視因此反應遲緩。572 KB 啟動器切斷網路權限與背景服務，只負責列出已安裝應用並啟動，D-pad 反應明顯較穩定。
+<!-- End AEO Capsule --></p>
+
+<p>啟動器的最低要求是 Android 8.0（API 26）。它提供可調的 Dock 順序、每行 4 至 7 個圖格、隱藏應用、時鐘螢幕保護與 30 種語言，其中包含完整的由右至左排版，供希伯來文使用。</p>
+
+<p>主題系統是這個專案的差異化設計。背景、桌布與版面透過推送一份 <code class="language-plaintext highlighter-rouge">config.json</code> 更換，無需重新編譯，官方收錄 14 套主題。另有模組卡片機制，讓其他電視應用自行提供圖格，但每次都需要使用者逐項同意。</p>
+
+<p>遙控器按鍵的兼容性同樣被處理。原廠首頁被停用之後，部分機型的 Input、YouTube 與設定鍵會失效，專案保留這些按鍵的對應，並提供 HDMI 埠的重新命名與連線狀態顯示。</p>
+
+<h2 id="這個專案為何能在十三日內累積-46-萬星">這個專案為何能在十三日內累積 4.6 萬星？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>起點是一則展示父母家中電視清理前後的社群貼文，累積 740 萬次瀏覽。大量使用者要求同等效果，回覆區直接變成機型清單來源，四日內收到逾 170 款機型。
+<!-- End AEO Capsule --></p>
+
+<p>專案的成長路徑值得記錄。作者在 10 月 17 日發布一段清理前後對比的短片，畫面只有原廠首頁的贊助列與清理後的純黑首頁，沒有旁白。貼文累積 740 萬次瀏覽，隨後湧入的詢問成為專案的市場驗證。</p>
+
+<p>供給端同時被組織起來。社群在四日內補上 170 餘款機型清單，兩日內送出 177 個合併請求，來自 104 位貢獻者。這種由需求驅動、以清單為單位的協作模式，比一般開源專案的入門門檻低得多。</p>
+
+<p>媒體跟進放大了擴散。專案 README 記錄 351 篇報導、來自 46 個國家，包括 TechCrunch、TechRadar、Tom’s Guide 與 XDA。三方報導與社群討論互相引用，形成一輪難以複製的曝光。</p>
+
+<h2 id="使用時有哪些實際風險">使用時有哪些實際風險？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>網路除錯埠 5555 以明文傳輸，同網段裝置在開啟期間可取得 shell。誤停系統關鍵套件可能導致首頁空白，而韌體更新會重新啟用清單中的套件，需再次執行檢查。
+<!-- End AEO Capsule --></p>
+
+<p>除錯埠是首要風險。專案文件明言網路除錯在 5555 埠以明文運作，部分韌體更允許同網段任何裝置取得 shell。建議在清理完成後關閉除錯、撤銷授權並重新開機，再以 <code class="language-plaintext highlighter-rouge">tools/adb-closed.py</code> 確認埠位已關閉。</p>
+
+<p>首頁歸屬是第二個風險。若在新啟動器安裝完成之前就停用原廠首頁，Home 可能落在工廠測試應用上。安裝腳本已把順序固定，但自行手動操作的使用者仍可能踩到。</p>
+
+<p>Google TV 的設定精靈是第三個風險。<code class="language-plaintext highlighter-rouge">setupwraith</code> 在特定情況下會搶走 Home 並造成系統循環重啟，且在 Chromecast 與 Google TV Streamer 上停用它會失去手機投放功能。文件建議先檢查 Wi-Fi 設定歸屬，再決定是否停用。</p>
+
+<h2 id="同類方案與它有何分別">同類方案與它有何分別？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>同類工具多為單一應用或付費清理服務。此專案的差別在於以清單為單位、可逐條還原，並同時替換首頁，把清理與使用體驗一併處理，社群維護成本分攤到各機型。
+<!-- End AEO Capsule --></p>
+
+<p>三星 Tizen、LG webOS、Roku、Vizio 與海信 VIDAA 均不支援，因為它們沒有 ADB。對這些平台，專案改為提供關閉追蹤的設定路徑，並未有同等方案。想在這些電視上徹底去廣告，目前仍無開源解法。</p>
+
+<p>手機端有社群開發的 Clean Your TV 應用，可直接以 Android 手機完成同樣流程，適合沒有電腦的使用者。另有 163 個衍生專案收錄在展示清單，涵蓋移植版、主題與附加元件。</p>
+
+<p>遠端協助是另一個實際場景。文件提供透過 Tailscale 連線處理親友電視的流程，明確反對在對方路由器上開放 ADB 埠。</p>
+
+<h2 id="專案的關鍵數據有哪些">專案的關鍵數據有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>專案累積 4.6 萬星、5,708 次分叉與 178 個待處理議題，主要語言為 Python，採 MIT 授權。收錄 360 款機型、97 個品牌、30 種語言與 151 個生態專案。
+<!-- End AEO Capsule --></p>
+
+<p>以下數據取自 2026 年 10 月 30 日的倉庫狀態與 v3.2.0 發布說明，供評估參考。</p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><div class="ui-stat-value">46,354</div><div class="ui-stat-label">星標數</div></div>
+<div class="ui-stat"><div class="ui-stat-value">5,708</div><div class="ui-stat-label">分叉數</div></div>
+<div class="ui-stat"><div class="ui-stat-value">360</div><div class="ui-stat-label">機型清單</div></div>
+<div class="ui-stat"><div class="ui-stat-value">97</div><div class="ui-stat-label">品牌</div></div>
+<div class="ui-stat"><div class="ui-stat-value">30</div><div class="ui-stat-label">啟動器語言</div></div>
+<div class="ui-stat"><div class="ui-stat-value">572 KB</div><div class="ui-stat-label">啟動器體積</div></div>
+<div class="ui-stat"><div class="ui-stat-value">177</div><div class="ui-stat-label">兩日合併請求</div></div>
+<div class="ui-stat"><div class="ui-stat-value">MIT</div><div class="ui-stat-label">授權條款</div></div>
+</div>
+
+<p>專案建立於 2026 年 10 月 17 日，十月初至今持續更新，10 月 30 日仍有提交。以十三日達成 4.6 萬星的速度，在同類工具型專案中屬於少見。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>清理後 Play 商店與串流應用照常運作；韌體更新會還原清單，可用 check.py 修復；也可只停用廣告而不換啟動器。前置環境為 Python 3 與 JDK 17 至 22。
+<!-- End AEO Capsule --></p>
+
+<p><strong>問：清理之後串流應用會失效嗎？</strong></p>
+
+<p>不會。Play 商店保持運作，Netflix、YouTube 等應用照常更新。啟動器只列出已安裝應用，並以十年未變的 intent 機制啟動，不攔截應用自身的廣告。</p>
+
+<p><strong>問：韌體更新會把清理結果還原嗎？</strong></p>
+
+<p>會。更新會覆蓋清理後的系統，清單中的套件重新啟用，首頁也可能回到原廠版本。執行 <code class="language-plaintext highlighter-rouge">tools/check.py</code> 可列出被還原的項目，加上 <code class="language-plaintext highlighter-rouge">--fix</code> 則重新套用。</p>
+
+<p><strong>問：可以只清理而不更換啟動器嗎？</strong></p>
+
+<p>可以。停用腳本與啟動器安裝是分開的步驟，僅執行 <code class="language-plaintext highlighter-rouge">tools/disable.sh</code> 即可移除廣告與遙測服務，首頁維持原廠版本。這也是多數人先嘗試的組合。</p>
+
+<p><strong>問：需要什麼前置環境？</strong></p>
+
+<p>電腦需具備 Python 3、JDK 17 至 22，以及 Android SDK platform 34 與 build-tools 34。不願安裝這些工具的使用者可改用 Docker 建置腳本，電腦只需 Docker。</p>
+
+<p><strong>問：電視壞掉怎麼辦？</strong></p>
+
+<p>專案不刷機、不 root、不刪除資料，套件僅在使用者設定檔停用。最壞情況可在電視自身的設定頁重新啟用套件，或由 recovery 選單執行出廠重置。</p>
+
+<h2 id="總結值得動手嗎">總結：值得動手嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>使用 Android TV 或 Google TV、且能接受一次電腦操作者，值得一試。流程可逆、清單完整、啟動器輕量。其他平台暫無適用方案。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案解決的是一個被普遍接受的預設狀態：使用者買下硬體，卻仍要持續支付注意力。它以可逆的方式把控制權交回使用者，技術門檻落在一次性的電腦操作上。</p>
+
+<p>值得觀察的是它的可持續性。清單依賴社群逐機型補齊，韌體更新會反覆破壞成果，長期維護成本不低。專案在十三日內證明需求真實存在，接下來要證明的是它能否在熱度退去後繼續運作。</p>
+
+<p>對於考慮動手的讀者，建議先以 <code class="language-plaintext highlighter-rouge">tools/check.py</code> 檢視現狀，再以單一清單小批量停用，確認電視功能正常後才處理首頁。這個順序能保留完整的退路。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>主要來源為 GitHub 倉庫與 v3.2.0 發布說明，數據截至 2026 年 10 月 30 日。專案官網 cleanyour.tv 提供機型查詢與附加元件索引。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>專案倉庫：<a href="https://github.com/Gathin23/cleanyourtv">Gathin23/cleanyourtv</a></li>
+  <li>官方網站：<a href="https://cleanyour.tv">cleanyour.tv</a></li>
+  <li>版本說明：<a href="https://github.com/Gathin23/cleanyourtv/releases/tag/v3.2.0">CleanYourTV 3.2</a></li>
+</ul>
+
+<p><img src="/assets/images/posts/cleanyourtv-debloat-news-shot2.png" alt="CleanYourTV 的 GitHub 倉庫首頁截圖，顯示倉庫名稱、46,354 個星標、專案描述「Debloat any Android or Google TV over Wi-Fi and get an Apple TV-style home」與主要語言標示" /></p>
+
+<p><img src="/assets/images/posts/cleanyourtv-debloat-news-shot1.png" alt="CleanYourTV README 開頭截圖，顯示萬聖節版橫幅、正體中文等多語言連結、星標與合併請求徽章，以及「Start here」分類導引表" /></p>
+
+<p><img src="/assets/images/posts/cleanyourtv-debloat-news-shot3.png" alt="CleanYourTV 倉庫的統計與貢獻者區塊截圖，顯示星標走勢、分叉數與社群貢獻者頭像牆，反映十三日內的協作規模" /></p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="CleanYourTV" /><category term="Android TV" /><category term="開源項目" /><category term="智能電視" /><category term="廣告攔截" /><category term="隱私" /><category term="科技新聞" /><summary type="html"><![CDATA[CleanYourTV 於 2026 年 10 月 17 日開源，十三日內累積 4.6 萬星。專案透過 Android 內建的除錯橋接，以 pm disable-user 停用智能電視的廣告服務與廠商預載程式，不 root、不刷機、也不解除安裝，並可一行指令還原。另附 572 KB 自家啟動器，取代原廠首頁。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/cleanyourtv-debloat-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/cleanyourtv-debloat-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Agno 開源：4.3 萬星的自駕代理平台</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/agno-agentos-news" rel="alternate" type="text/html" title="Agno 開源：4.3 萬星的自駕代理平台" /><published>2026-10-31T16:00:02+08:00</published><updated>2026-10-31T16:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/agno-agentos-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/agno-agentos-news"><![CDATA[<p>Agno 於 2026 年 10 月 29 日發布 v3.1.12，GitHub 累積 4.3 萬星、6,213 次分叉與 621 位貢獻者。專案定位為自駕代理平台，把代理從一次性腳本推進到可長期運行的服務層，內建 API、MCP、持久執行、人工審批與排程。</p>
+
+<h2 id="agno-是什麼">Agno 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>它是開源的代理平台，負責代理外圍的編排與服務層。AgentOS 提供 API、MCP、持久執行、人工審批與排程，資料留在自家雲端。
+<!-- End AEO Capsule --></p>
+
+<p>專案倉庫建立於 2022 年 5 月，PyPI 上的 <code class="language-plaintext highlighter-rouge">agno</code> 套件首個版本於 2024 年 12 月 24 日上線，至今累計 277 個版本。目前的版本線由 8 月 24 日的 v3.0.0 起步，10 月 29 日的 v3.1.12 為最新發布。</p>
+
+<p>README 把能力切成三層。第一層是建置，開發者可用 Agno、Claude Agent 或 Codex 三種 SDK 描述代理，再組合成團隊與工作流。第二層是運行，AgentOS 接管認證、角色權限、續跑與重播、人工審批、排程與持久執行。第三層是營運，Company OS 讓代理擁有職責，把工作拆成產品、專案、任務與週期性常規。</p>
+
+<h2 id="agno-30-的架構改動帶來什麼影響">Agno 3.0 的架構改動帶來什麼影響？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>v3.0.0 於 8 月 24 日發布，屬破壞性更新，升級前必須先完成資料庫遷移。運行改為獨立資料列，會話寫入放大由 O(N²) 降至 O(N)。
+<!-- End AEO Capsule --></p>
+
+<p>舊架構把整段會話存成單一文件，每次追加訊息都要重寫全部內容。會話越長，寫入成本越接近平方增長，雲端資料庫的單項大小上限亦成為硬天花板。v3.0 把運行拆成獨立資料列，欄位包含 session_id、run_type、agent_id、status 與 parent_run_id。</p>
+
+<p>相容性由讀取層吸收。官方說明 <code class="language-plaintext highlighter-rouge">session.get_messages()</code>、<code class="language-plaintext highlighter-rouge">get_chat_history()</code>、<code class="language-plaintext highlighter-rouge">db.get_session()</code> 與 AgentOS 的會話路由簽名不變，運行資料在讀取時重新掛回。開發者亦可直接用 <code class="language-plaintext highlighter-rouge">db.get_run()</code>、<code class="language-plaintext highlighter-rouge">db.get_runs()</code> 與 <code class="language-plaintext highlighter-rouge">db.delete_runs()</code> 等新介面操作單次運行。</p>
+
+<p>同一個版本還加入工具結果外置。當工具回傳超過 16,000 字元，內容寫入 AgentFS，訊息中只留預覽、大小與 result_id，代理需要時再以 <code class="language-plaintext highlighter-rouge">read_result</code> 或 <code class="language-plaintext highlighter-rouge">search_result</code> 取回。較大的圖片與檔案可改存 S3 或 GCS，一則 113 KB 的 JPEG 由約 151,000 字元降至 2,897 字元。</p>
+
+<h2 id="agentos-如何把代理變成可長期運行的服務">AgentOS 如何把代理變成可長期運行的服務？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>它以持久佇列保存背景任務，重啟後可接回原本執行點並追蹤狀態。平台同時提供認證、角色權限、逐使用者資料隔離與排程。
+<!-- End AEO Capsule --></p>
+
+<p>持久執行是分水嶺。一般框架在行程結束時失去執行中的任務，AgentOS 把背景任務寫入資料庫，並在重啟後接回原本的執行點，狀態可查。這讓代理能處理跨越數分鐘甚至數小時的工作，例如批次分析、長流程審批與定期維運。</p>
+
+<p>存取邊界由平台統一處理。README 列出的安全能力包含認證、角色為基礎的存取控制，以及每位使用者的資料隔離。代理對外只暴露兩條通道：產品端走 REST API，Claude 與 ChatGPT 端走 MCP，Slack 等聊天應用則透過 Agno Interfaces 接入。</p>
+
+<p>營運結構由 Company OS 承擔。開發者可替代理定義職責，把工作組織成產品、專案、任務與週期性常規，人員負責設定方向與覆核結果。v3.1.12 新增 <code class="language-plaintext highlighter-rouge">Routine(enabled=False)</code>，讓範本預先附帶未啟用的常規，由使用者在介面上自行開啟。</p>
+
+<h2 id="為什麼-claude-與-codex-的權限請求要交給-agentos-處理">為什麼 Claude 與 Codex 的權限請求要交給 AgentOS 處理？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>v3.1.12 把 Claude 與 Codex 自身的權限請求接入 AgentOS 審批介面，代理被攔下時寫成一筆暫停運行，核准後從同一執行點續跑，不重播提示詞。
+<!-- End AEO Capsule --></p>
+
+<p>過去的做法是在框架層另設一套審批。問題在於權限判斷發生在代理執行環境內部，框架看不到它為何停頓，只能整段重跑。v3.1.12 改為讓兩個代理執行環境的原生請求直接落到 AgentOS，審批決策再送回原本的執行。</p>
+
+<p>設計上有幾處值得注意。決策會對照實際請求的動作逐項驗證，支援同步與非同步續跑、取消、逾時與儲存失敗的處理。沙箱中的代理在 Docker 與 AgentCore 之間移動時仍保留這條審批鏈，包括能力協商、決策傳遞、持久化與 API 工作行程遺失後的重接。</p>
+
+<p>預設行為亦隨之改變。沒有設定審批參數的 <code class="language-plaintext highlighter-rouge">CodexAgent</code> 現在走原生 <code class="language-plaintext highlighter-rouge">on-request</code> 政策，先前無人處理的請求會轉為暫停，並由 <code class="language-plaintext highlighter-rouge">hitl_timeout</code> 在預設 900 秒後收束。</p>
+
+<h2 id="43-萬星背後的成長路徑是什麼">4.3 萬星背後的成長路徑是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>專案自 2022 年建立，套件於 2024 年 12 月上線，累積 277 個版本。最新三版間隔二至四日，10 月 31 日仍有提交，屬長期維護型專案。
+<!-- End AEO Capsule --></p>
+
+<p>發版節奏是這個專案最明顯的特徵。最新三個版本分別落在 10 月 23 日、10 月 27 日與 10 月 29 日，間隔二至四日。每次發布都附帶完整變更說明，逐項對應合併請求編號與貢獻者。</p>
+
+<p>貢獻者規模達 621 人。v3.1.12 的變更清單同時出現核心維護者與首次提交者，包含知識庫分塊選項隔離、評估器預設模型替換與圖表標題數值等修正，屬於長期維護型專案的典型樣貌。</p>
+
+<p>題材熱度亦有外部支撐。代理框架在 2026 年成為企業導入生成式人工智慧的主要形式，主流選擇集中在 LangGraph、CrewAI、AutoGen 與 OpenAI Agents SDK。Agno 的差異在於把服務層一併交付，而不只提供編排語法。</p>
+
+<h2 id="開發者如何快速開始">開發者如何快速開始？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>安裝只需執行 pip install agno，需求 Python 3.9 以上。官方建議由範本起步，複製 agentos-railway 後依技能指引啟動平台與首個代理。
+<!-- End AEO Capsule --></p>
+
+<p>官方把入門流程改寫成給編碼代理的提示詞。開發者把一段指令交給 Claude 或 Codex，代理便會複製範本倉庫、執行安裝技能，並在本機跑起 API 伺服器、MCP 伺服器與 PostgreSQL 儲存。</p>
+
+<p>部署範本覆蓋九種環境，包含 Docker、Railway、AWS、GCP、Azure、Fly.io、Render、Modal 與 Helm。這種做法把環境差異留在範本層，核心套件不需為每朵雲各自分叉。</p>
+
+<p>設定頁與營運介面集中在 os.agno.com。平台啟動後連接該站，即可檢視對話、追蹤、知識庫與代理活動，並以無程式碼介面或與 OS Manager 對話的方式調整代理。</p>
+
+<h2 id="專案的關鍵數據有哪些">專案的關鍵數據有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>截至 2026 年 10 月 31 日，專案累積 42,987 星、6,213 次分叉、621 位貢獻者，主要語言為 Python，採 Apache 2.0 授權，共 277 個版本。
+<!-- End AEO Capsule --></p>
+
+<p>以下數據取自 2026 年 10 月 31 日的倉庫狀態與 v3.1.12 發布說明，供評估參考。</p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><div class="ui-stat-value">42,987</div><div class="ui-stat-label">星標數</div></div>
+<div class="ui-stat"><div class="ui-stat-value">6,213</div><div class="ui-stat-label">分叉數</div></div>
+<div class="ui-stat"><div class="ui-stat-value">621</div><div class="ui-stat-label">貢獻者</div></div>
+<div class="ui-stat"><div class="ui-stat-value">1,959</div><div class="ui-stat-label">待處理議題</div></div>
+<div class="ui-stat"><div class="ui-stat-value">277</div><div class="ui-stat-label">PyPI 版本</div></div>
+<div class="ui-stat"><div class="ui-stat-value">3.1.12</div><div class="ui-stat-label">最新版本</div></div>
+<div class="ui-stat"><div class="ui-stat-value">3.9+</div><div class="ui-stat-label">Python 需求</div></div>
+<div class="ui-stat"><div class="ui-stat-value">Apache 2.0</div><div class="ui-stat-label">授權條款</div></div>
+</div>
+
+<p>議題數量偏高，反映使用面廣泛而非單純積壓。1,959 個開啟議題中，相當比例屬功能請求與整合問題，與 621 位貢獻者的提交節奏並存。</p>
+
+<h2 id="同類框架有何分別">同類框架有何分別？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>LangGraph 偏重狀態圖編排，CrewAI 偏重角色分工，OpenAI Agents SDK 貼近單一供應商。Agno 把編排與服務層一起交付，代價是概念數量較多。
+<!-- End AEO Capsule --></p>
+
+<p>選擇框架時，真正的差異通常在代理寫成之後。若團隊只需要在工作流中串接幾次模型呼叫，輕量編排層更合適；若代理要成為產品的一部分，需要認證、審批、續跑與稽核，平台層的價值才會顯現。</p>
+
+<p>多供應商支援是另一個分野。Agno 的模型層同時接受多家供應商與本地端點，v3.1.12 的修正清單即包含把評估器預設判官由已於 10 月 23 日下線的 o4-mini 換成 gpt-5.6-terra 這類供應商退役連動。</p>
+
+<p>程式碼組織方式亦有取捨。v3.0 引入的 CodeMode 把寬廣的工具結構換成一個可持續的 Python 核心，模型以程式碼組合工具呼叫，減少逐次往返。這種做法降低上下文消耗，但要求模型具備穩定的程式碼生成能力。</p>
+
+<h2 id="有哪些實際限制與風險">有哪些實際限制與風險？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>v3.0 屬破壞性更新，升級須先跑資料庫遷移，舊版無法直接回退。每個代理預設送出一筆遙測事件，可設 AGNO_TELEMETRY=false 關閉。
+<!-- End AEO Capsule --></p>
+
+<p>遷移是第一道門檻。官方在 v3.0.0 說明中明言需要先讀遷移指南再上線，運行資料表結構改變意味著舊版無法直接回退。對已進入生產的團隊，這件事需要排入維護窗口。</p>
+
+<p>遙測屬第二項需要留意的設定。每個代理實例會送出一筆事件，用於判斷供應商優先順序，官方說明提示詞、訊息與輸出不會傳送。在意資料流向的環境應在部署階段即關閉。</p>
+
+<p>架構複雜度是第三項。API、MCP、持久佇列、Company OS 與九種部署範本構成完整平台，同時也把學習曲線拉高。小團隊若只取其中一層，容易覺得負擔過重。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>平台可自架於自家雲端，資料不出環境；支援多家模型與 MCP，並提供 REST API 與 Slack 介面。Apache 2.0 授權允許商用。
+<!-- End AEO Capsule --></p>
+
+<p><strong>問：Agno 是否必須使用官方託管服務？</strong></p>
+
+<p>不需要。平台可部署在自己的雲端，官方提供 Docker、Railway、AWS、GCP、Azure、Fly.io、Render、Modal 與 Helm 九種範本。os.agno.com 屬營運介面，連接自架平台後即可使用。</p>
+
+<p><strong>問：既有代理程式碼需要改寫嗎？</strong></p>
+
+<p>需要部分調整。v3.0 的資料表結構與部分參數簽名改變，官方提供遷移指南與 v3 變更清單。以 v2 建立的會話資料在遷移後可繼續讀取，運行資料則改由新表承載。</p>
+
+<p><strong>問：代理可以接哪一些模型？</strong></p>
+
+<p>模型層支援多家供應商與本地端點，README 的教學與 cookbook 目錄涵蓋 OpenAI、Anthropic、Google 與開源模型路線。若要指定思考強度或工具呼叫格式，各供應商的設定仍在模型類別中處理。</p>
+
+<p><strong>問：如何把代理接進既有產品？</strong></p>
+
+<p>三條路徑並存。產品端以 REST API 呼叫，Claude 與 ChatGPT 端以 MCP 伺服器接入，Slack 等聊天應用透過 Agno Interfaces。三者共用同一套認證與權限模型。</p>
+
+<p><strong>問：團隊規模多大才值得採用？</strong></p>
+
+<p>若代理只是內部試作，輕量框架已足夠。當代理需要跨重啟續跑、需要人工審批高風險動作，或需要逐使用者的資料隔離與稽核紀錄，平台層帶來的節省通常大於學習成本。</p>
+
+<h2 id="總結agno-適合什麼團隊">總結：Agno 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>需要把代理長期運行、且有審批與稽核要求的團隊值得評估。純研究或一次性腳本未必需要平台層，v3.0 的資料表改動亦要求持續跟版。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案回答的是一個被多數框架略過的問題：代理寫好之後，誰負責它在半夜三點的狀態。AgentOS 把續跑、審批、排程與權限收進平台，代理因此可以像一般服務一樣被部署與維運。</p>
+
+<p>代價是相依範圍擴大。資料庫結構、部署範本、審批政策與版本升級都成為日常維護的一部分，團隊需要有人持續跟進每兩日一輪的發布。對於把代理視為產品核心的團隊，這筆成本換來的是可預期的運行行為。</p>
+
+<p>若只是驗證想法，先以輕量框架跑通流程更實際。等到代理需要面對真實使用者、需要留下審批紀錄、需要在重啟後接回工作，平台層的價值才會具體顯現。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>主要來源為 GitHub 倉庫與 v3.1.12 發布說明，數據截至 2026 年 10 月 31 日。官方文件站 docs.agno.com 提供完整指南。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>專案倉庫：<a href="https://github.com/agno-agi/agno">agno-agi/agno</a></li>
+  <li>官方文件：<a href="https://docs.agno.com">docs.agno.com</a></li>
+  <li>版本說明：<a href="https://github.com/agno-agi/agno/releases/tag/v3.1.12">Agno v3.1.12</a></li>
+  <li>遷移指南：<a href="https://docs.agno.com/other/v3-migration">v3 Migration Guide</a></li>
+</ul>
+
+<p><img src="/assets/images/posts/agno-agentos-news-shot2.png" alt="Agno 的 GitHub 倉庫首頁截圖，顯示倉庫名稱 agno-agi/agno、42,987 個星標、專案描述「The self-driving agent platform」與 Apache 2.0 授權標示" /></p>
+
+<p><img src="/assets/images/posts/agno-agentos-news-shot1.png" alt="Agno README 開頭截圖，顯示 Agno 的品牌標誌、專案定位「The self-driving agent platform」，以及建置、運行、營運三層架構的導引段落" /></p>
+
+<p><img src="/assets/images/posts/agno-agentos-news-shot3.png" alt="Agno 倉庫的統計與貢獻者區塊截圖，顯示星標走勢、分叉數、621 位貢獻者頭像與最近的提交紀錄，反映長期維護規模" /></p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Agno" /><category term="AgentOS" /><category term="AI Agent" /><category term="開源項目" /><category term="代理框架" /><category term="MCP" /><category term="科技新聞" /><summary type="html"><![CDATA[Agno 於 2026 年 10 月 29 日發布 v3.1.12，GitHub 累積 4.3 萬星、621 位貢獻者。專案以 AgentOS 把代理變成可長期運行的服務，內建 API、MCP、持久執行、人工審批與排程，並在 3.0 版把每次運行獨立成表，寫入放大由 O(N²) 降至 O(N)。採 Apache 2.0 授權。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/agno-agentos-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/agno-agentos-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">官方 Claude Code 擴充遭植入 SSH 後門</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news" rel="alternate" type="text/html" title="官方 Claude Code 擴充遭植入 SSH 後門" /><published>2026-10-31T12:00:01+08:00</published><updated>2026-10-31T12:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news"><![CDATA[<p>2026 年 10 月 30 日，資安公司 Phorion 公布一起供應鏈事件。官方 Claude Code for VS Code 擴充的 2.1.313 版本，在 Cursor Marketplace 上被替換為含後門的組建，模組載入時即寫入攻擊者持有的 Ed25519 公鑰，並建立反向 SSH 通道。</p>
+
+<p>植入程式同時在 macOS、Linux 與 Windows 留下開機持續執行機制，並回傳主機名稱、Git 電郵與環境變數名稱清單。Cursor 已下架該版本，NPM 與 VS Code 市集同步移除同號建置。</p>
+
+<h2 id="這次事件的實際情況是什麼">這次事件的實際情況是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>官方 Claude Code 擴充 2.1.313 在 Cursor 市集被換成含後門版本。編輯器一載入即寫入公鑰並建立反向 SSH 通道，使用者不需任何互動。
+<!-- End AEO Capsule --></p>
+
+<p>受影響的檔案是擴充目錄內的 <code class="language-plaintext highlighter-rouge">extension.js</code>。攻擊者在壓縮後的組建最前面插入一段立即執行函式，其餘內容維持原樣，包含 Claude Code 與 VS Code 的相關字串、正常的 <code class="language-plaintext highlighter-rouge">activate</code> 與 <code class="language-plaintext highlighter-rouge">deactivate</code> 匯出，以及介面邏輯。</p>
+
+<p>這種做法讓檔案在靜態比對時不易被察覺。注入的前綴引入 Node.js 內建的 <code class="language-plaintext highlighter-rouge">child_process</code>、<code class="language-plaintext highlighter-rouge">fs</code>、<code class="language-plaintext highlighter-rouge">os</code>、<code class="language-plaintext highlighter-rouge">path</code>、<code class="language-plaintext highlighter-rouge">http</code> 與 <code class="language-plaintext highlighter-rouge">crypto</code> 模組，於 Node 載入檔案的瞬間執行，時間點早於擴充本身的 <code class="language-plaintext highlighter-rouge">activate</code> 回呼。</p>
+
+<p>使用者不需要點擊任何按鈕，也不需要開啟 Claude Code 面板。只要編輯器載入該擴充，植入程式就會啟動。對於每天開著 IDE 的開發者而言，這個條件幾乎自動成立。</p>
+
+<h2 id="後門如何繞過正常安裝流程">後門如何繞過正常安裝流程？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>攻擊者更換的是市集上的組建內容，而非簽章或帳號。擴充以 IDE 與使用者權限執行，載入即取得本機檔案、原始碼與開發工具的完整存取權，因此不需提權漏洞也能完成植入。
+<!-- End AEO Capsule --></p>
+
+<p>Cursor Marketplace 提供的擴充以編輯器權限執行。一旦模組載入，後門即取得使用者可存取的全部檔案，包含原始碼、設定檔與憑證。這個權限模型本身沒有問題，問題在於市集對組建內容的驗證深度。</p>
+
+<p>事件中的樣本沒有使用任何提權漏洞。第一階段僅嘗試在既有權限內完成設定，遇到需要管理員權限的步驟時，腳本並未提供繞過手段，而是直接失敗。</p>
+
+<p>這意味著攻擊的假設相當務實：多數開發機器已開啟遠端登入，或使用者具備免密碼的 <code class="language-plaintext highlighter-rouge">sudo</code> 設定。只要其中一項成立，後門就能取得完整的互動式存取能力。</p>
+
+<h2 id="攻擊者用哪三組金鑰建立存取">攻擊者用哪三組金鑰建立存取？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>一組公鑰寫入授權檔供攻擊者登入，一組私鑰連向通道伺服器，第三組由開機腳本重建。註解分別是 svc-telemetry 與 svc-telemetry-tun。
+<!-- End AEO Capsule --></p>
+
+<p>第一階段確保 <code class="language-plaintext highlighter-rouge">~/.ssh</code> 目錄存在，並把攻擊者控制的 Ed25519 公鑰附加到 <code class="language-plaintext highlighter-rouge">authorized_keys</code>，目錄權限設為 <code class="language-plaintext highlighter-rouge">0700</code>，檔案設為 <code class="language-plaintext highlighter-rouge">0600</code>。公鑰註解為 <code class="language-plaintext highlighter-rouge">svc-telemetry</code>，與系統服務的命名風格相近。</p>
+
+<p>寫入前的檢查只看註解字串是否已存在，而非比對金鑰指紋。這個細節影響調查方式：單憑註解搜尋可能漏掉被改寫過註解的樣本，指紋比對較可靠。</p>
+
+<p>第二階段解碼另一組內嵌的 Ed25519 私鑰，註解為 <code class="language-plaintext highlighter-rouge">svc-telemetry-tun</code>，寫入系統暫存目錄，檔名以 <code class="language-plaintext highlighter-rouge">.stk_</code> 開頭，後接主機名稱與家目錄路徑的 MD5 前十字元。這組金鑰用於讓受害主機主動連向外部伺服器。</p>
+
+<p>第三階段把同一組私鑰嵌入持續執行腳本，開機時重新寫出。金鑰因此能在暫存目錄被清理後自動復原，清理流程必須同時處理設定檔與腳本。</p>
+
+<h2 id="反向通道如何運作">反向通道如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>腳本以 tunnel 身分連向該 IP 的 22 埠，用遠端埠轉發語法要求動態分配埠位，再把流量轉回本機 SSH。通道以 -N 執行，不開互動 shell。
+<!-- End AEO Capsule --></p>
+
+<p>指令使用遠端埠轉發，把 <code class="language-plaintext highlighter-rouge">0</code> 作為埠號傳給伺服器，由對方動態分配監聽埠。任何連到該埠的流量，都會經既有通道轉回受害主機的 <code class="language-plaintext highlighter-rouge">localhost:22</code>。</p>
+
+<p>攻擊者其後另開一段連線，用第一階段植入的公鑰登入本機 SSH 服務。這種設計把命令與控制邏輯外移到 SSH 本身，JavaScript 端不需要實作任何自訂通訊協定。</p>
+
+<p>連線參數刻意降低痕跡：關閉主機金鑰檢查、忽略 <code class="language-plaintext highlighter-rouge">known_hosts</code>、啟用 <code class="language-plaintext highlighter-rouge">BatchMode</code> 與 <code class="language-plaintext highlighter-rouge">IdentitiesOnly</code>，並設定 30 秒保活與轉發失敗即退出。若系統已安裝 <code class="language-plaintext highlighter-rouge">autossh</code> 則優先使用，否則退回標準 <code class="language-plaintext highlighter-rouge">ssh</code>。</p>
+
+<p>外層再包一層脫離終端的重試迴圈，每 60 秒重連一次，並以 <code class="language-plaintext highlighter-rouge">pgrep</code> 避免產生重複通道。因為迴圈已脫離終端，關閉 IDE 不會中斷連線。</p>
+
+<h2 id="開機持續執行靠什麼機制">開機持續執行靠什麼機制？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>三平台各用原生機制：Linux 寫入開機排程項目，macOS 建使用者層 LaunchAgent，Windows 試以 SYSTEM 身分建排程，失敗改放啟動腳本。
+<!-- End AEO Capsule --></p>
+
+<p>Linux 與 macOS 都會產生 <code class="language-plaintext highlighter-rouge">~/.config/.smt</code> 與 <code class="language-plaintext highlighter-rouge">~/.config/.smtk</code> 兩個檔案。前者是重連腳本，內含通道私鑰，執行時先把金鑰寫回 <code class="language-plaintext highlighter-rouge">.smtk</code> 再進入迴圈。</p>
+
+<p>macOS 額外建立 <code class="language-plaintext highlighter-rouge">~/Library/LaunchAgents/com.apple.sysmond.plist</code>，標籤模仿系統守護程序，並設定 <code class="language-plaintext highlighter-rouge">RunAtLoad</code> 與 <code class="language-plaintext highlighter-rouge">KeepAlive</code> 為 true，透過 <code class="language-plaintext highlighter-rouge">launchctl</code> 載入。由於置於使用者層而非系統層，不需要管理員權限即可生效。</p>
+
+<p>Linux 版本在 crontab 檢查上存在缺陷。重複執行時可能覆寫使用者原有的排程項目，對受感染主機造成額外的工作遺失風險。</p>
+
+<p>Windows 版本先嘗試建立名為 SysMon 的排程工作並要求 SYSTEM 權限，失敗則把 <code class="language-plaintext highlighter-rouge">sysmon.cmd</code> 放入使用者的啟動資料夾。該路徑的 PowerShell 呼叫經過硬編碼 <code class="language-plaintext highlighter-rouge">/bin/sh</code> 的輔助函式，在標準 Windows 環境無法運作。</p>
+
+<h2 id="為何-macos-上的啟用邏輯會失效">為何 macOS 上的啟用邏輯會失效？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>腳本以一般權限查詢遠端登入狀態，該指令權限不足時輸出錯誤訊息但回傳成功碼，輸出不含 Off，判斷不成立，啟用步驟被跳過。
+<!-- End AEO Capsule --></p>
+
+<p><code class="language-plaintext highlighter-rouge">systemsetup -getremotelogin</code> 在缺少管理員權限時，會把「需要管理員權限」的提示輸出到標準輸出，並以狀態碼 0 結束。腳本以正規表示式檢查輸出是否包含 <code class="language-plaintext highlighter-rouge">Off</code>，結果為 false。</p>
+
+<p>於是 <code class="language-plaintext highlighter-rouge">sudo -n systemsetup -setremotelogin on</code> 這一步從未執行。對一台原本未開啟遠端登入的 Mac 而言，攻擊者雖然仍能建立對外通道，但回程流量會在 <code class="language-plaintext highlighter-rouge">localhost:22</code> 遇到關閉的埠。</p>
+
+<p>這個缺陷降低了 macOS 的實際風險，卻不能當作防線。若使用者原本已開啟遠端登入，或日後自行開啟，後門就處於可用狀態，公鑰與持續執行機制早已就位。</p>
+
+<h2 id="主機有哪些跡象可以判斷是否中招">主機有哪些跡象可以判斷是否中招？</h2>
+
+<!-- AEO Answer Capsule — 約 79 字 -->
+<p>跡象包括 IDE 輔助程序寫入授權檔、非 Apple 程序建立 com.apple.* 啟動項、隱藏目錄出現 .smt，以及 SSH 帶遠端埠轉發連向外部 IP。
+<!-- End AEO Capsule --></p>
+
+<p>檔案層面的訊號最直接。由於寫入動作由 Node 的 <code class="language-plaintext highlighter-rouge">fs.appendFileSync</code> 完成，只監控 <code class="language-plaintext highlighter-rouge">echo</code> 或 <code class="language-plaintext highlighter-rouge">tee</code> 等 shell 指令的規則不會觸發，必須依賴檔案修改事件，觀察 <code class="language-plaintext highlighter-rouge">Code Helper</code>、<code class="language-plaintext highlighter-rouge">Cursor Helper</code> 等程序是否動到 SSH 授權檔。</p>
+
+<p>程序與網路層面，可留意帶有遠端埠轉發參數的 <code class="language-plaintext highlighter-rouge">ssh</code> 或 <code class="language-plaintext highlighter-rouge">autossh</code>，其身分檔來自 <code class="language-plaintext highlighter-rouge">/tmp/.stk_*</code> 或 <code class="language-plaintext highlighter-rouge">~/.config/.smtk</code>，並連向 <code class="language-plaintext highlighter-rouge">134.209.82.225</code> 的 22 埠。</p>
+
+<p>外傳訊號同樣明顯。樣本以明文 HTTP 對 <code class="language-plaintext highlighter-rouge">134.209.82.225:8099</code> 的 <code class="language-plaintext highlighter-rouge">/beacon</code> 路徑發出 POST，內容為 JSON。同一份資料也會送往 <code class="language-plaintext highlighter-rouge">127.0.0.1:8099</code>，來源文章未能解釋這個設計。</p>
+
+<p>若曾在 SSH 日誌看到來源為 <code class="language-plaintext highlighter-rouge">127.0.0.1</code> 或 <code class="language-plaintext highlighter-rouge">::1</code>、並以 <code class="language-plaintext highlighter-rouge">svc-telemetry</code> 金鑰完成的登入，代表通道已被實際使用，而非僅建立。</p>
+
+<h2 id="受影響的機器應該如何清理">受影響的機器應該如何清理？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>卸載擴充不足以清除後門。須終止重試迴圈與 SSH 程序、刪除持續執行項目、移除 .smt 與 .smtk、清走授權檔公鑰，並輪換可能外洩的憑證。
+<!-- End AEO Capsule --></p>
+
+<p>清理順序建議由執行中程序開始。先終止 <code class="language-plaintext highlighter-rouge">/bin/sh</code> 重試迴圈與任何連向 <code class="language-plaintext highlighter-rouge">134.209.82.225</code> 的 <code class="language-plaintext highlighter-rouge">ssh</code> 或 <code class="language-plaintext highlighter-rouge">autossh</code> 程序，否則刪除的檔案會被重新寫回。</p>
+
+<p>接着處理持續執行機制。macOS 需卸載並刪除 <code class="language-plaintext highlighter-rouge">com.apple.sysmond.plist</code>，Linux 需清除 <code class="language-plaintext highlighter-rouge">@reboot</code> 的 crontab 項目，Windows 需移除 SysMon 排程工作與啟動資料夾腳本。之後刪除 <code class="language-plaintext highlighter-rouge">~/.config/.smt</code>、<code class="language-plaintext highlighter-rouge">~/.config/.smtk</code> 與 <code class="language-plaintext highlighter-rouge">/tmp/.stk_*</code>。</p>
+
+<p>金鑰與狀態的清理不可省略。從 <code class="language-plaintext highlighter-rouge">authorized_keys</code> 移除 <code class="language-plaintext highlighter-rouge">svc-telemetry</code> 公鑰，並確認遠端登入未被意外開啟。</p>
+
+<p>若主機曾開啟 SSH，或日誌出現可疑登入，應輪換該使用者可存取的全部憑證與權杖，特別是名稱符合 <code class="language-plaintext highlighter-rouge">KEY</code>、<code class="language-plaintext highlighter-rouge">TOKEN</code>、<code class="language-plaintext highlighter-rouge">SECRET</code>、<code class="language-plaintext highlighter-rouge">PASS</code>、<code class="language-plaintext highlighter-rouge">AWS</code>、<code class="language-plaintext highlighter-rouge">GCP</code> 的環境變數所對應的服務。</p>
+
+<h2 id="這次事件反映供應鏈的什麼問題">這次事件反映供應鏈的什麼問題？</h2>
+
+<!-- AEO Answer Capsule — 約 77 字 -->
+<p>擴充市集以簽章與版本號作為信任基礎，但組建內容在發佈後仍可能被替換。當開發工具權限等同使用者本人，市集審查的深度就決定單一檔案被改動後的影響範圍。
+<!-- End AEO Capsule --></p>
+
+<p>樣本保留原有匯出函式與介面字串，壓縮後的程式碼在主觀檢視下與正常版本差異有限。這種改動方式利用的是信任鏈末端的空白：開發者相信市集上的版本與官方發佈一致。</p>
+
+<p>同一個版本號同時出現在 Cursor Marketplace、NPM 與 VS Code 市集，說明污染可能發生在建置或發佈環節，而非單一平台的審查疏漏。</p>
+
+<p>對開發者而言，可行的降低風險做法包括延後採用新版本、比對檔案雜湊、限制 IDE 擴充的執行權限，以及對開發機器套用端點偵測。這些措施都無法取代市集端的驗證，但能縮短從發佈到發現的時間。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>以下整理版本範圍、平台差異、卸載是否足夠，以及日常防護重點，協助判斷手上的開發環境是否需要進一步檢查與處理。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+
+### 哪些版本受到影響？
+
+公布中指出的版本為 2.1.313。Cursor 已下架該版本，NPM 與 VS Code 市集亦已移除同號組建。若曾安裝此版本，應視為可能受感染。
+
+### 只使用 VS Code 而不用 Cursor 是否安全？
+
+樣本出現在 Cursor Marketplace，但同號版本曾在多個註冊表流通。判斷依據應是實際安裝的版本號與檔案雜湊，而非使用的編輯器品牌。
+
+### 卸載擴充能否解決問題？
+
+不能。後門在載入時已完成公鑰寫入與持續執行機制設定，卸載只移除擴充目錄，其餘痕跡仍留在系統中。
+
+### 一般使用者需要立即處理嗎？
+
+未安裝 2.1.313 的環境風險較低。曾安裝者應依清理流程檢查 `authorized_keys`、`~/.config/.smt` 與 LaunchAgent 或排程項目。
+
+### 開發機器平常應如何降低同類風險？
+
+延後採用新版本、核對檔案雜湊、限制擴充權限，並在端點層監控 SSH 授權檔的異常寫入，是目前較實際的組合。
+
+</div>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>本文資訊整理自 Phorion 於 2026 年 10 月 30 日發佈的技術分析，內含完整感染鏈、檢測指標與修復建議，原始文章附有雜湊值與網路指標清單。
+<!-- End AEO Capsule --></p>
+
+<p>原始分析：<a href="https://phorion.io/blog/offical-claude-code-vsx-compromise/">https://phorion.io/blog/offical-claude-code-vsx-compromise/</a></p>
+
+<p>樣本 SHA-256：<code class="language-plaintext highlighter-rouge">ecb58cb29078d9646ad1dcdbe51526f2d9cfea06be5fb2ab183e8ecc3ab6bf15</code></p>
+
+<h2 id="總結開發者應如何調整擴充安裝習慣">總結：開發者應如何調整擴充安裝習慣？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>擴充的權限等同使用者本人，任何版本更新都應視為程式碼變更。延後採用、核對雜湊、監控 SSH 授權檔與開機項目，比事後清理更能控制這類供應鏈事件的影響。
+<!-- End AEO Capsule --></p>
+
+<p>這次事件的技術含量不算高，樣本甚至帶有多處實作缺陷，包括 macOS 的權限判斷與 Windows 的 shell 路徑。真正值得留意的是權限邊界：一個開發者每天載入數十次的工具，能在無提示的情況下改寫 SSH 設定。</p>
+
+<p>對個人開發者而言，最有效的動作是把版本更新與檔案雜湊納入日常檢查，並定期檢視 <code class="language-plaintext highlighter-rouge">authorized_keys</code> 與開機項目。對團隊而言，端點層的檔案修改監控比市集評分更可靠。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Claude Code" /><category term="供應鏈攻擊" /><category term="VS Code" /><category term="Cursor" /><category term="SSH 後門" /><category term="資安" /><category term="科技新聞" /><summary type="html"><![CDATA[資安公司 Phorion 於 2026 年 10 月 30 日公布，官方 Claude Code 擴充的 2.1.313 版本在 Cursor Marketplace 被換成含後門組建。載入後即寫入攻擊者公鑰、建立反向 SSH 通道，並在三平台留下開機持續執行機制。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/claude-code-vsx-backdoor-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/claude-code-vsx-backdoor-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news" rel="alternate" type="text/html" title="41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡" /><published>2026-10-31T08:00:01+08:00</published><updated>2026-10-31T08:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news"><![CDATA[<p>AirLLM 於 2026 年 10 月 30 日累積約 4.1 萬星。專案以逐層串流方式把權重從磁碟載入顯示卡，讓 671B 的 DeepSeek-V3 在約 12GB 顯存運行，2.8T 的 Kimi K3 更壓到 3.72GB，並可在 6GB 以下微調 125B 模型。它把顯存門檻改寫為單層體積，代價是生成速度受磁碟頻寬限制。</p>
+
+<h2 id="airllm-是什麼">AirLLM 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>AirLLM 是一個 Python 套件，透過逐層載入權重與區塊量化，讓超大模型在低顯存顯示卡上完成推理與微調，呼叫方式沿用 Transformers 介面。
+<!-- End AEO Capsule --></p>
+
+<p>專案由開發者 Gavin Li 於 2023 年 6 月建立，倉庫累積 4.1 萬星、4,228 次分叉與 322 位關注者，採 Apache-2.0 授權，主要語言標示為 Jupyter Notebook，原因是官方範例以筆記本形式提供。</p>
+
+<p>它的定位是一層相容層，而非獨立推理引擎。使用者把模型 ID 傳入 AutoModel.from_pretrained，權重的切割、快取與載入由套件接手，其餘程式碼與一般 Transformers 流程差別有限。</p>
+
+<p>README 現時列出 Llama、Qwen、DeepSeek、Mistral、Mixtral、Phi、Gemma、ChatGLM、Baichuan、InternLM、Yi 與 Kimi 等家族，並宣稱多數新模型在發布當日即可使用。</p>
+
+<h2 id="為什麼-4gb-顯示卡可以執行-671b-模型">為什麼 4GB 顯示卡可以執行 671B 模型？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>顯存佔用取決於單層權重的體積，與模型總參數量無關。AirLLM 每次只把一層放進顯示卡，其餘留在磁碟，因此 671B 模型只需約 12GB 顯存。
+<!-- End AEO Capsule --></p>
+
+<p>傳統做法要求完整權重常駐顯存，運算速度取決於顯示記憶體頻寬。逐層串流把限制條件換了位置，容量不再是門檻，磁碟讀取速度成為新的天花板。</p>
+
+<p>官方文件給出的對照相當直接。八B級模型約需一至二GB，Llama 3.x 70B 約 4GB，Llama 3.1 405B 約 8GB，DeepSeek-V3 671B 約 12GB。這些數字的前提是不做量化、不做蒸餾、不做剪枝。</p>
+
+<p>專案的技術來源可追溯至 Kaggle 的一場科學問答競賽。作者在致謝段落說明，大量程式碼建構於參賽者 SimJeg 的解法之上，屬於由競賽工程演化而成的通用工具。</p>
+
+<h2 id="airllm-的核心技術原理是什麼">AirLLM 的核心技術原理是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>原理分三層：首次載入時把權重切成一層一個檔案，執行時重疊載入與運算，並可選擇只量化權重的區塊量化。三者疊加後，顯存需求由總參數量轉為單層體積。
+<!-- End AEO Capsule --></p>
+
+<p>第一層是逐層切割。模型第一次被載入時，套件會把原始權重拆成一層一個 safetensors 檔案，寫回 Hugging Face 快取目錄。這個步驟只做一次，往後直接讀取切割結果。</p>
+
+<p>第二層是預取。載入下一層的磁碟讀取與當前層的運算重疊進行，官方記錄約有一成速度提升。這項機制目前主要針對 Llama 系列實作。</p>
+
+<p>第三層是區塊量化。專案只量化權重，不動激活值，理由是瓶頸落在磁碟讀取而非矩陣運算，因此壓縮權重體積即可加速，精度損失相對容易控制。啟用後官方稱最多三倍加速，需額外安裝 bitsandbytes。</p>
+
+<h2 id="28t-的-kimi-k3-如何在單張顯示卡上運行">2.8T 的 Kimi K3 如何在單張顯示卡上運行？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>Kimi K3 屬專家混合架構，AirLLM 只串流單次前向路由到的專家，其餘留在磁碟。README 記載於 RTX 6000 Ada 實測佔用 3.72GB。
+<!-- End AEO Capsule --></p>
+
+<p>這項支援在 2026 年 7 月加入。Kimi K3 是現時最大的開源模型，總參數達 2.8 兆，按常規估算的顯存需求遠超消費級顯示卡。專家混合架構讓每次前向只啟用少數專家，逐層串流因此得以只搬運真正需要的部分。</p>
+
+<p>代價是三項額外條件。模型程式碼強制使用 flash attention，需安裝 compressed-tensors 與 flash-attn；由於沒有對應 CUDA 13 的預編譯版本，必須使用 CUDA 12 版本的 torch；遠端程式碼在 transformers 5.x 下無法載入，需退回 4.56.x。</p>
+
+<p>同一條路徑在 Qwen 家族上更成熟。Qwen3.8-Flash-Next 為 125B 的專家混合模型，配一個約 51B 的 n-gram 嵌入表，於 RTX 4090 上端到端實測 5.95GB。嵌入表以檔案映射留在主機記憶體，官方建議 64GB 記憶體與約 360GB 磁碟空間。</p>
+
+<h2 id="airllm-是否支援模型微調">AirLLM 是否支援模型微調？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>支援。凍結的基礎權重逐層串流，只有 LoRA 適配器常駐顯存，因此 125B 模型可在 6GB 以下訓練，27B 模型在序列長度 512 時約需 2GB。
+<!-- End AEO Capsule --></p>
+
+<p>訓練支援於 2026 年 9 月加入，走的是自建路徑。專案明言並非 Hugging Face Trainer 或 bitsandbytes 的 QLoRA 流程，而是把凍結權重保留在磁碟、逐層串流，僅讓適配器留在顯示卡。</p>
+
+<p>API 以 AirLLMLoRA 與 AirLLMLoRAQwen4Exp 兩個類別提供，前者對應 27B 的稠密模型，後者對應 125B 的專家混合模型。範例腳本接受 jsonl 資料，每行一個物件，欄位可以是 text，也可以是 prompt 與 completion 的組合。</p>
+
+<p>實際配置上，125B 模型在 RTX 3060 Ti 上以 6GB 以下完成訓練，27B 模型在序列長度 512 時約需 2GB。這個數字讓入門級遊戲顯示卡首次具備微調旗艦模型的可能性。</p>
+
+<h2 id="實際使用時需要付出什麼代價">實際使用時需要付出什麼代價？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>代價落在速度與磁碟。逐層串流受磁碟頻寬限制，單次生成明顯慢於常駐方案；首次使用需完整切割權重，大模型動輒佔用數百 GB 空間。
+<!-- End AEO Capsule --></p>
+
+<p>磁碟空間是最常見的阻塞點。README 的疑難排解第一條就是 MetadataIncompleteBuffer 錯誤，成因幾乎都是切割過程中空間不足。671B 級模型的切割結果往往以百 GB 計算，官方因此提供 delete_original 參數，在轉換完成後刪除原始檔案。</p>
+
+<p>平台限制同樣明確。macOS 端只支援 Apple silicon，且現階段僅接受 Llama 與 Mistral 風格的架構，其他模型會在載入前直接報錯。</p>
+
+<p>它不適合即時對話服務。逐層讀取意味著每個 token 的生成都要等待磁碟，吞吐量與 vLLM 這類常駐引擎不在同一量級。專案解決的是能不能執行的問題。</p>
+
+<h2 id="airllm-與量化卸載方案有何分別">AirLLM 與量化、卸載方案有何分別？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>量化壓縮權重以換取速度，卸載在顯存與記憶體之間搬移資料。AirLLM 把多數權重留在磁碟並逐層載入，顯存需求最低，代價是單次生成速度較慢。
+<!-- End AEO Capsule --></p>
+
+<p>三條路線回應不同約束。量化降低每個參數的位元數，仍要求權重完整放進顯存；卸載在層與層之間把資料搬到主機記憶體，需要足夠的系統記憶體；逐層串流則把儲存層級再往下降到磁碟。</p>
+
+<p>專案內部同時提供壓縮選項，兩者可疊加使用。啟用四bit 或八bit 區塊量化後，權重體積下降，磁碟讀取量隨之減少，官方稱速度最多提升三倍。</p>
+
+<p>選型判斷相對單純。若目標是服務多人、追求吞吐量，應選 vLLM 或 llama.cpp；若目標是在既有硬體上驗證一個旗艦模型的行為，AirLLM 的門檻最低。</p>
+
+<h2 id="專案的關鍵數據有哪些">專案的關鍵數據有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>倉庫累積 41,337 星、4,228 次分叉與 150 個待處理議題，Apache-2.0 授權，2023 年 6 月建立，最新版本為 v4.0.0。
+<!-- End AEO Capsule --></p>
+
+<p>以下數據取自 2026 年 10 月 30 日的倉庫狀態與發布記錄，供評估參考。</p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><div class="ui-stat-value">41,337</div><div class="ui-stat-label">星標數</div></div>
+<div class="ui-stat"><div class="ui-stat-value">4,228</div><div class="ui-stat-label">分叉數</div></div>
+<div class="ui-stat"><div class="ui-stat-value">150</div><div class="ui-stat-label">待處理議題</div></div>
+<div class="ui-stat"><div class="ui-stat-value">3.72 GB</div><div class="ui-stat-label">Kimi K3 顯存</div></div>
+<div class="ui-stat"><div class="ui-stat-value">5.95 GB</div><div class="ui-stat-label">125B 模型顯存</div></div>
+<div class="ui-stat"><div class="ui-stat-value">~12 GB</div><div class="ui-stat-label">DeepSeek-V3 顯存</div></div>
+<div class="ui-stat"><div class="ui-stat-value">3×</div><div class="ui-stat-label">壓縮後加速</div></div>
+<div class="ui-stat"><div class="ui-stat-value">Apache-2.0</div><div class="ui-stat-label">授權條款</div></div>
+</div>
+
+<p>版本節奏值得留意。v3.2.0 於 2026 年 8 月 18 日發布，v3.3.0 於 8 月 28 日，v4.0.0 於 9 月 5 日，三週內推進兩個大版本，主軸由推理延伸至訓練。</p>
+
+<h2 id="如何快速開始使用-airllm">如何快速開始使用 AirLLM？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>安裝 airllm 後，以 AutoModel.from_pretrained 傳入模型 ID 即可推理，首次載入會自動切割權重，壓縮另需 bitsandbytes。
+<!-- End AEO Capsule --></p>
+
+<p>起點是一行安裝指令。執行 pip install airllm 之後，程式碼與一般 Transformers 寫法基本相同，差別只在於首次載入需要預留足夠磁碟與時間。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">airllm</span> <span class="kn">import</span> <span class="n">AutoModel</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">AutoModel</span><span class="p">.</span><span class="n">from_pretrained</span><span class="p">(</span><span class="s">"Qwen/Qwen3-32B"</span><span class="p">)</span>
+<span class="c1"># 進階：AutoModel.from_pretrained("deepseek-ai/DeepSeek-V3", compression='4bit')
+</span></code></pre></div></div>
+
+<p>若要用壓縮加速，先安裝 bitsandbytes，再於初始化時傳入 compression 參數，可選四bit 或八bit。這個選項只影響載入體積，不改變模型結構。</p>
+
+<p>環境準備有兩處容易忽略。部分新模型需要從原始碼安裝 transformers，Kimi K3 另需 CUDA 12 版本的 torch。官方提供 Colab 範例與 Docker 建置腳本，可省去環境調整。</p>
+
+<h2 id="airllm-值得一試嗎">AirLLM 值得一試嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>若目標是在既有顯示卡上驗證旗艦模型的行為，或在小顯存環境嘗試 LoRA 微調，這個專案值得一試。若追求吞吐量與低延遲，應選常駐式推理引擎。
+<!-- End AEO Capsule --></p>
+
+<p>專案的價值在於重新定義了硬體門檻的位置。當顯存需求由總參數量轉為單層體積，一張四GB 的舊卡與一張八十GB 的新卡，在能不能執行這條問題上的差距被大幅壓縮。</p>
+
+<p>限制同樣真實。速度、磁碟與平台相容性都構成了實際約束，它不是通用解，而是一條在資源受限時仍然可行的路徑。</p>
+
+<p>值得觀察的是訓練方向的進展。若 125B 模型真能在 6GB 以下完成微調，受影響的將不只是推理門檻，而是整個微調市場的硬體假設。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>主要來源為 GitHub 倉庫與官方 README，數據截至 2026 年 10 月 30 日。顯存數字均為官方記錄的端到端實測值。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>專案倉庫：<a href="https://github.com/lyogavin/airllm">lyogavin/airllm</a></li>
+  <li>版本說明：<a href="https://github.com/lyogavin/airllm/releases/tag/v4.0.0">AirLLM v4.0.0</a></li>
+  <li>作者部落格：<a href="https://gavinliblog.com">gavinliblog.com</a></li>
+</ul>
+
+<p><img src="/assets/images/posts/airllm-tiny-gpu-news-shot2.png" alt="AirLLM 的 GitHub 倉庫首頁截圖，顯示倉庫名稱 lyogavin/airllm、41,337 個星標、專案描述「AirLLM 2.8T LLM inference with single 4GB GPU」與 Jupyter Notebook 語言標示" /></p>
+
+<p><img src="/assets/images/posts/airllm-tiny-gpu-news-shot1.png" alt="AirLLM README 開頭截圖，顯示專案標誌、快速開始與設定導覽連結，以及「70B 模型在單張 4GB 顯示卡運行、Kimi K3 低於 4GB」的說明段落" /></p>
+
+<p><img src="/assets/images/posts/airllm-tiny-gpu-news-shot3.png" alt="AirLLM 倉庫的星標走勢與貢獻者區塊截圖，顯示專案自 2023 年建立以來的關注度變化與社群參與規模" /></p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="AirLLM" /><category term="本地推理" /><category term="大模型" /><category term="低顯存" /><category term="開源項目" /><category term="Qwen" /><category term="Kimi" /><category term="科技新聞" /><summary type="html"><![CDATA[AirLLM 於 2026 年 10 月 30 日累積約 4.1 萬星。專案以逐層串流把權重從磁碟載入顯示卡，讓 671B 的 DeepSeek-V3 在約 12GB 顯存運行，2.8T 的 Kimi K3 更壓到 3.72GB，並可在 6GB 以下微調 125B 模型。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/airllm-tiny-gpu-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/airllm-tiny-gpu-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Meta 推 Style Sketch：用 Instagram 舊相建衣櫥</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/style-sketch-meta-fashion-news" rel="alternate" type="text/html" title="Meta 推 Style Sketch：用 Instagram 舊相建衣櫥" /><published>2026-10-31T04:00:01+08:00</published><updated>2026-10-31T04:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/style-sketch-meta-fashion-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/style-sketch-meta-fashion-news"><![CDATA[<p>Meta 於 2026 年 10 月底推出 AI 穿搭應用 Style Sketch，讀取 Instagram 已發布的相片建立虛擬衣櫥，再按身型與膚色生成試身效果並排出逐日配搭。應用目前僅在印尼、新加坡與泰國上架，Meta 未回應查詢，也未說明是否擴大推出。</p>
+
+<h2 id="style-sketch-是什麼">Style Sketch 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>它是一款 Meta 開發的 AI 穿搭應用，把 Instagram 既有相片轉成可管理的虛擬衣櫥，再生成配搭與試身效果。
+<!-- End AEO Capsule --></p>
+
+<p>這款應用最早由社群媒體顧問在商店頁面發現，隨後由 TechCrunch 報導。它沒有發布會，也沒有官方新聞稿，上架方式與 Meta 過去處理實驗性產品的習慣一致。</p>
+
+<p>從功能定位看，Style Sketch 屬於衣櫥管理工具，而非購物平台。它不售賣服裝，也不連接品牌庫存，處理的對象是使用者衣櫃裡已經存在的衣物。這一點決定了它的價值來源：把既有資產重新組合，而不是增加新的消費。</p>
+
+<h2 id="它怎樣把-instagram-相片變成衣櫥">它怎樣把 Instagram 相片變成衣櫥？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>應用取得授權後讀取帳號內已發布的相片，辨識其中的服裝並轉為獨立項目，使用者可另行拍照、錄短片或從相簿上傳，補齊未在社群出現的衣物，形成完整收藏。
+<!-- End AEO Capsule --></p>
+
+<p>相片是現成的素材庫。多數使用者的 Instagram 帳號累積數年穿搭紀錄，涵蓋不同季節與場合，正好覆蓋衣櫥的主要組成。系統把每張相片中的服裝切分為獨立條目，標記顏色、類型與風格特徵，之後才能參與配搭運算。</p>
+
+<p>手動補充的路徑同樣重要。日常穿著的內搭、家居服或工作制服很少出現在社群相片裡，缺少這些項目，生成的配搭就會偏向特定場合。應用提供三種補充方式，拍照、錄製短片與從相簿上傳，目的都是降低建檔摩擦。</p>
+
+<p>衣櫥建好之後，使用者可以指定某一件單品，要求系統圍繞它產生新的組合。這種由單品出發的模式比隨機推薦更貼近實際情境，例如臨時需要為一件外套找出三種穿法。</p>
+
+<h2 id="為什麼先在三地上線">為什麼先在三地上線？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>首發市場為印尼、新加坡與泰國，屬於 Meta 慣用的區域小規模測試。三地行動網路使用密度高、社群商務活躍，適合驗證穿搭與導購之間的轉化路徑，再決定是否擴大。
+<!-- End AEO Capsule --></p>
+
+<p>東南亞市場的行動優先程度高，使用者習慣在手機完成購物決策，社群平台與消費行為的距離較短。對一款以相片為輸入的應用而言，這種環境能提供足夠的測試樣本。</p>
+
+<p>小規模上架同時降低監管壓力。虛擬試身涉及身體影像處理，不同司法管轄區對生物特徵資料的規範差異明顯，先在規範相對寬鬆的市場取得使用數據，是常見的產品節奏。</p>
+
+<p>Meta 對查詢保持沉默，也意味著這款產品仍可能調整。歷史上該公司多款實驗應用在上架數週後改名、改功能或直接下架。</p>
+
+<h2 id="虛擬試身如何處理身型與膚色">虛擬試身如何處理身型與膚色？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>官方商店頁面描述為「配合身型與膚色生成的真實模特兒」，即由模型重建使用者身形輪廓與膚色，再把服裝套用到生成影像上，實際精度與資料處理方式未公開。
+<!-- End AEO Capsule --></p>
+
+<p>這類功能的技術路徑通常分兩步。先由少量相片推算身體比例與姿態，再把服裝影像以貼合方式套用到生成的人體模型。結果的可用程度取決於輸入相片的數量與角度，單一正面照往往不足。</p>
+
+<p>膚色匹配涉及敏感範疇。生成模型的訓練資料若偏向特定族群，輸出的膚色與臉部特徵容易失真，這也是虛擬試身產品長期被批評的地方。Meta 未公布訓練資料組成，外部難以評估。</p>
+
+<h2 id="與現有穿搭應用有何分別">與現有穿搭應用有何分別？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>同類工具多以全新拍照建檔，這款應用直接接上 Instagram 相片，省去建檔成本。Meta 的優勢來自分發與帳號整合，而非演算法本身。
+<!-- End AEO Capsule --></p>
+
+<p>近年在歐美市場出現的幾款衣櫥應用，功能框架相似：拍照、切分、配搭、試身。它們的共同難點是建檔門檻，使用者要在初期投入大量時間拍攝每件衣物，多數人在完成之前就放棄。</p>
+
+<p>Instagram 的相片紀錄繞過了這道門檻。使用者不需要重新拍攝，系統從既有內容推導衣櫥，首次體驗的完成率因此有機會明顯提高。這也是 Meta 相對新創公司的結構性優勢。</p>
+
+<h2 id="這類工具的限制在哪裡">這類工具的限制在哪裡？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>相片庫只反映曾經公開的穿著，重複出現的日常服裝容易被過度權重，季節性衣物則可能缺席。生成的配搭仍須人工篩選，試身效果與實際布料質感存在差距。
+<!-- End AEO Capsule --></p>
+
+<p>資料偏誤是第一個問題。社群相片經過挑選，呈現的是使用者希望被看見的形象，而非衣櫥全貌。據此生成的建議會偏向拍照場合的穿著，日常通勤與家居情境反而缺少素材。</p>
+
+<p>第二個問題是質感。生成影像能表達顏色與剪裁，卻難以呈現布料垂墜、厚度與光澤，而這三項往往決定一套配搭是否成立。使用者把試身結果當作購買依據時，落差會特別明顯。</p>
+
+<h2 id="使用者應該注意什麼">使用者應該注意什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>授權 Instagram 相片等於讓應用讀取多年的個人影像紀錄，使用前應確認授權範圍與刪除機制。上傳親友合照亦涉及第三方肖像，需要事先取得同意。
+<!-- End AEO Capsule --></p>
+
+<p>多數使用者不會細讀授權條款，但這類應用的資料範圍比一般工具更廣。相片本身包含臉部、身形、住處背景與同行人物，屬於高敏感內容。應用是否保留原始相片、保留多久、能否要求刪除，都值得在安裝前確認。</p>
+
+<p>合照是容易被忽略的一環。上傳家庭聚會或朋友出遊的相片時，畫面中的其他人並未同意自己的影像被用於衣櫥建檔，這在部分地區已有明確的個資規範。</p>
+
+<h2 id="總結值得試用嗎">總結：值得試用嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>身處三地上架範圍、且 Instagram 已有一定相片累積的使用者，值得試用它的建檔流程。其他地區目前無法下載，可先觀察 Meta 是否擴大推出與資料政策的說明。
+<!-- End AEO Capsule --></p>
+
+<p>Style Sketch 解決的是建檔成本，這是同類產品最實際的障礙。若 Meta 能把首次體驗做到數分鐘完成，衣櫥類應用的使用者基數有機會明顯擴大。</p>
+
+<p>值得留意的是產品定位。當穿搭建議與 Instagram 的內容生態結合，下一步自然是連接品牌與購買流程。屆時工具的中立性會受到考驗，配搭建議是否仍以使用者利益為先，需要觀察。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>報導原文出自 TechCrunch 2026 年 10 月 29 日的文章，內容引用應用商店頁面描述與第三方發現者的觀察，Meta 未回應該媒體的查詢。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>報導原文：<a href="https://techcrunch.com/2026/10/29/meta-quietly-launches-an-ai-fashion-app-called-style-sketch/">Meta quietly launches an AI fashion app called Style Sketch</a></li>
+  <li>Meta 官方網站：<a href="https://www.meta.com/">meta.com</a></li>
+</ul>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Meta" /><category term="Style Sketch" /><category term="AI穿搭" /><category term="虛擬試身" /><category term="Instagram" /><category term="科技新聞" /><summary type="html"><![CDATA[Meta 於 2026 年 10 月底低調推出 AI 穿搭應用 Style Sketch，可讀取 Instagram 已發布的相片建立虛擬衣櫥，再依身型與膚色生成試身效果，並按行程與天氣排出每日配搭。應用目前僅在印尼、新加坡與泰國上架，Meta 未回應查詢，也未說明是否擴大推出。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/style-sketch-meta-fashion-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/style-sketch-meta-fashion-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">免費模型外掛 5.2 萬星：無需 API Key 用前沿模型</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/dsh-free-model-plugin-news" rel="alternate" type="text/html" title="免費模型外掛 5.2 萬星：無需 API Key 用前沿模型" /><published>2026-10-31T00:00:02+08:00</published><updated>2026-10-31T00:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/dsh-free-model-plugin-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/dsh-free-model-plugin-news"><![CDATA[<p>dsh-our-free-model 是 DeepSeek Harness 的第三方外掛，安裝後無需登入或填入 API Key，即可呼叫 DeepSeek V4.1 Flash、Kimi K3 等前沿模型。專案於 2026 年 9 月 24 日建立，GitHub 累積 52,343 顆星標與 1,429 個分支，採 MIT 授權。</p>
+
+<p><img src="/assets/images/posts/dsh-free-model-plugin-news-shot1.png" alt="dsh-our-free-model 的 GitHub README 開頭畫面，顯示專案名稱、免費模型外掛的簡體中文標語、Trendshift 日榜與 JavaScript 週榜第一名的金色徽章，以及標示為 beta 狀態的版本徽章" /></p>
+
+<h2 id="dsh-our-free-model-是什麼">dsh-our-free-model 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>它是一款掛載在 DeepSeek Harness 上的第三方外掛，把兩個公開的免密網關接進模型選擇器，讓使用者在沒有憑證的情況下直接呼叫前沿模型。
+<!-- End AEO Capsule --></p>
+
+<p>專案的定位寫得相當克制：純外掛掛載、不改內核、沒有構建步驟、零依賴。安裝之後模型選擇器會多出一個「Our Free Model」分組，內容由上游清單即時刷新，插件本身不保存靜態快照。</p>
+
+<p>與多數免費模型服務的差別在於角色分工。插件是客戶端，不是模型供應方，所有推理請求都轉往第三方網關，插件不托管、不修改也不過濾模型輸出。README 的免責聲明把這句話放在第一條，態度直接。</p>
+
+<p>專案建立於 2026 年 9 月 24 日，主要語言標示為 JavaScript，授權為 MIT。它曾登上 Trendshift 日榜第一，並在 2026 年 10 月 5 日至 10 月 11 日取得 JavaScript 週榜首位，熱度集中在十月初。</p>
+
+<h2 id="它為何能在沒有-api-key-的情況下取得前沿模型">它為何能在沒有 API Key 的情況下取得前沿模型？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>因為插件把兩個公開免密網關當作上游，分別是 OpenCode 的推論端點與 Kilo AI 的公共閘道。請求直連上游，插件負責身分標頭、協議轉換與模型探測。
+<!-- End AEO Capsule --></p>
+
+<p>第一個來源是 OpenCode 的免費車道。README 記載該路徑於 2026 年 10 月 14 日由 <code class="language-plaintext highlighter-rouge">/zen/v1</code> 遷移至 <code class="language-plaintext highlighter-rouge">/inference/v1</code>，舊路徑對免費模型一律回傳 403。插件在 <code class="language-plaintext highlighter-rouge">src/upstream.js</code> 內逐條核對路徑與指紋，並以固定的請求標頭識別客戶端。</p>
+
+<p>第二個來源是 Kilo AI 的公共閘道。該來源的免費池在清單中標記為 <code class="language-plaintext highlighter-rouge">isFree: true</code>，包含 <code class="language-plaintext highlighter-rouge">kilo-auto/free</code> 自動路由，呼叫時不需要帳號、Key 或登入態。這是「免登入」得以成立的技術前提。</p>
+
+<p>作者對「免費」的來源講得坦白：額度由上游單方面提供，隨時可能限流、收費或下線。插件能做的只有如實反映，把上游明確拒絕路由的模型從選擇器移除，並在設定頁保留記錄與拒因。</p>
+
+<h2 id="插件提供哪些核心功能">插件提供哪些核心功能？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>除模型選擇器外，還包含用量看板、公告中心、應用內升級、熱重載、OpenAI 兼容量轉發端口、聚合渠道、Token 壓縮與降級鏈路由，設定頁共十一頁。
+<!-- End AEO Capsule --></p>
+
+<p>用量看板把統計完全留在本機。Token 熱力圖、總量曲線、輸出速度與首字延遲逐次採樣，資料寫入本機資料目錄，不上傳任何位置。對在意請求紀錄的團隊，這一點比模型清單本身更有價值。</p>
+
+<p>轉發端口讓本機其他工具也能使用這批模型。插件提供 OpenAI 兼容的本地監聽，並在後續版本補上 Anthropic Messages 端點與 token 估算，Claude Code、Codex 與各語言 SDK 都可用固定 base URL 接入。監聽預設綁定回環地址，位址改成可路由介面會被拒絕。</p>
+
+<p>聚合渠道是另一個實用設計。設定頁內建 76 家提供商註冊表，包含 NVIDIA NIM、OpenRouter、Groq、Cerebras 與各家雲端服務，寫入 Key 後其模型會以 <code class="language-plaintext highlighter-rouge">provider/model</code> 形式併入同一條清單。Key 只寫入本機權限 0600 的設定檔，介面僅回顯末四位。</p>
+
+<p><img src="/assets/images/posts/dsh-free-model-plugin-news-shot2.png" alt="dsh-our-free-model 倉庫首頁截圖，顯示專案名稱、About 欄位的免費模型外掛描述、52,343 顆星標與 1,429 個分支數字、MIT 授權標示，以及右側的 Releases 與 Contributors 區塊" /></p>
+
+<h2 id="它的架構有哪些技術取捨">它的架構有哪些技術取捨？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>插件以結構性適配器取代對內核模組的直接依賴，用自有 JSON 存儲避開設定介面變動，並把 Token 壓縮收斂在單一出口，逐步失敗開放，確保最佳化不會拖垮請求。
+<!-- End AEO Capsule --></p>
+
+<p>README 的實現結構章節列出一個關鍵決定：適配器以鴨子類型實作，不 <code class="language-plaintext highlighter-rouge">import</code> 內核的語言模型模組。內核從不執行 <code class="language-plaintext highlighter-rouge">instanceof</code> 檢查，因此結構相符即可運作，同一份程式碼得以同時跑在 0.1.5 與 0.1.7 兩代內核上。</p>
+
+<p>存儲層同樣選擇繞道。設定註冊 API 在兩個內核版本之間並不一致，插件改用自有 JSON 存儲，行為穩定，轉發 Key 另存於權限 0600 的檔案，不進入任何共享設定文件。</p>
+
+<p>Token 壓縮的收口設計值得單獨看。提示詞注入與工具輸出壓縮都在 payload 完成全部改寫之後執行，統一經過同一個函式，因此選擇器派發與本地網關兩條路徑都套用同一套壓縮。README 引用實測數據，40 KB 的 <code class="language-plaintext highlighter-rouge">git diff</code> 可移除約九成位元組，模型仍能就內容作答。</p>
+
+<p>降級鏈則以虛擬清單行的形式存在。鏈路以 <code class="language-plaintext highlighter-rouge">channel:'combo'</code> 加一串真實模型 id 併入清單，選擇器照常廣播，本地網關照常按名呼叫，展開與推進判定發生在適配器內部，兩個呼叫方都不需要知道降級正在發生。</p>
+
+<h2 id="免費車道的實際限制是什麼">免費車道的實際限制是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>不限量指的是沒有額度體系，但仍按工作階段統計速率，短時間打滿會回傳 429。部分模型首字延遲超過 30 秒，思考階段可能靜默一分鐘以上，且思考與正文共用輸出預算。
+<!-- End AEO Capsule --></p>
+
+<p>README 對「不限量」給出精確定義：不存在額度體系，無需充值、不按 token 計費、沒有套餐與用量面板。但該車道按工作階段統計速率，短時間內打滿會回傳 429，插件會把模型標記為已達限額，下一輪探測自動恢復。</p>
+
+<p>延遲是第二道門檻。文件記載 <code class="language-plaintext highlighter-rouge">nemotron-3.5-lightning-free</code> 曾實測首字延遲超過 30 秒；<code class="language-plaintext highlighter-rouge">mimo-v2.6-flash-free</code> 可在思考階段靜默 60 至 70 秒，期間上游計入約 3,024 個推理 token 卻不送出任何思考訊框，該回合以正常結束收尾但正文為空。</p>
+
+<p>輸出速度欄位偶爾顯示為空，也不是程式缺陷。答案集中在一兩個大訊框中落地、或思考過程完全不串流的模型，不存在可用於計算的時間窗，看板寧可留空，也不把思考耗時計入輸出速度。</p>
+
+<h2 id="使用上有哪些安全與隱私風險">使用上有哪些安全與隱私風險？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>免費不等於私有。Kilo 免費池在模型卡明言提示詞可能被上游記錄並用於改進服務，不適合敏感資料工作負載。使用者發送的內容與呼叫任何模型 API 相同，均會送達上游。
+<!-- End AEO Capsule --></p>
+
+<p>文件在這一段沒有修飾。Kilo 免費池的模型卡原文寫明提示詞可能被上游提供方記錄並用於改進服務，不適合生產或敏感資料工作負載。插件把這段提示做成模型卡徽章的懸停說明，選模型時就看得到。</p>
+
+<p>第二個風險來自安裝渠道。README 以警示框標明 npm 上的同名套件並非本倉庫發布，其 <code class="language-plaintext highlighter-rouge">index.js</code> 與 <code class="language-plaintext highlighter-rouge">client.js</code> 被改動，另含倉庫從未有過的模組，安裝後拿不到簽名清單校驗與應用內升級。官方建議只使用 Release 發布包或本地源碼目錄。</p>
+
+<p>第三個風險與信任邊界有關。插件介面的鑑權等級取決於宿主，掛載連線服務的環境與內核同等，極簡組合則退回結構化檢查，本機其他程序仍可存取。文件直接把轉發 Key 在該情境下視為「本機程序可讀檔案」。</p>
+
+<h2 id="它與其他免費模型方案相比如何">它與其他免費模型方案相比如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>與直接申請免費額度相比，它換來零註冊成本，代價是把資料交給未知政策的上游。與自架模型相比，它省下硬體與部署，但失去資料主權與延遲可控性。
+<!-- End AEO Capsule --></p>
+
+<p>三種路徑的差異可以從控制權衡量。自行申請免費額度需要逐一註冊，額度明確、條款可查，但數量有限且多數需要信用卡；自架開源模型擁有完整控制權，前提是有對應硬體與維運能力。</p>
+
+<p>外掛走的是第三條路，把註冊摩擦降到零，代價是把資料處理權交給政策不一定透明的上游。對於只跑公開文件摘要、樣板程式碼或格式轉換的使用者，這個交換相當划算；對於處理客戶資料的團隊，條件则不成立。</p>
+
+<p>生態層面還有一個變數。免費車道依附在特定宿主之上，DeepSeek Harness 一旦調整插件介面或關閉外掛機制，整套方案就失效。這也是多數免費方案共同的結構性風險。</p>
+
+<h2 id="如何安裝與開始使用">如何安裝與開始使用？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>官方建議以 Release 發布包或本地源碼目錄安裝，指令為 dsh plugin 加 profile 名稱與路徑，完成後重啟一次。整合包報錯則改用本地 tarball。
+<!-- End AEO Capsule --></p>
+
+<p>命令列安裝適用於純網頁版宿主。指令為 <code class="language-plaintext highlighter-rouge">dsh plugin --profile web add /絕對路徑/dsh-our-free-model</code>，<code class="language-plaintext highlighter-rouge">--profile</code> 需填實際使用的 profile 名稱，安裝完成後重啟應用一次。</p>
+
+<p>桌面端與整合包的限制較多。部分整合包在啟動網頁服務前會執行 profile 檢查，限制符號連結與目錄接合，遇到時會回報 profile 升級需求錯誤。文件的解法是改用應用內插件管理器，或以可信源碼打出本地 tarball 後手動掛載。</p>
+
+<p>安裝後的驗證步驟同樣寫在文件裡。模型選擇器出現「Our Free Model」分組即代表車道已通；若只看到地區受限分組，代表目前網路出口被上游策略攔截，插件會保留可見但單獨隔離。</p>
+
+<p><img src="/assets/images/posts/dsh-free-model-plugin-news-shot3.png" alt="dsh-our-free-model 倉庫統計頁面截圖，顯示專案活躍度圖表、提交頻率、貢獻者人數與 Issues 數量等專案健康度指標" /></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">52,343</span><span class="ui-stat-label">GitHub 星標</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">1,429</span><span class="ui-stat-label">分支數</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">76</span><span class="ui-stat-label">聚合提供商</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">11</span><span class="ui-stat-label">設定頁數</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">2026-09-24</span><span class="ui-stat-label">建立日期</span></div>
+</div>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>主要來源為 GitHub 倉庫 Ebony-Vinyl/dsh-our-free-model，功能清單、架構與限制均取自官方 README 與 Release 記錄。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫網址為 <code class="language-plaintext highlighter-rouge">https://github.com/Ebony-Vinyl/dsh-our-free-model</code>，README 以簡體中文與英文雙語撰寫，章節包含亮點、安裝、使用說明、實現結構、已知邊界、上游來源、免責聲明與安全隱私。</p>
+
+<p>最新版本為 2.7.3，發布時間為 2026 年 10 月 30 日，說明為免費車道兼容與渠道穩定性修復。專案現有 375 個待處理議題、40 名關注者，維護者以單一倉庫節奏推進，尚未接受大型功能貢獻。</p>
+
+<h2 id="總結dsh-our-free-model-適合什麼團隊">總結：dsh-our-free-model 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>適合已使用 DeepSeek Harness、需要低成本試跑多個前沿模型，且可接受資料送往第三方網關的開發者。處理敏感資料或要求延遲穩定的生產環境並不適合。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案解決的是明確而具體的痛點：想試前沿模型，卻不想逐一註冊與綁卡。它把摩擦壓到接近零，同時把代價寫在文件顯眼處，這種誠實在同類專案中並不常見。</p>
+
+<p>限制同樣清楚。它依附特定宿主，上游政策隨時可變，延遲與可用性無保證，資料處理權也不在使用者手上。把它當成評估工具而非生產基礎設施，是目前較合理的定位。</p>
+
+<p>對正在比較多個模型表現的開發者，最實際的用法是先跑一輪公開文件與樣板程式碼的測試，記錄延遲與輸出品質，再決定哪些環節值得換成付費 API。免費車道的價值在於降低實驗成本，而不是取代付費合約。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="DeepSeek Harness" /><category term="免費模型" /><category term="AI 代理" /><category term="開源外掛" /><category term="MIT 授權" /><category term="開發者工具" /><category term="科技新聞" /><summary type="html"><![CDATA[dsh-our-free-model 是 DeepSeek Harness 的第三方外掛，安裝後無需登入或填入 API Key，即可呼叫 DeepSeek V4.1 Flash、Kimi K3 等模型。專案九月底建立，GitHub 累積 52,343 顆星標，採 MIT 授權。本文拆解其免密上游、架構取捨、實際限制與隱私風險。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/dsh-free-model-plugin-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/dsh-free-model-plugin-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Paperless-ngx 47K 星：自架文件庫內建 AI 檢索</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/paperless-ngx-documents-news" rel="alternate" type="text/html" title="Paperless-ngx 47K 星：自架文件庫內建 AI 檢索" /><published>2026-10-30T20:00:02+08:00</published><updated>2026-10-30T20:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/paperless-ngx-documents-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/paperless-ngx-documents-news"><![CDATA[<p>Paperless-ngx 於 2026 年 10 月底累積 47,297 個星標，是一套以 Python 與 Angular 建構的自架文件管理系統，把紙本掃描、光學字元辨識與全文檢索整合在同一個介面。專案在 10 月 6 日推出 3.3.0 版本，加入可切換的大型語言模型後端與向量索引，讓既有文件庫具備語意檢索能力。</p>
+
+<p><img src="/assets/images/posts/paperless-ngx-documents-news-shot1.png" alt="Paperless-ngx 的 README 開頭畫面，顯示專案標題與標誌、GPL-3.0 授權標記，以及將紙本文件轉為可搜尋線上檔案庫的說明段落" /></p>
+
+<h2 id="paperless-ngx-是什麼">Paperless-ngx 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>它是 Paperless 與 Paperless-ng 的官方後繼專案，採 GPL-3.0 授權，以 Docker Compose 部署，把掃描文件轉為可全文搜尋的線上檔案庫。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫建立於 2022 年 2 月 12 日，定位是承接前代專案並把維護責任分散到一組團隊，而不是由單一開發者長期承擔。技術組成以 Python 後端搭配 Angular 前端，資料層使用 Django 與關聯式資料庫，部署則以容器映像為主要形式。</p>
+
+<p>系統在概念上分成兩個部分。consumer 監看指定資料夾，把落入該資料夾的檔案納入處理流程；web server 提供介面，負責檢索、編輯與管理。這樣的分工讓掃描器或手機應用只需把檔案放進共用目錄，其餘流程由系統接手。</p>
+
+<p>每份文件可掛上多種中繼資料，包括 correspondent（往來對象）、tag（標籤）、document type（文件類型）、storage path（儲存路徑）與自訂欄位。其中標籤取代了傳統資料夾，允許一份文件同時屬於多個分類，也避免同一份文件在樹狀結構中重複存放。</p>
+
+<h2 id="47297-個星標反映怎樣的使用需求">47,297 個星標反映怎樣的使用需求？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>專案累積約 12,384 次提交、464 位貢獻者與 167 個版本，公開議題僅 6 個，需求討論主要集中到 Discussions，維護節奏相當緊密。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="stat-item"><span class="stat-number">47.3K</span><span class="stat-label">星標數</span></div>
+  <div class="stat-item"><span class="stat-number">3,297</span><span class="stat-label">Fork 數</span></div>
+  <div class="stat-item"><span class="stat-number">12,384</span><span class="stat-label">提交次數</span></div>
+  <div class="stat-item"><span class="stat-number">167</span><span class="stat-label">發佈版本</span></div>
+  <div class="stat-item"><span class="stat-number">GPL-3.0</span><span class="stat-label">許可證</span></div>
+</div>
+
+<p>星標數在這類工具中具有明確含義。文件管理屬於長期基礎設施，使用者把紙本與憑證交出去之前，通常會先觀察專案是否仍在維護。近 1.2 萬次提交與 167 個版本提供了一個可核對的答案，而 Fork 數接近 3,300 則說明不少人選擇自行改造而非單純使用。</p>
+
+<p>維護模式也值得注意。公開議題只有 6 個，功能請求被導向 GitHub Discussions 的投票分類，錯誤回報則走 Issue。這種分流減少了重複條目，也讓討論留在可搜尋的位置。專案同時透過 Crowdin 接受翻譯，並設有前端與 CI 等分工團隊，屬於少見的把治理寫進 README 的專案。</p>
+
+<p><img src="/assets/images/posts/paperless-ngx-documents-news-shot2.png" alt="Paperless-ngx 的 GitHub 倉庫首頁頂部，顯示倉庫名稱、GPL-3.0 授權標記、星標數與 Fork 數，以及右側的版本與貢獻者資訊" /></p>
+
+<h2 id="ai-功能如何運作且是否預設開啟">AI 功能如何運作且是否預設開啟？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>全部 AI 功能預設關閉。需設定 PAPERLESS_AI_ENABLED 並選擇 Ollama 或 OpenAI 相容後端，才會啟用建議、向量索引與文件對話三項能力。
+<!-- End AEO Capsule --></p>
+
+<p>三項功能各有分工。AI 建議會在文件詳情頁提供標題、標籤、往來對象、文件類型、儲存路徑與日期的候選值，並可與既有的機器學習分類器結果合併。向量索引則把文件切塊後建立索引，讓建議結果以相似文件為依據。文件對話在索引建立後可用，回答會附上引用來源。</p>
+
+<p>後端選擇決定資料流向。設定為 Ollama 時模型在本機執行，設定為 openai-like 時可指向 OpenAI 或任何相容端點。嵌入流程另有獨立開關，huggingface 選項會在本機下載模型並建立索引，首次執行需要網路與額外磁碟空間。索引預設每日透過排程重建，也可手動觸發。</p>
+
+<p>官方文件把隱私界線寫得相當直接。啟用功能即代表文件內容與中繼資料會送往所選的模型後端，若後端為遠端服務，內容會離開自家伺服器並可能產生費用。此外文件內容被視為不可信資料處理，並提供設定項封鎖指向內部或迴環位址的端點，避免模型後端被誘導去讀取內網資源。</p>
+
+<h2 id="330-版本帶來哪些實際改動">3.3.0 版本帶來哪些實際改動？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>3.3.0 加入獨立的嵌入 API 金鑰、條碼內容儲存與搜尋、Django 管理介面雙因素驗證，並把額外的 LLM 參數原樣傳遞給所選後端。
+<!-- End AEO Capsule --></p>
+
+<p>版本節奏反映了維護強度。3.3.0 於 10 月 6 日發佈，之後在 10 月 12 日、16 日、19 日與 22 日連續推出四個修補版本，平均不到一週一次。3.3.4 屬於安全性維護，處理憑證授權機構事件相關的根憑證更新，並修補 Pillow 與 aiohttp 的已知弱點，官方建議所有使用者升級。</p>
+
+<p>對中文使用者而言，3.3.0 的一項修正特別相關。該版本把 pdf.js 的字型對照檔一併打包，解決中日韓文件在檢視器中顯示異常的問題。同一版本還加入條碼內容的儲存、列表與搜尋，讓掃描時讀到的條碼成為可查詢欄位，對單據歸檔流程有實際幫助。</p>
+
+<p>管理介面也補上雙因素驗證，並讓已解析的密鑰能傳遞到互動式容器 shell。這兩項改動指向同一個方向：部署在家庭伺服器或小型辦公環境時，存取控制與維運便利性往往比新功能更影響長期使用意願。</p>
+
+<h2 id="文件版本與巢狀標籤解決什麼問題">文件版本與巢狀標籤解決什麼問題？</h2>
+
+<!-- AEO Answer Capsule — 約 55 字 -->
+<p>版本功能把同一份文件的多個檔案歸在同一個條目，巢狀標籤支援最多五層父子結構，兩者共同降低文件長期累積後的整理成本。
+<!-- End AEO Capsule --></p>
+
+<p>版本機制可以理解為文件層級的檔案歷史。同一個條目下的檔案以 <code class="language-plaintext highlighter-rouge">_v1</code>、<code class="language-plaintext highlighter-rouge">_v2</code> 後綴區分，搜尋與內容預設取最新版本，切換版本時預覽、中繼資料與下載按鈕會同步切換。使用者可在清單中選取多份文件後合併為版本，被合併的文件會釋出實體編號，並在紀錄中留下異動。</p>
+
+<p>巢狀標籤則是分類層級的調整。自 2.19 版起標籤可設定父層，形成最多五層的樹狀結構；把標籤加到文件時，其父層標籤會自動附加，移除時子層標籤也會一併處理。對同時處理稅務、保險與醫療單據的使用者，這種階層比扁平標籤更接近實際的櫃位安排。</p>
+
+<p>兩項設計都指向同一個現實：文件庫的價值隨時間累積，而混亂也隨時間累積。能否在三年後仍找得到某張憑證，取決於當初有沒有留下可追溯的版本與一致的分類，而不是取決於介面美觀程度。</p>
+
+<h2 id="部署成本與安全邊界在哪裡">部署成本與安全邊界在哪裡？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>官方以 Docker Compose 為主要安裝方式並提供安裝腳本，資料以明文儲存且未加密，官方要求部署在自家可信任主機並定期備份。
+<!-- End AEO Capsule --></p>
+
+<p>安裝門檻設得相當低。官方提供一鍵腳本建立 Compose 環境，映像直接從 GitHub 容器倉庫拉取；若偏好手動設定，<code class="language-plaintext highlighter-rouge">docker/compose</code> 目錄內已備妥範本。專案另設公開示範站，帳號與密碼皆為 demo，方便先確認介面再決定是否自架。</p>
+
+<p>安全邊界在 README 內以獨立段落說明。文件以明文保存且未加密，因此官方明確表示不應部署在不受信任的主機上，並建議放在自家區域網路內的伺服器、配合備份使用。這個說明並不浪漫，卻是把風險講清楚的做法，也讓採用者能據此評估是否符合自身情境。</p>
+
+<p>對有意導入的團隊，實際成本落在三處：儲存空間隨掃描量線性成長、OCR 與向量索引需要可觀的運算資源、以及備份策略必須自行設計。軟體本身免費，維運責任則完整轉移到部署者身上。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>原始碼位於 GitHub 的 paperless-ngx/paperless-ngx，官方文件站為 docs.paperless-ngx.com，另設公開示範站供試用。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫同時維護完整的文件站，涵蓋安裝、設定、使用、進階功能、API 與疑難排解，並保留 v3 的遷移說明。對於需要評估是否從舊版 Paperless-ng 遷移的使用者，文件中提供了直接替換映像的路徑說明。</p>
+
+<p><img src="/assets/images/posts/paperless-ngx-documents-news-shot3.png" alt="Paperless-ngx 倉庫的提交活躍度圖表，顯示 2026 年 8 月至 10 月的每週提交量長條與程式碼頻率曲線，反映持續整合的維護節奏" /></p>
+
+<ul>
+  <li>GitHub 倉庫：https://github.com/paperless-ngx/paperless-ngx</li>
+  <li>官方文件：https://docs.paperless-ngx.com</li>
+  <li>公開示範站：https://demo.paperless-ngx.com</li>
+  <li>版本紀錄：https://github.com/paperless-ngx/paperless-ngx/releases</li>
+</ul>
+
+<h2 id="總結paperless-ngx-適合什麼團隊">總結：Paperless-ngx 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 55 字 -->
+<p>適合有大量紙本憑證、願意自行維運伺服器並重視資料留在本地的個人或小型團隊；以雲端優先、無人維運的組織則需另尋方案。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案的分量來自時間。47,297 個星標背後是近 1.2 萬次提交與 167 個版本，而 10 月的五次發佈說明維護並未因規模擴大而放慢。3.3.0 把語言模型接進既有流程的方式也相對克制，功能預設關閉、後端可自選、隱私風險寫在前方。</p>
+
+<p>仍待觀察的是 AI 功能的實際採用率。分類器與正規表達式已足夠處理多數固定格式單據，語言模型的價值主要出現在欄位不規則或需要跨文件問答的場景。在索引重建成本與資料外送疑慮取得平衡之前，多數使用者較可能維持關閉狀態，把它當作可選的加分項而非必要條件。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Paperless-ngx" /><category term="文件管理" /><category term="OCR" /><category term="自架服務" /><category term="RAG" /><category term="開源工具" /><summary type="html"><![CDATA[Paperless-ngx 於 2026 年 10 月底累積 47,297 個星標，以 Python 與 Angular 建構，把掃描、光學字元辨識與全文檢索整合在同一介面。10 月 6 日推出的 3.3.0 加入可切換的 LLM 後端與向量索引，AI 功能預設關閉，需自行啟用。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/paperless-ngx-documents-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/paperless-ngx-documents-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">DeerFlow 2.1 開源：位元組跳動超級代理框架</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/deer-flow-superagent-news" rel="alternate" type="text/html" title="DeerFlow 2.1 開源：位元組跳動超級代理框架" /><published>2026-10-30T16:00:01+08:00</published><updated>2026-10-30T16:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/deer-flow-superagent-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/deer-flow-superagent-news"><![CDATA[<p>DeerFlow 2.1 是位元組跳動開源的長時程超級代理框架，於 2026 年 10 月底在 GitHub 累積 84,685 個星標。專案在 9 月 24 日發布 2.1.0，自 2.0.0 起合併 772 個拉取請求，把深度研究框架改寫成內建沙箱、記憶體與子代理的執行環境。</p>
+
+<p><img src="/assets/images/posts/deer-flow-superagent-news-shot1.png" alt="DeerFlow 儲存庫 README 開頭畫面，顯示專案標題 DeerFlow 2.0 與鹿形標誌、多語言文件連結、Python 3.12 與 Node.js 22 及 MIT 授權徽章，以及描述超級代理框架定位的段落" /></p>
+
+<h2 id="deerflow-21-是什麼">DeerFlow 2.1 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>它是位元組跳動以 MIT 授權開源的代理執行環境，建構在 LangGraph 之上，內建檔案系統、記憶體、沙箱與子代理調度，星標達 84,685 顆。
+<!-- End AEO Capsule --></p>
+
+<p>專案在 2025 年 5 月建立，最初定位是深度研究框架，讓模型自動檢索資料並產出報告。維護團隊觀察到社群把它用在資料管道、簡報產生、儀表板與內容工作流，於是決定不再把它當成需要自行組裝的框架，而是改成開箱即用的執行環境。</p>
+
+<p>命名來自 Deep Exploration and Efficient Research Flow。專案在 2026 年 2 月 28 日登上 GitHub 趨勢榜首位，官方把原因歸於 2.0 版本的重寫，並在 6 月 25 日正式發布 2.0.0。</p>
+
+<p>程式碼組成以 Python 為主，約 3,683 萬位元組，TypeScript 約 638 萬位元組，另有 MDX 文件與 Shell 腳本。倉庫累積 4,590 次提交、11,873 次複製，具名與匿名貢獻者合計 626 位。</p>
+
+<h2 id="為什麼-20-要從零重寫架構">為什麼 2.0 要從零重寫架構？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>維護團隊發現社群把研究框架用在遠超原設計的場景，於是放棄需要自行接線的框架定位。2.0 與 1.x 不共用任何程式碼，舊版留在獨立分支繼續維護。
+<!-- End AEO Capsule --></p>
+
+<p>這個決定並不溫和。官方文件明言 2.0 是徹底重寫，與 1.x 沒有任何共用程式碼，如果仍需要原本的深度研究框架，必須切換到 1.x 分支，活躍開發已全部轉移到 2.0。</p>
+
+<p>重寫的邏輯是把「框架」換成「執行環境」。官方說法是：DeerFlow 不再是一堆需要自行串接的元件，而是一套附帶電池的執行時，提供檔案系統、記憶體、技能、具沙箱感知的執行能力，以及規劃與派生代理的能力。</p>
+
+<p>從產品角度看，這個轉向把競爭對手從研究工具換成了代理執行平台。同類專案包括 OpenHands、browser-use 與各家的代理 SDK，差別在於 DeerFlow 把工作區、專案、排程與多通道訊息一併做進同一個介面。</p>
+
+<h2 id="21-版本最核心的改動是什麼">2.1 版本最核心的改動是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>重心放在可驗證執行、批次委派、可插拔記憶體、四種新沙箱與企業級授權。發行說明把主題定為信任、規模與可運維性，並列出六項破壞性變更要求升級前處理。
+<!-- End AEO Capsule --></p>
+
+<p>發行說明把 2.1 的主題寫成信任、規模與可運維性三個詞。具體落點是可驗證的代理執行、耐久化的批次委派、可插拔的記憶體後端、四種新增沙箱供應商、樹外擴充系統，以及企業級認證與授權。</p>
+
+<p>破壞性變更寫得相當明確。追蹤識別碼改為無條件附加，每個 Gateway HTTP 回應都帶 X-Trace-Id 標頭，用戶端在執行中繼資料提供的識別碼會被覆寫；記憶體改成可插拔，原本的私有序號設定移入 backend_config 並自動遷移，儲存路徑的語意從檔案改為根目錄。</p>
+
+<p>部署層面同樣收緊。Docker 的對外連接埠預設綁定 127.0.0.1，要對外提供服務必須明確設定 BIND_HOST；E2B 沙箱的副本數成為容量上限，預設等待策略在超限時會直接讓該回合失敗，而不是無限擴張。</p>
+
+<p><img src="/assets/images/posts/deer-flow-superagent-news-shot2.png" alt="DeerFlow 儲存庫首頁頂部，顯示專案名稱 bytedance/deer-flow、說明文字「An open-source long-horizon SuperAgent harness that researches, codes, and creates」、約 84,700 顆星標與 About 區塊列出的官方網站 deerflow.tech 與 MIT 授權" /></p>
+
+<h2 id="可驗證執行如何運作">可驗證執行如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>每個工具呼叫產生帶執行時戳記的防竄改回執，摘要帳本進入模型上下文。子代理報告必須引用可驗證的交付物，驗收條件由父代理端以檔案存在與測試退出碼判定。
+<!-- End AEO Capsule --></p>
+
+<p>這套機制的目的是處理代理最常見的失效模式：模型聲稱完成，實際上沒有。DeerFlow 2.1 讓每次工具呼叫都附上一份防竄改、由執行時蓋章的回執，並把有上限的回執帳本送進模型上下文，讓模型在後續推理中能核對自己做過什麼。</p>
+
+<p>子代理的報告不再只是自然語言。報告必須引用工具回執，並附上可驗證的交付物控制代碼，由主任務代理交叉核對；委派任務上的驗收條件則在父代理端以確定性方式檢查，包括檔案是否真的存在、記錄下來的測試指令退出狀態為何。任何無法判定的項目一律標記為未驗證。</p>
+
+<p>對需要合規紀錄的團隊，這個設計的好處是可稽核性。代理做了什麼、依據什麼檔案、測試有沒有通過，都能沿著回執鏈回查，而不是只能相信文字敘述。</p>
+
+<h2 id="子代理與批次任務如何規模化">子代理與批次任務如何規模化？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>系統維護的委派帳本避免重複派工，總量上限約束扇出。選用的 batch_task 工具把大量獨立項目做成可續跑的 SQL 批次，支援租約、重試、暫停、續跑與取消。
+<!-- End AEO Capsule --></p>
+
+<p>2.0 已經支援派生代理，2.1 補上的是規模與可恢復性。系統會維護一份委派帳本，記錄哪些任務已被派出去，避免主任務代理重複委派相同工作；扇出總量另有上限，並由一個跨行程的容量控制器統一管理並行度。</p>
+
+<p>新增的 batch_task 工具處理的是另一種形態的工作。它把大量彼此獨立的項目當成耐久批次執行，狀態存進 SQL，具備租約、重試、暫停、續跑與取消，聊天介面另有進度面板。這個設計讓批次工作在 Gateway 重啟後仍可繼續，而不是全部重來。</p>
+
+<p>子代理的上下文取得方式也變得可選。task(context_mode=”snapshot”) 會在派工當下複製一份父對話，避免後續對話改動影響執行中的子任務；子代理的步驟歷史也會持久化並顯示在對話串中。</p>
+
+<h2 id="記憶體後端有什麼選擇">記憶體後端有什麼選擇？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>2.1 引入可插拔設定，可用 OpenViking、mem0、Honcho 三個 HTTP 後端，另附內建 FTS5 與 BM25 檢索，並支援記憶整併與過期修剪。
+<!-- End AEO Capsule --></p>
+
+<p>記憶體從單一實作變成可替換的元件。設定中的 manager_class 決定使用哪個後端，官方提供 OpenViking、mem0 與 Honcho 三個走 HTTP 的選項，另有一個內建的 FTS5 與 BM25 檢索適配器，適合不想引入外部服務的部署。</p>
+
+<p>功能面上補了幾個實務缺口。LLM 協助的記憶整併與過期修剪讓長期記憶不至於無限膨脹；逐代理的增量事實儲存把不同代理的記憶分開；混合淘汰策略則在容量壓力下決定哪些項目先被移除。選用的寫入端去重可避免同一事實被重複記錄。</p>
+
+<p>對自行接手的團隊，理解成本主要在於儲存語意變化。舊版的 storage_path 是檔案路徑，新版視為根目錄，舊格式值會被丟棄並留下警告；自訂儲存類別需要搬到新路徑，並在建構式中接收 config。</p>
+
+<h2 id="沙箱與安全邊界如何設計">沙箱與安全邊界如何設計？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>新增 E2B、BoxLite、Tenki 與 OpenSandbox 供應商。本機 Docker 沙箱改用預設 seccomp、丟棄全部能力，埠口只綁橋接閘道。
+<!-- End AEO Capsule --></p>
+
+<p>沙箱是這個專案最需要謹慎對待的部分，因為代理具備系統指令執行與檔案讀寫能力。官方把部署模型寫得很直白：設計上只適用於本機信任環境，僅透過 127.0.0.1 回環介面存取；若要在區域網路或公網伺服器部署，必須自行加上嚴格防護。</p>
+
+<p>2.1 的硬化措施集中在容器層。本機 Docker 沙箱把發佈的埠口綁定到 Docker 橋接閘道、套用 Docker 預設的 seccomp 設定檔、丟棄所有能力，並加上 no-new-privileges；SSH 代理通訊端會從沙箱環境清除；投射進沙箱的技能檔案改為複本而非硬連結，避免沙箱內的寫入改動原始檔。</p>
+
+<p>提示注入的防線同時加厚。新增的輸入清理中介層關閉了兩條已知繞道；模型提示中的不受信任內容，包括記憶事實、SOUL.md、子代理描述與技能中繼資料，一律做 HTML 轉義；網頁擷取與 MCP 來源的工具結果也走同一條信任邊界。</p>
+
+<p>官方對權限的判讀相當直接：Gateway 管理員等同於在主機上執行程式碼。因為管理員可以註冊 stdio MCP 伺服器，而這類啟動器本質上會抓取並執行遠端套件，所以官方要求按此等級授予權限，並用允許清單約束可執行的指令。</p>
+
+<p><img src="/assets/images/posts/deer-flow-superagent-news-shot3.png" alt="DeerFlow 儲存庫的貢獻者頁面，顯示 626 位具名與匿名貢獻者的頭像清單，反映專案在 2026 年 10 月底的社群規模" /></p>
+
+<h2 id="企業級認證與權限有哪些">企業級認證與權限有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>支援通用 OIDC 與 Keycloak 單一登入、具範圍路由策略的個人存取權杖，以及內建 RBAC 供應商，在工具、模型與沙箱三個層面同時於組裝期與執行期強制授權。
+<!-- End AEO Capsule --></p>
+
+<p>2.1 把授權做成兩個檢查點。組裝期檢查決定某個工具、模型或沙箱能否進入這次執行的可用清單，執行期檢查則在實際呼叫時再確認一次，避免長時間執行的任務在權限被撤銷後仍繼續動作。空的工具允許清單一律拒絕，而不是放行。</p>
+
+<p>帳號體系的變化對自架團隊有直接影響。本機自行註冊可以關閉，改成只允許單一登入來源建立帳號；帳號偏好設定在瀏覽器資料被清除後仍會保留。個人存取權杖支援具範圍的路由策略，適合把部分端點開放給自動化流程。</p>
+
+<p>外部訊息角色另有硬性限制。Gateway 的執行請求與對話狀態更新會拒絕用戶端提供的 system 或 developer 訊息並回傳 400，這個檢查阻止新的角色注入，但不會改寫既有檢查點，所以舊版本若曾接受注入，官方建議改用新對話或由管理員檢視清理。</p>
+
+<h2 id="部署與模型需求是什麼">部署與模型需求是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>需要 Python 3.12 與 Node.js 22 以上，官方建議以 Docker 部署並執行 make setup。模型需相容 OpenAI API，建議具備 10 萬以上上下文。
+<!-- End AEO Capsule --></p>
+
+<p>部署路徑分兩條。官方推薦 Docker，執行 make setup 會啟動互動精靈，引導選擇模型供應商、是否啟用網路搜尋，以及沙箱模式、Bash 存取與檔案寫入等安全選項，產出一份最小化的 config.yaml 並把金鑰寫入 .env。另一條是本機開發模式，需自行安裝 Python 與 Node 相依。</p>
+
+<p>模型選擇相當開放。任何實作 OpenAI 相容 API 的模型都能接入，官方建議挑選上下文視窗 10 萬個 Token 以上、具備推理能力、支援多模態輸入與穩定工具呼叫的模型。設定檔另附多家供應商的範本，包含 OpenAI、Anthropic、DeepSeek、阿里雲百煉、火山引擎豆包、月之暗面 Kimi、智譜與 MiniMax。</p>
+
+<p>介面提供三種形態。瀏覽器工作區包含專案、對話分支、文件架與能力中心；終端工作台提供 TUI 操作；此外還有 MCP 伺服器、排程任務與即時通訊通道的整合，支援的通道包含 Lark、飛書與 Nostr 通訊協定的 Buzz 連接器。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>本文資訊整理自 DeerFlow 的 GitHub 儲存庫、README 與 2.1.0 版本說明，星標與提交數取自 GitHub API，數據截至 2026 年 10 月 30 日。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/bytedance/deer-flow</li>
+  <li>2.1.0 版本說明：https://github.com/bytedance/deer-flow/releases/tag/v2.1.0</li>
+  <li>官方網站：https://deerflow.tech</li>
+</ul>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">84,685</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">11,873</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">4,590</span><span class="ui-stat-label">累積提交</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">626</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Python</span><span class="ui-stat-label">主要語言</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<h2 id="總結deerflow-適合什麼團隊">總結：DeerFlow 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>適合需要長時程任務、可稽核執行紀錄與自架部署的團隊。若只想要輕量單一任務代理，或無法提供獨立主機與沙箱隔離，投入的維運成本會高於收益。
+<!-- End AEO Capsule --></p>
+
+<p>這次改版最值得注意的地方，是它把不確定性當成工程問題處理。代理宣稱完成卻沒有實際產出，是這個領域最普遍的問題，2.1 用回執、交付物核對與父代理端驗收把這件事變成可檢查的流程，而不是靠提示詞要求模型誠實。</p>
+
+<p>代價是複雜度。2.1 列出六項破壞性變更，涵蓋追蹤識別碼、技能路徑保留、沙箱副本上限、記憶體設定結構與檢查點快照頻率；升級舊部署需要逐項核對，記憶體儲存路徑的語意變化尤其容易在無提示的情況下遺失既有資料。</p>
+
+<p>選型上的判斷點相對清楚。若團隊已經在用 LangGraph 或 LangChain 建構代理，且需要沙箱隔離、稽核紀錄與企業授權，DeerFlow 提供的是省去自行拼裝的完整方案；若需求只是單一任務的自動化，直接呼叫模型 API 搭配少量工具會更省成本。安全上則必須先確認部署環境符合官方要求，因為這套系統的設計前提是本機信任環境，而不是公開網路。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="DeerFlow" /><category term="位元組跳動" /><category term="AI Agent" /><category term="開源框架" /><category term="LangGraph" /><category term="沙箱" /><summary type="html"><![CDATA[位元組跳動開源的 DeerFlow 於 2026 年 10 月底累積 84,685 個星標，9 月 24 日發布 2.1.0，自 2.0.0 以來合併 772 個拉取請求。2.1 加入可驗證的工具回執、可續跑的批次任務、可插拔記憶體後端與四種新沙箱，並把 Docker 預設綁定改為本機回環。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/deer-flow-superagent-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/deer-flow-superagent-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Mistral 釋出 1T 權重：主權資安新選項</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/mistral-large-4-open-weights-news" rel="alternate" type="text/html" title="Mistral 釋出 1T 權重：主權資安新選項" /><published>2026-10-30T12:00:02+08:00</published><updated>2026-10-30T12:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/mistral-large-4-open-weights-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/mistral-large-4-open-weights-news"><![CDATA[<p>Mistral AI 於 2026 年 10 月 29 日釋出 Mistral Large 4 的模型權重，總參數達一兆，每次推理啟用約五百二十億。權重已上架 Hugging Face 並同步開放 API，企業與政府機構可以下載後在地端自行部署。官方把網路安全列為首要場景，主張防守方不應把偵測能力寄託在隨時可能被中斷的外部服務上。</p>
+
+<p><img src="/assets/images/posts/mistral-large-4-open-weights-news-inline.jpg" alt="深色機房內成排伺服器機櫃的示意畫面，藍色與金色光線沿線纜延伸，象徵模型權重下載後在自有機房內執行推論的部署情境" /></p>
+
+<h2 id="mistral-large-4-權重釋出代表什麼">Mistral Large 4 權重釋出代表什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>代表前沿等級的模型不再只能透過廠商 API 使用。組織取得完整權重後，可在自有或租用的算力上執行推論，服務不會因外部合約變動而中斷。
+<!-- End AEO Capsule --></p>
+
+<p>這款模型代號 Mistral Large 4，社群替它取了「Le Chonk」的暱稱，十月上旬先以公開預覽形式登場，月底才把權重交付。執行長 Arthur Mensch 把這次釋出定位為工具屬性的選擇，認為人工智慧應該成為賦權的手段，而非支配的來源。</p>
+
+<p>對採購方而言，差別出現在合約結構。過去使用前沿模型多數只能租用 API，用量、版本與服務條款由供應商決定。取得權重之後，版本凍結、稽核紀錄與資料流向都改由使用方掌握，這對受監管的機構特別關鍵。</p>
+
+<h2 id="一兆參數如何在實際部署中運作">一兆參數如何在實際部署中運作？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>模型採混合專家架構，總參數一兆，每次前向傳遞只啟用約五百二十億參數。這種設計讓推論成本貼近中型模型，而知識容量維持在旗艦規模。
+<!-- End AEO Capsule --></p>
+
+<p>Hugging Face 上的模型編號為 Mistral-Large-4-1T-A52B，從命名即可讀出總量與啟用量兩個數字。混合專家架構把參數切成多個專家網路，每次請求只喚醒其中一部分，因此實際算力消耗與五百二十億級模型相近，記憶體佔用則取決於權重精度。</p>
+
+<p>官方同時提供 NVFP4 量化版本，發佈於十月中旬。量化把每個權重壓縮到四位浮點，顯著降低顯示記憶體需求，代價是部分任務的分數可能輕微下滑。常見推論框架如 vLLM、SGLang 與 llama.cpp 都已列入支援清單，部署路徑與主流開源模型一致。</p>
+
+<div class="ui-stat-grid">
+  <div class="stat-item"><span class="stat-number">1T</span><span class="stat-label">總參數</span></div>
+  <div class="stat-item"><span class="stat-number">52B</span><span class="stat-label">每次啟用</span></div>
+  <div class="stat-item"><span class="stat-number">47%</span><span class="stat-label">Token 節省</span></div>
+  <div class="stat-item"><span class="stat-number">1,154</span><span class="stat-label">Hugging Face 收藏</span></div>
+  <div class="stat-item"><span class="stat-number">10-29</span><span class="stat-label">權重釋出日</span></div>
+</div>
+
+<h2 id="為何把網路安全列為首要場景">為何把網路安全列為首要場景？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>安全團隊需要在自有環境分析惡意程式與漏洞細節，資料不宜外傳。權重落地後，偵測規則、樣本與修補流程都能留在機構內部，不受外部服務條款限制。
+<!-- End AEO Capsule --></p>
+
+<p>Mistral 科學副總裁 Pierre Stock 的說法相當直接：機構取得前沿能力之後，面對攻擊時的回應能力不會因為模型是封閉服務而遭到切斷。這段話針對的是實際的作業情境，當事故發生時，團隊往往需要在數小時內完成樣本分析與修補排序。</p>
+
+<p>另一個因素是樣本本身。惡意程式的原始碼與受害系統的日誌屬於高度敏感資料，多數機構不願意把它們送到第三方端點處理。地端部署讓這類分析維持在既有資安邊界之內，稽核時也較容易交代資料流向。</p>
+
+<h2 id="與-glm-53-的比較結果如何">與 GLM-5.3 的比較結果如何？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>官方稱兩者效能相當，但 Mistral Large 4 每項任務少用四成七 token。在 Artificial Analysis 的編程代理指數中，它排名所有開源模型首位。
+<!-- End AEO Capsule --></p>
+
+<p>比較基準是中國的 GLM-5.3。Mistral 表示兩款模型在能力上接近，但自家模型完成同一項任務所需的 token 少四成七，換算成 API 帳單或自家算力時數都是明顯差距。這個數字來自廠商自述，尚未經完整第三方複驗。</p>
+
+<p>第三方評測平台 Artificial Analysis 的編程代理指數則被引用為另一項佐證。該榜單以多步驟任務評估模型的工具調用與程式修改能力，Mistral Large 4 在其中取得開源模型最高名次。需要注意的是，這類指數會隨版本更新變動，排名優勢未必長期維持。</p>
+
+<h2 id="企業在地端部署需要準備什麼">企業在地端部署需要準備什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>需要可容納一兆參數權重的儲存空間與對應加速卡，並具備推論框架的維運能力。實務上多數團隊會先採用官方量化版本，再依實際負載調整。
+<!-- End AEO Capsule --></p>
+
+<p>硬體門檻是第一個現實問題。即使每次只啟用五百二十億參數，完整權重仍需存放於高速儲存或分散式記憶體，單機部署幾乎不可行。多數機構會選擇八卡以上的伺服器節點，或直接採用雲端業者提供的權重託管方案。</p>
+
+<p>第二個問題是維運能力。權重落地之後，版本升級、量化調校與服務監控都由使用方負責，廠商只提供模型檔案與技術文件。這與租用 API 的責任分工完全不同，團隊若沒有既有的推論平台經驗，前置成本會明顯上升。</p>
+
+<h2 id="開源權重對監管機構有何意義">開源權重對監管機構有何意義？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>權重可被封存與稽核，監管方能在指定環境重現模型行為。對於要求資料不出境的市場，這種可驗證性往往比效能分數更具決定性。
+<!-- End AEO Capsule --></p>
+
+<p>歐洲近期對前沿模型的討論集中在可驗證性。當模型只能透過 API 存取，監管方難以確認某個輸出是否來自宣稱的版本，也無法在隔離環境重複測試。權重公開之後，這類驗證可以在受控條件下完成。</p>
+
+<p>同樣的邏輯適用於公部門採購。政府機構在評估模型時，除了效能，還要回答資料存放地點、適用法規與服務中止時的替代方案。可下載的權重讓最後一項有了具體答案，合約到期不再等同能力歸零。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>本文資訊來自 TechCrunch 於 2026 年 10 月 29 日的報導，模型檔案可在 Hugging Face 的 mistralai 帳號下取得，權重與量化版本並列。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>原始報導：<a href="https://techcrunch.com/2026/10/29/mistral-releases-weights-for-its-trillion-parameter-ai-model-targeting-cybersecurity/">Mistral releases weights for its trillion-parameter AI model, targeting cybersecurity</a></li>
+  <li>模型檔案：<a href="https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B">mistralai/Mistral-Large-4-1T-A52B</a></li>
+  <li>量化版本：<a href="https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B-NVFP4">mistralai/Mistral-Large-4-1T-A52B-NVFP4</a></li>
+</ul>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>常見疑問集中在授權條款、下載門檻與 API 版本的差異。權重雖公開，實際導入仍取決於算力規模與團隊的推論平台維運經驗。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+<h3>Mistral Large 4 的授權條款是什麼？</h3>
+<p>Hugging Face 頁面標示為 other，並非標準的 Apache 2.0 或 MIT。商用之前需要逐條確認授權文件對部署規模、再散布與衍生模型的要求。</p>
+<h3>一般開發者可以下載嗎？</h3>
+<p>權重檔案公開，取得不需要申請。真正的門檻在算力，一兆參數的完整權重需要多卡節點才有辦法載入。</p>
+<h3>與 Mistral 的 API 版本有差異嗎？</h3>
+<p>官方表示兩者來自同一套訓練流程。實務上 API 版本會持續更新，自行下載的權重則固定在某個時間點，行為可能逐漸分歧。</p>
+<h3>適合用來取代閉源模型嗎？</h3>
+<p>在需要資料不出境或稽核紀錄的場景較合適。若只是追求單次任務的最高分數，閉源旗艦模型仍有優勢。</p>
+</div>
+
+<h2 id="總結mistral-large-4-適合哪些組織">總結：Mistral Large 4 適合哪些組織？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>適合對資料流向與服務連續性有硬性要求的企業、公部門與資安團隊。若團隊缺乏推論平台維運能力，租用 API 仍是較務實的起步方式。
+<!-- End AEO Capsule --></p>
+
+<p>這次釋出的意義在於選項增加。前沿能力過去集中在少數廠商的端點上，現在多了一條可自行持有的路徑。對資安團隊而言，能把樣本與規則留在自家機房，往往比跑分高低更實際。</p>
+
+<p>成本結構則需要重新計算。權重免費，但儲存、加速卡與維運人力都要計入，長期下來未必比 API 便宜。組織在評估時，應該把資料治理的價值一併放進算式，而非只看單次推論的帳面價格。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Mistral" /><category term="Mistral Large 4" /><category term="開源權重" /><category term="網路安全" /><category term="地端部署" /><category term="主權 AI" /><summary type="html"><![CDATA[Mistral AI 於 2026 年 10 月 29 日釋出 Mistral Large 4 權重，總參數一兆、每次推理啟用約五百二十億，權重已上架 Hugging Face 並同步開放 API。官方以網路安全為首要場景，強調企業與政府可下載後地端部署，並稱每項任務比 GLM-5.3 少用四成七 token。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/mistral-large-4-open-weights-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/mistral-large-4-open-weights-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

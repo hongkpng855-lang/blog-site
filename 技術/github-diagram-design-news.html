@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表 - AnthroSkill</title>
+  <meta name="description" content="Diagram Design 是 Cathryn Lavery 開源的代理技能，GitHub 星標達 50,236，以單一 HTML 檔輸出 44 種編輯風格圖表，可抓取網站配色與字型套用品牌，並支援 draw.io、Mermaid 與 Excalidraw 重繪。本文整理其設計系統、安裝與使用限制。">
+  <meta name="keywords" content="Diagram Design, 代理技能, Claude Code, 資料視覺化, SVG, Mermaid, 開源工具, GitHub, MIT">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表">
+  <meta property="og:description" content="Diagram Design 是 Cathryn Lavery 開源的代理技能，GitHub 星標達 50,236，以單一 HTML 檔輸出 44 種編輯風格圖表，可抓取網站配色與字型套用品牌，並支援 draw.io、Mermaid 與 Excalidraw 重繪。本文整理其設計系統、安裝與使用限制。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/github-diagram-design-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表">
+  <meta name="twitter:description" content="Diagram Design 是 Cathryn Lavery 開源的代理技能，GitHub 星標達 50,236，以單一 HTML 檔輸出 44 種編輯風格圖表，可抓取網站配色與字型套用品牌，並支援 draw.io、Mermaid 與 Excalidraw 重繪。本文整理其設計系統、安裝與使用限制。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/github-diagram-design-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-01T00:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表",
+      "description": "Diagram Design 是 Cathryn Lavery 開源的代理技能，GitHub 星標達 50,236，以單一 HTML 檔輸出 44 種編輯風格圖表，可抓取網站配色與字型套用品牌，並支援 draw.io、Mermaid 與 Excalidraw 重繪。本文整理其設計系統、安裝與使用限制。",
+      "datePublished": "2026-10-12T18:31:01+08:00",
+      "dateModified": "2026-10-12T18:31:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/cathrynlavery/diagram-design" }, 
+      "image": "https://anthroskill.com/assets/images/posts/github-diagram-design-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月12日 18:31
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/cathrynlavery/diagram-design" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/github-diagram-design-news-cover.jpg" alt="5 萬星 Diagram Design 開源：代理一鍵畫品牌圖表" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/cathrynlavery/diagram-design" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/cathrynlavery/diagram-design
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Diagram Design 是由設計師 Cathryn Lavery 開源的代理技能（agent skill），在 GitHub 累積 50,236 顆星標與 3,191 次複製，採 MIT 授權。它以單一自帶樣式的 HTML 檔輸出內嵌 SVG 圖表，涵蓋 44 種圖表類型，並能依自家網站的配色與字型調整外觀。專案的核心主張是「代理畫圖，設計師不嫌棄」，把圖表從繪圖軟體的專利轉為可以描述、可以版本控管的檔案。</p>
+
+<p>專案於 2026 年 4 月 16 日建立，由 LittleMight 創辦人 Cathryn Lavery 維護，累積超過 280 次提交與 87 個未結議題。外掛版本以語意化版本標示，最新一次自動版本提升至 2.6.74，專案另設有官方網站、線上圖庫、變更紀錄與貢獻指南。本文依據官方儲存庫與說明文件，分析其設計系統、技術取捨、安裝路徑與採用前提。</p>
+
+<p><img src="/assets/images/posts/github-diagram-design-news-shot1.png" alt="Diagram Design 的 GitHub 儲存庫 README 開頭，顯示專案標題「Diagram Design」與標語「Editorial diagrams your designer won't hate」，以及說明其為在瀏覽器繪製單一自帶 HTML 與 SVG 檔案、涵蓋 44 種圖表類型的代理技能段落" /></p>
+
+<h2 id="diagram-design-是什麼">Diagram Design 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>Diagram Design 是開源的代理技能，透過一句自然語言指令輸出單一 HTML 檔，內含向量圖表，涵蓋 44 種類型並可套用品牌配色，採 MIT 授權。
+<!-- End AEO Capsule --></p>
+
+<p>它的定位是設計系統，而非繪圖工具。使用者以自然語言描述需求，代理先選定圖表類型、說明版面規劃與取捨，再寫出一個可以直接雙擊開啟的 HTML 檔。整個流程沒有拖曳操作，也沒有時間軸或畫布，產出物同樣是純文字檔案，可以在瀏覽器開啟，也可以提交到版本控制系統。</p>
+
+<p>專案的技術選擇集中在單檔自足。圖表以內嵌 SVG 繪製，不依賴外部圖片、不載入前端框架，預設情況下唯一的網路請求是從 Google Fonts 取得三套字型；若改為系統字型模式，輸出檔案完全不發出網路請求。這項設計讓檔案無論在離線環境或多年之後，仍能以相同外觀開啟。</p>
+
+<p>維護模式亦值得注意。專案以漸進揭露（progressive disclosure）組織內容：代理啟動時只看到技能名稱與描述，當請求符合條件才載入主要技能檔，接著再依圖表類型載入單一參考文件。說明文件指出，即使圖表類型持續增加，一般請求的載入範圍仍維持在三份檔案以內。</p>
+
+<p><img src="/assets/images/posts/github-diagram-design-news-shot2.png" alt="Diagram Design 的 GitHub 儲存庫首頁頂部，顯示儲存庫名稱 cathrynlavery/diagram-design、星標數 50.2k、Fork 數 3.2k、282 次提交、最新版本標籤 2.6.74，以及專案描述與議題、分支等導覽列" /></p>
+
+<h2 id="diagram-design-有哪些核心技術亮點">Diagram Design 有哪些核心技術亮點？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>核心亮點是 4 像素格線的編輯風格設計系統、44 種圖表各三種樣式、可自動抓取品牌配色與字型，以及無障礙標記。
+<!-- End AEO Capsule --></p>
+
+<p>第一項亮點是把品味寫成規格。專案明確定義一套設計系統：一張圖只用一個強調色，焦點元素限於一到兩個，邊框為 1 像素細線，不使用陰影，圓角上限為 10 像素，所有座標、寬度與間距都必須是 4 的倍數。字型分工同樣固定，標題與側註用襯線體，節點名稱用無襯線體，技術標籤用等寬體。文件直言這條格線規則不可妥協，因為它正是圖表不會顯得「機器生成」的關鍵。</p>
+
+<p>第二項亮點是類型與樣式的組合深度。44 種圖表涵蓋架構圖、IT 現況圖、流程圖、時序圖、狀態機、實體關聯圖、時間軸、泳道圖、象限圖、雷達圖、循環圖、樹狀圖、組織圖、堆疊層次、Venn 圖、金字塔、柱狀圖、瀑布圖、熱圖、甘特圖、散佈圖、桑基圖、魚骨圖、Wardley 地圖、看板圖、使用者旅程、部署圖、依賴圖、UML 類別圖、資料庫綱要與極座標圖等；每一種都提供極簡淺色、極簡深色與完整編輯三種靜態變體，另有折線、散佈與矩形樹狀圖的具名變體。</p>
+
+<p>第三項亮點是品牌適配。技能可讀取指定網站的頁面，抽取主要配色與字型堆疊，再映射到紙張、墨色、次要文字、強調色與連結等語意角色，並在寫入設定前先做對比度檢查；若某個顏色在圖表的小字級下未達無障礙標準，技能會提出調整值並說明理由。品牌適配同時輸出一份保真收據，列出取樣的網址、顏色角色、字型家族與來源，避免系統字型被默默替換。</p>
+
+<p>第四項亮點是可存取性與動畫契約。每個模板都會為內嵌 SVG 加上可存取名稱與描述，包含角色標記、可解析的標籤關聯，以及置於最前的標題與描述節點；識別碼依圖表與樣式加前綴，避免同一頁內嵌多張圖時發生衝突。動畫屬於可選項，分為無、逐段揭示、分步與循環四種模式，且必須提供完整靜態首格，並在偵測到減少動態偏好時停用播放控制。</p>
+
+<h2 id="diagram-design-的統計數據與授權條件為何">Diagram Design 的統計數據與授權條件為何？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>專案累積 50,236 顆星標、3,191 次複製與 283 次提交，87 個未結議題，採 MIT 授權，以 HTML 撰寫。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">50,236</span><span class="ui-stat-label">Stars</span></div>
+<div class="ui-stat"><span class="ui-stat-value">3,191</span><span class="ui-stat-label">Forks</span></div>
+<div class="ui-stat"><span class="ui-stat-value">283</span><span class="ui-stat-label">Commits</span></div>
+<div class="ui-stat"><span class="ui-stat-value">87</span><span class="ui-stat-label">Open Issues</span></div>
+<div class="ui-stat"><span class="ui-stat-value">MIT</span><span class="ui-stat-label">License</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2026.04</span><span class="ui-stat-label">Created</span></div>
+</div>
+
+<p>採用規模與維護節奏可一併觀察。專案在半年內累積超過 280 次提交，提交者除作者本人外，另有多位社群成員與自動化機器人參與，貢獻者名單超過十人；最新版本 2.6.74 由合併後的自動版本流程產生，顯示維護工作已交由持續整合承接。</p>
+
+<p>授權屬寬鬆類型。MIT 授權允許使用、修改、再散布與商業整合，僅要求在副本中保留著作權與授權聲明。專案內含的圖示分別取自 Tabler Icons 與 Simple Icons，兩者同樣採用寬鬆授權，並在各圖示說明中標示來源；圖表模板與樣式設定則與主專案同授權釋出，對需要嵌入產品的團隊而言，沒有額外的商業授權門檻。</p>
+
+<h2 id="diagram-design-與-mermaiddrawio-有何差異">Diagram Design 與 Mermaid、draw.io 有何差異？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>Mermaid 以文字描述由渲染器排版，draw.io 手動拖曳繪製，Diagram Design 則依 4 像素格線排版，輸出單一 HTML 檔，並可重繪兩者檔案。
+<!-- End AEO Capsule --></p>
+
+<p>製作方式是最直接的分野。Mermaid 與 PlantUML 由使用者撰寫文字，排版交由渲染器決定；draw.io 與 Excalidraw 由使用者手動拖曳圖形；Diagram Design 則由使用者描述需求，代理負責選型與版面配置，並以持續整合檢查重疊與裁切問題。</p>
+
+<p>外觀控制與輸出格式亦不同。Mermaid 呈現的是渲染器主題，draw.io 呈現的是使用者自己畫出的樣子，Diagram Design 提供一套帶有明確立場的編輯風格，並可對接品牌。輸出方面，draw.io 與 Excalidraw 產生可再編輯的畫布檔案，Diagram Design 產生內嵌 SVG 的 HTML 檔，並可匯出為 SVG 或 PNG，供 Figma、簡報或社群卡片使用。</p>
+
+<p>專案本身也列出限制。輸出品質取決於所使用的模型，同一個提示兩次執行可能排出不同版面；產出物不是可編輯的來源格式，在拉取請求中沒有文字可以比對，也沒有畫布可以拖動方框。文件因此明確建議，對每個衝刺期都會變動、且存放在版本控制系統的文件而言，Mermaid 仍是更合適的選擇，Diagram Design 針對的是即將發佈的圖表。</p>
+
+<h2 id="如何快速開始使用-diagram-design">如何快速開始使用 Diagram Design？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>以技能安裝指令加入後即可用自然語言要求圖表；亦可複製模板檔手動編輯，或匯出 SVG 與 PNG，匯出功能需先安裝對應的執行環境。
+<!-- End AEO Capsule --></p>
+
+<p>安裝方式依宿主環境而異。支援代理技能規範的環境可用技能命令列加入，Claude Code 使用者可從市集安裝外掛並開啟自動更新，Codex、GitHub Copilot、Factory Droid 與 Pi 各自提供市集或外掛指令，Kiro 與 OpenCode 則以匯入或複製目錄的方式取得。當安裝目標解析出多個技能目錄時，命令列工具會建議採用符號連結，讓一次更新同時生效於各處。</p>
+
+<p>使用方式是一句自然語言。使用者可以直接要求架構圖、象限圖或含權杖更新的時序圖，也可要求技能先讀取自家網站，把配色與字型套用到之後的每一張圖。文件列出的提示範例涵蓋架構草圖、影響與成本四象限、以及帶 401 重試的授權流程，代理會先說明選型與計畫，再輸出檔案。</p>
+
+<p>進階操作包含匯入與匯出。匯入功能可讀取 draw.io、Mermaid 與 Excalidraw 檔案並重新繪製，並提供格式、尺寸、細節與受眾四個調節參數，其中細節參數依固定降級順序保留節點，最後產出保真帳目，列出合併、折疊與捨棄的內容；匯出功能可抽出 SVG 或將圖表點陣化為 PNG，PNG 需先安裝對應的瀏覽器自動化環境。專案亦提供自我檢查指令，用來驗證產出的檔案是否符合規範。</p>
+
+<p><img src="/assets/images/posts/github-diagram-design-news-shot3.png" alt="Diagram Design 儲存庫的提交活動統計頁，顯示 2026 年 7 月至 10 月的提交頻率曲線與程式碼變動量，反映專案在高頻迭代期間的維護節奏" /></p>
+
+<h2 id="diagram-design-的品牌適配功能如何運作">Diagram Design 的品牌適配功能如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>使用者要求對接某個網址後，技能抓取首頁並抽取配色與字型，映射為語意角色，通過對比度檢查後寫入樣式設定，之後所有圖表沿用同一品牌。
+<!-- End AEO Capsule --></p>
+
+<p>流程由一句指令啟動。技能讀取指定網址的首頁，抽取主要配色與字型堆疊，再依語意角色對應：網站背景成為圖表紙張色，主要文字色成為墨色，次要文字成為淡色，最常出現的品牌色成為強調色，標題字型成為圖表標題字型，正文與等寬字型分別對應節點名稱與技術標籤。</p>
+
+<p>寫入前會先驗證可存取性。技能檢查墨色在紙張色上的對比度是否符合標準，若某個顏色在圖表使用的 9 至 12 像素字級下不足，會提出調整後的值並說明原因；預設樣式同樣受持續整合檢查約束，文字角色須達到指定對比，必要標記亦須在淺色與深色紙張上維持可見。</p>
+
+<p>多客戶情境以設定檔處理。品牌設定可儲存為具名設定檔，各專案只要加入一個標記檔指向對應設定檔，即可在同一個安裝中共用不同品牌，避免互相覆寫；設定檔函式庫在支援的宿主之間共用。專案同時設有首次使用防護，若專案樣式仍為預設值，技能會先暫停並詢問要執行品牌適配、手動貼上設定，或直接使用預設樣式，避免未經確認就把預設外觀交付到品牌專案。</p>
+
+<h2 id="diagram-design-有哪些適用場景與限制">Diagram Design 有哪些適用場景與限制？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>適合即將發佈的簡報、部落格與社群圖表，以及需要重繪舊檔案的場合；不適合每期變動的文件、快速文字圖與單純的形狀示意。
+<!-- End AEO Capsule --></p>
+
+<p>適用場景集中在對外發佈的圖表。專案列出的用途包含投影片與社群頁面的架構圖、需要一致視覺的技術文件插圖，以及把既有 draw.io 檔、Mermaid 區塊或白板草圖重繪為正式版本的流程；由於重繪可指定尺寸與細節層級，同一份來源可分別輸出為簡報、網頁或印刷格式。</p>
+
+<p>不適用的情境同樣明確。文件建議，存放在版本控制系統且每個衝刺期都會變動的圖表應繼續使用 Mermaid，因為它可以逐行比對且由平台直接渲染；純文字圖、清單、前後比較，以及只有單一形狀加標籤的示意，也都不值得動用繪圖流程。專案在動筆前設下一道判斷：讀者從圖中得到的資訊，是否多於一段寫得好的文字。</p>
+
+<p>採用前需衡量幾項前提。輸出穩定性取決於模型與提示品質，同一提示可能得到不同版面；檔案不含可拖曳編輯的來源格式，後續修改需要重新提問或直接編輯向量碼；匯出點陣圖需額外安裝瀏覽器自動化環境，團隊若在受限網路中工作，仍需處理字型來源或改用系統字型模式。對於需要高度客製版面、或要求每次輸出一致的使用者而言，仍有明顯的學習與調整成本。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>本文資訊整理自 cathrynlavery/diagram-design 的 GitHub 儲存庫與官方說明文件，涵蓋設計系統、圖表類型、安裝方式、匯入匯出與授權條款。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/cathrynlavery/diagram-design</li>
+  <li>官方網站：https://diagramdesign.dev</li>
+  <li>線上圖庫：https://cathrynlavery.github.io/diagram-design/</li>
+  <li>技能安裝頁：https://skills.sh/cathrynlavery/diagram-design/diagram-design</li>
+  <li>作者專欄：https://littlemight.com</li>
+  <li>技能目錄：https://github.com/cathrynlavery/diagram-design/tree/main/skills/diagram-design</li>
+  <li>變更紀錄：https://github.com/cathrynlavery/diagram-design/blob/main/CHANGELOG.md</li>
+  <li>MIT 授權條款：https://github.com/cathrynlavery/diagram-design/blob/main/LICENSE</li>
+</ul>
+
+<h2 id="總結diagram-design-適合什麼團隊">總結：Diagram Design 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>適合具備代理工作流程、需要大量對外圖表的團隊；若圖表需頻繁比對或要求可拖曳編輯，Mermaid 與傳統繪圖工具更合適。
+<!-- End AEO Capsule --></p>
+
+<p>專案的價值在於把圖表從一次性產出變成可重複的規格。4 像素格線、單一強調色、三套字型與固定對比標準構成一組可檢查的規則，讓品質不再取決於操作者的手感；44 種圖表與三種樣式的組合，則覆蓋了技術文件與簡報最常見的視覺需求，MIT 授權與無外部依賴的輸出，進一步降低了長期使用的成本。</p>
+
+<p>採用前仍須衡量現實條件。它假設團隊已經有可用的代理環境，也接受由模型決定版面所帶來的不確定性；對需要逐行比對、或需要反覆微調位置的圖表而言，文字描述與拖曳操作仍具優勢。對於圖表數量多、對外發佈頻繁、且希望視覺與品牌一致的團隊，這套技能提供了明確且可驗證的槓桿。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-dev" href="/topics/dev/" title="科技 · 開發">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-dev"/></svg><span class="topic-tag-name">開發</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-design" href="/topics/design/" title="科技 · 設計">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-design"/></svg><span class="topic-tag-name">設計</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-agent" href="/topics/agent/" title="科技 · 代理">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-agent"/></svg><span class="topic-tag-name">代理</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Diagram+Design" class="badge bg-secondary text-decoration-none me-1">Diagram Design</a>
+          
+          
+          <a href="/search/?q=%E4%BB%A3%E7%90%86%E6%8A%80%E8%83%BD" class="badge bg-secondary text-decoration-none me-1">代理技能</a>
+          
+          
+          <a href="/search/?q=Claude+Code" class="badge bg-secondary text-decoration-none me-1">Claude Code</a>
+          
+          
+          <a href="/search/?q=%E8%B3%87%E6%96%99%E8%A6%96%E8%A6%BA%E5%8C%96" class="badge bg-secondary text-decoration-none me-1">資料視覺化</a>
+          
+          
+          <a href="/search/?q=SVG" class="badge bg-secondary text-decoration-none me-1">SVG</a>
+          
+          
+          <a href="/search/?q=Mermaid" class="badge bg-secondary text-decoration-none me-1">Mermaid</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開源工具</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+          
+          <a href="/search/?q=MIT" class="badge bg-secondary text-decoration-none me-1">MIT</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news&text=5+%E8%90%AC%E6%98%9F+Diagram+Design+%E9%96%8B%E6%BA%90%EF%BC%9A%E4%BB%A3%E7%90%86%E4%B8%80%E9%8D%B5%E7%95%AB%E5%93%81%E7%89%8C%E5%9C%96%E8%A1%A8" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?5+%E8%90%AC%E6%98%9F+Diagram+Design+%E9%96%8B%E6%BA%90%EF%BC%9A%E4%BB%A3%E7%90%86%E4%B8%80%E9%8D%B5%E7%95%AB%E5%93%81%E7%89%8C%E5%9C%96%E8%A1%A8%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/github-diagram-design-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news" class="text-decoration-none">官方 Claude Code 擴充遭植入 SSH 後門</a>
+              <br><small class="text-muted">2026-10-31</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/claude-plugins-marketplace-315-news" class="text-decoration-none">Claude Code 插件市集擴至 315 個 版本號上線</a>
+              <br><small class="text-muted">2026-10-30</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/anthropic-enterprise-roi-reports-news" class="text-decoration-none">Anthropic 推成本報告：企業看得到錢花在哪</a>
+              <br><small class="text-muted">2026-10-30</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/claude-mem-v15-workbench-news" class="text-decoration-none">claude-mem 15.5 開源：代理記憶變成工作台</a>
+              <br><small class="text-muted">2026-10-29</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/herdr-agent-runtime-news" class="text-decoration-none">herdr 開源：46k 星的代理終端執行層</a>
+              <br><small class="text-muted">2026-10-29</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/hallmark-design-skill-news" class="text-decoration-none">Hallmark 開源：4 萬星的防 AI 味設計技能</a>
+              <br><small class="text-muted">2026-10-29</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news" class="text-decoration-none">Anthropic IPO 後恐被評垃圾級 發債成本升</a>
+            <br><small class="text-muted">2026-11-01</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news" class="text-decoration-none">46K 星 CleanYourTV：免 root 移除電視廣告與追蹤</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/agno-agentos-news" class="text-decoration-none">Agno 開源：4.3 萬星的自駕代理平台</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news" class="text-decoration-none">官方 Claude Code 擴充遭植入 SSH 後門</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news" class="text-decoration-none">41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">630</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

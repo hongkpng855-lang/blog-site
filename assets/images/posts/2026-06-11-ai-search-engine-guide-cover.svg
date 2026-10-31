@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="50%" stop-color="#1f3a5f"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <linearGradient id="cardGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#a88a30"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2C3E6B"/>
+      <stop offset="100%" stop-color="#1B2A4A"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#3a7bd5"/>
+    </linearGradient>
+    <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGrad)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="80" x2="512" y2="80" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="160" x2="512" y2="160" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="512" y2="240" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="320" x2="512" y2="320" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="512" y2="400" stroke="white" stroke-width="0.5"/>
+    <line x1="128" y1="0" x2="128" y2="512" stroke="white" stroke-width="0.5"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="white" stroke-width="0.5"/>
+    <line x1="384" y1="0" x2="384" y2="512" stroke="white" stroke-width="0.5"/>
+  </g>
+
+  <!-- Central AI Search icon - Magnifying glass with AI chip -->
+  <g transform="translate(256, 155)" filter="url(#glow)">
+    <!-- Outer ring of search icon -->
+    <circle cx="0" cy="0" r="48" fill="none" stroke="url(#accentGrad)" stroke-width="3" opacity="0.3"/>
+    <circle cx="0" cy="0" r="42" fill="none" stroke="url(#accentGrad)" stroke-width="2" opacity="0.5"/>
+    <!-- Inner circle -->
+    <circle cx="0" cy="0" r="34" fill="url(#cardGrad2)" stroke="url(#accentGrad)" stroke-width="2.5"/>
+
+    <!-- AI chip inside search -->
+    <rect x="-18" y="-22" width="36" height="44" rx="4" fill="url(#accentGrad)" opacity="0.9"/>
+    <rect x="-14" y="-18" width="28" height="36" rx="2" fill="#0d1b2a"/>
+    <!-- AI text lines -->
+    <rect x="-8" y="-10" width="16" height="3" rx="1.5" fill="#00d2ff" opacity="0.9"/>
+    <rect x="-8" y="-4" width="16" height="3" rx="1.5" fill="#00d2ff" opacity="0.7"/>
+    <rect x="-8" y="2" width="16" height="3" rx="1.5" fill="#00d2ff" opacity="0.5"/>
+    <rect x="-8" y="8" width="10" height="3" rx="1.5" fill="#00d2ff" opacity="0.3"/>
+
+    <!-- Search handle (magnifying glass) -->
+    <line x1="30" y1="30" x2="58" y2="58" stroke="url(#cardGrad1)" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="60" cy="60" r="3" fill="#FB923C"/>
+  </g>
+
+  <!-- Orbiting search result nodes -->
+  <!-- Node 1 -->
+  <g transform="translate(120, 88)">
+    <circle cx="0" cy="0" r="16" fill="url(#cardGrad2)" stroke="url(#cardGrad1)" stroke-width="1.5" opacity="0.85"/>
+    <text x="0" y="4" text-anchor="middle" fill="#FB923C" font-size="10" font-family="Arial">GPT</text>
+  </g>
+  <!-- Node 2 -->
+  <g transform="translate(390, 88)">
+    <circle cx="0" cy="0" r="16" fill="url(#cardGrad2)" stroke="url(#accentGrad)" stroke-width="1.5" opacity="0.85"/>
+    <text x="0" y="4" text-anchor="middle" fill="#00d2ff" font-size="9" font-family="Arial">AI</text>
+  </g>
+  <!-- Node 3 -->
+  <g transform="translate(100, 200)">
+    <circle cx="0" cy="0" r="14" fill="url(#cardGrad2)" stroke="#f7971e" stroke-width="1.5" opacity="0.75"/>
+    <text x="0" y="4" text-anchor="middle" fill="#ffd200" font-size="8" font-family="Arial">P</text>
+  </g>
+  <!-- Node 4 -->
+  <g transform="translate(410, 200)">
+    <circle cx="0" cy="0" r="14" fill="url(#cardGrad2)" stroke="#3a7bd5" stroke-width="1.5" opacity="0.75"/>
+    <text x="0" y="4" text-anchor="middle" fill="#00d2ff" font-size="8" font-family="Arial">G</text>
+  </g>
+
+  <!-- Connection lines -->
+  <g opacity="0.15" stroke="url(#accentGrad)" stroke-width="0.8" stroke-dasharray="3,3">
+    <line x1="120" y1="88" x2="256" y2="155"/>
+    <line x1="390" y1="88" x2="256" y2="155"/>
+    <line x1="100" y1="200" x2="256" y2="155"/>
+    <line x1="410" y1="200" x2="256" y2="155"/>
+  </g>
+
+  <!-- 4 Info Cards -->
+  <!-- Card 1: Perplexity -->
+  <g filter="url(#shadow)">
+    <rect x="25" y="295" width="226" height="80" rx="10" fill="#1a2d4a" stroke="#FB923C" stroke-width="1" opacity="0.95"/>
+    <text x="40" y="320" fill="#FB923C" font-size="12" font-weight="bold" font-family="Arial">Perplexity</text>
+    <text x="40" y="338" fill="#8899bb" font-size="10" font-family="Arial">直接答案 + 引用來源</text>
+    <text x="40" y="354" fill="#667799" font-size="9" font-family="Arial">Pro Search 拆解複雜問題</text>
+    <rect x="210" y="304" width="26" height="26" rx="5" fill="#FB923C" opacity="0.2"/>
+    <text x="223" y="321" text-anchor="middle" fill="#FB923C" font-size="13" font-family="Arial">1</text>
+  </g>
+
+  <!-- Card 2: ChatGPT Search -->
+  <g filter="url(#shadow)">
+    <rect x="261" y="295" width="226" height="80" rx="10" fill="#1a2d4a" stroke="#00d2ff" stroke-width="1" opacity="0.95"/>
+    <text x="276" y="320" fill="#00d2ff" font-size="12" font-weight="bold" font-family="Arial">ChatGPT Search</text>
+    <text x="276" y="338" fill="#8899bb" font-size="10" font-family="Arial">對話整合 Research 寫作</text>
+    <text x="276" y="354" fill="#667799" font-size="9" font-family="Arial">自然語言 + 多模態搜尋</text>
+    <rect x="446" y="304" width="26" height="26" rx="5" fill="#00d2ff" opacity="0.2"/>
+    <text x="459" y="321" text-anchor="middle" fill="#00d2ff" font-size="13" font-family="Arial">2</text>
+  </g>
+
+  <!-- Card 3: Google AI Overviews -->
+  <g filter="url(#shadow)">
+    <rect x="25" y="385" width="226" height="80" rx="10" fill="#1a2d4a" stroke="#f7971e" stroke-width="1" opacity="0.95"/>
+    <text x="40" y="410" fill="#ffd200" font-size="12" font-weight="bold" font-family="Arial">Google AI Overviews</text>
+    <text x="40" y="428" fill="#8899bb" font-size="10" font-family="Arial">搜尋結果 AI 摘要</text>
+    <text x="40" y="444" fill="#667799" font-size="9" font-family="Arial">Quick Preview 後睇原文</text>
+    <rect x="210" y="394" width="26" height="26" rx="5" fill="#f7971e" opacity="0.2"/>
+    <text x="223" y="411" text-anchor="middle" fill="#ffd200" font-size="13" font-family="Arial">3</text>
+  </g>
+
+  <!-- Card 4: 實戰技巧 -->
+  <g filter="url(#shadow)">
+    <rect x="261" y="385" width="226" height="80" rx="10" fill="#1a2d4a" stroke="#3a7bd5" stroke-width="1" opacity="0.95"/>
+    <text x="276" y="410" fill="#00d2ff" font-size="12" font-weight="bold" font-family="Arial">實戰技巧</text>
+    <text x="276" y="428" fill="#8899bb" font-size="10" font-family="Arial">自然語言提問</text>
+    <text x="276" y="444" fill="#667799" font-size="9" font-family="Arial">4 步 Research Framework</text>
+    <rect x="446" y="394" width="26" height="26" rx="5" fill="#3a7bd5" opacity="0.2"/>
+    <text x="459" y="411" text-anchor="middle" fill="#00d2ff" font-size="13" font-family="Arial">4</text>
+  </g>
+
+  <!-- Bottom stats bar -->
+  <g>
+    <rect x="25" y="478" width="462" height="22" rx="6" fill="#0d1b2a" opacity="0.6"/>
+    <!-- Stats dots -->
+    <circle cx="50" cy="489" r="3" fill="#00d2ff"/>
+    <text x="58" y="493" fill="#8899bb" font-size="9" font-family="Arial">10x 搜尋效率提升</text>
+
+    <circle cx="200" cy="489" r="3" fill="#FB923C"/>
+    <text x="208" y="493" fill="#8899bb" font-size="9" font-family="Arial">80% 取代 Google</text>
+
+    <circle cx="350" cy="489" r="3" fill="#f7971e"/>
+    <text x="358" y="493" fill="#8899bb" font-size="9" font-family="Arial">免費開始</text>
+  </g>
+</svg>

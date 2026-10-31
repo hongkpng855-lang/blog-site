@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="50%" stop-color="#2C3E6B"/>
+      <stop offset="100%" stop-color="#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8D48B"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.12)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.08)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Subtle pattern -->
+  <g opacity="0.04">
+    <circle cx="100" cy="100" r="300" fill="#FB923C"/>
+    <circle cx="1100" cy="500" r="250" fill="#FB923C"/>
+    <circle cx="600" cy="315" r="400" fill="#fff"/>
+  </g>
+
+  <!-- Decorative line -->
+  <rect x="60" y="80" width="80" height="4" rx="2" fill="url(#gold)" opacity="0.6"/>
+
+  <!-- Main title -->
+  <text x="60" y="140" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="52" font-weight="700" fill="#ffffff" letter-spacing="2">
+    <tspan x="60" dy="0">2026 香港人</tspan>
+    <tspan x="60" dy="64">「獨活」美學</tspan>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="60" y="270" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="24" fill="#FB923C" opacity="0.9" letter-spacing="1">
+    一人燒肉 · 一人旅行 · 一人活動
+  </text>
+  <text x="60" y="310" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="18" fill="#aabbdd" opacity="0.8">
+    ソロ活——同自己約會，係最浪漫嘅事
+  </text>
+
+  <!-- Decorative cards -->
+  <!-- Card 1 - Solo BBQ -->
+  <rect x="620" y="100" width="240" height="180" rx="16" fill="url(#card1)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+  <text x="740" y="150" font-family="sans-serif" font-size="40" text-anchor="middle" fill="#E8D48B" opacity="0.9">🥩</text>
+  <text x="740" y="200" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="600">一人燒肉</text>
+  <text x="740" y="225" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="13" text-anchor="middle" fill="#aabbdd">自己同自己慶祝</text>
+
+  <!-- Card 2 - Solo Trip -->
+  <rect x="880" y="100" width="240" height="180" rx="16" fill="url(#card1)" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+  <text x="1000" y="150" font-family="sans-serif" font-size="40" text-anchor="middle" fill="#E8D48B" opacity="0.9">✈️</text>
+  <text x="1000" y="200" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="600">一人旅行</text>
+  <text x="1000" y="225" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="13" text-anchor="middle" fill="#aabbdd">自由自在去探索</text>
+
+  <!-- Card 3 - Solo Cinema -->
+  <rect x="620" y="300" width="240" height="180" rx="16" fill="url(#card2)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="740" y="350" font-family="sans-serif" font-size="40" text-anchor="middle" fill="#E8D48B" opacity="0.9">🎬</text>
+  <text x="740" y="400" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="600">一人睇戲</text>
+  <text x="740" y="425" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="13" text-anchor="middle" fill="#aabbdd">完全投入電影世界</text>
+
+  <!-- Card 4 - Solo Cafe -->
+  <rect x="880" y="300" width="240" height="180" rx="16" fill="url(#card2)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="1000" y="350" font-family="sans-serif" font-size="40" text-anchor="middle" fill="#E8D48B" opacity="0.9">☕</text>
+  <text x="1000" y="400" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="18" text-anchor="middle" fill="#ffffff" font-weight="600">一人 Cafe</text>
+  <text x="1000" y="425" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="13" text-anchor="middle" fill="#aabbdd">屬於自己嘅時間</text>
+
+  <!-- Bottom stats bar -->
+  <rect x="60" y="530" width="500" height="60" rx="30" fill="rgba(255,255,255,0.06)" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+  <text x="100" y="563" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="14" fill="#aabbdd">📊 一人用餐↑40%</text>
+  <text x="280" y="563" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="14" fill="#aabbdd">一人旅行↑65%</text>
+  <text x="430" y="563" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="14" fill="#aabbdd">一人戶口↑20%</text>
+
+  <!-- Tagline -->
+  <text x="60" y="500" font-family="'Noto Sans TC','Microsoft JhengHei',system-ui,sans-serif" font-size="16" fill="#FB923C" opacity="0.7" letter-spacing="1">
+    #ソロ活  #獨活美學  #同自己約會  #香港生活
+  </text>
+</svg>

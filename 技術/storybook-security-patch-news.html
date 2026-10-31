@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>Storybook 緊急修補：四版本線同步堵開發伺服器漏洞 - AnthroSkill</title>
+  <meta name="description" content="Storybook 於 2026 年 10 月 12 日同步為第 8、9、10、11 四條版本線發布修補，處理兩個可導致程式碼注入的開發伺服器漏洞。本文整理漏洞成因、預設網路行為改動、開發者升級步驟，以及專案累積 91,255 顆星標的最新數據。">
+  <meta name="keywords" content="Storybook, 前端開發, 安全性修補, UI 元件, 開發伺服器, TypeScript, 開源工具, GitHub">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Storybook 緊急修補：四版本線同步堵開發伺服器漏洞">
+  <meta property="og:description" content="Storybook 於 2026 年 10 月 12 日同步為第 8、9、10、11 四條版本線發布修補，處理兩個可導致程式碼注入的開發伺服器漏洞。本文整理漏洞成因、預設網路行為改動、開發者升級步驟，以及專案累積 91,255 顆星標的最新數據。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/storybook-security-patch-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Storybook 緊急修補：四版本線同步堵開發伺服器漏洞">
+  <meta name="twitter:description" content="Storybook 於 2026 年 10 月 12 日同步為第 8、9、10、11 四條版本線發布修補，處理兩個可導致程式碼注入的開發伺服器漏洞。本文整理漏洞成因、預設網路行為改動、開發者升級步驟，以及專案累積 91,255 顆星標的最新數據。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/storybook-security-patch-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-01T00:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Storybook 緊急修補：四版本線同步堵開發伺服器漏洞",
+      "description": "Storybook 於 2026 年 10 月 12 日同步為第 8、9、10、11 四條版本線發布修補，處理兩個可導致程式碼注入的開發伺服器漏洞。本文整理漏洞成因、預設網路行為改動、開發者升級步驟，以及專案累積 91,255 顆星標的最新數據。",
+      "datePublished": "2026-10-13T14:00:02+08:00",
+      "dateModified": "2026-10-13T14:00:02+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/storybookjs/storybook" }, 
+      "image": "https://anthroskill.com/assets/images/posts/storybook-security-patch-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Storybook 只在本機執行，為什麼仍有安全風險？",
+          "acceptedAnswer": { "@type": "Answer", "text": "開發伺服器雖然執行於本機，但會開啟網路連接埠並提供網頁介面，因此瀏覽器中的惡意網站或同一區域網路的其他主機都可能與其通訊。當這些通訊缺乏來源驗證與權杖保護時，就有機會演變成檔案修改甚至程式碼執行。本次修補的核心正是收窄這些連線的可信任範圍。" }
+        },
+        {
+          "@type": "Question",
+          "name": "升級後既有工作流程失效該如何處理？",
+          "acceptedAnswer": { "@type": "Answer", "text": "先確認失效的是 iframe 嵌入、跨來源訊息傳遞，還是 Vitest 瀏覽器模式的檔案寫入與程序執行能力。前三者可透過官方提供的功能旗標暫時還原，建議同時評估改用建置版本或本機執行的替代方案。若為自行開發的外掛，官方建議直接聯繫維護者取得安全實作建議。" }
+        },
+        {
+          "@type": "Question",
+          "name": "使用已建置的 Storybook 會受影響嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "不會。官方公告明確指出，執行或瀏覽已建置版本的 Storybook 不受影響，建置版本仍可自由嵌入其他網頁，也繼續接受來自未知來源的訊息傳遞。受影響的情境僅限於執行開發伺服器，且該伺服器可被外部來源存取的情況。 ## 總結：Storybook 使用者該如何應對？ 建議先升級至對應版本線的修補版，再重新檢視團隊是否依賴已改動的網路功能；無法立即升級者應停止執行開發伺服器，並避免在不受信任的區域網路中開啟。 本次事件的重點不只是一次版本更新，而是開發工具安全邊界的重新界定。官方為 8、9、10 與 11 四條版本線同步發布修補，處理一個重大與一個高風險漏洞，並主動收窄開發伺服器的預設網路行為，包含僅監聽 localhost、限制 iframe 嵌入來源，以及收緊訊息傳遞與檔案寫入的驗證。 對日常使用者而言，動作相對明確：升級至對應版本線的修補版，並避免在不受信任的網路環境中啟動開發伺服器。對把 Storybook 納入內部部署或 CI 流程的團隊，則需要進一步確認自動化流程是否依賴被限制的跨來源功能，並評估是否改用建置版本。若團隊自行開發會寫入檔案的外掛，輸入驗證的收緊代表相關實作需要重新測試。" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Storybook 緊急修補：四版本線同步堵開發伺服器漏洞",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Storybook 緊急修補：四版本線同步堵開發伺服器漏洞</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">Storybook 緊急修補：四版本線同步堵開發伺服器漏洞</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月13日 14:00
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 3 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/storybookjs/storybook" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/storybook-security-patch-news-cover.jpg" alt="Storybook 緊急修補：四版本線同步堵開發伺服器漏洞" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/storybookjs/storybook" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/storybookjs/storybook
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Storybook 是前端元件開發工作坊，讓團隊在隔離環境中建置、測試與記錄 UI 元件。專案於 2016 年 3 月建立，GitHub 星標累積至 91,255 顆、複製數 10,482 次，貢獻者約 2,806 位，採用 MIT 授權。2026 年 10 月 12 日，官方同步為 8、9、10、11 四條版本線發布修補，處理兩個可導致程式碼注入的開發伺服器漏洞，並改動多項網路相關功能的預設行為。本文依據官方安全公告、版本更新紀錄與 GitHub 公開統計資料整理，說明漏洞成因、修補後的預設行為變化，以及開發團隊需要採取的動作。</p>
+
+<p><img src="/assets/images/posts/storybook-security-patch-news-shot1.png" alt="Storybook 儲存庫 README 開頭，顯示專案標誌與名稱，以及「Build bulletproof UI components faster」標語，下方為官方說明：Storybook 是前端工作坊，用於隔離環境中建置 UI 元件與頁面，數千個團隊用它進行 UI 開發、測試與文件撰寫" /></p>
+
+<h2 id="storybook-是什麼">Storybook 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Storybook 是開源前端元件工作坊，讓開發者在隔離環境中建置、測試與記錄 UI 元件，支援 React、Vue 與 Angular 等主流框架，採用 MIT 授權。
+<!-- End AEO Capsule --></p>
+
+<p>專案的定位是前端工作坊，核心價值在於把元件從完整應用程式中抽離出來，讓開發者單獨檢視每種狀態與互動。這種隔離方式使元件的邊界條件、載入狀態與錯誤處理可以在不啟動完整應用的情況下驗證，也讓設計系統的文件與實際程式碼維持同步。</p>
+
+<p>技術層面以 TypeScript 撰寫，並針對多種前端框架提供整合層。儲存庫標示的主題包含元件、設計系統、文件、測試、React、Vue、Angular、Svelte、Web Components 與 Vite 等，涵蓋目前主流的前端技術選擇。專案另提供可擴充的外掛機制，讓無障礙檢查、視覺回歸測試與互動測試能以附加元件形式接入。</p>
+
+<p>採用規模是此專案最顯著的特徵。官方在儲存庫說明中表示，數千個團隊使用它進行 UI 開發、測試與文件撰寫，累積星標達 91,255 顆，複製數 10,482 次。專案以開放治理方式運作，維護者與貢獻者分布於多個組織，並透過社群頻道與年度會議維持開發者關係。</p>
+
+<h2 id="storybook-這次修補了哪些漏洞">Storybook 這次修補了哪些漏洞？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>本次修補處理兩個開發伺服器漏洞：重大等級者可讓惡意網站未授權修改專案檔案，高風險等級者允許同網段主機竊取權杖並注入程式碼。
+<!-- End AEO Capsule --></p>
+
+<p>第一個漏洞編號 GHSA-f2ph-cmg5-wxc8，嚴重性列為重大。官方說明指出，當受影響版本的開發伺服器執行時，惡意網站可能導致開發者專案中的檔案被未經授權修改。在附加條件成立時，被修改的檔案可能由本機執行環境以開發者的權限執行，最終形成程式碼執行。官方同時聲明，目前未發現實際專案中被利用的證據。</p>
+
+<p>第二個漏洞編號 GHSA-px85-f4q5-jh77，嚴重性列為高風險。官方說明指出，開發伺服器會向任何能載入其 HTML 頁面的客戶端暴露 WebSocket 驗證權杖，因此同一區域網路中的任何主機只要以 IP 位址開啟該應用，即可取得權杖。取得權杖後，攻擊者可透過 WebSocket 對 story 檔案注入程式碼或建立新檔案，在特定條件下可於同網段開發者的機器上執行程式碼。若同時安裝 Vitest 外掛並使用較舊版本，影響程度會進一步提高。</p>
+
+<p>兩份公告都由官方安全團隊協調處理，並在同日發布修補版本。重大漏洞的揭露時間為 9 月 30 日，高風險漏洞的揭露時間為 8 月 19 日，兩者最終併入同一批安全更新一次處理。</p>
+
+<p><img src="/assets/images/posts/storybook-security-patch-news-shot2.png" alt="Storybook 儲存庫首頁頂部，顯示儲存庫路徑 storybookjs/storybook、星標數約 91.3k、複製數約 10.5k、分支與標籤數量，以及 repo 說明「Storybook is the industry standard workshop for building, documenting, and testing UI components in isolation」，主要語言標示為 TypeScript" /></p>
+
+<h2 id="為什麼-storybook-要改變預設網路行為">為什麼 Storybook 要改變預設網路行為？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>官方認為漏洞組合利用的風險足以動搖既有預設值，因此收窄網路存取，改為只監聽 localhost 並限制 iframe 與 postMessage 來源。
+<!-- End AEO Capsule --></p>
+
+<p>官方在公告中說明，由於漏洞的性質特殊，團隊決定改變 Storybook 的預設行為，且範圍包含第 8 與第 9 版，針對多項並非多數使用者工作流程必需的網路功能收緊設定。公告同時提到，這些改動可能被視為破壞性變更，因此為依賴相關功能的團隊提供功能旗標，讓其可以關閉特定的安全更新以維持既有流程。</p>
+
+<p>最直接的變化是監聽範圍。開發伺服器不再綁定機器上的所有網路介面，預設僅綁定 localhost，藉此避免同網段的其他使用者看見該服務。若團隊確實需要在區域網路中分享，可使用命令列選項指定綁定位址，並設定允許的主機清單以通過驗證；官方提醒此舉會觸發警告，需手動確認才會繼續執行。</p>
+
+<p>跨來源互動同樣受到限制。開發模式下的管理介面與預覽介面只接受與自身來源或本機服務之間的通訊，跨網域的 iframe 嵌入在預設狀態下被拒。已建置完成的 Storybook 不受此限，仍可自由嵌入。官方建議需要組合多個 Storybook 的團隊改為使用建置版本。此外，highlight 事件的 API 曾被過度授權，經重新設計後不再能觸發任意事件，Chromatic 的 Visual Tests 外掛需更新至 5.4.1 或之後版本以維持文件連結功能。</p>
+
+<h2 id="開發者應該如何處理這次修補">開發者應該如何處理這次修補？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>先升級至對應版本線的修補版再啟動開發伺服器，分別為 11.0.0-alpha.6、10.6.2、9.1.21 與 8.6.19；無法立即升級者應暫停執行開發伺服器。
+<!-- End AEO Capsule --></p>
+
+<p>處理順序的第一步是升級。官方為四條版本線分別發布修補版本，包含 11.0.0-alpha.6、10.6.2、9.1.21 與 8.6.19，並明確要求在下一次執行 <code class="language-plaintext highlighter-rouge">storybook dev</code> 之前完成升級。若團隊短期內無法升級，官方建議直接停止執行受影響的開發伺服器，直到可以套用修正。</p>
+
+<p>接著需要檢視既有工作流程是否依賴已改動的功能。若團隊曾把開發中的 Storybook 嵌入另一個網頁應用，或依賴跨來源的訊息傳遞更新 story 參數，這些用法在升級後可能失效。官方為此提供 <code class="language-plaintext highlighter-rouge">security.insecureRemoteIframeEmbed</code> 與 <code class="language-plaintext highlighter-rouge">security.insecurePreviewMessaging</code> 等功能旗標，但公告建議優先改用建置版本或本機執行等較安全的方式，把旗標保留給確實無法調整的少數情境。</p>
+
+<p>測試相關設定亦有兩處需要確認。Vitest 外掛在瀏覽器模式下不再允許寫入檔案或執行其他程序，若測試流程原本依賴這兩項能力，需在設定中手動重新啟用。<code class="language-plaintext highlighter-rouge">saveStoryRequest</code> 事件的輸入驗證亦已收緊，外掛與介面只能寫入序列化參數與 story 標題，若團隊自行開發會代為寫入檔案的外掛，官方建議直接聯繫維護者取得安全實作建議。</p>
+
+<h2 id="storybook-的專案數據與維護狀況如何">Storybook 的專案數據與維護狀況如何？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>專案累積 91,255 顆星標、10,482 次複製與 88,257 次提交，貢獻者約 2,806 位，最近一次推送為 2026 年 10 月 12 日。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">91,255</span><span class="ui-stat-label">Stars</span></div>
+<div class="ui-stat"><span class="ui-stat-value">10,482</span><span class="ui-stat-label">Forks</span></div>
+<div class="ui-stat"><span class="ui-stat-value">957</span><span class="ui-stat-label">Watchers</span></div>
+<div class="ui-stat"><span class="ui-stat-value">88,257</span><span class="ui-stat-label">Commits</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2,806</span><span class="ui-stat-label">Contributors</span></div>
+<div class="ui-stat"><span class="ui-stat-value">MIT</span><span class="ui-stat-label">License</span></div>
+</div>
+
+<p><img src="/assets/images/posts/storybook-security-patch-news-shot3.png" alt="Storybook 儲存庫的貢獻者活躍度統計頁面，上方位於每週提交次數的柱狀圖，時間範圍涵蓋 2026 年 7 月至 10 月並在 8 月中旬出現明顯高峰，下方列出各主要貢獻者及其提交分布" /></p>
+
+<p>維護強度是此專案的另一項特徵。儲存庫累積 88,257 次提交與約 2,806 位貢獻者，最近一次推送時間為 2026 年 10 月 12 日，與本文整理時間相隔一日。貢獻者活躍度圖表顯示，每週提交次數在觀察期間維持穩定，並在 8 月中旬出現明顯高峰，反映版本開發與安全稽核期間的集中投入。</p>
+
+<p>版本策略則採用多線並行。官方同時維護第 8、9、10 與 11 四條線，其中第 11 版處於 alpha 階段，其餘為穩定線。這種做法讓仍在使用較舊主版本的團隊可以在不進行大版本遷移的前提下取得安全修正，代價是維護者需要同步處理多條分支的修補與發布。儲存庫目前待處理議題約 1,885 項，數量與其龐大的生態規模相符。</p>
+
+<h2 id="storybook-在同類工具中的定位為何">Storybook 在同類工具中的定位為何？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>與單純的元件預覽工具相比，Storybook 同時涵蓋文件、無障礙檢查與視覺回歸測試，並以框架無關的外掛架構支援跨團隊協作，轉換成本較高。
+<!-- End AEO Capsule --></p>
+
+<p>現階段的前端生態中，元件可視化並非只有一種做法，部分框架提供官方或社群維護的獨立預覽工具，也有一些團隊自行以最小化的展示頁面取代。這些方案的共同優勢是設定成本較低，適合元件數量有限或技術棧單一的專案。</p>
+
+<p>Storybook 的差異在於整合範圍。它同時涵蓋元件文件、無障礙檢查、互動測試與視覺回歸測試，並以框架無關的外掛架構讓不同技術棧的團隊共用同一套流程。這種設計使其在中大型專案與跨團隊情境下具備優勢，但也代表導入後的文件與 stories 會形成一定的轉換成本，較難在專案中途更換。</p>
+
+<p>值得留意的是，本次修補改變了部分預設行為，而這些行為過去並未被視為需要調整的風險來源。對於把元件工作坊納入 CI 流程或內部部署的團隊，這代表安全邊界需要重新檢視。官方以功能旗標保留回溯能力的做法，短期內降低了升級阻力，但長期而言，收窄預設權限的方向與近年開發工具供應鏈強化的趨勢一致。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>本文資訊整理自 Storybook 官方儲存庫的安全公告與版本更新紀錄，完整公告內容、修補版本清單與功能旗標說明可由下列來源查證。
+<!-- End AEO Capsule --></p>
+
+<p>官方儲存庫位於 <a href="https://github.com/storybookjs/storybook">https://github.com/storybookjs/storybook</a>，內含完整原始碼、貢獻指南與授權文件。兩份安全公告分別為 <a href="https://github.com/storybookjs/storybook/security/advisories/GHSA-f2ph-cmg5-wxc8">https://github.com/storybookjs/storybook/security/advisories/GHSA-f2ph-cmg5-wxc8</a> 與 <a href="https://github.com/storybookjs/storybook/security/advisories/GHSA-px85-f4q5-jh77">https://github.com/storybookjs/storybook/security/advisories/GHSA-px85-f4q5-jh77</a>，內容涵蓋受影響範圍、建議動作與揭露時程。版本更新紀錄見 <a href="https://github.com/storybookjs/storybook/releases">https://github.com/storybookjs/storybook/releases</a>，官方網站為 <a href="https://storybook.js.org">https://storybook.js.org</a>，其中提供安裝說明與文件。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 59 字 -->
+<p>本次修補收窄開發伺服器的連線可信任範圍，已建置版本不受影響；升級後若工作流程失效，可先用功能旗標還原，再評估替代方案。
+<!-- End AEO Capsule --></p>
+
+<div class="faq-section">
+<h3>Storybook 只在本機執行，為什麼仍有安全風險？</h3>
+<p>開發伺服器雖然執行於本機，但會開啟網路連接埠並提供網頁介面，因此瀏覽器中的惡意網站或同一區域網路的其他主機都可能與其通訊。當這些通訊缺乏來源驗證與權杖保護時，就有機會演變成檔案修改甚至程式碼執行。本次修補的核心正是收窄這些連線的可信任範圍。</p>
+<h3>升級後既有工作流程失效該如何處理？</h3>
+<p>先確認失效的是 iframe 嵌入、跨來源訊息傳遞，還是 Vitest 瀏覽器模式的檔案寫入與程序執行能力。前三者可透過官方提供的功能旗標暫時還原，建議同時評估改用建置版本或本機執行的替代方案。若為自行開發的外掛，官方建議直接聯繫維護者取得安全實作建議。</p>
+<h3>使用已建置的 Storybook 會受影響嗎？</h3>
+<p>不會。官方公告明確指出，執行或瀏覽已建置版本的 Storybook 不受影響，建置版本仍可自由嵌入其他網頁，也繼續接受來自未知來源的訊息傳遞。受影響的情境僅限於執行開發伺服器，且該伺服器可被外部來源存取的情況。</p>
+</div>
+
+<h2 id="總結storybook-使用者該如何應對">總結：Storybook 使用者該如何應對？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>建議先升級至對應版本線的修補版，再重新檢視團隊是否依賴已改動的網路功能；無法立即升級者應停止執行開發伺服器，並避免在不受信任的區域網路中開啟。
+<!-- End AEO Capsule --></p>
+
+<p>本次事件的重點不只是一次版本更新，而是開發工具安全邊界的重新界定。官方為 8、9、10 與 11 四條版本線同步發布修補，處理一個重大與一個高風險漏洞，並主動收窄開發伺服器的預設網路行為，包含僅監聽 localhost、限制 iframe 嵌入來源，以及收緊訊息傳遞與檔案寫入的驗證。</p>
+
+<p>對日常使用者而言，動作相對明確：升級至對應版本線的修補版，並避免在不受信任的網路環境中啟動開發伺服器。對把 Storybook 納入內部部署或 CI 流程的團隊，則需要進一步確認自動化流程是否依賴被限制的跨來源功能，並評估是否改用建置版本。若團隊自行開發會寫入檔案的外掛，輸入驗證的收緊代表相關實作需要重新測試。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-dev" href="/topics/dev/" title="科技 · 開發">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-dev"/></svg><span class="topic-tag-name">開發</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-security" href="/topics/security/" title="科技 · 安全">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-security"/></svg><span class="topic-tag-name">安全</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-design" href="/topics/design/" title="科技 · 設計">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-design"/></svg><span class="topic-tag-name">設計</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Storybook" class="badge bg-secondary text-decoration-none me-1">Storybook</a>
+          
+          
+          <a href="/search/?q=%E5%89%8D%E7%AB%AF%E9%96%8B%E7%99%BC" class="badge bg-secondary text-decoration-none me-1">前端開發</a>
+          
+          
+          <a href="/search/?q=%E5%AE%89%E5%85%A8%E6%80%A7%E4%BF%AE%E8%A3%9C" class="badge bg-secondary text-decoration-none me-1">安全性修補</a>
+          
+          
+          <a href="/search/?q=UI+%E5%85%83%E4%BB%B6" class="badge bg-secondary text-decoration-none me-1">UI 元件</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E7%99%BC%E4%BC%BA%E6%9C%8D%E5%99%A8" class="badge bg-secondary text-decoration-none me-1">開發伺服器</a>
+          
+          
+          <a href="/search/?q=TypeScript" class="badge bg-secondary text-decoration-none me-1">TypeScript</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開源工具</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news&text=Storybook+%E7%B7%8A%E6%80%A5%E4%BF%AE%E8%A3%9C%EF%BC%9A%E5%9B%9B%E7%89%88%E6%9C%AC%E7%B7%9A%E5%90%8C%E6%AD%A5%E5%A0%B5%E9%96%8B%E7%99%BC%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%BC%8F%E6%B4%9E" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?Storybook+%E7%B7%8A%E6%80%A5%E4%BF%AE%E8%A3%9C%EF%BC%9A%E5%9B%9B%E7%89%88%E6%9C%AC%E7%B7%9A%E5%90%8C%E6%AD%A5%E5%A0%B5%E9%96%8B%E7%99%BC%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%BC%8F%E6%B4%9E%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/storybook-security-patch-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-material-ui-v10-news" class="text-decoration-none">Material UI 發布 v10 預覽版：9.9 萬星 React 元件庫</a>
+              <br><small class="text-muted">2026-10-20</small>
+            </li>
+            
+            
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/apache-echarts-news" class="text-decoration-none">Apache ECharts 開源：67k 星的圖表引擎</a>
+              <br><small class="text-muted">2026-10-10</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-webdev-for-beginners-news" class="text-decoration-none">微軟開源 24 堂前端入門課：96,919 星</a>
+              <br><small class="text-muted">2026-10-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-screenshot-to-code-news-hk" class="text-decoration-none">74,143 星開源項目：screenshot-to-code — 截圖秒轉代碼</a>
+              <br><small class="text-muted">2026-08-18</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-front-end-checklist-news-hk" class="text-decoration-none">7.3 萬星開源項目：Front-End Checklist — 前端品質檢查系統</a>
+              <br><small class="text-muted">2026-08-14</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-ui-ux-pro-max-news-hk" class="text-decoration-none">11萬星開源項目：UI UX Pro Max — AI 驅動的跨平台設計系統生成器</a>
+              <br><small class="text-muted">2026-08-13</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news" class="text-decoration-none">Anthropic IPO 後恐被評垃圾級 發債成本升</a>
+            <br><small class="text-muted">2026-11-01</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news" class="text-decoration-none">46K 星 CleanYourTV：免 root 移除電視廣告與追蹤</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/agno-agentos-news" class="text-decoration-none">Agno 開源：4.3 萬星的自駕代理平台</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news" class="text-decoration-none">官方 Claude Code 擴充遭植入 SSH 後門</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news" class="text-decoration-none">41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">630</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4B96A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#34D399"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Decorative grid dots -->
+  <g opacity="0.06">
+    <pattern id="dotGrid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="white"/>
+    </pattern>
+    <rect width="800" height="450" fill="url(#dotGrid)"/>
+  </g>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#gold)"/>
+
+  <!-- Title -->
+  <text x="40" y="62" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="url(#gold)" letter-spacing="1">
+    高效自學實戰系統
+  </text>
+  <text x="40" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="15" fill="#94A3B8" letter-spacing="0.5">
+    Pareto 原則 · 間隔重複 · 主動回憶 · 刻意練習
+  </text>
+
+  <!-- ====== Card 1: Pareto 80/20 ====== -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="118" width="230" height="130" rx="14" fill="#1E3A5F" opacity="0.95"/>
+    <rect x="30" y="118" width="230" height="130" rx="14" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <!-- 80/20 circle diagram -->
+    <circle cx="85" cy="175" r="35" fill="none" stroke="#FB923C" stroke-width="3" opacity="0.3"/>
+    <path d="M 85 175 L 85 155 A 25 25 0 0 1 106 189" fill="none" stroke="#FB923C" stroke-width="4" stroke-linecap="round"/>
+    <text x="85" y="179" text-anchor="middle" font-family="system-ui" font-size="20" font-weight="800" fill="#FB923C">80/20</text>
+    <text x="88" y="197" text-anchor="middle" font-family="system-ui" font-size="9" fill="#FB923C" opacity="0.6">Pareto</text>
+    <text x="160" y="156" font-family="system-ui" font-size="11" font-weight="600" fill="#F1F5F9">Pareto 原則</text>
+    <text x="160" y="174" font-family="system-ui" font-size="9.5" fill="#94A3B8">搵出最重要 20%</text>
+    <text x="160" y="190" font-family="system-ui" font-size="9.5" fill="#94A3B8">集中火力學習</text>
+    <text x="160" y="206" font-family="system-ui" font-size="9.5" fill="#94A3B8">80% 成果由此來</text>
+  </g>
+
+  <!-- ====== Card 2: Spaced Repetition ====== -->
+  <g filter="url(#shadow)">
+    <rect x="285" y="118" width="230" height="130" rx="14" fill="#1E3A5F" opacity="0.95"/>
+    <rect x="285" y="118" width="230" height="130" rx="14" fill="none" stroke="#3B82F6" stroke-width="1" opacity="0.4"/>
+    <!-- Forgetting curve -->
+    <polyline points="310,195 340,180 370,190 400,170 430,178 460,165" fill="none" stroke="#3B82F6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="310,178 340,172 370,178 400,165 430,170 460,160" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="4,3"/>
+    <text x="315" y="210" font-family="system-ui" font-size="8" fill="#EF4444" opacity="0.7">忘記曲線</text>
+    <text x="315" y="222" font-family="system-ui" font-size="8" fill="#10B981" opacity="0.7">間隔重複</text>
+    <text x="360" y="156" font-family="system-ui" font-size="11" font-weight="600" fill="#F1F5F9">間隔重複</text>
+    <text x="360" y="174" font-family="system-ui" font-size="9.5" fill="#94A3B8">Anki 每日 review</text>
+    <text x="360" y="190" font-family="system-ui" font-size="9.5" fill="#94A3B8">對抗 Ebbinghaus</text>
+    <text x="360" y="206" font-family="system-ui" font-size="9.5" fill="#94A3B8">忘記曲線</text>
+  </g>
+
+  <!-- ====== Card 3: Active Recall ====== -->
+  <g filter="url(#shadow)">
+    <rect x="540" y="118" width="230" height="130" rx="14" fill="#1E3A5F" opacity="0.95"/>
+    <rect x="540" y="118" width="230" height="130" rx="14" fill="none" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+    <!-- Brain icon simplified -->
+    <circle cx="595" cy="173" r="28" fill="none" stroke="#10B981" stroke-width="2.5" opacity="0.4"/>
+    <path d="M 580 165 Q 588 158 595 162 Q 602 158 610 165" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 578 180 Q 585 190 595 188 Q 605 190 612 180" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+    <text x="595" y="210" text-anchor="middle" font-family="system-ui" font-size="9" fill="#10B981" opacity="0.6">主動回憶</text>
+    <text x="635" y="156" font-family="system-ui" font-size="11" font-weight="600" fill="#F1F5F9">主動回憶</text>
+    <text x="635" y="174" font-family="system-ui" font-size="9.5" fill="#94A3B8">唔睇筆記迫 recall</text>
+    <text x="635" y="190" font-family="system-ui" font-size="9.5" fill="#94A3B8">Feynman Technique</text>
+    <text x="635" y="206" font-family="system-ui" font-size="9.5" fill="#94A3B8">記憶保留高 2 倍</text>
+  </g>
+
+  <!-- ====== Bottom section: Deliberate Practice ====== -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="268" width="740" height="80" rx="14" fill="#1E3A5F" opacity="0.9"/>
+    <rect x="30" y="268" width="740" height="80" rx="14" fill="none" stroke="#34D399" stroke-width="1" opacity="0.3"/>
+
+    <!-- Zone model -->
+    <text x="55" y="298" font-family="system-ui" font-size="12" font-weight="700" fill="#F1F5F9">刻意練習 3 區模型</text>
+
+    <!-- Comfort Zone -->
+    <rect x="55" y="308" width="160" height="28" rx="8" fill="#1E40AF" opacity="0.5"/>
+    <text x="135" y="327" text-anchor="middle" font-family="system-ui" font-size="11" fill="#93C5FD">✅ Comfort Zone</text>
+
+    <!-- Arrow -->
+    <text x="223" y="327" font-family="system-ui" font-size="14" fill="#FB923C">→</text>
+
+    <!-- Learning Zone (highlighted) -->
+    <rect x="240" y="308" width="180" height="28" rx="8" fill="#FB923C" opacity="0.3"/>
+    <rect x="240" y="308" width="180" height="28" rx="8" fill="none" stroke="#FB923C" stroke-width="1.5"/>
+    <text x="330" y="327" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="700" fill="#FB923C">⭐ Learning Zone</text>
+
+    <!-- Arrow -->
+    <text x="428" y="327" font-family="system-ui" font-size="14" fill="#FB923C">→</text>
+
+    <!-- Panic Zone -->
+    <rect x="445" y="308" width="155" height="28" rx="8" fill="#DC2626" opacity="0.25"/>
+    <text x="522" y="327" text-anchor="middle" font-family="system-ui" font-size="11" fill="#FCA5A5">❌ Panic Zone</text>
+
+    <!-- Key insight -->
+    <text x="620" y="315" font-family="system-ui" font-size="9.5" fill="#94A3B8">每日專注 30min</text>
+    <text x="620" y="332" font-family="system-ui" font-size="9.5" fill="#94A3B8">用 7 成難度練習</text>
+  </g>
+
+  <!-- Bottom CTA badge -->
+  <g>
+    <rect x="30" y="365" width="740" height="36" rx="18" fill="url(#gold)" opacity="0.15"/>
+    <text x="400" y="390" text-anchor="middle" font-family="system-ui" font-size="13" font-weight="700" fill="#FB923C">
+      📚 30 日自學系統建立挑戰 · 由混亂學習變高效產出
+    </text>
+  </g>
+
+  <!-- Decorative elements -->
+  <circle cx="760" cy="60" r="25" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.1"/>
+  <circle cx="770" cy="50" r="8" fill="#FB923C" opacity="0.08"/>
+
+  <!-- Side stats -->
+  <g opacity="0.07">
+    <rect x="700" y="40" width="60" height="1" fill="#FB923C"/>
+    <rect x="700" y="44" width="40" height="1" fill="#FB923C"/>
+  </g>
+</svg>

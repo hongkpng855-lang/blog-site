@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞 - AnthroSkill</title>
+  <meta name="description" content="Crawl4AI 於 2026 年 10 月 14 日發布 v0.9.5，一次修補 Docker 伺服器六個協調披露漏洞，涵蓋 SSRF、頁面 JavaScript 注入與反序列化風險，並新增可選深度爬取。本文整理漏洞細節、架構特性與自架評選建議。">
+  <meta name="keywords" content="Crawl4AI, 網頁爬蟲, AI Agent, RAG, 開源工具, 資訊安全, 科技新聞">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞">
+  <meta property="og:description" content="Crawl4AI 於 2026 年 10 月 14 日發布 v0.9.5，一次修補 Docker 伺服器六個協調披露漏洞，涵蓋 SSRF、頁面 JavaScript 注入與反序列化風險，並新增可選深度爬取。本文整理漏洞細節、架構特性與自架評選建議。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/crawl4ai-v095-security-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞">
+  <meta name="twitter:description" content="Crawl4AI 於 2026 年 10 月 14 日發布 v0.9.5，一次修補 Docker 伺服器六個協調披露漏洞，涵蓋 SSRF、頁面 JavaScript 注入與反序列化風險，並新增可選深度爬取。本文整理漏洞細節、架構特性與自架評選建議。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/crawl4ai-v095-security-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-01T00:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/profile.php?id=1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/1247126168485543", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞",
+      "description": "Crawl4AI 於 2026 年 10 月 14 日發布 v0.9.5，一次修補 Docker 伺服器六個協調披露漏洞，涵蓋 SSRF、頁面 JavaScript 注入與反序列化風險，並新增可選深度爬取。本文整理漏洞細節、架構特性與自架評選建議。",
+      "datePublished": "2026-10-19T22:00:01+08:00",
+      "dateModified": "2026-10-19T22:00:01+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/unclecode/crawl4ai" }, 
+      "image": "https://anthroskill.com/assets/images/posts/crawl4ai-v095-security-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年10月19日 22:00
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 4 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/unclecode/crawl4ai" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/crawl4ai-v095-security-news-cover.jpg" alt="Crawl4AI 8.6 萬星爬蟲：v0.9.5 修補六個漏洞" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/unclecode/crawl4ai" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/unclecode/crawl4ai
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Crawl4AI 於 2026 年 10 月 14 日發布 v0.9.5，這是一個以安全修補為核心的版本，一次關閉 Docker 伺服器在處理不受信任請求本文時發現的六個協調披露漏洞，並首次把深度爬取能力以可選方式帶進伺服器端。該專案在 GitHub 累積 85,824 個星標與 8,924 次分叉，是星標數最高的開源爬蟲專案之一，同期亦以 Crawl4AI Cloud 形式提供託管服務，形成開源自架與雲端並行的雙軌路線。</p>
+
+<p><img src="/assets/images/posts/crawl4ai-v095-security-news-shot2.png" alt="Crawl4AI GitHub 首頁頂部，顯示 repo 名稱、85.8k 星標數、8.9k 分叉數與專案描述" /></p>
+
+<h2 id="crawl4ai-是什麼">Crawl4AI 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Crawl4AI 是開源網頁爬蟲框架，能把網站轉換為適合語言模型的乾淨 Markdown，供 RAG 管線與 AI 代理取用，現有約 8.6 萬星標。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案的起點來自一次不愉快的付費經驗。作者在 2023 年需要把網頁內容轉為 Markdown，當時標榜開源的方案要求註冊帳號、申請 API token，收費 16 美元，實際輸出仍然不足，於是他自行動手，在數天內完成初版並開源釋出。2024 年 5 月建立儲存庫之後，專案成為 GitHub 上星標數最高的爬蟲類專案，並以 Apache-2.0 授權發布。</p>
+
+<p>它的目標受眾並非一般使用者，而是正在建構檢索增強生成系統、代理工作流與資料管線的開發團隊。這類團隊的共同需求是把雜亂的 HTML 轉成結構穩定、去除導覽與頁尾雜訊的文字，同時保留標題層級、表格與程式碼區塊，讓語言模型可以準確引用。Crawl4AI 把這個轉換過程標準化，並以非同步瀏覽器池、快取與鉤子機制降低重複抓取的延遲。</p>
+
+<p>三種使用形態對應不同的營運條件。Python 函式庫在自身行程內執行瀏覽器，適合單機腳本與批次任務；Docker 伺服器把爬取能力包成 REST 端點，適合團隊共用與內部服務化；Crawl4AI Cloud 則由官方代管瀏覽器、代理與反爬處理，使用者只需持有金鑰即可呼叫。</p>
+
+<h2 id="v095-修補了哪些安全漏洞">v0.9.5 修補了哪些安全漏洞？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>v0.9.5 修補六個漏洞，涵蓋快取檢查繞過外送代理的 SSRF、頁面腳本注入、任意模型載入、正規表達式 ReDoS、延遲欄位無上限與憑證檢查關閉。
+<!-- End AEO Capsule --></p>
+
+<p>第一個問題出在快取有效性的判斷。<code class="language-plaintext highlighter-rouge">CacheValidator.validate()</code> 原本以自己的 HTTP 客戶端發出 HEAD 與 GET 請求，繞過了 Docker 伺服器用來釘住目標 IP 的外送代理，形成盲式 SSRF，攻擊者可以藉此讓伺服器連向內部網路與雲端中繼資料位址。修補後這條路徑改為經過同一個代理，與 0.9.4 已修正的 robots.txt 抓取與連結預覽抓取保持一致。</p>
+
+<p>第二個問題是頁面腳本注入。<code class="language-plaintext highlighter-rouge">css_selector</code> 原本被直接拼接進 JavaScript 字串，<code class="language-plaintext highlighter-rouge">wait_for</code> 也可能被當成頁面腳本執行，即使伺服器已拒絕 <code class="language-plaintext highlighter-rouge">js_code</code>，不受信任的請求本文仍可在被爬頁面的上下文中執行任意 JavaScript。現在選擇器以參數形式傳入 <code class="language-plaintext highlighter-rouge">evaluate()</code>，同時修正了含引號選擇器失效的舊問題，而不受信任請求中的 JavaScript 形式 <code class="language-plaintext highlighter-rouge">wait_for</code> 一律拒絕。</p>
+
+<p>第三個問題嚴重度最高。<code class="language-plaintext highlighter-rouge">CosineStrategy</code> 允許請求本文指定 <code class="language-plaintext highlighter-rouge">model_name</code>，伺服器因此會下載並載入任意 HuggingFace 儲存庫；在 PyTorch 2.6 之前的版本，特製的 pickle 權重檔可在伺服器上執行任意程式碼。修補方式是拒絕來自不受信任本文的模型名稱，官方預設映像檔未安裝 PyTorch，因此不受影響。</p>
+
+<p>其餘三項分別是中度的正規表達式 ReDoS、延遲欄位無上限與憑證檢查被關閉。使用者自訂的正規表達式可能觸發災難性回溯，而 Python 的 <code class="language-plaintext highlighter-rouge">re</code> 在比對期間持有全域解釋器鎖，單一請求即可凍結整個伺服器，因此 <code class="language-plaintext highlighter-rouge">RegexExtractionStrategy.custom</code>、<code class="language-plaintext highlighter-rouge">RegexChunking.patterns</code> 與結構描述中的 regex 欄位一律拒絕。延遲欄位原本沒有上限，單一請求可以長期佔住瀏覽器頁面或拖慢限流器，現已限制在 60 秒並拒絕負值與非數值。最後，兩份預設啟動參數都帶有 <code class="language-plaintext highlighter-rouge">--ignore-certificate-errors</code>，使 <code class="language-plaintext highlighter-rouge">ignore_https_errors=False</code> 與伺服器預設的 TLS 強制設定形同無效，該旗標已被移除，不安全模式只能透過明確設定開啟。</p>
+
+<p>除六個公告之外，此版本亦收緊若干邊界。<code class="language-plaintext highlighter-rouge">DomainFilter</code> 改用 <code class="language-plaintext highlighter-rouge">urlparse()</code> 解析真實主機，避免使用者資訊欄位、連接埠或尾端句點繞過黑名單；Webhook 標頭名稱與成品編號改用完整匹配，尾端換行不再通過；無法把瀏覽器釘在外送代理時，<code class="language-plaintext highlighter-rouge">enforce_egress</code> 直接以 <code class="language-plaintext highlighter-rouge">EgressBlocked</code> 拒絕抓取，而不是在未釘住的情況下繼續執行。</p>
+
+<h2 id="為什麼爬蟲服務特別容易出現-ssrf-風險">為什麼爬蟲服務特別容易出現 SSRF 風險？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>爬蟲本質是代替使用者連向任意網址，每一次附帶請求都可能成為跳板。只要有任何路徑未經外送代理，攻擊者即可繞過目的地檢查，讀取內網與雲端中繼資料。
+<!-- End AEO Capsule --></p>
+
+<p>這個風險結構來自功能本身。爬蟲被要求抓取使用者指定的網址，因此目的地位址必然帶有外部輸入，防禦的重點不在於封鎖單一入口，而在於確保所有對外連線都經過同一套釘選與目的地檢查。real-world 的漏洞往往不是主流程出錯，而是主流程旁邊的輔助請求被遺漏，例如種子連結探測、robots.txt 讀取、連結預覽與快取有效性驗證。</p>
+
+<p>Crawl4AI 的修補節奏正好反映這個模式。0.9.4 修補了 robots.txt 與連結預覽兩條路徑，0.9.5 再補上快取驗證，三次修正指向同一個架構要求：任何新增的網路請求都必須走共用的外送代理，而不是各自建立客戶端。對自架團隊而言，這也提示了營運層面的檢查重點，包括容器網路政策、雲端中繼資料端點的封鎖，以及對外連線的紀錄與告警。</p>
+
+<p>非 SSRF 類的風險同樣與輸入邊界有關。選擇器字串被拼進腳本、模型名稱被當成可載入的資源、正規表達式由使用者提供，三者都屬於把外部字串當成可執行程式碼或可執行設定的典型錯誤。這類缺陷難以靠單一檢查攔截，需要在型別與信任層級上區分「來自系統」與「來自請求本文」的參數。</p>
+
+<h2 id="crawl4ai-的技術架構有什麼特點">Crawl4AI 的技術架構有什麼特點？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>架構分內容轉換、資料抽取與瀏覽器控制三層。內容轉換以修剪與 BM25 過濾產生模型友善的 Markdown，抽取層可不依賴模型，瀏覽器層支援持久設定檔與三種引擎。
+<!-- End AEO Capsule --></p>
+
+<p><img src="/assets/images/posts/crawl4ai-v095-security-news-shot1.png" alt="Crawl4AI README 開頭，顯示專案名稱、標語與 v0.9.5 版本公告" /></p>
+
+<p>內容轉換層的核心是把 HTML 轉成模型友善的 Markdown，並附上引用編號。三種過濾策略各有分工，<code class="language-plaintext highlighter-rouge">PruningContentFilterLXML</code> 以結構與密度判斷移除導覽與頁尾，<code class="language-plaintext highlighter-rouge">BM25ContentFilter</code> 依查詢關鍵詞保留相關段落，<code class="language-plaintext highlighter-rouge">LLMContentFilter</code> 則交由模型判斷取捨。0.9.4 起，以 lxml 原生實作的修剪過濾器成為預設，官方稱內容修剪速度約提升十倍，對大量頁面的批次處理有直接影響。</p>
+
+<p>抽取層的設計原則是盡量避免模型呼叫。<code class="language-plaintext highlighter-rouge">JsonCssExtractionStrategy</code>、<code class="language-plaintext highlighter-rouge">JsonXPathExtractionStrategy</code> 與 <code class="language-plaintext highlighter-rouge">RegexExtractionStrategy</code> 以宣告式結構描述直接產出 JSON，適合欄位固定、頁面結構穩定的場景；<code class="language-plaintext highlighter-rouge">generate_schema</code> 可以依自然語言描述生成可重複使用的結構描述；需要處理語意模糊的內容時，<code class="language-plaintext highlighter-rouge">LLMExtractionStrategy</code> 才介入，並支援 LiteLLM 涵蓋的多家供應商，包括以 Ollama 執行本地模型。</p>
+
+<p>瀏覽器層提供的控制範圍超過一般爬蟲框架。開發者可以使用持久化的瀏覽器設定檔保留登入狀態與 Cookie，透過 Chrome DevTools Protocol 連向遠端瀏覽器，設定代理與輪換，啟用隱蔽模式或替換為反偵測瀏覽器，並在 Chromium、Firefox 與 WebKit 之間切換。抓取階段支援執行 JavaScript、等待元素、整頁滾動以載入無限捲動內容，以及輸出截圖與 PDF。</p>
+
+<p>深度爬取與網址探索補足了規模化的一面。BFS、DFS 與最佳優先三種策略可搭配崩潰恢復狀態，讓長時間任務從中斷點續跑；<code class="language-plaintext highlighter-rouge">AdaptiveCrawler</code> 會在累積足夠資訊回答查詢時停止，避免無節制擴散；<code class="language-plaintext highlighter-rouge">AsyncUrlSeeder</code> 可從網站地圖與 Common Crawl 取得網址，官方稱預取模式比逐頁探索快五到十倍。</p>
+
+<h2 id="開源自架與-crawl4ai-cloud-該如何選擇">開源自架與 Crawl4AI Cloud 該如何選擇？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>資料敏感或要完全控制瀏覽器指紋的團隊適合自架，成本僅主機與代理。需要搜尋、SERP 或不願維運瀏覽器與反爬處理者，可選雲端，每月有 1,000 免費額度。
+<!-- End AEO Capsule --></p>
+
+<p>三種形態的界線主要在誰執行瀏覽器。函式庫與自架 Docker 都由使用者自行承擔瀏覽器、代理與反爬對抗的成本，好處是資料不出本地網路，抓取參數完全可控，並且沒有按次計費。對於處理客戶資料、內部系統或受監管內容的團隊，這個邊界通常是必要條件。</p>
+
+<p>雲端的差異在於附加能力與維運負擔。免費層提供每分鐘十次、同時兩個請求與每月 1,000 點額度；付費方案自每月 10 美元起，提升至每分鐘 120 次、同時十個請求。除 <code class="language-plaintext highlighter-rouge">/scrape</code> 與 <code class="language-plaintext highlighter-rouge">/extract</code> 之外，雲端另提供 <code class="language-plaintext highlighter-rouge">/search</code> 的網頁搜尋、<code class="language-plaintext highlighter-rouge">/serp</code> 的搜尋結果頁資料與 <code class="language-plaintext highlighter-rouge">/answer</code> 的附來源問答，這些端點在開源版本中並不包含。</p>
+
+<p>代理與反爬是隱形成本所在。自架團隊若要穩定抓取受保護的網站，往往需要額外採購住宅代理並自行維護偵測對抗邏輯，這部分的人力與費用常被低估。官方在 README 中亦註明雲端服務處於軟啟動階段，價格可能調整，已購買的額度則維持不變，評估長期成本時應把這個不確定性納入。</p>
+
+<h2 id="開發者該如何安全地升級與部署">開發者該如何安全地升級與部署？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>自架 Docker 伺服器應升級至 0.9.5，並檢查呼叫端有否使用被拒絕的欄位。函式庫使用者無破壞性變更。深度爬取須以環境變數開啟並設定上限。
+<!-- End AEO Capsule --></p>
+
+<p>升級的優先順序取決於部署形態。官方明確建議自行架設 Docker 伺服器的使用者升級，因為六個漏洞全部位於伺服器對不受信任請求本文的處理路徑；單機使用函式庫、且只抓取自身指定網址的場景，暴露面相對有限。函式庫使用者沒有破壞性變更，升級風險主要來自相依套件。</p>
+
+<p>行為變更需要同步檢查呼叫端。在 Docker 伺服器上，帶有 <code class="language-plaintext highlighter-rouge">CosineStrategy.model_name</code>、<code class="language-plaintext highlighter-rouge">RegexExtractionStrategy.custom</code>、<code class="language-plaintext highlighter-rouge">RegexChunking.patterns</code>、結構描述中的 regex 欄位或 JavaScript 形式 <code class="language-plaintext highlighter-rouge">wait_for</code> 的請求，現在會直接回傳 400。既有整合若依賴這些欄位，必須改為在伺服器設定中預先定義，而不是由請求本文提供。</p>
+
+<p>深度爬取預設關閉，需要設定 <code class="language-plaintext highlighter-rouge">CRAWL4AI_ALLOW_DEEP_CRAWL=true</code> 才會生效，且只允許 BFS、DFS 與最佳優先三種策略、安全的過濾器與評分器類型，以及僅含 glob 的網址樣式；頁數與深度上限取自 <code class="language-plaintext highlighter-rouge">config.yml</code> 的 <code class="language-plaintext highlighter-rouge">limits.max_pages</code> 與 <code class="language-plaintext highlighter-rouge">limits.max_depth</code>，單一策略最多二十個過濾器與評分器，串流深度爬取另設截止時間。這種預設關閉的設計降低了暴露面，也意味著啟用時必須同時估算瀏覽器資源。</p>
+
+<p>營運層面還有幾項值得落實。伺服器必須設定 <code class="language-plaintext highlighter-rouge">CRAWL4AI_API_TOKEN</code>，否則只在容器內部提供服務；若使用 <code class="language-plaintext highlighter-rouge">CosineStrategy</code>，應確保 PyTorch 為 2.6 或以上，以避開 pickle 反序列化的程式碼執行風險；對外網路應封鎖雲端中繼資料位址與內部網段，並保留外送連線紀錄。官方亦加入首次執行與封鎖時的雲端提示，可用 <code class="language-plaintext highlighter-rouge">CRAWL4AI_NO_CLOUD_NOTICE=1</code> 關閉。</p>
+
+<h2 id="crawl4ai-的專案數據與生態現況如何">Crawl4AI 的專案數據與生態現況如何？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>專案以 Python 撰寫、Apache-2.0 授權，累積 85,824 星與 8,924 次分叉、1,778 次提交。2024 年 5 月建立，版本約每月一次。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-value">85,824</span><span class="ui-stat-label">GitHub 星標</span></div>
+  <div class="ui-stat"><span class="ui-stat-value">8,924</span><span class="ui-stat-label">分叉數</span></div>
+  <div class="ui-stat"><span class="ui-stat-value">1,778</span><span class="ui-stat-label">提交次數</span></div>
+  <div class="ui-stat"><span class="ui-stat-value">Apache-2.0</span><span class="ui-stat-label">授權條款</span></div>
+  <div class="ui-stat"><span class="ui-stat-value">Python</span><span class="ui-stat-label">主要語言</span></div>
+  <div class="ui-stat"><span class="ui-stat-value">v0.9.5</span><span class="ui-stat-label">最新版本</span></div>
+</div>
+
+<p><img src="/assets/images/posts/crawl4ai-v095-security-news-shot3.png" alt="Crawl4AI 儲存庫統計頁，顯示提交活躍度與分叉趨勢圖表" /></p>
+
+<p>版本節奏顯示專案處於高頻維護狀態。0.9.2 於 7 月 15 日發布，0.9.3 在 8 月 31 日，0.9.4 在 9 月 23 日，0.9.5 在 10 月 14 日，平均間隔約一個月。其中 0.9.4 與 0.9.5 連續兩個版本都以安全修補為主軸，0.9.4 處理三個公告，包括兩條繞過外送控制的 SSRF 路徑，以及可讀取伺服器環境變數的信任邊界繞過，0.9.5 再處理六個公告。這種節奏說明維護者已把安全審查納入固定流程，也說明爬蟲服務的攻擊面會隨功能擴充持續增加。</p>
+
+<p>生態層面的變化更值得注意。README 目前把雲端服務放在文件最前段，並在安裝流程與封鎖提示中加入推廣訊息，商業化意圖明確。與此同時，開源版本仍維持完整功能與 Apache-2.0 授權，雲端獨有的部分集中在搜尋、SERP 與問答端點，以及代管瀏覽器與代理。這種分層方式讓自架使用者不會因商業化而被削減能力，但雲端推廣訊息進入命令列工具的行為，已在社群中引起討論。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>本文資訊整理自 Crawl4AI 的 GitHub 儲存庫、v0.9.5 版本說明與 CHANGELOG，並對照官方文件。漏洞編號與技術細節均可於儲存庫查證。
+<!-- End AEO Capsule --></p>
+
+<ul>
+  <li>GitHub 儲存庫：https://github.com/unclecode/crawl4ai</li>
+  <li>v0.9.5 版本說明：https://github.com/unclecode/crawl4ai/releases/tag/v0.9.5</li>
+  <li>變更日誌：https://github.com/unclecode/crawl4ai/blob/main/CHANGELOG.md</li>
+  <li>官方文件：https://docs.crawl4ai.com/</li>
+  <li>雲端服務：https://crawl4ai.com/</li>
+</ul>
+
+<h2 id="總結crawl4ai-適合什麼團隊">總結：Crawl4AI 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>需要把大量網頁轉為模型可讀內容、且要求資料留在自有環境的團隊最適合自架。偏好快速驗證者，可先以雲端免費額度評估，再決定是否回到開源部署。
+<!-- End AEO Capsule --></p>
+
+<p>Crawl4AI 的價值在於把網頁到模型可讀文字之間的工程細節標準化，包括去雜訊、保留結構、抽取欄位與瀏覽器控制。v0.9.5 的意義則是提醒使用者，這類工具同時是一個對外連線的代理，任何暴露在不受信任輸入下的端點都需要與主流程同等級的邊界檢查。</p>
+
+<p>對已經自架 Docker 伺服器的團隊，升級到 0.9.5 應列為短期工作，並同步檢查呼叫端是否依賴已被拒絕的欄位。對仍在評估的團隊，先以函式庫或雲端免費額度完成概念驗證，再依資料敏感度與維運能力選擇長期形態，會比一次到位更務實。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-agent" href="/topics/agent/" title="科技 · 代理">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-agent"/></svg><span class="topic-tag-name">代理</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-ai" href="/topics/ai/" title="科技 · 人工智能">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-ai"/></svg><span class="topic-tag-name">人工智能</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-open-source" href="/topics/open-source/" title="科技 · 開源">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-open-source"/></svg><span class="topic-tag-name">開源</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Crawl4AI" class="badge bg-secondary text-decoration-none me-1">Crawl4AI</a>
+          
+          
+          <a href="/search/?q=%E7%B6%B2%E9%A0%81%E7%88%AC%E8%9F%B2" class="badge bg-secondary text-decoration-none me-1">網頁爬蟲</a>
+          
+          
+          <a href="/search/?q=AI+Agent" class="badge bg-secondary text-decoration-none me-1">AI Agent</a>
+          
+          
+          <a href="/search/?q=RAG" class="badge bg-secondary text-decoration-none me-1">RAG</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E5%B7%A5%E5%85%B7" class="badge bg-secondary text-decoration-none me-1">開源工具</a>
+          
+          
+          <a href="/search/?q=%E8%B3%87%E8%A8%8A%E5%AE%89%E5%85%A8" class="badge bg-secondary text-decoration-none me-1">資訊安全</a>
+          
+          
+          <a href="/search/?q=%E7%A7%91%E6%8A%80%E6%96%B0%E8%81%9E" class="badge bg-secondary text-decoration-none me-1">科技新聞</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news&text=Crawl4AI+8.6+%E8%90%AC%E6%98%9F%E7%88%AC%E8%9F%B2%EF%BC%9Av0.9.5+%E4%BF%AE%E8%A3%9C%E5%85%AD%E5%80%8B%E6%BC%8F%E6%B4%9E" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?Crawl4AI+8.6+%E8%90%AC%E6%98%9F%E7%88%AC%E8%9F%B2%EF%BC%9Av0.9.5+%E4%BF%AE%E8%A3%9C%E5%85%AD%E5%80%8B%E6%BC%8F%E6%B4%9E%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/crawl4ai-v095-security-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/agno-agentos-news" class="text-decoration-none">Agno 開源：4.3 萬星的自駕代理平台</a>
+              <br><small class="text-muted">2026-10-31</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/deer-flow-superagent-news" class="text-decoration-none">DeerFlow 2.1 開源：位元組跳動超級代理框架</a>
+              <br><small class="text-muted">2026-10-30</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/browser-use-pi-engine-news" class="text-decoration-none">browser-use 改寫引擎：Pi 接手、砍 5.5 萬行程式碼</a>
+              <br><small class="text-muted">2026-10-30</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/claude-mem-v15-workbench-news" class="text-decoration-none">claude-mem 15.5 開源：代理記憶變成工作台</a>
+              <br><small class="text-muted">2026-10-29</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/herdr-agent-runtime-news" class="text-decoration-none">herdr 開源：46k 星的代理終端執行層</a>
+              <br><small class="text-muted">2026-10-29</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/hallmark-design-skill-news" class="text-decoration-none">Hallmark 開源：4 萬星的防 AI 味設計技能</a>
+              <br><small class="text-muted">2026-10-29</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/anthropic-junk-rating-news" class="text-decoration-none">Anthropic IPO 後恐被評垃圾級 發債成本升</a>
+            <br><small class="text-muted">2026-11-01</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/cleanyourtv-debloat-news" class="text-decoration-none">46K 星 CleanYourTV：免 root 移除電視廣告與追蹤</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/agno-agentos-news" class="text-decoration-none">Agno 開源：4.3 萬星的自駕代理平台</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/claude-code-vsx-backdoor-news" class="text-decoration-none">官方 Claude Code 擴充遭植入 SSH 後門</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/airllm-tiny-gpu-news" class="text-decoration-none">41K 星 AirLLM：2.8T 模型跑進 4GB 顯卡</a>
+            <br><small class="text-muted">2026-10-31</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">630</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/1247126168485543" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

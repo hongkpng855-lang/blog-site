@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f1629"/>
+      <stop offset="50%" stop-color="#1a2744"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8D48B"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="blue-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.04">
+    <line x1="0" y1="75" x2="800" y2="75" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="225" x2="800" y2="225" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="375" x2="800" y2="375" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="160" y1="0" x2="160" y2="450" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="320" y1="0" x2="320" y2="450" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="480" y1="0" x2="480" y2="450" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="640" y1="0" x2="640" y2="450" stroke="#FB923C" stroke-width="0.5"/>
+  </g>
+
+  <!-- Decorative glow circles -->
+  <circle cx="650" cy="80" r="250" fill="#FB923C" opacity="0.04"/>
+  <circle cx="150" cy="380" r="200" fill="#3b82f6" opacity="0.03"/>
+
+  <!-- Title -->
+  <text x="400" y="60" text-anchor="middle" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="32" font-weight="bold" filter="url(#glow)">
+    💰 
+    <tspan fill="url(#gold)">每月財務健康檢查</tspan>
+  </text>
+
+  <!-- Dashboard Card Background -->
+  <rect x="50" y="85" width="700" height="270" rx="16" fill="#1a2744" opacity="0.6" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.2"/>
+  <rect x="50" y="85" width="700" height="270" rx="16" fill="none" stroke="#FB923C" stroke-width="1" stroke-opacity="0.15"/>
+
+  <!-- Balance Sheet Box -->
+  <rect x="80" y="105" width="195" height="115" rx="10" fill="#0f1629" opacity="0.7"/>
+  <text x="177" y="128" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">資產負債</text>
+  <text x="177" y="155" text-anchor="middle" fill="#22c55e" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">$850K</text>
+  <text x="177" y="175" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">總資產</text>
+  <line x1="100" y1="183" x2="255" y2="183" stroke="#334155" stroke-width="0.5"/>
+  <text x="100" y="200" fill="#ef4444" font-family="system-ui, sans-serif" font-size="11">負債 $210K</text>
+  <rect x="100" y="206" width="155" height="6" rx="3" fill="#1e293b"/>
+  <rect x="100" y="206" width="48" height="6" rx="3" fill="#ef4444" opacity="0.7"/>
+
+  <!-- Cash Flow Box -->
+  <rect x="302" y="105" width="195" height="115" rx="10" fill="#0f1629" opacity="0.7"/>
+  <text x="399" y="128" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">每月現金流</text>
+  <text x="399" y="155" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">$32,500</text>
+  <text x="399" y="175" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">月收入</text>
+  <line x1="322" y1="183" x2="477" y2="183" stroke="#334155" stroke-width="0.5"/>
+  <text x="322" y="200" fill="#22c55e" font-family="system-ui, sans-serif" font-size="11">儲蓄 $8,450</text>
+  <rect x="322" y="206" width="155" height="6" rx="3" fill="#1e293b"/>
+  <rect x="322" y="206" width="40" height="6" rx="3" fill="#22c55e" opacity="0.7"/>
+
+  <!-- Investment Box -->
+  <rect x="524" y="105" width="195" height="115" rx="10" fill="#0f1629" opacity="0.7"/>
+  <text x="621" y="128" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">投資組合</text>
+  <text x="621" y="155" text-anchor="middle" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="20" font-weight="bold">+12.4%</text>
+  <text x="621" y="175" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="10">累計回報</text>
+  <line x1="544" y1="183" x2="699" y2="183" stroke="#334155" stroke-width="0.5"/>
+  <text x="544" y="200" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="11">YTD +5.8%</text>
+  <!-- Mini chart -->
+  <polyline points="544,212 560,208 576,210 592,204 608,205 624,198 640,200 656,195 672,197 688,192 699,194"
+    fill="none" stroke="#3b82f6" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- Spending Breakdown Bar -->
+  <text x="80" y="255" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">每月開支分佈</text>
+  
+  <rect x="80" y="265" width="640" height="6" rx="3" fill="#1e293b"/>
+  <rect x="80" y="265" width="205" height="6" rx="3" fill="#ef4444" opacity="0.7"/>   <!-- 居住 32% -->
+  <rect x="285" y="265" width="115" height="6" rx="3" fill="#f59e0b" opacity="0.7"/>  <!-- 飲食 18% -->
+  <rect x="400" y="265" width="64" height="6" rx="3" fill="#3b82f6" opacity="0.7"/>   <!-- 交通 10% -->
+  <rect x="464" y="265" width="90" height="6" rx="3" fill="#8b5cf6" opacity="0.7"/>   <!-- 保險 14% -->
+  <rect x="554" y="265" width="96" height="6" rx="3" fill="#22c55e" opacity="0.7"/>   <!-- 娛樂 15% -->
+  <rect x="650" y="265" width="70" height="6" rx="3" fill="#64748b" opacity="0.7"/>   <!-- 其他 11% -->
+
+  <!-- Labels -->
+  <text x="80" y="285" fill="#ef4444" font-family="system-ui, sans-serif" font-size="9">居住 32%</text>
+  <text x="285" y="285" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="9">飲食 18%</text>
+  <text x="400" y="285" fill="#3b82f6" font-family="system-ui, sans-serif" font-size="9">交通 10%</text>
+  <text x="464" y="285" fill="#8b5cf6" font-family="system-ui, sans-serif" font-size="9">保險 14%</text>
+  <text x="554" y="285" fill="#22c55e" font-family="system-ui, sans-serif" font-size="9">娛樂 15%</text>
+  <text x="650" y="285" fill="#64748b" font-family="system-ui, sans-serif" font-size="9">其他 11%</text>
+
+  <!-- Bottom section: Key metrics and checklist -->
+  <rect x="50" y="370" width="700" height="60" rx="12" fill="#0f1629" opacity="0.5" stroke="#FB923C" stroke-width="0.5" stroke-opacity="0.15"/>
+
+  <!-- Ticks -->
+  <text x="80" y="398" fill="#22c55e" font-family="system-ui, sans-serif" font-size="14">✅</text>
+  <text x="100" y="398" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">儲蓄率 26%</text>
+  
+  <text x="230" y="398" fill="#22c55e" font-family="system-ui, sans-serif" font-size="14">✅</text>
+  <text x="250" y="398" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">Emergency Fund 6.2月</text>
+
+  <text x="430" y="398" fill="#f59e0b" font-family="system-ui, sans-serif" font-size="14">⚠️</text>
+  <text x="450" y="398" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">娛樂開支偏高</text>
+
+  <text x="610" y="398" fill="#22c55e" font-family="system-ui, sans-serif" font-size="14">✅</text>
+  <text x="630" y="398" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="11">投資持平</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="445" text-anchor="middle" fill="#64748b" font-family="system-ui, sans-serif" font-size="10">每月30分鐘 • 掌握你嘅財務狀況 • 建立理財習慣</text>
+</svg>

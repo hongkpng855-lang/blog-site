@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2332"/>
+      <stop offset="100%" style="stop-color:#2d4059"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8C547"/>
+      <stop offset="100%" style="stop-color:#D4A82A"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d5a80"/>
+      <stop offset="100%" style="stop-color:#293b5a"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ee6c4d"/>
+      <stop offset="100%" style="stop-color:#d45a3e"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a8c6f"/>
+      <stop offset="100%" style="stop-color:#357a5c"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="75" x2="800" y2="75" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="225" x2="800" y2="225" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="375" x2="800" y2="375" stroke="#fff" stroke-width="0.5"/>
+    <line x1="100" y1="0" x2="100" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="300" y1="0" x2="300" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="500" y1="0" x2="500" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="700" y1="0" x2="700" y2="450" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="700" cy="60" r="80" fill="#3d5a80" opacity="0.15"/>
+  <circle cx="100" cy="400" r="100" fill="#4a8c6f" opacity="0.1"/>
+  <circle cx="650" cy="380" r="50" fill="#ee6c4d" opacity="0.08"/>
+
+  <!-- Title -->
+  <text x="400" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="36" font-weight="bold" fill="#fff" letter-spacing="1">生活習慣系統化指南</text>
+  <text x="400" y="108" text-anchor="middle" font-family="system-ui, sans-serif" font-size="18" fill="#a0b4c8" letter-spacing="0.5">由微小行動建立可持續的生活節奏</text>
+
+  <!-- Habit cards -->
+  <!-- Card 1 - Morning -->
+  <rect x="60" y="145" width="200" height="120" rx="12" fill="url(#card1)" filter="url(#shadow)"/>
+  <text x="160" y="175" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28">🌅</text>
+  <text x="160" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#fff">早晨習慣</text>
+  <text x="160" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0c4d8">冥想 2 分鐘 + 飲水</text>
+  <text x="160" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0c4d8">✓ 習慣堆疊</text>
+
+  <!-- Arrow 1 -->
+  <text x="280" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#E8C547" opacity="0.6">→</text>
+
+  <!-- Card 2 - Work -->
+  <rect x="300" y="145" width="200" height="120" rx="12" fill="url(#card2)" filter="url(#shadow)"/>
+  <text x="400" y="175" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28">💼</text>
+  <text x="400" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#fff">工作習慣</text>
+  <text x="400" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ffd4c8">番茄鐘 + 時間區塊</text>
+  <text x="400" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#ffd4c8">✓ 環境設計</text>
+
+  <!-- Arrow 2 -->
+  <text x="520" y="205" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" fill="#E8C547" opacity="0.6">→</text>
+
+  <!-- Card 3 - Evening -->
+  <rect x="540" y="145" width="200" height="120" rx="12" fill="url(#card3)" filter="url(#shadow)"/>
+  <text x="640" y="175" text-anchor="middle" font-family="system-ui, sans-serif" font-size="28">🌙</text>
+  <text x="640" y="210" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="bold" fill="#fff">夜晚習慣</text>
+  <text x="640" y="230" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0d4c0">回顧 + 準備聽日</text>
+  <text x="640" y="248" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#b0d4c0">✓ 定期檢討</text>
+
+  <!-- System cycle below -->
+  <rect x="150" y="300" width="500" height="50" rx="25" fill="url(#gold)" opacity="0.15" stroke="#E8C547" stroke-width="1.5"/>
+  <text x="400" y="323" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="bold" fill="#E8C547">🔄 系統 = 微行動 + 習慣堆疊 + 環境設計 + 追蹤 + 檢討</text>
+
+  <!-- Bottom quote -->
+  <text x="400" y="390" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#8a9cb0 font-style: italic">「唔好靠意志力，靠系統」</text>
+
+  <!-- Tags -->
+  <rect x="225" y="410" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="265" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#生活習慣</text>
+  <rect x="315" y="410" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="355" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#生產力</text>
+  <rect x="405" y="410" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="445" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#時間管理</text>
+  <rect x="495" y="410" width="80" height="22" rx="11" fill="#3d5a80" opacity="0.6"/>
+  <text x="535" y="425" text-anchor="middle" font-family="system-ui, sans-serif" font-size="10" fill="#a0b4c8">#微行動</text>
+</svg>
