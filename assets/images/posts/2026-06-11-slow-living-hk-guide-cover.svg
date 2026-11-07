@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF5E6"/>
+      <stop offset="50%" style="stop-color:#FAF0E6"/>
+      <stop offset="100%" style="stop-color:#F5E6D0"/>
+    </linearGradient>
+    <linearGradient id="sunlight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE4B5;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#FFE4B5;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="window-glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#B0E0E6;stop-opacity:0.3"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- 牆壁裝飾線條 -->
+  <line x1="0" y1="120" x2="800" y2="120" stroke="#E8D5B8" stroke-width="0.5" opacity="0.4"/>
+  <line x1="0" y1="380" x2="800" y2="380" stroke="#E8D5B8" stroke-width="0.5" opacity="0.4"/>
+
+  <!-- 窗戶 -->
+  <rect x="60" y="40" width="280" height="340" rx="4" fill="none" stroke="#D4C4A0" stroke-width="4"/>
+  <rect x="65" y="45" width="270" height="330" rx="2" fill="url(#window-glass)"/>
+  <!-- 窗框 - 垂直 -->
+  <line x1="200" y1="40" x2="200" y2="380" stroke="#D4C4A0" stroke-width="3"/>
+  <!-- 窗框 - 水平 -->
+  <line x1="60" y1="210" x2="340" y2="210" stroke="#D4C4A0" stroke-width="3"/>
+  <!-- 窗外景色 - 天空 -->
+  <rect x="65" y="45" width="270" height="165" fill="#B8D4E8" opacity="0.4"/>
+  <!-- 窗外雲 -->
+  <ellipse cx="140" cy="100" rx="40" ry="15" fill="white" opacity="0.5"/>
+  <ellipse cx="180" cy="95" rx="30" ry="12" fill="white" opacity="0.4"/>
+  <!-- 窗外樹 -->
+  <ellipse cx="280" cy="190" rx="25" ry="30" fill="#8FBC8F" opacity="0.5"/>
+  <rect x="277" y="190" width="6" height="20" fill="#8B7355" opacity="0.4" rx="2"/>
+
+  <!-- 陽光斜射 -->
+  <polygon points="60,40 340,40 500,380 100,380" fill="url(#sunlight)"/>
+
+  <!-- 書架 -->
+  <rect x="400" y="60" width="160" height="140" rx="3" fill="none" stroke="#D4C4A0" stroke-width="2.5"/>
+  <line x1="400" y1="100" x2="560" y2="100" stroke="#D4C4A0" stroke-width="2.5"/>
+  <line x1="400" y1="140" x2="560" y2="140" stroke="#D4C4A0" stroke-width="2.5"/>
+  <!-- 書 -->
+  <rect x="410" y="65" width="14" height="33" rx="1.5" fill="#FB923C" opacity="0.7"/>
+  <rect x="428" y="68" width="12" height="30" rx="1.5" fill="#DC143C" opacity="0.6"/>
+  <rect x="444" y="65" width="16" height="33" rx="1.5" fill="#4682B4" opacity="0.7"/>
+  <rect x="464" y="70" width="11" height="28" rx="1.5" fill="#6B8E23" opacity="0.6"/>
+  <rect x="479" y="65" width="14" height="33" rx="1.5" fill="#CD853F" opacity="0.7"/>
+  <!-- 第二層書 -->
+  <rect x="410" y="105" width="16" height="33" rx="1.5" fill="#DAA520" opacity="0.7"/>
+  <rect x="430" y="108" width="12" height="30" rx="1.5" fill="#8B0000" opacity="0.6"/>
+  <rect x="446" y="105" width="14" height="33" rx="1.5" fill="#2E8B57" opacity="0.7"/>
+  <rect x="464" y="110" width="13" height="28" rx="1.5" fill="#5F9EA0" opacity="0.6"/>
+  <!-- 第三層 - 盆栽 -->
+  <ellipse cx="460" cy="175" rx="20" ry="15" fill="#8FBC8F" opacity="0.8"/>
+  <rect x="456" y="175" width="8" height="18" rx="2" fill="#8B7355" opacity="0.6"/>
+  <!-- 小相框 -->
+  <rect x="500" y="145" width="35" height="45" rx="2" fill="none" stroke="#D4C4A0" stroke-width="2"/>
+  <circle cx="517" cy="163" r="6" fill="#FFD700" opacity="0.4"/>
+
+  <!-- 人物 - 坐在窗邊椅上閱讀 -->
+  <!-- 椅子 -->
+  <ellipse cx="180" cy="360" rx="60" ry="12" fill="#D4C4A0" opacity="0.5"/>
+  <rect x="125" y="310" width="110" height="50" rx="8" fill="#E8A87C" opacity="0.6"/>
+  <!-- 椅背 -->
+  <rect x="130" y="250" width="100" height="65" rx="8" fill="#E8A87C" opacity="0.5"/>
+  <!-- 人物身體 -->
+  <ellipse cx="180" cy="320" rx="30" ry="35" fill="#8B7355" opacity="0.5"/>
+  <!-- 人物頭部 -->
+  <circle cx="180" cy="270" r="20" fill="#DEB887" opacity="0.6"/>
+  <!-- 頭髮 -->
+  <ellipse cx="180" cy="258" rx="22" ry="12" fill="#3C2415" opacity="0.5"/>
+  <!-- 書 -->
+  <rect x="148" y="310" width="40" height="32" rx="2" fill="#FAF0E6" stroke="#D4C4A0" stroke-width="1"/>
+  <line x1="155" y1="318" x2="180" y2="318" stroke="#D4C4A0" stroke-width="0.8"/>
+  <line x1="155" y1="324" x2="178" y2="324" stroke="#D4C4A0" stroke-width="0.8"/>
+
+  <!-- 茶杯 -->
+  <ellipse cx="240" cy="340" rx="15" ry="5" fill="#FAF0E6" stroke="#D4C4A0" stroke-width="1.5"/>
+  <rect x="227" y="328" width="26" height="12" rx="3" fill="#FAF0E6" stroke="#D4C4A0" stroke-width="1.5"/>
+  <path d="M253,332 Q262,332 262,338 Q262,344 253,344" fill="none" stroke="#D4C4A0" stroke-width="1.5"/>
+  <!-- 蒸氣 -->
+  <path d="M235,325 Q237,318 233,312" fill="none" stroke="#D4C4A0" stroke-width="1" opacity="0.4"/>
+  <path d="M240,325 Q243,316 239,310" fill="none" stroke="#D4C4A0" stroke-width="1" opacity="0.3"/>
+
+  <!-- 地氈 -->
+  <ellipse cx="260" cy="400" rx="120" ry="20" fill="#E8D5B8" opacity="0.3"/>
+
+  <!-- 文字區（右下） -->
+  <!-- 標題文字用直排裝飾 -->
+  <g transform="translate(580, 60)">
+    <rect x="0" y="0" width="180" height="330" rx="8" fill="white" opacity="0.85"/>
+    <rect x="8" y="8" width="164" height="314" rx="5" fill="none" stroke="#FB923C" stroke-width="1.5"/>
+
+    <text x="20" y="45" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="20" font-weight="bold" fill="#4A3728">
+      慢活生活
+    </text>
+    <line x1="20" y1="55" x2="155" y2="55" stroke="#FB923C" stroke-width="1.5"/>
+
+    <text x="20" y="85" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="13" fill="#8B7355">
+      告別 Burnout
+    </text>
+    <text x="20" y="108" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="13" fill="#8B7355">
+      擁抱生活中的寧靜
+    </text>
+
+    <line x1="20" y1="125" x2="155" y2="125" stroke="#E8D5B8" stroke-width="1"/>
+
+    <text x="20" y="150" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="11" fill="#A09080">
+      ☕ 晨間一杯茶
+    </text>
+    <text x="20" y="172" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="11" fill="#A09080">
+      📖 閱讀放空
+    </text>
+    <text x="20" y="194" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="11" fill="#A09080">
+      🌿 植物陪伴
+    </text>
+    <text x="20" y="216" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="11" fill="#A09080">
+      ☀️ 陽光洗禮
+    </text>
+
+    <line x1="20" y1="235" x2="155" y2="235" stroke="#E8D5B8" stroke-width="1"/>
+
+    <text x="20" y="260" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="10" fill="#FB923C" font-style="italic">
+      JOMO · 正念 · 微習慣
+    </text>
+    <text x="20" y="290" font-family="'Noto Sans TC', system-ui, sans-serif" font-size="9" fill="#B0A090">
+      2026 香港人慢活指南
+    </text>
+  </g>
+
+  <!-- 裝飾小圓點 -->
+  <circle cx="580" cy="410" r="3" fill="#FB923C" opacity="0.3"/>
+  <circle cx="600" cy="415" r="2" fill="#FB923C" opacity="0.2"/>
+  <circle cx="615" cy="412" r="2.5" fill="#FB923C" opacity="0.25"/>
+  <circle cx="635" cy="416" r="1.5" fill="#D4C4A0" opacity="0.2"/>
+
+  <!-- 植物葉子裝飾（右下角） -->
+  <path d="M750,420 Q740,390 720,380" fill="none" stroke="#8FBC8F" stroke-width="2" opacity="0.5"/>
+  <path d="M720,380 Q710,370 715,360" fill="none" stroke="#8FBC8F" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="720" cy="378" rx="12" ry="6" fill="#8FBC8F" opacity="0.3" transform="rotate(-30,720,378)"/>
+  <ellipse cx="735" cy="400" rx="10" ry="5" fill="#8FBC8F" opacity="0.25" transform="rotate(-15,735,400)"/>
+</svg>

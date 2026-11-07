@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#0F1A33"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#B8952E"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71"/>
+      <stop offset="100%" style="stop-color:#27AE60"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3498DB"/>
+      <stop offset="100%" style="stop-color:#2980B9"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E74C3C"/>
+      <stop offset="100%" style="stop-color:#C0392B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="16"/>
+
+  <!-- Title -->
+  <text x="256" y="48" text-anchor="middle" font-family="system-ui, sans-serif" font-size="17" font-weight="700" fill="#FB923C" letter-spacing="1">投資組合再平衡</text>
+  <text x="256" y="70" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#8899BB" letter-spacing="0.5">PORTFOLIO REBALANCING</text>
+
+  <!-- 4 Info Cards -->
+  <!-- Card 1: 日曆法 -->
+  <rect x="20" y="90" width="225" height="95" rx="10" fill="#ffffff" opacity="0.08"/>
+  <rect x="20" y="90" width="225" height="95" rx="10" fill="none" stroke="url(#card1)" stroke-width="1.5" opacity="0.6"/>
+  <text x="36" y="118" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#FB923C">📅 日曆法</text>
+  <text x="36" y="140" font-family="system-ui, sans-serif" font-size="10" fill="#AABBCC">每年固定一日檢查</text>
+  <text x="36" y="157" font-family="system-ui, sans-serif" font-size="10" fill="#8899BB">最簡單 · 低交易成本</text>
+  <text x="36" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#667788">適合新手、月供投資者</text>
+
+  <!-- Card 2: 閾值法 -->
+  <rect x="265" y="90" width="225" height="95" rx="10" fill="#ffffff" opacity="0.08"/>
+  <rect x="265" y="90" width="225" height="95" rx="10" fill="none" stroke="url(#card2)" stroke-width="1.5" opacity="0.6"/>
+  <text x="281" y="118" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#2ECC71">⚖️ 閾值法</text>
+  <text x="281" y="140" font-family="system-ui, sans-serif" font-size="10" fill="#AABBCC">偏離5-10%即觸發</text>
+  <text x="281" y="157" font-family="system-ui, sans-serif" font-size="10" fill="#8899BB">回報最高 · 即時風險控制</text>
+  <text x="281" y="174" font-family="system-ui, sans-serif" font-size="9" fill="#667788">適合進階投資者</text>
+
+  <!-- Card 3: 混合法 -->
+  <rect x="20" y="200" width="225" height="95" rx="10" fill="#ffffff" opacity="0.08"/>
+  <rect x="20" y="200" width="225" height="95" rx="10" fill="none" stroke="url(#card3)" stroke-width="1.5" opacity="0.6"/>
+  <text x="36" y="228" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#3498DB">🔄 混合法</text>
+  <text x="36" y="250" font-family="system-ui, sans-serif" font-size="10" fill="#AABBCC">每年2次 + 極端閾值</text>
+  <text x="36" y="267" font-family="system-ui, sans-serif" font-size="10" fill="#8899BB">平衡實用 · 懶人安全網</text>
+  <text x="36" y="284" font-family="system-ui, sans-serif" font-size="9" fill="#667788">推薦多數投資者</text>
+
+  <!-- Card 4: 慳錢技巧 -->
+  <rect x="265" y="200" width="225" height="95" rx="10" fill="#ffffff" opacity="0.08"/>
+  <rect x="265" y="200" width="225" height="95" rx="10" fill="none" stroke="url(#card4)" stroke-width="1.5" opacity="0.6"/>
+  <text x="281" y="228" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#E74C3C">💡 慳錢技巧</text>
+  <text x="281" y="250" font-family="system-ui, sans-serif" font-size="10" fill="#AABBCC">用新資金/股息調整</text>
+  <text x="281" y="267" font-family="system-ui, sans-serif" font-size="10" fill="#8899BB">免交易費 · 免稅</text>
+  <text x="281" y="284" font-family="system-ui, sans-serif" font-size="9" fill="#667788">MPF調整零成本</text>
+
+  <!-- Bottom comparison chart -->
+  <rect x="20" y="315" width="470" height="80" rx="10" fill="#ffffff" opacity="0.05"/>
+
+  <!-- No rebalance bar -->
+  <rect x="40" y="365" width="180" height="18" rx="4" fill="#E74C3C" opacity="0.7"/>
+  <text x="50" y="378" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#ffffff">唔再平衡：-38% 最大回撤</text>
+
+  <!-- Rebalance bar -->
+  <rect x="40" y="340" width="180" height="18" rx="4" fill="#2ECC71" opacity="0.8"/>
+  <text x="50" y="353" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#ffffff">每年再平衡：-27% 最大回撤</text>
+
+  <!-- Arrow difference -->
+  <text x="240" y="355" font-family="system-ui, sans-serif" font-size="14" fill="#FB923C" font-weight="700">→</text>
+  <text x="260" y="350" font-family="system-ui, sans-serif" font-size="11" fill="#FB923C" font-weight="600">風險低 11%</text>
+  <text x="260" y="368" font-family="system-ui, sans-serif" font-size="9" fill="#8899BB">回報高 0.6-0.9%/年</text>
+
+  <!-- Bottom stat bar -->
+  <rect x="20" y="410" width="470" height="40" rx="8" fill="#FB923C" opacity="0.15"/>
+  <text x="40" y="435" font-family="system-ui, sans-serif" font-size="11" fill="#FB923C" font-weight="600">每年只需幾分鐘 · $100萬 → 30年多 $160 萬</text>
+
+  <!-- Footer watermark -->
+  <text x="256" y="490" text-anchor="middle" font-family="system-ui, sans-serif" font-size="9" fill="#445566" opacity="0.3">ESGov</text>
+</svg>

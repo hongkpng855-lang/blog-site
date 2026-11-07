@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="50%" style="stop-color:#0d2137"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#0077be"/>
+      <stop offset="100%" style="stop-color:#4fc3f7"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00b4d8"/>
+      <stop offset="100%" style="stop-color:#48cae4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)" rx="20"/>
+  <!-- Water drop main shape -->
+  <path d="M256 100 C256 100 180 220 180 280 C180 320 214 352 256 352 C298 352 332 320 332 280 C332 220 256 100 256 100 Z" fill="url(#water)" opacity="0.25"/>
+  <path d="M256 120 C256 120 195 230 195 282 C195 316 222 342 256 342 C290 342 317 316 317 282 C317 230 256 120 256 120 Z" fill="none" stroke="#4fc3f7" stroke-width="2" opacity="0.4"/>
+  <!-- Inner water droplet glow -->
+  <circle cx="256" cy="255" r="60" fill="#4fc3f7" opacity="0.1"/>
+  <circle cx="256" cy="255" r="40" fill="#00b4d8" opacity="0.12"/>
+  <!-- Electrolyte particles inside droplet -->
+  <circle cx="235" cy="245" r="4" fill="#ffd54f" opacity="0.7"/>
+  <circle cx="270" cy="230" r="3.5" fill="#ffd54f" opacity="0.6"/>
+  <circle cx="250" cy="270" r="3" fill="#ffd54f" opacity="0.7"/>
+  <circle cx="275" cy="265" r="2.5" fill="#ffd54f" opacity="0.5"/>
+  <circle cx="240" cy="218" r="2.5" fill="#81c784" opacity="0.6"/>
+  <circle cx="268" cy="285" r="3" fill="#81c784" opacity="0.5"/>
+  <circle cx="248" cy="292" r="2" fill="#81c784" opacity="0.5"/>
+  <!-- H2O molecule labels -->
+  <text x="235" y="310" text-anchor="middle" fill="#4fc3f7" font-size="9" font-family="sans-serif" opacity="0.5">H₂O</text>
+  <text x="275" y="208" text-anchor="middle" fill="#4fc3f7" font-size="9" font-family="sans-serif" opacity="0.5">H₂O</text>
+  <!-- Small decorative water drops -->
+  <ellipse cx="140" cy="150" rx="8" ry="10" fill="#4fc3f7" opacity="0.15"/>
+  <ellipse cx="130" cy="165" rx="5" ry="6" fill="#4fc3f7" opacity="0.1"/>
+  <ellipse cx="370" cy="160" rx="6" ry="8" fill="#4fc3f7" opacity="0.12"/>
+  <ellipse cx="382" cy="145" rx="4" ry="5" fill="#4fc3f7" opacity="0.08"/>
+  <ellipse cx="150" cy="320" rx="5" ry="7" fill="#4fc3f7" opacity="0.1"/>
+  <ellipse cx="360" cy="330" rx="7" ry="9" fill="#4fc3f7" opacity="0.12"/>
+  <!-- Bottom wave pattern -->
+  <path d="M0 420 Q64 400 128 420 Q192 440 256 420 Q320 400 384 420 Q448 440 512 420 L512 512 L0 512 Z" fill="#0077be" opacity="0.08"/>
+  <path d="M0 440 Q64 425 128 440 Q192 455 256 440 Q320 425 384 440 Q448 455 512 440 L512 512 L0 512 Z" fill="#00b4d8" opacity="0.05"/>
+  <!-- Title text -->
+  <text x="256" y="395" text-anchor="middle" fill="#ffffff" font-size="26" font-family="sans-serif" font-weight="bold" letter-spacing="1">夏季補水科學指南</text>
+  <text x="256" y="422" text-anchor="middle" fill="#4fc3f7" font-size="14" font-family="sans-serif" opacity="0.9">水合作用 · 電解質平衡 · 脫水預防</text>
+  <text x="256" y="448" text-anchor="middle" fill="#8888bb" font-size="12" font-family="sans-serif">科學實證夏日補水系統</text>
+  <!-- Thermometer icon on left -->
+  <rect x="88" y="380" width="6" height="30" rx="3" fill="#e94560" opacity="0.3"/>
+  <circle cx="91" cy="416" r="8" fill="none" stroke="#e94560" stroke-width="1.5" opacity="0.3"/>
+  <rect x="92" y="395" width="4" height="8" fill="#e94560" opacity="0.3"/>
+  <!-- Lightning/energy icon on right -->
+  <path d="M404 390 L398 408 L412 408 L404 425" fill="none" stroke="#ffd54f" stroke-width="1.5" opacity="0.3" stroke-linejoin="round"/>
+</svg>

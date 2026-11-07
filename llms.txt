@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（2072 篇中的最新 30 篇）
+- [Claude 代理記憶怎麼運作？官方拆解四大元件](https://anthroskill.com/技術/claude-agent-memory-components-news)：Anthropic 官方研究部落格拆解 Claude 的代理記憶框架，把記憶分成工作階段標記、記憶筆記、離線整理與主動注入四層。團隊以 CL-Bench 資料庫任務、寶可夢紅版與 35 萬份內部文件實測，發現記憶檔案數量
+- [Claude Code 把用戶電郵寫進 UA：官方承諾下週修](https://anthroskill.com/技術/claude-code-user-agent-email-leak-news)：Claude Code 被指在網頁請求的 User-Agent 標頭寫入用戶帳號電郵，事件在 GitHub 上累積六十八則留言並登上 Hacker News。Anthropic 員工在討論中確認，會在下一版本移除模型上下
+- [Anthropic 開源 Claude 金融代理：41,077 星](https://anthroskill.com/技術/claude-financial-services-news)：Anthropic 於二月開源金融服務代理專案，累積 41,077 顆星標、5,715 個分支，採 Apache 2.0 授權。專案把投資銀行、股權研究、私募與財富管理的流程拆成十個具名代理與六組垂直技能，附十二個 MC
+- [GPT-6 Cyber：Linux 挖出 948 個提權漏洞](https://anthroskill.com/技術/gpt-6-cyber-news)：OpenAI 於十一月五日發布 GPT-6 Cyber，在 ExploitGym 取得 48.5%，較前代 32.1% 高出十六個百分點。研究團隊用它重現 1724 個 Linux 漏洞、開發 948 個提權利用，並在 
+- [2.5 萬星 IndexTTS：一句錄音複製聲音](https://anthroskill.com/技術/index-tts-25-voice-clone-news)：IndexTTS 2.5 於八月初發布，以零樣本方式從單一參考錄音複製音色，支援中英日西阿五種語言，並提供情緒向量、語速倍率與拼音發音控制。模型規模僅 0.8B，在跨語言基準的字符錯誤率為 6.00，項目在 GitHub
+- [NotebookLM 非官方 API 開源：20,142 星](https://anthroskill.com/技術/notebooklm-py-api-news)：notebooklm-py 是社群維護的非官方 Python API 與代理技能，把 Gemini Notebook 的筆記本管理、來源匯入、深度研究與內容生成搬到命令列。專案累積 20,142 顆星標、2,678 個分
+- [Shannon 開源：AI 自動滲透測試代理](https://anthroskill.com/技術/shannon-ai-pentester-news)：Shannon 是 Keygraph 釋出的自主滲透測試代理，在 GitHub 累積五萬一千顆星標。它先分析原始碼找出攻擊路徑，再對執行中的應用實際執行利用，只把有可重現證明的漏洞寫入報告。本文整理它的六階段架構、覆蓋的
+- [Apple 削 AI 預算：工程師每日額度降至 200 美元](https://anthroskill.com/技術/apple-ai-budget-cuts-news)：Apple 於十月把工程團隊每日人工智能使用額度由三百美元下調至二百美元，彭博於十一月四日報道。部分團隊將進一步降至一百美元，工程部門以外更低至每日二十五美元。本文整理額度分層結構、成本與生產力落差的背景，以及對開發流程
+- [Dokploy 3.8 萬星：自架 PaaS 取代 Vercel](https://anthroskill.com/技術/dokploy-31-selfhost-paas-news)：Dokploy 是自行架設的平台即服務工具，在 GitHub 累積三萬八千二百六十九顆星標，定位為 Vercel、Netlify 與 Heroku 的開源替代方案。十一月五日發布的 v0.31.0 合併一百三十三項改動，
+- [19.8 萬星 Firecrawl：GitHub 搜索退場](https://anthroskill.com/技術/firecrawl-developer-index-news)：Firecrawl 於十一月初調整搜索產品線，把已棄用的 GitHub 研究索引端點下線，並移除搜索分類中的 github 選項，改由開發者索引承接。項目在 GitHub 累積十九萬八千顆星標，此輪同時加入技能文件來源，
+- [Gemini Omni 1.2 Flash：15 秒影片降價三成](https://anthroskill.com/技術/gemini-omni-1-2-flash-news)：Google DeepMind 於十一月五日推出 Gemini Omni 1.2 Flash，把原生影片長度由十秒延長至十五秒，720p 定價下調三成至每秒零點零七美元。新版本加入多輪對話剪輯、更強的參考圖遵循與多語者對
+- [Stirling-PDF 3.3.0 開源：PDF 轉檔脫離 LibreOffice](https://anthroskill.com/技術/stirling-pdf-330-office-convert-news)：Stirling-PDF 於十一月五日發布 3.3.0 版，這個累積九萬五千多顆星標的開源 PDF 平台，把文件轉檔核心從 LibreOffice 換成自家 Office Convert 引擎。本文整理版本改動、轉檔引擎
+- [Ventoy 1.1.18：8 萬星多重開機 USB 工具](https://anthroskill.com/技術/ventoy-multiboot-news)：Ventoy 是累積八萬顆星標的開源開機碟工具，於二零二六年十月九日發布 1.1.18 版。映像檔直接複製到隨身碟即可開機，不需每次重新格式化，同一支裝置可存放多個系統。本文整理版本改動、運作原理、與傳統寫入工具的分別，
+- [Dify 1.19 發布：巢狀工作流逐層追蹤](https://anthroskill.com/技術/dify-1-19-nested-tracing-news)：Dify 於 2026 年 11 月 4 日發布 1.19.0，把巢狀工作流工具的執行步驟接進外部追蹤工具，並讓應用套件帶同工作流工具一併搬移。此版加入 difyctl 技能管理、代理檔案批次上傳與即時預覽，追蹤佇列改為
+- [llama.cpp v0.9.0：FP8 量化與多節點並行](https://anthroskill.com/技術/llamacpp-v090-news)：llama.cpp 於十一月四日發布 v0.9.0，加入 OCP FP8 E4M3 量化、多序列 KV 快取算子與 NCCL 跨節點張量並行。同版支援四款新架構，包括 Mistral Large 4 與混合 Mamba-
+- [OpenAI 悄然重啟 Codex 對話訓練開關](https://anthroskill.com/技術/openai-codex-training-toggle-news)：二零二六年十一月三日，Hacker News 一則貼文指出 ChatGPT 與 Codex 的「為所有人改善模型」開關在未經同意的情況下被重新啟用，累積五百一十點與一百五十一則留言。本文整理事件時序、開關覆蓋的資料範圍、
+- [1.9 萬星 SkillOpt：技能文件當參數訓練](https://anthroskill.com/技術/skillopt-agent-skills-news)：微軟研究院開源 SkillOpt，把代理的技能文件當成可訓練參數，以留出驗證集分數把關每一次新增、刪除與替換。六個基準、七個模型、三種執行環境共五十二個組合全部最佳或並列最佳，GPT-5.5 在直接對話提升 23.5 分
+- [Stack Overflow 月提問跌破千條：知識迴圈的斷點](https://anthroskill.com/技術/stackoverflow-question-collapse-news)：Stack Overflow 在二零二六年十月只收到一千零一十二條新提問，較二零二五年同月減少約八成，九月更低至九百六十五條。本文以官方 API 逐月數據重建十二年曲線，對照同期回答量、其他 Stack Exchange
+- [Strapi 5.61 內建 MCP：AI 代理直接管理內容](https://anthroskill.com/技術/strapi-mcp-server-news)：Strapi 是累積七萬三千顆星標的開源無頭內容管理系統，於十一月四日發布 5.61.0 版。此版把內建的模型上下文協定伺服器併入核心套件，以單一端點與管理員權杖認證，讓 AI 代理直接讀寫內容。本文整理版本改動、傳輸與
+- [Astra 讀寫神經網絡權重：微調還有必要嗎？](https://anthroskill.com/技術/astra-weight-space-news)：麻省理工學院 CSAIL 發表權重空間編程研究，GPT-6 Astra 在沒有工具輔助下讀懂神經網絡權重，辨認網絡用途並直接改寫參數。對 Qwen3.5-0.8B 只調整百分之零點零一六權重，MATH-500 由 7.9
+- [Cua 開源：給 AI 代理一台真實電腦](https://anthroskill.com/技術/cua-computer-use-2-news)：Cua 是 trycua 開源的電腦操作代理基礎設施，於二零二六年十一月初累積三萬一千六百六十四顆星標。它以 Cua Spaces 提供完整桌面、Lume 管理本機虛擬機、Cua Driver 操作原生應用，並以 CUA
+- [DeepSeek 開源自主代理：人類注意力當成本](https://anthroskill.com/技術/dsh-superagent-prototype-news)：DeepSeek Harness 團隊公開 dsh-superagent 研究原型，三日內累積一萬五千八百六十四顆星。此代理只服務單一 GitHub 儲存庫，以不可變授權決定誰可以起工作、工作行到幾遠，並為每個工作項開獨
+- [1.5 萬星 gpu-unlock：GeForce 算力解鎖實測](https://anthroskill.com/技術/gpu-unlock-news)：gpu-unlock 是 Linux 核心模組，在 NVIDIA 驅動綁定前解除 GeForce RTX 20、30、40 系列的張量核心限速。RTX 4090 的 BF16 由 165 升至 329 TFLOPS，LL
+- [Postman 為何自動安裝 Codex 與 Claude 外掛？](https://anthroskill.com/技術/postman-plugin-consent-news)：Postman 桌面版在二零二六年十月二十四日啟動時，未經確認便向 Codex 與 Claude Code 安裝外掛，並寫入啟動 hook 的信任雜湊。編號 14370 的公開 issue 以日誌與原始碼佐證整個流程，指
+- [QwenPaw 開源：3.7 萬星本地 AI 助理工作站](https://anthroskill.com/技術/qwenpaw-2-3-local-agent-news)：阿里巴巴 AgentScope 團隊開源的 QwenPaw 於十一月二日推出 v2.3.0-beta.2，GitHub 累積三萬七千顆星。這個個人 AI 助理工作站採三層記憶架構，內建 2B 至 35B 本地模型，並以沙
+- [Google EGM 開源：象與金魚的分工設計](https://anthroskill.com/技術/egm-elephant-goldfish-news)：Google 開源的 EGM 以象與金魚兩種角色分工，一邊用深層上下文起草技術規格，一邊用零上下文子代理審查未言明的假設。本文整理其七個技能模組、五階段生命週期、六階段審查關卡、支援的編程代理清單，以及一萬顆星背後的貢獻
+- [Grok Bot 額度提前用完：Musk 認成本過高](https://anthroskill.com/技術/grok-bot-cost-limit-news)：Grok Bot 於二零二六年十一月初出現大規模額度提前耗盡，馬斯克在 X 確認並非故障，並稱服務成本相對收入不可持續。本文整理用戶回報的實際幅度、官方未公布的調整細節、代理產品的運算成本結構，以及與 OpenAI、Me
+- [gws 開源：3.2 萬星接管 Google Workspace](https://anthroskill.com/技術/gws-cli-agent-news)：Google Workspace 組織開源的 gws 命令列工具在 GitHub 累積三萬二千顆星，npm 單週下載五萬一千次。它在執行時讀取 Discovery Service 動態組出命令面，內建九十五個代理技能與提
+- [Karpathy 兩小時重造 YouTube：HackerTube 上線](https://anthroskill.com/技術/karpathy-hackertube-claude-news)：Andrej Karpathy 於二零二六年十月三十一日公開 HackerTube，把 Hacker News 十五年來被推薦的影片整理成一個沒有帳號、沒有演算法的影片站。專案以 Claude Code 配合 Opus 
+- [OpenAI 模型宣稱推翻 ETH：3-SAT 次指數演算法](https://anthroskill.com/技術/openai-math-eth-refutation-news)：OpenAI 於二零二六年十月二十六日在 math 儲存庫新增兩篇手稿，其中一篇宣稱以確定性演算法在次指數時間精確計算任意固定寬度的 k-CNF 解數，直接推翻指數時間假設，並連帶推翻 SETH、Gap-ETH 與 NS
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 2072 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan

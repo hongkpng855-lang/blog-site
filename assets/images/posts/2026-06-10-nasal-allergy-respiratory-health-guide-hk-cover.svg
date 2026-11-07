@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2A1A3F"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#E8C84A"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ECDC4"/>
+      <stop offset="100%" style="stop-color:#44B09E"/>
+    </linearGradient>
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90D9"/>
+      <stop offset="100%" style="stop-color:#357ABD"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A2F4F"/>
+      <stop offset="100%" style="stop-color:#13223D"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1F3A5F"/>
+      <stop offset="100%" style="stop-color:#162A49"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="420" cy="80" r="120" fill="#FB923C" opacity="0.04"/>
+  <circle cx="80" cy="420" r="100" fill="#4ECDC4" opacity="0.04"/>
+  <circle cx="256" cy="256" r="200" fill="#4A90D9" opacity="0.02"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="512" height="62" fill="url(#gold)" opacity="0.95"/>
+  <text x="256" y="38" text-anchor="middle" fill="#0F1B33" font-family="system-ui, sans-serif" font-weight="800" font-size="16">鼻敏感與呼吸道健康</text>
+
+  <!-- === Central Icon: Nose / Lungs / Airflow === -->
+  <!-- Nose silhouette -->
+  <g transform="translate(256, 165)" filter="url(#glow)">
+    <!-- Nose shape -->
+    <path d="M-16,-30 Q-22,-10 -20,10 Q-18,30 -8,35 Q0,38 8,35 Q18,30 20,10 Q22,-10 16,-30 Q8,-40 0,-42 Q-8,-40 -16,-30Z"
+          fill="none" stroke="url(#gold)" stroke-width="2.5" opacity="0.9"/>
+    <!-- Nostrils -->
+    <ellipse cx="-10" cy="33" rx="6" ry="3" fill="#FB923C" opacity="0.3"/>
+    <ellipse cx="10" cy="33" rx="6" ry="3" fill="#FB923C" opacity="0.3"/>
+  </g>
+
+  <!-- Airflow waves going into nose -->
+  <g opacity="0.6">
+    <path d="M196,155 Q180,160 175,170 Q170,180 180,185" fill="none" stroke="#4ECDC4" stroke-width="1.5" opacity="0.5">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M190,140 Q170,145 162,158 Q155,170 165,178" fill="none" stroke="#4ECDC4" stroke-width="1.5" opacity="0.4">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M316,155 Q332,160 337,170 Q342,180 332,185" fill="none" stroke="#4ECDC4" stroke-width="1.5" opacity="0.5">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <path d="M322,140 Q342,145 350,158 Q358,170 348,178" fill="none" stroke="#4ECDC4" stroke-width="1.5" opacity="0.4">
+      <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3.5s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- Lungs icon (below nose) -->
+  <g transform="translate(256, 210)" opacity="0.6">
+    <path d="M-35,0 Q-50,-15 -48,-30 Q-46,-40 -38,-42 Q-30,-44 -25,-35 Q-22,-28 -20,-15 Q-18,0 -25,15 Q-30,25 -38,28 Q-45,30 -42,20 Q-40,12 -35,0Z"
+          fill="none" stroke="#4ECDC4" stroke-width="2"/>
+    <path d="M35,0 Q50,-15 48,-30 Q46,-40 38,-42 Q30,-44 25,-35 Q22,-28 20,-15 Q18,0 25,15 Q30,25 38,28 Q45,30 42,20 Q40,12 35,0Z"
+          fill="none" stroke="#4ECDC4" stroke-width="2"/>
+    <!-- Windpipe -->
+    <line x1="0" y1="-45" x2="0" y2="-10" stroke="#4ECDC4" stroke-width="2" opacity="0.5"/>
+  </g>
+
+  <!-- === 4 Info Cards === -->
+  <!-- Card 1: 環境控制 -->
+  <g transform="translate(16, 290)" filter="url(#shadow)">
+    <rect width="232" height="94" rx="10" fill="url(#card1)" stroke="#FB923C" stroke-opacity="0.15" stroke-width="1"/>
+    <rect x="10" y="8" width="32" height="32" rx="8" fill="#FB923C" opacity="0.15"/>
+    <text x="26" y="28" text-anchor="middle" fill="#FB923C" font-size="16">🏠</text>
+    <text x="50" y="22" fill="#FB923C" font-family="system-ui, sans-serif" font-weight="700" font-size="12">環境控制</text>
+    <text x="50" y="38" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">抽濕・HEPA・防塵蟎</text>
+    <text x="50" y="52" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">洗冷氣・除霉菌</text>
+    <text x="50" y="66" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">溫差管理・口罩過渡</text>
+    <text x="12" y="84" fill="#4ECDC4" font-family="system-ui, sans-serif" font-weight="700" font-size="10">▸ 最有效第一步</text>
+  </g>
+
+  <!-- Card 2: 日常保養 -->
+  <g transform="translate(264, 290)" filter="url(#shadow)">
+    <rect width="232" height="94" rx="10" fill="url(#card2)" stroke="#4ECDC4" stroke-opacity="0.15" stroke-width="1"/>
+    <rect x="10" y="8" width="32" height="32" rx="8" fill="#4ECDC4" opacity="0.15"/>
+    <text x="26" y="28" text-anchor="middle" fill="#4ECDC4" font-size="16">💧</text>
+    <text x="50" y="22" fill="#4ECDC4" font-family="system-ui, sans-serif" font-weight="700" font-size="12">日常保養</text>
+    <text x="50" y="38" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">鹽水洗鼻・按摩穴位</text>
+    <text x="50" y="52" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">腹式呼吸・補水</text>
+    <text x="50" y="66" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">早晚各 5 分鐘 routine</text>
+    <text x="12" y="84" fill="#FB923C" font-family="system-ui, sans-serif" font-weight="700" font-size="10">▸ 發作減少 50%+</text>
+  </g>
+
+  <!-- Card 3: 飲食調理 -->
+  <g transform="translate(16, 396)" filter="url(#shadow)">
+    <rect width="232" height="94" rx="10" fill="url(#card1)" stroke="#4A90D9" stroke-opacity="0.15" stroke-width="1"/>
+    <rect x="10" y="8" width="32" height="32" rx="8" fill="#4A90D9" opacity="0.15"/>
+    <text x="26" y="28" text-anchor="middle" fill="#4A90D9" font-size="16">🥗</text>
+    <text x="50" y="22" fill="#4A90D9" font-family="system-ui, sans-serif" font-weight="700" font-size="12">飲食調理</text>
+    <text x="50" y="38" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">Omega-3・維C・槲皮素</text>
+    <text x="50" y="52" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">淮山北芪・抗發炎飲食</text>
+    <text x="50" y="66" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">戒凍飲・減少酒精</text>
+    <text x="12" y="84" fill="#4A90D9" font-family="system-ui, sans-serif" font-weight="700" font-size="10">▸ 天然抗組織胺</text>
+  </g>
+
+  <!-- Card 4: 運動 + 醫療 -->
+  <g transform="translate(264, 396)" filter="url(#shadow)">
+    <rect width="232" height="94" rx="10" fill="url(#card2)" stroke="#E8C84A" stroke-opacity="0.15" stroke-width="1"/>
+    <rect x="10" y="8" width="32" height="32" rx="8" fill="#E8C84A" opacity="0.15"/>
+    <text x="26" y="28" text-anchor="middle" fill="#E8C84A" font-size="16">🏃</text>
+    <text x="50" y="22" fill="#E8C84A" font-family="system-ui, sans-serif" font-weight="700" font-size="12">運動・醫療</text>
+    <text x="50" y="38" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">游水・瑜伽・急步行</text>
+    <text x="50" y="52" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">抗組織胺・類固醇噴劑</text>
+    <text x="50" y="66" fill="#8899AA" font-family="system-ui, sans-serif" font-size="9.5">洗鼻器・通鼻塞 tips</text>
+    <text x="12" y="84" fill="#E8C84A" font-family="system-ui, sans-serif" font-weight="700" font-size="10">▸ 咩情況睇醫生</text>
+  </g>
+
+  <!-- Bottom stat bar -->
+  <g transform="translate(0, 492)">
+    <rect width="512" height="20" fill="#FB923C" opacity="0.9"/>
+    <text x="20" y="13" fill="#0F1B33" font-family="system-ui, sans-serif" font-weight="700" font-size="9">🏥 香港 25-30% 人口有鼻敏感</text>
+    <text x="256" y="13" text-anchor="middle" fill="#0F1B33" font-family="system-ui, sans-serif" font-weight="700" font-size="9">🫁 4 大管理支柱</text>
+    <text x="480" y="13" text-anchor="end" fill="#0F1B33" font-family="system-ui, sans-serif" font-weight="700" font-size="9">完整實戰系統</text>
+  </g>
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d1b2e"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3d2b4a"/>
+      <stop offset="100%" style="stop-color:#2a1a38"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a3b5e"/>
+      <stop offset="100%" style="stop-color:#3a2b4e"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glowFilter">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+  
+  <!-- Glow circle -->
+  <circle cx="256" cy="240" r="200" fill="url(#glow)"/>
+  
+  <!-- Smartphone frame -->
+  <g filter="url(#shadow)">
+    <rect x="190" y="100" width="132" height="240" rx="18" fill="url(#phone)" stroke="#c9a84c" stroke-width="1.5" opacity="0.8"/>
+    <!-- Screen -->
+    <rect x="197" y="112" width="118" height="210" rx="4" fill="url(#screen)"/>
+    <!-- Notch -->
+    <rect x="235" y="102" width="42" height="3" rx="1.5" fill="#2d1b2e"/>
+    
+    <!-- Screen content - grid/app icons -->
+    <g opacity="0.4">
+      <!-- App icons row 1 -->
+      <rect x="205" y="120" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.3"/>
+      <rect x="235" y="120" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.2"/>
+      <rect x="265" y="120" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.3"/>
+      <rect x="295" y="120" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.2"/>
+      
+      <!-- App icons row 2 -->
+      <rect x="205" y="150" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.2"/>
+      <rect x="235" y="150" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.3"/>
+      <rect x="265" y="150" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.2"/>
+      <rect x="295" y="150" width="22" height="22" rx="4" fill="#c9a84c" opacity="0.3"/>
+    </g>
+    
+    <!-- Screen cross-out circle (digital detox symbol) -->
+    <g filter="url(#glowFilter)">
+      <circle cx="256" cy="220" r="38" fill="none" stroke="#c9a84c" stroke-width="3" opacity="0.85"/>
+      <line x1="232" y1="205" x2="280" y2="235" stroke="#c9a84c" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+      <!-- Leaf/nature symbol inside -->
+      <path d="M256 208 Q262 216 256 224 Q250 216 256 208 Z" fill="#6db36d" opacity="0.7"/>
+      <path d="M256 215 Q265 225 256 235 Q247 225 256 215 Z" fill="#7ec87e" opacity="0.5"/>
+    </g>
+    
+    <!-- Unread notifications fading out -->
+    <g opacity="0.25">
+      <circle cx="280" cy="130" r="6" fill="#e74c3c"/>
+      <circle cx="290" cy="130" r="4" fill="#e74c3c" opacity="0.5"/>
+      <circle cx="297" cy="130" r="2" fill="#e74c3c" opacity="0.2"/>
+    </g>
+    
+    <!-- Bottom dots -->
+    <g opacity="0.35">
+      <circle cx="215" cy="310" r="4" fill="#c9a84c"/>
+      <circle cx="235" cy="310" r="4" fill="#c9a84c" opacity="0.4"/>
+      <circle cx="255" cy="310" r="4" fill="#c9a84c" opacity="0.3"/>
+      <circle cx="275" cy="310" r="4" fill="#c9a84c" opacity="0.4"/>
+      <circle cx="295" cy="310" r="4" fill="#c9a84c" opacity="0.2"/>
+    </g>
+  </g>
+  
+  <!-- Small plant/leaves (symbolizing real life) -->
+  <g transform="translate(370, 280)" opacity="0.6">
+    <path d="M0 30 Q-5 15 10 5 Q15 0 20 5 Q30 15 25 30 Z" fill="#6db36d"/>
+    <path d="M5 30 Q2 18 15 10" stroke="#5a9a5a" stroke-width="1.5" fill="none"/>
+    <path d="M10 35 Q8 25 20 18" stroke="#5a9a5a" stroke-width="1" fill="none"/>
+    <circle cx="12" cy="8" r="2" fill="#c9a84c" opacity="0.6"/>
+  </g>
+  
+  <!-- Stars -->
+  <g fill="#c9a84c" opacity="0.5">
+    <circle cx="100" cy="110" r="2"/>
+    <circle cx="420" cy="100" r="2.5"/>
+    <circle cx="80" cy="380" r="1.5"/>
+    <circle cx="430" cy="390" r="2"/>
+    <circle cx="370" cy="130" r="1.5"/>
+    <circle cx="140" cy="390" r="2"/>
+  </g>
+  
+  <!-- Title -->
+  <text x="256" y="410" text-anchor="middle" fill="#c9a84c" font-family="system-ui, sans-serif" font-size="22" font-weight="bold" letter-spacing="2">數位極簡生活</text>
+  <text x="256" y="435" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif" font-size="13" opacity="0.7" letter-spacing="1">2026 找回專注力的實踐指南</text>
+</svg>
