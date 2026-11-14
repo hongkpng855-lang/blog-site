@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="50%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <linearGradient id="accent1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#e2b84c"/>
+    </linearGradient>
+    <linearGradient id="accent2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#38bdf8"/>
+      <stop offset="100%" style="stop-color:#818cf8"/>
+    </linearGradient>
+    <linearGradient id="accent3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34d399"/>
+      <stop offset="100%" style="stop-color:#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#334155"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <marker id="arrowhead" markerWidth="6" markerHeight="4" refX="5" refY="2" orient="auto">
+      <polygon points="0 0, 6 2, 0 4" fill="#FB923C"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Decorative circuit/grid lines -->
+  <g opacity="0.05">
+    <line x1="0" y1="0" x2="512" y2="512" stroke="#FB923C" stroke-width="1"/>
+    <line x1="512" y1="0" x2="0" y2="512" stroke="#FB923C" stroke-width="1"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="256" x2="512" y2="256" stroke="#FB923C" stroke-width="0.5"/>
+  </g>
+
+  <!-- Network nodes (knowledge graph visualization) -->
+  <!-- Central brain node -->
+  <circle cx="256" cy="170" r="45" fill="none" stroke="url(#accent1)" stroke-width="2.5" filter="url(#softGlow)"/>
+  <circle cx="256" cy="170" r="32" fill="url(#accent1)" opacity="0.15"/>
+  <text x="256" y="178" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="18" font-weight="bold" letter-spacing="1">🧠 第二</text>
+  <text x="256" y="198" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" letter-spacing="1">大腦</text>
+
+  <!-- Connected nodes around the brain -->
+  <circle cx="140" cy="90" r="20" fill="none" stroke="url(#accent2)" stroke-width="1.5" opacity="0.8"/>
+  <text x="140" y="95" text-anchor="middle" fill="#38bdf8" font-family="system-ui" font-size="8">Capture</text>
+
+  <circle cx="370" cy="90" r="20" fill="none" stroke="url(#accent3)" stroke-width="1.5" opacity="0.8"/>
+  <text x="370" y="95" text-anchor="middle" fill="#34d399" font-family="system-ui" font-size="8">Organize</text>
+
+  <circle cx="100" cy="260" r="20" fill="none" stroke="url(#accent2)" stroke-width="1.5" opacity="0.8"/>
+  <text x="100" y="265" text-anchor="middle" fill="#38bdf8" font-family="system-ui" font-size="8">Distill</text>
+
+  <circle cx="410" cy="260" r="20" fill="none" stroke="url(#accent3)" stroke-width="1.5" opacity="0.8"/>
+  <text x="410" y="265" text-anchor="middle" fill="#34d399" font-family="system-ui" font-size="8">Express</text>
+
+  <!-- Connection lines between nodes -->
+  <line x1="155" y1="107" x2="222" y2="145" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+  <line x1="290" y1="145" x2="355" y2="107" stroke="#34d399" stroke-width="1" opacity="0.3"/>
+  <line x1="115" y1="242" x2="225" y2="195" stroke="#38bdf8" stroke-width="1" opacity="0.3"/>
+  <line x1="287" y1="195" x2="395" y2="242" stroke="#34d399" stroke-width="1" opacity="0.3"/>
+
+  <!-- Sub-nodes (connecting dots) -->
+  <circle cx="200" cy="115" r="4" fill="#38bdf8" opacity="0.5"/>
+  <circle cx="310" cy="115" r="4" fill="#34d399" opacity="0.5"/>
+  <circle cx="175" cy="225" r="4" fill="#38bdf8" opacity="0.5"/>
+  <circle cx="340" cy="225" r="4" fill="#34d399" opacity="0.5"/>
+
+  <!-- Additional scattered knowledge nodes -->
+  <circle cx="60" cy="140" r="3" fill="#FB923C" opacity="0.4"/>
+  <circle cx="70" cy="160" r="3" fill="#FB923C" opacity="0.3"/>
+  <circle cx="450" cy="130" r="3" fill="#FB923C" opacity="0.4"/>
+  <circle cx="440" cy="150" r="3" fill="#FB923C" opacity="0.3"/>
+  <circle cx="80" cy="200" r="3" fill="#FB923C" opacity="0.3"/>
+  <circle cx="430" cy="200" r="3" fill="#FB923C" opacity="0.3"/>
+
+  <!-- Thin connecting lines to scattered nodes -->
+  <line x1="63" y1="143" x2="100" y2="155" stroke="#FB923C" stroke-width="0.5" opacity="0.2"/>
+  <line x1="453" y1="133" x2="410" y2="155" stroke="#FB923C" stroke-width="0.5" opacity="0.2"/>
+
+  <!-- C.O.D.E. flow indicator -->
+  <rect x="40" y="305" width="432" height="28" rx="14" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="146" y="323" text-anchor="middle" fill="#38bdf8" font-family="monospace" font-size="11">C → O → D → E</text>
+  <text x="340" y="323" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="10">Workflow</text>
+
+  <!-- 4 Info Cards -->
+  <!-- Card 1: Capture -->
+  <rect x="30" y="355" width="102" height="70" rx="8" fill="url(#card1)" stroke="#38bdf8" stroke-width="1" opacity="0.9"/>
+  <text x="81" y="374" text-anchor="middle" fill="#38bdf8" font-family="system-ui" font-size="9" font-weight="bold">⚡️ Capture</text>
+  <text x="81" y="392" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="8">30秒快速記錄</text>
+  <text x="81" y="407" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="7">搭車・排隊・隨時</text>
+
+  <!-- Card 2: Organize -->
+  <rect x="145" y="355" width="102" height="70" rx="8" fill="url(#card1)" stroke="#34d399" stroke-width="1" opacity="0.9"/>
+  <text x="196" y="374" text-anchor="middle" fill="#34d399" font-family="system-ui" font-size="9" font-weight="bold">📁 Organize</text>
+  <text x="196" y="392" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="8">PARA 分類框架</text>
+  <text x="196" y="407" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="7">Projects / Areas</text>
+
+  <!-- Card 3: Distill -->
+  <rect x="260" y="355" width="102" height="70" rx="8" fill="url(#card1)" stroke="#FB923C" stroke-width="1" opacity="0.9"/>
+  <text x="311" y="374" text-anchor="middle" fill="#FB923C" font-family="system-ui" font-size="9" font-weight="bold">🔮 Distill</text>
+  <text x="311" y="392" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="8">提煉核心觀點</text>
+  <text x="311" y="407" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="7">去除雜訊</text>
+
+  <!-- Card 4: Express -->
+  <rect x="375" y="355" width="107" height="70" rx="8" fill="url(#card1)" stroke="#a78bfa" stroke-width="1" opacity="0.9"/>
+  <text x="428" y="374" text-anchor="middle" fill="#a78bfa" font-family="system-ui" font-size="9" font-weight="bold">🚀 Express</text>
+  <text x="428" y="392" text-anchor="middle" fill="#94a3b8" font-family="system-ui" font-size="8">知識轉化輸出</text>
+  <text x="428" y="407" text-anchor="middle" fill="#64748b" font-family="system-ui" font-size="7">創作・決策・行動</text>
+
+  <!-- Arrow flow between cards -->
+  <line x1="132" y1="390" x2="143" y2="390" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="247" y1="390" x2="258" y2="390" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+  <line x1="362" y1="390" x2="373" y2="390" stroke="#334155" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+
+  <!-- Stats bar at bottom -->
+  <rect x="30" y="445" width="452" height="22" rx="11" fill="#1e293b" stroke="#334155" stroke-width="0.5"/>
+  <text x="100" y="459" text-anchor="middle" fill="#38bdf8" font-family="system-ui" font-size="8">📝 每日 Capture</text>
+  <text x="200" y="459" text-anchor="middle" fill="#34d399" font-family="system-ui" font-size="8">🔄 雙向連結</text>
+  <text x="300" y="459" text-anchor="middle" fill="#FB923C" font-family="system-ui" font-size="8">⚡ AI 輔助</text>
+  <text x="400" y="459" text-anchor="middle" fill="#a78bfa" font-family="system-ui" font-size="8">📈 Graph View</text>
+
+  <!-- Bottom decorative line -->
+  <line x1="80" y1="480" x2="432" y2="480" stroke="#334155" stroke-width="1" opacity="0.5"/>
+  <text x="256" y="498" text-anchor="middle" fill="#475569" font-family="system-ui" font-size="8">第二大腦・知識管理系統・2026</text>
+</svg>

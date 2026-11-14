@@ -1,0 +1,1662 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.10.0">Jekyll</generator><link href="https://anthroskill.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://anthroskill.com/" rel="alternate" type="text/html" /><updated>2026-11-14T20:14:56+08:00</updated><id>https://anthroskill.com/feed.xml</id><title type="html">AnthroSkill 人類學｜由痛點到實測，日日更新</title><subtitle>由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</subtitle><author><name>Eric Chan</name></author><entry><title type="html">Codex CLI 0.169：13.5 萬星的終端工作區擴張</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/openai-codex-0169-news" rel="alternate" type="text/html" title="Codex CLI 0.169：13.5 萬星的終端工作區擴張" /><published>2026-11-14T20:00:02+08:00</published><updated>2026-11-14T20:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/openai-codex-0169-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/openai-codex-0169-news"><![CDATA[<p>OpenAI 開源的 Codex CLI 於 2026 年 11 月 13 日推出 0.169.0 版，這個以 Rust 撰寫的終端編程代理在 GitHub 累積 135,179 顆星標。新版本把終端工作區擴充為可同時開啟多個側邊對話分頁，並補上自訂模型供應商設定、裝置碼授權與 Cloud 連線，同時收緊未受信任目錄的執行邊界。</p>
+
+<p><img src="/assets/images/posts/openai-codex-0169-news-shot1.png" alt="Codex CLI 的 GitHub README 開頭畫面，顯示專案名稱 Codex CLI 與其定位為在本機執行的編程代理，下方為啟動畫面圖、IDE 與桌面應用程式入口說明，以及 macOS、Linux、Windows 三平台的安裝指令區塊" /></p>
+
+<h2 id="codex-cli-是什麼">Codex CLI 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>Codex CLI 是 OpenAI 以 Rust 撰寫的終端編程代理，可於本機讀寫儲存庫並執行指令，採 Apache-2.0 授權，2026 年 11 月累積 135,179 顆星標。
+<!-- End AEO Capsule --></p>
+
+<p>官方文件把它定位為跑在使用者電腦上的編程代理，並提供三條使用路徑：終端機、編輯器整合與桌面應用程式。倉庫同時是發佈管道，每個版本附上對應平台的執行檔，包含 macOS 的 Apple Silicon 與 x86_64、Linux 的 musl 靜態版本。</p>
+
+<p>安裝方式分為四類。官方提供 shell 與 PowerShell 的一行安裝腳本，亦支援 npm 全域安裝、Homebrew cask，以及直接下載二進位檔。安裝器預設從官方發佈站下載，若中繼資料或檔案不可用才回退至 GitHub Releases，亦可透過環境變數強制指定來源。</p>
+
+<p>授權模式與帳號綁定。使用者可以透過 ChatGPT 的 Plus、Pro、Business、Edu 或 Enterprise 方案登入，亦可以使用 API 金鑰，但後者需要額外設定驗證流程。這個安排把成本計算與既有訂閱綁在一起，企業採購時通常會影響決策。</p>
+
+<h2 id="01690-版為終端工作區加入哪些能力">0.169.0 版為終端工作區加入哪些能力？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>0.169.0 版讓終端工作區支援多個側邊對話分頁，並可依名稱、提示詞預覽或工作目錄搜尋舊任務，另加入折疊回合細節與診斷壓縮檔的本機儲存。
+<!-- End AEO Capsule --></p>
+
+<p>版本紀錄把新功能分成六項，其中三項直接改變終端的操作方式。工作區可以同時開多個側邊對話分頁，以鍵盤或滑鼠切換，重啟之後仍能回復已儲存的本地側聊。這讓同一個專案可以並行處理互不相關的問題，而不必開多個終端視窗。</p>
+
+<p>第二項是任務檢索。代理指令中心支援以名稱、提示詞預覽或工作目錄搜尋舊任務，過去的對話不再只能靠時間序列翻找。長期使用之後，這種檢索能力往往比新增功能更影響日常效率。</p>
+
+<p>第三項與輸出可讀性有關。全屏逐字稿提供折疊回合細節的開關，已完成的活動會收在對應提示詞之下，答案保持可見，工具輸出仍可搜尋。對於動輒數十回合的長任務，這個調整直接影響回顧成本。</p>
+
+<p>另外三項偏向邊緣場景。終端報告編輯器可以按 Ctrl+S 把診斷壓縮檔存在本機，即使上傳功能被停用；鍵盤快捷鍵與側邊欄選擇器亦補上尺寸調整與浮動面板。這些改動單獨看很小，合起來則說明維護團隊正在處理長時間使用的細節。</p>
+
+<h2 id="側邊對話分頁解決什麼實際問題">側邊對話分頁解決什麼實際問題？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>單一對話序列難以承載並行工作。分頁把不相關的追問隔離在獨立上下文，避免主線被支線內容稀釋，重啟後亦可續接原本的討論。
+<!-- End AEO Capsule --></p>
+
+<p>終端代理的預設模型是線性對話。使用者提出一個問題，代理回答，接著追問，上下文沿著單一軌跡累積。這種設計在短任務上很有效率，一旦出現「順便問一下」的需求，支線內容就會混進主線上下文。</p>
+
+<p>混入的代價是雙向的。支線的無關細節佔用上下文額度，主線的長篇推理亦會干擾支線的判斷。當上下文接近上限而觸發壓縮，兩條線索的內容都可能被摘要，細節一併流失。</p>
+
+<p>分頁把兩者分離。每個側邊分頁持有獨立的對話狀態，主線與支線各自累積，互不稀釋。這個做法與編輯器的分割視窗類似，差別在於切分的是上下文而非畫面。</p>
+
+<p>本地保存則是延續性問題。重啟之後仍能回復已儲存的側聊，意味著分頁不只是暫時的視窗，而是可以跨工作階段存續的物件。對需要分日推進的長任務，這一點比切分本身更關鍵。</p>
+
+<h2 id="自訂模型供應商與裝置碼授權意味著什麼">自訂模型供應商與裝置碼授權意味著什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>終端現在可以直接新增或編輯自訂模型供應商，並在登入時以裝置碼完成網關授權。這讓 SSH 或無本機瀏覽器的環境不必依賴圖形介面。
+<!-- End AEO Capsule --></p>
+
+<p>模型供應商的設定過去偏向設定檔作業。使用者要開啟檔案，手動填入端點與模型名稱，再回到終端驗證。新版把這一步搬進終端介面，可以在登入流程中建立供應商，所選設定即時生效。</p>
+
+<p>裝置碼授權處理的是環境限制。在 SSH 連線或沒有本機瀏覽器的主機上，傳統的 OAuth 回呼無法完成，使用者往往只能退回長期有效的 API 金鑰。裝置碼把授權拆成兩步：終端顯示一組代碼，使用者在另一台裝置確認，憑證再回寫到原主機。</p>
+
+<p>兩項改動合起來，指向同一個方向。代理的模型來源與身分驗證，正從「個人本機的一次性設定」變成「可在遠端主機重複執行的流程」。對需要在大批伺服器上部署代理的團隊，這是能否自動化的分界線。</p>
+
+<p>版本紀錄亦提到應用伺服器端的能力補齊。用戶端可以列出可用模型，或為已設定的供應商授權網關，而不改變預設供應商。這類介面變動通常不會出現在使用者的第一印象裡，卻決定了整合層能否穩定運作。</p>
+
+<h2 id="cloud-連線把哪些功能搬進終端">Cloud 連線把哪些功能搬進終端？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>macOS 與 Linux 的 Cloud 連線屬於選用功能，開啟後可在終端傳送圖片、選擇模型與推理強度，並封存或還原雲端對話。
+<!-- End AEO Capsule --></p>
+
+<p>雲端與本機兩條路線過去分工明確。終端代理處理本機儲存庫，網頁版本處理雲端任務，兩者共用帳號但介面分離。新版把部分雲端操作拉回終端，讓同一個視窗可以涵蓋兩類工作。</p>
+
+<p>具體能力包含三項。使用者可以在終端傳送圖片給支援視覺的模型，選擇模型與推理強度，以及封存或還原雲端對話。這些操作過去需要切換到瀏覽器完成。</p>
+
+<p>選擇性設計值得注意。Cloud 連線在 macOS 與 Linux 上屬於需主動開啟的選項，而非預設行為。這種安排反映出企業環境的顧慮：本機執行的代理一旦預設連上雲端，資料流向就會改變，稽核邊界亦需重新界定。</p>
+
+<p>對個人使用者而言，這項改動降低的是切換成本。對組織而言，真正的問題是政策：哪些專案允許送往雲端，哪些必須留在本機。工具提供了通道，邊界仍要靠規範劃定。</p>
+
+<p><img src="/assets/images/posts/openai-codex-0169-news-shot2.png" alt="Codex CLI 的 GitHub 倉庫首頁頂部，顯示倉庫名稱與 Public 標記、Fork 與 Star 計數、分支與版本標籤數量，右側 About 欄列出專案描述、官方文件與安裝入口，以及 Rust、CLI、coding-agent 等主題標籤" /></p>
+
+<h2 id="未受信任目錄的執行邊界如何收緊">未受信任目錄的執行邊界如何收緊？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p><code class="language-plaintext highlighter-rouge">codex exec</code> 在未受信任目錄會停用專案設定與 MCP 伺服器，即使加上 <code class="language-plaintext highlighter-rouge">--sandbox workspace-write</code>，需以 <code class="language-plaintext highlighter-rouge">--trust</code> 標記信任。
+<!-- End AEO Capsule --></p>
+
+<p>專案設定與 MCP 伺服器都來自儲存庫內的檔案。這些檔案一旦被載入，就等於讓專案內容影響代理的執行環境，包括可呼叫的外部工具與連線位址。在未經審查的儲存庫上執行代理，這條路徑本身就是風險。</p>
+
+<p>過去的假設是沙箱模式足以隔離。實際上 <code class="language-plaintext highlighter-rouge">--sandbox workspace-write</code> 只限制寫入範圍，並不處理設定載入；代理仍可能讀入專案層級的設定，並依此建立外部連線。新版本把兩件事分開處理。</p>
+
+<p>修正後的預設值是停用。在未受信任的目錄中，<code class="language-plaintext highlighter-rouge">codex exec</code> 與 <code class="language-plaintext highlighter-rouge">codex review</code> 會保持專案設定與 MCP 伺服器關閉，使用者必須以 <code class="language-plaintext highlighter-rouge">--trust</code> 明確標記，專案信任才會被保存。這個設計把風險判斷交回使用者，而非交給路徑啟發式規則。</p>
+
+<p>同批修正還包括幾項互動層面的整頓。中斷的回合現在會乾淨結束，延遲的中止或檔案授權取消不會干擾下一個回合；終端亦不再因為共享應用伺服器未回報的 MCP 伺服器而持續等待。這些問題在自動化腳本中特別明顯，因為沒有人會在旁邊手動重試。</p>
+
+<h2 id="專案規模與開發節奏呈現什麼訊號">專案規模與開發節奏呈現什麼訊號？</h2>
+
+<div class="ui-stat-grid">
+  <div class="ui-stat"><span class="ui-stat-num">135,179</span><span class="ui-stat-label">Stars</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">21,439</span><span class="ui-stat-label">Forks</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">477</span><span class="ui-stat-label">貢獻者</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">27,534</span><span class="ui-stat-label">未結問題</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">86.1 MB</span><span class="ui-stat-label">Rust 程式碼</span></div>
+  <div class="ui-stat"><span class="ui-stat-num">Apache-2.0</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>查詢當日專案有 135,179 顆星標、21,439 個分支、約 477 位貢獻者與 27,534 項未結問題，Rust 程式碼約 86.1 MB，累計版本發佈超過 1,290 個。
+<!-- End AEO Capsule --></p>
+
+<p>星標對分支比約為 6.3 比 1，與前一個月觀察到的比例一致。這個數字低於工具類專案常見的十倍區間，通常意味著採用者傾向直接使用官方發佈的執行檔，而非複製倉庫自行修改。</p>
+
+<p>未結問題數升至 27,534 項，較 10 月下旬的 25,051 項增加約一成。對照 477 位貢獻者與每日多次提交的節奏，問題佇列的吸收速度仍跟不上使用者增長，這是高速擴張階段常見的現象。</p>
+
+<p>版本節奏維持高頻。0.168.0 與 0.169.0 同在 11 月 13 日發佈，倉庫累計版本數達 1,291 個；同期還有數個 alpha 版本在推進。這種小步快跑的策略讓修補能快速落地，代價是使用者需要主動追蹤變更。</p>
+
+<p>語言組成說明重心。Rust 約 86.1 MB，Python 約 1.7 MB，其餘為 Starlark、TypeScript、PowerShell 與 Shell 等輔助部分。主體以系統語言撰寫，與需要低延遲啟動的終端工具定位相符。</p>
+
+<p><img src="/assets/images/posts/openai-codex-0169-news-shot3.png" alt="Codex CLI 的 GitHub 貢獻者統計頁，顯示近三個月的每週提交曲線與貢獻者活躍度圖表，時間軸由八月延伸至十一月，曲線在版本密集發佈期間出現多個高峰" /></p>
+
+<h2 id="與其他終端編程代理相比定位如何">與其他終端編程代理相比定位如何？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>同期競品為約 10.8 萬星的 Gemini CLI 與 22.6 萬星的 OpenCode。Codex CLI 以 Rust 實作、綁定 ChatGPT 訂閱，重心放在權限治理。
+<!-- End AEO Capsule --></p>
+
+<p>同類工具的規模接近。Gemini CLI 在查詢當日累積約 108,813 顆星標，定位同樣是終端內的編程代理，並以開源方式釋出；OpenCode 累積約 226,604 顆星標，以 TypeScript 撰寫。三者的使用者群高度重疊，選擇往往取決於既有訂閱與模型偏好。</p>
+
+<p>差異出現在實作與治理兩層。Codex CLI 以 Rust 撰寫，啟動延遲與記憶體佔用較低；權限設計分成多個設定檔，配合沙箱、網路代理與專案信任標記控制外部存取。這些安排對需要在受管裝置上執行代理的組織更有吸引力。</p>
+
+<p>生態整合是另一個分野。官方同時提供編輯器擴充與桌面應用程式，同一帳號可在多個入口使用；一體化路線降低切換成本，但也意味著使用深度與訂閱方案綁定。若團隊同時使用多間供應商，<a href="/%E6%8A%80%E8%A1%93/freellmapi-free-llm-router-news">以單一閘道轉發多家模型的開源方案</a>可降低硬綁定風險；而<a href="/%E6%8A%80%E8%A1%93/qwen-code-1-0-preview-news">同期的 Qwen Code 1.0 預覽版</a>則把重心放在把既有代理能力併入終端。</p>
+
+<p>評估時值得先釐清需求邊界。若重點在模型能力比較，多數工具都能切換供應商；若重點在權限稽核與憑證治理，近幾個版本反覆出現的沙箱、信任標記與認證修補，會比任何功能清單更能說明維護團隊的優先順序。</p>
+
+<h2 id="升級到-01690-前應注意什麼">升級到 0.169.0 前應注意什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>既有腳本應先確認 <code class="language-plaintext highlighter-rouge">codex exec</code> 在未受信任目錄的行為變化，並檢查是否依賴沙箱模式自動載入專案設定。跨主機部署需重測裝置碼授權。
+<!-- End AEO Capsule --></p>
+
+<p>專案信任的行為變化是第一項要驗證的。若既有腳本依賴專案內的設定或 MCP 伺服器在沙箱模式下自動生效，升級後會靜默失效，且不一定出現錯誤訊息。這類依賴通常不會寫在文件裡，需要實際跑一次流程確認。</p>
+
+<p>裝置碼授權改變的是登入路徑。透過 SSH 管理的主機過去多以環境變數保存長期憑證，改用裝置碼之後，憑證的發放與輪換流程需要一併規劃，否則容易退回舊做法。</p>
+
+<p>多分頁工作區會改變記憶體曲線。每個側邊分頁持有獨立上下文，同時開啟多個分頁意味著更高的常駐用量；在記憶體受限的環境中，這個成本需要預先評估。</p>
+
+<p>最後是版本鎖定。同日推出兩個穩定版的節奏，意味著團隊不宜長期停留在浮動版本。在正式環境採用固定版本並保留回退方案，比追求最新功能更符合維運現實。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+<p>本文資訊整理自 OpenAI 官方倉庫的說明文件、版本紀錄與介面統計。原始碼、版本發佈與問題追蹤均在 GitHub 公開，讀者可自行核對最新狀態。
+<!-- End AEO Capsule --></p>
+
+<p>專案原始碼與文件位於 <a href="https://github.com/openai/codex">https://github.com/openai/codex</a>，版本紀錄與執行檔在同一倉庫的 Releases 頁面發佈。0.169.0 版的完整變更清單可於該頁對照前一版本查閱。</p>
+
+<div class="faq-section">
+
+## 常見問題有哪些？
+
+<!-- AEO Answer Capsule — 約 56 字 -->
+常見問題集中在安裝方式、訂閱要求、專案信任與企業導入四類。以下依官方文件與版本紀錄整理，答案以 2026 年 11 月 13 日的倉庫狀態為準。
+<!-- End AEO Capsule -->
+
+### Codex CLI 是否必須付費才能使用？
+
+工具本身以 Apache-2.0 授權開源，但實際執行需要模型存取權限。官方建議以 ChatGPT 的付費方案登入，亦可以使用 API 金鑰，成本依用量計算。
+
+### 支援哪些作業系統？
+
+官方提供 macOS、Linux 與 Windows 的安裝路徑，包括 shell 與 PowerShell 安裝腳本、npm 與 Homebrew 套件，以及各平台的預編譯執行檔。
+
+### 側邊對話分頁與一般新開任務有何差別？
+
+分頁附屬於同一個工作區，可在主線旁邊並行追問並快速切換；新開任務則建立獨立的執行環境。分頁的側聊在重啟後可以回復。
+
+### 為何在未受信任目錄中專案設定不生效？
+
+專案設定與 MCP 伺服器來自儲存庫檔案，載入即等於讓專案內容影響執行環境。新版要求以 `--trust` 明確標記信任，設定才會被保存與載入。
+
+### 企業導入需要哪些前置條件？
+
+需要可用的身分驗證機制，包含支援裝置碼授權的網關設定。同時應規劃憑證輪換、版本鎖定與專案信任政策，並為沙箱與網路代理安排測試。
+
+</div>
+
+<h2 id="總結哪些團隊適合升級到-01690">總結：哪些團隊適合升級到 0.169.0？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>需要在本機或受管裝置執行編程代理、且要求權限邊界可稽核的團隊最適合。若只需單線任務，多分頁與 Cloud 連線帶來的效益有限，可先觀望。
+<!-- End AEO Capsule --></p>
+
+<p>0.169.0 版的改動沒有新增模型能力，重心落在並行工作的容納量與執行邊界。多分頁工作區與任務檢索處理的是長時間使用的組織問題，專案信任標記與執行邊界修補處理的則是採用門檻。</p>
+
+<p>這種取向說明專案的階段。當工具從個人試用走向組織部署，版本更新的重心自然從功能清單轉向可維運性；星標規模、貢獻者數量與問題佇列的增長速度，亦支持這個判斷。</p>
+
+<p>評估時值得先問一個問題：團隊目前卡住的是產出速度，還是稽核與合規。若是前者，分頁與檢索帶來的效率提升值得先試；若是後者，近幾個版本反覆出現的信任標記與沙箱修補，會比任何功能介紹都更值得細讀。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="OpenAI" /><category term="Codex CLI" /><category term="編程代理" /><category term="終端工具" /><category term="側邊對話" /><category term="沙箱" /><category term="模型供應商" /><category term="Rust" /><category term="開源專案" /><category term="科技新聞" /><summary type="html"><![CDATA[OpenAI 開源的 Codex CLI 於 2026 年 11 月 13 日推出 0.169.0 版，以 Rust 撰寫的終端編程代理累積 135,179 顆星標。本文整理多側邊對話分頁、自訂模型供應商、裝置碼授權與 Cloud 連線四項改動，並說明未受信任目錄的執行邊界如何收緊，以及升級前需要實測的環節。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/openai-codex-0169-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/openai-codex-0169-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">llama.cpp 1.0 正式版：API 凍結與 FP8 快取</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/llamacpp-v1-0-release-news" rel="alternate" type="text/html" title="llama.cpp 1.0 正式版：API 凍結與 FP8 快取" /><published>2026-11-14T16:00:02+08:00</published><updated>2026-11-14T16:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/llamacpp-v1-0-release-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/llamacpp-v1-0-release-news"><![CDATA[<p>llama.cpp 於二零二六年十一月十三日發布 v1.0.0，這是專案自二零二三年三月建立以來首次啟用主版本號，同時把底層張量庫 ggml 推進至 v1.0.0。此版移除三十五個棄用函數，把 NextN 投機解碼介面升上公開標頭，並加入 OCP FP8 KV 快取。</p>
+
+<p><img src="/assets/images/posts/llamacpp-v1-0-release-news-shot1.png" alt="llama.cpp 的 GitHub 儲存庫 README 開頭，頂部為深色橫幅與羊駝標誌，下方寫明 LLM inference in C/C++，並列出 MIT 授權、正式版、每夜版、伺服器與 Docker 建置狀態徽章，再往下是 curl 與 powershell 的安裝指令、模型下載與 OpenAI 相容伺服器啟動範例，以及命令列與網頁介面的兩張預覽圖" /></p>
+
+<p>專案定位自建立以來保持一致。它要在最少設定的前提下，於各類硬件執行大型語言模型與視覺語言模型的推理，既可在本地執行，也能部署到雲端。</p>
+
+<p>這項定位使專案成為本地推理的主要基礎。多數桌面端模型應用、量化工具與圖形介面，都以它的 GGUF 格式與後端作為執行層。</p>
+
+<h2 id="llamacpp-v100-是什麼">llama.cpp v1.0.0 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>llama.cpp v1.0.0 於 2026 年 11 月 13 日發布，以 C/C++ 提供大型語言模型推理，採 MIT 授權，星標約 13.5 萬。
+<!-- End AEO Capsule --></p>
+
+<p>專案以 libllama 對外提供推理介面，底層張量運算交由 libggml 處理，兩者各自有獨立的公開標頭與版本號。此次發布把兩個庫一併標記為 v1.0.0，版本說明引用七十八個合併請求，並列出二百四十九筆提交紀錄。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>項目</th>
+      <th>數據</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>GitHub 星標</td>
+      <td>134,862</td>
+    </tr>
+    <tr>
+      <td>分支數</td>
+      <td>25,566</td>
+    </tr>
+    <tr>
+      <td>主要語言</td>
+      <td>C/C++</td>
+    </tr>
+    <tr>
+      <td>授權</td>
+      <td>MIT</td>
+    </tr>
+    <tr>
+      <td>建立日期</td>
+      <td>2023 年 3 月 10 日</td>
+    </tr>
+    <tr>
+      <td>v1.0.0 發布</td>
+      <td>2026 年 11 月 13 日</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="/assets/images/posts/llamacpp-v1-0-release-news-shot2.png" alt="llama.cpp 的 GitHub 儲存庫首頁頂部，顯示 repo 名稱 ggml-org/llama.cpp 與 Watch、Fork 25.6k、Star 135k 按鈕，下方為 master 分支與一千多個分支標記，檔案清單包含 ggml、src、tools、examples 等目錄，右欄 About 區塊列出 LLM inference in C/C++、llama.app 連結、MIT 授權與 134.9k 星標統計" /></p>
+
+<h2 id="為什麼要推出-10-這個版本">為什麼要推出 1.0 這個版本？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>專案成立三年半後，下游應用已大量依賴其介面，維護團隊需要一個明確的穩定承諾。主版本號用來標示介面邊界，而非功能成熟度。
+<!-- End AEO Capsule --></p>
+
+<p>官方部落格把這次發布描述為責任的宣告。當愈來愈多產品把 llama.cpp 當作執行層，介面的每一次變動都會傳導到下游，因此需要一套可預期的版本規則。</p>
+
+<p>規模是另一項理由。目前專案支援超過一百五十種模型架構，以及主流的多種投機解碼方法，並在 Linux、macOS、Windows、Android 與 iOS 上提供預先建置產物。</p>
+
+<p>維護團隊亦在發布文中說明持續投入的基礎設施。在 NVIDIA、AMD、Qualcomm、Arm、IBM 與 Intel 的硬件支援下，自架執行器覆蓋主要運算平台，用以驗證每一次合併。</p>
+
+<h2 id="語意化版本規則如何影響下游開發者">語意化版本規則如何影響下游開發者？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>主版本對應 include 目錄內公開 C API 的破壞性變更，次版本對應向後兼容的功能與後端更新，修訂號對應無介面變更的修錯。
+<!-- End AEO Capsule --></p>
+
+<p>規則寫得相當具體。凡是 <code class="language-plaintext highlighter-rouge">include</code> 內的公開 C 介面出現不相容變更，就升主版本號；新增功能、後端更新或模型支援，升次版本號；純修錯而介面不變，只升修訂號。</p>
+
+<p>這套規則同時適用於 ggml 專案群。官方表明往後會更嚴格地把介面邊界顯性化，讓下游在建置與升級時能預先判斷風險。</p>
+
+<p>對使用命令列工具的讀者，版本號的意義較小。但若專案把 libllama 嵌入自家應用，主版本號的變動就是必須重新編譯與回歸測試的訊號。</p>
+
+<h2 id="v100-的公開介面有哪些破壞性變更">v1.0.0 的公開介面有哪些破壞性變更？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>移除 llama_set_warmup 與三十五個棄用函數，刪除 defrag_thold 及旗標，NextN 介面升上 llama.h。
+<!-- End AEO Capsule --></p>
+
+<p>三處改動最有機會令既有程式編譯失敗。第一項是預熱功能退場，原本呼叫 <code class="language-plaintext highlighter-rouge">llama_set_warmup</code> 的初始化流程需要改寫。第二項是命令列旗標 <code class="language-plaintext highlighter-rouge">--defrag-thold</code> 消失，依賴它調整 KV 快取碎片整理的啟動腳本會失去效果。</p>
+
+<p>第三項關係到投機解碼。NextN 介面原本放在擴充標頭 <code class="language-plaintext highlighter-rouge">llama-ext.h</code>，現已提升為正式介面並移入 <code class="language-plaintext highlighter-rouge">llama.h</code>，同時把 <code class="language-plaintext highlighter-rouge">llama_set_embd_state_src</code> 更名為 <code class="language-plaintext highlighter-rouge">llama_set_ctx_state_src</code>。</p>
+
+<p>升級時建議先做一次完整編譯，再以自建腳本跑一輪推理，確認沒有殘留舊介面的呼叫。專案維持每夜建置，若需要時間遷移，可暫時停留在對應的每夜版本。</p>
+
+<h2 id="記憶體管理新增了哪些能力">記憶體管理新增了哪些能力？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>新增 OCP FP8 KV 快取，可用 -ctk／-ctv 設為 f8_e4m3。MoE 專家快取加入 CPU 佔比參數，外部 PLE 分片可獨立載入。
+<!-- End AEO Capsule --></p>
+
+<p>FP8 KV 快取是這次最直接影響佔用的改動。把鍵值快取由十六位元降到八位元，可延長可用上下文長度，代價是需要確認縮放設定與模型相容性。上一版把 FP8 量化與多節點並行放在一起，<a href="/%E6%8A%80%E8%A1%93/llamacpp-v090-news">v0.9.0 的實測數字</a>可作對照基線。</p>
+
+<p>MoE 專家快取的調整針對混合專家模型。新增的 CPU 佔比參數讓未命中的專家在系統記憶體中處理，並改用 LRFU 與 ClassLRU 之類的替換策略，命中時不再等待 CPU 端。同類設計在<a href="/%E6%8A%80%E8%A1%93/gpu-unlock-news">顯示記憶體不足時以系統記憶體承接參數的做法</a>中亦可見，方向都是把權重搬運成本換成可預測的延遲。</p>
+
+<p>其餘兩項偏工程層面。外部 PLE 分片允許把詞彙相關權重放在獨立 GGUF 檔案，按需載入；Windows 端補上與 Linux DirectIO 對應的無緩衝載入路徑。</p>
+
+<h2 id="新增支援哪些模型與模態">新增支援哪些模型與模態？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>文字架構加入 Kimi-K3.1-Pro、Ripple-65B 與 xing4_0，語音加入 drama-3，視覺加入 MageVL-Cowork 與 Kimi-K3.1。
+<!-- End AEO Capsule --></p>
+
+<p>Kimi-K3.1-Pro 的改動幅度較大。它把原本的全注意力 MLA 層換成 DSA，屬架構層調整而非單純權重相容。Ripple-65B-Preview 則是新的稠密六十五億級設計，官方強調沒有引入新算子。</p>
+
+<p>語音端補上 drama-3 合成，並新增 OpenAI 相容的 <code class="language-plaintext highlighter-rouge">/v1/audio/speech</code> 端點，<code class="language-plaintext highlighter-rouge">/tts</code> 亦加上溫度參數。視覺與音訊的子上下文改為共用計算緩衝，降低同時載入多模態模型時的記憶體需求。</p>
+
+<p>架構層同時做了收斂。舊有的 <code class="language-plaintext highlighter-rouge">clip.h</code> 被移除，模型與子上下文的基礎設施整合進 mtmd，log-mel 頻譜改在計算圖內完成，不再為每個請求開執行緒。</p>
+
+<h2 id="llama-server-在安全性上做了哪些收緊">llama-server 在安全性上做了哪些收緊？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>未認證工具與私有網址改為須明確開啟，同版修正 CORS 驗證、DNS 重綁定與代理 SSRF，HF_TOKEN 限制在 huggingface.co。
+<!-- End AEO Capsule --></p>
+
+<p>四項修正都被列入版本說明的安全段落。CORS 來源檢查原本可被繞過，代理路徑存在 SSRF 風險，子實例的存取控制亦有缺口。</p>
+
+<p>令牌處理同樣收窄。<code class="language-plaintext highlighter-rouge">HF_TOKEN</code> 只會送往 huggingface.co 主機，避免在下載模型時把憑證交給其他網域。</p>
+
+<p>工具調用補上取消機制。客戶端斷線或超時時，伺服器會中止對應的 MCP 工具調用並通知對方，不再讓請求在背景持續佔用資源。</p>
+
+<p>對外暴露服務的讀者值得留意預設值的變化。以往可直接使用的未認證工具與私有網址抓取，現在要自行加上旗標才會啟用。</p>
+
+<h2 id="如何安裝或升級到-v100">如何安裝或升級到 v1.0.0？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>最簡方式是執行官方安裝腳本，Linux 與 macOS 用 curl，Windows 用 powershell，亦可經 Homebrew、Winget 或 Docker 安裝。
+<!-- End AEO Capsule --></p>
+
+<p>官方 README 把安裝壓成一行指令。腳本會抓取對應平台的預先建置版本，完成後即可下載模型並啟動相容 OpenAI 介面的伺服器。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-LsSf</span> https://llama.app/install.sh | sh
+llama run &lt;model&gt;
+llama serve
+</code></pre></div></div>
+
+<p>Windows 環境改用 <code class="language-plaintext highlighter-rouge">irm https://llama.app/install.ps1 | iex</code>。若團隊已有套件管理流程，可走 Homebrew、Winget、conda-forge 或 MacPorts，容器化部署則有官方 Docker 映像。</p>
+
+<p>自行編譯的讀者要留意後端選項。CUDA 十二與十三、ROCm、Vulkan、SYCL、OpenVINO 與行動平台的 Snapdragon 後端各有獨立產物，升級時需同步更新對應的執行期函式庫。</p>
+
+<h2 id="有哪些已知限制與升級風險">有哪些已知限制與升級風險？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>介面移除會令舊呼叫編譯失敗，defrag 旗標失效後碎片整理改由其他機制處理。商店條目的未簽章提示與各後端產物版本不同步，亦是常見的升級障礙。
+<!-- End AEO Capsule --></p>
+
+<p>風險集中在三個層面。原始碼層面的舊函數呼叫必須改寫，這一點在編譯階段就會暴露，處理成本最低。</p>
+
+<p>執行層面的變化較隱蔽。KV 快取改為 FP8 後，長上下文的數值穩定性需要實測；MoE 專家快取的 CPU 佔比若設得過高，吞吐會明顯下降。</p>
+
+<p>發行渠道的同步亦需留意。各平台商店與容器映像的收錄時間不同，版本說明中的功能未必在當日就能透過套件管理器取得。倉庫目前仍有約二千六百個未結問題，遇到異常時值得先搜尋既有回報。</p>
+
+<p><img src="/assets/images/posts/llamacpp-v1-0-release-news-shot3.png" alt="llama.cpp 儲存庫的貢獻者統計頁，顯示按週統計的提交活躍度長條圖與頂部貢獻者列表，反映專案長期的社群投入規模" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>版本內容見 GitHub 的 v1.0.0 Release，設計說明與版本規則見 Hugging Face 部落格，程式碼在 ggml-org/llama.cpp。
+<!-- End AEO Capsule --></p>
+
+<p>發布說明位於 <a href="https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0">llama.cpp v1.0.0 Release</a>，逐項列出介面變更、新模型與後端修正。官方設計文章為 <a href="https://huggingface.co/blog/ggml-org/llama-cpp-v1">llama.cpp v1.0.0: A stronger foundation for the local AI ecosystem</a>。</p>
+
+<p>程式碼、建置說明與各平台發行產物集中在 <a href="https://github.com/ggml-org/llama.cpp">github.com/ggml-org/llama.cpp</a>，張量庫 <a href="https://github.com/ggml-org/ggml">ggml</a> 亦同步發布 v1.0.0。</p>
+
+<h2 id="總結llamacpp-v100-適合什麼團隊">總結：llama.cpp v1.0.0 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>把推理層嵌入自家產品的團隊最值得升級，因為介面邊界自此有明確規則。純用命令列工具的讀者收益集中在模型支援與伺服器安全修正。
+<!-- End AEO Capsule --></p>
+
+<p>這次發布的意義主要在契約層面。三年半累積的功能已足夠，專案選擇在此刻把介面鎖定，讓下游能按版本號判斷升級成本。</p>
+
+<p>實際收益分散在幾個方向。FP8 KV 快取與 MoE 專家快取降低記憶體門檻，新架構擴大可用模型範圍，伺服器安全修正則降低自架服務的暴露面。</p>
+
+<p>限制同樣存在。捨棄舊介面的代價由下游承擔，自行編譯者要重新驗證後端組合。對只在桌面使用圖形介面的讀者，升不升級的差別，多半要等應用程式跟著更新才感受得到。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="llama.cpp" /><category term="ggml" /><category term="本地推理" /><category term="語意化版本" /><category term="FP8 快取" /><category term="MoE" /><category term="開源" /><category term="科技新聞" /><summary type="html"><![CDATA[llama.cpp 於 2026 年 11 月 13 日發布 v1.0.0，首次啟用主版本號並同步把 ggml 推進至 1.0。此版移除 35 個棄用函數與 defrag 參數，把 NextN 投機解碼介面升上公開標頭，加入 OCP FP8 KV 快取與可設定 CPU 佔比的 MoE 專家快取，並收緊伺服器安全預設。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/llamacpp-v1-0-release-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/llamacpp-v1-0-release-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Edge0-145B 開源：24GB 顯卡跑 145B 代理</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/edge0-145b-on-device-news" rel="alternate" type="text/html" title="Edge0-145B 開源：24GB 顯卡跑 145B 代理" /><published>2026-11-14T12:00:02+08:00</published><updated>2026-11-14T12:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/edge0-145b-on-device-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/edge0-145b-on-device-news"><![CDATA[<p>Edge0 於 2026 年 11 月 13 日開源 145B 的 Edge0-145B 與 120B 版本，配合 edge0-infer 推理引擎，可在單張 24GB 顯示卡上執行編程與代理任務。倉庫採 Apache-2.0 授權，以 C++ 撰寫，累積 10,862 顆星標，官方錄得 121.2 tok/s 代理解碼速度。</p>
+
+<p><img src="/assets/images/posts/edge0-145b-on-device-news-shot1.png" alt="Edge0 的 GitHub README 開頭畫面，中央為專案名稱 Edge0 與「An open-source streaming MoE inference framework」定位說明，下方標示 Think big. Run here. 與 macOS、iOS、Android、Linux、Windows 五個平台圖示，再往下是 arXiv 論文、GitHub 倉庫、Discord 與 Apache 2.0 授權徽章，以及 145B 與 120B 兩個版本的 Hugging Face 權重連結" /></p>
+
+<h2 id="edge0-145b-是什麼">Edge0-145B 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Edge0-145B 是 1450 億參數的潛在混合專家模型，原生以 4 位元訓練，採 Apache-2.0 授權，定位為本機執行代理工作的開源方案。
+<!-- End AEO Capsule --></p>
+
+<p>模型派生自 Qwen3.8-Flash-Next，架構為 48 層、512 個專家、每次推理啟動 K=10。145B 版本設有 1792 個潛在專家，120B 版本為 1280 個，兩者總參數不同但層數與專家數一致。權重同時上架 Hugging Face 與 ModelScope，技術報告以 The Other Half of the Memory Wall 為題放在 arXiv，處理 35B 混合專家模型從 SSD 供應的問題。</p>
+
+<p>倉庫由 Edge0-AI 維護，內容包含推理引擎、模型文件與桌面應用程式三個部分。11 月 4 日釋出的 edge0-infer 以 GGML 為基礎，把命令列、OpenAI 相容的本機伺服器與聊天範例統一成一套 C++ 介面，取代原本的 Python 框架與逐平台引擎。</p>
+
+<h2 id="145b-模型如何在單張-24gb-顯示卡上運行">145B 模型如何在單張 24GB 顯示卡上運行？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>關鍵在三層權重放置與專家共用矩陣。常駐專家留在顯示記憶體，專家庫放系統記憶體，詞彙資料留在 SSD 按需讀取，配合 CPU 與 GPU 分工壓低搬運量。
+<!-- End AEO Capsule --></p>
+
+<p>官方把設計拆成四個層次。架構層讓每組 64 個專家共用兩組大型矩陣，每個專家只保留少量差異參數，因此 145B 的總參數中每次推理約 10B 參與計算。訓練層直接以裝置架構為前提，避免先訓練雲端模型再壓縮的做法。</p>
+
+<p>載入層把顯示記憶體、系統記憶體與 SSD 串成管線。常用專家留在 GPU，約 40GB 的專家庫放在系統記憶體，約 48GB 的詞彙資料留在 SSD 按需讀取。排程層由 GPU 處理已快取的專家、CPU 並行處理其餘工作，並以投機解碼一次驗證多個候選 token，把讀取權重的成本攤到更多輸出上。</p>
+
+<p>權重體積仍是硬指標。Q3_K 版本佔 40.81 GiB，NVFP4 佔 47.79 GiB。在 16 GiB 顯示記憶體加 20 GiB 系統記憶體的測試條件下，同一張 RTX 5090 D 把 Q3_K 拆成 23.14 GiB 顯示記憶體與 31.28 GiB 系統記憶體，兩組專家集合互不重疊。</p>
+
+<h2 id="官方公布的效能數據如何">官方公布的效能數據如何？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>RTX 5090 D 配 Q3_K 版錄得代理解碼 121.2 tok/s、16K 前置填充 3554.9 tok/s。RTX 4090 為 91.7，記憶體受限時降至 44.9。
+<!-- End AEO Capsule --></p>
+
+<p>所有吞吐數字以 tok/s 計，官方頭條採用 145B 的 Q3_K 版本。前置填充指處理輸入提示的速度，代理解碼指多回合工具調用時的生成速度，兩者在長流程下的差距會直接影響等待時間。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>機器</th>
+      <th>版本</th>
+      <th style="text-align: right">4K 前置</th>
+      <th style="text-align: right">16K 前置</th>
+      <th style="text-align: right">對話解碼</th>
+      <th style="text-align: right">代理解碼</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>RTX 5090 D 24GB</td>
+      <td>Q3_K</td>
+      <td style="text-align: right">2169.9</td>
+      <td style="text-align: right">3554.9</td>
+      <td style="text-align: right">99.7</td>
+      <td style="text-align: right">121.2</td>
+    </tr>
+    <tr>
+      <td>RTX 5090 D 24GB</td>
+      <td>NVFP4</td>
+      <td style="text-align: right">1839.6</td>
+      <td style="text-align: right">3165.7</td>
+      <td style="text-align: right">79.6</td>
+      <td style="text-align: right">98.3</td>
+    </tr>
+    <tr>
+      <td>RTX 4090 24GB</td>
+      <td>Q3_K</td>
+      <td style="text-align: right">2042.0</td>
+      <td style="text-align: right">3179.4</td>
+      <td style="text-align: right">69.9</td>
+      <td style="text-align: right">91.7</td>
+    </tr>
+    <tr>
+      <td>RTX Spark N1X 60GiB</td>
+      <td>Q3_K</td>
+      <td style="text-align: right">674.0</td>
+      <td style="text-align: right">770.3</td>
+      <td style="text-align: right">37.7</td>
+      <td style="text-align: right">36.7</td>
+    </tr>
+    <tr>
+      <td>16GiB VRAM + 20GiB RAM</td>
+      <td>Q3_K</td>
+      <td style="text-align: right">249</td>
+      <td style="text-align: right">335</td>
+      <td style="text-align: right">36.8</td>
+      <td style="text-align: right">44.9</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>同一張 5090 D 在 NVFP4 版本反而較慢，官方數據顯示代理解碼由 121.2 降至 98.3。原因在於兩種量化格式的解碼路徑不同，較低的位元寬不等於較快的速度，選版本時要看實際工作負載而非只看壓縮率。</p>
+
+<h2 id="基準測試與雲端模型相差多少">基準測試與雲端模型相差多少？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>六項基準平均 72.8 分，高於 Qwen3.8-Flash-Next 的 71.7。DeepSWE 1.1 得 64.6，HLE 僅 35.4，通用推理仍落後於 Claude。
+<!-- End AEO Capsule --></p>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>DeepSWE 1.1 得 64.6、Terminal-Bench 2.1 得 86.5，均高於同場雲端模型。GPQA-Diamond 90.4，HLE 僅 35.4 落後。
+<!-- End AEO Capsule --></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>模型</th>
+      <th style="text-align: right">DeepSWE 1.1</th>
+      <th style="text-align: right">Terminal-Bench 2.1</th>
+      <th style="text-align: right">GPQA-Diamond</th>
+      <th style="text-align: right">IFBench</th>
+      <th style="text-align: right">HLE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Edge0-145B</td>
+      <td style="text-align: right">64.6</td>
+      <td style="text-align: right">86.5</td>
+      <td style="text-align: right">90.4</td>
+      <td style="text-align: right">80.6</td>
+      <td style="text-align: right">35.4</td>
+    </tr>
+    <tr>
+      <td>Edge0-120B</td>
+      <td style="text-align: right">51.3</td>
+      <td style="text-align: right">75.3</td>
+      <td style="text-align: right">87.4</td>
+      <td style="text-align: right">79.3</td>
+      <td style="text-align: right">31.0</td>
+    </tr>
+    <tr>
+      <td>Qwen3.8-Flash-Next</td>
+      <td style="text-align: right">58.7</td>
+      <td style="text-align: right">83.3</td>
+      <td style="text-align: right">91.7</td>
+      <td style="text-align: right">81.3</td>
+      <td style="text-align: right">35.9</td>
+    </tr>
+    <tr>
+      <td>DeepSeek-V4-Flash-0731</td>
+      <td style="text-align: right">54.4</td>
+      <td style="text-align: right">82.7</td>
+      <td style="text-align: right">90.8</td>
+      <td style="text-align: right">79.2</td>
+      <td style="text-align: right">33.8</td>
+    </tr>
+    <tr>
+      <td>Claude-Opus-4.6 (Max)</td>
+      <td style="text-align: right">無公開分數</td>
+      <td style="text-align: right">78.2</td>
+      <td style="text-align: right">91.3</td>
+      <td style="text-align: right">62.5</td>
+      <td style="text-align: right">40.0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>值得留意的是分數來源。Edge0、Qwen、DeepSeek 與 Claude 四組數字由 Edge0 自行評測，其中 Claude 沒有公開的 DeepSWE 1.1 成績，因此該列留空而非記零。Flint、Muse Glimmer 與 Gemma 4 的數據分別取自 Recursive Flint 評測與 Artificial Analysis，換算方式並不完全一致。</p>
+
+<p>推論成本要一併看。官方把 145B 的 29GB 實測峰值與 Qwen3.8-Flash-Next 約 70GB 的 4 位元部署估算並列，得出約四成的記憶體佔用。這個比較對本地部署有意義，但估算值尚未實測，官方文件亦以星號標示。</p>
+
+<h2 id="如何在-linux-或-windows-上安裝並啟動">如何在 Linux 或 Windows 上安裝並啟動？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>先複製倉庫，再分別建置 edge0-strata 引擎與 edge0-infer。啟動時指向單一模型資料夾，載入後印出本機 8000 埠位址，並提供 OpenAI 相容端點。
+<!-- End AEO Capsule --></p>
+
+<p>建置分成兩步，兩個部分都要編譯。Linux 環境需要 CUDA 13，Windows 支援 x64 與 ARM64。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/Edge0-AI/Edge0.git edge0
+build/cpu/bin/edge0-infer serve <span class="nt">--model</span> /path/to/Edge0-145B-q3k
+</code></pre></div></div>
+
+<p>載入完成後終端會印出 Listening 一行，其中模型名稱顯示為 edge0_145b。既有客戶端只要把 base URL 指向本機 8000 埠並改用該模型名稱，就能沿用原本的 OpenAI 介面。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl localhost:8000/v1/chat/completions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s1">'content-type: application/json'</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{"model":"edge0_145b","messages":[{"role":"user","content":"hi"}],"max_tokens":64}'</span>
+</code></pre></div></div>
+
+<p>若不想自行編譯，Windows 另有 Edge0 Chat 桌面應用程式，從 Releases 下載後直接選擇模型資料夾即可執行，離線狀態下核心功能仍可用。命令列模式則提供 chat 子命令開啟互動工作階段，適合在終端內連續測試提示詞。</p>
+
+<p>這類本機服務的用法與其他執行期相近。<a href="/%E6%8A%80%E8%A1%93/llamacpp-v090-news">llama.cpp 的伺服器同樣提供相容 OpenAI 的端點</a>，客戶端只需改 base URL 與模型名稱。若要進一步壓縮記憶體佔用，<a href="/%E6%8A%80%E8%A1%93/ollama-v040-mlx-news">Ollama 在近期版本改以 MLX 處理蘋果平台推理</a>，顯示各執行期都在同一個方向上調整。</p>
+
+<h2 id="記憶體不足時有哪些調整參數">記憶體不足時有哪些調整參數？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>五個旗標控制容量。vram-reserve-mib 保留顯示記憶體給桌面，expert-cache 決定常駐專家數，mmap-experts 改為全部按需讀取。
+<!-- End AEO Capsule --></p>
+
+<p>這些旗標寫在模型包的 model.json 內，分為 args 與 env 兩組，改一次就套用到每次啟動，不必每次在命令列重複。–vram-reserve-mib 預設 700，用於保留驅動與其他程式所需的顯示記憶體，引擎再從剩餘空間規劃快取。</p>
+
+<p>–expert-cache 設為 auto 時，會依扣除固定開銷後的空閒顯示記憶體推算專家槽位。–kv-resident 控制每層留在顯示記憶體的 KV 單元數，其餘從鎖定的系統記憶體串流，這個設定換取的是專家可用的顯示記憶體。–spec 調整投機解碼的驗證視窗，預設 4，視窗越大需要越大的驗證緩衝區。</p>
+
+<p>系統記憶體吃緊時，–mmap-experts 讓專家直接從包檔讀取，不在記憶體常駐，代價是速度下降。–resident-budget-gib 則限制系統記憶體專家快取的上限，並會依可用記憶體再收窄，使用時必須搭配靜態的專家設定檔。</p>
+
+<h2 id="與-9-月的手機版-edge0-35b-有什麼差別">與 9 月的手機版 Edge0-35B 有什麼差別？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>35B 走原生引擎，支援 macOS、iOS 與 Android；145B 與 120B 走 edge0-strata，只支援 Linux 或 Windows 配 NVIDIA 顯示卡。
+<!-- End AEO Capsule --></p>
+
+<p>9 月 8 日首發的 35B 版本在 iPhone 18 Pro Max 上以約 2.5GB 記憶體達到 37 tok/s，把討論從數十億參數推向 350 億級別。11 月 4 日的 edge0-infer 進一步把命令列、本機伺服器與聊天範例收攏到同一套 C++ 介面，取代原本的 Python 框架。</p>
+
+<p>145B 系列沒有跟上這份平台清單。倉庫的平台表把 145B 與 120B 標為 Linux 或 Windows 配 CUDA 13，35B 才涵蓋 macOS 的 Metal 與 CPU、iOS 的 Metal 及 Android 的 CPU。蘋果 M2 Ultra 的 57 tok/s 屬於量測數據，文件明確說明不構成 macOS 發佈承諾。</p>
+
+<h2 id="官方說法與倉庫文件有何不一致">官方說法與倉庫文件有何不一致？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>部落格以筆記本與 29GB 峰值描述，倉庫平台表只列 Linux 或 Windows 配 NVIDIA 顯示卡。採購前應以倉庫文件為準。
+<!-- End AEO Capsule --></p>
+
+<p>這是本地部署最常踩的一環。部落格示範提到 MacBook Pro 與 128K 至 256K 上下文，倉庫的建置說明則要求 CUDA 13 環境。兩種說法並非互相矛盾，而是描述不同層面：前者談模型能力上限，後者談目前的發佈狀態。</p>
+
+<p>29GB 峰值與 40.81 GiB 權重兩個數字並列時亦容易誤讀。前者是特定硬體設定的實測峰值，後者是權重檔案本身的大小，測量對象不同。若團隊以蘋果筆記本為主要設備，現階段可行的組合是 35B 系列，145B 需要另備 NVIDIA 機器。</p>
+
+<p><img src="/assets/images/posts/edge0-145b-on-device-news-shot2.png" alt="Edge0 倉庫首頁頂部畫面，顯示專案名稱 Edge0 與一行描述「Device-native foundation models: 145B on a laptop, 35B on a phone」，右側列出約 10.8k 顆星標、1.6k 個分支，上方分頁為 Code、Issues、Pull requests、Actions，右欄顯示 About 區塊與 Apache 2.0 授權標示" /></p>
+
+<h2 id="哪些團隊適合本地部署">哪些團隊適合本地部署？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>需要把程式碼與設計檔留在本機、且已有 24GB 顯示卡的團隊最適合。純雲端使用者若沒有資料外流顧慮，改用 API 的維護負擔與總成本通常更低。
+<!-- End AEO Capsule --></p>
+
+<p>本地推理省下的是 token 費用與網路往返，硬體與電力仍要計入。官方示範涵蓋 Blender 場景建構、遊戲關卡設計、無人機控制程式與電路板佈局，共同點是回合數多、需要視覺檢查。這類長流程按次計費時成本容易放大，改在本機執行則只受硬體限制。</p>
+
+<p>反過來說，跨裝置長期記憶與需要即時資訊的查詢仍依賴雲端。官方文件把分工描述成三個階段：雲端優先、日常本機、複雜工作本機，並未主張全面取代。用耳機廠商的混合方案為例，92% 的 AI 用量在本機完成，其餘 8% 才送到雲端。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>權重放在 Hugging Face 的 Edge0 組織，推理框架在 GitHub 的 Edge0-AI/Edge0 倉庫，官方部落格另有完整基準表。
+<!-- End AEO Capsule --></p>
+
+<p>權重分為 <a href="https://huggingface.co/Edge0/Edge0-145B-q3k">Edge0-145B-q3k</a> 與 <a href="https://huggingface.co/Edge0/Edge0-145B-NVFP4">Edge0-145B-NVFP4</a> 兩個版本，120B 同樣提供兩種量化格式。推理框架與建置說明位於 <a href="https://github.com/Edge0-AI/Edge0">github.com/Edge0-AI/Edge0</a>，模型細節見倉庫內的 145B 模型頁。</p>
+
+<p>官方部落格文章 <a href="https://edge0.ai/blog/introducing-edge0-145b-frontier-ai-capabilities-on-your-own-computer">Introducing Edge0-145B</a> 提供完整的硬體說明與示範案例。技術報告 <a href="https://arxiv.org/abs/2609.18063">The Other Half of the Memory Wall</a> 說明了從 SSD 供應專家權重的路由預測方法。</p>
+
+<p><img src="/assets/images/posts/edge0-145b-on-device-news-shot3.png" alt="Edge0 倉庫的統計與發布頁面截圖，顯示版本標籤 v0.2.0 的發佈說明，包含 145B 與 120B 模型的權重連結、edge0-strata 引擎的建置要求，以及 Apache 2.0 授權與貢獻者資訊區塊" /></p>
+
+<h2 id="總結edge0-145b-適合什麼情況">總結：Edge0-145B 適合什麼情況？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>在單張消費級顯示卡上執行 145B 級代理模型的門檻被拉低，編程與終端任務的分數已接近雲端中階模型。平台限制與自行評測兩點，是現階段評估時的主要變數。
+<!-- End AEO Capsule --></p>
+
+<p>真正的進展在資料搬運的處理方式，而非單純的參數堆疊。把專家拆到顯示記憶體、系統記憶體與 SSD 三層，再以投機解碼攤薄讀取成本，讓 24GB 的消費級顯示卡得以承載 145B 規模的模型，這條路徑對後續的本地部署方案有參考價值。</p>
+
+<p>限制同樣清楚。平台仍鎖在 NVIDIA 與 CUDA 13，蘋果設備只能靠 35B 系列，而六項基準的分數由廠商自行評測。實際採用前值得先用自身工作流程跑一輪，特別是長上下文的代理任務，再判斷省下的費用是否足以抵銷硬體與調校成本。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Edge0" /><category term="開源模型" /><category term="本地推理" /><category term="混合專家" /><category term="代理模型" /><category term="顯示卡" /><category term="CUDA" /><category term="量化" /><category term="邊緣運算" /><category term="科技新聞" /><summary type="html"><![CDATA[Edge0 於 2026 年 11 月 13 日開源 145B 的 Edge0-145B，配合 edge0-infer 推理引擎，可在單張 24GB 顯示卡上執行編程與代理任務。本文整理三層權重放置的設計、官方 121.2 tok/s 解碼數據、六項基準對比，並指出倉庫平台表與部落格描述之間的落差。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/edge0-145b-on-device-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/edge0-145b-on-device-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news" rel="alternate" type="text/html" title="Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%" /><published>2026-11-14T08:00:00+08:00</published><updated>2026-11-14T08:00:00+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news"><![CDATA[<p>Unsloth 於 2026 年 11 月 11 日發佈桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 量化檔升級至 Dynamic V3.1。官方基準指同一檔案大小下平均準確度提升 5% 至 10%，4-bit 版本只需 16GB 至 19GB 記憶體。</p>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>Dynamic V3.1 是 Unsloth 的量化演算法預覽版，2026 年 11 月 11 日隨桌面版推出，首批套用於 Qwen3.8-27B 的 2-bit 至 6-bit 檔案。
+<!-- End AEO Capsule --></p>
+
+<h2 id="unsloth-dynamic-v31-是什麼">Unsloth Dynamic V3.1 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Dynamic V3.1 按權重層的敏感度分配位元數，而非全模型採同一精度。項目以 Python 撰寫，採 Apache 2.0 授權，GitHub 累積 79,380 顆星標。
+<!-- End AEO Capsule --></p>
+
+<p>Unsloth 是一個以降低微調與推論成本為目標的開源專案，2023 年 11 月 29 日建立，目前累積 79,380 顆星標與 7,396 個分叉。它以 Python 撰寫，採 Apache 2.0 授權，提供命令列套件、網頁介面 Unsloth Studio 與桌面應用三種形態。</p>
+
+<p>Dynamic 系列是該項目的量化方案。名稱中的「動態」指位元分配並非整齊劃一，而是按層的重要性浮動。V3.0 演算法此前已用於 DeepSeek-V4.1-Flash 與 Qwen3.8-Flash-Next，V3.1 屬預覽版本，先在 Qwen3.8-27B 上落地。</p>
+
+<p>更新範圍有明確邊界。官方指出 2-bit 至 6-bit 的檔案大多已重新產生，但 3-bit 的 UD3 量化與 UD3.1 表現相當，因此維持原樣。團隊同時表示，更進一步的演算法版本將留待 Qwen4 及後續模型使用。</p>
+
+<p><img src="/assets/images/posts/unsloth-qwen38-v31-news-shot1.png" alt="Unsloth 的 GitHub README 開頭，顯示專案標誌、副標題與各平台下載入口" /></p>
+
+<h2 id="qwen38-27b-的量化精度提升了多少">Qwen3.8-27B 的量化精度提升了多少？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>官方稱同一檔案大小下平均準確度提升 5% 至 10%。代理測試採 Terminal Bench 2.1 與 DeepSWE v1.1，一般能力涵蓋 LiveCodeBench v6。
+<!-- End AEO Capsule --></p>
+
+<p>27B 是 Qwen3.8 系列中的緊湊稠密模型，具備視覺與推理能力，原生上下文長度為 256K。官方文件指出，該模型可在 17GB 記憶體或顯示記憶體的環境下運行，定位是讓中階硬件也能承擔多步代理任務。</p>
+
+<p>基準測試分為兩類。代理類工作使用 Terminal Bench 2.1 與 DeepSWE v1.1，兩者皆以 256K 上下文執行；一般能力測試則包含 LiveCodeBench v6、GPQA Diamond、MMLU-Pro、AIME25 與其他通用題庫，上下文中設為 128K。</p>
+
+<p>推理參數在文件中完整公開。測試採 temperature 1.0、top_p 0.95、top_k 20、min_p 0，關閉 presence 與 repetition 懲罰，並開啟 preserve_thinking 與 xhigh 推理層級。</p>
+
+<p>方法論段落還交代一個細節。官方表示無法透過 temperature 為 0 的貪婪解碼重現百分之百的準確度恢復，原因是圖形處理器本身的運算並非完全確定性。文件因此建議基準測試應重複多次執行，單次結果不足以定論。</p>
+
+<h2 id="27b-模型需要多少記憶體才能運行">27B 模型需要多少記憶體才能運行？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>官方硬體表列總記憶體需求：1-bit 需 7 至 8GB，3-bit 需 12 至 14GB，4-bit 需 16 至 19GB，6-bit 需 23 至 26GB，8-bit 需 31GB。
+<!-- End AEO Capsule --></p>
+
+<p>4-bit 是實務上最常被考慮的檔位。官方指出該級別可在 16GB 至 19GB 顯示記憶體的裝置上運行，例如 RTX 5080、RTX 4090，或配備 24GB 統一記憶體的 Mac。若計劃啟用 MTP 加速，需額外預留 1GB 至 2GB 空間。</p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">7-8 GB</span><span class="ui-stat-label">1-bit 需求</span></div>
+<div class="ui-stat"><span class="ui-stat-value">16-19 GB</span><span class="ui-stat-label">4-bit 需求</span></div>
+<div class="ui-stat"><span class="ui-stat-value">23-26 GB</span><span class="ui-stat-label">6-bit 需求</span></div>
+<div class="ui-stat"><span class="ui-stat-value">56 GB</span><span class="ui-stat-label">BF16 需求</span></div>
+</div>
+
+<p>記憶體不足時仍可執行，代價是速度。官方給出的經驗法則相當直接：隨機存取記憶體與顯示記憶體之和應接近量化檔大小，否則權重會被分頁到磁碟，生成速度明顯下降。Unsloth 會自動把部分層卸載到隨機存取記憶體，並偵測多張顯示卡的組合。</p>
+
+<p>同系列的超大模型提供另一個參照。Qwen3.8-2.4T-A95B 的 BF16 版本需 4.9TB 儲存空間，經 Dynamic 1-bit 量化後降至 397GB，約減少 91%。這個級別需要至少 450GB 記憶體，已超出消費級裝置範圍。</p>
+
+<h2 id="動態量化與傳統量化有何差別">動態量化與傳統量化有何差別？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>傳統量化對所有層採同一精度，動態量化按層的敏感度分配位元數，把容量留給影響輸出最大的層。兩者檔案大小相近，動態方案的準確度通常較高。
+<!-- End AEO Capsule --></p>
+
+<p>量化本質上是一場取捨。位元數下降可換來更小的檔案與更快的載入，但誤差會累積，尤其在長鏈推理與工具呼叫時容易被放大。固定精度方案的好處是流程簡單、工具鏈成熟，弱點是對所有層一視同仁。</p>
+
+<p>動態方案改變了分配邏輯。敏感層保留較多精度，冗餘層則壓得更緊，總檔案大小維持在目標範圍。這種做法需要逐層評估，量化流程因此較長，但換來的準確度可直接反映在基準分數上。</p>
+
+<p>比較時有一個技術細節值得注意。官方說明，為與 Exllama-v3 對照，主要圖表的橫軸剔除了 token embedding 層，原因是 Exllama-v3 在該層使用 BF16。若按完整下載大小與實際隨機存取記憶體佔用計算，曲線會有所變化。</p>
+
+<p>除 GGUF 之外，項目另推 NVFP4 路線。官方稱該格式在 24GB 顯示記憶體上比 BF16 快約 1.5 倍，並加入 FP8 KV 快取校準，令可用上下文長度延長約一倍。限制是 NVFP4 需 NVIDIA Blackwell 架構的顯示卡，例如 RTX 50 系列與 DGX Spark，目前僅在 vLLM 中支援。</p>
+
+<h2 id="unsloth-start-如何接上編碼代理">Unsloth Start 如何接上編碼代理？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>在終端執行 unsloth start 加代理名稱，即可把本地模型接入該代理。官方列出 Claude Code、Codex、OpenCode、Pi 等九種客戶端。
+<!-- End AEO Capsule --></p>
+
+<p>本地模型的價值取決於能否進入既有工作流。Unsloth Start 的作用正是補上這一段，把模型服務與代理客戶端之間的設定壓縮成一行指令。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unsloth start claude <span class="nt">--model</span> unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL
+</code></pre></div></div>
+
+<p>上例把 4-bit 動態量化的 Qwen3.8-27B 接到 Claude Code。同一模式可套用於 Codex 與其他客戶端，只需替換代理名稱。桌面版亦內建 MCP 預設，讓編碼代理直接取用本機工具。</p>
+
+<p>Mac 用戶另有選擇。v0.1.917-beta 把 MLX 模型接入 Claude Code 與 Codex 的路徑整併進同一指令，並修正 MLX 模型在提示超出服務上下文時的處理方式，改為回傳明確的長度錯誤，不再給出空白回應。</p>
+
+<p><img src="/assets/images/posts/unsloth-qwen38-v31-news-shot2.png" alt="Unsloth 的 GitHub 倉庫首頁，顯示倉庫名稱、星標數與目錄結構" /></p>
+
+<h2 id="桌面版-v01917-還帶來哪些改動">桌面版 v0.1.917 還帶來哪些改動？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>同版本改善長對話的串流與選單效能，FLUX.2 與 FLUX.3 影像解碼減少 36% 至 43% 顯示記憶體，並新增 HTML 與 PDF 匯出及影像生成排隊功能。
+<!-- End AEO Capsule --></p>
+
+<p>效能修正集中在長對話場景。官方稱串流輸出不再隨對話變長而劣化，背景圖與 Glass 主題同時開啟時的捲動亦更順暢，選單與對話框的開啟延遲一併降低。</p>
+
+<p>影像生成方面，FLUX.2 與 FLUX.3 在解碼階段的顯示記憶體佔用減少 36% 至 43%，速度維持不變。INT8 與 FP8 影像模型現在可在較舊的 NVIDIA 顯示卡上載入，包括 T4；LTX-2.5 的 FP8 版本可在 24GB 顯示記憶體上運行。</p>
+
+<p>訓練路徑亦有改善。FastModel 系列的 model.generate() 在 T4 顯示卡上預設快 2 至 8 倍，Ulysses 上下文並行擴展至 Kimi-Linear、DeepSeek、MiniMax 與 Gemma 4 等文字模型。這些改動對以舊卡執行微調的團隊較有實際意義。</p>
+
+<h2 id="項目規模與維護節奏如何">項目規模與維護節奏如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>倉庫累積 79,380 星標與 7,396 個分叉，主要語言 Python，採 Apache 2.0 授權。兩個 beta 版本相隔五日推出，節奏密集。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">79,380</span><span class="ui-stat-label">GitHub 星標</span></div>
+<div class="ui-stat"><span class="ui-stat-value">7,396</span><span class="ui-stat-label">分叉數</span></div>
+<div class="ui-stat"><span class="ui-stat-value">v0.1.917</span><span class="ui-stat-label">最新版本</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Apache 2.0</span><span class="ui-stat-label">授權條款</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Python</span><span class="ui-stat-label">主要語言</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2023-11</span><span class="ui-stat-label">建立時間</span></div>
+</div>
+
+<p>維護節奏偏向高頻小幅更新。兩個版本相隔五日，前者主打長對話效能與雙顯示卡影像生成，後者集中在量化演算法與界面細節。發佈檔一律標記為 beta，說明桌面應用仍在快速迭代階段。</p>
+
+<p>未解議題的數量值得留意。倉庫現有 470 個未關閉議題，對於一個安裝門檻涉及顯示卡驅動與記憶體配置的專案而言，這個數字反映使用者環境的複雜度，也提示新手在首次部署時需預留排錯時間。</p>
+
+<h2 id="如何開始使用">如何開始使用？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>Mac、Linux 與 WSL 可執行 curl 安裝腳本，Windows 用 PowerShell，亦提供 Homebrew 與 Docker 映像。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://unsloth.ai/install.sh | sh
+unsloth studio
+</code></pre></div></div>
+
+<p>Windows 環境改用 <code class="language-plaintext highlighter-rouge">irm https://unsloth.ai/install.ps1 | iex</code>。若偏好套件管理器，macOS 可用 <code class="language-plaintext highlighter-rouge">brew install --cask unsloth</code>，Windows 可用 <code class="language-plaintext highlighter-rouge">winget install --id UnslothAI.Unsloth -e</code>。</p>
+
+<p>桌面應用提供 Windows、macOS、Ubuntu 與 ARM64 版本，並可透過環境變數 UNSLOTH_DESKTOP_PORT 指定本機連接埠，預設為 8888。若該埠被佔用，程式會自動往後嘗試二十個埠。</p>
+
+<p>Docker 路線適合伺服器部署。官方映像為 unsloth/unsloth，AMD 顯示卡另有 unsloth/unsloth-rocm。需要對外提供服務時可加上 –secure 參數，透過 Cloudflare 取得 HTTPS 連結。官方同時提醒，伺服器端工具預設開啟，對外暴露時應設定密碼或加上 –disable-tools。</p>
+
+<p><img src="/assets/images/posts/unsloth-qwen38-v31-news-shot3.png" alt="Unsloth 的貢獻者統計頁面，顯示提交活動分佈與主要貢獻者" /></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>常見疑問集中在量化等級選擇、舊顯示卡支援、與 Ollama 共存、授權範圍、視覺能力與更新方式，以下逐項以問答形式回答，並附上官方文件對應的限制說明。
+<!-- End AEO Capsule --></p>
+
+<p><strong>4-bit 與 8-bit 應如何取捨？</strong></p>
+
+<p>4-bit 需 16GB 至 19GB 記憶體，8-bit 需 31GB。記憶體充裕時 8-bit 的準確度較高；若要在單張消費級顯示卡上運行長上下文代理任務，4-bit 是較現實的選擇。</p>
+
+<p><strong>舊款 NVIDIA 顯示卡仍然可用嗎？</strong></p>
+
+<p>可以。官方明言 NVFP4 需要 Blackwell 架構，但 GGUF 路線對較舊的顯示卡支援較廣，T4 亦在改善名單之內。</p>
+
+<p><strong>Dynamic V3.1 是否取代 V3.0？</strong></p>
+
+<p>V3.1 屬預覽版本，先在 Qwen3.8-27B 上套用。官方表示後續更完整的演算法版本會用於 Qwen4 及之後的模型。</p>
+
+<p><strong>3-bit 為何沒有更新？</strong></p>
+
+<p>官方測試發現 UD3 與 UD3.1 的表現相當，因此維持原有檔案，避免使用者重複下載。</p>
+
+<p><strong>可以與 Ollama 共存嗎？</strong></p>
+
+<p>可以。v0.1.917-beta 加入讓 unsloth start 連接已載入的 Ollama 模型的能力。</p>
+
+<p><strong>授權是否允許商業使用？</strong></p>
+
+<p>專案採 Apache 2.0 授權，允許商業使用與修改，需保留版權聲明。個別模型權重另有授權條款，使用前應查閱對應的模型卡。</p>
+
+<p><strong>視覺能力是否需要額外設定？</strong></p>
+
+<p>Qwen3.8-27B 原生支援圖像與影片理解。桌面版提供思考模式切換，推理深度可透過 reasoning_effort 調整。</p>
+
+<p><strong>如何更新到最新量化檔？</strong></p>
+
+<p>重新下載對應的 GGUF 檔案即可。安裝腳本已固定最低套件版本，重新執行安裝指令會一併更新依賴。</p>
+
+<h2 id="這次更新適合哪些使用者">這次更新適合哪些使用者？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>適合以單張消費級顯示卡運行 27B 模型、又需要代理與工具呼叫能力的開發者。若硬件低於 16GB 記憶體，或只需短對話用途，改用量化程度更高的檔案或較小模型更合適。
+<!-- End AEO Capsule --></p>
+
+<p>這次更新的核心是一條算術題。硬件不變，檔案大小不變，準確度上升 5% 至 10%，對已經在 16GB 級別顯示卡上跑本地模型的團隊而言，這是可直接感受到的改善。</p>
+
+<p>限制同樣明確。5% 至 10% 是官方自測的平均值，個別任務的差距可能更小或更大；代理類測試使用 256K 上下文，實際使用若縮短上下文，分數未必完全對應。</p>
+
+<p>部署決策仍取決於工作型態。需要頻繁工具呼叫與長鏈推理的流程，值得投入時間調整量化等級與上下文設定；純文字問答或短篇摘要，較小的模型配合一般量化已能滿足需求。同類的本地推理與代理接入選項，可對照 <a href="/技術/llamacpp-v090-news">llama.cpp v0.9.0 的本地推論路線</a> 與 <a href="/技術/qwen-code-1-0-preview-news">Qwen Code 1.0 預覽版的終端代理安排</a>。</p>
+
+<h2 id="原始碼與文件在何處查閱">原始碼與文件在何處查閱？</h2>
+
+<!-- AEO Answer Capsule — 約 79 字 -->
+<p>原始碼在 GitHub 的 unslothai/unsloth，文件在 unsloth.ai/docs，量化檔案發佈於 Hugging Face 的 unsloth 組織頁面。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫網址為 https://github.com/unslothai/unsloth ，內含各平台安裝方式、Unsloth Start 對照表與功能說明。量化細節與基準方法論載於 https://unsloth.ai/docs/models/qwen3.8 ，該頁提供 Markdown 版本，便於比對數據。</p>
+
+<p>模型檔案位於 https://huggingface.co/unsloth/Qwen3.8-27B-GGUF ，模型卡列出量化等級、硬體需求與更新日期。桌面應用的發佈檔則集中在 https://github.com/unslothai/unsloth/releases 。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Unsloth" /><category term="Qwen3.8" /><category term="GGUF" /><category term="量化" /><category term="本地 AI" /><category term="開源項目" /><category term="模型壓縮" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[Unsloth 於 2026 年 11 月 11 日推出桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 升級至 Dynamic V3.1。官方基準指同一大小的準確度提升 5% 至 10%，4-bit 版本需 16GB 至 19GB 記憶體，本文整理硬體門檻與代理接入方式。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/unsloth-qwen38-v31-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/unsloth-qwen38-v31-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Gemini 4 Hydrogen 接管 Google 搜尋</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/gemini-4-hydrogen-search-news" rel="alternate" type="text/html" title="Gemini 4 Hydrogen 接管 Google 搜尋" /><published>2026-11-14T04:00:01+08:00</published><updated>2026-11-14T04:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/gemini-4-hydrogen-search-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/gemini-4-hydrogen-search-news"><![CDATA[<p>Google 於 2026 年 11 月 12 日把 Gemini 4 Hydrogen 推上搜尋，全球使用者即時可用，官方形容為歷來最大的一次模型升級。變動集中三處：多段式提問的意圖理解、平行查詢帶來的連結覆蓋，以及表格與圖片的視覺化輸出。這批能力替換的是搜尋背後的推理層，並非功能表上的獨立開關。</p>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Gemini 4 Hydrogen 是 Google 於 2026 年 11 月 12 日全球推送的搜尋推理模型，接替原有生成層，主打量化拆解多段式提問與視覺化答案。
+<!-- End AEO Capsule --></p>
+
+<p>推送方式值得留意。同一日、同一版本、所有語言同時上線，沒有先開放付費用戶，也沒有分區灰度測試。過往 Gemini 模型多以預覽形式分階段釋出，這次直接覆蓋全部使用者，說明 Google 把搜尋視為模型能力的主戰場，而非實驗場。</p>
+
+<h2 id="gemini-4-hydrogen-是什麼">Gemini 4 Hydrogen 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>Gemini 4 Hydrogen 是 Google 搜尋的模型底座更新，由產品副總裁 Robby Stein 署名公布，取代先前的生成模型，在 AI 模式與一般結果中同時生效。
+<!-- End AEO Capsule --></p>
+
+<p>官方把 Hydrogen 定位為「把前沿智能帶給所有人」，用語的重點在普及而非規格。實際運作上，模型負責理解提問、決定要查哪些子題，再把結果組成可掃讀的版面。使用者見到的仍是搜尋框，換掉的是框後面那層判斷。</p>
+
+<p>這層判斷過去由較小的模型承擔，成本低、延遲短，代價是遇到複雜提問時容易只抓字面。Hydrogen 把推理深度拉高，等於承認一件事：使用者的提問方式已經改變，單一關鍵字無法涵蓋真實需求。</p>
+
+<h2 id="這次升級改了搜尋的哪幾層">這次升級改了搜尋的哪幾層？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>官方列出四層改動：多段式提問的意圖理解、平行查詢擴大連結來源、結構化與視覺化輸出，以及全部 AI 模式支援語言的品質一致化。四者同時生效，並非獨立選項。
+<!-- End AEO Capsule --></p>
+
+<p>第一層是意圖理解。官方說明，使用者可以直接用自然語序提問，包括含有多個子問題、明顯錯字或高度特定要求的句子。模型需要判斷哪一段是主問題，哪一段是限制條件，這一步決定後續查詢的方向。</p>
+
+<p>第二層是連結覆蓋。Hydrogen 的推理能力被用來強化平行查詢，讓搜尋同時向多個相關子題發出查詢，再從結果中挑選網站。官方稱之為連接更廣泛的連結來源，用意是找回以往可能無法觸及的頁面。</p>
+
+<p>第三層與第四層分別處理呈現與語言。回應會出現更多圖片、結構化段落、比較表格與針對特定需求生成的小工具，並且在所有支援的語言中維持相同品質。對非英語市場而言，第四層的實際影響最大。</p>
+
+<h2 id="為什麼搜尋需要更強的推理模型">為什麼搜尋需要更強的推理模型？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>因為提問的形態已經改變。使用者不再輸入兩三個關鍵字，而是描述一個含多個條件的需求，字面比對無法回應，需要模型先拆解再查詢，才找得到對應的頁面與工具。
+<!-- End AEO Capsule --></p>
+
+<p>旅遊與購物是最明顯的例子。官方舉出的情境包括指定預算、同行人數、時段偏好與交通方式的組合查詢，這類需求在舊架構下只能用多次搜尋拼湊。推理層換掉之後，一次提問就能展開成多條子查詢。</p>
+
+<p>搜尋產品本身也面對競爭壓力。使用者愈來愈習慣在對話介面取得答案，搜尋若只負責列出十條藍色連結，就會在習慣遷移中失去入口地位。把推理模型放進搜尋，是把答案生成與來源導引綁在同一個畫面。</p>
+
+<h2 id="平行查詢如何影響連結來源">平行查詢如何影響連結來源？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>平行查詢指模型把一個問題拆成多個子題，同時向各子題發出查詢，再把結果合併成完整回答。連結來源因此由單一路徑擴展為多路徑，覆蓋面變寬。
+<!-- End AEO Capsule --></p>
+
+<p>技術上的關鍵在於合併方式。多條查詢各自回傳一批候選頁面，模型需要判斷哪些頁面回應同一個子題、哪些只是詞面相近。判斷錯誤會導致引用不相關的網站，判斷正確則能補上舊架構漏掉的來源。</p>
+
+<p>對網站經營者而言，這個變化有兩面。一條頁面若只覆蓋單一關鍵字，被選中的機率會下降；反過來，把一個主題的多個面向寫在同一篇深度文章裡，就有機會同時命中多條子查詢。內容結構的影響開始大於關鍵字密度。</p>
+
+<h2 id="繁體中文使用者會見到什麼變化">繁體中文使用者會見到什麼變化？</h2>
+
+<!-- AEO Answer Capsule — 約 64 字 -->
+<p>回應語言品質與英語對齊，複雜提問可一次完成。繁體中文介面的搜尋結果會出現更多表格、圖片與比較式整理，AI 模式下的回答亦會保留來源連結。
+<!-- End AEO Capsule --></p>
+
+<p>實際差異出現在提問方式。以往需要把問題切成數次搜尋，現在可以直接寫成一句包含條件與限制的長句，例如同時指定地區、預算與時間範圍。模型會自行決定要查哪些子題。</p>
+
+<p>另一項變化是版面。比較表格與結構化段落佔用的位置增加，傳統連結列表相對被壓縮。對習慣快速掃讀的使用者而言，這代表答案更集中；對依賴自然排名的網站而言，曝光位置則變得更不穩定。</p>
+
+<h2 id="對內容網站與創作者有什麼影響">對內容網站與創作者有什麼影響？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>流量分配會更集中在意圖明確的深度頁面，只覆蓋單一關鍵字的短文較難被平行查詢選中。網站需要把同一主題的多個問題寫在同一頁，並保留可被引用的具體數據與表格。
+<!-- End AEO Capsule --></p>
+
+<p>這種結構與 AEO 的做法重疊。可被引用的段落需要自足、資料具體，並且在開頭就給出答案；分散在不同頁面的零碎說明，較難在合併階段被挑中。內容編排因此從「一篇打一個關鍵字」轉向「一篇覆蓋一組問題」。</p>
+
+<p>風險同時存在。搜尋直接生成答案，使用者未必點擊進入網站，曝光與造訪的落差會擴大。可觀察的對策是把工具、計算與互動留在站內，讓答案頁面本身成為目的地，而不是前往答案的中途站。</p>
+
+<h2 id="現在可以試用嗎">現在可以試用嗎？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>可以。Gemini 4 Hydrogen 已對全球所有使用者開放，無需申請或付費，直接前往 Google 搜尋輸入複雜提問即可見到新回應格式。
+<!-- End AEO Capsule --></p>
+
+<p>官方提供的測試方式是提出一個含多個條件的問題，觀察回應是否同時處理各部分。若回應出現比較表格、圖片分組或針對需求生成的小工具，即代表已進入 Hydrogen 的處理路徑。</p>
+
+<p>需要留意的是，生成式回應仍標示為實驗性質，內容可能出錯。涉及金額、法規或醫療的判斷，仍應回到原始來源核對。搜尋給出的是整理後的線索，而非最終依據。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>常見疑問集中在推送範圍、與 AI 模式的關係、對排名的影響，以及是否收費。以下逐項回答，並附官方說法與可觀察的實務影響。
+<!-- End AEO Capsule --></p>
+
+<p><strong>需要付費訂閱才能使用嗎？</strong></p>
+
+<p>不需要。官方明確表示 Hydrogen 已對所有使用者開放，包含免費用戶，亦沒有地區限制。</p>
+
+<p><strong>與 AI 模式是同一件事嗎？</strong></p>
+
+<p>兩者共用同一個推理層，但介面不同。AI 模式是獨立入口，一般搜尋結果也會套用 Hydrogen 的理解與整理能力。</p>
+
+<p><strong>會不會改變網站排名？</strong></p>
+
+<p>官方未公布排名機制的調整。可觀察的是版面比重改變，結構化答案與表格佔用更多位置，連結列表的曝光空間相對收窄。</p>
+
+<p><strong>舊的搜尋習慣要改嗎？</strong></p>
+
+<p>不必全面改寫，但複雜需求值得改成完整句子。把條件、限制與期望一次講清楚，模型才有足夠資訊拆解子題。</p>
+
+<p><strong>支援哪些語言？</strong></p>
+
+<p>官方稱所有 AI 模型目前支援的語言都包括在內，回應品質在各語言間對齊，繁體中文亦在其中。</p>
+
+<p><strong>生成內容出錯怎麼辦？</strong></p>
+
+<p>回應頁面保留來源連結，可回到原始網站核對。涉及數字與法規的內容，建議以官方文件為準。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>主要來源為 Google 官方部落格於 2026 年 11 月 12 日發布的公告，由搜尋產品副總裁 Robby Stein 署名，文中列出四項能力變動與使用方式。
+<!-- End AEO Capsule --></p>
+
+<p>官方公告題為「Google Search gets a major upgrade with Gemini 4 Hydrogen」，刊於 Google 產品部落格，內容涵蓋模型定位、四項能力與全球推送範圍。文中亦附上產品副總裁的署名與職銜，屬於第一手資料。</p>
+
+<ul>
+  <li>Google 官方公告：https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/</li>
+</ul>
+
+<h2 id="這次升級對搜尋生態意味著什麼">這次升級對搜尋生態意味著什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>搜尋的競爭單位由關鍵字轉為完整問題，內容價值取決於能否一次回應多個子題。網站流量會更集中，生成式答案與來源連結的比例成為新生態的分配關鍵。
+<!-- End AEO Capsule --></p>
+
+<p>把 Hydrogen 放進脈絡看，這一步與同期推出的模型更新屬於同一條路線。前沿模型先在高強度場景驗證，再下放到使用者日常接觸的介面；搜尋是最後一站，也是規模最大的一站。同期公布的模型演進可見 <a href="/技術/gemini-4-argon-news">Gemini 4 Argon 的百萬代幣輸出</a>，而把模型輸出壓縮成結構化判斷的做法，則可參考 <a href="/技術/gemini-decisions-api-news">Gemini 決策 API 的單次前向設計</a>。</p>
+
+<p>對內容生產者而言，方向已經清楚：把一個主題寫成能自我回答的完整頁面，保留具體數據與可引用的段落，比追逐單一關鍵字更實際。搜尋介面會繼續變化，可被引用的內容結構則相對穩定。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Gemini 4 Hydrogen" /><category term="Google 搜尋" /><category term="AI 模式" /><category term="平行查詢" /><category term="搜尋引擎" /><category term="Google" /><category term="科技新聞" /><summary type="html"><![CDATA[Google 於 2026 年 11 月 12 日把 Gemini 4 Hydrogen 推上 Google 搜尋，全球使用者即時可用，官方形容為搜尋歷來最大一次模型升級。變動涵蓋多段式提問的意圖理解、平行查詢擴大的連結覆蓋，以及表格、圖片與即時小工具的視覺化輸出。本文整理實際變化、技術背景，以及對內容網站的影響。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/gemini-4-hydrogen-search-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/gemini-4-hydrogen-search-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Cherry Studio 2.2.1：技能市集與遠端任務</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/cherry-studio-221-skills-marketplace-news" rel="alternate" type="text/html" title="Cherry Studio 2.2.1：技能市集與遠端任務" /><published>2026-11-14T00:00:02+08:00</published><updated>2026-11-14T00:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/cherry-studio-221-skills-marketplace-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/cherry-studio-221-skills-marketplace-news"><![CDATA[<p>Cherry Studio 於 2026 年 11 月 12 日發佈 v2.2.1，距 2.2.0 僅兩日。此版本把 2.2.0 建立的技能市集補上遠端任務查詢能力，新增 SerpKite 與 StepFun 兩個搜尋供應商，並修復代理與排程任務的多項缺陷。專案累積 53,485 顆星標，以 AGPL-3.0 釋出。</p>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>Cherry Studio 2.2.1 於 2026 年 11 月 12 日發佈，屬修補版本。主體功能仍來自 2.2.0 的技能市集，本版集中處理遠端任務查詢與缺陷修正。
+<!-- End AEO Capsule --></p>
+
+<h2 id="cherry-studio-221-是什麼">Cherry Studio 2.2.1 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Cherry Studio 是跨平台開源 AI 桌面工作站，支援 Windows、macOS 與 Linux，統一接入多間模型供應商，以 AGPL-3.0 釋出。
+<!-- End AEO Capsule --></p>
+
+<p>Cherry Studio 是一個跨平台的 AI 桌面工作站，2024 年 5 月 24 日建立於 GitHub。專案以 TypeScript 撰寫，採 GNU AGPL-3.0 授權，累積 53,485 顆星標、5,218 個分叉與 417 頁貢獻者名單。它的定位並非單純的聊天介面，而是把模型接入、代理執行、知識庫與排程任務放進同一個應用程式。</p>
+
+<p>版本節奏值得留意。2.1.10 於 10 月 31 日發佈，2.2.0 於 11 月 10 日推出，2.2.1 於 11 月 12 日跟上，三個版本間隔不足兩週。這種密度說明 2.2 系列仍在穩定化階段，功能擴張與缺陷修補同時進行。</p>
+
+<p><img src="/assets/images/posts/cherry-studio-221-skills-marketplace-news-shot1.png" alt="Cherry Studio 的 GitHub README 開頭，顯示專案標誌、跨平台定位說明與下載入口" /></p>
+
+<h2 id="技能市集解決了什麼問題">技能市集解決了什麼問題？</h2>
+
+<!-- AEO Answer Capsule — 約 57 字 -->
+<p>技能市集把技能目錄、外部來源、代理範本與 MCP 資源集中於單一介面，安裝附有引導，使用者不必再逐項進入設定頁面配置。
+<!-- End AEO Capsule --></p>
+
+<p>2.2.0 最受注目的改動是市集。它把原本分散在設定頁的技能、代理範本與 MCP 資源集中，並提供引導式安裝。對長期使用 MCP 的使用者而言，這件事的意義在於降低配置成本：過去每一台伺服器都要手動填寫指令與環境變數，如今可從目錄挑選後直接落地。</p>
+
+<p>市集同時處理外部技能來源。專案允許把受管理的技能匯出至 <code class="language-plaintext highlighter-rouge">~/.agents/skills</code>，供其他代理工具讀取。這個設計意味著 Cherry Studio 願意把技能視為可攜資產，而非綁定於單一應用程式的私有格式。專案的 GitHub topics 中列有 <code class="language-plaintext highlighter-rouge">agent-skills</code> 與 <code class="language-plaintext highlighter-rouge">mcp-client</code>，與此方向一致。</p>
+
+<p>技能市集把散落的設定變成可挑選的目錄，但目錄本身不會判斷內容是否安全。近期對代理技能的實測顯示，<a href="/%E6%8A%80%E8%A1%93/nvidia-skillspector-news">掃描一批公開技能後有相當比例存在權限或腳本風險</a>，因此在市集內一鍵安裝之前，仍值得先看清技能要求的存取範圍。若關注技能品質如何量測，<a href="/%E6%8A%80%E8%A1%93/skillopt-agent-skills-news">把技能文件當作可訓練參數的做法</a>提供了另一個切入角度。</p>
+
+<h2 id="遠端任務與通知中心帶來哪些改變">遠端任務與通知中心帶來哪些改變？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>遠端客戶端可發現排程任務的結果對話，並查詢任務排程、執行歷史與範圍受限的摘要。即使執行紀錄被清理，任務對話仍可被找到，補上行動端與桌面端之間的斷層。
+<!-- End AEO Capsule --></p>
+
+<p>2.2.0 為排程任務建立獨立側欄頁面，把任務對話、分頁的執行歷史與已完成或錯過任務的管理集中。2.2.1 進一步開放遠端查詢：外部客戶端能發現任務結果對話，並讀取排程、歷史與摘要。</p>
+
+<p>通知中心是配套設計。側欄新增的通知抽屜把任務結果與官方公告集中，附未讀指示、回覆預覽與本地化公告。對同時跑多個長時間任務的使用者，這種集中入口比逐一翻查對話實用。</p>
+
+<p>2.2.1 另外強化了代理的檔案與權限處理。系統與全域套件安裝改為在一般模式下請求批准、在完全存取模式下直接執行，而非一律封鎖。代理與助手可使用上傳圖片作為頭像，工作區與代理群組可釘選至頂部。子代理呼叫可同時指定供應商與模型，子任務列會顯示所請求的模型。</p>
+
+<h2 id="搜尋供應商與本地模型有什麼新選擇">搜尋供應商與本地模型有什麼新選擇？</h2>
+
+<!-- AEO Answer Capsule — 約 57 字 -->
+<p>遠端客戶端可發現排程任務的結果對話，並查詢排程、執行歷史與範圍受限的摘要。即使執行紀錄被清理，任務對話仍可被找到。
+<!-- End AEO Capsule --></p>
+
+<p>搜尋層的擴充反映實際需求。使用者接入多間供應商後，搜尋品質與計費方式差異明顯，可替換的供應商清單因此成為關鍵。2.2.1 加入 SerpKite 與 StepFun，並讓 Exa 透過 Contents API 取得指定網址的內容，減少自行抓取網頁的工夫。</p>
+
+<p>本地模型接入亦有進展。Rapid-MLX 以內建且免金鑰的形式加入，安裝後即可選用。既有路徑仍包括 Ollama 與 LM Studio，README 亦列出 Qwen、LongCat 2.5 與 Hunyuan 4 等模型的圖像輸入支援。對不想把資料送出本機的使用者，這條路線是主要選項。</p>
+
+<p>執行期的選擇會直接影響速度與記憶體佔用。<a href="/%E6%8A%80%E8%A1%93/ollama-v040-mlx-news">Ollama 在新版本把 Apple 平台全面轉向 MLX</a>，是本地推理路線近期較明顯的變化。桌面客戶端與執行期分屬兩層，前者負責介面與任務編排，後者決定模型跑得多快。</p>
+
+<p><img src="/assets/images/posts/cherry-studio-221-skills-marketplace-news-shot2.png" alt="Cherry Studio 的 GitHub 首頁頂部，顯示倉庫名稱、描述與星標數量" /></p>
+
+<h2 id="221-修復了哪些代理與排程問題">2.2.1 修復了哪些代理與排程問題？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>2.2.1 新增 SerpKite 與 StepFun 兩個搜尋供應商，Exa 可透過 Contents API 抓取網址內容。Rapid-MLX 成為免金鑰的本地供應商。
+<!-- End AEO Capsule --></p>
+
+<p>缺陷清單集中在代理執行時期。嵌套的 shell、檔案與產物工具結果在 Pi 與 Pi Durable 的 codemode 下重新顯示，包括重開對話後；未指定逾時的 Pi shell 指令不再無限期等待；關閉工作階段時先中斷 Claude 的工作，被中斷的回覆不再留下佔位文字。</p>
+
+<p>排程任務的修正同樣具體。Cron 逾時在 Gemini 相容執行時期下可正常運作，刪除超過約三萬二千個工作階段的任務不再失敗，執行歷史載入時錨點導覽保持對齊。這些項目單獨看細碎，合起來卻決定長時間執行的可靠度。</p>
+
+<h2 id="cherry-studio-的技術架構與生態定位如何">Cherry Studio 的技術架構與生態定位如何？</h2>
+
+<!-- AEO Answer Capsule — 約 63 字 -->
+<p>2.2.1 修正嵌套工具結果顯示、Pi 指令無限期等待、關閉工作階段的中斷順序，以及 Cron 逾時對 Gemini 相容執行時期的支援。
+<!-- End AEO Capsule --></p>
+
+<p>架構上，Cherry Studio 以 TypeScript 撰寫，桌面端採 Electron 打包，同時提供 Windows、macOS 與 Linux 三平台安裝檔。代理層分為 Pi 與 Pi Durable 兩種執行時期，後者為新建代理的預設，原生保存工作階段並獨立串流背景子代理。</p>
+
+<p>生態已超出單一應用程式。行動版另有獨立倉庫，企業版提供集中模型管理、共享知識庫與私有部署，社群亦維護多個主題倉庫。商業模式採雙軌：社群版依 AGPL-3.0 釋出，需要豁免條款者可另談商業授權。這種安排在開源專案中常見，但會影響企業採用的評估流程。</p>
+
+<p><img src="/assets/images/posts/cherry-studio-221-skills-marketplace-news-shot3.png" alt="Cherry Studio 的貢獻者統計頁，顯示長期活躍的貢獻者分佈" /></p>
+
+<h2 id="如何開始使用-cherry-studio-221">如何開始使用 Cherry Studio 2.2.1？</h2>
+
+<!-- AEO Answer Capsule — 約 67 字 -->
+<p>專案以 TypeScript 與 Electron 建構桌面應用，代理執行時期分為 Pi 與 Pi Durable。生態另含行動版、企業版與社群主題。
+<!-- End AEO Capsule --></p>
+
+<p>安裝路徑清楚。Windows 使用者可選 x64 或 arm64 的安裝版與可攜版，macOS 分 Apple silicon 與 Intel 兩種封裝，Linux 則有 AppImage、DEB 與 RPM 三種格式，並涵蓋 arm64。首次啟動後於供應商設定填入金鑰，或改用 Ollama、LM Studio 等本地路徑。</p>
+
+<p>功能可用性取決於供應商、作業系統與設定。官方文件明言部分功能需要 API 憑證、已下載模型、額外依賴或系統權限。文件另提醒社群主題若為 v1 時期撰寫，需先適配 v2 介面方可使用。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>可從官方網站或 GitHub Releases 下載安裝檔：Windows 有安裝版與可攜版，macOS 有 DMG，Linux 有 AppImage、DEB 與 RPM。
+<!-- End AEO Capsule --></p>
+
+<p>原始碼與版本紀錄位於 <a href="https://github.com/CherryHQ/cherry-studio">github.com/CherryHQ/cherry-studio</a>，2.2.1 的完整變更清單可在該倉庫的 Releases 頁面查閱。使用說明與快速入門見官方文件站，行動版與企業版各自有獨立入口。</p>
+
+<h2 id="總結cherry-studio-適合什麼團隊">總結：Cherry Studio 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 77 字 -->
+<p>主要出處為 GitHub 倉庫 CherryHQ/cherry-studio，版本紀錄見 Releases 頁，使用說明見官方文件站，企業版與商業授權另有獨立入口。
+<!-- End AEO Capsule --></p>
+
+<p>2.2 系列的方向明確：把技能、代理與排程收進同一個工作站，並讓這些資產可被外部工具讀取。53,485 顆星標與 417 頁貢獻者說明社群基礎穩固，但 2,701 個未結議題與兩日內連發兩版，也反映維護壓力真實存在。對正在評估桌面 AI 工作站的團隊，這個專案值得實測，惟應先確認授權條款與資料留存邊界。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Cherry Studio" /><category term="開源項目" /><category term="AI 桌面客戶端" /><category term="MCP" /><category term="技能市集" /><category term="代理框架" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[Cherry Studio 於 2026 年 11 月 12 日發佈 v2.2.1，為 2.2.0 引入的技能市集補上遠端任務查詢、SerpKite 與 StepFun 搜尋供應商，並修復代理與排程問題。本文整理版本差異、5.3 萬星標專案的架構定位與接入方式。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/cherry-studio-221-skills-marketplace-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/cherry-studio-221-skills-marketplace-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">聯合航空封殺 AI 代理訂票：誰代旅客簽名</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news" rel="alternate" type="text/html" title="聯合航空封殺 AI 代理訂票：誰代旅客簽名" /><published>2026-11-13T20:00:02+08:00</published><updated>2026-11-13T20:00:02+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news"><![CDATA[<p>聯合航空於 2026 年 11 月 11 日發表聲明，限制第三方個人 AI 代理在其系統上代客訂票與管理行程。措施同時覆蓋自家數位平台與經由旅行社、聚合平台的外部通路，並涉及訂位、開票與分銷政策的修改。官方理由分兩層：帳號憑證交給外部助理後可能外洩，代理自動執行的動作亦可能抵觸美國聯邦航空法規。</p>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>聯合航空於 2026 年 11 月 11 日禁止未經授權的第三方 AI 代理代客訂票，涵蓋自家平台與旅行社通路，理由是憑證外洩風險與法規要求真人確認行李聲明。
+<!-- End AEO Capsule --></p>
+
+<p>這次表態並非單純的技術封鎖。航空公司面對的是一個身份判斷問題：當一個帳號的登入行為由代理而非本人發出，系統難以分辨這是使用者的授權，還是憑證被挪用。聯合航空選擇的做法是直接切斷通路，把操作導回官方應用程式。</p>
+
+<h2 id="聯合航空今次封鎖了哪些通路">聯合航空今次封鎖了哪些通路？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>封鎖範圍分為直接與間接兩層。直接一層是聯合航空自家的網站與應用程式，間接一層是旅行社與聚合平台的介接管道，兩者同時納入限制。
+<!-- End AEO Capsule --></p>
+
+<p>官方聲明的用語是「直接在我們的數位平台之內，以及間接經由旅行社與聚合平台」，禁止未經授權的第三方個人 AI 代理或助理使用。配套動作是更新訂位、開票與分銷政策，把限制寫進商業條款而不只依賴技術攔截。</p>
+
+<p>這種雙軌做法有其道理。單靠在網站加上機器人偵測，代理可以改用旅遊代理的介接介面繞過；反過來只收緊分銷政策，使用者仍能直接在官方管道手動授權代理操作。兩邊同時收緊，才形成完整的封鎖面。</p>
+
+<p>值得注意的是，限制對象寫明是「個人」與「未經授權」。企業級差旅系統與既有的授權經銷商不在同一分類，官方的措辭保留了商業客戶的空間。</p>
+
+<h2 id="為什麼航空公司要阻擋-ai-代理">為什麼航空公司要阻擋 AI 代理？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>官方列出兩項理由。第一是帳號憑證交給外部助理後可能外洩，並可能導致未經授權的購買、帳號變更或里程兌換；第二是自動化動作難以符合人為確認的法規要求。
+<!-- End AEO Capsule --></p>
+
+<p>聯合航空在聲明中具體描述了第一層風險：與第三方個人 AI 助理分享帳號憑證，可能暴露敏感資訊，而這些工具執行的動作可能造成非預期的購買、帳號變更或 MileagePlus 里程的使用。這類動作一旦發生，追溯與復原都比人手操作複雜。</p>
+
+<p>第二層風險與法規直接相關。美國的航班報到程序要求由真人確認行李不含爆炸物等違禁品，這個確認動作具有法律意義，不能由自動化流程代勞。代理若代客完成報到，等於讓一個無法承擔法律責任的程式代替旅客作出聲明。</p>
+
+<p>兩項理由指向同一個核心：航空交易帶有身份與責任的屬性。訂票不只是資料寫入，還牽涉付款授權、行程變更的同意，以及安全聲明的具結。代理可以執行點擊，卻無法承接這些後果。</p>
+
+<h2 id="銀行業的立場如何">銀行業的立場如何？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>美國銀行於 2026 年 10 月 27 日向客戶發出主題為「在 AI 世界中保護你的財務」的電郵，明確要求不要把使用者名稱與密碼交給任何外部服務，包括聲稱代為操作的 AI 工具。
+<!-- End AEO Capsule --></p>
+
+<p>銀行業的動作比航空公司更早。美國銀行在十月下旬發出的客戶電郵中指出，帳號與密碼不應交給他人或外部服務，並把「聲稱可代為操作的 AI 工具或代理」明確列入其中。電郵同時提醒，多數銀行的帳戶協議規定，客戶須為自己交出登入憑證後產生的活動負責。</p>
+
+<p>行業層面的困擾在於授權邊界。據媒體報道，銀行正處理未經授權的代理存取客戶資金的個案，同時又要為代理支付這類新場景設計合規路徑。代理支付若要在市場落地，先要解決「誰同意這筆交易」的舉證問題。</p>
+
+<p>聯合航空在聲明中主動提到銀行與零售業已採取類似措施，並鼓勵其他行業考慮同類安排。這段話的用意不只是解釋自身決定，也是在為整個行業建立先例。</p>
+
+<h2 id="代理訂票在技術上如何運作">代理訂票在技術上如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>現階段的代理訂票多數依靠瀏覽器自動化，以使用者的登入狀態操作網站，或透過旅遊代理介接介面查詢與下單。兩種方式都需要取得等同本人的存取權限。
+<!-- End AEO Capsule --></p>
+
+<p>技術路徑大致分兩類。第一類是瀏覽器自動化，代理在使用者已登入的瀏覽環境中點擊與填表，對網站而言請求來自合法帳號與正常用戶端。第二類是介接旅遊代理的程式介面，代理以合作夥伴身分查詢艙位與建立訂單。</p>
+
+<p>兩類路徑的共同點是權限等同本人。網站端看見的是一組有效憑證，無法從請求本身判斷操作者是人還是程式。這正是航空公司難以防禦的位置：攔截需要辨識行為特徵，而行為特徵可以模仿。</p>
+
+<p>近期坊間的代理工具多數支援在這兩條路徑上運作，部分更以「幫你格價並自動下單」作為賣點。當航空公司把限制寫進分銷政策，這些工具的合規成本會直接上升，因為它們不再是單純的用戶端軟體，而是需要被授權的通路。</p>
+
+<h2 id="對旅客有什麼實際影響">對旅客有什麼實際影響？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>短期影響集中在自動化流程。以往交由代理完成的訂票、改期與報到，可能在下單或報到環節被攔截，旅客須改用官方應用程式手動完成，或承擔交易被取消的風險。
+<!-- End AEO Capsule --></p>
+
+<p>最直接的變化是報到環節。行李安全聲明要求真人確認，代理代為點擊的做法在政策上已被排除，旅客需要自行完成這個步驟。訂票與改期的情況較複雜，取決於攔截發生在請求階段還是事後審查階段。</p>
+
+<p>另一個風險落在帳號本身。航空公司有權把異常存取視為可疑活動並凍結帳號，屆時里程與既有訂位都會受影響。把憑證交給代理以換取便利，代價可能是失去對帳號的控制權。</p>
+
+<p>對習慣以代理處理行程的旅客而言，較穩妥的做法是保留官方應用程式作為最終操作介面。代理可以用於搜尋、比較與提醒，但涉及付款與具結的步驟，目前仍適合由本人完成。</p>
+
+<h2 id="代理經濟的下一步會怎樣">代理經濟的下一步會怎樣？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>代理要進入交易場景，需要可驗證的授權機制，讓網站能確認操作範圍與責任歸屬。在標準落地之前，企業多以封鎖代替授權，代理只能停留在搜尋與建議層。
+<!-- End AEO Capsule --></p>
+
+<p>目前的技術缺口在於授權的表達方式。網站需要知道三件事：操作者獲得哪些權限、權限的有效期限，以及越權時由誰負責。既有的密碼分享模式對這三個問題都無法回答，因此企業傾向以封鎖降低風險。</p>
+
+<p>業界已有幾條可能路徑。代幣化的授權憑證、由平台背書的代理身份，或把代理動作限制在可撤銷的範圍內，都是正在討論的方向。共通點是把「本人憑證」換成「限定授權」，讓網站能分辨代操作與盜用。</p>
+
+<p>標準的形成速度會決定代理經濟的節奏。在授權機制普及之前，航空公司與銀行的封鎖行動大概會繼續增加，而代理的實用範圍則集中在不需要具結與付款的環節。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>常見疑問集中在限制範圍、既有訂位是否受影響、代理工具能否繞過，以及旅客應如何自保。以下逐項回答，並附上官方聲明與行業先例的對應說明。
+<!-- End AEO Capsule --></p>
+
+<p><strong>限制是否包括企業差旅系統？</strong></p>
+
+<p>官方措辭指向「未經授權的第三方個人 AI 代理」，企業級差旅系統與授權經銷商不在同一分類。實際界線仍要看更新後的分銷政策如何定義授權。</p>
+
+<p><strong>已由代理建立的訂位會被取消嗎？</strong></p>
+
+<p>聲明未提及追溯取消既有訂位。政策重點在限制未來的存取，但航空公司保留把異常活動視為可疑存取的權利。</p>
+
+<p><strong>代理工具可以改用其他方式繞過嗎？</strong></p>
+
+<p>技術上存在多種路徑，但政策已同時涵蓋旅行社與聚合平台。繞過政策而發生的交易，可能被認定為未經授權操作。</p>
+
+<p><strong>會不會影響里程累積與兌換？</strong></p>
+
+<p>官方把「非預期的里程使用」列為風險之一。以代理操作兌換時，若被判定為未經授權，交易可能被撤銷。</p>
+
+<p><strong>其他航空公司會跟隨嗎？</strong></p>
+
+<p>聯合航空在聲明中鼓勵其他行業考慮同類措施。是否形成行業共識，仍需觀察同業的後續表態。</p>
+
+<p><strong>旅客應如何保護帳號？</strong></p>
+
+<p>避免把帳號密碼交給第三方助理，改用官方應用程式完成付款與報到，並定期檢查里程與訂位紀錄有無異常變動。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>主要來源為聯合航空 2026 年 11 月 11 日的官方聲明，以及 TechCrunch 於 11 月 12 日的報導；銀行業先例見美國銀行 10 月 27 日的客戶電郵。
+<!-- End AEO Capsule --></p>
+
+<p>聯合航空的原始聲明刊於其新聞室，題為「United Restricts Access for Third-Party AI Agents」，同時提及會更新數位信任中心的說明頁面。TechCrunch 的報導補充了銀行業的平行動作與行業背景。</p>
+
+<ul>
+  <li>聯合航空聲明：https://united.mediaroom.com/news-releases?item=125496</li>
+  <li>TechCrunch 報導：https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/</li>
+  <li>美國銀行相關報導：https://techcrunch.com/2026/10/27/bank-of-america-kindly-asks-that-you-dont-share-your-banking-password-with-your-ai-assistant/</li>
+</ul>
+
+<h2 id="這次封鎖的真正意義是什麼">這次封鎖的真正意義是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>這次事件標誌代理經濟進入摩擦期。能力已足以完成訂票，但授權與責任機制尚未建立，企業因此選擇封鎖而非開放，代理的實用邊界由法規與責任定義。
+<!-- End AEO Capsule --></p>
+
+<p>聯合航空的決定放在產業脈絡下並不突然。銀行先表態，航空公司跟進，兩者面對的是同一個結構問題：自動化可以複製操作，卻無法複製具結。當交易涉及法規聲明與金錢責任，封鎖就成了成本最低的選項。</p>
+
+<p>對代理開發者而言，這是產品設計的提醒。以「代替使用者登入」為前提的工具，會持續遇到這類封鎖；改為在授權框架內運作，雖然推進較慢，卻是唯一可持續的路徑。對旅客而言，便利與控制權之間的取捨，短期內仍需自行判斷。代理與既有系統邊界的同類課題，可延伸閱讀 <a href="/技術/claude-computer-use-bg-news">Claude 電腦使用的背景執行安排</a> 與 <a href="/技術/gemini-intelligence-widget-news">Gemini Intelligence 的手機系統入口設計</a>。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="聯合航空" /><category term="AI代理" /><category term="身份驗證" /><category term="航空業" /><category term="銀行業" /><category term="資安" /><category term="代理支付" /><category term="科技新聞" /><summary type="html"><![CDATA[聯合航空於 2026 年 11 月 11 日宣布，限制第三方個人 AI 代理代客訂票與管理行程，涵蓋自家平台與旅行社通路，並同步修改訂位、開票與分銷政策。官方理由是憑證外洩風險與美國聯邦航空法規的人為確認要求，本文整理封鎖範圍、技術背景與旅客實際影響。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/united-airlines-ai-agent-block-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/united-airlines-ai-agent-block-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">NVIDIA SkillSpector 開源：26% 代理技能有漏洞</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/nvidia-skillspector-news" rel="alternate" type="text/html" title="NVIDIA SkillSpector 開源：26% 代理技能有漏洞" /><published>2026-11-13T16:00:01+08:00</published><updated>2026-11-13T16:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/nvidia-skillspector-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/nvidia-skillspector-news"><![CDATA[<p>NVIDIA 在 GitHub 開源 SkillSpector，針對 Claude Code、Codex 與 MCP 技能做安裝前安全掃描。倉庫累積 25,730 顆星標。官方引用研究顯示，31,132 個已分析技能中 26.1% 含至少一個漏洞，5.2% 出現明顯惡意意圖。</p>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>SkillSpector 是 NVIDIA 開源的代理技能安全掃描器，以 71 條規則與兩階段分析在安裝前檢查漏洞、提示注入與資料外送風險，輸出 0 至 100 分風險分數。
+<!-- End AEO Capsule --></p>
+
+<h2 id="skillspector-是什麼">SkillSpector 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>SkillSpector 以 Python 撰寫，提供命令列與 MCP 伺服器兩種形態，採 Apache 2.0 授權，屬 NVIDIA 技能驗證流程的一部分。
+<!-- End AEO Capsule --></p>
+
+<p>這個專案處理的是一個結構性縫隙。代理技能由第三方撰寫，安裝後以使用者權限執行，中間缺乏審查環節。SkillSpector 的定位是把審查動作提前到安裝之前，用機械規則回答一個具體問題：這個技能是否安全。</p>
+
+<p>它同時是 NVIDIA Verified Skills 流程的一部分。通過掃描的技能會發佈至 NVIDIA 的技能目錄，形成一條由上架前檢查、評分到簽章的鏈路。倉庫以 Python 撰寫，採 Apache 2.0 授權，提供命令列、Python API、Docker 映像與 MCP 伺服器四種接入形態。</p>
+
+<p>技術路線偏向防禦縱深。掃描全程不執行被檢查的技能，只做正規表達式比對、Python 抽象語法樹分析、YARA 簽章與可選的大型語言模型語意判讀。官方文件明確指出它並非沙箱，用途在於攔截高風險模式，而非隔離已安裝的程式。</p>
+
+<p><img src="/assets/images/posts/nvidia-skillspector-news-shot1.png" alt="SkillSpector 的 GitHub README 開頭，顯示專案名稱、副標題與研究數據摘要" /></p>
+
+<h2 id="代理技能的安全風險有多嚴重">代理技能的安全風險有多嚴重？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>官方引用的研究涵蓋 42,447 個技能，其中 31,132 個完成分析，26.1% 至少含一個漏洞，5.2% 出現明顯惡意意圖，附可執行腳本者風險高出 2.12 倍。
+<!-- End AEO Capsule --></p>
+
+<p>數據來自論文《Agent Skills in the Wild: An Empirical Study of Security Vulnerabilities at Scale》，作者為 Liu 等人，2026 年發表。研究從主要技能市場收集 42,447 個樣本，其中 31,132 個具備可分析內容，成為比率計算的分母。</p>
+
+<p>兩個比率指向不同性質的問題。26.1% 代表存在至少一個可辨識的漏洞模式，可能出於疏忽，例如未固定依賴版本或過度要求權限。5.2% 的惡意意圖比例較低，但性質嚴重，涉及憑證外送、隱藏指令與反拒答設定。</p>
+
+<p>第三個數字最值得留意。具可執行腳本的技能，風險比率是純文字技能的 2.12 倍，說明風險集中在真正能動手的部分。這也解釋了為何掃描器把腳本標記為 1.3 倍加權，而非與文件同等看待。</p>
+
+<h2 id="skillspector-能偵測哪些漏洞類型">SkillSpector 能偵測哪些漏洞類型？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>涵蓋 71 條規則、17 個類別，包括提示注入、反拒答、資料外送、權限提升、供應鏈風險、系統提示洩漏、記憶污染與 MCP 工具投毒。
+<!-- End AEO Capsule --></p>
+
+<p>提示注入類規則共 6 條，處理指令覆寫、註解中的隱藏指令、外送命令與行為操縱，另有一條針對以空白字元把指令推出可視範圍的寫法。反拒答類 3 條，偵測「永不拒絕」、「不加警告」與「取消限制」等框架。</p>
+
+<p>資料外送類共 5 條，覆蓋對外傳輸、環境變數收割、檔案系統列舉、對話上下文外洩與雲端儲存上傳。其中環境變數收割被列為高嚴重度，因為它直接對應憑證收集的行為模式。</p>
+
+<p>MCP 相關規則分為兩組。權限最小化 4 條檢查宣告與實際能力是否相符，包括未宣告卻使用的能力、萬用字元授權與過度宣告；工具投毒 4 條則針對中繼資料中的隱藏指令、同形字混淆、參數描述注入，以及描述與實際行為不符的情況。</p>
+
+<h2 id="風險分數如何計算">風險分數如何計算？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>嚴重度對應固定點數：極危 50 分、高危 25 分、中危 10 分、低危 5 分，含可執行腳本者再乘 1.3 倍，總分上限 100 分，並據此給出安裝建議。
+<!-- End AEO Capsule --></p>
+
+<p>分數帶與建議一一對應。0 至 20 分為低風險，建議為安全；21 至 50 分為中風險，建議為謹慎使用；51 至 80 分為高風險，81 至 100 分為極危，兩者一律建議不要安裝。</p>
+
+<p>這種線性加總的設計有明顯取捨。優點是透明度高，使用者可以直接由報告回推每一分的來源，也方便在 CI 設定門檻。限制在於不同漏洞的實際危害差異很大，一項高危憑證外送與兩項低危未固定依賴，在分數上可能接近。</p>
+
+<p>報告同時保留逐項證據。每個發現附上檔案位置、行號、信心度與說明，並標記語意模型是否確認。模型未確認的項目會被標為未確認，但不會因此從報告中移除，避免語意判讀掩蓋機械規則的結果。</p>
+
+<h2 id="如何開始掃描一個技能">如何開始掃描一個技能？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>以 uv 安裝後即可掃描目錄、單一 SKILL.md、Git 倉庫或 zip 檔，加上 –no-llm 可純本機靜態分析，不需任何 API 金鑰。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uv tool <span class="nb">install </span>git+https://github.com/NVIDIA/skillspector.git
+skillspector scan ./my-skill/ <span class="nt">--no-llm</span>
+</code></pre></div></div>
+
+<p>若要在代理會話中直接呼叫，安裝時加上 MCP 擴充，再執行 skillspector mcp 即可把掃描能力接入任何 MCP 客戶端。Docker 路線適合不想安裝 Python 的環境，把工作目錄掛載為 /scan 後執行掃描。</p>
+
+<p>輸入規模有明確上限。單次輸入的串流下載、zip 解壓總量與倉庫複製後容量上限為 100 MiB，單一 zip 的成員數上限為 10,000，單檔分析上限為 1 MB。超限時程式以失敗關閉處理，不會靜默截斷。</p>
+
+<p>批次情境另有工具。contrib/batch_scan 支援目錄並行掃描，可指定工作執行緒數，並內建中文、日文與韓文的偵測支援。</p>
+
+<h2 id="在-ci-流程中如何自動攔截">在 CI 流程中如何自動攔截？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>退出碼 0 代表分數不超過 50，1 代表超標或覆蓋不完整，2 代表執行錯誤。加 –fail-on-incomplete 可收緊門檻。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>skillspector scan https://github.com/user/my-skill <span class="se">\</span>
+  <span class="nt">--format</span> sarif <span class="nt">--output</span> report.sarif <span class="nt">--fail-on-incomplete</span>
+</code></pre></div></div>
+
+<p>輸出格式共四種。終端機格式適合人工閱讀，JSON 適合程式解析，Markdown 適合寫入文件，SARIF 則對應 IDE 與程式碼掃描平台的標準格式。選用 SARIF 可以把結果直接併入既有的安全儀表板。</p>
+
+<p>覆蓋率是這套設計的關鍵概念。當部分檔案被排除、分析預算耗盡或隔離環境不可用，報告會標記為不完整。加上 –fail-on-incomplete 之後，不完整即視為失敗，避免「掃過了」與「掃完了」被混為一談。</p>
+
+<p>誤報處理有專門機制。使用者可先執行 baseline 子命令把當前發現寫入基準檔並提交，之後重複掃描只會顯示新增項目，既有的已接受項目仍保留在報告中，可用 –show-suppressed 檢視。</p>
+
+<p><img src="/assets/images/posts/nvidia-skillspector-news-shot2.png" alt="SkillSpector 的 GitHub 倉庫頂部，顯示專案名稱、星標數與提交活動" /></p>
+
+<h2 id="skillspector-有什麼限制與資料外送風險">SkillSpector 有什麼限制與資料外送風險？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>啟用語意分析時，可分析檔案內容會傳送至所選的模型供應商端點。加上 –no-llm 只做本機靜態分析。它亦無法判讀圖片內文字、加密內容或執行期行為。
+<!-- End AEO Capsule --></p>
+
+<p>官方把這一段寫得相當直白。語意分析會把檔案內容送往 SKILLSPECTOR_PROVIDER 指定的端點，包括可讀的簽章中繼資料。若內容涉及內部程式碼，這一點必須在導入前決定是否接受。</p>
+
+<p>供應鏈檢查會把依賴名稱送往 OSV.dev 查詢已知漏洞。這一步送出的只有套件座標，不含檔案內容，也不需要 API 金鑰，但在完全離線的環境會退回內建清單。</p>
+
+<p>能力邊界同樣清楚。非英語內容的偵測可能遺漏，圖片中的文字無法分析，編譯或加密的二進位內容無法判讀，靜態分析亦不會觀察執行期行為。這些限制意味着低分不等於絕對安全，只是風險較低。</p>
+
+<h2 id="項目規模與維護節奏如何">項目規模與維護節奏如何？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>倉庫累積 25,730 星標與 2,272 個分叉，主要語言 Python，採 Apache 2.0 授權，2026 年 3 月建立，最新版本 v2.13.4 於 11 月 4 日發佈。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">25,730</span><span class="ui-stat-label">GitHub 星標</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2,272</span><span class="ui-stat-label">分叉數</span></div>
+<div class="ui-stat"><span class="ui-stat-value">v2.13.4</span><span class="ui-stat-label">最新版本</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Apache 2.0</span><span class="ui-stat-label">授權條款</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Python</span><span class="ui-stat-label">主要語言</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2026-03</span><span class="ui-stat-label">建立時間</span></div>
+</div>
+
+<p>提交記錄顯示改動集中在規則覆蓋與解析器邊界。近期合併的項目包括雲端下載與上傳的區分、ELF 符號表缺漏時的動態符號還原、PE 匯出限制，以及 Unity 與 Unreal 材質格式的解碼。這些都屬於掃描準確度的底層工作，而非介面功能。</p>
+
+<p>社群活躍度維持在高位。倉庫現有 150 個未關閉議題，主要貢獻者集中在少數帳號，其中一位累積超過 700 次提交。專案同時提供 Pi 與 OpenCode 的擴充，讓掃描可以在代理會話內直接觸發。</p>
+
+<p>議題數量亦反映一個現實。技能格式仍在演變，規則庫需要持續追上新寫法，這個維護負擔不會因為工具成熟而消失。</p>
+
+<p><img src="/assets/images/posts/nvidia-skillspector-news-shot3.png" alt="SkillSpector 的貢獻者與提交統計頁面，顯示提交活動分佈" /></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>常見疑問集中在是否需要 API 金鑰、能否離線執行、與 MCP 註冊表的關係、誤報處理方式，以及低分是否代表絕對安全，以下逐項回答。
+<!-- End AEO Capsule --></p>
+
+<p><strong>沒有 API 金鑰可以使用嗎？</strong></p>
+
+<p>可以。加上 –no-llm 後只執行靜態分析與 OSV.dev 查詢，不需任何模型憑證。代價是失去語意判讀，對描述與行為不符一類的模式偵測能力較弱。</p>
+
+<p><strong>掃描會執行被檢查的程式嗎？</strong></p>
+
+<p>不會。官方明確表示所有分析皆為靜態，包括正規表達式、語法樹與 YARA 簽章，技能程式碼從未被執行。這也是它定位為防禦縱深而非沙箱的原因。</p>
+
+<p><strong>支援哪些模型供應商？</strong></p>
+
+<p>內建選項包括 OpenAI、Anthropic、NVIDIA build、Gemini、Azure OpenAI 與 Ollama，另可指向任何相容端點。部分命令列供應商如 Codex CLI 因沙箱允許讀取主機檔案而被停用。</p>
+
+<p><strong>可以掃描 MCP 伺服器嗎？</strong></p>
+
+<p>可以。指定 –mcp-registry 後，輸入可為註冊表中的伺服器名稱或完整目錄網址。另可比較兩份快照，列出新增、移除與欄位變更的伺服器。</p>
+
+<p><strong>誤報太多怎麼辦？</strong></p>
+
+<p>先用 baseline 子命令建立基準檔，再以 –baseline 指定。之後的掃描只報告新增發現，並可用 –show-suppressed 檢視被抑制的項目。基準檔可支援指紋或 glob 規則兩種寫法。</p>
+
+<p><strong>分數低就代表安全嗎？</strong></p>
+
+<p>不代表。官方列出多項限制，包括非英語內容、圖片文字、加密內容與執行期行為。分數是安裝前的風險參考，而非安全保證。</p>
+
+<h2 id="這次發佈適合哪些團隊">這次發佈適合哪些團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 60 字 -->
+<p>適合已在團隊內使用 Claude Code、Codex 或 MCP 技能，並需要安裝前審查機制的組織。偶爾安裝個人技能者效益有限。
+<!-- End AEO Capsule --></p>
+
+<p>導入的門檻不在技術，而在流程。掃描器提供的是判準與報告，是否把 51 分以上一律攔截、抑或只攔極危項目，屬於組織的政策決定。官方文件亦把這一點留給整合方自行設定。</p>
+
+<p>離線環境需要額外評估。OSV.dev 查詢在無網路時會退回內建清單，覆蓋範圍明顯縮減。若團隊的技能來源固定且數量有限，可考慮一次性掃描後建立基準，之後只追蹤變更。</p>
+
+<p>同類的供應鏈與權限議題，可對照 <a href="/技術/openai-codex-security-news">OpenAI Codex Security 的漏洞掃描路線</a> 與 <a href="/技術/github-anthropic-skills-news-hk">代理技能生態的快速擴張</a>。</p>
+
+<h2 id="原始碼與文件在何處查閱">原始碼與文件在何處查閱？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>原始碼在 GitHub 的 NVIDIA/SkillSpector，使用文件在 docs.nvidia.com/skills，另有 NVIDIA 技能目錄可對照。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫網址為 https://github.com/NVIDIA/SkillSpector ，內含命令列用法、Python API 範例、規則清單與各供應商的設定方式。規則表逐條列出編號、嚴重度與說明，便於對照報告中的發現。</p>
+
+<p>官方文件位於 https://docs.nvidia.com/skills/scanning-agent-skills ，說明掃描時機、報告解讀與安裝閘門的設定方式。NVIDIA 技能目錄在 https://github.com/NVIDIA/skills ，列出通過掃描與簽章的技能。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="NVIDIA" /><category term="SkillSpector" /><category term="AI 代理" /><category term="技能安全" /><category term="MCP" /><category term="提示注入" /><category term="供應鏈風險" /><category term="GitHub" /><category term="開源項目" /><category term="科技新聞" /><summary type="html"><![CDATA[NVIDIA 於 GitHub 開源 SkillSpector，針對 Claude Code、Codex 與 MCP 技能做安裝前安全掃描。官方引用研究顯示，31,132 個已分析技能中 26.1% 含至少一個漏洞，5.2% 出現明顯惡意意圖，附可執行腳本者風險高 2.12 倍。本文整理偵測範圍、評分機制與接入方式。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/nvidia-skillspector-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/nvidia-skillspector-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Quivr 2.0 重寫：39.6k 星改寫為 Go 內容引擎</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/quivr-2-go-rewrite-news" rel="alternate" type="text/html" title="Quivr 2.0 重寫：39.6k 星改寫為 Go 內容引擎" /><published>2026-11-13T12:00:01+08:00</published><updated>2026-11-13T12:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/quivr-2-go-rewrite-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/quivr-2-go-rewrite-news"><![CDATA[<p>Quivr 2.0.0 於 2026 年 10 月 29 日發佈，把這個累積 39,644 顆星標的專案，從文件問答工具改寫為 Go 內容引擎。新版本取消聊天介面，只以 HTTP 介面接收持續湧入的文件，保留每個版本，建立關鍵字與語意搜尋，並以主題警報與簽名 Webhook 通知上層系統。</p>
+
+<!-- AEO Answer Capsule — 約 76 字 -->
+<p>Quivr 2.0 是無介面的 Go 內容引擎。應用程式經 /v0 HTTP 介面送入文件，或由 RSS、Microsoft 365 信箱與 X 列表收集，引擎保留全部版本。
+<!-- End AEO Capsule --></p>
+
+<h2 id="quivr-20-是什麼">Quivr 2.0 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>Quivr 2.0 於 2026 年 10 月 29 日發佈首個穩定版，是集中儲存、搜尋與監控持續湧入內容的開源引擎。它沒有介面，可經 quivr mcp 供 AI 代理調用。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫在 2023 年 5 月建立，早期定位為文件問答與個人知識庫，讓使用者上傳檔案後以對話方式提問。專案目前由 The Vibe Company 維護，該公司為 Quivr 團隊成立的 AI 代理機構，重寫工作於 2026 年完成。</p>
+
+<p>2.0.0 是重寫後第一個穩定版本，先前的 alpha 版本只供評估，不支援原地升級。發佈說明列出三項可依賴的承諾：HTTP 介面在整個 2.x 系列維持 /v0 路徑且只增不改，跨版本升級會執行 quivr migrate 並在原地保留資料，外掛需宣告支援的 Plugin API 版本，不相容者拒絕啟用。</p>
+
+<p><img src="/assets/images/posts/quivr-2-go-rewrite-news-shot1.png" alt="Quivr README 開頭，顯示專案名稱 Quivr、定位說明「store it, search it, and get alerted」以及收集、搜尋、追蹤主題的功能清單" /></p>
+
+<h2 id="quivr-為何從-python-改寫為-go">Quivr 為何從 Python 改寫為 Go？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>重寫目標是營運保證。專案改以單一 Go 二進位交付，內含 api、worker、migrate 等六種角色；資料層用 PostgreSQL 加物件儲存，索引可隨時重建。
+<!-- End AEO Capsule --></p>
+
+<p>語言欄已由 Python 換為 Go，這個改動直接反映在部署形態上。過去使用需安裝整套 Python 依賴，現在只需一個二進位檔，配合 Docker Compose 啟動周邊服務，安裝腳本與映像檔皆固定依賴版本。</p>
+
+<p>架構上的核心保證寫在文件裡。文件只有在完成儲存後才會被確認，之後才進入背景處理，因此服務中斷只會延遲處理，不會遺失已確認的內容。搜尋索引與儲存分離，索引損壞或格式升級時可重新建置。搜尋在資料庫重啟後會恢復緩衝區，並限制補水工作的範圍。</p>
+
+<p>專案結構亦反映這種分層。cmd/quivr 放置單一二進位，internal 按領域切成獨立套件，contracts 保存 HTTP 介面與外掛協定的 OpenAPI 描述，client 為由協定自動產生的 Go 客戶端，migrations 管理 PostgreSQL 結構變更。</p>
+
+<p><img src="/assets/images/posts/quivr-2-go-rewrite-news-shot2.png" alt="Quivr GitHub 首頁頂部，顯示 repo 名稱 The-Vibe-Company/quivr、39.6k 星標、Go 主要語言與 MIT 授權標示" /></p>
+
+<h2 id="quivr-的搜尋與引用機制如何運作">Quivr 的搜尋與引用機制如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>搜尋支援關鍵字、語意或兩者混合三種模式。每個結果都會標明來源段落、所屬文件與版本，開發者可直接引用；混合模式在同一請求內同時比對字面與向量相似度。
+<!-- End AEO Capsule --></p>
+
+<p>引用能力是這套設計的分水嶺。多數檢索系統回傳文件片段，讀者難以確認段落出自哪一次修訂；Quivr 把版本視為一等公民，同一份文件的更正會產生新版本，舊版本維持可讀，因此答案永遠可回溯到具體時點。</p>
+
+<p>版本機制與警報互相扣連。文件被撤回時會立即退出搜尋，先前命中該文件的主題警報亦會收到通知。這對法規追蹤、供應鏈監控或新聞監察類應用有實際價值，因為錯誤資訊不會靜默留在索引內。</p>
+
+<h2 id="主題警報功能有什麼實際用途">主題警報功能有什麼實際用途？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>主題警報可存成布林查詢或自然語言描述。引擎逐份比對新文件並記錄命中理由，應用程式可主動讀取，或接收帶簽章的 Webhook 通知。
+<!-- End AEO Capsule --></p>
+
+<p>警報把被動搜尋變成主動通知。使用者不需要反覆輸入查詢，只需一次定義關注範圍，之後每份新進文件都會被自動比對，命中時附上判定理由，方便覆核判斷是否合理。</p>
+
+<p>簽名 Webhook 是為生產環境設計的細節。推送帶有簽章，接收端可驗證來源真偽，避免偽造通知觸發下游流程。對於把警報接入工單系統或即時通訊機器人的團隊，這比輪詢介面更省資源。</p>
+
+<h2 id="插件架構如何擴充功能">插件架構如何擴充功能？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>檔案格式、來源、嵌入模型、排序與警報規則皆為外掛，形式為小型 HTTP 服務，可用任何語言撰寫。專案另附 Go 與 Python 開發套件。
+<!-- End AEO Capsule --></p>
+
+<p>外掛以協定邊界取代函式庫耦合。核心只負責儲存、排程與協定，實際的解析、切分、向量化與評分交由外掛執行，替換模型或加入新檔案格式時不需修改核心程式碼。</p>
+
+<p>這種設計的代價是部署複雜度。每個外掛都是獨立服務，需要各自的執行環境與健康檢查；換來的是語言中立與故障隔離，單一外掛失效不會拖垮整個引擎，worker 只會延後處理該批文件。</p>
+
+<h2 id="quivr-有哪些已知限制">Quivr 有哪些已知限制？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>官方限制頁列出四項：只搜尋文字、不支援 OCR、沒有使用者帳號體系、每份文件與每次搜尋設有大小上限。掃描版 PDF 或需要多人權限隔離的場景，目前須自行在外層補足。
+<!-- End AEO Capsule --></p>
+
+<p>缺少帳號體系是一項明確的架構選擇。Quivr 假設呼叫端已處理身分驗證與授權，引擎本身只認 API 金鑰，因此多租戶應用需自行在介面層做隔離，不能依賴引擎內建的權限模型。</p>
+
+<p>OCR 缺席影響最大的是紙本檔案數位化流程。純圖像 PDF 送入後不會產生可搜尋文字，需先以外部工具辨識再匯入。團隊若以掃描發票或舊檔案為主要來源，必須在流程前端加一層處理。</p>
+
+<h2 id="如何在本機啟動-quivr-20">如何在本機啟動 Quivr 2.0？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>需求為 Linux x86_64 或 Apple Silicon Mac、Docker Compose v2 與 Python 3.12。首次啟動下載 1GB 映像，執行 make dev。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/The-Vibe-Company/quivr.git <span class="o">&amp;&amp;</span> <span class="nb">cd </span>quivr
+make dev
+<span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>make <span class="nt">-s</span> <span class="nb">env</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>啟動後依照官方快速入門操作，約十五分鐘可完成建立集合、加入文章、以關鍵字與語意各搜尋一次，並設定一個主題警報。執行 make demo 會額外啟動示範網頁，監聽本機 5183 連接埠，用於觀察介面回應。</p>
+
+<p>伺服器部署另有路徑。官方提供已簽章的映像檔，支援 linux/amd64，可依單機、Railway 或 Kubernetes 三種方式安裝，不需保留原始碼目錄。專案以 Go 1.27.3 建置，並修補了相依套件中的已知漏洞。</p>
+
+<h2 id="quivr-與傳統-rag-框架有何差別">Quivr 與傳統 RAG 框架有何差別？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>傳統 RAG 框架多為函式庫，切分與向量化須自行組裝；Quivr 以獨立服務運行，把版本保留與索引重建納入職責，並內建 MCP 介面。
+<!-- End AEO Capsule --></p>
+
+<p>定位差異決定適用場景。需要完全掌控提示詞與生成流程的團隊，函式庫仍是更合適的選擇；關注點在內容持續進站、需要可信引用與即時通知的系統，服務化的引擎可省下大量基礎建設工作。</p>
+
+<p>與同類產品相比，Quivr 2.0 明確放棄生成層。它不負責撰寫答案，只提供可引用的段落與變更訊號，因此可與任何語言模型搭配，也避免把模型版本綁進資料層。</p>
+
+<h2 id="quivr-20-的規模數據如何">Quivr 2.0 的規模數據如何？</h2>
+
+<!-- AEO Answer Capsule — 約 61 字 -->
+<p>截至 2026 年 11 月 13 日，倉庫累積 39,644 顆星標、3,729 次分支與 30 位貢獻者。主要語言為 Go，採 MIT 授權，最新版為 2.0.2。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">39,644</span><span class="ui-stat-label">星標數</span></div>
+<div class="ui-stat"><span class="ui-stat-value">3,729</span><span class="ui-stat-label">分支數</span></div>
+<div class="ui-stat"><span class="ui-stat-value">30</span><span class="ui-stat-label">貢獻者</span></div>
+<div class="ui-stat"><span class="ui-stat-value">MIT</span><span class="ui-stat-label">授權條款</span></div>
+</div>
+
+<p>版本節奏值得注意。2.0.0 於 10 月 29 日發佈，同日推出 2.0.1，翌日再推出 2.0.2 修正工作目錄消失後的分支行為與 Anthropic OAuth 版本回報，顯示重寫後的維護反應相當快。</p>
+
+<p>倉庫自 2023 年 5 月建立至今，星標增長集中在近兩年，而同期的程式碼幾乎完全替換。這種「高星標配新架構」的組合，意味著大量既有關注者其實從未使用過現在的版本。</p>
+
+<p><img src="/assets/images/posts/quivr-2-go-rewrite-news-shot3.png" alt="Quivr 專案的提交活動圖表，顯示各年度提交分佈與主要貢獻者的提交次數" /></p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 58 字 -->
+<p>原始碼在 GitHub 的 The-Vibe-Company/quivr，文件站為 docs.quivr.thevibecompany.co，發佈檔見 releases。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫網址為 https://github.com/The-Vibe-Company/quivr ，內含 README、版本相容說明、貢獻指南與安全政策。文件站為 https://docs.quivr.thevibecompany.co ，分為概念、快速入門、營運、外掛與參考五個區塊。</p>
+
+<p>版本細節可查閱 https://github.com/The-Vibe-Company/quivr/releases ，2.0.0 的發佈說明列出三項相容承諾與實驗性功能清單。完整變更記錄則在倉庫根目錄的 CHANGELOG.md。</p>
+
+<h2 id="總結quivr-20-適合什麼團隊">總結：Quivr 2.0 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>適合需要持續接收外部內容、要求每條結果可回溯版本、並希望以事件方式驅動下游流程的團隊。若需求集中在單次問答或掃描檔辨識，現階段的文字限制會令其不合適。
+<!-- End AEO Capsule --></p>
+
+<p>這次重寫的意義不在技術棧更換，而在責任範圍的重新劃定。Quivr 選擇承擔儲存、版本、索引與通知，把生成與介面留給上層應用，這種分工讓它更像基礎設施而非應用框架。</p>
+
+<p>判斷是否採用的關鍵在於內容流動方式。若資料是一次性匯入後偶爾查詢，函式庫加上現成向量資料庫更輕便；若內容每天持續進站、需要知道某項變化何時出現、又要對外提供可引用的答案，服務化的引擎能省下自建版本管理與告警管線的成本。</p>
+
+<p>風險同樣需要評估。專案剛完成大規模重寫，alpha 至穩定版僅隔數週，長期穩定性仍待觀察；缺少帳號體系與 OCR 也意味著外層需要補上這兩塊，實際整合工作量比快速入門所示更多。同樣以 Go 重寫換取部署便利的案例，可對照 <a href="/技術/ragflow-v1-go-rewrite-news">RAGFlow v1 的 Go 重寫經驗</a>；若流程需要視覺化編排，<a href="/技術/dify-1-19-nested-tracing-news">Dify 1.19 的巢狀追蹤設計</a> 提供另一種對照。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Quivr" /><category term="RAG" /><category term="Go" /><category term="內容引擎" /><category term="向量搜尋" /><category term="開源項目" /><category term="MCP" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[Quivr 2.0.0 於 2026 年 10 月 29 日發佈，把這個累積 39,644 顆星標的專案改寫為 Go 內容引擎。新版本只提供 HTTP 介面，負責接收持續湧入的文件、保留每個版本、建立關鍵字與語意搜尋，並以主題警報與簽名 Webhook 通知應用程式。本文整理架構轉向、已知限制與本機啟動方式。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/quivr-2-go-rewrite-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/quivr-2-go-rewrite-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Playwright MCP 開源：72 個工具操控瀏覽器</title><link href="https://anthroskill.com/%E6%8A%80%E8%A1%93/playwright-mcp-news" rel="alternate" type="text/html" title="Playwright MCP 開源：72 個工具操控瀏覽器" /><published>2026-11-13T08:00:01+08:00</published><updated>2026-11-13T08:00:01+08:00</updated><id>https://anthroskill.com/%E6%8A%80%E8%A1%93/playwright-mcp-news</id><content type="html" xml:base="https://anthroskill.com/%E6%8A%80%E8%A1%93/playwright-mcp-news"><![CDATA[<p>Playwright MCP 是微軟開源的瀏覽器自動化伺服器，GitHub 累積 39,552 顆星標。它把 Playwright 的控制能力包裝成 72 個 MCP 工具，讓代理以無障礙樹快照讀取頁面並執行點擊輸入，全程無需視覺模型與截圖比對。</p>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Playwright MCP 是微軟開源的 MCP 伺服器，39,552 星標，把 Playwright 包裝成 72 個工具，以無障礙樹取代截圖。
+<!-- End AEO Capsule --></p>
+
+<h2 id="playwright-mcp-是什麼">Playwright MCP 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>項目由微軟於 2025 年 3 月建立，採 Apache 2.0 授權，主要語言 TypeScript，為語言模型提供瀏覽器自動化能力。
+<!-- End AEO Capsule --></p>
+
+<p>此項目建立於 2025 年 3 月 21 日，是微軟在 Playwright 生態上另設的獨立倉庫。它並不重複實作瀏覽器引擎，而是把上游框架的能力整理成語言模型可呼叫的工具介面。</p>
+
+<p>定位上，它介於「測試框架」與「通用代理工具」之間。開發者用同一套伺服器，既可讓代理執行端對端測試的探索步驟，也可讓代理代替人手完成填表、截圖與資料抓取。授權為 Apache 2.0，程式碼以 TypeScript 撰寫，主要透過 npm 套件 <code class="language-plaintext highlighter-rouge">@playwright/mcp</code> 發佈。</p>
+
+<h2 id="playwright-mcp-與-playwright-cli-有何差別">Playwright MCP 與 Playwright CLI 有何差別？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>微軟指出高頻編碼代理宜用 CLI 加技能檔以節省上下文；MCP 則適合需要持續瀏覽器狀態、頁面內省與反覆推理的長時間流程。
+<!-- End AEO Capsule --></p>
+
+<p>這是少見的官方自我比較。README 直言，現代編碼代理正趨向 CLI 加技能檔的工作方式，原因是每次 CLI 呼叫只需載入精簡指令，不必把大量工具結構與冗長的無障礙樹塞進模型上下文。</p>
+
+<p>MCP 的價值落在另一類場景。當流程需要保留持續的瀏覽器狀態、對頁面結構反覆內省，或進行自我修復測試與長時間自主操作，維持一條連續的瀏覽器連線，往往比節省詞元更重要。微軟同時維護 <code class="language-plaintext highlighter-rouge">playwright-cli</code> 倉庫，該項目目前有 15,142 顆星標，最新版本 v0.1.24 於 2026 年 11 月 10 日發佈。</p>
+
+<p>這種雙軌安排說明一件事：協定本身不是效率的萬靈丹。工具數目與上下文成本之間，團隊需要按代理的工作型態自行取捨。</p>
+
+<h2 id="playwright-mcp-提供哪些工具">Playwright MCP 提供哪些工具？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>README 列出 72 個 browser_ 工具，涵蓋導航、點擊、表單、頁籤、網路攔截、儲存空間、追蹤錄影與 PDF 輸出。
+<!-- End AEO Capsule --></p>
+
+<p>工具清單按能力分層。基礎層是 <code class="language-plaintext highlighter-rouge">browser_navigate</code>、<code class="language-plaintext highlighter-rouge">browser_click</code>、<code class="language-plaintext highlighter-rouge">browser_type</code>、<code class="language-plaintext highlighter-rouge">browser_fill_form</code> 與 <code class="language-plaintext highlighter-rouge">browser_snapshot</code>，構成代理與頁面互動的最小集合。管理層包括 <code class="language-plaintext highlighter-rouge">browser_tabs</code>、<code class="language-plaintext highlighter-rouge">browser_resize</code>、<code class="language-plaintext highlighter-rouge">browser_handle_dialog</code> 與 <code class="language-plaintext highlighter-rouge">browser_file_upload</code>，處理多頁籤與系統對話框。</p>
+
+<p>狀態與網路層覆蓋較深。代理可透過 <code class="language-plaintext highlighter-rouge">browser_cookie_*</code>、<code class="language-plaintext highlighter-rouge">browser_localstorage_*</code> 與 <code class="language-plaintext highlighter-rouge">browser_sessionstorage_*</code> 讀寫儲存空間，亦可用 <code class="language-plaintext highlighter-rouge">browser_route</code>、<code class="language-plaintext highlighter-rouge">browser_network_requests</code> 攔截或檢視請求。診斷層則有 <code class="language-plaintext highlighter-rouge">browser_start_tracing</code>、<code class="language-plaintext highlighter-rouge">browser_start_video</code> 與 <code class="language-plaintext highlighter-rouge">browser_console_messages</code>。</p>
+
+<p>部分工具需要額外能力旗標才會出現。加上 <code class="language-plaintext highlighter-rouge">--caps=vision</code> 後可使用 <code class="language-plaintext highlighter-rouge">browser_mouse_click_xy</code> 等座標操作，<code class="language-plaintext highlighter-rouge">--caps=pdf</code> 提供 <code class="language-plaintext highlighter-rouge">browser_pdf_save</code>，<code class="language-plaintext highlighter-rouge">--caps=devtools</code> 則開啟開發者工具相關入口。這種按需展開的設計，令預設工具表不會一次過膨脹。</p>
+
+<p><img src="/assets/images/posts/playwright-mcp-news-shot1.png" alt="Playwright MCP 的 GitHub README 開頭，顯示項目名稱、副標題與特色說明" /></p>
+
+<h2 id="playwright-mcp-的無障礙樹快照如何運作">Playwright MCP 的無障礙樹快照如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 67 字 -->
+<p>伺服器把頁面轉換為結構化的無障礙樹，以角色、名稱與狀態描述每個元素，代理據此選取目標。這種做法不依賴像素比對，動作可重現，也不需要載入視覺模型。
+<!-- End AEO Capsule --></p>
+
+<p>傳統電腦操作代理多數依賴截圖，再讓視覺模型判斷座標。這種方式的弱點是解析度敏感、字型差異會造成誤判，而且同一頁面在不同縮放比例下的結果並不一致。</p>
+
+<p>無障礙樹路線把頁面壓縮成角色與名稱的組合，例如按鈕、文字框與表格標題。代理看到的是「名為 City 的文字輸入框」，而非某個座標上的矩形，因此動作具備確定性，頁面改版後亦較容易維持。</p>
+
+<p>設定層面亦有對應控制。<code class="language-plaintext highlighter-rouge">--snapshot-mode</code> 可設為 <code class="language-plaintext highlighter-rouge">full</code> 或 <code class="language-plaintext highlighter-rouge">none</code> 以調整回應內容，<code class="language-plaintext highlighter-rouge">--snapshot-boxes</code> 會附上每個元素的邊界框，<code class="language-plaintext highlighter-rouge">locateOnlyVisible</code> 選項則把定位限制在可見元素，避免選中隱藏的重複節點。</p>
+
+<h2 id="playwright-mcp-如何處理登入狀態與多客戶端並行">Playwright MCP 如何處理登入狀態與多客戶端並行？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>伺服器預設使用持久化設定檔，路徑按工作區雜湊分開存放，登入狀態可跨工作階段保留。同一個設定檔同時只容許一個瀏覽器實例，要多客戶端並行須改用隔離模式或獨立目錄。
+<!-- End AEO Capsule --></p>
+
+<p>持久化設定檔是預設行為。在 Linux 上，資料存放於 <code class="language-plaintext highlighter-rouge">~/.cache/ms-playwright/mcp-{channel}-{workspace-hash}</code>，其中雜湊值取自客戶端的工作區根目錄，因此不同專案會自動分開，不會互相污染登入狀態。</p>
+
+<p>限制同樣明確。README 指出，一個持久化設定檔同時只能被一個瀏覽器實例使用，同一工作區的多個客戶端會互相衝突。並行需求須以 <code class="language-plaintext highlighter-rouge">--isolated</code> 啟動，或為每個客戶端指定不同的 <code class="language-plaintext highlighter-rouge">--user-data-dir</code>。</p>
+
+<p>第三條路線是連接既有瀏覽器。<code class="language-plaintext highlighter-rouge">--extension</code> 模式透過 Chrome 擴充功能接管已登入的頁籤，適合需要沿用真實帳號的流程。v0.0.85 加入 <code class="language-plaintext highlighter-rouge">--background</code> 與 <code class="language-plaintext highlighter-rouge">--no-tab-group</code>，令被接管的頁籤不再搶走焦點，也不會被強制搬入專屬頁籤群組。</p>
+
+<h2 id="playwright-mcp-有哪些安全風險需要留意">Playwright MCP 有哪些安全風險需要留意？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>微軟明言此伺服器不是安全邊界。它預設限制檔案存取於工作區並封鎖 file:// 導航，隔離須靠外層容器。
+<!-- End AEO Capsule --></p>
+
+<p>預設防護集中在檔案層。伺服器只允許存取工作區根目錄，並阻止導航至 <code class="language-plaintext highlighter-rouge">file://</code> 網址，除非開發者主動加上 <code class="language-plaintext highlighter-rouge">--allow-unrestricted-file-access</code>。這項預設值可阻擋代理讀取系統敏感檔案。</p>
+
+<p>網路層的設定需要正確理解。<code class="language-plaintext highlighter-rouge">--allowed-origins</code> 與 <code class="language-plaintext highlighter-rouge">--blocked-origins</code> 控制瀏覽器可請求的來源，但文件明確標注它們不是安全邊界，也不會影響重新導向。真正需要隔離時，<code class="language-plaintext highlighter-rouge">--allowed-hosts</code> 限制伺服器綁定的主機，配合容器化執行較為穩妥。</p>
+
+<p>其他可用控制包括以 <code class="language-plaintext highlighter-rouge">--secrets</code> 載入 dotenv 格式的憑證檔，以及用 <code class="language-plaintext highlighter-rouge">--redact-url-params</code> 把網址中的權杖參數遮蔽。Docker 映像 <code class="language-plaintext highlighter-rouge">mcr.microsoft.com/playwright/mcp</code> 目前只支援無頭 Chromium，適合放進受限網路環境。</p>
+
+<h2 id="playwright-mcp-的專案規模與維護節奏如何">Playwright MCP 的專案規模與維護節奏如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>倉庫累積 39,552 星標與 3,427 個分叉，最新版 v0.0.85 於 2026 年 11 月 9 日發佈，節奏約每月一次。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">39,552</span><span class="ui-stat-label">GitHub 星標</span></div>
+<div class="ui-stat"><span class="ui-stat-value">3,427</span><span class="ui-stat-label">分叉數</span></div>
+<div class="ui-stat"><span class="ui-stat-value">72</span><span class="ui-stat-label">MCP 工具</span></div>
+<div class="ui-stat"><span class="ui-stat-value">v0.0.85</span><span class="ui-stat-label">最新版本</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Apache 2.0</span><span class="ui-stat-label">授權條款</span></div>
+<div class="ui-stat"><span class="ui-stat-value">TypeScript</span><span class="ui-stat-label">主要語言</span></div>
+</div>
+
+<p>版本節奏偏向密集修正而非大型功能。v0.0.85 的亮點集中在連線體驗：背景連線、頁籤群組控制、只匹配可見元素的定位選項，以及快照中保留容器與表格標題的名稱。</p>
+
+<p>修正項目同樣貼近實務。<code class="language-plaintext highlighter-rouge">browser_snapshot</code> 回退了上一版對 inert 與模態內容的可見性過濾，<code class="language-plaintext highlighter-rouge">browser_evaluate</code> 改為以可讀形式回傳 BigInt、NaN 等非 JSON 值，設定檔內的相對路徑亦改為按檔案所在目錄解析。這些都是代理長時間運行時才會浮現的細節問題。</p>
+
+<h2 id="如何開始使用-playwright-mcp">如何開始使用 Playwright MCP？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>在客戶端 mcpServers 加入指令 npx @playwright/mcp@latest，需 Node.js 18 以上，重啟後即見工具。
+<!-- End AEO Capsule --></p>
+
+<p>標準設定在多數客戶端通用。在 <code class="language-plaintext highlighter-rouge">mcpServers</code> 之下加入名為 <code class="language-plaintext highlighter-rouge">playwright</code> 的條目，指令填 <code class="language-plaintext highlighter-rouge">npx</code>，參數填 <code class="language-plaintext highlighter-rouge">@playwright/mcp@latest</code>，即可完成註冊。VS Code、Cursor、Windsurf、Claude Desktop、Goose、Grok、Junie、Kiro、LM Studio 與 opencode 都沿用同一段結構。</p>
+
+<p>命令列工具另有更快路徑。Codex 可直接執行 <code class="language-plaintext highlighter-rouge">codex mcp add playwright npx "@playwright/mcp@latest"</code>，設定會寫入 <code class="language-plaintext highlighter-rouge">~/.codex/config.toml</code>；Copilot CLI 於互動模式輸入 <code class="language-plaintext highlighter-rouge">/mcp add</code> 後按指示操作。</p>
+
+<p>需要長期服務時可改用 Docker 或獨立程序。映像啟動後在 8931 埠提供 SSE 傳輸，任何 MCP 客戶端都可連上。首次執行需下載瀏覽器二進位檔，之後啟動只需數秒。</p>
+
+<p><img src="/assets/images/posts/playwright-mcp-news-shot2.png" alt="Playwright MCP 的 GitHub 倉庫首頁，顯示倉庫名稱、星標數與主要檔案結構" /></p>
+
+<h2 id="playwright-mcp-與其他瀏覽器代理方案相比如何">Playwright MCP 與其他瀏覽器代理方案相比如何？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>與截圖式代理相比，它以結構化資料換取穩定度與詞元效率，代價是難以處理畫布與純圖形介面，精確度亦受解析度限制。
+<!-- End AEO Capsule --></p>
+
+<p>截圖式方案的優勢在於通用性。任何看得見的介面都能操作，包括遊戲、遠端桌面與 canvas 繪製的圖表。Playwright MCP 在這些場景需要退回座標點擊，精確度取決於解析度，穩定性不及結構化定位。</p>
+
+<p>自建腳本的優勢在於可預期。每一步都是程式碼，錯誤可重現，執行成本極低。MCP 路線把決策交給模型，換來面對未知頁面時的適應力，代價是每次呼叫都帶著推理成本與不確定性。</p>
+
+<p>實務上三者並非互斥。常見組合是以 Playwright 腳本處理穩定流程，把探索與修復步驟交給代理，並在代理工作時以追蹤檔記錄每一步，事後轉為固定腳本。這種分工把模型成本集中在真正需要判斷的環節。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 55 字 -->
+<p>原始碼位於 GitHub 的 microsoft/playwright-mcp，npm 套件為 @playwright/mcp，Docker 映像由微軟發佈。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫網址為 https://github.com/microsoft/playwright-mcp ，README 內含完整工具清單、各客戶端設定範例與安全章節。上游框架文件位於 https://playwright.dev ，MCP 協定規格則可於 modelcontextprotocol.io 查閱。若只需要命令列工作流，可參考 https://github.com/microsoft/playwright-cli 。</p>
+
+<p><img src="/assets/images/posts/playwright-mcp-news-shot3.png" alt="Playwright MCP 的貢獻者與提交活動統計頁面，顯示近三個月的提交頻率" /></p>
+
+<h2 id="playwright-mcp-常見問題有哪些">Playwright MCP 常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>常見疑問集中在視覺模型需求、無頭運行、瀏覽器選擇、本機檔案存取範圍、彈出視窗處理與追蹤檔用途，以下逐項以問答形式回答，並附上官方建議的設定方式。
+<!-- End AEO Capsule --></p>
+
+<p><strong>Playwright MCP 需要視覺模型嗎？</strong></p>
+
+<p>不需要。伺服器以無障礙樹描述頁面，代理只讀結構化文字。只有在 <code class="language-plaintext highlighter-rouge">--caps=vision</code> 開啟座標操作，或需要判讀截圖內容時，才涉及視覺能力。</p>
+
+<p><strong>Playwright MCP 可以在無頭環境運行嗎？</strong></p>
+
+<p>可以。加上 <code class="language-plaintext highlighter-rouge">--headless</code> 即以無頭模式啟動，並可配合 <code class="language-plaintext highlighter-rouge">--idle-timeout</code> 設定閒置多久後關閉瀏覽器，適合伺服器與容器部署。</p>
+
+<p><strong>Playwright MCP 支援哪些瀏覽器？</strong></p>
+
+<p>透過 <code class="language-plaintext highlighter-rouge">--browser</code> 可選 chrome、firefox、webkit 或 msedge。預設使用 Chrome for Testing 版本，確保跨機器行為一致。</p>
+
+<p><strong>Playwright MCP 會不會讀取本機檔案？</strong></p>
+
+<p>預設只允許工作區根目錄，並封鎖 <code class="language-plaintext highlighter-rouge">file://</code> 導航。放寬須明確加上 <code class="language-plaintext highlighter-rouge">--allow-unrestricted-file-access</code>，不建議在不受信任的環境開啟。</p>
+
+<p><strong>Playwright MCP 如何處理彈出視窗與對話框？</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">browser_handle_dialog</code> 可接受或拒絕 alert、confirm 與 prompt，<code class="language-plaintext highlighter-rouge">browser_tabs</code> 則負責切換與關閉頁籤，避免代理在彈窗出現後卡住。</p>
+
+<p><strong>Playwright MCP 的追蹤檔有什麼用途？</strong></p>
+
+<p><code class="language-plaintext highlighter-rouge">browser_start_tracing</code> 會記錄 DOM 快照、網路請求與操作序列，失敗時可用 Trace Viewer 逐步重播，是把代理行為轉為可除錯證據的主要手段。</p>
+
+<p><strong>Playwright MCP 適合用在生產環境嗎？</strong></p>
+
+<p>適合以容器隔離的方式部署，但不應當作安全邊界。README 明言伺服器本身不提供防護，憑證管理、網路限制與權限回收都需由外層機制負責。</p>
+
+<p><strong>Playwright MCP 與 Playwright 測試框架會衝突嗎？</strong></p>
+
+<p>不會。兩者共用同一套瀏覽器二進位檔與定位模型，可以在同一個專案並存，測試套件與代理工作流各自獨立運行。</p>
+
+<h2 id="總結playwright-mcp-適合什麼團隊">總結：Playwright MCP 適合什麼團隊？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>適合已用 Playwright 或正建立代理工作流的團隊，尤其是需要穩定頁面讀取與可重播證據的長時間流程。
+<!-- End AEO Capsule --></p>
+
+<p>Playwright MCP 的價值不在工具數量，而在於把不穩定的像素世界轉換為可列舉的結構。72 個工具構成一個完整介面，讓代理能在同一個連線內完成導航、操作、驗證與錄影。</p>
+
+<p>限制同樣清楚。它不是安全邊界，不擅長畫布類介面，工具表本身也佔用上下文。微軟在 README 主動指出 CLI 路線的詞元優勢，這種坦白反而提升了可信度。</p>
+
+<p>對於正在評估代理落地方式的團隊，合理的做法是先以 CLI 處理已知流程，把 MCP 留給需要持續狀態與反覆推理的長流程。兩者共用同一套引擎，切換成本極低。同類的瀏覽器操作路線可對照 <a href="/技術/browser-use-1-0-rewrite-news">Browser Use 1.0 重寫後的取捨</a>，而把工具以 MCP 形式暴露的做法，另可參考 <a href="/技術/strapi-mcp-server-news">Strapi MCP 伺服器的接口設計</a>。</p>]]></content><author><name>AnIskill 編輯部</name></author><category term="技術" /><category term="Playwright MCP" /><category term="MCP" /><category term="AI 代理" /><category term="瀏覽器自動化" /><category term="微軟" /><category term="開源項目" /><category term="無障礙樹" /><category term="GitHub" /><category term="科技新聞" /><summary type="html"><![CDATA[Playwright MCP 是微軟開源的瀏覽器自動化伺服器，GitHub 累積 39,552 顆星標。它把 Playwright 包裝成 72 個 MCP 工具，讓代理以無障礙樹快照讀取頁面並執行點擊輸入，無需視覺模型。本文整理工具清單、連線模式、安全設定與 v0.0.85 更新重點。]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://anthroskill.com/assets/images/posts/playwright-mcp-news-cover.jpg" /><media:content medium="image" url="https://anthroskill.com/assets/images/posts/playwright-mcp-news-cover.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

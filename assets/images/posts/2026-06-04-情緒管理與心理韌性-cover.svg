@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a3a"/>
+      <stop offset="50%" style="stop-color:#2d5a6e"/>
+      <stop offset="100%" style="stop-color:#4a8c7c"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#ffd700;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="8" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="200" cy="450" r="180" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <circle cx="200" cy="450" r="120" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+  <circle cx="200" cy="450" r="60" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="1"/>
+
+  <circle cx="1000" cy="180" r="140" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+  <circle cx="1000" cy="180" r="90" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="1"/>
+
+  <!-- Central brain/nodes illustration -->
+  <!-- Neural network nodes -->
+  <g stroke="#ffd700" stroke-opacity="0.3" stroke-width="0.8" fill="none">
+    <line x1="400" y1="280" x2="520" y2="200"/>
+    <line x1="400" y1="280" x2="520" y2="340"/>
+    <line x1="400" y1="280" x2="350" y2="360"/>
+    <line x1="400" y1="280" x2="300" y2="220"/>
+    <line x1="520" y1="200" x2="480" y2="100"/>
+    <line x1="520" y1="200" x2="620" y2="180"/>
+    <line x1="520" y1="340" x2="620" y2="380"/>
+    <line x1="520" y1="340" x2="480" y2="440"/>
+    <line x1="350" y1="360" x2="250" y2="400"/>
+    <line x1="300" y1="220" x2="200" y2="150"/>
+    <line x1="300" y1="220" x2="220" y2="280"/>
+  </g>
+
+  <!-- Nodes -->
+  <g fill="#ffd700" opacity="0.6">
+    <circle cx="400" cy="280" r="6"/>
+    <circle cx="520" cy="200" r="4"/>
+    <circle cx="520" cy="340" r="4"/>
+    <circle cx="350" cy="360" r="3"/>
+    <circle cx="300" cy="220" r="4"/>
+    <circle cx="480" cy="100" r="3"/>
+    <circle cx="620" cy="180" r="3"/>
+    <circle cx="620" cy="380" r="3"/>
+    <circle cx="480" cy="440" r="3"/>
+    <circle cx="250" cy="400" r="3"/>
+    <circle cx="200" cy="150" r="3"/>
+    <circle cx="220" cy="280" r="3"/>
+  </g>
+
+  <!-- Central heart symbol -->
+  <g transform="translate(400, 260)" fill="none" stroke="#ffd700" stroke-width="2.5" opacity="0.8">
+    <path d="M0,-20 C-20,-45 -60,-40 -60,-15 C-60,5 -40,15 0,35 C40,15 60,5 60,-15 C60,-40 20,-45 0,-20Z"/>
+  </g>
+
+  <!-- Floating leaves -->
+  <g fill="#5abf8c" opacity="0.25">
+    <path d="M850,120 Q870,100 890,120 Q870,140 850,120Z" transform="rotate(30, 870, 120)"/>
+    <path d="M920,480 Q940,460 960,480 Q940,500 920,480Z" transform="rotate(-20, 940, 480)"/>
+    <path d="M300,500 Q315,485 330,500 Q315,515 300,500Z" transform="rotate(15, 315, 500)"/>
+  </g>
+
+  <!-- Title -->
+  <text x="120" y="160" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="42" font-weight="700" fill="#ffffff" filter="url(#softShadow)">
+    情緒管理與心理韌性
+  </text>
+
+  <text x="120" y="215" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="24" font-weight="400" fill="#b0d4d0">
+    在焦慮時代找回內在平衡的科學方法
+  </text>
+
+  <!-- Tags -->
+  <g transform="translate(120, 270)">
+    <rect x="0" y="0" width="80" height="30" rx="15" fill="#ffd700" opacity="0.15"/>
+    <text x="40" y="20" font-family="system-ui, sans-serif" font-size="13" fill="#ffd700" text-anchor="middle">心理健康</text>
+    <rect x="92" y="0" width="65" height="30" rx="15" fill="#5abf8c" opacity="0.15"/>
+    <text x="124" y="20" font-family="system-ui, sans-serif" font-size="13" fill="#5abf8c" text-anchor="middle">情緒管理</text>
+    <rect x="169" y="0" width="65" height="30" rx="15" fill="#5abf8c" opacity="0.15"/>
+    <text x="201" y="20" font-family="system-ui, sans-serif" font-size="13" fill="#5abf8c" text-anchor="middle">正念練習</text>
+  </g>
+
+  <!-- Bottom bar -->
+  <g transform="translate(120, 530)">
+    <line x1="0" y1="0" x2="300" y2="0" stroke="#ffd700" stroke-opacity="0.3" stroke-width="1"/>
+    <text x="0" y="25" font-family="system-ui, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.5">
+      GovFlow 健康指南
+    </text>
+    <text x="170" y="25" font-family="system-ui, sans-serif" font-size="14" fill="#ffffff" fill-opacity="0.5">
+      2026 年 6 月
+    </text>
+  </g>
+
+  <!-- Side decorative dots -->
+  <g fill="#ffd700" opacity="0.15">
+    <circle cx="1100" cy="500" r="3"/>
+    <circle cx="1130" cy="530" r="2"/>
+    <circle cx="1060" cy="550" r="2.5"/>
+    <circle cx="1150" cy="480" r="2"/>
+  </g>
+</svg>

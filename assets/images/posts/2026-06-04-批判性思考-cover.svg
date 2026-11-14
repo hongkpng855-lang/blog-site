@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#f5a623"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
+
+  <!-- Decorative brain network lines -->
+  <g opacity="0.15" stroke="#e94560" stroke-width="1.5" fill="none">
+    <circle cx="256" cy="200" r="80" stroke-dasharray="4,6"/>
+    <circle cx="256" cy="200" r="55" stroke-dasharray="3,5"/>
+    <circle cx="256" cy="200" r="35" stroke-dasharray="2,4"/>
+    <!-- Network lines -->
+    <line x1="176" y1="200" x2="120" y2="320"/>
+    <line x1="336" y1="200" x2="392" y2="320"/>
+    <line x1="120" y1="320" x2="392" y2="320"/>
+    <line x1="256" y1="120" x2="256" y2="80"/>
+    <line x1="256" y1="120" x2="176" y2="200"/>
+    <line x1="256" y1="120" x2="336" y2="200"/>
+  </g>
+
+  <!-- Question mark brain -->
+  <g transform="translate(256,180)">
+    <!-- Question mark -->
+    <text x="0" y="0" text-anchor="middle" font-family="Georgia, serif" font-size="120" font-weight="bold" fill="url(#glow)" opacity="0.9">?</text>
+  </g>
+
+  <!-- Magnifying glass -->
+  <g transform="translate(310,280)" filter="url(#shadow)">
+    <circle cx="0" cy="0" r="32" fill="none" stroke="#e94560" stroke-width="4" opacity="0.8"/>
+    <line x1="22" y1="22" x2="45" y2="45" stroke="#e94560" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+  </g>
+
+  <!-- Lightbulb dots -->
+  <g fill="#f5a623" opacity="0.6">
+    <circle cx="160" cy="300" r="3"/>
+    <circle cx="145" cy="330" r="2.5"/>
+    <circle cx="170" cy="350" r="2"/>
+    <circle cx="350" cy="280" r="2.5"/>
+    <circle cx="370" cy="310" r="2"/>
+    <circle cx="130" cy="370" r="2"/>
+    <circle cx="380" cy="340" r="1.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="440" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="24" font-weight="bold" fill="#ffffff">批判性思考</text>
+  <text x="256" y="468" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="15" fill="#8899aa">在 AI 時代分辨真偽</text>
+</svg>

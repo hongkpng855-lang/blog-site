@@ -1,0 +1,171 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0e27"/>
+      <stop offset="50%" stop-color="#121b3d"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="50%" stop-color="#E8D48B"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- ===== Decorative Grid Pattern ===== -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="200" y1="0" x2="200" y2="450" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="400" y1="0" x2="400" y2="450" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="600" y1="0" x2="600" y2="450" stroke="#FB923C" stroke-width="0.3"/>
+  </g>
+
+  <!-- ===== Max Drawdown Chart ===== -->
+  <!-- Starting point (top) -->
+  <path d="M 100,100
+           Q 160,95 220,140
+           Q 280,185 340,130
+           Q 380,95 420,105
+           Q 460,115 490,170
+           Q 520,225 560,200
+           Q 600,175 640,190
+           Q 680,205 720,180"
+        fill="none" stroke="#22c55e" stroke-width="2.5" opacity="0.3"/>
+
+  <!-- Drawdown curve (after peak, sharp decline) -->
+  <path d="M 100,100
+           Q 160,95 220,140
+           Q 280,185 340,130
+           Q 380,95 420,105
+           Q 460,115 490,170
+           Q 520,225 560,200
+           Q 600,175 640,240
+           Q 680,305 720,300"
+        fill="none" stroke="url(#red)" stroke-width="2.5" opacity="0.6"/>
+
+  <!-- Second line overlay - recovery -->
+  <path d="M 640,240
+           Q 680,305 720,300"
+        fill="none" stroke="#22c55e" stroke-width="2" opacity="0.4"/>
+
+  <!-- Dotted recovery projection -->
+  <path d="M 720,300
+           Q 740,290 780,260"
+        fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+
+  <!-- Peak marker -->
+  <circle cx="560" cy="200" r="5" fill="#22c55e" opacity="0.5"/>
+  <circle cx="560" cy="200" r="2.5" fill="#22c55e"/>
+  <text x="560" y="190" fill="#22c55e" font-size="9" font-family="sans-serif" text-anchor="middle" opacity="0.8">最高位</text>
+
+  <!-- Trough marker -->
+  <circle cx="700" cy="310" r="5" fill="#ef4444" opacity="0.5"/>
+  <circle cx="700" cy="310" r="2.5" fill="#ef4444"/>
+  <text x="700" y="328" fill="#ef4444" font-size="9" font-family="sans-serif" text-anchor="middle" opacity="0.8">最低位</text>
+
+  <!-- Drawdown label -->
+  <g transform="translate(630, 255)">
+    <rect x="0" y="-10" width="85" height="20" rx="4" fill="#ef4444" opacity="0.12"/>
+    <text x="42" y="5" fill="#ef4444" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="bold">最大回撤 ▼35%</text>
+  </g>
+
+  <!-- ===== Shield Icon (decorative) ===== -->
+  <g transform="translate(130, 105)" opacity="0.07">
+    <path d="M0,0 L30,0 L30,25 Q30,40 15,45 Q0,40 0,25 Z" fill="none" stroke="#FB923C" stroke-width="1.5"/>
+    <line x1="8" y1="20" x2="13" y2="28" stroke="#FB923C" stroke-width="2"/>
+    <line x1="13" y1="28" x2="22" y2="12" stroke="#FB923C" stroke-width="2"/>
+  </g>
+
+  <!-- ===== Title Section ===== -->
+  <!-- Divider -->
+  <line x1="50" y1="85" x2="750" y2="85" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+
+  <!-- Main Title -->
+  <text x="50" y="46" fill="#ffffff" font-size="26" font-family="sans-serif" font-weight="bold">
+    投資組合風險管理終極指南
+  </text>
+
+  <!-- Subtitle -->
+  <text x="50" y="72" fill="#FB923C" font-size="13" font-family="sans-serif" opacity="0.9">
+    唔好淨係諗回報，學識保護你嘅資產 · 風險先行，回報隨後
+  </text>
+
+  <!-- ===== 4 Info Cards ===== -->
+
+  <!-- Card 1: Diversification -->
+  <g transform="translate(50, 370)">
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="#FB923C" opacity="0.1"/>
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="none" stroke="#FB923C" stroke-width="0.5" opacity="0.3"/>
+    <text x="70" y="15" fill="#FB923C" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="500">🛡️ 分散投資</text>
+  </g>
+
+  <!-- Card 2: Rebalancing -->
+  <g transform="translate(205, 370)">
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="#22c55e" opacity="0.1"/>
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="none" stroke="#22c55e" stroke-width="0.5" opacity="0.3"/>
+    <text x="70" y="15" fill="#22c55e" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="500">🔄 定期再平衡</text>
+  </g>
+
+  <!-- Card 3: Stop Loss -->
+  <g transform="translate(360, 370)">
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="#06b6d4" opacity="0.1"/>
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="none" stroke="#06b6d4" stroke-width="0.5" opacity="0.3"/>
+    <text x="70" y="15" fill="#06b6d4" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="500">✂️ 止蝕策略</text>
+  </g>
+
+  <!-- Card 4: Emergency Fund -->
+  <g transform="translate(515, 370)">
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="#a855f7" opacity="0.1"/>
+    <rect x="0" y="-5" width="140" height="28" rx="6" fill="none" stroke="#a855f7" stroke-width="0.5" opacity="0.3"/>
+    <text x="70" y="15" fill="#a855f7" font-size="11" font-family="sans-serif" text-anchor="middle" font-weight="500">💰 應急資金</text>
+  </g>
+
+  <!-- ===== Risk gauge bar at bottom of chart area ===== -->
+  <g transform="translate(100, 340)">
+    <!-- Bar background -->
+    <rect x="0" y="0" width="600" height="4" rx="2" fill="white" opacity="0.06"/>
+    <!-- Gradient bar: green → yellow → red -->
+    <rect x="0" y="0" width="180" height="4" rx="2" fill="#22c55e" opacity="0.25"/>
+    <rect x="180" y="0" width="240" height="4" fill="#FB923C" opacity="0.2"/>
+    <rect x="420" y="0" width="180" height="4" rx="2" fill="#ef4444" opacity="0.2"/>
+    <!-- Labels -->
+    <text x="90" y="-4" fill="#22c55e" font-size="9" font-family="sans-serif" text-anchor="middle" opacity="0.5">低風險</text>
+    <text x="300" y="-4" fill="#FB923C" font-size="9" font-family="sans-serif" text-anchor="middle" opacity="0.5">中等</text>
+    <text x="510" y="-4" fill="#ef4444" font-size="9" font-family="sans-serif" text-anchor="middle" opacity="0.5">高風險</text>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="0" y="448" width="800" height="2" fill="url(#gold)" opacity="0.35"/>
+</svg>

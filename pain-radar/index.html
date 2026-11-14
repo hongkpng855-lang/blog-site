@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>痛點雷達 - AnthroSkill</title>
+  <meta name="description" content="每日從 Reddit、Hacker News、討論區等平台，篩選高質量的人類真實痛點，整理成可搜尋、可分類的條目。每則條目標明類型與地區，說明人們實際卡住的位置與當下需求。內容可供讀者參考與避坑，也是 AnthroSkill 選擇實測題材的來源，讓觀察與驗證彼此呼應。">
+  <meta name="keywords" content="UI, 前端, 技術, 投資, 生活, 健康, 學習, 部落格, 知識分享">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/pain-radar/">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="痛點雷達">
+  <meta property="og:description" content="每日從 Reddit、Hacker News、討論區等平台，篩選高質量的人類真實痛點，整理成可搜尋、可分類的條目。每則條目標明類型與地區，說明人們實際卡住的位置與當下需求。內容可供讀者參考與避坑，也是 AnthroSkill 選擇實測題材的來源，讓觀察與驗證彼此呼應。">
+  <meta property="og:url" content="https://anthroskill.com/pain-radar/">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="website">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/hero/ai-pain-point-radar-anthroskill-og.jpg?v=4">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="痛點雷達">
+  <meta name="twitter:description" content="每日從 Reddit、Hacker News、討論區等平台，篩選高質量的人類真實痛點，整理成可搜尋、可分類的條目。每則條目標明類型與地區，說明人們實際卡住的位置與當下需求。內容可供讀者參考與避坑，也是 AnthroSkill 選擇實測題材的來源，讓觀察與驗證彼此呼應。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/hero/ai-pain-point-radar-anthroskill-og.jpg?v=4">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-14T20:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+  <script>
+(function () {
+  if (typeof gtag !== 'function') return;
+
+  // 1) 訂閱表單送出
+  document.querySelectorAll('form[data-subscribe-source]').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      gtag('event', 'newsletter_submit', {
+        source: f.getAttribute('data-subscribe-source'),
+        page_path: location.pathname
+      });
+    });
+  });
+
+  // 2) 外部連結點擊（同網域除外）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!/^https?:/i.test(href)) return;
+    if (href.indexOf(location.host) !== -1) return;
+    gtag('event', 'outbound_click', {
+      link_url: href,
+      link_domain: (href.split('/')[2] || ''),
+      page_path: location.pathname
+    });
+  }, true);
+
+  // 3) 文章讀完（捲到 90%，每頁只記一次）
+  var done = false;
+  window.addEventListener('scroll', function () {
+    if (done) return;
+    var h = document.documentElement;
+    var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight;
+    if (pct >= 0.9) {
+      done = true;
+      gtag('event', 'read_complete', { page_path: location.pathname });
+    }
+  }, { passive: true });
+})();
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+<!-- 痛點雷達 Hero -->
+<section class="tutorials-hero" style="--hero-bg: url('/assets/images/hero/ai-pain-point-radar-anthroskill.jpg?v=4');">
+  <div class="container">
+    <p class="hero-kicker">pain radar · daily</p>
+    <h1 class="tutorials-title">痛點雷達</h1>
+    <p class="tutorials-sub">每日從 Reddit、Hacker News、V2EX 及各大討論區，發掘高質量的真實痛點，並標明類型與地區。這裡不談空泛理論，只收錄「人真正卡住的位置」——你可以參考、可以避坑，亦是我落場實測的題材來源。</p>
+  </div>
+</section>
+
+<!-- 痛點列表（分類 + 搜尋）-->
+<section class="devlog-section">
+  <div class="container">
+    
+
+    <!-- 工具列：搜尋 + 排序 -->
+    <div class="pain-toolbar">
+      <div class="pain-search">
+        <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-search"></use></svg>
+        <label for="pain-search-input" class="visually-hidden">搜尋痛點關鍵字、地區、平台</label>
+        <input type="search" id="pain-search-input" class="pain-search-input" placeholder="搜尋痛點關鍵字、地區、平台…" aria-label="搜尋痛點" autocomplete="off" toolname="search_pain_points" tooldescription="以關鍵字搜尋 AnthroSkill 痛點雷達收錄的真實使用者痛點，回傳平台、地區、痛感分數與原文摘要。">
+      </div>
+      <div class="pain-sorts" role="group" aria-label="排序">
+        <button type="button" class="pain-sort is-active" data-sort="urgency">綜合迫切度</button>
+        <button type="button" class="pain-sort" data-sort="score">痛感排序</button>
+        <button type="button" class="pain-sort" data-sort="date">最新</button>
+        <button type="button" class="pain-sort" data-sort="heat">熱度</button>
+      </div>
+    </div>
+
+    <!-- 類型篩選 -->
+    <div class="pain-filter-row" role="tablist" aria-label="痛點類型">
+      <span class="pain-filter-label">類型</span>
+      <div class="pain-filters">
+        <button type="button" class="pain-filter is-active" data-filter="all">全部 <span class="pain-filter-n">383</span></button>
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="AI 應用">AI 應用 <span class="pain-filter-n">33</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="自架與工具">自架與工具 <span class="pain-filter-n">49</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="消費決策">消費決策 <span class="pain-filter-n">44</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="職涯職場">職涯職場 <span class="pain-filter-n">146</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="資訊安全">資訊安全 <span class="pain-filter-n">20</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="內容版權">內容版權 <span class="pain-filter-n">1</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="生活疑難">生活疑難 <span class="pain-filter-n">89</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-filter" data-filter="其他">其他 <span class="pain-filter-n">1</span></button>
+        
+        
+      </div>
+    </div>
+
+    <!-- 地區篩選 -->
+    <div class="pain-filter-row" role="tablist" aria-label="痛點地區">
+      <span class="pain-filter-label">地區</span>
+      <div class="pain-filters">
+        <button type="button" class="pain-region-filter is-active" data-region="all">全部</button>
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="香港">香港 <span class="pain-filter-n">83</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="台灣">台灣 <span class="pain-filter-n">76</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="中國">中國 <span class="pain-filter-n">77</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="美國">美國 <span class="pain-filter-n">121</span></button>
+        
+        
+        
+        
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="韓國">韓國 <span class="pain-filter-n">1</span></button>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="歐洲">歐洲 <span class="pain-filter-n">6</span></button>
+        
+        
+        
+        
+        <button type="button" class="pain-region-filter" data-region="全球">全球 <span class="pain-filter-n">19</span></button>
+        
+        
+        
+        
+        
+      </div>
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<p class="pain-count text-muted small mb-3" id="pain-count">共 383 條痛點，現顯示第 1 / 16 頁（按日期新至舊）</p>
+
+<div class="row g-4" id="pain-grid">
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="消費決策" data-region="美國" data-level="medium" data-search="硬件買斷後仍被訂閱鎖住，用戶只能自建 app 取回控制權 有開發者買了一部三百美元的家用刺繡機，原廠要求以訂閱方式才能使用圖案庫與雲端功能，機器買斷後仍然每月付費，最後自行寫了一個 app 接手。 硬件廠商把關鍵功能搬上雲端並以訂閱收費，買機當刻難以察覺，事後才發現機器一離線就等於半廢。 購買前先確認機器能否完全離線運作，以及有無第三方或開源替代客戶端；已購入的可以記錄原廠通訊協定，再自建本地工具繞過訂閱。 消費決策 美國 hacker news（show hn） 訂閱制 硬件鎖定 自建工具" data-score="63" data-urgency="71" data-date="2026-11-14" data-heat="高" data-platforms="2" data-track="solved">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-0">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 63</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">硬件買斷後仍被訂閱鎖住，用戶只能自建 App 取回控制權</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ Hacker News（Show HN） ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有開發者買了一部三百美元的家用刺繡機，原廠要求以訂閱方式才能使用圖案庫與雲端功能，機器買斷後仍然每月付費，最後自行寫了一個 App 接手。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>硬件廠商把關鍵功能搬上雲端並以訂閱收費，買機當刻難以察覺，事後才發現機器一離線就等於半廢。</p>
+        <p><strong>可能解法：</strong>購買前先確認機器能否完全離線運作，以及有無第三方或開源替代客戶端；已購入的可以記錄原廠通訊協定，再自建本地工具繞過訂閱。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 7/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 7/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 4/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（2 個平台、2 條相關，關聯加成 +8）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://www.threads.com/@boars.daily/post/DflOeidH1p-" target="_blank" rel="noopener nofollow">通訊軟件功能與訂閱不斷加，用戶想要一個可自控的替代方案</a> <span class="pain-related-src">Threads</span></li>
+            
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener nofollow">想把運動軌跡做成 3D 影片，現成工具不是收月費就是限制畫質</a> <span class="pain-related-src">Facebook</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：已有方案（2026-11-14 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/simpsoka/zigzag" target="_blank" rel="noopener nofollow">Show HN: My $300 embroidery machine needed a subscription, so I built my own app</a> <span class="pain-related-src">社群討論 · 679</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">消費決策</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">高熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 71</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">2 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">已有方案</span>
+        
+        <span class="devlog-tag">訂閱制</span><span class="devlog-tag">硬件鎖定</span><span class="devlog-tag">自建工具</span>
+      </div>
+      
+      <a href="https://news.ycombinator.com/item?id=50470488" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Hacker News（Show HN） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="生活疑難" data-region="中國" data-level="low" data-search="九宮格輸入法用戶老化，熟悉的手感在新裝置上逐步消失 有網民發現年輕同事幾乎不識九宮格輸入法，用家多為功能機年代長大的人，擔心這種輸入方式在新裝置與新系統上逐步被移除。 輸入習慣與年齡層綁定，小眾輸入法一旦失去系統支援，用家要重新學另一套手感，轉換成本全由個人承擔。 先在備用手機試裝仍有社群維護的第三方輸入法並備份設定，確認長遠有人接手才全面轉用。 生活疑難 中國 v2ex 輸入法 數位落差 習慣遷移" data-score="46" data-urgency="46" data-date="2026-11-14" data-heat="低" data-platforms="0" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-1">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-low" title="痛感指數（0-100）">微痛 46</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">九宮格輸入法用戶老化，熟悉的手感在新裝置上逐步消失</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ V2EX ・ 中國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有網民發現年輕同事幾乎不識九宮格輸入法，用家多為功能機年代長大的人，擔心這種輸入方式在新裝置與新系統上逐步被移除。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>輸入習慣與年齡層綁定，小眾輸入法一旦失去系統支援，用家要重新學另一套手感，轉換成本全由個人承擔。</p>
+        <p><strong>可能解法：</strong>先在備用手機試裝仍有社群維護的第三方輸入法並備份設定，確認長遠有人接手才全面轉用。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 4/10</span>
+          <span>重複頻率 7/10</span>
+          <span>付費意願 4/10</span>
+          <span>解法缺口 5/10</span>
+          <span>急切程度 2/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-14 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/0x00000003/iOSNineKeyIME-for-Android" target="_blank" rel="noopener nofollow">0x00000003/iOSNineKeyIME-for-Android</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">生活疑難</span>
+        <span class="devlog-tag">中國</span>
+        <span class="devlog-tag">低熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">輸入法</span><span class="devlog-tag">數位落差</span><span class="devlog-tag">習慣遷移</span>
+      </div>
+      
+      <a href="https://www.v2ex.com/t/1256717" class="devlog-link" target="_blank" rel="noopener nofollow">來源：V2EX →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="生活疑難" data-region="美國" data-level="high" data-search="全日不停吸收內容，學業與工作一齊被拖垮卻停不下來 一名學生說自己整日離不開影片與遊戲，已移除短影音平台、又裝插件擋掉 shorts，學業、工作與私人生活仍然一齊下滑。 問題不在單一平台，而在整套裝置與通知設計；逐個 app 刪除只會把時間搬到另一個入口，使用者因而覺得方法全部無效。 先記錄一週的實際使用時段，找出真正的高危時段，再用系統層級的專注模式加上裝置隔離，取代逐個 app 封鎖。 生活疑難 美國 reddit r/productivity 內容成癮 專注力 螢幕時間" data-score="69" data-urgency="73" data-date="2026-11-14" data-heat="低" data-platforms="1" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-2">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 69</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">全日不停吸收內容，學業與工作一齊被拖垮卻停不下來</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ Reddit r/productivity ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>一名學生說自己整日離不開影片與遊戲，已移除短影音平台、又裝插件擋掉 Shorts，學業、工作與私人生活仍然一齊下滑。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>問題不在單一平台，而在整套裝置與通知設計；逐個 App 刪除只會把時間搬到另一個入口，使用者因而覺得方法全部無效。</p>
+        <p><strong>可能解法：</strong>先記錄一週的實際使用時段，找出真正的高危時段，再用系統層級的專注模式加上裝置隔離，取代逐個 App 封鎖。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 7/10</span>
+          <span>重複頻率 9/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 6/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（1 個平台、1 條相關，關聯加成 +4）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://www.reddit.com/r/productivity/comments/1xdcufe/how_do_i_stop_using_my_phone_to_fill_silence/" target="_blank" rel="noopener nofollow">一靜下來就拿起手機，明知佔據整日時間卻停不了</a> <span class="pain-related-src">Reddit</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-14 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">生活疑難</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">低熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 73</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">1 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">內容成癮</span><span class="devlog-tag">專注力</span><span class="devlog-tag">螢幕時間</span>
+      </div>
+      
+      <a href="https://www.reddit.com/r/productivity/comments/1xsgk8s/i_cant_stop_consuming_content_all_day_long/" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Reddit r/productivity →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="全球" data-level="high" data-search="一個星期推兩個產品全部零登記，獨立開發者不知問題出在哪 有獨立開發者在一星期內為兩個未上線產品做推廣，結果一個登記也沒有，無法判斷是產品、渠道還是文案出問題。 早期產品最缺的是可驗證的需求訊號；同時推兩個品項會把有限的曝光與注意力攤薄，最後兩邊都讀不出數據。 集中做單一產品，先找十個目標用戶做訪談，再用量少但精準的渠道測轉換，把每次實驗的結果寫下來。 職涯職場 全球 indie hackers 冷啟動 轉換率 獨立開發" data-score="66" data-urgency="66" data-date="2026-11-14" data-heat="低" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-3">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 66</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">一個星期推兩個產品全部零登記，獨立開發者不知問題出在哪</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ Indie Hackers ・ 全球</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有獨立開發者在一星期內為兩個未上線產品做推廣，結果一個登記也沒有，無法判斷是產品、渠道還是文案出問題。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>早期產品最缺的是可驗證的需求訊號；同時推兩個品項會把有限的曝光與注意力攤薄，最後兩邊都讀不出數據。</p>
+        <p><strong>可能解法：</strong>集中做單一產品，先找十個目標用戶做訪談，再用量少但精準的渠道測轉換，把每次實驗的結果寫下來。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 8/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 7/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 6/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-14 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">全球</span>
+        <span class="devlog-tag">低熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">冷啟動</span><span class="devlog-tag">轉換率</span><span class="devlog-tag">獨立開發</span>
+      </div>
+      
+      <a href="https://www.indiehackers.com/post/two-prelaunch-products-one-week-0-sign-ups-mAtzfhbBkIK1YLF1e9X3" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Indie Hackers →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="香港" data-level="medium" data-search="公司郵件系統連日故障，上班族卡在收不到通知與無法報到 連登上班台有多篇帖文集中同一現象：公司用的 outlook 接連幾日未修好，員工收不到通知，無法完成報到與回覆客戶。 企業把關鍵流程綁在單一郵件服務，一旦平台故障，員工既無備用通道也無對外說法，只能私下互相確認。 平時先建立第二聯絡通道，例如即時通訊群組與電話清單，並把重要通知同步到內部系統，避免單點依賴。 職涯職場 香港 lihkg 連登（上班） 郵件故障 單點依賴 職場通訊" data-score="51" data-urgency="51" data-date="2026-11-14" data-heat="低" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-4">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 51</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">公司郵件系統連日故障，上班族卡在收不到通知與無法報到</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ LIHKG 連登（上班） ・ 香港</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>連登上班台有多篇帖文集中同一現象：公司用的 Outlook 接連幾日未修好，員工收不到通知，無法完成報到與回覆客戶。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>企業把關鍵流程綁在單一郵件服務，一旦平台故障，員工既無備用通道也無對外說法，只能私下互相確認。</p>
+        <p><strong>可能解法：</strong>平時先建立第二聯絡通道，例如即時通訊群組與電話清單，並把重要通知同步到內部系統，避免單點依賴。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 4/10</span>
+          <span>付費意願 4/10</span>
+          <span>解法缺口 5/10</span>
+          <span>急切程度 7/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-14 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">香港</span>
+        <span class="devlog-tag">低熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">郵件故障</span><span class="devlog-tag">單點依賴</span><span class="devlog-tag">職場通訊</span>
+      </div>
+      
+      <a href="https://lihkg.com/thread/4179985" class="devlog-link" target="_blank" rel="noopener nofollow">來源：LIHKG 連登（上班） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="生活疑難" data-region="香港" data-level="medium" data-search="長期投入未見回報，散戶在繼續下注與離場之間反覆拉扯 高登財經台有網民感嘆多年投入股樓波馬，連四位數字的利潤都未試過，累積的挫敗已經影響生活情緒。 長期小額虧損最難察覺，因為每次金額不大，但反覆發生之後會形成「自己永遠贏不了」的自我評價，比虧損本身更難處理。 先要求自己記帳一整季，把每筆交易的進出理由寫下，用紀錄取代感覺，再決定是否繼續留在同一種操作方式。 生活疑難 香港 高登討論區（財經台） 散戶 投資紀律 記帳" data-score="55" data-urgency="63" data-date="2026-11-14" data-heat="低" data-platforms="2" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-5">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 55</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">長期投入未見回報，散戶在繼續下注與離場之間反覆拉扯</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ 高登討論區（財經台） ・ 香港</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>高登財經台有網民感嘆多年投入股樓波馬，連四位數字的利潤都未試過，累積的挫敗已經影響生活情緒。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>長期小額虧損最難察覺，因為每次金額不大，但反覆發生之後會形成「自己永遠贏不了」的自我評價，比虧損本身更難處理。</p>
+        <p><strong>可能解法：</strong>先要求自己記帳一整季，把每筆交易的進出理由寫下，用紀錄取代感覺，再決定是否繼續留在同一種操作方式。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 6/10</span>
+          <span>付費意願 5/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 3/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（2 個平台、4 條相關，關聯加成 +8）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://forum.hkgolden.com/thread/8101603" target="_blank" rel="noopener nofollow">股災之後忙著找戰犯，散戶手上卻沒有可查證的判斷依據</a> <span class="pain-related-src">高登討論區</span></li>
+            
+            <li><a href="https://www.douban.com/group/topic/504057989/" target="_blank" rel="noopener nofollow">想用一千元在異地生活一個月，實際開支結構無從預估</a> <span class="pain-related-src">豆瓣</span></li>
+            
+            <li><a href="https://www.douban.com/group/topic/503777312/" target="_blank" rel="noopener nofollow">自己裝修四十幾坪小單位，工序與報價全部要自己扛</a> <span class="pain-related-src">豆瓣</span></li>
+            
+            <li><a href="https://forum.hkgolden.com/thread/8098286" target="_blank" rel="noopener nofollow">股評人離世消息在高登財經台流傳，投資者重新檢視依賴他人意見的習慣</a> <span class="pain-related-src">高登討論區</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-14 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/Yoyojas/tradelens" target="_blank" rel="noopener nofollow">Yoyojas/tradelens</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+            <li><a href="https://github.com/the-balanced-investor-club/claude-plugin" target="_blank" rel="noopener nofollow">the-balanced-investor-club/claude-plugin</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">生活疑難</span>
+        <span class="devlog-tag">香港</span>
+        <span class="devlog-tag">低熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 63</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">2 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">散戶</span><span class="devlog-tag">投資紀律</span><span class="devlog-tag">記帳</span>
+      </div>
+      
+      <a href="https://forum.hkgolden.com/thread/8103623" class="devlog-link" target="_blank" rel="noopener nofollow">來源：高登討論區（財經台） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="生活疑難" data-region="中國" data-level="medium" data-search="長者退休後社交圈急速收窄，子女想幫忙卻無從入手 豆瓣一篇高熱帖寫奶奶在六十七歲才交到這生最好的朋友，留言區大量網民談到家中長者退休之後幾乎沒有同齡社交。 長者的社交機會高度依賴居住地與身體狀況，子女想幫忙卻找不到可查證的活動渠道，也不知道怎樣的社群才適合。 由固定的小型活動入手，例如社區課程或每週一次的散步團，先建立見面節奏，再慢慢擴大圈子，不必一開始就找大型組織。 生活疑難 中國 豆瓣（生活组小组） 長者 社交連結 退休生活" data-score="60" data-urgency="60" data-date="2026-11-14" data-heat="高" data-platforms="0" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-6">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 60</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">長者退休後社交圈急速收窄，子女想幫忙卻無從入手</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ 豆瓣（生活组小组） ・ 中國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>豆瓣一篇高熱帖寫奶奶在六十七歲才交到這生最好的朋友，留言區大量網民談到家中長者退休之後幾乎沒有同齡社交。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>長者的社交機會高度依賴居住地與身體狀況，子女想幫忙卻找不到可查證的活動渠道，也不知道怎樣的社群才適合。</p>
+        <p><strong>可能解法：</strong>由固定的小型活動入手，例如社區課程或每週一次的散步團，先建立見面節奏，再慢慢擴大圈子，不必一開始就找大型組織。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 8/10</span>
+          <span>急切程度 4/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-14 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/midnight-muse-fsfsfs/Sahayak-Smart-Elderly-Care-Urban-Assistance-Platform" target="_blank" rel="noopener nofollow">midnight-muse-fsfsfs/Sahayak-Smart-Elderly-Care-Urban-Assistance-Platform</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">生活疑難</span>
+        <span class="devlog-tag">中國</span>
+        <span class="devlog-tag">高熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">長者</span><span class="devlog-tag">社交連結</span><span class="devlog-tag">退休生活</span>
+      </div>
+      
+      <a href="https://www.douban.com/group/topic/505335068/" class="devlog-link" target="_blank" rel="noopener nofollow">來源：豆瓣（生活组小组） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="台灣" data-level="low" data-search="科技業從業員緊盯高層變動傳聞，對行業前景的不安無處安放 ptt 科技業板連續多篇回覆圍繞同一個未經確認的高層變動消息，從業員在無法判斷真偽的情況下已開始討論對公司與職位的實際影響。 這類消息在從業員之間擴散得極快，因為它直接關係到裁員、專案與股價，但公開資訊極少，大家只能用猜測填補空白。 把傳聞來源與公司公告分開記錄，只按已確認的公告調整職涯規劃，避免用未經核實的消息決定去留。 職涯職場 台灣 ptt（科技業） 科技業 職涯焦慮 資訊判讀" data-score="49" data-urgency="49" data-date="2026-11-14" data-heat="低" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-7">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-low" title="痛感指數（0-100）">微痛 49</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">科技業從業員緊盯高層變動傳聞，對行業前景的不安無處安放</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ PTT（科技業） ・ 台灣</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>PTT 科技業板連續多篇回覆圍繞同一個未經確認的高層變動消息，從業員在無法判斷真偽的情況下已開始討論對公司與職位的實際影響。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>這類消息在從業員之間擴散得極快，因為它直接關係到裁員、專案與股價，但公開資訊極少，大家只能用猜測填補空白。</p>
+        <p><strong>可能解法：</strong>把傳聞來源與公司公告分開記錄，只按已確認的公告調整職涯規劃，避免用未經核實的消息決定去留。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 5/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 3/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 4/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-14 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">台灣</span>
+        <span class="devlog-tag">低熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">科技業</span><span class="devlog-tag">職涯焦慮</span><span class="devlog-tag">資訊判讀</span>
+      </div>
+      
+      <a href="https://www.ptt.cc/bbs/Tech_Job/M.1794493601.A.E38.html" class="devlog-link" target="_blank" rel="noopener nofollow">來源：PTT（科技業） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="AI 應用" data-region="美國" data-level="medium" data-search="模型行為連開發者都猜不透，提示詞指南再詳細也補不上 有開發者讀完多份提示詞指南之後指出，這些指南本身就反映模型作者對新模型的行為同樣感到意外，使用者只能靠反覆試錯摸出可用寫法。 提示詞效果與模型版本綁定，一次升級就可能推翻既有寫法，團隊難以建立可重用的內部標準，每次改版都要重做一次。 為常用任務建立最小回歸測試集，每次換模型先跑一輪，把有效提示詞與對應版本一併記錄，減少靠記憶維持寫法。 ai 應用 美國 x（@simonw） 提示詞 模型版本 可重現性" data-score="59" data-urgency="71" data-date="2026-11-14" data-heat="中" data-platforms="3" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-8">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 59</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">模型行為連開發者都猜不透，提示詞指南再詳細也補不上</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ X（@simonw） ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有開發者讀完多份提示詞指南之後指出，這些指南本身就反映模型作者對新模型的行為同樣感到意外，使用者只能靠反覆試錯摸出可用寫法。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>提示詞效果與模型版本綁定，一次升級就可能推翻既有寫法，團隊難以建立可重用的內部標準，每次改版都要重做一次。</p>
+        <p><strong>可能解法：</strong>為常用任務建立最小回歸測試集，每次換模型先跑一輪，把有效提示詞與對應版本一併記錄，減少靠記憶維持寫法。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 5/10</span>
+          <span>重複頻率 8/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 4/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（3 個平台、4 條相關，關聯加成 +12）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/FrigadeHQ/yogurt" target="_blank" rel="noopener nofollow">會議記錄要上傳雲端才有人工智能摘要，私隱與訂閱費成為雙重顧慮</a> <span class="pain-related-src">Hacker News</span></li>
+            
+            <li><a href="https://www.v2ex.com/t/1254053" target="_blank" rel="noopener nofollow">長期使用的 AI 助理累積大量個人記憶，用戶無法預期記憶會被怎樣使用</a> <span class="pain-related-src">V2EX</span></li>
+            
+            <li><a href="https://x.com/simonw/status/2117655816581071203" target="_blank" rel="noopener nofollow">模型權重可否直接解讀仍在論文階段，開發者想在本地重現卻缺可跟隨步驟</a> <span class="pain-related-src">X</span></li>
+            
+            <li><a href="https://news.ycombinator.com/item?id=50328896" target="_blank" rel="noopener nofollow">想買尊重私隱的電視，市面上幾乎找不到可查證的型號</a> <span class="pain-related-src">Hacker News</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-14 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/InfronAI/prompt-cache-bench" target="_blank" rel="noopener nofollow">InfronAI/prompt-cache-bench</a> <span class="pain-related-src">開源專案 · 2</span></li>
+            
+            <li><a href="https://github.com/harishkotra/ai-behavior-lab" target="_blank" rel="noopener nofollow">harishkotra/ai-behavior-lab</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">AI 應用</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 71</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">3 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">提示詞</span><span class="devlog-tag">模型版本</span><span class="devlog-tag">可重現性</span>
+      </div>
+      
+      <a href="https://x.com/simonw/status/2120029567616458900" class="devlog-link" target="_blank" rel="noopener nofollow">來源：X（@simonw） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="香港" data-level="medium" data-search="藝術市場轉向年輕買家，學院訓練出身的創作者難以重新定位 一名藝術工作者觀察到公開市場的交易集中在五萬美元以下的作品，買家以 z 世代為主，學院訓練出身的創作者發現原本的定價與題材邏輯不再適用。 買家結構改變得比創作風格快，藝術家若只靠畫廊與學院認證，很難接觸到新的收藏群體，也不知道該用什麼價位入場。 先做一個小尺寸、低門檻的系列直接面向年輕買家測試定價，再按實際成交調整產量與題材，不必一次改掉整套路線。 職涯職場 香港 threads @artistdogz 藝術市場 定價 創作者" data-score="57" data-urgency="57" data-date="2026-11-14" data-heat="低" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-9">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 57</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">藝術市場轉向年輕買家，學院訓練出身的創作者難以重新定位</h3>
+      <p class="card-text text-muted small mb-2">2026-11-14 ・ Threads @artistdogz ・ 香港</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>一名藝術工作者觀察到公開市場的交易集中在五萬美元以下的作品，買家以 Z 世代為主，學院訓練出身的創作者發現原本的定價與題材邏輯不再適用。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>買家結構改變得比創作風格快，藝術家若只靠畫廊與學院認證，很難接觸到新的收藏群體，也不知道該用什麼價位入場。</p>
+        <p><strong>可能解法：</strong>先做一個小尺寸、低門檻的系列直接面向年輕買家測試定價，再按實際成交調整產量與題材，不必一次改掉整套路線。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 4/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 5/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-14 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">香港</span>
+        <span class="devlog-tag">低熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">藝術市場</span><span class="devlog-tag">定價</span><span class="devlog-tag">創作者</span>
+      </div>
+      
+      <a href="https://www.threads.com/@artistdogz/post/Dfo279vElR5" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Threads @artistdogz →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="AI 應用" data-region="美國" data-level="medium" data-search="會議記錄要上傳雲端才有人工智能摘要，私隱與訂閱費成為雙重顧慮 有開發者指出，現成會議記錄工具要把整段錄音上傳雲端，月費不便宜，內容亦不受自己控制，於是自行重寫一個在本地執行的版本。 會議內容往往含客戶與內部決策，企業對上傳第三方存有顧慮，但市場上的方案多以雲端訂閱為主。 選擇支援本地模型的轉寫工具，先在單機試跑一週，確認準確度與耗電後再決定是否全面替換。 ai 應用 美國 hacker news（show hn） 會議記錄 私隱 本地模型" data-score="59" data-urgency="71" data-date="2026-11-13" data-heat="中" data-platforms="3" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-10">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 59</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">會議記錄要上傳雲端才有人工智能摘要，私隱與訂閱費成為雙重顧慮</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ Hacker News（Show HN） ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有開發者指出，現成會議記錄工具要把整段錄音上傳雲端，月費不便宜，內容亦不受自己控制，於是自行重寫一個在本地執行的版本。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>會議內容往往含客戶與內部決策，企業對上傳第三方存有顧慮，但市場上的方案多以雲端訂閱為主。</p>
+        <p><strong>可能解法：</strong>選擇支援本地模型的轉寫工具，先在單機試跑一週，確認準確度與耗電後再決定是否全面替換。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 7/10</span>
+          <span>付費意願 7/10</span>
+          <span>解法缺口 4/10</span>
+          <span>急切程度 5/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（3 個平台、4 條相關，關聯加成 +12）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://x.com/simonw/status/2120029567616458900" target="_blank" rel="noopener nofollow">模型行為連開發者都猜不透，提示詞指南再詳細也補不上</a> <span class="pain-related-src">X</span></li>
+            
+            <li><a href="https://www.v2ex.com/t/1254053" target="_blank" rel="noopener nofollow">長期使用的 AI 助理累積大量個人記憶，用戶無法預期記憶會被怎樣使用</a> <span class="pain-related-src">V2EX</span></li>
+            
+            <li><a href="https://x.com/simonw/status/2117655816581071203" target="_blank" rel="noopener nofollow">模型權重可否直接解讀仍在論文階段，開發者想在本地重現卻缺可跟隨步驟</a> <span class="pain-related-src">X</span></li>
+            
+            <li><a href="https://news.ycombinator.com/item?id=50328896" target="_blank" rel="noopener nofollow">想買尊重私隱的電視，市面上幾乎找不到可查證的型號</a> <span class="pain-related-src">Hacker News</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-13 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/okamyuji/meeting-transcriber" target="_blank" rel="noopener nofollow">okamyuji/meeting-transcriber</a> <span class="pain-related-src">開源專案 · 16</span></li>
+            
+            <li><a href="https://github.com/teconomix/local-transcriber" target="_blank" rel="noopener nofollow">teconomix/local-transcriber</a> <span class="pain-related-src">開源專案 · 11</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">AI 應用</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 71</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">3 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">會議記錄</span><span class="devlog-tag">私隱</span><span class="devlog-tag">本地模型</span>
+      </div>
+      
+      <a href="https://github.com/FrigadeHQ/yogurt" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Hacker News（Show HN） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="中國" data-level="high" data-search="學歷不足又背著欠款，異地找工作的容錯空間幾乎為零 一名大專應屆生借錢到深圳找工作，首份工作做了兩週公司就散夥，現金見底，不能再承受一次選錯。 缺學歷又缺現金的人，求職決策被還款期壓縮，只能接受任何先給錢的機會，結果反覆踩進不穩定的公司。 先算出每月最低還款額與可支撐月數，再按現金流排序機會，優先選能即時出糧且有規模的職位。 職涯職場 中國 v2ex 求職 負債 現金流" data-score="65" data-urgency="65" data-date="2026-11-13" data-heat="高" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-11">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 65</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">學歷不足又背著欠款，異地找工作的容錯空間幾乎為零</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ V2EX ・ 中國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>一名大專應屆生借錢到深圳找工作，首份工作做了兩週公司就散夥，現金見底，不能再承受一次選錯。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>缺學歷又缺現金的人，求職決策被還款期壓縮，只能接受任何先給錢的機會，結果反覆踩進不穩定的公司。</p>
+        <p><strong>可能解法：</strong>先算出每月最低還款額與可支撐月數，再按現金流排序機會，優先選能即時出糧且有規模的職位。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 9/10</span>
+          <span>重複頻率 3/10</span>
+          <span>付費意願 5/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 8/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-13 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">中國</span>
+        <span class="devlog-tag">高熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">求職</span><span class="devlog-tag">負債</span><span class="devlog-tag">現金流</span>
+      </div>
+      
+      <a href="https://www.v2ex.com/t/1256423" class="devlog-link" target="_blank" rel="noopener nofollow">來源：V2EX →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="消費決策" data-region="美國" data-level="medium" data-search="買了終身授權的自架軟件，要求補開發票後授權竟被取消 有用戶購買自架檔案管理軟件的終身授權，向廠商索取正式發票後，授權被直接取消，社群回覆亦多為同類遭遇。 終身授權條款普遍留有廠商單方面終止的空間，用戶在付款前難以看出實際保障範圍。 付費前把授權條款中終止與退款段落抄下來，並優先選擇原始碼可自行編譯的方案作備份。 消費決策 美國 reddit r/selfhosted 授權 自架 消費者權益" data-score="63" data-urgency="63" data-date="2026-11-13" data-heat="高" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-12">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 63</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">買了終身授權的自架軟件，要求補開發票後授權竟被取消</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ Reddit r/selfhosted ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有用戶購買自架檔案管理軟件的終身授權，向廠商索取正式發票後，授權被直接取消，社群回覆亦多為同類遭遇。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>終身授權條款普遍留有廠商單方面終止的空間，用戶在付款前難以看出實際保障範圍。</p>
+        <p><strong>可能解法：</strong>付費前把授權條款中終止與退款段落抄下來，並優先選擇原始碼可自行編譯的方案作備份。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 8/10</span>
+          <span>重複頻率 3/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 7/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-13 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">消費決策</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">高熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">授權</span><span class="devlog-tag">自架</span><span class="devlog-tag">消費者權益</span>
+      </div>
+      
+      <a href="https://www.reddit.com/r/selfhosted/comments/1xqyhfz/filerun_canceled_my_lifetime_license_after_i/" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Reddit r/selfhosted →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="消費決策" data-region="台灣" data-level="medium" data-search="突發高層變動消息滿天飛，散戶難判斷真偽與去留 討論區出現單一來源的高層人事快訊，持股者要在消息未經確認前決定加注還是離場，多數人只能憑感覺。 財經消息的传播速度快過核實速度，散戶接收到的多是二手轉述，缺乏回到原始公告的習慣。 把重大消息一律對回公司公告與交易所披露頁，未經確認前只調整倉位比例，不做全進全出。 消費決策 台灣 ptt（科技業） 投資 消息核實 風險" data-score="57" data-urgency="73" data-date="2026-11-13" data-heat="低" data-platforms="4" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-13">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 57</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">突發高層變動消息滿天飛，散戶難判斷真偽與去留</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ PTT（科技業） ・ 台灣</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>討論區出現單一來源的高層人事快訊，持股者要在消息未經確認前決定加注還是離場，多數人只能憑感覺。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>財經消息的传播速度快過核實速度，散戶接收到的多是二手轉述，缺乏回到原始公告的習慣。</p>
+        <p><strong>可能解法：</strong>把重大消息一律對回公司公告與交易所披露頁，未經確認前只調整倉位比例，不做全進全出。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 4/10</span>
+          <span>付費意願 5/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 7/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（4 個平台、6 條相關，關聯加成 +16）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://www.v2ex.com/t/1253836" target="_blank" rel="noopener nofollow">前老闆請回去救場，當事人算不清條件與風險</a> <span class="pain-related-src">V2EX</span></li>
+            
+            <li><a href="https://forum.hkgolden.com/thread/8100252" target="_blank" rel="noopener nofollow">銀行推出穩定幣，使用者看不懂實際用途與風險差別</a> <span class="pain-related-src">高登討論區</span></li>
+            
+            <li><a href="https://www.ptt.cc/bbs/Tech_Job/M.1792964667.A.DB5.html" target="_blank" rel="noopener nofollow">科技業大型裁員一次接一次，員工無從判斷自己部門的風險</a> <span class="pain-related-src">PTT</span></li>
+            
+            <li><a href="https://www.v2ex.com/t/1251432" target="_blank" rel="noopener nofollow">在單位電腦開代理查資料，事後才擔心網絡日誌被倒查</a> <span class="pain-related-src">V2EX</span></li>
+            
+            <li><a href="https://www.v2ex.com/t/1251200" target="_blank" rel="noopener nofollow">專案開源當日收到裁員通知，賠償與交接全部要即場談</a> <span class="pain-related-src">V2EX</span></li>
+            
+            <li><a href="https://x.com/levelsio/status/2111956757073596904" target="_blank" rel="noopener nofollow">賣公司接受 earn-out 對賭條款，創辦人事後才知現金拿不足</a> <span class="pain-related-src">X</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-13 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/nevil06/freash-news" target="_blank" rel="noopener nofollow">nevil06/freash-news</a> <span class="pain-related-src">開源專案 · 5</span></li>
+            
+            <li><a href="https://github.com/Harish2859/Stock-Agent" target="_blank" rel="noopener nofollow">Harish2859/Stock-Agent</a> <span class="pain-related-src">開源專案 · 2</span></li>
+            
+            <li><a href="https://github.com/Krishnabhure04/Stock-News-Verifier" target="_blank" rel="noopener nofollow">Krishnabhure04/Stock-News-Verifier</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+            <li><a href="https://github.com/phonlapatS/thai-stock-news-transcriber" target="_blank" rel="noopener nofollow">phonlapatS/thai-stock-news-transcriber</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+            <li><a href="https://github.com/Amrovv/news-sentiment-signal" target="_blank" rel="noopener nofollow">Amrovv/news-sentiment-signal</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">消費決策</span>
+        <span class="devlog-tag">台灣</span>
+        <span class="devlog-tag">低熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 73</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">4 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">投資</span><span class="devlog-tag">消息核實</span><span class="devlog-tag">風險</span>
+      </div>
+      
+      <a href="https://www.ptt.cc/bbs/Tech_Job/M.1794439222.A.612.html" class="devlog-link" target="_blank" rel="noopener nofollow">來源：PTT（科技業） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="台灣" data-level="medium" data-search="二十幾歲想開早餐店，找不到可對照的開店成本與存活數據 有二十三代歲的網友打算明年開早餐店，上網請前輩給經驗，回覆多是零碎見聞，湊不出裝修、設備與人力的實際金額。 小店創業的關鍵數字多在同業之間口耳相傳，公開資料偏向加盟總部說法，難以用來做退場判斷。 先以同區店面的租金與來客數反推營業額，再向兩間即將轉讓的店主要實際帳目，用真實數字試算回本期。 職涯職場 台灣 mobile01（職場甘苦談） 創業 小店 成本估算" data-score="61" data-urgency="61" data-date="2026-11-13" data-heat="中" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-14">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 61</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">二十幾歲想開早餐店，找不到可對照的開店成本與存活數據</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ Mobile01（職場甘苦談） ・ 台灣</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有二十三代歲的網友打算明年開早餐店，上網請前輩給經驗，回覆多是零碎見聞，湊不出裝修、設備與人力的實際金額。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>小店創業的關鍵數字多在同業之間口耳相傳，公開資料偏向加盟總部說法，難以用來做退場判斷。</p>
+        <p><strong>可能解法：</strong>先以同區店面的租金與來客數反推營業額，再向兩間即將轉讓的店主要實際帳目，用真實數字試算回本期。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 7/10</span>
+          <span>重複頻率 2/10</span>
+          <span>付費意願 7/10</span>
+          <span>解法缺口 8/10</span>
+          <span>急切程度 6/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-13 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">台灣</span>
+        <span class="devlog-tag">中熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">創業</span><span class="devlog-tag">小店</span><span class="devlog-tag">成本估算</span>
+      </div>
+      
+      <a href="https://www.mobile01.com/topicdetail.php?f=651&t=5093409" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Mobile01（職場甘苦談） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="美國" data-level="high" data-search="自由工作者追討逾期款項全靠人手記，漏一次就拖一個月 有開發者為單人接案者做了一個催款小工具，因為這批人普遍用試算表記賬，發票過期後要靠自己記得再開口。 接案者不願為催款顯得太急，往往延後開口，結果現金流被單一客人卡住整個月。 在發票開出時就設定到期前三天與到期後兩次自動提醒，把催款變成流程而非人情。 職涯職場 美國 indie hackers 接案 現金流 自動化" data-score="69" data-urgency="73" data-date="2026-11-13" data-heat="中" data-platforms="1" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-15">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 69</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">自由工作者追討逾期款項全靠人手記，漏一次就拖一個月</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ Indie Hackers ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有開發者為單人接案者做了一個催款小工具，因為這批人普遍用試算表記賬，發票過期後要靠自己記得再開口。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>接案者不願為催款顯得太急，往往延後開口，結果現金流被單一客人卡住整個月。</p>
+        <p><strong>可能解法：</strong>在發票開出時就設定到期前三天與到期後兩次自動提醒，把催款變成流程而非人情。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 8/10</span>
+          <span>重複頻率 6/10</span>
+          <span>付費意願 8/10</span>
+          <span>解法缺口 5/10</span>
+          <span>急切程度 7/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（1 個平台、1 條相關，關聯加成 +4）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://www.threads.com/@minz.freelancer/post/C9zsH3YvFNK" target="_blank" rel="noopener nofollow">接案十年才追上同齡薪水，前期每一步都沒有可參考的路徑</a> <span class="pain-related-src">Threads</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-13 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/soumojit622/Chromatic--Invoice-App" target="_blank" rel="noopener nofollow">soumojit622/Chromatic--Invoice-App</a> <span class="pain-related-src">開源專案 · 7</span></li>
+            
+            <li><a href="https://github.com/Sid-Lais/django-invoice-reminders" target="_blank" rel="noopener nofollow">Sid-Lais/django-invoice-reminders</a> <span class="pain-related-src">開源專案 · 5</span></li>
+            
+            <li><a href="https://github.com/kirkawo/invoiceflow" target="_blank" rel="noopener nofollow">kirkawo/invoiceflow</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+            <li><a href="https://github.com/calebapril/InvoiceIQ" target="_blank" rel="noopener nofollow">calebapril/InvoiceIQ</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+            <li><a href="https://github.com/Fouzia-Oreen/InvoiceFlow_Invoice-Management-SaaS" target="_blank" rel="noopener nofollow">Fouzia-Oreen/InvoiceFlow_Invoice-Management-SaaS</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 73</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">1 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">接案</span><span class="devlog-tag">現金流</span><span class="devlog-tag">自動化</span>
+      </div>
+      
+      <a href="https://www.indiehackers.com/post/i-built-a-small-invoice-follow-up-app-for-solo-freelancers-looking-for-honest-feedback-not-a-victory-lap-oP4UssvBCJEqsDllev1H" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Indie Hackers →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="職涯職場" data-region="香港" data-level="medium" data-search="見工被追問上一份工為何離開，講真話與包裝之間沒有安全答案 有求職者在連登問，見工時被人力資源問到上一份工為何不做，講真實原因怕被扣分，編理由又怕前後對不上。 離職原因幾乎每場面試都會被問，但公開的建議多是空泛口訣，沒有針對不同情境的具體講法。 預先把離職原因寫成三句：客觀事實、學到什麼、想要什麼，並與履歷時間線對齊後反覆演練。 職涯職場 香港 lihkg 連登（上班） 面試 離職 履歷" data-score="62" data-urgency="62" data-date="2026-11-13" data-heat="中" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-16">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 62</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">見工被追問上一份工為何離開，講真話與包裝之間沒有安全答案</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ LIHKG 連登（上班） ・ 香港</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有求職者在連登問，見工時被人力資源問到上一份工為何不做，講真實原因怕被扣分，編理由又怕前後對不上。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>離職原因幾乎每場面試都會被問，但公開的建議多是空泛口訣，沒有針對不同情境的具體講法。</p>
+        <p><strong>可能解法：</strong>預先把離職原因寫成三句：客觀事實、學到什麼、想要什麼，並與履歷時間線對齊後反覆演練。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 7/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 5/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 7/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-13 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">職涯職場</span>
+        <span class="devlog-tag">香港</span>
+        <span class="devlog-tag">中熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">面試</span><span class="devlog-tag">離職</span><span class="devlog-tag">履歷</span>
+      </div>
+      
+      <a href="https://lihkg.com/thread/4179510" class="devlog-link" target="_blank" rel="noopener nofollow">來源：LIHKG 連登（上班） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="消費決策" data-region="香港" data-level="high" data-search="把大部分身家押在單一股票，散戶沒有倉位與止蝕規則可依 有網友以「最後身家」為題表示要重注出擊，討論區回覆多為起哄，沒有人提出倉位上限或離場條件。 散戶在情緒高漲時缺少可執行的資金規則，事後檢討只會歸因於運氣，同樣的錯誤會重複。 入場前先寫下單一持倉上限與止蝕價，並把規則放在下單畫面旁邊，觸及即執行不再討論。 消費決策 香港 高登討論區（財經台） 投資 風險管理 倉位" data-score="73" data-urgency="77" data-date="2026-11-13" data-heat="中" data-platforms="1" data-track="trying">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-17">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 73</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">把大部分身家押在單一股票，散戶沒有倉位與止蝕規則可依</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ 高登討論區（財經台） ・ 香港</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有網友以「最後身家」為題表示要重注出擊，討論區回覆多為起哄，沒有人提出倉位上限或離場條件。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>散戶在情緒高漲時缺少可執行的資金規則，事後檢討只會歸因於運氣，同樣的錯誤會重複。</p>
+        <p><strong>可能解法：</strong>入場前先寫下單一持倉上限與止蝕價，並把規則放在下單畫面旁邊，觸及即執行不再討論。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 9/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 8/10</span>
+          <span>急切程度 8/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（1 個平台、1 條相關，關聯加成 +4）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://forum.hkgolden.com/thread/8095517" target="_blank" rel="noopener nofollow">股市連日急跌愈坐愈驚，散戶不知應該止蝕還是死守</a> <span class="pain-related-src">高登討論區</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：有人試緊（2026-11-13 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/corehtml5canvas/turtle-position-sizer" target="_blank" rel="noopener nofollow">corehtml5canvas/turtle-position-sizer</a> <span class="pain-related-src">開源專案 · 8</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">消費決策</span>
+        <span class="devlog-tag">香港</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 77</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">1 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">有人試緊</span>
+        
+        <span class="devlog-tag">投資</span><span class="devlog-tag">風險管理</span><span class="devlog-tag">倉位</span>
+      </div>
+      
+      <a href="https://forum.hkgolden.com/thread/8103186" class="devlog-link" target="_blank" rel="noopener nofollow">來源：高登討論區（財經台） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="生活疑難" data-region="中國" data-level="medium" data-search="想低成本自學雅思，方法與教材散落各處難排出順序 有大学生分享一個月自學考到雅思八分的流程，貼文被大量收藏，反映多數人手上資料很多，卻不知道先做哪一項。 備考資料不缺，缺的是按月、按週排好的次序與自我檢查點，於是人人在收藏夾裡打轉。 先做一次完整模擬測試定出四科分數，再按最弱一科排四週計劃，每週只加一項新教材。 生活疑難 中國 豆瓣（豆瓣学习区小组） 語言考試 自學 計劃" data-score="57" data-urgency="61" data-date="2026-11-13" data-heat="中" data-platforms="1" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-18">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 57</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">想低成本自學雅思，方法與教材散落各處難排出順序</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ 豆瓣（豆瓣学习区小组） ・ 中國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有大学生分享一個月自學考到雅思八分的流程，貼文被大量收藏，反映多數人手上資料很多，卻不知道先做哪一項。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>備考資料不缺，缺的是按月、按週排好的次序與自我檢查點，於是人人在收藏夾裡打轉。</p>
+        <p><strong>可能解法：</strong>先做一次完整模擬測試定出四科分數，再按最弱一科排四週計劃，每週只加一項新教材。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 4/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 7/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（1 個平台、1 條相關，關聯加成 +4）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://x.com/dotey/status/2120388990616433083" target="_blank" rel="noopener nofollow">人工智能代理課程資料齊備，自學者仍難排出可執行的學習次序</a> <span class="pain-related-src">X</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-13 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">生活疑難</span>
+        <span class="devlog-tag">中國</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 61</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">1 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">語言考試</span><span class="devlog-tag">自學</span><span class="devlog-tag">計劃</span>
+      </div>
+      
+      <a href="https://www.douban.com/group/topic/505307216/" class="devlog-link" target="_blank" rel="noopener nofollow">來源：豆瓣（豆瓣学习区小组） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="AI 應用" data-region="美國" data-level="medium" data-search="人工智能代理課程資料齊備，自學者仍難排出可執行的學習次序 有博主整理史丹福一門人工智能代理課程的公開資料，講義、影片與兩份作業分散在不同平台，留言多在問應該由哪裡開始。 課程資源公開之後，學習者面對的是編排問題：先看影片還是先做作業，沒有人給出建議路徑。 以作業為主線倒推，先做第一份作業再回頭補影片章節，並把每週產出寫成可檢查的成品。 ai 應用 美國 x（@dotey） ai 代理 自學 課程" data-score="59" data-urgency="63" data-date="2026-11-13" data-heat="中" data-platforms="1" data-track="solved">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-19">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 59</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">人工智能代理課程資料齊備，自學者仍難排出可執行的學習次序</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ X（@dotey） ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有博主整理史丹福一門人工智能代理課程的公開資料，講義、影片與兩份作業分散在不同平台，留言多在問應該由哪裡開始。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>課程資源公開之後，學習者面對的是編排問題：先看影片還是先做作業，沒有人給出建議路徑。</p>
+        <p><strong>可能解法：</strong>以作業為主線倒推，先做第一份作業再回頭補影片章節，並把每週產出寫成可檢查的成品。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 5/10</span>
+          <span>付費意願 7/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 5/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（1 個平台、1 條相關，關聯加成 +4）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://www.douban.com/group/topic/505307216/" target="_blank" rel="noopener nofollow">想低成本自學雅思，方法與教材散落各處難排出順序</a> <span class="pain-related-src">豆瓣</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：已有方案（2026-11-13 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/zorost/AI-Engineering-Lab" target="_blank" rel="noopener nofollow">zorost/AI-Engineering-Lab</a> <span class="pain-related-src">開源專案 · 318</span></li>
+            
+            <li><a href="https://github.com/ruhaankumar2013-debug/Practical-AI-engineering" target="_blank" rel="noopener nofollow">ruhaankumar2013-debug/Practical-AI-engineering</a> <span class="pain-related-src">開源專案 · 16</span></li>
+            
+            <li><a href="https://github.com/shaneliuyx/agent-prep" target="_blank" rel="noopener nofollow">shaneliuyx/agent-prep</a> <span class="pain-related-src">開源專案 · 5</span></li>
+            
+            <li><a href="https://github.com/fancydirty/learn-agent-engineering" target="_blank" rel="noopener nofollow">fancydirty/learn-agent-engineering</a> <span class="pain-related-src">開源專案 · 3</span></li>
+            
+            <li><a href="https://github.com/CodyAMaughan/agent-first-engineering" target="_blank" rel="noopener nofollow">CodyAMaughan/agent-first-engineering</a> <span class="pain-related-src">開源專案 · 3</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">AI 應用</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 63</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">1 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">已有方案</span>
+        
+        <span class="devlog-tag">AI 代理</span><span class="devlog-tag">自學</span><span class="devlog-tag">課程</span>
+      </div>
+      
+      <a href="https://x.com/dotey/status/2120388990616433083" class="devlog-link" target="_blank" rel="noopener nofollow">來源：X（@dotey） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="自架與工具" data-region="香港" data-level="high" data-search="通訊軟件功能與訂閱不斷加，用戶想要一個可自控的替代方案 有網友在 threads 招募同伴，想重做一個基本功能完整、資料自主的通訊軟件，理由是不滿現有平台把功能逐步收進訂閱。 通訊軟件的替換成本來自聯絡人網絡而非功能，少數人自行開發往往卡在朋友不願搬遷。 先由家庭或小組層面試用自架方案，保留與主流平台互通的橋接，再逐步轉移常用群組。 自架與工具 香港 threads @allenhsu3 通訊軟件 自架 訂閱制" data-score="70" data-urgency="78" data-date="2026-11-13" data-heat="中" data-platforms="2" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-20">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 70</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">通訊軟件功能與訂閱不斷加，用戶想要一個可自控的替代方案</h3>
+      <p class="card-text text-muted small mb-2">2026-11-13 ・ Threads @allenhsu3 ・ 香港</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>有網友在 Threads 招募同伴，想重做一個基本功能完整、資料自主的通訊軟件，理由是不滿現有平台把功能逐步收進訂閱。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>通訊軟件的替換成本來自聯絡人網絡而非功能，少數人自行開發往往卡在朋友不願搬遷。</p>
+        <p><strong>可能解法：</strong>先由家庭或小組層面試用自架方案，保留與主流平台互通的橋接，再逐步轉移常用群組。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 7/10</span>
+          <span>重複頻率 8/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 8/10</span>
+          <span>急切程度 5/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（2 個平台、2 條相關，關聯加成 +8）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://news.ycombinator.com/item?id=50470488" target="_blank" rel="noopener nofollow">硬件買斷後仍被訂閱鎖住，用戶只能自建 App 取回控制權</a> <span class="pain-related-src">Hacker News</span></li>
+            
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener nofollow">想把運動軌跡做成 3D 影片，現成工具不是收月費就是限制畫質</a> <span class="pain-related-src">Facebook</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-13 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">自架與工具</span>
+        <span class="devlog-tag">香港</span>
+        <span class="devlog-tag">中熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 78</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">2 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">通訊軟件</span><span class="devlog-tag">自架</span><span class="devlog-tag">訂閱制</span>
+      </div>
+      
+      <a href="https://www.threads.com/@boars.daily/post/DflOeidH1p-" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Threads @allenhsu3 →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="AI 應用" data-region="美國" data-level="medium" data-search="ai 寫前端仍停留在舊語法，開發者每次都要逐段改正 show hn 作者整理瀏覽器原生 api，指出編程代理雖然認得這些名稱，實際輸出時仍採用十年前的寫法，開發者要逐段審閱與改寫。 模型訓練資料以舊寫法為主，專案又缺乏明確規範，輸出會趨向最常見而非最新的做法，最後由審閱者承擔成本。 在專案加入規範檔與可複製範例，把新 api 寫成片段，審閱時按清單逐項核對。 ai 應用 美國 hacker news（show hn） ai 編程 前端 程式碼品質" data-score="62" data-urgency="78" data-date="2026-11-12" data-heat="高" data-platforms="5" data-track="solved">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-21">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-medium" title="痛感指數（0-100）">中痛 62</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">AI 寫前端仍停留在舊語法，開發者每次都要逐段改正</h3>
+      <p class="card-text text-muted small mb-2">2026-11-12 ・ Hacker News（Show HN） ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>Show HN 作者整理瀏覽器原生 API，指出編程代理雖然認得這些名稱，實際輸出時仍採用十年前的寫法，開發者要逐段審閱與改寫。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>模型訓練資料以舊寫法為主，專案又缺乏明確規範，輸出會趨向最常見而非最新的做法，最後由審閱者承擔成本。</p>
+        <p><strong>可能解法：</strong>在專案加入規範檔與可複製範例，把新 API 寫成片段，審閱時按清單逐項核對。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 7/10</span>
+          <span>重複頻率 7/10</span>
+          <span>付費意願 5/10</span>
+          <span>解法缺口 6/10</span>
+          <span>急切程度 5/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（5 個平台、6 條相關，關聯加成 +16）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://www.threads.com/@kaochenlong/post/DfNR9AiAY24" target="_blank" rel="noopener nofollow">AI 編程工具的用量限制被調整，付費用戶無法預算每週可用的實際額度</a> <span class="pain-related-src">Threads</span></li>
+            
+            <li><a href="https://lihkg.com/thread/4175567" target="_blank" rel="noopener nofollow">機場保安改由大灣區調人，本地年輕求職者被跳過</a> <span class="pain-related-src">LIHKG 連登</span></li>
+            
+            <li><a href="https://x.com/levelsio/status/2116485229779058954" target="_blank" rel="noopener nofollow">歐洲按流量與 AI 收入開徵新稅，跨境提供服務的成本無法預算</a> <span class="pain-related-src">X</span></li>
+            
+            <li><a href="https://lihkg.com/thread/4172204" target="_blank" rel="noopener nofollow">機場搬行李月薪不足兩萬，仍然有人爭住做</a> <span class="pain-related-src">LIHKG 連登</span></li>
+            
+            <li><a href="https://lihkg.com/thread/4171251" target="_blank" rel="noopener nofollow">外勞在香港是否要交稅，僱主與工人都在猜，網上找不到清楚答案</a> <span class="pain-related-src">LIHKG 連登</span></li>
+            
+            <li><a href="https://lihkg.com/thread/4170864" target="_blank" rel="noopener nofollow">外勞保安大批輸入，本地基層打工仔看不到自己的位置</a> <span class="pain-related-src">LIHKG 連登</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：已有方案（2026-11-12 查）</p>
+          
+          <ul class="pain-related">
+            
+            <li><a href="https://github.com/nktkt/mini-claude-agent" target="_blank" rel="noopener nofollow">nktkt/mini-claude-agent</a> <span class="pain-related-src">開源專案 · 1</span></li>
+            
+            <li><a href="https://github.com/joshfestus/modern-python" target="_blank" rel="noopener nofollow">joshfestus/modern-python</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+            <li><a href="https://github.com/hitendrasingh01/EduBridge-AI-Agent" target="_blank" rel="noopener nofollow">hitendrasingh01/EduBridge-AI-Agent</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+            <li><a href="https://github.com/MdxShad/LLM_Agent_helper" target="_blank" rel="noopener nofollow">MdxShad/LLM_Agent_helper</a> <span class="pain-related-src">開源專案 · 0</span></li>
+            
+            <li><a href="https://www.runtm.com/" target="_blank" rel="noopener nofollow">Launch HN: Runtime (YC P26) – Sandboxed coding agents for everyone on a team</a> <span class="pain-related-src">社群討論 · 103</span></li>
+            
+          </ul>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">AI 應用</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">高熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 78</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">5 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">已有方案</span>
+        
+        <span class="devlog-tag">AI 編程</span><span class="devlog-tag">前端</span><span class="devlog-tag">程式碼品質</span>
+      </div>
+      
+      <a href="https://github.com/GoogleChrome/modern-web-guidance" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Hacker News（Show HN） →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="生活疑難" data-region="中國" data-level="high" data-search="結婚在即，雙方家庭對禮金與改口費的分擔沒有共識 發帖者準備結婚，禮金與改口費主要由自己承擔，父母出資有限，女友認為男方家庭分擔不足，雙方在金額與體面上出現分歧。 婚禮開支同時牽涉金錢與面子，兩個家庭事前沒有講清標準，金額一旦公開就難以再談。 提親前把各項開支與出資比例寫成清單，各自與家人確認底線，再由新人對外統一說法。 生活疑難 中國 v2ex 婚姻 家庭財務 禮俗" data-score="65" data-urgency="73" data-date="2026-11-12" data-heat="高" data-platforms="2" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-22">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 65</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">結婚在即，雙方家庭對禮金與改口費的分擔沒有共識</h3>
+      <p class="card-text text-muted small mb-2">2026-11-12 ・ V2EX ・ 中國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>發帖者準備結婚，禮金與改口費主要由自己承擔，父母出資有限，女友認為男方家庭分擔不足，雙方在金額與體面上出現分歧。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>婚禮開支同時牽涉金錢與面子，兩個家庭事前沒有講清標準，金額一旦公開就難以再談。</p>
+        <p><strong>可能解法：</strong>提親前把各項開支與出資比例寫成清單，各自與家人確認底線，再由新人對外統一說法。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 8/10</span>
+          <span>重複頻率 2/10</span>
+          <span>付費意願 6/10</span>
+          <span>解法缺口 8/10</span>
+          <span>急切程度 9/10</span>
+        </div>
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-link"></use></svg>關聯印證（2 個平台、2 條相關，關聯加成 +8）</p>
+          <ul class="pain-related">
+            
+            <li><a href="https://lihkg.com/thread/4178656" target="_blank" rel="noopener nofollow">與父母同住該給多少家用，兄弟姊妹之間沒有共同標準</a> <span class="pain-related-src">LIHKG 連登</span></li>
+            
+            <li><a href="https://www.v2ex.com/t/1250834" target="_blank" rel="noopener nofollow">婚後十個月因家務與金錢分工爭執，妻子搬回娘家，丈夫不知如何修補</a> <span class="pain-related-src">V2EX</span></li>
+            
+          </ul>
+        </div>
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-12 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">生活疑難</span>
+        <span class="devlog-tag">中國</span>
+        <span class="devlog-tag">高熱度</span>
+        <span class="devlog-tag" title="綜合迫切度 = 痛感 + 關聯加成">綜合 73</span>
+        <span class="devlog-tag" title="同一主題在其他平台的印證">2 平台印證</span>
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">婚姻</span><span class="devlog-tag">家庭財務</span><span class="devlog-tag">禮俗</span>
+      </div>
+      
+      <a href="https://www.v2ex.com/t/1256055" class="devlog-link" target="_blank" rel="noopener nofollow">來源：V2EX →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+  
+  
+
+<div class="col-md-6 col-lg-4 pain-col" data-category="消費決策" data-region="美國" data-level="high" data-search="側睡聽播客時耳機壓耳，伴侶又嫌手機喇叭太吵 一名學生開發枕下喇叭，起點是側睡時耳機壓住耳朵會痛，伴侶又嫌手機喇叭吵，市面上沒有同時解決兩者的產品。 睡眠場景對音量與佩戴感的要求與通勤不同，現有耳機與喇叭各自只解決一半問題。 以骨傳導或定向發聲配合定時淡出，先做小批量試用收集佩戴感反饋。 消費決策 美國 reddit r/sideproject 睡眠 耳機 產品驗證" data-score="66" data-urgency="66" data-date="2026-11-12" data-heat="低" data-platforms="0" data-track="none">
+  <article class="card h-100 shadow-sm post-card overflow-hidden pain-card" id="pain-23">
+    <div class="card-body d-flex flex-column">
+      <div class="pain-card-top">
+        <span class="pain-score pain-score-high" title="痛感指數（0-100）">很痛 66</span>
+      </div>
+      <h3 class="post-card-title pain-card-title">側睡聽播客時耳機壓耳，伴侶又嫌手機喇叭太吵</h3>
+      <p class="card-text text-muted small mb-2">2026-11-12 ・ Reddit r/SideProject ・ 美國</p>
+      <p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>一名學生開發枕下喇叭，起點是側睡時耳機壓住耳朵會痛，伴侶又嫌手機喇叭吵，市面上沒有同時解決兩者的產品。</p>
+      
+      <details class="pain-more">
+        <summary>觀察、關聯與評估</summary>
+        <p><strong>觀察：</strong>睡眠場景對音量與佩戴感的要求與通勤不同，現有耳機與喇叭各自只解決一半問題。</p>
+        <p><strong>可能解法：</strong>以骨傳導或定向發聲配合定時淡出，先做小批量試用收集佩戴感反饋。</p>
+        
+        <div class="pain-dims">
+          <span>痛楚強度 6/10</span>
+          <span>重複頻率 8/10</span>
+          <span>付費意願 7/10</span>
+          <span>解法缺口 7/10</span>
+          <span>急切程度 4/10</span>
+        </div>
+        
+        
+        
+        
+        <div class="pain-section">
+          <p class="pain-section-title"><svg class="ui-icon ui-icon-sm pain-sec-icon" aria-hidden="true"><use href="#ui-radar"></use></svg>評估動向：未見方案（2026-11-12 查）</p>
+          
+          <p class="pain-none">暫未發現明顯嘅現成方案或討論。</p>
+          
+          
+        </div>
+        
+      </details>
+      
+      <div class="devlog-tags pain-tags">
+        <span class="devlog-tag pain-cat-tag">消費決策</span>
+        <span class="devlog-tag">美國</span>
+        <span class="devlog-tag">低熱度</span>
+        
+        
+        <span class="devlog-tag" title="評估：有冇人做緊／解決緊">未見方案</span>
+        
+        <span class="devlog-tag">睡眠</span><span class="devlog-tag">耳機</span><span class="devlog-tag">產品驗證</span>
+      </div>
+      
+      <a href="https://www.reddit.com/r/SideProject/comments/1xria1s/im_a_student_building_an_underpillow_speaker_for/" class="devlog-link" target="_blank" rel="noopener nofollow">來源：Reddit r/SideProject →</a>
+      
+    </div>
+  </article>
+</div>
+
+  
+</div>
+
+<p class="pain-empty text-center text-muted py-5" id="pain-empty" hidden>沒有符合條件的痛點，換個關鍵字或分類試試。</p>
+
+
+
+
+
+
+<nav aria-label="Page navigation" class="mt-4">
+  <ul class="pagination justify-content-center flex-wrap">
+    
+      <li class="page-item disabled"><span class="page-link">‹</span></li>
+    
+
+    
+    
+    
+    
+    
+    
+
+    
+
+    
+      
+        <li class="page-item active"><span class="page-link">1</span></li>
+      
+    
+      
+        <li class="page-item"><a class="page-link" href="/pain-radar/page/2/">2</a></li>
+      
+    
+      
+        <li class="page-item"><a class="page-link" href="/pain-radar/page/3/">3</a></li>
+      
+    
+      
+        <li class="page-item"><a class="page-link" href="/pain-radar/page/4/">4</a></li>
+      
+    
+      
+        <li class="page-item"><a class="page-link" href="/pain-radar/page/5/">5</a></li>
+      
+    
+
+    
+      
+      <li class="page-item disabled"><span class="page-link">…</span></li>
+      <li class="page-item"><a class="page-link" href="/pain-radar/page/16/">16</a></li>
+    
+
+    
+      
+      <li class="page-item"><a class="page-link" href="/pain-radar/page/2/" aria-label="下一頁">›</a></li>
+    
+  </ul>
+</nav>
+
+
+
+
+    <!-- 篩選結果：由 pains-index.json 即時載入，唔改動靜態分頁內容 -->
+    <div class="row g-4" id="pain-results" hidden></div>
+
+    <script>
+    (function () {
+      var idxUrl = '/assets/data/pains-index.json';
+      var grid = document.getElementById('pain-grid');
+      var resultsEl = document.getElementById('pain-results');
+      var pagUl = document.querySelector('ul.pagination');
+      var pagerEl = pagUl ? pagUl.closest('nav') : null;
+      var filters = Array.prototype.slice.call(document.querySelectorAll('.pain-filter'));
+      var regionFilters = Array.prototype.slice.call(document.querySelectorAll('.pain-region-filter'));
+      var input = document.getElementById('pain-search-input');
+      var countEl = document.getElementById('pain-count');
+      var emptyEl = document.getElementById('pain-empty');
+      var staticCountText = countEl ? countEl.textContent : '';
+      var activeCat = 'all';
+      var activeRegion = 'all';
+      var activeSort = 'urgency';
+      var heatRank = { '高': 3, '中': 2, '低': 1 };
+      var DATA = null;
+      var loading = false;
+
+      function isFiltering() {
+        var q = input && input.value ? input.value.trim() : '';
+        return activeCat !== 'all' || activeRegion !== 'all' || q !== '';
+      }
+
+      function esc(s) {
+        return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      function cardHtml(x) {
+        var tags = (x.tg || []).slice(0, 4).map(function (t) {
+          return '<span class="devlog-tag">' + esc(t) + '</span>';
+        }).join('');
+        return '<div class="col-md-6 col-lg-4">' +
+          '<article class="card h-100 shadow-sm post-card overflow-hidden pain-card">' +
+            '<div class="card-body d-flex flex-column">' +
+              '<div class="pain-card-top">' +
+                (x.s ? '<span class="pain-score pain-score-' + esc(x.lk) + '" title="痛感指數（0-100）">' + esc(x.lv) + ' ' + esc(x.s) + '</span>' : '') +
+              '</div>' +
+              '<h3 class="post-card-title pain-card-title"><a href="' + esc(x.u) + '">' + esc(x.t) + '</a></h3>' +
+              '<p class="card-text text-muted small mb-2">' + esc(x.d) +
+                (x.src ? ' ・ ' + esc(x.src) : '') + (x.r ? ' ・ ' + esc(x.r) : '') + '</p>' +
+              '<p class="card-text small flex-grow-1 pain-card-desc"><strong>痛點：</strong>' + esc(x.p) + '</p>' +
+              '<div class="devlog-tags pain-tags">' +
+                '<span class="devlog-tag pain-cat-tag">' + esc(x.c) + '</span>' +
+                (x.r ? '<span class="devlog-tag">' + esc(x.r) + '</span>' : '') +
+                (x.h ? '<span class="devlog-tag">' + esc(x.h) + '熱度</span>' : '') +
+                tags +
+              '</div>' +
+              '<a href="' + esc(x.u) + '" class="devlog-link">查看完整分析 →</a>' +
+            '</div>' +
+          '</article>' +
+        '</div>';
+      }
+
+      function apply() {
+        if (!isFiltering()) {
+          if (grid) grid.hidden = false;
+          if (pagerEl) pagerEl.hidden = false;
+          if (resultsEl) { resultsEl.hidden = true; resultsEl.innerHTML = ''; }
+          if (emptyEl) emptyEl.hidden = true;
+          if (countEl) countEl.textContent = staticCountText;
+          return;
+        }
+        var q = (input && input.value ? input.value : '').trim().toLowerCase();
+        if (!DATA) {
+          if (countEl) countEl.textContent = '載入痛點索引…';
+          if (!loading) {
+            loading = true;
+            fetch(idxUrl).then(function (r) { return r.json(); }).then(function (d) {
+              DATA = d; loading = false; apply();
+            }).catch(function () {
+              loading = false;
+              if (countEl) countEl.textContent = '索引載入失敗，請重新整理。';
+            });
+          }
+          return;
+        }
+        var matched = DATA.filter(function (x) {
+          if (activeCat !== 'all' && x.c !== activeCat) return false;
+          if (activeRegion !== 'all' && x.r !== activeRegion) return false;
+          if (!q) return true;
+          var blob = (x.t + ' ' + x.p + ' ' + x.c + ' ' + x.r + ' ' + x.src + ' ' + (x.tg || []).join(' ')).toLowerCase();
+          return blob.indexOf(q) !== -1;
+        });
+        matched.sort(function (a, b) {
+          if (activeSort === 'date') return String(b.d).localeCompare(String(a.d));
+          if (activeSort === 'heat') return (heatRank[b.h] || 0) - (heatRank[a.h] || 0);
+          if (activeSort === 'score') return (b.s || 0) - (a.s || 0);
+          return (b.ur || 0) - (a.ur || 0);
+        });
+        if (grid) grid.hidden = true;
+        if (pagerEl) pagerEl.hidden = true;
+        if (resultsEl) {
+          resultsEl.hidden = matched.length === 0;
+          resultsEl.innerHTML = matched.slice(0, 120).map(cardHtml).join('');
+        }
+        if (emptyEl) emptyEl.hidden = matched.length !== 0;
+        if (countEl) {
+          countEl.textContent = '符合 ' + matched.length + ' 條痛點（共 ' + DATA.length + ' 條）' +
+            (matched.length > 120 ? '，僅顯示前 120 條，請收窄關鍵字' : '');
+        }
+      }
+
+      var sortBtns = Array.prototype.slice.call(document.querySelectorAll('.pain-sort'));
+      sortBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeSort = btn.getAttribute('data-sort');
+          sortBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+          if (isFiltering()) apply();
+        });
+      });
+      filters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeCat = btn.getAttribute('data-filter');
+          filters.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+          apply();
+        });
+      });
+      regionFilters.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          activeRegion = btn.getAttribute('data-region');
+          regionFilters.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+          apply();
+        });
+      });
+      if (input) input.addEventListener('input', apply);
+      apply();
+    })();
+    </script>
+
+    
+  </div>
+</section>
+
+<!-- 搜尋平台 -->
+
+
+<section class="py-5" style="border-top:1px solid var(--border-soft);">
+  <div class="container">
+    <h2 class="h4 fw-bold mb-1">搜尋平台</h2>
+    <p class="text-muted small mb-4">
+      痛點雷達每日掃描以下平台。每張卡顯示最近一次掃描的實際結果：
+      「搜到」＝該平台今次成功取回的帖文數；「已入選」＝最終收進痛點庫的條目數。
+      標「規劃中」的平台尚未接入。
+    </p>
+    
+    <p class="plat-stamp">
+      最近一次掃描：2026-11-14 01:26（台北時間）
+      ・共掃 309 條
+      ・入選 30 條
+    </p>
+    
+    <div class="plat-grid">
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://news.ycombinator.com/" target="_blank" rel="noopener nofollow">Hacker News</a></span>
+          
+          <span class="plat-state on">搜到 23 條</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 開發者社群</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.reddit.com/" target="_blank" rel="noopener nofollow">Reddit</a></span>
+          
+          <span class="plat-state on">搜到 24 條</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 綜合論壇</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.v2ex.com/" target="_blank" rel="noopener nofollow">V2EX</a></span>
+          
+          <span class="plat-state on">搜到 10 條</span>
+          
+        </div>
+        <div class="plat-meta">中國 ・ 華語開發者社群</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.ptt.cc/" target="_blank" rel="noopener nofollow">PTT</a></span>
+          
+          <span class="plat-state on">搜到 36 條</span>
+          
+        </div>
+        <div class="plat-meta">台灣 ・ 討論區</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.mobile01.com/" target="_blank" rel="noopener nofollow">Mobile01</a></span>
+          
+          <span class="plat-state on">搜到 12 條</span>
+          
+        </div>
+        <div class="plat-meta">台灣 ・ 討論區</div>
+        
+        <div class="plat-stat">
+          
+          已入選 0 條（今次未選中）
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.indiehackers.com/" target="_blank" rel="noopener nofollow">Indie Hackers</a></span>
+          
+          <span class="plat-state on">搜到 12 條</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 創業社群</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://lihkg.com/" target="_blank" rel="noopener nofollow">LIHKG 連登</a></span>
+          
+          <span class="plat-state on">搜到 45 條</span>
+          
+        </div>
+        <div class="plat-meta">香港 ・ 討論區</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://forum.hkgolden.com/" target="_blank" rel="noopener nofollow">高登討論區</a></span>
+          
+          <span class="plat-state on">搜到 17 條</span>
+          
+        </div>
+        <div class="plat-meta">香港 ・ 討論區</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.douban.com/group/explore" target="_blank" rel="noopener nofollow">豆瓣</a></span>
+          
+          <span class="plat-state on">搜到 24 條</span>
+          
+        </div>
+        <div class="plat-meta">中國 ・ 生活社群</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://x.com/" target="_blank" rel="noopener nofollow">X（Twitter）</a></span>
+          
+          <span class="plat-state on">搜到 29 條</span>
+          
+        </div>
+        <div class="plat-meta">全球 ・ 社交平台</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.threads.net/" target="_blank" rel="noopener nofollow">Threads</a></span>
+          
+          <span class="plat-state on">搜到 77 條</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 社交平台</div>
+        
+        <div class="plat-stat">
+          
+          已入選 3 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-fail">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.facebook.com/" target="_blank" rel="noopener nofollow">Facebook</a></span>
+          
+          <span class="plat-state fail">今次 0 條</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 社交平台</div>
+        
+        <div class="plat-stat">
+          
+          本次掃描 0 條
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-fail">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.instagram.com/" target="_blank" rel="noopener nofollow">Instagram</a></span>
+          
+          <span class="plat-state fail">今次 0 條</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 社交平台</div>
+        
+        <div class="plat-stat">
+          
+          監測清單未設定
+          
+        </div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://forum.gamer.com.tw/" target="_blank" rel="noopener nofollow">巴哈姆特</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">台灣 ・ 社群</div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.producthunt.com/" target="_blank" rel="noopener nofollow">Product Hunt</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">美國 ・ 產品社群</div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.discuss.com.hk/" target="_blank" rel="noopener nofollow">香港討論區</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">香港 ・ 討論區</div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.xiaohongshu.com/" target="_blank" rel="noopener nofollow">小紅書</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">中國 ・ 生活社群</div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.zhihu.com/" target="_blank" rel="noopener nofollow">知乎</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">中國 ・ 問答社群</div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.bilibili.com/" target="_blank" rel="noopener nofollow">Bilibili</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">中國 ・ 影音社群</div>
+        
+      </div>
+      
+      
+      
+      
+      
+      <div class="plat-card is-plan">
+        <div class="plat-head">
+          <span class="plat-name"><a href="https://www.dcard.tw/" target="_blank" rel="noopener nofollow">Dcard</a></span>
+          
+          <span class="plat-state plan">規劃中</span>
+          
+        </div>
+        <div class="plat-meta">台灣 ・ 討論區</div>
+        
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- 方法說明 -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold"><svg class="ui-icon" aria-hidden="true"><use href="#ui-radar"/></svg> 每日採集</h5>
+            <p class="card-text text-muted small mb-0">自動掃描 Reddit、Hacker News、V2EX 等平台，按地區與類型整理，由 AI 篩選高質量痛點，無需人手逐一查看。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold"><svg class="ui-icon" aria-hidden="true"><use href="#ui-flask"/></svg> 落場實測</h5>
+            <p class="card-text text-muted small mb-0">挑選值得的痛點，親手試用現成工具或自研解法，實測結果收錄於「開發日誌」。</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title fw-bold"><svg class="ui-icon" aria-hidden="true"><use href="#ui-search"/></svg> 可分類、可搜尋</h5>
+            <p class="card-text text-muted small mb-0">每條痛點標明類型（AI 應用、消費決策、職涯職場等）與地區（香港、台灣、美國等），可用關鍵字搜尋，日後同樣問題直接找到。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section py-5">
+  <div class="container">
+    <div class="cta-box text-center">
+      <h3 class="mb-2">看到值得留意的痛點？</h3>
+      <p class="text-white-50 mb-4">在 Facebook 專頁貼上連結，優質題材會排入實測清單。</p>
+      <a href="https://www.facebook.com/profile.php?id=1247126168485543" target="_blank" rel="noopener" class="btn btn-gold btn-lg">前往專頁報料</a>
+    </div>
+  </div>
+</section>
+
+<!-- 關注（低調，最底） -->
+<section class="container">
+  <div class="follow-strip">
+    <p class="follow-label">每日更新不間斷</p>
+    <a class="follow-link" href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon" aria-hidden="true"><use href="#ui-x"></use></svg>關注我</a>
+  </div>
+</section>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="subscribe-box subscribe-box-footer">
+  <h6 class="text-white fw-bold mb-2">每週一封，只講試過的事</h6>
+  <p class="text-white-50 small mb-3">AI 工具實測結果、踩坑記錄。不業配、不轉貼。</p><a href="/feed.xml" class="btn btn-outline-light btn-sm">改用 RSS 訂閱</a></div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

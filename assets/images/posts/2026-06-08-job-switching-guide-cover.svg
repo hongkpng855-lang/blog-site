@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="50%" style="stop-color:#16213e"/>
+      <stop offset="100%" style="stop-color:#0f3460"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e94560"/>
+      <stop offset="100%" style="stop-color:#f5a623"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Abstract shapes -->
+  <circle cx="100" cy="100" r="300" fill="#e94560" opacity="0.05"/>
+  <circle cx="1100" cy="500" r="250" fill="#f5a623" opacity="0.04"/>
+  <circle cx="600" cy="315" r="400" fill="#0f3460" opacity="0.15"/>
+
+  <!-- Decorative line pattern -->
+  <g opacity="0.08" stroke="#fff" stroke-width="1">
+    <line x1="50" y1="80" x2="1150" y2="80"/>
+    <line x1="50" y1="100" x2="1150" y2="100"/>
+    <line x1="50" y1="120" x2="1150" y2="120"/>
+    <line x1="50" y1="510" x2="1150" y2="510"/>
+    <line x1="50" y1="530" x2="1150" y2="530"/>
+    <line x1="50" y1="550" x2="1150" y2="550"/>
+  </g>
+
+  <!-- Main icon: Career/Job Switch -->
+  <g transform="translate(600, 230)" filter="url(#shadow)">
+    <!-- Arrow going up right -->
+    <line x1="-180" y1="60" x2="120" y2="-80" stroke="url(#accent)" stroke-width="6" stroke-linecap="round"/>
+    <polygon points="120,-80 90,-55 105,-90" fill="#f5a623"/>
+
+    <!-- Briefcase icon -->
+    <rect x="-200" y="-20" width="80" height="70" rx="8" fill="none" stroke="#e94560" stroke-width="3"/>
+    <rect x="-180" y="-40" width="40" height="25" rx="6" fill="none" stroke="#e94560" stroke-width="3"/>
+    <line x1="-175" y1="-20" x2="-175" y2="30" stroke="#e94560" stroke-width="2" opacity="0.5"/>
+    <line x1="-145" y1="-20" x2="-145" y2="30" stroke="#e94560" stroke-width="2" opacity="0.5"/>
+
+    <!-- Document icon (CV) -->
+    <rect x="140" y="-90" width="60" height="80" rx="4" fill="none" stroke="#f5a623" stroke-width="3"/>
+    <line x1="150" y1="-70" x2="190" y2="-70" stroke="#f5a623" stroke-width="2.5" opacity="0.7"/>
+    <line x1="150" y1="-55" x2="185" y2="-55" stroke="#f5a623" stroke-width="2.5" opacity="0.7"/>
+    <line x1="150" y1="-40" x2="180" y2="-40" stroke="#f5a623" stroke-width="2.5" opacity="0.7"/>
+    <line x1="150" y1="-25" x2="188" y2="-25" stroke="#f5a623" stroke-width="2.5" opacity="0.5"/>
+  </g>
+
+  <!-- Decorative dots -->
+  <g fill="#e94560" opacity="0.2">
+    <circle cx="200" cy="400" r="4"/>
+    <circle cx="220" cy="430" r="3"/>
+    <circle cx="180" cy="460" r="2"/>
+    <circle cx="1000" cy="200" r="4"/>
+    <circle cx="1020" cy="230" r="3"/>
+    <circle cx="980" cy="260" r="2"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="400" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="48" font-weight="bold" fill="#fff" letter-spacing="2">
+    轉工跳槽完整指南
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="455" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" fill="#a0aec0" letter-spacing="1">
+    CV 優化 · 面試技巧 · 薪酬談判 · 2026 實戰攻略
+  </text>
+
+  <!-- Bottom accent line -->
+  <rect x="420" y="490" width="360" height="4" rx="2" fill="url(#accent)"/>
+
+  <!-- Tags -->
+  <text x="600" y="540" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" fill="#718096">
+    Career Guide 2026 · Hong Kong
+  </text>
+</svg>

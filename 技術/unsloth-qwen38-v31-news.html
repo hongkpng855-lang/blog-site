@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10% - AnthroSkill</title>
+  <meta name="description" content="Unsloth 於 2026 年 11 月 11 日推出桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 升級至 Dynamic V3.1。官方基準指同一大小的準確度提升 5% 至 10%，4-bit 版本需 16GB 至 19GB 記憶體，本文整理硬體門檻與代理接入方式。">
+  <meta name="keywords" content="Unsloth, Qwen3.8, GGUF, 量化, 本地 AI, 開源項目, 模型壓縮, GitHub, 科技新聞">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%">
+  <meta property="og:description" content="Unsloth 於 2026 年 11 月 11 日推出桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 升級至 Dynamic V3.1。官方基準指同一大小的準確度提升 5% 至 10%，4-bit 版本需 16GB 至 19GB 記憶體，本文整理硬體門檻與代理接入方式。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/unsloth-qwen38-v31-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%">
+  <meta name="twitter:description" content="Unsloth 於 2026 年 11 月 11 日推出桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 升級至 Dynamic V3.1。官方基準指同一大小的準確度提升 5% 至 10%，4-bit 版本需 16GB 至 19GB 記憶體，本文整理硬體門檻與代理接入方式。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/unsloth-qwen38-v31-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-14T20:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+  <script>
+(function () {
+  if (typeof gtag !== 'function') return;
+
+  // 1) 訂閱表單送出
+  document.querySelectorAll('form[data-subscribe-source]').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      gtag('event', 'newsletter_submit', {
+        source: f.getAttribute('data-subscribe-source'),
+        page_path: location.pathname
+      });
+    });
+  });
+
+  // 2) 外部連結點擊（同網域除外）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!/^https?:/i.test(href)) return;
+    if (href.indexOf(location.host) !== -1) return;
+    gtag('event', 'outbound_click', {
+      link_url: href,
+      link_domain: (href.split('/')[2] || ''),
+      page_path: location.pathname
+    });
+  }, true);
+
+  // 3) 文章讀完（捲到 90%，每頁只記一次）
+  var done = false;
+  window.addEventListener('scroll', function () {
+    if (done) return;
+    var h = document.documentElement;
+    var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight;
+    if (pct >= 0.9) {
+      done = true;
+      gtag('event', 'read_complete', { page_path: location.pathname });
+    }
+  }, { passive: true });
+})();
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%",
+      "description": "Unsloth 於 2026 年 11 月 11 日推出桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 升級至 Dynamic V3.1。官方基準指同一大小的準確度提升 5% 至 10%，4-bit 版本需 16GB 至 19GB 記憶體，本文整理硬體門檻與代理接入方式。",
+      "datePublished": "2026-11-14T08:00:00+08:00",
+      "dateModified": "2026-11-14T08:00:00+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news" },
+       "isBasedOn": { "@type": "Article", "name": "GitHub", "url": "https://github.com/unslothai/unsloth" }, 
+      "image": "https://anthroskill.com/assets/images/posts/unsloth-qwen38-v31-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "4-bit 與 8-bit 應如何取捨？",
+          "acceptedAnswer": { "@type": "Answer", "text": "4-bit 需 16GB 至 19GB 記憶體，8-bit 需 31GB。記憶體充裕時 8-bit 的準確度較高；若要在單張消費級顯示卡上運行長上下文代理任務，4-bit 是較現實的選擇。" }
+        },
+        {
+          "@type": "Question",
+          "name": "舊款 NVIDIA 顯示卡仍然可用嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。官方明言 NVFP4 需要 Blackwell 架構，但 GGUF 路線對較舊的顯示卡支援較廣，T4 亦在改善名單之內。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Dynamic V3.1 是否取代 V3.0？",
+          "acceptedAnswer": { "@type": "Answer", "text": "V3.1 屬預覽版本，先在 Qwen3.8-27B 上套用。官方表示後續更完整的演算法版本會用於 Qwen4 及之後的模型。" }
+        },
+        {
+          "@type": "Question",
+          "name": "3-bit 為何沒有更新？",
+          "acceptedAnswer": { "@type": "Answer", "text": "官方測試發現 UD3 與 UD3.1 的表現相當，因此維持原有檔案，避免使用者重複下載。" }
+        },
+        {
+          "@type": "Question",
+          "name": "可以與 Ollama 共存嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "可以。v0.1.917-beta 加入讓 unsloth start 連接已載入的 Ollama 模型的能力。" }
+        },
+        {
+          "@type": "Question",
+          "name": "授權是否允許商業使用？",
+          "acceptedAnswer": { "@type": "Answer", "text": "專案採 Apache 2.0 授權，允許商業使用與修改，需保留版權聲明。個別模型權重另有授權條款，使用前應查閱對應的模型卡。" }
+        },
+        {
+          "@type": "Question",
+          "name": "視覺能力是否需要額外設定？",
+          "acceptedAnswer": { "@type": "Answer", "text": "Qwen3.8-27B 原生支援圖像與影片理解。桌面版提供思考模式切換，推理深度可透過 reasoning_effort 調整。" }
+        },
+        {
+          "@type": "Question",
+          "name": "如何更新到最新量化檔？",
+          "acceptedAnswer": { "@type": "Answer", "text": "重新下載對應的 GGUF 檔案即可。安裝腳本已固定最低套件版本，重新執行安裝指令會一併更新依賴。 ## 這次更新適合哪些使用者？ 適合以單張消費級顯示卡運行 27B 模型、又需要代理與工具呼叫能力的開發者。若硬件低於 16GB 記憶體，或只需短對話用途，改用量化程度更高的檔案或較小模型更合適。 這次更新的核心是一條算術題。硬件不變，檔案大小不變，準確度上升 5% 至 10%，對已經在 16GB 級別顯示卡上跑本地模型的團隊而言，這是可直接感受到的改善。 限制同樣明確。5% 至 10% 是官方自測的平均值，個別任務的差距可能更小或更大；代理類測試使用 256K 上下文，實際使用若縮短上下文，分數未必完全對應。 部署決策仍取決於工作型態。需要頻繁工具呼叫與長鏈推理的流程，值得投入時間調整量化等級與上下文設定；純文字問答或短篇摘要，較小的模型配合一般量化已能滿足需求。同類的本地推理與代理接入選項，可對照 llama.cpp v0.9.0 的本地推論路線 與 Qwen Code 1.0 預覽版的終端代理安排。 ## 原始碼與文件在何處查閱？ 原始碼在 GitHub 的 unslothai/unsloth，文件在 unsloth.ai/docs，量化檔案發佈於 Hugging Face 的 unsloth 組織頁面。 倉庫網址為 https://github.com/unslothai/un" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年11月14日 08:00
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 5 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://github.com/unslothai/unsloth" target="_blank" rel="noopener nofollow" class="text-decoration-none">GitHub</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/unsloth-qwen38-v31-news-cover.jpg" alt="Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%" class="img-fluid rounded">
+        </div>
+        
+
+        
+        <!-- 內容創作者 GitHub 連結 -->
+        <div class="creator-github-link mb-4 p-3 rounded" style="background:#1B2A4A;border:1px solid #FB923C;">
+          <svg class="ui-icon ui-icon-sm" style="vertical-align:-2px;fill:#FB923C"><use href="#ui-github"/></svg>
+          <strong style="color:#FB923C">內容創作者</strong>：
+          <a href="https://github.com/unslothai/unsloth" target="_blank" rel="noopener" class="text-decoration-none" style="color:#FFFFFF;">
+            https://github.com/unslothai/unsloth
+          </a>
+        </div>
+        
+
+        <div class="post-content">
+          <p>Unsloth 於 2026 年 11 月 11 日發佈桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 量化檔升級至 Dynamic V3.1。官方基準指同一檔案大小下平均準確度提升 5% 至 10%，4-bit 版本只需 16GB 至 19GB 記憶體。</p>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>Dynamic V3.1 是 Unsloth 的量化演算法預覽版，2026 年 11 月 11 日隨桌面版推出，首批套用於 Qwen3.8-27B 的 2-bit 至 6-bit 檔案。
+<!-- End AEO Capsule --></p>
+
+<h2 id="unsloth-dynamic-v31-是什麼">Unsloth Dynamic V3.1 是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>Dynamic V3.1 按權重層的敏感度分配位元數，而非全模型採同一精度。項目以 Python 撰寫，採 Apache 2.0 授權，GitHub 累積 79,380 顆星標。
+<!-- End AEO Capsule --></p>
+
+<p>Unsloth 是一個以降低微調與推論成本為目標的開源專案，2023 年 11 月 29 日建立，目前累積 79,380 顆星標與 7,396 個分叉。它以 Python 撰寫，採 Apache 2.0 授權，提供命令列套件、網頁介面 Unsloth Studio 與桌面應用三種形態。</p>
+
+<p>Dynamic 系列是該項目的量化方案。名稱中的「動態」指位元分配並非整齊劃一，而是按層的重要性浮動。V3.0 演算法此前已用於 DeepSeek-V4.1-Flash 與 Qwen3.8-Flash-Next，V3.1 屬預覽版本，先在 Qwen3.8-27B 上落地。</p>
+
+<p>更新範圍有明確邊界。官方指出 2-bit 至 6-bit 的檔案大多已重新產生，但 3-bit 的 UD3 量化與 UD3.1 表現相當，因此維持原樣。團隊同時表示，更進一步的演算法版本將留待 Qwen4 及後續模型使用。</p>
+
+<p><img src="/assets/images/posts/unsloth-qwen38-v31-news-shot1.png" alt="Unsloth 的 GitHub README 開頭，顯示專案標誌、副標題與各平台下載入口" /></p>
+
+<h2 id="qwen38-27b-的量化精度提升了多少">Qwen3.8-27B 的量化精度提升了多少？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>官方稱同一檔案大小下平均準確度提升 5% 至 10%。代理測試採 Terminal Bench 2.1 與 DeepSWE v1.1，一般能力涵蓋 LiveCodeBench v6。
+<!-- End AEO Capsule --></p>
+
+<p>27B 是 Qwen3.8 系列中的緊湊稠密模型，具備視覺與推理能力，原生上下文長度為 256K。官方文件指出，該模型可在 17GB 記憶體或顯示記憶體的環境下運行，定位是讓中階硬件也能承擔多步代理任務。</p>
+
+<p>基準測試分為兩類。代理類工作使用 Terminal Bench 2.1 與 DeepSWE v1.1，兩者皆以 256K 上下文執行；一般能力測試則包含 LiveCodeBench v6、GPQA Diamond、MMLU-Pro、AIME25 與其他通用題庫，上下文中設為 128K。</p>
+
+<p>推理參數在文件中完整公開。測試採 temperature 1.0、top_p 0.95、top_k 20、min_p 0，關閉 presence 與 repetition 懲罰，並開啟 preserve_thinking 與 xhigh 推理層級。</p>
+
+<p>方法論段落還交代一個細節。官方表示無法透過 temperature 為 0 的貪婪解碼重現百分之百的準確度恢復，原因是圖形處理器本身的運算並非完全確定性。文件因此建議基準測試應重複多次執行，單次結果不足以定論。</p>
+
+<h2 id="27b-模型需要多少記憶體才能運行">27B 模型需要多少記憶體才能運行？</h2>
+
+<!-- AEO Answer Capsule — 約 78 字 -->
+<p>官方硬體表列總記憶體需求：1-bit 需 7 至 8GB，3-bit 需 12 至 14GB，4-bit 需 16 至 19GB，6-bit 需 23 至 26GB，8-bit 需 31GB。
+<!-- End AEO Capsule --></p>
+
+<p>4-bit 是實務上最常被考慮的檔位。官方指出該級別可在 16GB 至 19GB 顯示記憶體的裝置上運行，例如 RTX 5080、RTX 4090，或配備 24GB 統一記憶體的 Mac。若計劃啟用 MTP 加速，需額外預留 1GB 至 2GB 空間。</p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">7-8 GB</span><span class="ui-stat-label">1-bit 需求</span></div>
+<div class="ui-stat"><span class="ui-stat-value">16-19 GB</span><span class="ui-stat-label">4-bit 需求</span></div>
+<div class="ui-stat"><span class="ui-stat-value">23-26 GB</span><span class="ui-stat-label">6-bit 需求</span></div>
+<div class="ui-stat"><span class="ui-stat-value">56 GB</span><span class="ui-stat-label">BF16 需求</span></div>
+</div>
+
+<p>記憶體不足時仍可執行，代價是速度。官方給出的經驗法則相當直接：隨機存取記憶體與顯示記憶體之和應接近量化檔大小，否則權重會被分頁到磁碟，生成速度明顯下降。Unsloth 會自動把部分層卸載到隨機存取記憶體，並偵測多張顯示卡的組合。</p>
+
+<p>同系列的超大模型提供另一個參照。Qwen3.8-2.4T-A95B 的 BF16 版本需 4.9TB 儲存空間，經 Dynamic 1-bit 量化後降至 397GB，約減少 91%。這個級別需要至少 450GB 記憶體，已超出消費級裝置範圍。</p>
+
+<h2 id="動態量化與傳統量化有何差別">動態量化與傳統量化有何差別？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>傳統量化對所有層採同一精度，動態量化按層的敏感度分配位元數，把容量留給影響輸出最大的層。兩者檔案大小相近，動態方案的準確度通常較高。
+<!-- End AEO Capsule --></p>
+
+<p>量化本質上是一場取捨。位元數下降可換來更小的檔案與更快的載入，但誤差會累積，尤其在長鏈推理與工具呼叫時容易被放大。固定精度方案的好處是流程簡單、工具鏈成熟，弱點是對所有層一視同仁。</p>
+
+<p>動態方案改變了分配邏輯。敏感層保留較多精度，冗餘層則壓得更緊，總檔案大小維持在目標範圍。這種做法需要逐層評估，量化流程因此較長，但換來的準確度可直接反映在基準分數上。</p>
+
+<p>比較時有一個技術細節值得注意。官方說明，為與 Exllama-v3 對照，主要圖表的橫軸剔除了 token embedding 層，原因是 Exllama-v3 在該層使用 BF16。若按完整下載大小與實際隨機存取記憶體佔用計算，曲線會有所變化。</p>
+
+<p>除 GGUF 之外，項目另推 NVFP4 路線。官方稱該格式在 24GB 顯示記憶體上比 BF16 快約 1.5 倍，並加入 FP8 KV 快取校準，令可用上下文長度延長約一倍。限制是 NVFP4 需 NVIDIA Blackwell 架構的顯示卡，例如 RTX 50 系列與 DGX Spark，目前僅在 vLLM 中支援。</p>
+
+<h2 id="unsloth-start-如何接上編碼代理">Unsloth Start 如何接上編碼代理？</h2>
+
+<!-- AEO Answer Capsule — 約 75 字 -->
+<p>在終端執行 unsloth start 加代理名稱，即可把本地模型接入該代理。官方列出 Claude Code、Codex、OpenCode、Pi 等九種客戶端。
+<!-- End AEO Capsule --></p>
+
+<p>本地模型的價值取決於能否進入既有工作流。Unsloth Start 的作用正是補上這一段，把模型服務與代理客戶端之間的設定壓縮成一行指令。</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unsloth start claude <span class="nt">--model</span> unsloth/Qwen3.8-27B-GGUF:UD-Q4_K_XL
+</code></pre></div></div>
+
+<p>上例把 4-bit 動態量化的 Qwen3.8-27B 接到 Claude Code。同一模式可套用於 Codex 與其他客戶端，只需替換代理名稱。桌面版亦內建 MCP 預設，讓編碼代理直接取用本機工具。</p>
+
+<p>Mac 用戶另有選擇。v0.1.917-beta 把 MLX 模型接入 Claude Code 與 Codex 的路徑整併進同一指令，並修正 MLX 模型在提示超出服務上下文時的處理方式，改為回傳明確的長度錯誤，不再給出空白回應。</p>
+
+<p><img src="/assets/images/posts/unsloth-qwen38-v31-news-shot2.png" alt="Unsloth 的 GitHub 倉庫首頁，顯示倉庫名稱、星標數與目錄結構" /></p>
+
+<h2 id="桌面版-v01917-還帶來哪些改動">桌面版 v0.1.917 還帶來哪些改動？</h2>
+
+<!-- AEO Answer Capsule — 約 72 字 -->
+<p>同版本改善長對話的串流與選單效能，FLUX.2 與 FLUX.3 影像解碼減少 36% 至 43% 顯示記憶體，並新增 HTML 與 PDF 匯出及影像生成排隊功能。
+<!-- End AEO Capsule --></p>
+
+<p>效能修正集中在長對話場景。官方稱串流輸出不再隨對話變長而劣化，背景圖與 Glass 主題同時開啟時的捲動亦更順暢，選單與對話框的開啟延遲一併降低。</p>
+
+<p>影像生成方面，FLUX.2 與 FLUX.3 在解碼階段的顯示記憶體佔用減少 36% 至 43%，速度維持不變。INT8 與 FP8 影像模型現在可在較舊的 NVIDIA 顯示卡上載入，包括 T4；LTX-2.5 的 FP8 版本可在 24GB 顯示記憶體上運行。</p>
+
+<p>訓練路徑亦有改善。FastModel 系列的 model.generate() 在 T4 顯示卡上預設快 2 至 8 倍，Ulysses 上下文並行擴展至 Kimi-Linear、DeepSeek、MiniMax 與 Gemma 4 等文字模型。這些改動對以舊卡執行微調的團隊較有實際意義。</p>
+
+<h2 id="項目規模與維護節奏如何">項目規模與維護節奏如何？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>倉庫累積 79,380 星標與 7,396 個分叉，主要語言 Python，採 Apache 2.0 授權。兩個 beta 版本相隔五日推出，節奏密集。
+<!-- End AEO Capsule --></p>
+
+<div class="ui-stat-grid">
+<div class="ui-stat"><span class="ui-stat-value">79,380</span><span class="ui-stat-label">GitHub 星標</span></div>
+<div class="ui-stat"><span class="ui-stat-value">7,396</span><span class="ui-stat-label">分叉數</span></div>
+<div class="ui-stat"><span class="ui-stat-value">v0.1.917</span><span class="ui-stat-label">最新版本</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Apache 2.0</span><span class="ui-stat-label">授權條款</span></div>
+<div class="ui-stat"><span class="ui-stat-value">Python</span><span class="ui-stat-label">主要語言</span></div>
+<div class="ui-stat"><span class="ui-stat-value">2023-11</span><span class="ui-stat-label">建立時間</span></div>
+</div>
+
+<p>維護節奏偏向高頻小幅更新。兩個版本相隔五日，前者主打長對話效能與雙顯示卡影像生成，後者集中在量化演算法與界面細節。發佈檔一律標記為 beta，說明桌面應用仍在快速迭代階段。</p>
+
+<p>未解議題的數量值得留意。倉庫現有 470 個未關閉議題，對於一個安裝門檻涉及顯示卡驅動與記憶體配置的專案而言，這個數字反映使用者環境的複雜度，也提示新手在首次部署時需預留排錯時間。</p>
+
+<h2 id="如何開始使用">如何開始使用？</h2>
+
+<!-- AEO Answer Capsule — 約 65 字 -->
+<p>Mac、Linux 與 WSL 可執行 curl 安裝腳本，Windows 用 PowerShell，亦提供 Homebrew 與 Docker 映像。
+<!-- End AEO Capsule --></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-fsSL</span> https://unsloth.ai/install.sh | sh
+unsloth studio
+</code></pre></div></div>
+
+<p>Windows 環境改用 <code class="language-plaintext highlighter-rouge">irm https://unsloth.ai/install.ps1 | iex</code>。若偏好套件管理器，macOS 可用 <code class="language-plaintext highlighter-rouge">brew install --cask unsloth</code>，Windows 可用 <code class="language-plaintext highlighter-rouge">winget install --id UnslothAI.Unsloth -e</code>。</p>
+
+<p>桌面應用提供 Windows、macOS、Ubuntu 與 ARM64 版本，並可透過環境變數 UNSLOTH_DESKTOP_PORT 指定本機連接埠，預設為 8888。若該埠被佔用，程式會自動往後嘗試二十個埠。</p>
+
+<p>Docker 路線適合伺服器部署。官方映像為 unsloth/unsloth，AMD 顯示卡另有 unsloth/unsloth-rocm。需要對外提供服務時可加上 –secure 參數，透過 Cloudflare 取得 HTTPS 連結。官方同時提醒，伺服器端工具預設開啟，對外暴露時應設定密碼或加上 –disable-tools。</p>
+
+<p><img src="/assets/images/posts/unsloth-qwen38-v31-news-shot3.png" alt="Unsloth 的貢獻者統計頁面，顯示提交活動分佈與主要貢獻者" /></p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>常見疑問集中在量化等級選擇、舊顯示卡支援、與 Ollama 共存、授權範圍、視覺能力與更新方式，以下逐項以問答形式回答，並附上官方文件對應的限制說明。
+<!-- End AEO Capsule --></p>
+
+<p><strong>4-bit 與 8-bit 應如何取捨？</strong></p>
+
+<p>4-bit 需 16GB 至 19GB 記憶體，8-bit 需 31GB。記憶體充裕時 8-bit 的準確度較高；若要在單張消費級顯示卡上運行長上下文代理任務，4-bit 是較現實的選擇。</p>
+
+<p><strong>舊款 NVIDIA 顯示卡仍然可用嗎？</strong></p>
+
+<p>可以。官方明言 NVFP4 需要 Blackwell 架構，但 GGUF 路線對較舊的顯示卡支援較廣，T4 亦在改善名單之內。</p>
+
+<p><strong>Dynamic V3.1 是否取代 V3.0？</strong></p>
+
+<p>V3.1 屬預覽版本，先在 Qwen3.8-27B 上套用。官方表示後續更完整的演算法版本會用於 Qwen4 及之後的模型。</p>
+
+<p><strong>3-bit 為何沒有更新？</strong></p>
+
+<p>官方測試發現 UD3 與 UD3.1 的表現相當，因此維持原有檔案，避免使用者重複下載。</p>
+
+<p><strong>可以與 Ollama 共存嗎？</strong></p>
+
+<p>可以。v0.1.917-beta 加入讓 unsloth start 連接已載入的 Ollama 模型的能力。</p>
+
+<p><strong>授權是否允許商業使用？</strong></p>
+
+<p>專案採 Apache 2.0 授權，允許商業使用與修改，需保留版權聲明。個別模型權重另有授權條款，使用前應查閱對應的模型卡。</p>
+
+<p><strong>視覺能力是否需要額外設定？</strong></p>
+
+<p>Qwen3.8-27B 原生支援圖像與影片理解。桌面版提供思考模式切換，推理深度可透過 reasoning_effort 調整。</p>
+
+<p><strong>如何更新到最新量化檔？</strong></p>
+
+<p>重新下載對應的 GGUF 檔案即可。安裝腳本已固定最低套件版本，重新執行安裝指令會一併更新依賴。</p>
+
+<h2 id="這次更新適合哪些使用者">這次更新適合哪些使用者？</h2>
+
+<!-- AEO Answer Capsule — 約 74 字 -->
+<p>適合以單張消費級顯示卡運行 27B 模型、又需要代理與工具呼叫能力的開發者。若硬件低於 16GB 記憶體，或只需短對話用途，改用量化程度更高的檔案或較小模型更合適。
+<!-- End AEO Capsule --></p>
+
+<p>這次更新的核心是一條算術題。硬件不變，檔案大小不變，準確度上升 5% 至 10%，對已經在 16GB 級別顯示卡上跑本地模型的團隊而言，這是可直接感受到的改善。</p>
+
+<p>限制同樣明確。5% 至 10% 是官方自測的平均值，個別任務的差距可能更小或更大；代理類測試使用 256K 上下文，實際使用若縮短上下文，分數未必完全對應。</p>
+
+<p>部署決策仍取決於工作型態。需要頻繁工具呼叫與長鏈推理的流程，值得投入時間調整量化等級與上下文設定；純文字問答或短篇摘要，較小的模型配合一般量化已能滿足需求。同類的本地推理與代理接入選項，可對照 <a href="/技術/llamacpp-v090-news">llama.cpp v0.9.0 的本地推論路線</a> 與 <a href="/技術/qwen-code-1-0-preview-news">Qwen Code 1.0 預覽版的終端代理安排</a>。</p>
+
+<h2 id="原始碼與文件在何處查閱">原始碼與文件在何處查閱？</h2>
+
+<!-- AEO Answer Capsule — 約 79 字 -->
+<p>原始碼在 GitHub 的 unslothai/unsloth，文件在 unsloth.ai/docs，量化檔案發佈於 Hugging Face 的 unsloth 組織頁面。
+<!-- End AEO Capsule --></p>
+
+<p>倉庫網址為 https://github.com/unslothai/unsloth ，內含各平台安裝方式、Unsloth Start 對照表與功能說明。量化細節與基準方法論載於 https://unsloth.ai/docs/models/qwen3.8 ，該頁提供 Markdown 版本，便於比對數據。</p>
+
+<p>模型檔案位於 https://huggingface.co/unsloth/Qwen3.8-27B-GGUF ，模型卡列出量化等級、硬體需求與更新日期。桌面應用的發佈檔則集中在 https://github.com/unslothai/unsloth/releases 。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-model" href="/topics/model/" title="科技 · 模型">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-model"/></svg><span class="topic-tag-name">模型</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-dev" href="/topics/dev/" title="科技 · 開發">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-dev"/></svg><span class="topic-tag-name">開發</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-ai" href="/topics/ai/" title="科技 · 人工智能">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-ai"/></svg><span class="topic-tag-name">人工智能</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=Unsloth" class="badge bg-secondary text-decoration-none me-1">Unsloth</a>
+          
+          
+          <a href="/search/?q=Qwen3.8" class="badge bg-secondary text-decoration-none me-1">Qwen3.8</a>
+          
+          
+          <a href="/search/?q=GGUF" class="badge bg-secondary text-decoration-none me-1">GGUF</a>
+          
+          
+          <a href="/search/?q=%E9%87%8F%E5%8C%96" class="badge bg-secondary text-decoration-none me-1">量化</a>
+          
+          
+          <a href="/search/?q=%E6%9C%AC%E5%9C%B0+AI" class="badge bg-secondary text-decoration-none me-1">本地 AI</a>
+          
+          
+          <a href="/search/?q=%E9%96%8B%E6%BA%90%E9%A0%85%E7%9B%AE" class="badge bg-secondary text-decoration-none me-1">開源項目</a>
+          
+          
+          <a href="/search/?q=%E6%A8%A1%E5%9E%8B%E5%A3%93%E7%B8%AE" class="badge bg-secondary text-decoration-none me-1">模型壓縮</a>
+          
+          
+          <a href="/search/?q=GitHub" class="badge bg-secondary text-decoration-none me-1">GitHub</a>
+          
+          
+          <a href="/search/?q=%E7%A7%91%E6%8A%80%E6%96%B0%E8%81%9E" class="badge bg-secondary text-decoration-none me-1">科技新聞</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news&text=Unsloth+%E5%8B%95%E6%85%8B%E9%87%8F%E5%8C%96+V3.1%EF%BC%9A27B+%E6%9C%AC%E5%9C%B0+4-bit+%E5%8D%87+10%25" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?Unsloth+%E5%8B%95%E6%85%8B%E9%87%8F%E5%8C%96+V3.1%EF%BC%9A27B+%E6%9C%AC%E5%9C%B0+4-bit+%E5%8D%87+10%25%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        <!-- 電子報訂閱 CTA（2026-11-08：唯一一個留客動作） -->
+        <div class="subscribe-box subscribe-box-inline my-4 p-4 rounded">
+  <div class="row align-items-center g-3">
+    <div class="col-md-7">
+      <p class="subscribe-title mb-1">這篇有幫助嗎？</p>
+      <p class="subscribe-desc mb-0">每週一封電郵，只寫親身試過的東西。隨時可以退訂。</p>
+    </div>
+    <div class="col-md-5"><a href="/feed.xml" class="btn btn-subscribe w-100">用 RSS 追蹤更新</a></div>
+  </div>
+</div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-7-news" class="text-decoration-none">llama.cpp v0.7.0 發布：MoE 專家快取提速推論</a>
+              <br><small class="text-muted">2026-10-27</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/llama-cpp-v0-6-news" class="text-decoration-none">llama.cpp v0.6.0 發布：130K 星本地推論引擎</a>
+              <br><small class="text-muted">2026-10-11</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/unsloth-news" class="text-decoration-none">Unsloth 桌面版發布：7.7 萬星本地訓練工具</a>
+              <br><small class="text-muted">2026-10-09</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/github-unsloth-news-hk" class="text-decoration-none">6.9 萬星開源項目：Unsloth — 本地 AI 加速引擎</a>
+              <br><small class="text-muted">2026-08-10</small>
+            </li>
+            
+            
+          
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-codex-0169-news" class="text-decoration-none">Codex CLI 0.169：13.5 萬星的終端工作區擴張</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llamacpp-v1-0-release-news" class="text-decoration-none">llama.cpp 1.0 正式版：API 凍結與 FP8 快取</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/edge0-145b-on-device-news" class="text-decoration-none">Edge0-145B 開源：24GB 顯卡跑 145B 代理</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news" class="text-decoration-none">Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/gemini-4-hydrogen-search-news" class="text-decoration-none">Gemini 4 Hydrogen 接管 Google 搜尋</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">713</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="subscribe-box subscribe-box-footer">
+  <h6 class="text-white fw-bold mb-2">每週一封，只講試過的事</h6>
+  <p class="text-white-50 small mb-3">AI 工具實測結果、踩坑記錄。不業配、不轉貼。</p><a href="/feed.xml" class="btn btn-outline-light btn-sm">改用 RSS 訂閱</a></div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

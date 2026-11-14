@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a2a"/>
+      <stop offset="50%" style="stop-color:#2d6a4f"/>
+      <stop offset="100%" style="stop-color:#1a3a2a"/>
+    </linearGradient>
+    <linearGradient id="circle1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#95d5b2;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#52b788;stop-opacity:0.05"/>
+    </linearGradient>
+    <linearGradient id="circle2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d8f3dc;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#95d5b2;stop-opacity:0.05"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- 裝飾圓 -->
+  <circle cx="380" cy="120" r="200" fill="url(#circle1)"/>
+  <circle cx="120" cy="380" r="180" fill="url(#circle2)"/>
+
+  <!-- 葉子裝飾 -->
+  <g opacity="0.6">
+    <!-- 左葉片 -->
+    <path d="M100 180 Q80 150 110 130 Q130 120 150 140 Q160 160 140 175 Q120 185 100 180Z" fill="#52b788" opacity="0.5"/>
+    <path d="M110 170 Q100 145 125 128 Q140 118 155 135 Q165 155 150 168 Q130 178 110 170Z" fill="#74c69d" opacity="0.4"/>
+    <!-- 右葉片 -->
+    <path d="M400 350 Q420 320 390 300 Q370 290 355 310 Q345 330 360 345 Q380 355 400 350Z" fill="#52b788" opacity="0.5"/>
+    <path d="M390 340 Q400 315 375 298 Q360 288 345 305 Q335 325 350 338 Q370 348 390 340Z" fill="#74c69d" opacity="0.4"/>
+  </g>
+
+  <!-- 主圖示：盤子/碗 -->
+  <g transform="translate(256, 180)" filter="url(#glow)">
+    <!-- 碗 -->
+    <ellipse cx="0" cy="15" rx="90" ry="20" fill="#1b4332" opacity="0.5"/>
+    <path d="M-85 -10 Q-85 40 0 55 Q85 40 85 -10Z" fill="none" stroke="#d8f3dc" stroke-width="2.5" opacity="0.7"/>
+    <path d="M-85 -10 Q-85 40 0 55 Q85 40 85 -10Z" fill="url(#circle1)" opacity="0.3"/>
+
+    <!-- 蔬菜在碗裡 -->
+    <!-- 綠花椰 -->
+    <circle cx="-25" cy="-5" r="18" fill="#52b788" opacity="0.8"/>
+    <circle cx="-25" cy="-5" r="10" fill="#74c69d" opacity="0.6"/>
+    <rect x="-26" y="10" width="3" height="15" fill="#40916c" rx="1.5"/>
+
+    <!-- 番茄 -->
+    <circle cx="25" cy="-8" r="15" fill="#e76f51" opacity="0.85"/>
+    <circle cx="25" cy="-8" r="8" fill="#f4a261" opacity="0.3"/>
+    <path d="M25-23 Q30-28 25-30 Q20-28 25-23" fill="#2d6a4f" opacity="0.7"/>
+
+    <!-- 紅蘿蔔 -->
+    <path d="M-50 0 Q-55 15 -50 25 Q-45 15 -50 0Z" fill="#f4a261" opacity="0.8"/>
+    <path d="M-50 0 L-53 -8 L-47 -8Z" fill="#40916c" opacity="0.7"/>
+
+    <!-- 蘑菇 -->
+    <ellipse cx="40" cy="-5" rx="10" ry="6" fill="#d8f3dc" opacity="0.7"/>
+    <rect x="39" y="1" width="3" height="8" fill="#d8f3dc" rx="1" opacity="0.6"/>
+
+    <!-- 藜麥粒 -->
+    <circle cx="-5" cy="-10" r="2" fill="#fefae0" opacity="0.6"/>
+    <circle cx="2" cy="-12" r="2" fill="#fefae0" opacity="0.5"/>
+    <circle cx="-10" cy="-8" r="1.5" fill="#fefae0" opacity="0.4"/>
+    <circle cx="8" cy="-10" r="1.5" fill="#fefae0" opacity="0.5"/>
+    <circle cx="-2" cy="-6" r="1.8" fill="#fefae0" opacity="0.4"/>
+  </g>
+
+  <!-- 周圍裝飾小圖示 -->
+  <!-- Omega-3 魚 -->
+  <g transform="translate(85, 280)" opacity="0.7">
+    <ellipse cx="0" cy="0" rx="20" ry="8" fill="#a3d9c0" opacity="0.5"/>
+    <polygon points="-18,0 -28,-8 -28,8" fill="#a3d9c0" opacity="0.5"/>
+    <circle cx="10" cy="-2" r="2" fill="#1a3a2a"/>
+  </g>
+
+  <!-- 莓果 -->
+  <g transform="translate(420, 290)" opacity="0.7">
+    <circle cx="0" cy="0" r="6" fill="#c77dff" opacity="0.6"/>
+    <circle cx="8" cy="4" r="5" fill="#7b2cbf" opacity="0.5"/>
+    <circle cx="-6" cy="6" r="5" fill="#9d4edd" opacity="0.5"/>
+    <circle cx="3" cy="-7" r="4" fill="#c77dff" opacity="0.4"/>
+  </g>
+
+  <!-- 綠茶 -->
+  <g transform="translate(100, 340)" opacity="0.6">
+    <rect x="-6" y="-12" width="12" height="20" rx="1" fill="#52b788" opacity="0.5"/>
+    <path d="M-6 -5 Q-10 0 -6 5" fill="none" stroke="#52b788" stroke-width="1.5" opacity="0.5"/>
+    <rect x="-4" y="-10" width="8" height="16" rx="1" fill="#d8f3dc" opacity="0.2"/>
+  </g>
+
+  <!-- 薑黃 -->
+  <g transform="translate(400, 340)" opacity="0.6">
+    <ellipse cx="0" cy="0" rx="4" ry="12" fill="#e9c46a" opacity="0.6"/>
+    <ellipse cx="6" cy="-2" rx="3.5" ry="10" fill="#f4a261" opacity="0.5"/>
+    <ellipse cx="-5" cy="1" rx="3" ry="9" fill="#e9c46a" opacity="0.4"/>
+  </g>
+
+  <!-- 堅果 -->
+  <g transform="translate(250, 350)" opacity="0.5">
+    <ellipse cx="-15" cy="0" rx="5" ry="4" fill="#c9a84c" opacity="0.6"/>
+    <ellipse cx="-5" cy="-3" rx="4" ry="3.5" fill="#d4a373" opacity="0.5"/>
+    <ellipse cx="5" cy="0" rx="5" ry="4" fill="#c9a84c" opacity="0.5"/>
+    <ellipse cx="15" cy="-2" rx="4" ry="3" fill="#d4a373" opacity="0.4"/>
+  </g>
+
+  <!-- 發炎細胞象徵（被抗炎食物包圍） -->
+  <g transform="translate(256, 260)" opacity="0.25">
+    <circle cx="0" cy="0" r="8" fill="#e76f51"/>
+    <circle cx="0" cy="0" r="5" fill="#f4a261"/>
+  </g>
+
+  <!-- 標題文字 -->
+  <text x="256" y="420" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="22" font-weight="700" fill="#d8f3dc" letter-spacing="1">
+    抗發炎飲食科學指南
+  </text>
+  <text x="256" y="448" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="13" fill="#95d5b2" letter-spacing="0.5" opacity="0.8">
+    從餐桌開始的慢性發炎逆轉計畫
+  </text>
+  <text x="256" y="478" text-anchor="middle" font-family="system-ui, 'Noto Sans TC', sans-serif" font-size="11" fill="#52b788" letter-spacing="2" opacity="0.6">
+    HEALTH · NUTRITION · 2026
+  </text>
+</svg>

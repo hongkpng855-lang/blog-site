@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2d5a27"/>
+      <stop offset="100%" stop-color="#4a8c3f"/>
+    </linearGradient>
+    <linearGradient id="circle1" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#ff6b35"/>
+      <stop offset="100%" stop-color="#e85d26"/>
+    </linearGradient>
+    <linearGradient id="circle2" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#f7c948"/>
+      <stop offset="100%" stop-color="#e0a800"/>
+    </linearGradient>
+    <linearGradient id="circle3" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#e63946"/>
+      <stop offset="100%" stop-color="#c1292e"/>
+    </linearGradient>
+    <linearGradient id="circle4" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#457b9d"/>
+      <stop offset="100%" stop-color="#1d3557"/>
+    </linearGradient>
+    <linearGradient id="circle5" cx="0.5" cy="0.5" r="0.5" fx="0.3" fy="0.3" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#6d597a"/>
+      <stop offset="100%" stop-color="#4a3b5c"/>
+    </linearGradient>
+    <linearGradient id="overlay" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="100%" stop-color="rgba(0,0,0,0.55)"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Decorative circles (food items) -->
+  <circle cx="100" cy="120" r="55" fill="url(#circle1)" opacity="0.85"/>
+  <circle cx="350" cy="110" r="45" fill="url(#circle2)" opacity="0.8"/>
+  <circle cx="390" cy="270" r="50" fill="url(#circle3)" opacity="0.8"/>
+  <circle cx="130" cy="300" r="40" fill="url(#circle4)" opacity="0.8"/>
+  <circle cx="260" cy="180" r="35" fill="url(#circle5)" opacity="0.7"/>
+
+  <!-- Small decorative dots -->
+  <circle cx="180" cy="90" r="8" fill="#f7c948" opacity="0.6"/>
+  <circle cx="400" cy="170" r="6" fill="#ff6b35" opacity="0.5"/>
+  <circle cx="80" cy="230" r="7" fill="#457b9d" opacity="0.5"/>
+  <circle cx="440" cy="350" r="5" fill="#f7c948" opacity="0.5"/>
+  <circle cx="160" cy="380" r="6" fill="#e63946" opacity="0.4"/>
+  <circle cx="300" cy="100" r="5" fill="#6d597a" opacity="0.4"/>
+
+  <!-- Leaf decorations -->
+  <g fill="#5cb85c" opacity="0.4">
+    <ellipse cx="200" cy="70" rx="30" ry="8" transform="rotate(-30 200 70)"/>
+    <ellipse cx="200" cy="70" rx="30" ry="8" transform="rotate(30 200 70)"/>
+    <ellipse cx="340" cy="350" rx="25" ry="7" transform="rotate(-45 340 350)"/>
+    <ellipse cx="340" cy="350" rx="25" ry="7" transform="rotate(45 340 350)"/>
+  </g>
+
+  <!-- Overlay gradient for readability -->
+  <rect y="280" width="512" height="232" fill="url(#overlay)"/>
+
+  <!-- Title area -->
+  <g filter="url(#shadow)">
+    <text x="256" y="370" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="bold" fill="white" letter-spacing="1">
+      抗發炎生活指南
+    </text>
+    <text x="256" y="412" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="rgba(255,255,255,0.9)" letter-spacing="0.5">
+      從飲食到習慣的科學實戰攻略
+    </text>
+    <text x="256" y="450" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="rgba(255,255,255,0.7)" letter-spacing="1">
+      🌿 遠離慢性疲勞 · 重啟身體修復力
+    </text>
+  </g>
+
+  <!-- Bottom accent line -->
+  <rect x="180" y="475" width="152" height="3" rx="1.5" fill="#f7c948" opacity="0.8"/>
+</svg>

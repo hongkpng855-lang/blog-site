@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a"/>
+      <stop offset="100%" style="stop-color:#1e1b4b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#34d399"/>
+      <stop offset="100%" style="stop-color:#10b981"/>
+    </linearGradient>
+    <linearGradient id="brain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- Grid dots -->
+  <g fill="#334155" opacity="0.4">
+    <circle cx="40" cy="40" r="1.5"/><circle cx="120" cy="40" r="1.5"/>
+    <circle cx="200" cy="40" r="1.5"/><circle cx="280" cy="40" r="1.5"/>
+    <circle cx="360" cy="40" r="1.5"/><circle cx="440" cy="40" r="1.5"/>
+    <circle cx="40" cy="120" r="1.5"/><circle cx="440" cy="120" r="1.5"/>
+    <circle cx="40" cy="200" r="1.5"/><circle cx="440" cy="200" r="1.5"/>
+    <circle cx="40" cy="280" r="1.5"/><circle cx="440" cy="280" r="1.5"/>
+    <circle cx="40" cy="360" r="1.5"/><circle cx="440" cy="360" r="1.5"/>
+    <circle cx="40" cy="440" r="1.5"/><circle cx="440" cy="440" r="1.5"/>
+    <circle cx="120" cy="120" r="1.5"/><circle cx="200" cy="120" r="1.5"/>
+    <circle cx="280" cy="120" r="1.5"/><circle cx="360" cy="120" r="1.5"/>
+    <circle cx="120" cy="200" r="1.5"/><circle cx="200" cy="200" r="1.5"/>
+    <circle cx="280" cy="200" r="1.5"/><circle cx="360" cy="200" r="1.5"/>
+    <circle cx="120" cy="280" r="1.5"/><circle cx="200" cy="280" r="1.5"/>
+    <circle cx="280" cy="280" r="1.5"/><circle cx="360" cy="280" r="1.5"/>
+    <circle cx="120" cy="360" r="1.5"/><circle cx="200" cy="360" r="1.5"/>
+    <circle cx="280" cy="360" r="1.5"/><circle cx="360" cy="360" r="1.5"/>
+    <circle cx="120" cy="440" r="1.5"/><circle cx="200" cy="440" r="1.5"/>
+    <circle cx="280" cy="440" r="1.5"/><circle cx="360" cy="440" r="1.5"/>
+  </g>
+
+  <!-- Glow behind brain -->
+  <circle cx="256" cy="180" r="120" fill="#7c3aed" opacity="0.1" filter="url(#softGlow)"/>
+
+  <!-- Brain / Network node icon -->
+  <g transform="translate(256,170)" fill="none" stroke-width="2">
+    <!-- Left brain hemisphere -->
+    <path d="M-30,-15 Q-50,-10 -55,5 Q-58,12 -52,20 Q-45,30 -35,28 Q-28,25 -25,15 Q-22,8 -20,0 Q-22,-10 -30,-15Z" fill="url(#brain)" stroke="#a78bfa" opacity="0.9"/>
+    <!-- Right brain hemisphere -->
+    <path d="M30,-15 Q50,-10 55,5 Q58,12 52,20 Q45,30 35,28 Q28,25 25,15 Q22,8 20,0 Q22,-10 30,-15Z" fill="url(#brain)" stroke="#a78bfa" opacity="0.9"/>
+    <!-- Center line -->
+    <line x1="0" y1="-12" x2="0" y2="26" stroke="#a78bfa" stroke-width="1" opacity="0.5"/>
+    <!-- Neural connections left -->
+    <circle cx="-15" cy="5" r="3" fill="#c4b5fd"/>
+    <circle cx="-35" cy="12" r="2.5" fill="#c4b5fd"/>
+    <circle cx="-20" cy="-5" r="2.5" fill="#c4b5fd"/>
+    <circle cx="-40" cy="3" r="2" fill="#a78bfa"/>
+    <line x1="-15" y1="5" x2="-35" y2="12" stroke="#c4b5fd" stroke-width="1" opacity="0.7"/>
+    <line x1="-15" y1="5" x2="-20" y2="-5" stroke="#c4b5fd" stroke-width="1" opacity="0.7"/>
+    <line x1="-35" y1="12" x2="-40" y2="3" stroke="#a78bfa" stroke-width="0.8" opacity="0.5"/>
+    <!-- Neural connections right -->
+    <circle cx="15" cy="5" r="3" fill="#c4b5fd"/>
+    <circle cx="35" cy="12" r="2.5" fill="#c4b5fd"/>
+    <circle cx="20" cy="-5" r="2.5" fill="#c4b5fd"/>
+    <circle cx="40" cy="3" r="2" fill="#a78bfa"/>
+    <line x1="15" y1="5" x2="35" y2="12" stroke="#c4b5fd" stroke-width="1" opacity="0.7"/>
+    <line x1="15" y1="5" x2="20" y2="-5" stroke="#c4b5fd" stroke-width="1" opacity="0.7"/>
+    <line x1="35" y1="12" x2="40" y2="3" stroke="#a78bfa" stroke-width="0.8" opacity="0.5"/>
+    <!-- Central node -->
+    <circle cx="0" cy="10" r="4" fill="#e0e7ff" stroke="#818cf8" stroke-width="1.5"/>
+  </g>
+
+  <!-- Connected notes around brain -->
+  <g fill="#334155" opacity="0.8">
+    <rect x="195" y="110" width="18" height="22" rx="2" fill="#1e293b" stroke="#6366f1" stroke-width="1.2" transform="rotate(-15,204,121)"/>
+    <rect x="295" y="118" width="16" height="20" rx="2" fill="#1e293b" stroke="#8b5cf6" stroke-width="1.2" transform="rotate(10,303,128)"/>
+    <rect x="175" y="145" width="14" height="18" rx="2" fill="#1e293b" stroke="#10b981" stroke-width="1" transform="rotate(-8,182,154)"/>
+    <rect x="305" y="148" width="15" height="19" rx="2" fill="#1e293b" stroke="#10b981" stroke-width="1" transform="rotate(12,312,157)"/>
+  </g>
+
+  <!-- Knowledge connection lines -->
+  <g stroke="#6366f1" stroke-width="1" opacity="0.25" fill="none">
+    <line x1="204" y1="121" x2="236" y2="155"/>
+    <line x1="303" y1="128" x2="276" y2="155"/>
+    <line x1="182" y1="154" x2="236" y2="160"/>
+    <line x1="312" y1="157" x2="276" y2="160"/>
+  </g>
+
+  <!-- Connection node dots -->
+  <circle cx="236" cy="155" r="2" fill="#818cf8" opacity="0.5"/>
+  <circle cx="276" cy="155" r="2" fill="#818cf8" opacity="0.5"/>
+
+  <!-- Title text -->
+  <text x="256" y="290" text-anchor="middle" fill="#e2e8f0" font-family="system-ui, sans-serif" font-size="23" font-weight="700">個人知識管理</text>
+  <text x="256" y="318" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="15" font-weight="400">打造你的第二大腦系統</text>
+
+  <!-- Divider line -->
+  <line x1="180" y1="335" x2="332" y2="335" stroke="url(#gold)" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Tags row -->
+  <rect x="170" y="350" width="80" height="22" rx="11" fill="#6366f1" opacity="0.15"/>
+  <text x="210" y="365" text-anchor="middle" fill="#a5b4fc" font-family="system-ui, sans-serif" font-size="10" font-weight="500">PKM</text>
+  <rect x="260" y="350" width="85" height="22" rx="11" fill="#10b981" opacity="0.15"/>
+  <text x="302" y="365" text-anchor="middle" fill="#6ee7b7" font-family="system-ui, sans-serif" font-size="10" font-weight="500">第二大腦</text>
+
+  <!-- Bottom accent bar -->
+  <rect x="0" y="490" width="512" height="22" fill="url(#accent)" opacity="0.15"/>
+  <text x="256" y="505" text-anchor="middle" fill="#94a3b8" font-family="system-ui, sans-serif" font-size="9" opacity="0.7">學習 · 知識管理 · Obsidian · Zettelkasten</text>
+
+  <!-- Decorative corner lines -->
+  <path d="M30,30 L30,60 M30,30 L60,30" stroke="#6366f1" stroke-width="1.5" opacity="0.3" fill="none"/>
+  <path d="M482,30 L482,60 M482,30 L452,30" stroke="#6366f1" stroke-width="1.5" opacity="0.3" fill="none"/>
+  <path d="M30,482 L30,452 M30,482 L60,482" stroke="#6366f1" stroke-width="1.5" opacity="0.3" fill="none"/>
+  <path d="M482,482 L482,452 M482,482 L452,482" stroke="#6366f1" stroke-width="1.5" opacity="0.3" fill="none"/>
+</svg>

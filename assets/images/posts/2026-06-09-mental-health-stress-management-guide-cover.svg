@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A"/>
+      <stop offset="50%" style="stop-color:#2C4A6E"/>
+      <stop offset="100%" style="stop-color:#1B3A5A"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#E8D48B;stop-opacity:0.1"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8D48B"/>
+      <stop offset="100%" style="stop-color:#FB923C"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="100" cy="500" r="200" fill="url(#glow)"/>
+  <circle cx="1100" cy="100" r="150" fill="url(#glow)"/>
+  <circle cx="600" cy="315" r="250" fill="url(#glow)" opacity="0.15"/>
+
+  <!-- Brain icon (simplified) -->
+  <g transform="translate(140,120)" filter="url(#softGlow)">
+    <!-- Brain shape -->
+    <path d="M160,50 C160,20 140,0 110,0 C80,0 60,20 60,50 C60,60 65,70 70,78 C55,88 45,105 45,125 C45,160 70,180 100,180 C120,180 140,170 150,155 C155,165 165,172 180,172 C200,172 215,160 215,140 C215,125 205,115 195,110 C200,100 205,88 205,75 C205,50 185,35 165,35 C162,35 158,36 155,37 C157,42 160,48 160,55 Z" fill="url(#brainGrad)" opacity="0.9"/>
+    <!-- Brain line details -->
+    <path d="M100,40 C100,40 85,60 90,85 M130,35 C130,35 140,60 135,85 M170,50 C170,50 155,65 160,85" stroke="#1B2A4A" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M95,90 C95,90 80,110 85,135 M165,88 C165,88 150,105 155,130 M130,85 C130,85 125,110 130,135" stroke="#1B2A4A" stroke-width="1.5" fill="none" opacity="0.5"/>
+    <path d="M90,140 C90,140 75,155 85,170 M150,140 C150,140 140,155 145,168" stroke="#1B2A4A" stroke-width="1.5" fill="none" opacity="0.4"/>
+  </g>
+
+  <!-- Lotus / flower of balance next to brain -->
+  <g transform="translate(310,165)" filter="url(#softGlow)">
+    <ellipse cx="0" cy="-25" rx="14" ry="22" fill="#E8D48B" opacity="0.4" transform="rotate(-20)"/>
+    <ellipse cx="0" cy="-25" rx="14" ry="22" fill="#E8D48B" opacity="0.4" transform="rotate(20)"/>
+    <ellipse cx="0" cy="-25" rx="14" ry="22" fill="#FB923C" opacity="0.5" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-25" rx="10" ry="16" fill="#F0E0A0" opacity="0.6" transform="rotate(0)"/>
+    <circle cx="0" cy="0" r="4" fill="#FFF8DC" opacity="0.8"/>
+  </g>
+
+  <!-- Shield shape -->
+  <g transform="translate(500,95)">
+    <path d="M60,0 L120,30 L120,100 C120,140 60,170 60,170 C60,170 0,140 0,100 L0,30 Z" fill="none" stroke="#FB923C" stroke-width="2.5" opacity="0.7"/>
+    <path d="M60,15 L105,38 L105,95 C105,128 60,152 60,152 C60,152 15,128 15,95 L15,38 Z" fill="none" stroke="#E8D48B" stroke-width="1.5" opacity="0.4"/>
+    <!-- Inside shield: heartbeat line -->
+    <polyline points="35,70 48,70 55,50 62,95 68,30 75,90 82,70 98,70" fill="none" stroke="#5BC0BE" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  </g>
+
+  <!-- Leaves / growth elements -->
+  <g transform="translate(730,120)" filter="url(#softGlow)">
+    <path d="M0,60 C-20,30 -10,0 20,-10 C50,-20 70,0 80,30 C70,20 50,10 30,15 C10,20 0,40 0,60Z" fill="#4ECDC4" opacity="0.25"/>
+    <path d="M10,50 C-5,25 5,-5 30,-15 C55,-25 75,-10 85,20 C75,10 55,0 35,8 C15,15 10,35 10,50Z" fill="#5BC0BE" opacity="0.2"/>
+    <path d="M40,60 C35,45 40,25 55,18 C70,11 85,20 90,40" fill="none" stroke="#4ECDC4" stroke-width="1.5" opacity="0.3"/>
+  </g>
+
+  <!-- Title -->
+  <g filter="url(#shadow)">
+    <text x="140" y="380" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="56" font-weight="700" fill="#FFFFFF" letter-spacing="1">
+      <tspan x="140" dy="0">城市人心靈整理術</tspan>
+    </text>
+    <text x="140" y="450" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="36" font-weight="600" fill="#E8D48B" letter-spacing="0.5">
+      <tspan x="140" dy="0">精神健康與壓力管理終極指南</tspan>
+    </text>
+  </g>
+
+  <!-- Description line -->
+  <text x="140" y="510" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="20" font-weight="400" fill="#A0B4C8" letter-spacing="0.5">
+    Burnout 退散！用科學方法重建身心平衡
+  </text>
+
+  <!-- Decorative dots -->
+  <circle cx="140" cy="535" r="4" fill="#FB923C" opacity="0.6"/>
+  <circle cx="160" cy="535" r="4" fill="#FB923C" opacity="0.4"/>
+  <circle cx="180" cy="535" r="4" fill="#FB923C" opacity="0.2"/>
+
+  <!-- Bottom decoration -->
+  <line x1="140" y1="560" x2="600" y2="560" stroke="#FB923C" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="140" cy="560" r="3" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Tags on right -->
+  <g transform="translate(780, 380)">
+    <rect x="0" y="0" width="260" height="35" rx="17" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <text x="130" y="24" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="14" fill="#FB923C" text-anchor="middle" opacity="0.7">🧠 心理健康</text>
+
+    <rect x="0" y="48" width="260" height="35" rx="17" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <text x="130" y="72" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="14" fill="#FB923C" text-anchor="middle" opacity="0.7">🧘 正念冥想</text>
+
+    <rect x="0" y="96" width="260" height="35" rx="17" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+    <text x="130" y="120" font-family="'Noto Sans TC','Microsoft JhengHei',sans-serif" font-size="14" fill="#FB923C" text-anchor="middle" opacity="0.7">⚖️ 生活平衡</text>
+  </g>
+</svg>

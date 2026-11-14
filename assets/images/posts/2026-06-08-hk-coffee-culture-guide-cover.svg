@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2C1810"/>
+      <stop offset="50%" stop-color="#4A2820"/>
+      <stop offset="100%" stop-color="#1B2A4A"/>
+    </linearGradient>
+    <linearGradient id="steam" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#D4A574" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#D4A574" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Coffee cup body -->
+  <ellipse cx="600" cy="380" rx="120" ry="20" fill="#8B6914" opacity="0.3"/>
+  <path d="M480,300 Q480,380 500,400 L700,400 Q720,380 720,300 Z" fill="#5C3A1E" stroke="#8B6914" stroke-width="2"/>
+  
+  <!-- Cup rim -->
+  <ellipse cx="600" cy="300" rx="120" ry="25" fill="#8B6914"/>
+  <ellipse cx="600" cy="300" rx="110" ry="20" fill="#3C2210"/>
+  
+  <!-- Coffee surface -->
+  <ellipse cx="600" cy="300" rx="105" ry="18" fill="#4A2A10"/>
+  <ellipse cx="590" cy="298" rx="60" ry="10" fill="#5C3A1E" opacity="0.5"/>
+
+  <!-- Cup handle -->
+  <path d="M720,320 Q780,320 780,360 Q780,400 720,390" fill="none" stroke="#8B6914" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Saucer -->
+  <ellipse cx="600" cy="405" rx="160" ry="18" fill="#8B6914" opacity="0.4"/>
+  <ellipse cx="600" cy="405" rx="150" ry="14" fill="#6B4F2A" opacity="0.5"/>
+
+  <!-- Steam -->
+  <path d="M560,290 Q550,260 560,230 Q570,200 560,170" fill="none" stroke="#D4A574" stroke-width="3" stroke-linecap="round" opacity="0.4">
+    <animate attributeName="d" values="M560,290 Q550,260 560,230 Q570,200 560,170;M560,290 Q570,260 560,230 Q550,200 560,170;M560,290 Q550,260 560,230 Q570,200 560,170" dur="3s" repeatCount="indefinite"/>
+  </path>
+  <path d="M600,285 Q590,255 600,225 Q610,195 600,165" fill="none" stroke="#D4A574" stroke-width="3" stroke-linecap="round" opacity="0.5">
+    <animate attributeName="d" values="M600,285 Q590,255 600,225 Q610,195 600,165;M600,285 Q610,255 600,225 Q590,195 600,165;M600,285 Q590,255 600,225 Q610,195 600,165" dur="3.5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M640,290 Q630,260 640,230 Q650,200 640,170" fill="none" stroke="#D4A574" stroke-width="3" stroke-linecap="round" opacity="0.3">
+    <animate attributeName="d" values="M640,290 Q630,260 640,230 Q650,200 640,170;M640,290 Q650,260 640,230 Q630,200 640,170;M640,290 Q630,260 640,230 Q650,200 640,170" dur="4s" repeatCount="indefinite"/>
+  </path>
+
+  <!-- Coffee beans scattered -->
+  <ellipse cx="480" cy="420" rx="8" ry="5" fill="#5C3A1E" transform="rotate(-20,480,420)"/>
+  <ellipse cx="720" cy="415" rx="8" ry="5" fill="#5C3A1E" transform="rotate(30,720,415)"/>
+  <ellipse cx="700" cy="425" rx="7" ry="4" fill="#6B4F2A" transform="rotate(-10,700,425)"/>
+  <ellipse cx="500" cy="430" rx="6" ry="4" fill="#6B4F2A" transform="rotate(15,500,430)"/>
+
+  <!-- Title -->
+  <text x="600" y="140" font-family="'Noto Sans TC', 'Microsoft YaHei', sans-serif" font-size="52" fill="#FB923C" text-anchor="middle" font-weight="bold">
+    香港咖啡文化
+  </text>
+  <text x="600" y="195" font-family="'Noto Sans TC', 'Microsoft YaHei', sans-serif" font-size="32" fill="#D4A574" text-anchor="middle" font-weight="500">
+    與咖啡店生活指南
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="490" font-family="'Noto Sans TC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#A08070" text-anchor="middle" opacity="0.8">
+    由連鎖啡到精品咖啡 · 啡迷日常提案
+  </text>
+
+  <!-- Bottom decorative line -->
+  <line x1="400" y1="510" x2="800" y2="510" stroke="#FB923C" stroke-width="1" opacity="0.3"/>
+  
+  <!-- Small decorative dots -->
+  <circle cx="370" cy="510" r="3" fill="#FB923C" opacity="0.4"/>
+  <circle cx="830" cy="510" r="3" fill="#FB923C" opacity="0.4"/>
+</svg>

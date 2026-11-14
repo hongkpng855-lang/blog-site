@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Google Search Console 驗證（2026-08-05） -->
+  <meta name="google-site-verification" content="bFDlIlR_3H6_TLBVhundPRQwGks4SRbDvN3D9U4eTp0" />
+  
+  <!-- SEO Meta Tags -->
+  <!-- 2026-10-26：seo_title 供長版標題（帶關鍵字），h1 保持短版易讀 -->
+  <title>聯合航空封殺 AI 代理訂票：誰代旅客簽名 - AnthroSkill</title>
+  <meta name="description" content="聯合航空於 2026 年 11 月 11 日宣布，限制第三方個人 AI 代理代客訂票與管理行程，涵蓋自家平台與旅行社通路，並同步修改訂位、開票與分銷政策。官方理由是憑證外洩風險與美國聯邦航空法規的人為確認要求，本文整理封鎖範圍、技術背景與旅客實際影響。">
+  <meta name="keywords" content="聯合航空, AI代理, 身份驗證, 航空業, 銀行業, 資安, 代理支付, 科技新聞">
+  <meta name="author" content="Eric Chan">
+  
+  <link rel="canonical" href="https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="聯合航空封殺 AI 代理訂票：誰代旅客簽名">
+  <meta property="og:description" content="聯合航空於 2026 年 11 月 11 日宣布，限制第三方個人 AI 代理代客訂票與管理行程，涵蓋自家平台與旅行社通路，並同步修改訂位、開票與分銷政策。官方理由是憑證外洩風險與美國聯邦航空法規的人為確認要求，本文整理封鎖範圍、技術背景與旅客實際影響。">
+  <meta property="og:url" content="https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news">
+  <meta property="og:site_name" content="AnthroSkill 人類學｜由痛點到實測，日日更新">
+  <meta property="og:type" content="article">
+  
+  
+  
+  <!-- og:image 改用 custom domain（2026-10-04 換 anthroskill.com；github.io 而家會 301 去 HTTP，會壞預覽） -->
+  <meta property="og:image" content="https://anthroskill.com/assets/images/posts/united-airlines-ai-agent-block-news-cover.jpg">
+  
+  
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="聯合航空封殺 AI 代理訂票：誰代旅客簽名">
+  <meta name="twitter:description" content="聯合航空於 2026 年 11 月 11 日宣布，限制第三方個人 AI 代理代客訂票與管理行程，涵蓋自家平台與旅行社通路，並同步修改訂位、開票與分銷政策。官方理由是憑證外洩風險與美國聯邦航空法規的人為確認要求，本文整理封鎖範圍、技術背景與旅客實際影響。">
+  
+  
+  
+  <meta name="twitter:image" content="https://anthroskill.com/assets/images/posts/united-airlines-ai-agent-block-news-cover.jpg">
+  
+  
+  
+  <!-- Theme Colors -->
+  <meta name="theme-color" content="#17181C">
+  <meta name="msapplication-TileColor" content="#17181C">
+  
+  <!-- Stylesheets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/assets/css/main.css?v=4.5" rel="stylesheet">
+  
+  <!-- 網站圖標（2026-10-18：iOS/Android 加主畫面修正） -->
+  <link rel="icon" type="image/svg+xml" href="/assets/images/anthroskill-icon.svg">
+  <link rel="icon" type="image/png" sizes="256x256" href="/assets/images/favicon.png">
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+  <link rel="manifest" href="/assets/images/site.webmanifest">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="AnthroSkill">
+  <meta name="mobile-web-app-capable" content="yes">
+  
+  <!-- RSS Feed -->
+  <link rel="alternate" type="application/rss+xml" title="AnthroSkill 人類學｜由痛點到實測，日日更新" href="/feed.xml">
+  
+  <!-- JSON-LD: WebSite + Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://anthroskill.com/#website",
+        "url": "https://anthroskill.com/",
+        "name": "AnthroSkill 人類學｜由痛點到實測，日日更新",
+        "description": "由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。",
+        "inLanguage": "zh-Hant",
+        "dateModified": "2026-11-14T20:00:02+08:00",
+        "publisher": { "@id": "https://anthroskill.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://anthroskill.com/search/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://anthroskill.com/#organization",
+        "name": "AnthroSkill 人類學",
+        "alternateName": "AnthroSkill",
+        "url": "https://anthroskill.com/",
+        "logo": { "@type": "ImageObject", "url": "https://anthroskill.com/assets/images/anthroskill-icon.svg" },
+        "founder": { "@id": "https://anthroskill.com/author/#person" },
+        "description": "由 IT 顧問 Eric Chan 主理的繁體中文科技內容網站，專注 AI 工具實測、自動化與前端開發。",
+        "sameAs": ["https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      },
+      {
+        "@type": "Person",
+        "@id": "https://anthroskill.com/author/#person",
+        "name": "Eric Chan",
+        "url": "https://anthroskill.com/author/",
+        "jobTitle": "IT 顧問・科技內容創作者",
+        "description": "18 年經驗 IT 顧問，親身實測 AI 工具與前端開發，創辦 AnthroSkill 人類學。",
+        "image": "https://anthroskill.com/assets/images/eric-chan-it-consultant-avatar.jpg",
+        "knowsAbout": ["AI 工具實測", "前端開發", "UI 設計", "自動化", "生產力", "投資理財"],
+        "sameAs": ["https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/", "https://www.instagram.com/eric_chan_aniskill_ai/", "https://x.com/hongkpng852", "https://github.com/hongkpng855-lang"]
+      }
+    ]
+  }
+  </script>
+
+  <!-- JSON-LD: VideoObject（首頁 IG Reels 短片）
+       2026-10-16 新增：GEO 官方審計一直報「Video detected without VideoObject schema」，
+       首頁有 <video> 但全站無對應 schema。跟 _data/reels.yml 第一條自動生成。
+       2026-10-17 修正條件：原本用 `page.reels_sidebar`，但會 render <video> 嘅係
+       index.html（page.url == "/"）本身，首頁冇設 reels_sidebar → 條件永遠 false，
+       schema 從未輸出（官方審計連續 7 日仍報缺 VideoObject）。 -->
+  
+  <!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RGBELNMBBH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RGBELNMBBH', { anonymize_ip: true });
+</script>
+  <script>
+(function () {
+  if (typeof gtag !== 'function') return;
+
+  // 1) 訂閱表單送出
+  document.querySelectorAll('form[data-subscribe-source]').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      gtag('event', 'newsletter_submit', {
+        source: f.getAttribute('data-subscribe-source'),
+        page_path: location.pathname
+      });
+    });
+  });
+
+  // 2) 外部連結點擊（同網域除外）
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (!/^https?:/i.test(href)) return;
+    if (href.indexOf(location.host) !== -1) return;
+    gtag('event', 'outbound_click', {
+      link_url: href,
+      link_domain: (href.split('/')[2] || ''),
+      page_path: location.pathname
+    });
+  }, true);
+
+  // 3) 文章讀完（捲到 90%，每頁只記一次）
+  var done = false;
+  window.addEventListener('scroll', function () {
+    if (done) return;
+    var h = document.documentElement;
+    var pct = (h.scrollTop + window.innerHeight) / h.scrollHeight;
+    if (pct >= 0.9) {
+      done = true;
+      gtag('event', 'read_complete', { page_path: location.pathname });
+    }
+  }, { passive: true });
+})();
+</script>
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<!-- AnthroSkill 人類學 品牌 Icon Set（SVG Sprite）— 炭黑 + 橙色線條風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 記事 / 文章 -->
+  <symbol id="ui-newspaper" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="7" y1="9" x2="17" y2="9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="13" x2="17" y2="13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="7" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- AI / 機械人 -->
+  <symbol id="ui-robot" viewBox="0 0 24 24">
+    <rect x="5" y="8" width="14" height="11" rx="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="5" x2="12" y2="8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="9" cy="13" r="1.3" fill="currentColor"/>
+    <circle cx="15" cy="13" r="1.3" fill="currentColor"/>
+    <line x1="9" y1="17" x2="15" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 火箭 / 熱門 -->
+  <symbol id="ui-rocket" viewBox="0 0 24 24">
+    <path d="M12 3c3 1.5 5 4.5 5 8l-1 5-4 2-4-2-1-5c0-3.5 2-6.5 5-8z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="10.5" r="1.6" fill="currentColor"/>
+    <path d="M8 14l-3 4M16 14l3 4M10.5 19l1.5-2 1.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 燈泡 / 貼士 -->
+  <symbol id="ui-bulb" viewBox="0 0 24 24">
+    <path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.5 10.9c-.8.6-1.5 1.4-1.5 2.6h-4c0-1.2-.7-2-1.5-2.6A6 6 0 0 1 12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 警告 -->
+  <symbol id="ui-alert" viewBox="0 0 24 24">
+    <path d="M12 4L2.5 20h19L12 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <line x1="12" y1="10" x2="12" y2="14.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="17.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 資訊 -->
+  <symbol id="ui-info" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="7.5" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 數據 / 圖表 -->
+  <symbol id="ui-chart" viewBox="0 0 24 24">
+    <line x1="4" y1="20" x2="20" y2="20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <rect x="6" y="12" width="3.5" height="8" rx="1" fill="currentColor" opacity="0.85"/>
+    <rect x="10.5" y="7" width="3.5" height="13" rx="1" fill="currentColor" opacity="0.65"/>
+    <rect x="15" y="10" width="3.5" height="10" rx="1" fill="currentColor" opacity="0.45"/>
+  </symbol>
+  <!-- 下載 -->
+  <symbol id="ui-download" viewBox="0 0 24 24">
+    <path d="M12 4v10m0 0l-4-4m4 4l4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <line x1="4" y1="19" x2="20" y2="19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 連結 / 出處 -->
+  <symbol id="ui-link" viewBox="0 0 24 24">
+    <path d="M9.5 14.5l5-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M11 7l1.5-1.5a4 4 0 0 1 5.7 5.7L16.5 13M13 17l-1.5 1.5a4 4 0 0 1-5.7-5.7L7.5 11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 星星 -->
+  <symbol id="ui-star" viewBox="0 0 24 24">
+    <path d="M12 3.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8-5.2-2.7-5.2 2.7 1-5.8L3.5 9.7l5.9-.9L12 3.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 搜尋 -->
+  <symbol id="ui-search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="15.5" y1="15.5" x2="21" y2="21" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- FAQ / 問答 -->
+  <symbol id="ui-question" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M9.5 9.5a2.5 2.5 0 1 1 3.7 2.2c-.8.5-1.2 1-1.2 1.8v.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="16.8" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- GitHub -->
+  <symbol id="ui-github" viewBox="0 0 24 24">
+    <path d="M9 19c-4 1.2-4-2-5-3m14 5v-3.5c0-1-.3-1.7-1-2 3-.3 5-1.5 5-5.5 0-1.2-.4-2.3-1-3.2.1-.3.4-1.5-.1-3.2-1 0-3.3 1-4.9 1.3A8 8 0 0 0 12 5c-1 0-2 0-3 .3C7.3 5 5 4 4 4c-.5 1.7-.2 2.9-.1 3.2A5.5 5.5 0 0 0 3 10.4c0 4 2 5.2 5 5.5-.6.5-.9 1.2-1 2V20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 眼睛 / 檢視 -->
+  <symbol id="ui-eye" viewBox="0 0 24 24">
+    <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/>
+  </symbol>
+  <!-- 日曆 -->
+  <symbol id="ui-calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5.5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="4" y1="10" x2="20" y2="10" stroke="currentColor" stroke-width="1.8"/>
+    <line x1="8" y1="3" x2="8" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="16" y1="3" x2="16" y2="7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 時鐘 -->
+  <symbol id="ui-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M12 7v5l3.5 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 用戶 / 作者 -->
+  <symbol id="ui-user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M4.5 20c1.5-3.5 4.5-5 7.5-5s6 1.5 7.5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 資料夾 / 分類 -->
+  <symbol id="ui-folder" viewBox="0 0 24 24">
+    <path d="M3.5 6.5a2 2 0 0 1 2-2h4l2 2.5h7a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2V6.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 核對 / 完成 -->
+  <symbol id="ui-check" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8 12.5l2.5 2.5L16 9.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- RSS -->
+  <symbol id="ui-rss" viewBox="0 0 24 24">
+    <path d="M5 20a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M5 11a8 8 0 0 1 8 8M5 5a14 14 0 0 1 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 雷達 / 痛點探測 -->
+  <symbol id="ui-radar" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.6"/>
+    <line x1="12" y1="12" x2="19" y2="6.8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="12" cy="12" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 實驗瓶 / 實測 -->
+  <symbol id="ui-flask" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v6.2L4.7 18.2A1.7 1.7 0 0 0 6.2 21h11.6a1.7 1.7 0 0 0 1.5-2.8L14 9.2V3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M7.4 15h9.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 程式碼 / 開發日誌 -->
+  <symbol id="ui-code" viewBox="0 0 24 24">
+    <path d="M8.5 8.5L4 12l4.5 3.5M15.5 8.5L20 12l-4.5 3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M13.4 5.2l-2.8 13.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+  <!-- 書本 / 教學 -->
+  <symbol id="ui-book" viewBox="0 0 24 24">
+    <path d="M4 5.5a2 2 0 0 1 2-2h5.5V19H6a2 2 0 0 0-2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    <path d="M20 5.5a2 2 0 0 0-2-2h-5.5V19H18a2 2 0 0 1 2 2V5.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 地球 / 科技新聞 -->
+  <symbol id="ui-globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M3 12h18M12 3c2.7 2.7 2.7 15.3 0 18M12 3c-2.7 2.7-2.7 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  </symbol>
+  <!-- 清單 / 條目 -->
+  <symbol id="ui-list" viewBox="0 0 24 24">
+    <path d="M9 6h11M9 12h11M9 18h11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <circle cx="4.6" cy="6" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="12" r="1.3" fill="currentColor"/>
+    <circle cx="4.6" cy="18" r="1.3" fill="currentColor"/>
+  </symbol>
+  <!-- Facebook -->
+  <symbol id="ui-facebook" viewBox="0 0 24 24">
+    <path d="M14 8.5V7c0-.8.3-1.3 1.5-1.3H17V3.1c-.6-.1-1.4-.1-2.1-.1-2.2 0-3.5 1.3-3.5 3.6v1.9H9V11h2.4v10h2.9V11h2.4l.4-2.5H14z" fill="currentColor"/>
+  </symbol>
+  <!-- Instagram -->
+  <symbol id="ui-instagram" viewBox="0 0 24 24">
+    <rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="17.2" cy="6.8" r="1.15" fill="currentColor"/>
+  </symbol>
+  <!-- X（Twitter） -->
+  <symbol id="ui-x" viewBox="0 0 24 24">
+    <path d="M17.7 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.4 21H2.3l7.3-8.3L2 3h6.3l4.4 5.8L17.7 3zm-1.1 16.1h1.7L7.5 4.8H5.7l10.9 14.3z" fill="currentColor"/>
+  </symbol>
+  <!-- 返回 / 左箭嘴 -->
+  <symbol id="ui-arrow-left" viewBox="0 0 24 24">
+    <line x1="19" y1="12" x2="5" y2="12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <polyline points="12,5 5,12 12,19" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 分享 -->
+  <symbol id="ui-share" viewBox="0 0 24 24">
+    <circle cx="6" cy="12" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="6" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <circle cx="18" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
+
+<!-- AnthroSkill 主題維度 Icon Set（自訂 SVG，非 default）— 炭黑 + 橙色線條，與 ui-icons 同風格 -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <!-- 模型 / 神經網絡 -->
+  <symbol id="ui-topic-model" viewBox="0 0 24 24">
+    <circle cx="5" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="5" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="12" cy="12" r="1.9" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="7" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="19" cy="17" r="1.7" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6.4 8.2l4.1 2.6M6.4 15.8l4.1-2.6M13.7 10.4l4-2.4M13.7 13.6l4 2.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 代理 / 工作流 -->
+  <symbol id="ui-topic-agent" viewBox="0 0 24 24">
+    <rect x="3" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="15" y="4" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="14" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 7h6M12 10v4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 記憶 / 分層記憶庫 -->
+  <symbol id="ui-topic-memory" viewBox="0 0 24 24">
+    <ellipse cx="12" cy="6" rx="7" ry="2.6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 6v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M5 12v6c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6v-6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 音樂 / 音符 -->
+  <symbol id="ui-topic-music" viewBox="0 0 24 24">
+    <path d="M9 18V6l9-2v12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="6.5" cy="18" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="15.5" cy="16" r="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 影像 / 相框 -->
+  <symbol id="ui-topic-image" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8.5" cy="10" r="1.5" fill="currentColor"/>
+    <path d="M4.5 17l4.5-4.5 3 3 3.5-3.5 4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開發 / 程式碼 -->
+  <symbol id="ui-topic-dev" viewBox="0 0 24 24">
+    <path d="M9 7l-5 5 5 5M15 7l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 安全 / 盾牌 -->
+  <symbol id="ui-topic-security" viewBox="0 0 24 24">
+    <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 自架 / 伺服器 -->
+  <symbol id="ui-topic-selfhost" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="4" y="14" width="16" height="6" rx="1.8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="8" cy="7" r="1" fill="currentColor"/>
+    <circle cx="8" cy="17" r="1" fill="currentColor"/>
+  </symbol>
+  <!-- 設計 / 貝茲筆 -->
+  <symbol id="ui-topic-design" viewBox="0 0 24 24">
+    <path d="M12 4l8 8-8 8-8-8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <circle cx="12" cy="12" r="1.8" fill="currentColor"/>
+  </symbol>
+  <!-- 效率 / 閃電鐘 -->
+  <symbol id="ui-topic-productivity" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M12 8v4l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 2v2M22 12h-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 職涯 / 公事包 -->
+  <symbol id="ui-topic-career" viewBox="0 0 24 24">
+    <rect x="3" y="8" width="18" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 13h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 創業 / 幼苗 -->
+  <symbol id="ui-topic-startup" viewBox="0 0 24 24">
+    <path d="M12 21v-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M12 14c0-3-2-5-5-5 0 3 2 5 5 5zM12 14c0-3 2-5 5-5 0 3-2 5-5 5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M8 21h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 投資 / 上升走勢 -->
+  <symbol id="ui-topic-investment" viewBox="0 0 24 24">
+    <path d="M4 18l5-6 3.5 3L20 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M15 6h5v5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 理財 / 錢包 -->
+  <symbol id="ui-topic-money" viewBox="0 0 24 24">
+    <rect x="3" y="6" width="18" height="13" rx="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M3 10h18" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="16.5" cy="14.5" r="1.4" fill="currentColor"/>
+  </symbol>
+  <!-- 學習 / 打開書本 -->
+  <symbol id="ui-topic-learning" viewBox="0 0 24 24">
+    <path d="M12 6c-2-1.3-4.8-1.6-8-1.4v13c3.2-.2 6 .1 8 1.4 2-1.3 4.8-1.6 8-1.4v-13c-3.2-.2-6 .1-8 1.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M12 6v13" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+  <!-- 健康 / 心跳 -->
+  <symbol id="ui-topic-health" viewBox="0 0 24 24">
+    <path d="M3 12h4l2-4 3 8 2.5-5 1.5 1h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <!-- 生活 / 葉子 -->
+  <symbol id="ui-topic-life" viewBox="0 0 24 24">
+    <path d="M5 19c0-8 5-13 14-13 0 9-5 13-14 13z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M5 19c3-3 6-5 9-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <!-- 內容 / 原子筆 -->
+  <symbol id="ui-topic-content" viewBox="0 0 24 24">
+    <path d="M5 19l2.5-.6L19 6.9a1.8 1.8 0 0 0-2.5-2.5L5 15.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M14.5 6.5l2.5 2.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 人工智能 / 晶片 -->
+  <symbol id="ui-topic-ai" viewBox="0 0 24 24">
+    <rect x="4" y="4" width="16" height="16" rx="3" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <rect x="9" y="9" width="6" height="6" rx="1.2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+  </symbol>
+  <!-- 開源 / 分支分岔 -->
+  <symbol id="ui-topic-open-source" viewBox="0 0 24 24">
+    <circle cx="6" cy="6" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="6" cy="18" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="18" cy="12" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M6 8.2v7.6M8.2 6.6c3 1 6 1.6 7.7 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </symbol>
+  <!-- 研究 / 試管 -->
+  <symbol id="ui-topic-research" viewBox="0 0 24 24">
+    <path d="M9 3h6M10 3v13a3 3 0 0 0 6 0V3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M10 13h6" fill="none" stroke="currentColor" stroke-width="1.6"/>
+  </symbol>
+</svg>
+
+
+<!-- 頂部導航 -->
+<header class="site-header sticky-top">
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="brand-icon me-2" width="34" height="34">
+        <span class="brand-wordmark"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item">
+            <a class="nav-link" href="/">首頁</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/pain-radar/">痛點雷達</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/devlog/">開發日誌</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/news/">科技新聞</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tags/">標籤</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/search/">搜尋</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about/">關於我</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- 主要內容區域 -->
+<main class="flex-shrink-0 py-4">
+  <div class="container">
+    
+
+
+
+
+
+
+
+
+
+
+<!-- JSON-LD: Article + BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "聯合航空封殺 AI 代理訂票：誰代旅客簽名",
+      "description": "聯合航空於 2026 年 11 月 11 日宣布，限制第三方個人 AI 代理代客訂票與管理行程，涵蓋自家平台與旅行社通路，並同步修改訂位、開票與分銷政策。官方理由是憑證外洩風險與美國聯邦航空法規的人為確認要求，本文整理封鎖範圍、技術背景與旅客實際影響。",
+      "datePublished": "2026-11-13T20:00:02+08:00",
+      "dateModified": "2026-11-13T20:00:02+08:00",
+      "author": { "@type": "Person", "@id": "https://anthroskill.com/author/#person", "name": "Eric Chan", "url": "https://anthroskill.com/author/" },
+      "publisher": { "@id": "https://anthroskill.com/#organization" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news" },
+       "isBasedOn": { "@type": "Article", "name": "TechCrunch", "url": "https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/" }, 
+      "image": "https://anthroskill.com/assets/images/posts/united-airlines-ai-agent-block-news-cover.jpg",
+      "inLanguage": "zh-Hant"
+    },
+    
+    
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "限制是否包括企業差旅系統？",
+          "acceptedAnswer": { "@type": "Answer", "text": "官方措辭指向「未經授權的第三方個人 AI 代理」，企業級差旅系統與授權經銷商不在同一分類。實際界線仍要看更新後的分銷政策如何定義授權。" }
+        },
+        {
+          "@type": "Question",
+          "name": "已由代理建立的訂位會被取消嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "聲明未提及追溯取消既有訂位。政策重點在限制未來的存取，但航空公司保留把異常活動視為可疑存取的權利。" }
+        },
+        {
+          "@type": "Question",
+          "name": "代理工具可以改用其他方式繞過嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "技術上存在多種路徑，但政策已同時涵蓋旅行社與聚合平台。繞過政策而發生的交易，可能被認定為未經授權操作。" }
+        },
+        {
+          "@type": "Question",
+          "name": "會不會影響里程累積與兌換？",
+          "acceptedAnswer": { "@type": "Answer", "text": "官方把「非預期的里程使用」列為風險之一。以代理操作兌換時，若被判定為未經授權，交易可能被撤銷。" }
+        },
+        {
+          "@type": "Question",
+          "name": "其他航空公司會跟隨嗎？",
+          "acceptedAnswer": { "@type": "Answer", "text": "聯合航空在聲明中鼓勵其他行業考慮同類措施。是否形成行業共識，仍需觀察同業的後續表態。" }
+        },
+        {
+          "@type": "Question",
+          "name": "旅客應如何保護帳號？",
+          "acceptedAnswer": { "@type": "Answer", "text": "避免把帳號密碼交給第三方助理，改用官方應用程式完成付款與報到，並定期檢查里程與訂位紀錄有無異常變動。 ## 出處連結有哪些？ 主要來源為聯合航空 2026 年 11 月 11 日的官方聲明，以及 TechCrunch 於 11 月 12 日的報導；銀行業先例見美國銀行 10 月 27 日的客戶電郵。 聯合航空的原始聲明刊於其新聞室，題為「United Restricts Access for Third-Party AI Agents」，同時提及會更新數位信任中心的說明頁面。TechCrunch 的報導補充了銀行業的平行動作與行業背景。 聯合航空聲明：https://united.mediaroom.com/news-releases?item=125496 TechCrunch 報導：https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/ 美國銀行相關報導：https://techcrunch.com/2026/10/27/bank-of-america-kindly-asks-that-you-dont-share-your-banking-password-with-your-ai-assistant/" }
+        }
+        
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://anthroskill.com/" },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "技術",
+          "item": "https://anthroskill.com/categories/技術/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "聯合航空封殺 AI 代理訂票：誰代旅客簽名",
+          "item": "https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news"
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="row">
+  <div class="col-lg-8">
+    <!-- 返回箭嘴（手機友善，2026-10-18）：有上一頁就返上一頁，否則回首頁 -->
+    <a href="/" class="post-back-btn" onclick="if (window.history.length &gt; 1 &amp;&amp; document.referrer) { window.history.back(); return false; }" aria-label="返回上一頁">
+      <svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-arrow-left"></use></svg>返回
+    </a>
+
+    <!-- 麵包屑導航 -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">首頁</a></li>
+        
+        <li class="breadcrumb-item">
+          <a href="/categories/%E6%8A%80%E8%A1%93/">技術</a>
+        </li>
+        
+        <li class="breadcrumb-item active" aria-current="page">聯合航空封殺 AI 代理訂票：誰代旅客簽名</li>
+      </ol>
+    </nav>
+
+    <article class="card mb-4">
+      <div class="card-body">
+        
+        <h1 class="mb-3">聯合航空封殺 AI 代理訂票：誰代旅客簽名</h1>
+
+        
+        <p class="post-meta-line text-muted small mb-4">
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-calendar"/></svg>2026年11月13日 20:00
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-clock"/></svg>閱讀時間 2 分鐘
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg><a href="/author/" class="text-decoration-none">Eric Chan</a>
+          
+          <span class="mx-2">•</span>
+          <svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>來源：<a href="https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/" target="_blank" rel="noopener nofollow" class="text-decoration-none">TechCrunch</a>
+          
+        </p>
+
+        
+        <div class="post-cover mb-4">
+          <img src="/assets/images/posts/united-airlines-ai-agent-block-news-cover.jpg" alt="聯合航空封殺 AI 代理訂票：誰代旅客簽名" class="img-fluid rounded">
+        </div>
+        
+
+        
+
+        <div class="post-content">
+          <p>聯合航空於 2026 年 11 月 11 日發表聲明，限制第三方個人 AI 代理在其系統上代客訂票與管理行程。措施同時覆蓋自家數位平台與經由旅行社、聚合平台的外部通路，並涉及訂位、開票與分銷政策的修改。官方理由分兩層：帳號憑證交給外部助理後可能外洩，代理自動執行的動作亦可能抵觸美國聯邦航空法規。</p>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>聯合航空於 2026 年 11 月 11 日禁止未經授權的第三方 AI 代理代客訂票，涵蓋自家平台與旅行社通路，理由是憑證外洩風險與法規要求真人確認行李聲明。
+<!-- End AEO Capsule --></p>
+
+<p>這次表態並非單純的技術封鎖。航空公司面對的是一個身份判斷問題：當一個帳號的登入行為由代理而非本人發出，系統難以分辨這是使用者的授權，還是憑證被挪用。聯合航空選擇的做法是直接切斷通路，把操作導回官方應用程式。</p>
+
+<h2 id="聯合航空今次封鎖了哪些通路">聯合航空今次封鎖了哪些通路？</h2>
+
+<!-- AEO Answer Capsule — 約 62 字 -->
+<p>封鎖範圍分為直接與間接兩層。直接一層是聯合航空自家的網站與應用程式，間接一層是旅行社與聚合平台的介接管道，兩者同時納入限制。
+<!-- End AEO Capsule --></p>
+
+<p>官方聲明的用語是「直接在我們的數位平台之內，以及間接經由旅行社與聚合平台」，禁止未經授權的第三方個人 AI 代理或助理使用。配套動作是更新訂位、開票與分銷政策，把限制寫進商業條款而不只依賴技術攔截。</p>
+
+<p>這種雙軌做法有其道理。單靠在網站加上機器人偵測，代理可以改用旅遊代理的介接介面繞過；反過來只收緊分銷政策，使用者仍能直接在官方管道手動授權代理操作。兩邊同時收緊，才形成完整的封鎖面。</p>
+
+<p>值得注意的是，限制對象寫明是「個人」與「未經授權」。企業級差旅系統與既有的授權經銷商不在同一分類，官方的措辭保留了商業客戶的空間。</p>
+
+<h2 id="為什麼航空公司要阻擋-ai-代理">為什麼航空公司要阻擋 AI 代理？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>官方列出兩項理由。第一是帳號憑證交給外部助理後可能外洩，並可能導致未經授權的購買、帳號變更或里程兌換；第二是自動化動作難以符合人為確認的法規要求。
+<!-- End AEO Capsule --></p>
+
+<p>聯合航空在聲明中具體描述了第一層風險：與第三方個人 AI 助理分享帳號憑證，可能暴露敏感資訊，而這些工具執行的動作可能造成非預期的購買、帳號變更或 MileagePlus 里程的使用。這類動作一旦發生，追溯與復原都比人手操作複雜。</p>
+
+<p>第二層風險與法規直接相關。美國的航班報到程序要求由真人確認行李不含爆炸物等違禁品，這個確認動作具有法律意義，不能由自動化流程代勞。代理若代客完成報到，等於讓一個無法承擔法律責任的程式代替旅客作出聲明。</p>
+
+<p>兩項理由指向同一個核心：航空交易帶有身份與責任的屬性。訂票不只是資料寫入，還牽涉付款授權、行程變更的同意，以及安全聲明的具結。代理可以執行點擊，卻無法承接這些後果。</p>
+
+<h2 id="銀行業的立場如何">銀行業的立場如何？</h2>
+
+<!-- AEO Answer Capsule — 約 80 字 -->
+<p>美國銀行於 2026 年 10 月 27 日向客戶發出主題為「在 AI 世界中保護你的財務」的電郵，明確要求不要把使用者名稱與密碼交給任何外部服務，包括聲稱代為操作的 AI 工具。
+<!-- End AEO Capsule --></p>
+
+<p>銀行業的動作比航空公司更早。美國銀行在十月下旬發出的客戶電郵中指出，帳號與密碼不應交給他人或外部服務，並把「聲稱可代為操作的 AI 工具或代理」明確列入其中。電郵同時提醒，多數銀行的帳戶協議規定，客戶須為自己交出登入憑證後產生的活動負責。</p>
+
+<p>行業層面的困擾在於授權邊界。據媒體報道，銀行正處理未經授權的代理存取客戶資金的個案，同時又要為代理支付這類新場景設計合規路徑。代理支付若要在市場落地，先要解決「誰同意這筆交易」的舉證問題。</p>
+
+<p>聯合航空在聲明中主動提到銀行與零售業已採取類似措施，並鼓勵其他行業考慮同類安排。這段話的用意不只是解釋自身決定，也是在為整個行業建立先例。</p>
+
+<h2 id="代理訂票在技術上如何運作">代理訂票在技術上如何運作？</h2>
+
+<!-- AEO Answer Capsule — 約 69 字 -->
+<p>現階段的代理訂票多數依靠瀏覽器自動化，以使用者的登入狀態操作網站，或透過旅遊代理介接介面查詢與下單。兩種方式都需要取得等同本人的存取權限。
+<!-- End AEO Capsule --></p>
+
+<p>技術路徑大致分兩類。第一類是瀏覽器自動化，代理在使用者已登入的瀏覽環境中點擊與填表，對網站而言請求來自合法帳號與正常用戶端。第二類是介接旅遊代理的程式介面，代理以合作夥伴身分查詢艙位與建立訂單。</p>
+
+<p>兩類路徑的共同點是權限等同本人。網站端看見的是一組有效憑證，無法從請求本身判斷操作者是人還是程式。這正是航空公司難以防禦的位置：攔截需要辨識行為特徵，而行為特徵可以模仿。</p>
+
+<p>近期坊間的代理工具多數支援在這兩條路徑上運作，部分更以「幫你格價並自動下單」作為賣點。當航空公司把限制寫進分銷政策，這些工具的合規成本會直接上升，因為它們不再是單純的用戶端軟體，而是需要被授權的通路。</p>
+
+<h2 id="對旅客有什麼實際影響">對旅客有什麼實際影響？</h2>
+
+<!-- AEO Answer Capsule — 約 73 字 -->
+<p>短期影響集中在自動化流程。以往交由代理完成的訂票、改期與報到，可能在下單或報到環節被攔截，旅客須改用官方應用程式手動完成，或承擔交易被取消的風險。
+<!-- End AEO Capsule --></p>
+
+<p>最直接的變化是報到環節。行李安全聲明要求真人確認，代理代為點擊的做法在政策上已被排除，旅客需要自行完成這個步驟。訂票與改期的情況較複雜，取決於攔截發生在請求階段還是事後審查階段。</p>
+
+<p>另一個風險落在帳號本身。航空公司有權把異常存取視為可疑活動並凍結帳號，屆時里程與既有訂位都會受影響。把憑證交給代理以換取便利，代價可能是失去對帳號的控制權。</p>
+
+<p>對習慣以代理處理行程的旅客而言，較穩妥的做法是保留官方應用程式作為最終操作介面。代理可以用於搜尋、比較與提醒，但涉及付款與具結的步驟，目前仍適合由本人完成。</p>
+
+<h2 id="代理經濟的下一步會怎樣">代理經濟的下一步會怎樣？</h2>
+
+<!-- AEO Answer Capsule — 約 70 字 -->
+<p>代理要進入交易場景，需要可驗證的授權機制，讓網站能確認操作範圍與責任歸屬。在標準落地之前，企業多以封鎖代替授權，代理只能停留在搜尋與建議層。
+<!-- End AEO Capsule --></p>
+
+<p>目前的技術缺口在於授權的表達方式。網站需要知道三件事：操作者獲得哪些權限、權限的有效期限，以及越權時由誰負責。既有的密碼分享模式對這三個問題都無法回答，因此企業傾向以封鎖降低風險。</p>
+
+<p>業界已有幾條可能路徑。代幣化的授權憑證、由平台背書的代理身份，或把代理動作限制在可撤銷的範圍內，都是正在討論的方向。共通點是把「本人憑證」換成「限定授權」，讓網站能分辨代操作與盜用。</p>
+
+<p>標準的形成速度會決定代理經濟的節奏。在授權機制普及之前，航空公司與銀行的封鎖行動大概會繼續增加，而代理的實用範圍則集中在不需要具結與付款的環節。</p>
+
+<h2 id="常見問題有哪些">常見問題有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 66 字 -->
+<p>常見疑問集中在限制範圍、既有訂位是否受影響、代理工具能否繞過，以及旅客應如何自保。以下逐項回答，並附上官方聲明與行業先例的對應說明。
+<!-- End AEO Capsule --></p>
+
+<p><strong>限制是否包括企業差旅系統？</strong></p>
+
+<p>官方措辭指向「未經授權的第三方個人 AI 代理」，企業級差旅系統與授權經銷商不在同一分類。實際界線仍要看更新後的分銷政策如何定義授權。</p>
+
+<p><strong>已由代理建立的訂位會被取消嗎？</strong></p>
+
+<p>聲明未提及追溯取消既有訂位。政策重點在限制未來的存取，但航空公司保留把異常活動視為可疑存取的權利。</p>
+
+<p><strong>代理工具可以改用其他方式繞過嗎？</strong></p>
+
+<p>技術上存在多種路徑，但政策已同時涵蓋旅行社與聚合平台。繞過政策而發生的交易，可能被認定為未經授權操作。</p>
+
+<p><strong>會不會影響里程累積與兌換？</strong></p>
+
+<p>官方把「非預期的里程使用」列為風險之一。以代理操作兌換時，若被判定為未經授權，交易可能被撤銷。</p>
+
+<p><strong>其他航空公司會跟隨嗎？</strong></p>
+
+<p>聯合航空在聲明中鼓勵其他行業考慮同類措施。是否形成行業共識，仍需觀察同業的後續表態。</p>
+
+<p><strong>旅客應如何保護帳號？</strong></p>
+
+<p>避免把帳號密碼交給第三方助理，改用官方應用程式完成付款與報到，並定期檢查里程與訂位紀錄有無異常變動。</p>
+
+<h2 id="出處連結有哪些">出處連結有哪些？</h2>
+
+<!-- AEO Answer Capsule — 約 71 字 -->
+<p>主要來源為聯合航空 2026 年 11 月 11 日的官方聲明，以及 TechCrunch 於 11 月 12 日的報導；銀行業先例見美國銀行 10 月 27 日的客戶電郵。
+<!-- End AEO Capsule --></p>
+
+<p>聯合航空的原始聲明刊於其新聞室，題為「United Restricts Access for Third-Party AI Agents」，同時提及會更新數位信任中心的說明頁面。TechCrunch 的報導補充了銀行業的平行動作與行業背景。</p>
+
+<ul>
+  <li>聯合航空聲明：https://united.mediaroom.com/news-releases?item=125496</li>
+  <li>TechCrunch 報導：https://techcrunch.com/2026/11/12/united-airlines-blocks-ai-agents-from-booking-flights-citing-cybersecurity-risks/</li>
+  <li>美國銀行相關報導：https://techcrunch.com/2026/10/27/bank-of-america-kindly-asks-that-you-dont-share-your-banking-password-with-your-ai-assistant/</li>
+</ul>
+
+<h2 id="這次封鎖的真正意義是什麼">這次封鎖的真正意義是什麼？</h2>
+
+<!-- AEO Answer Capsule — 約 68 字 -->
+<p>這次事件標誌代理經濟進入摩擦期。能力已足以完成訂票，但授權與責任機制尚未建立，企業因此選擇封鎖而非開放，代理的實用邊界由法規與責任定義。
+<!-- End AEO Capsule --></p>
+
+<p>聯合航空的決定放在產業脈絡下並不突然。銀行先表態，航空公司跟進，兩者面對的是同一個結構問題：自動化可以複製操作，卻無法複製具結。當交易涉及法規聲明與金錢責任，封鎖就成了成本最低的選項。</p>
+
+<p>對代理開發者而言，這是產品設計的提醒。以「代替使用者登入」為前提的工具，會持續遇到這類封鎖；改為在授權框架內運作，雖然推進較慢，卻是唯一可持續的路徑。對旅客而言，便利與控制權之間的取捨，短期內仍需自行判斷。代理與既有系統邊界的同類課題，可延伸閱讀 <a href="/技術/claude-computer-use-bg-news">Claude 電腦使用的背景執行安排</a> 與 <a href="/技術/gemini-intelligence-widget-news">Gemini Intelligence 的手機系統入口設計</a>。</p>
+
+        </div>
+
+        <!-- 主題維度（辨識度層） -->
+        
+        
+
+
+
+<span class="topic-tags topic-tags-post" aria-label="主題">
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-ai" href="/topics/ai/" title="科技 · 人工智能">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-ai"/></svg><span class="topic-tag-name">人工智能</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-agent" href="/topics/agent/" title="科技 · 代理">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-agent"/></svg><span class="topic-tag-name">代理</span>
+    </a>
+  
+    
+    
+    
+    <a class="topic-tag topic-tag-security" href="/topics/security/" title="科技 · 安全">
+      <svg class="topic-tag-icon" aria-hidden="true"><use href="#ui-topic-security"/></svg><span class="topic-tag-name">安全</span>
+    </a>
+  
+</span>
+
+
+        
+
+        <!-- 標籤 -->
+        
+        <div class="post-tags mt-4">
+          
+          
+          <a href="/search/?q=%E8%81%AF%E5%90%88%E8%88%AA%E7%A9%BA" class="badge bg-secondary text-decoration-none me-1">聯合航空</a>
+          
+          
+          <a href="/search/?q=AI%E4%BB%A3%E7%90%86" class="badge bg-secondary text-decoration-none me-1">AI代理</a>
+          
+          
+          <a href="/search/?q=%E8%BA%AB%E4%BB%BD%E9%A9%97%E8%AD%89" class="badge bg-secondary text-decoration-none me-1">身份驗證</a>
+          
+          
+          <a href="/search/?q=%E8%88%AA%E7%A9%BA%E6%A5%AD" class="badge bg-secondary text-decoration-none me-1">航空業</a>
+          
+          
+          <a href="/search/?q=%E9%8A%80%E8%A1%8C%E6%A5%AD" class="badge bg-secondary text-decoration-none me-1">銀行業</a>
+          
+          
+          <a href="/search/?q=%E8%B3%87%E5%AE%89" class="badge bg-secondary text-decoration-none me-1">資安</a>
+          
+          
+          <a href="/search/?q=%E4%BB%A3%E7%90%86%E6%94%AF%E4%BB%98" class="badge bg-secondary text-decoration-none me-1">代理支付</a>
+          
+          
+          <a href="/search/?q=%E7%A7%91%E6%8A%80%E6%96%B0%E8%81%9E" class="badge bg-secondary text-decoration-none me-1">科技新聞</a>
+          
+        </div>
+        
+
+        <!-- 分享按鈕（2026-10-17：改低調配色 + 加 X） -->
+        <div class="share-buttons mt-4 d-flex flex-wrap align-items-center gap-2">
+          <span class="me-2 d-inline-flex align-items-center gap-1"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-share"></use></svg><strong>分享到：</strong></span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 Facebook"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"></use></svg> Facebook</a>
+          <a href="https://x.com/intent/post?url=https://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news&text=%E8%81%AF%E5%90%88%E8%88%AA%E7%A9%BA%E5%B0%81%E6%AE%BA+AI+%E4%BB%A3%E7%90%86%E8%A8%82%E7%A5%A8%EF%BC%9A%E8%AA%B0%E4%BB%A3%E6%97%85%E5%AE%A2%E7%B0%BD%E5%90%8D" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm d-inline-flex align-items-center gap-1" title="分享到 X"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"></use></svg> X</a>
+          <a href="https://line.me/R/msg/text/?%E8%81%AF%E5%90%88%E8%88%AA%E7%A9%BA%E5%B0%81%E6%AE%BA+AI+%E4%BB%A3%E7%90%86%E8%A8%82%E7%A5%A8%EF%BC%9A%E8%AA%B0%E4%BB%A3%E6%97%85%E5%AE%A2%E7%B0%BD%E5%90%8D%0Ahttps://anthroskill.com/%E6%8A%80%E8%A1%93/united-airlines-ai-agent-block-news" target="_blank" rel="noopener noreferrer" class="btn btn-social btn-sm" title="分享到 LINE">LINE</a>
+        </div>
+
+        <!-- 電子報訂閱 CTA（2026-11-08：唯一一個留客動作） -->
+        <div class="subscribe-box subscribe-box-inline my-4 p-4 rounded">
+  <div class="row align-items-center g-3">
+    <div class="col-md-7">
+      <p class="subscribe-title mb-1">這篇有幫助嗎？</p>
+      <p class="subscribe-desc mb-0">每週一封電郵，只寫親身試過的東西。隨時可以退訂。</p>
+    </div>
+    <div class="col-md-5"><a href="/feed.xml" class="btn btn-subscribe w-100">用 RSS 追蹤更新</a></div>
+  </div>
+</div>
+
+        
+        <div class="post-author-box mt-4 p-3 rounded">
+          <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle me-3 post-author-avatar" width="54" height="54">
+          <div>
+            <p class="mb-0 fw-bold"><a href="/author/" class="text-decoration-none">Eric Chan</a></p>
+            <p class="mb-0 text-muted small">IT 顧問・實測主義者</p>
+            <p class="mb-0 text-muted small">18 年經驗 IT 顧問，AnthroSkill 人類學創辦人與主筆。所有內容親自實測，試過先講。</p>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 相關文章（自動內鏈：共用 tag 優先，其次同分類）— 2026-10-05 SEO 強化 -->
+    
+    
+    
+    
+    
+    <div class="card mb-4 shadow-sm related-posts-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-link"/></svg>相關文章</div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/meta-muse-spaces-news" class="text-decoration-none">Meta Muse 推出 Spaces：一句話生成儀表板</a>
+              <br><small class="text-muted">2026-11-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/anthropic-skills-apache-2-0-news" class="text-decoration-none">18.8 萬星 Agent Skills：Office 技能全面開源</a>
+              <br><small class="text-muted">2026-11-08</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/notebooklm-py-api-news" class="text-decoration-none">NotebookLM 非官方 API 開源：20,142 星</a>
+              <br><small class="text-muted">2026-11-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/claude-financial-services-news" class="text-decoration-none">Anthropic 開源 Claude 金融代理：41,077 星</a>
+              <br><small class="text-muted">2026-11-07</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/strapi-mcp-server-news" class="text-decoration-none">Strapi 5.61 內建 MCP：AI 代理直接管理內容</a>
+              <br><small class="text-muted">2026-11-05</small>
+            </li>
+            
+            
+          
+            
+            
+            <li class="list-group-item">
+              <a href="/%E6%8A%80%E8%A1%93/deepseek-search-fetch-api-news" class="text-decoration-none">DeepSeek 開賣搜尋 API：代理上網每次 0.75 美元</a>
+              <br><small class="text-muted">2026-10-18</small>
+            </li>
+            
+            
+          
+            
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- 側邊欄 -->
+  <div class="col-lg-4">
+    <!-- 關於作者 -->
+    <div class="card mb-4 shadow-sm author-sidebar-card">
+      <div class="card-header fw-bold"><svg class="ui-icon ui-icon-sm"><use href="#ui-user"/></svg>關於作者</div>
+      <div class="card-body text-center">
+        <img src="/assets/images/eric-chan-it-consultant-avatar.jpg" alt="Eric Chan 作者頭像" class="rounded-circle mb-3 author-sidebar-avatar" width="90" height="90">
+        <h5 class="card-title fw-bold">Eric Chan</h5>
+        <p class="card-text text-muted small">IT 顧問・實測主義者</p>
+        <a href="/about/" class="btn btn-outline-gold btn-sm">了解更多</a>
+      </div>
+    </div>
+
+    <!-- 最新文章 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-newspaper"/></svg>最新文章
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/openai-codex-0169-news" class="text-decoration-none">Codex CLI 0.169：13.5 萬星的終端工作區擴張</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/llamacpp-v1-0-release-news" class="text-decoration-none">llama.cpp 1.0 正式版：API 凍結與 FP8 快取</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/edge0-145b-on-device-news" class="text-decoration-none">Edge0-145B 開源：24GB 顯卡跑 145B 代理</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/unsloth-qwen38-v31-news" class="text-decoration-none">Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+          <li class="list-group-item">
+            <a href="/%E6%8A%80%E8%A1%93/gemini-4-hydrogen-search-news" class="text-decoration-none">Gemini 4 Hydrogen 接管 Google 搜尋</a>
+            <br><small class="text-muted">2026-11-14</small>
+          </li>
+          
+        </ul>
+      </div>
+    </div>
+
+    <!-- 分類 -->
+    <div class="card mb-4 shadow-sm">
+      <div class="card-header bg-secondary text-white">
+        <svg class="ui-icon ui-icon-sm"><use href="#ui-folder"/></svg>文章分類
+      </div>
+      <div class="card-body p-0">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%95%E8%B3%87/" class="text-decoration-none">投資</a>
+            <span class="badge bg-primary rounded-pill">102</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E7%94%9F%E6%B4%BB/" class="text-decoration-none">生活</a>
+            <span class="badge bg-primary rounded-pill">85</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E6%8A%80%E8%A1%93/" class="text-decoration-none">技術</a>
+            <span class="badge bg-primary rounded-pill">713</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%81%A5%E5%BA%B7/" class="text-decoration-none">健康</a>
+            <span class="badge bg-primary rounded-pill">64</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <a href="/categories/%E5%AD%B8%E7%BF%92/" class="text-decoration-none">學習</a>
+            <span class="badge bg-primary rounded-pill">44</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </div>
+</main>
+
+<!-- 頁腳 -->
+<footer class="site-footer mt-auto">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-5">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/assets/images/anthroskill-icon.svg" alt="AnthroSkill 標誌" class="me-2" width="30" height="30">
+          <h5 class="mb-0 text-white fw-bold"><span class="text-gold">Anthro</span><span style="color:#FFFFFF">Skill</span> <span class="text-gold">人類</span><span style="color:#FFFFFF">學</span></h5>
+        </div>
+        <p class="text-white-50 mb-2">由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。觀察人類 → 落場實測 → 回報發現。</p>
+        <p class="text-white-50 small mb-0"> 由 Eric Chan 主理 — 親身實測，試過先講。</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">主題</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/devlog/">開發日誌</a></li>
+          <li class="mb-2"><a href="/news/">科技新聞</a></li>
+          <li class="mb-2"><a href="/pain-radar/">痛點雷達</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">分類</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/categories/%E6%8A%80%E8%A1%93/">技術</a></li>
+          <li class="mb-2"><a href="/categories/%E6%8A%95%E8%B3%87/">投資</a></li>
+          <li class="mb-2"><a href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></li>
+          <li class="mb-2"><a href="/categories/%E5%81%A5%E5%BA%B7/">健康</a></li>
+          <li class="mb-2"><a href="/categories/%E5%AD%B8%E7%BF%92/">學習</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6 class="text-white fw-bold mb-3">連結</h6>
+        <ul class="list-unstyled footer-links">
+          <li class="mb-2"><a href="/">首頁</a></li>
+          <li class="mb-2"><a href="/about/">關於我</a></li>
+          <li class="mb-2"><a href="/topics/">主題維度</a></li>
+          <li class="mb-2"><a href="/tags/">全部標籤</a></li>
+          <li class="mb-2"><a href="/search/">搜尋</a></li>
+          <li class="mb-2"><a href="/feed.xml">RSS</a></li>
+          <li class="mb-2"><a href="/privacy/">私隱政策</a></li>
+          <li class="mb-2"><a href="https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-facebook"/></svg> 追蹤 Facebook 專頁</a></li>
+          <li class="mb-2"><a href="https://www.instagram.com/eric_chan_aniskill_ai/" target="_blank" rel="noopener"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-instagram"/></svg> 追蹤 Instagram</a></li>
+          <li class="mb-2"><a href="https://x.com/hongkpng852" target="_blank" rel="noopener me"><svg class="ui-icon ui-icon-sm" aria-hidden="true"><use href="#ui-x"/></svg> 追蹤 X</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6 class="text-white fw-bold mb-3">一句講晒</h6>
+        <div class="footer-quote">
+          <p class="mb-0">「與其聽人講，不如自己試。試過先講。」</p>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="subscribe-box subscribe-box-footer">
+  <h6 class="text-white fw-bold mb-2">每週一封，只講試過的事</h6>
+  <p class="text-white-50 small mb-3">AI 工具實測結果、踩坑記錄。不業配、不轉貼。</p><a href="/feed.xml" class="btn btn-outline-light btn-sm">改用 RSS 訂閱</a></div>
+      </div>
+    </div>
+    <hr class="border-white-50 my-4">
+    <div class="text-center">
+      <p class="mb-0 text-white-50 small">© 2026 AnthroSkill 人類學｜由痛點到實測，日日更新。保留所有權利。</p>
+    </div>
+  </div>
+</footer>
+
+<!-- JavaScript 資源 -->
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// 響應式導航欄優化：移動端點擊菜單項後自動關閉
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link:not(.dropdown-toggle)');
+  const navbarCollapse = document.querySelector('.navbar-collapse');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth < 992) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+        if (bsCollapse) bsCollapse.hide();
+      }
+    });
+  });
+});
+</script>
+<!-- 瀏覽計數（2026-10-11 起）匿名・每 session 一次・唔記任何個人資料 -->
+<!-- 2026-10-20 加逐頁計數：全站一個 key + 每頁一個 key（key 由 path 雜湊，唔含個人資料） -->
+<script>
+(function () {
+  try {
+    var GLOBAL_KEY = 'anthroskill-org/pageviews';
+    var PAGE_NS = 'anthroskill-pg';
+    var BASE = 'https://abacus.jasoncameron.dev/hit/';
+
+    if (sessionStorage.getItem('as_vc')) return;
+    sessionStorage.setItem('as_vc', '1');
+    if (navigator.webdriver) return;
+    var ua = navigator.userAgent || '';
+    if (/bot|crawl|spider|headless|preview|lighthouse|monitor|pagespeed/i.test(ua)) return;
+
+    function beep(key) {
+      var img = new Image();
+      img.referrerPolicy = 'no-referrer';
+      img.src = BASE + key + '?t=' + Date.now();
+    }
+
+    // 逐頁 key：可讀 slug（ASCII）+ FNV-1a 32-bit 雜湊，同 scripts/page-views-report.py 保持一致
+    function canon(path) {
+      // 統一成 canonical percent-encoding，瀏覽器同 Python 兩邊計出同一個字串
+      try { return encodeURI(decodeURI(path)); } catch (e) { return path; }
+    }
+
+    function fnv1a(str) {
+      var h = 0x811c9dc5;
+      for (var i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+      }
+      return h >>> 0;
+    }
+
+    function pageKey() {
+      var p = canon(location.pathname || '/');
+      var body = p.replace(/^\/+|\/+$/g, '');
+      if (!body) body = 'home';
+      var slug = body.toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .slice(0, 40)
+        .replace(/-+$/g, '');
+      if (!slug) slug = 'p';
+      var h = fnv1a(p).toString(36);
+      return PAGE_NS + '/' + slug + '-' + h;
+    }
+
+    beep(GLOBAL_KEY);
+    var pk = pageKey();
+    if (/^[A-Za-z0-9_\-.]+$/.test(pk.split('/')[1])) beep(pk);
+  } catch (e) {}
+})();
+</script>
+
+</body>
+</html>

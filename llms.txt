@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（2114 篇中的最新 30 篇）
+- [Cherry Studio 2.2.1：技能市集與遠端任務](https://anthroskill.com/技術/cherry-studio-221-skills-marketplace-news)：Cherry Studio 於 2026 年 11 月 12 日發佈 v2.2.1，為 2.2.0 引入的技能市集補上遠端任務查詢、SerpKite 與 StepFun 搜尋供應商，並修復代理與排程問題。本文整理版本差異
+- [Edge0-145B 開源：24GB 顯卡跑 145B 代理](https://anthroskill.com/技術/edge0-145b-on-device-news)：Edge0 於 2026 年 11 月 13 日開源 145B 的 Edge0-145B，配合 edge0-infer 推理引擎，可在單張 24GB 顯示卡上執行編程與代理任務。本文整理三層權重放置的設計、官方 121.
+- [Gemini 4 Hydrogen 接管 Google 搜尋](https://anthroskill.com/技術/gemini-4-hydrogen-search-news)：Google 於 2026 年 11 月 12 日把 Gemini 4 Hydrogen 推上 Google 搜尋，全球使用者即時可用，官方形容為搜尋歷來最大一次模型升級。變動涵蓋多段式提問的意圖理解、平行查詢擴大的連結
+- [llama.cpp 1.0 正式版：API 凍結與 FP8 快取](https://anthroskill.com/技術/llamacpp-v1-0-release-news)：llama.cpp 於 2026 年 11 月 13 日發布 v1.0.0，首次啟用主版本號並同步把 ggml 推進至 1.0。此版移除 35 個棄用函數與 defrag 參數，把 NextN 投機解碼介面升上公開標頭，
+- [Codex CLI 0.169：13.5 萬星的終端工作區擴張](https://anthroskill.com/技術/openai-codex-0169-news)：OpenAI 開源的 Codex CLI 於 2026 年 11 月 13 日推出 0.169.0 版，以 Rust 撰寫的終端編程代理累積 135,179 顆星標。本文整理多側邊對話分頁、自訂模型供應商、裝置碼授權與 
+- [Unsloth 動態量化 V3.1：27B 本地 4-bit 升 10%](https://anthroskill.com/技術/unsloth-qwen38-v31-news)：Unsloth 於 2026 年 11 月 11 日推出桌面版 v0.1.917-beta，把 Qwen3.8-27B 的 GGUF 升級至 Dynamic V3.1。官方基準指同一大小的準確度提升 5% 至 10%，4
+- [Gemini 決策 API：千條是非題一次過答完](https://anthroskill.com/技術/gemini-decisions-api-news)：Gemini Decisions API 是 Google DeepMind 於 2026 年 11 月推出的決策端點，由 Gemini Decision 1 模型在單次前向傳遞中回答最多一千條是非題、選擇題與評分題，輸
+- [NVIDIA SkillSpector 開源：26% 代理技能有漏洞](https://anthroskill.com/技術/nvidia-skillspector-news)：NVIDIA 於 GitHub 開源 SkillSpector，針對 Claude Code、Codex 與 MCP 技能做安裝前安全掃描。官方引用研究顯示，31,132 個已分析技能中 26.1% 含至少一個漏洞，5.
+- [33K 星 OfficeCLI：一句指令改 Word、Excel、PPT](https://anthroskill.com/技術/officecli-news)：OfficeCLI 是 GitHub 上累積 33,210 顆星標的開源 Office 命令列工具，以單一執行檔讀寫 Word、Excel 與 PowerPoint，不需安裝 Microsoft Office。本文整理內
+- [Playwright MCP 開源：72 個工具操控瀏覽器](https://anthroskill.com/技術/playwright-mcp-news)：Playwright MCP 是微軟開源的瀏覽器自動化伺服器，GitHub 累積 39,552 顆星標。它把 Playwright 包裝成 72 個 MCP 工具，讓代理以無障礙樹快照讀取頁面並執行點擊輸入，無需視覺模型
+- [Quivr 2.0 重寫：39.6k 星改寫為 Go 內容引擎](https://anthroskill.com/技術/quivr-2-go-rewrite-news)：Quivr 2.0.0 於 2026 年 10 月 29 日發佈，把這個累積 39,644 顆星標的專案改寫為 Go 內容引擎。新版本只提供 HTTP 介面，負責接收持續湧入的文件、保留每個版本、建立關鍵字與語意搜尋，並
+- [聯合航空封殺 AI 代理訂票：誰代旅客簽名](https://anthroskill.com/技術/united-airlines-ai-agent-block-news)：聯合航空於 2026 年 11 月 11 日宣布，限制第三方個人 AI 代理代客訂票與管理行程，涵蓋自家平台與旅行社通路，並同步修改訂位、開票與分銷政策。官方理由是憑證外洩風險與美國聯邦航空法規的人為確認要求，本文整理封
+- [38K 星開源：49 個 AI 代理開一間遊戲工作室](https://anthroskill.com/技術/claude-code-game-studios-news)：Claude Code Game Studios 是 GitHub 上累積 38,361 顆星標的開源模板，把 49 個 AI 代理、75 個工作流指令與 15 個自動檢查腳本組成一套遊戲開發工作室架構。本文整理 v1.
+- [FreeLLMAPI 開源：34 家免費模型併成單一 API](https://anthroskill.com/技術/freellmapi-free-llm-router-news)：FreeLLMAPI 以五萬顆星標成為免費模型聚合的代表專案。它把 34 家供應商的免費額度併成單一 OpenAI 相容端點，合計約 74 億 token 的月配額，並以簽章目錄自動更新 635 個免費端點。本文整理路由
+- [Gemini Intelligence 可一句話生成手機小工具](https://anthroskill.com/技術/gemini-intelligence-widget-news)：Google 於十一月十日公布 Gemini Intelligence 新功能，Create My Widget 讓使用者以一句描述生成主畫面小工具，Rambler 把口述內容即時轉成文字，任務自動化擴展至英國、印度與日
+- [LangChain 1.5：模型路由與工具風險攔截](https://anthroskill.com/技術/langchain-1-5-model-router-news)：LangChain 於 2026 年 11 月 11 日發布 1.5.0，把模型路由與工具風險攔截兩組中間件由外部套件移入主套件，並終止支援 Python 3.10。本文整理決策模型的四種題型、路由的單次分類機制、0.5
+- [36K 星 Next AI Draw.io：一句話畫出架構圖](https://anthroskill.com/技術/next-ai-draw-io-news)：Next AI Draw.io 是 GitHub 上累積 36,889 顆星標的開源繪圖工具，以一句話讓模型在真實 draw.io 畫布上繪製架構圖與流程圖。本文整理版本卡片與撤銷機制、二十五家模型供應商、MCP 伺服器
+- [Qwen Code 1.0 預覽：Qoder 能力併入終端代理](https://anthroskill.com/技術/qwen-code-1-0-preview-news)：QwenLM 發布 Qwen Code 1.0 預覽版，把 Qoder 的代理能力併入這套開源終端編碼代理，並提供三個平台的原生安裝包。專案累積二萬九千餘顆星標與六百四十六名貢獻者，上週 npm 下載量十六萬八千餘次。本
+- [AlphaProof Code：四星期驗證 Signal 加密碼](https://anthroskill.com/技術/alphaproof-code-signal-news)：Google DeepMind 發布 AlphaProof Code，以 Gemini Carbon 驅動的多模型代理框架，把 Signal 通訊協定的實際程式碼翻譯成 Lean 定理並完成機器驗證。過程歷時四星期，產生
+- [Anthropic 發布 Fable 5.2：八日寫出可開機作業系統](https://anthroskill.com/技術/anthropic-fable-5-2-news)：Anthropic 於十一月九日發布 Claude Fable 5.2 與 Mythos 5.2，兩者共用同一底層模型。輸出速度提升約三成，輸入價降至每百萬代幣八美元，代理編碼基準 FrontierCode 2.0 取得
+- [browser-use 1.0 重生：砍掉 13.7 萬行程式碼](https://anthroskill.com/技術/browser-use-1-0-rewrite-news)：browser-use 於十一月十日發布 1.0.0 版本，刪除 136,866 行程式碼，相當於原有程式庫的八成。代理改為在單一持續執行的 REPL 撰寫 Python，直接操作 Chrome DevTools Pro
+- [Claude Meetings 登場：會議未完就開始做事](https://anthroskill.com/技術/claude-meetings-workplace-news)：Anthropic 十一月十日發布三項協作功能，Claude Meetings 以與會者身分加入視像會議，一邊聽討論一邊起草計劃並回答提問。同場推出 Claude Whiteboards 與 Sheets，另把 Clau
+- [2.5 萬星 Filee：拖放轉換 270 種格式，不上傳](https://anthroskill.com/技術/filee-file-converter-news)：Filee 於十一月九日發布 2.4.0，修補兩個中度風險安全公告，並加入離線 AI 圖片放大、ISO 製作與中繼資料檢視。該專案以 C# 撰寫，六星期內累積 25,300 顆星標，三十二個版本合計下載 821,047 
+- [歸藏 PPT Skill 開源：3 萬星生成網頁簡報](https://anthroskill.com/技術/guizang-ppt-skill-news)：歸藏 PPT Skill 以單一 HTML 檔案生成橫向翻頁簡報，在 GitHub 累積 29,595 顆星標。內建電子雜誌與瑞士國際主義兩套視覺系統、三十二種版式與演講者模式，並以校驗腳本攔截排版錯誤。本文整理架構定位
+- [Amazon 換掉 Sonnet：2B 決策模型省 98% 成本](https://anthroskill.com/技術/strands-decider-sonnet-replacement-news)：亞馬遜內部票務系統原本以 Claude Sonnet 4.6 為二十類工單貼標籤，近日改用 Strands Decider 的 E4B 模型。官方公布每百萬張工單成本由約 22,200 美元降至約 500 美元，單次呼叫
+- [GitHub Spec Kit 1.3：規格驅動擴張為代理平台](https://anthroskill.com/技術/github-spec-kit-1-3-news)：GitHub Spec Kit 於十一月初推進至 1.3.3 版，星標達十四萬九千。專案把原本單一的規格驅動流程拆成開發、除錯與構想評估三條入口，並以擴充、預設集、工作流與套件四層機制組合，官方目錄支援私有來源與離線安裝
+- [高盛收回 Claude Code：交易員失去 AI 編碼權](https://anthroskill.com/技術/goldman-claude-code-restriction-news)：高盛十月更新內部指引，把 Claude Code 與 GitHub 編碼代理限制給一萬二千名工程師，交易員與投資銀行家失去使用權。此決定出於生產力與風險審查，時間點落在 Anthropic 上市前數週。本文整理限制範圍、
+- [4 萬星 Marker 2.1：PDF 轉 Markdown 準確率 76%](https://anthroskill.com/技術/marker-2-1-surya-release-news)：Marker 2.1 於十月二十九日發布，改用 Surya 2.5 作預設 OCR 模型，單卡頁面處理速度提升 1.7 倍。專案採 Apache 2.0 授權，累積四萬餘星標，於 olmocr-bench 取得 76.0
+- [Meta 開源 Astryx：八年內部設計系統一萬九千星](https://anthroskill.com/技術/meta-astryx-design-system-news)：Meta 於 2026 年一月開源 Astryx 設計系統，採 MIT 授權與 TypeScript 實作。該系統在內部使用八年，支撐一萬三千個以上應用，開源版提供一百五十餘個無障礙元件、七套可換主題與命令列工具，並將元
+- [Meta 發布 Muse Ember：每百萬代幣十美分專攻代理](https://anthroskill.com/技術/meta-muse-ember-news)：Meta 超級智慧實驗室於十一月九日發布 Muse Ember，每百萬輸入代幣十美分，主打代理重複性工作的執行層。官方以每任務成本比較，稱其較 Haiku 與 Luna 便宜，並與 DeepSeek V4.1 Flash
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 2114 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan

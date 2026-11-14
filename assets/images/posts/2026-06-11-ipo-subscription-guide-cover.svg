@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4B96A"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#34D399"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EF4444"/>
+      <stop offset="100%" style="stop-color:#F87171"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#FBBF24"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.25"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)" rx="8"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="75" x2="800" y2="75" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="225" x2="800" y2="225" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="375" x2="800" y2="375" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="0" x2="160" y2="450" stroke="white" stroke-width="1"/>
+    <line x1="320" y1="0" x2="320" y2="450" stroke="white" stroke-width="1"/>
+    <line x1="480" y1="0" x2="480" y2="450" stroke="white" stroke-width="1"/>
+    <line x1="640" y1="0" x2="640" y2="450" stroke="white" stroke-width="1"/>
+  </g>
+
+  <!-- Title -->
+  <text x="40" y="56" font-family="system-ui,-apple-system,sans-serif" font-size="22" font-weight="800" fill="url(#gold)" letter-spacing="2">
+    IPO 抽新股實戰指南
+  </text>
+
+  <!-- Subtitle -->
+  <text x="40" y="118" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#9CA3AF" letter-spacing="1">
+    香港散戶必讀：由申請到賣出嘅完整系統
+  </text>
+
+  <!-- === Info Cards === -->
+
+  <!-- Card 1: 分析 -->
+  <rect x="40" y="145" width="225" height="130" rx="10" fill="white" opacity="0.08"/>
+  <rect x="40" y="145" width="225" height="130" rx="10" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <circle cx="68" cy="182" r="14" fill="url(#blue)" opacity="0.8"/>
+  <text x="68" y="188" font-family="system-ui,sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">1</text>
+  <text x="92" y="188" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="white">招股分析</text>
+  <text x="56" y="215" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">行業賽道 · 估值比較</text>
+  <text x="56" y="235" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">保薦人 · 基石投資者</text>
+  <text x="56" y="255" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">孖展反應 · 市場情緒</text>
+
+  <!-- Card 2: 策略 -->
+  <rect x="287" y="145" width="225" height="130" rx="10" fill="white" opacity="0.08"/>
+  <rect x="287" y="145" width="225" height="130" rx="10" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <circle cx="315" cy="182" r="14" fill="url(#gold)" opacity="0.8"/>
+  <text x="315" y="188" font-family="system-ui,sans-serif" font-size="14" font-weight="bold" fill="#1B2A4A" text-anchor="middle">2</text>
+  <text x="339" y="188" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="white">認購策略</text>
+  <text x="303" y="215" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">現金 vs 孖展</text>
+  <text x="303" y="235" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">槓桿倍數 · 利息計算</text>
+  <text x="303" y="255" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">多戶口 · 頂頭槌飛</text>
+
+  <!-- Card 3: 分配 -->
+  <rect x="535" y="145" width="225" height="130" rx="10" fill="white" opacity="0.08"/>
+  <rect x="535" y="145" width="225" height="130" rx="10" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.4"/>
+  <circle cx="563" cy="182" r="14" fill="url(#green)" opacity="0.8"/>
+  <text x="563" y="188" font-family="system-ui,sans-serif" font-size="14" font-weight="bold" fill="white" text-anchor="middle">3</text>
+  <text x="587" y="188" font-family="system-ui,sans-serif" font-size="13" font-weight="600" fill="white">分配結果</text>
+  <text x="551" y="215" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">回撥機制 · 一人一手</text>
+  <text x="551" y="235" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">中籤率分析</text>
+  <text x="551" y="255" font-family="system-ui,sans-serif" font-size="11" fill="#9CA3AF">暗盤交易 · 部署</text>
+
+  <!-- Bottom bar: Sell strategy -->
+  <rect x="40" y="295" width="720" height="56" rx="10" fill="white" opacity="0.06"/>
+  <rect x="40" y="295" width="720" height="56" rx="10" fill="none" stroke="url(#gold)" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Step indicators -->
+  <rect x="64" y="308" width="48" height="30" rx="6" fill="url(#blue)" opacity="0.7"/>
+  <text x="88" y="328" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">分析</text>
+  <text x="120" y="328" font-family="system-ui,sans-serif" font-size="13" fill="#4B5563">→</text>
+  <rect x="135" y="308" width="48" height="30" rx="6" fill="url(#gold)" opacity="0.7"/>
+  <text x="159" y="328" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="#1B2A4A" text-anchor="middle">認購</text>
+  <text x="191" y="328" font-family="system-ui,sans-serif" font-size="13" fill="#4B5563">→</text>
+  <rect x="206" y="308" width="48" height="30" rx="6" fill="url(#orange)" opacity="0.7"/>
+  <text x="230" y="328" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">分配</text>
+  <text x="262" y="328" font-family="system-ui,sans-serif" font-size="13" fill="#4B5563">→</text>
+  <rect x="277" y="308" width="48" height="30" rx="6" fill="url(#green)" opacity="0.7"/>
+  <text x="301" y="328" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">暗盤</text>
+  <text x="333" y="328" font-family="system-ui,sans-serif" font-size="13" fill="#4B5563">→</text>
+  <rect x="348" y="308" width="48" height="30" rx="6" fill="url(#red)" opacity="0.7"/>
+  <text x="372" y="328" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">止蝕</text>
+  <text x="404" y="328" font-family="system-ui,sans-serif" font-size="13" fill="#4B5563">→</text>
+  <rect x="419" y="308" width="48" height="30" rx="6" fill="#10B981" opacity="0.7"/>
+  <text x="443" y="328" font-family="system-ui,sans-serif" font-size="11" font-weight="bold" fill="white" text-anchor="middle">獲利</text>
+
+  <!-- Stats bar -->
+  <rect x="535" y="308" width="96" height="30" rx="6" fill="url(#gold)" opacity="0.15"/>
+  <text x="555" y="327" font-family="system-ui,sans-serif" font-size="11" fill="#FB923C">📊 系統化操作</text>
+
+  <rect x="640" y="308" width="100" height="30" rx="6" fill="url(#green)" opacity="0.15"/>
+  <text x="655" y="327" font-family="system-ui,sans-serif" font-size="11" fill="#10B981">💰 告別亂抽</text>
+
+  <!-- Bottom tagline -->
+  <text x="40" y="393" font-family="system-ui,-apple-system,sans-serif" font-size="13" fill="#6B7280">
+    港股IPO市場 · 由招股書解讀到賣出時機
+  </text>
+
+  <!-- Date -->
+  <text x="760" y="393" font-family="system-ui,sans-serif" font-size="11" fill="#4B5563" text-anchor="end">
+    2026.06
+  </text>
+</svg>

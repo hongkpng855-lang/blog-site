@@ -1,0 +1,149 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c1445;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a237e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#283593;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffd54f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="chart" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#81C784;stop-opacity:0.8" />
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#c9a84c;stop-opacity:0.5" />
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4CAF50;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#4CAF50;stop-opacity:0.5" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+
+  <!-- Subtle grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="white" stroke-width="0.5"/>
+    <line x1="0" y1="500" x2="800" y2="500" stroke="white" stroke-width="0.5"/>
+    <line x1="100" y1="0" x2="100" y2="600" stroke="white" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="600" stroke="white" stroke-width="0.5"/>
+    <line x1="300" y1="0" x2="300" y2="600" stroke="white" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="600" stroke="white" stroke-width="0.5"/>
+    <line x1="500" y1="0" x2="500" y2="600" stroke="white" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="600" stroke="white" stroke-width="0.5"/>
+    <line x1="700" y1="0" x2="700" y2="600" stroke="white" stroke-width="0.5"/>
+  </g>
+
+  <!-- Decorative circles -->
+  <circle cx="680" cy="80" r="120" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.15"/>
+  <circle cx="680" cy="80" r="160" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.1"/>
+  <circle cx="120" cy="520" r="100" fill="none" stroke="#4CAF50" stroke-width="0.8" opacity="0.12"/>
+  <circle cx="120" cy="520" r="140" fill="none" stroke="#4CAF50" stroke-width="0.5" opacity="0.08"/>
+
+  <!-- Chart area: bar chart -->
+  <!-- Y-axis label 區 -->
+  <g opacity="0.3">
+    <text x="130" y="195" fill="white" font-size="10" font-family="sans-serif">$</text>
+    <text x="130" y="320" fill="white" font-size="10" font-family="sans-serif">$</text>
+    <text x="130" y="445" fill="white" font-size="10" font-family="sans-serif">$</text>
+  </g>
+
+  <!-- Bars: Dividend Growth over years -->
+  <g>
+    <!-- Year 1 -->
+    <rect x="155" y="380" width="40" height="60" rx="4" fill="url(#bar2)" opacity="0.7"/>
+    <text x="160" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y1</text>
+
+    <!-- Year 2 -->
+    <rect x="210" y="360" width="40" height="80" rx="4" fill="url(#bar2)" opacity="0.75"/>
+    <text x="215" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y2</text>
+
+    <!-- Year 3 -->
+    <rect x="265" y="340" width="40" height="100" rx="4" fill="url(#bar2)" opacity="0.8"/>
+    <text x="270" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y3</text>
+
+    <!-- Year 4 -->
+    <rect x="320" y="310" width="40" height="130" rx="4" fill="url(#bar2)" opacity="0.85"/>
+    <text x="325" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y4</text>
+
+    <!-- Year 5 -->
+    <rect x="375" y="280" width="40" height="160" rx="4" fill="url(#bar2)" opacity="0.9"/>
+    <text x="380" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y5</text>
+
+    <!-- Year 6 -->
+    <rect x="430" y="245" width="40" height="195" rx="4" fill="url(#bar1)" opacity="0.95"/>
+    <text x="435" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y6</text>
+
+    <!-- Year 7 -->
+    <rect x="485" y="210" width="40" height="230" rx="4" fill="url(#bar1)"/>
+    <text x="490" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y7</text>
+
+    <!-- Year 8 -->
+    <rect x="540" y="180" width="40" height="260" rx="4" fill="url(#bar1)"/>
+    <text x="545" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y8</text>
+
+    <!-- Year 9 -->
+    <rect x="595" y="210" width="40" height="230" rx="4" fill="url(#bar1)"/>
+    <text x="600" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y9</text>
+
+    <!-- Year 10 -->
+    <rect x="650" y="145" width="40" height="295" rx="4" fill="url(#gold)" filter="url(#glow)"/>
+    <text x="655" y="455" fill="white" font-size="10" font-family="sans-serif" opacity="0.6">Y10</text>
+  </g>
+
+  <!-- Baseline -->
+  <line x1="140" y1="450" x2="710" y2="450" stroke="white" stroke-width="1" opacity="0.3"/>
+
+  <!-- Upward trend line -->
+  <polyline points="155,390 265,340 375,280 485,210 650,145"
+            fill="none" stroke="#ffd54f" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.5"/>
+
+  <!-- Growth arrow annotation -->
+  <g filter="url(#softGlow)">
+    <text x="400" y="130" fill="#ffd54f" font-size="16" font-family="sans-serif" font-weight="bold" text-anchor="middle" opacity="0.8">股息持續成長</text>
+    <text x="400" y="150" fill="#c9a84c" font-size="12" font-family="sans-serif" text-anchor="middle" opacity="0.6">Dividend Growth</text>
+  </g>
+
+  <!-- Dividend coin icons -->
+  <g opacity="0.15">
+    <circle cx="160" cy="200" r="20" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+    <text x="160" y="205" fill="#c9a84c" font-size="14" font-family="sans-serif" text-anchor="middle">$</text>
+    <circle cx="200" cy="170" r="18" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+    <text x="200" y="175" fill="#c9a84c" font-size="12" font-family="sans-serif" text-anchor="middle">$</text>
+    <circle cx="240" cy="155" r="16" fill="none" stroke="#c9a84c" stroke-width="1.5"/>
+    <text x="240" y="160" fill="#c9a84c" font-size="11" font-family="sans-serif" text-anchor="middle">$</text>
+  </g>
+
+  <!-- Title section -->
+  <g>
+    <text x="400" y="510" fill="white" font-size="28" font-family="sans-serif" font-weight="bold" text-anchor="middle">股息成長投資策略</text>
+    <text x="400" y="540" fill="#aab0c0" font-size="15" font-family="sans-serif" text-anchor="middle">打造穩定現金流的完整指南</text>
+    <text x="400" y="570" fill="#c9a84c" font-size="12" font-family="sans-serif" text-anchor="middle" opacity="0.7">Dividend Growth Investing · 2026</text>
+  </g>
+
+  <!-- Decorative $$ floating -->
+  <text x="80" y="100" fill="#c9a84c" font-size="24" font-family="sans-serif" opacity="0.08">$$</text>
+  <text x="720" y="520" fill="#4CAF50" font-size="20" font-family="sans-serif" opacity="0.08">$$$</text>
+</svg>
