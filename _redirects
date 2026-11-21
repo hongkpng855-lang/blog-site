@@ -1,0 +1,69 @@
+# Cloudflare Pages _redirects
+# 用途：9 個分類頁別名 → 正式中文分類頁（301 永久重定向）
+# 背景：別名頁原本 noindex + canonical 互相矛盾，noindex 會阻止權重合併
+# 建立：2026-10-30
+# 注意：CF Pages 會在建置後讀取此檔，規則優先於靜態資產
+
+# 技術
+/categories/tech/     /categories/%E6%8A%80%E8%A1%93/   301
+/categories/tech      /categories/%E6%8A%80%E8%A1%93/   301
+/categories/technology/  /categories/%E6%8A%80%E8%A1%93/  301
+/categories/technology   /categories/%E6%8A%80%E8%A1%93/  301
+/categories/%E7%A7%91%E6%8A%80/  /categories/%E6%8A%80%E8%A1%93/  301
+/categories/%E7%A7%91%E6%8A%80   /categories/%E6%8A%80%E8%A1%93/  301
+
+# /tech/ 舊導向頁（meta refresh + noindex，GSC 89 曝光 0 點擊）
+# 2026-11-06：改為真 301，避免 noindex 的 200 頁面浪費曝光與權重
+/tech/                /categories/%E6%8A%80%E8%A1%93/   301
+/tech                 /categories/%E6%8A%80%E8%A1%93/   301
+
+# 健康
+/categories/health/   /categories/%E5%81%A5%E5%BA%B7/   301
+/categories/health    /categories/%E5%81%A5%E5%BA%B7/   301
+
+# 學習
+/categories/learning/ /categories/%E5%AD%B8%E7%BF%92/   301
+/categories/learning  /categories/%E5%AD%B8%E7%BF%92/   301
+
+# 生活
+/categories/life/     /categories/%E7%94%9F%E6%B4%BB/   301
+/categories/life      /categories/%E7%94%9F%E6%B4%BB/   301
+/categories/%E9%81%8A%E6%88%B2/  /categories/%E7%94%9F%E6%B4%BB/  301
+/categories/%E9%81%8A%E6%88%B2   /categories/%E7%94%9F%E6%B4%BB/  301
+
+# 投資
+/categories/investment/  /categories/%E6%8A%95%E8%B3%87/  301
+/categories/investment   /categories/%E6%8A%95%E8%B3%87/  301
+/categories/%E7%90%86%E8%B2%A1/  /categories/%E6%8A%95%E8%B3%87/  301
+/categories/%E7%90%86%E8%B2%A1   /categories/%E6%8A%95%E8%B3%87/  301
+
+# 裸中文分類路徑（2026-11-21 健康檢查新增）
+# 背景：GSC 30 日顯示頁面「技術」212 曝光、排名 7.7、0 點擊，連續 18 週。
+# 實測 https://anthroskill.com/技術/ 回 404 —— 舊 permalink 年代的分類路徑仍留在
+# Google 索引，212 次曝光全部落在一個 404 頁。sitemap 只列 /categories/技術/，
+# 所以站內不會再產生此路徑，屬純外部殘留，用 301 把殘留曝光導回正式頁。
+# 來源路徑必須 percent-encoded（CF Pages 不匹配 literal UTF-8）；
+# 只加目錄根（有／無尾斜線），文章永久連結是 /技術/{slug}，不會被攔。
+/%E6%8A%80%E8%A1%93/   /categories/%E6%8A%80%E8%A1%93/   301
+/%E5%81%A5%E5%BA%B7/   /categories/%E5%81%A5%E5%BA%B7/   301
+/%E6%8A%95%E8%B3%87/   /categories/%E6%8A%95%E8%B3%87/   301
+/%E5%AD%B8%E7%BF%92/   /categories/%E5%AD%B8%E7%BF%92/   301
+/%E7%94%9F%E6%B4%BB/   /categories/%E7%94%9F%E6%B4%BB/   301
+/%E6%8A%80%E8%A1%93   /categories/%E6%8A%80%E8%A1%93/   301
+/%E5%81%A5%E5%BA%B7   /categories/%E5%81%A5%E5%BA%B7/   301
+/%E6%8A%95%E8%B3%87   /categories/%E6%8A%95%E8%B3%87/   301
+/%E5%AD%B8%E7%BF%92   /categories/%E5%AD%B8%E7%BF%92/   301
+/%E7%94%9F%E6%B4%BB   /categories/%E7%94%9F%E6%B4%BB/   301
+
+# 同時保留 literal UTF-8 寫法：CF Pages 對來源路徑的比對方式未見文件說明，
+# 兩種寫法並存，實際生效的一組會被採用，另一組不會誤攔（路徑只在目錄根）。
+/技術/   /categories/%E6%8A%80%E8%A1%93/   301
+/技術   /categories/%E6%8A%80%E8%A1%93/   301
+/健康/   /categories/%E5%81%A5%E5%BA%B7/   301
+/健康   /categories/%E5%81%A5%E5%BA%B7/   301
+/投資/   /categories/%E6%8A%95%E8%B3%87/   301
+/投資   /categories/%E6%8A%95%E8%B3%87/   301
+/學習/   /categories/%E5%AD%B8%E7%BF%92/   301
+/學習   /categories/%E5%AD%B8%E7%BF%92/   301
+/生活/   /categories/%E7%94%9F%E6%B4%BB/   301
+/生活   /categories/%E7%94%9F%E6%B4%BB/   301

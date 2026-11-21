@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1F3D"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#E8C86A"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E3A5F"/>
+      <stop offset="100%" style="stop-color:#152B4A"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4953A"/>
+      <stop offset="100%" style="stop-color:#E8B84A"/>
+    </linearGradient>
+    <linearGradient id="moon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5E6A0"/>
+      <stop offset="100%" style="stop-color:#E8D078"/>
+    </linearGradient>
+    <mask id="stars">
+      <rect width="800" height="450" fill="white"/>
+      <circle cx="120" cy="60" r="1.5" fill="white" opacity="0.8"/>
+      <circle cx="300" cy="45" r="1" fill="white" opacity="0.6"/>
+      <circle cx="500" cy="70" r="1.2" fill="white" opacity="0.7"/>
+      <circle cx="680" cy="40" r="1.5" fill="white" opacity="0.5"/>
+      <circle cx="750" cy="90" r="1" fill="white" opacity="0.6"/>
+      <circle cx="50" cy="100" r="0.8" fill="white" opacity="0.4"/>
+      <circle cx="200" cy="30" r="1.2" fill="white" opacity="0.7"/>
+      <circle cx="620" cy="55" r="0.8" fill="white" opacity="0.5"/>
+      <circle cx="400" cy="80" r="1" fill="white" opacity="0.4"/>
+    </mask>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- 星空 -->
+  <circle cx="120" cy="60" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="300" cy="45" r="1" fill="white" opacity="0.5"/>
+  <circle cx="500" cy="70" r="1.2" fill="white" opacity="0.6"/>
+  <circle cx="680" cy="40" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="750" cy="90" r="1" fill="white" opacity="0.5"/>
+  <circle cx="50" cy="100" r="0.8" fill="white" opacity="0.3"/>
+  <circle cx="200" cy="30" r="1.2" fill="white" opacity="0.6"/>
+  <circle cx="620" cy="55" r="0.8" fill="white" opacity="0.4"/>
+  <circle cx="400" cy="80" r="1" fill="white" opacity="0.3"/>
+  <circle cx="150" cy="120" r="0.6" fill="white" opacity="0.3"/>
+  <circle cx="580" cy="95" r="0.7" fill="white" opacity="0.4"/>
+
+  <!-- 月光效果 -->
+  <circle cx="650" cy="80" r="25" fill="url(#moon)" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="650" cy="80" r="22" fill="#FFF8DC" opacity="0.3"/>
+
+  <!-- 月光光線 -->
+  <line x1="650" y1="105" x2="590" y2="180" stroke="#F5E6A0" stroke-width="0.5" opacity="0.15"/>
+  <line x1="650" y1="105" x2="630" y2="190" stroke="#F5E6A0" stroke-width="0.5" opacity="0.12"/>
+  <line x1="650" y1="105" x2="670" y2="185" stroke="#F5E6A0" stroke-width="0.5" opacity="0.12"/>
+  <line x1="650" y1="105" x2="700" y2="175" stroke="#F5E6A0" stroke-width="0.5" opacity="0.1"/>
+
+  <!-- 標題區域 -->
+  <rect x="30" y="140" width="440" height="4" rx="2" fill="url(#gold)" opacity="0.6"/>
+
+  <text x="35" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="700" fill="url(#gold)">
+    告別報復性熬夜
+  </text>
+  <text x="35" y="225" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="600" fill="white">
+    晚間習慣
+  </text>
+  <text x="35" y="258" font-family="system-ui, -apple-system, sans-serif" font-size="13" fill="#A0B4D0">
+    用科學夜間 routine 提升睡眠同生活質素
+  </text>
+
+  <!-- 底部裝飾線 -->
+  <rect x="30" y="278" width="300" height="2" rx="1" fill="url(#gold)" opacity="0.3"/>
+
+  <!-- 4 張資訊卡 -->
+  <!-- Card 1: Screen Detox -->
+  <rect x="30" y="295" width="170" height="135" rx="10" fill="url(#card1)" stroke="#2C5F8A" stroke-width="1" opacity="0.95"/>
+  <text x="48" y="322" font-family="system-ui" font-size="22">🌙</text>
+  <text x="48" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">Screen Detox</text>
+  <text x="48" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">睡前 1 小時熄電話</text>
+  <text x="48" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">用暖光閱讀燈</text>
+  <text x="48" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">白噪音機輔助</text>
+  <rect x="48" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Card 2: 3 Phase Routine -->
+  <rect x="215" y="295" width="170" height="135" rx="10" fill="url(#card1)" stroke="#2C5F8A" stroke-width="1" opacity="0.95"/>
+  <text x="233" y="322" font-family="system-ui" font-size="22">⏰</text>
+  <text x="233" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">3 階段 Routine</text>
+  <text x="233" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Phase 1：Me Time</text>
+  <text x="233" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Phase 2：Wind Down</text>
+  <text x="233" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Phase 3：Sleep Prep</text>
+  <rect x="233" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Card 3: Relaxation -->
+  <rect x="400" y="295" width="170" height="135" rx="10" fill="url(#card1)" stroke="#2C5F8A" stroke-width="1" opacity="0.95"/>
+  <text x="418" y="322" font-family="system-ui" font-size="22">🧘</text>
+  <text x="418" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">放鬆練習</text>
+  <text x="418" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">冥想 10 分鐘</text>
+  <text x="418" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">4-7-8 呼吸法</text>
+  <text x="418" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">漸進式肌肉放鬆</text>
+  <rect x="418" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- Card 4: 7 Day Challenge -->
+  <rect x="585" y="295" width="185" height="135" rx="10" fill="url(#card1)" stroke="#2C5F8A" stroke-width="1" opacity="0.95"/>
+  <text x="603" y="322" font-family="system-ui" font-size="22">🔥</text>
+  <text x="603" y="345" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#E8C86A">7 日挑戰賽</text>
+  <text x="603" y="365" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Day 1：Set Sleep Mode</text>
+  <text x="603" y="382" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Day 4：Bedtime Stretch</text>
+  <text x="603" y="399" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#90A8C8">Day 7：完整 3 Phase</text>
+  <rect x="603" y="410" width="60" height="3" rx="1.5" fill="#FB923C" opacity="0.5"/>
+
+  <!-- 底部標示 -->
+  <text x="35" y="440" font-family="system-ui" font-size="9" fill="#4A6A8A">esgov.org | 生活類</text>
+</svg>

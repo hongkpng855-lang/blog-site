@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#1a2a4a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0c040"/>
+      <stop offset="100%" style="stop-color:#c9a84c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <rect x="60" y="180" width="392" height="160" rx="16" fill="#ffffff" opacity="0.08"/>
+  <text x="256" y="240" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="url(#gold)">2026 下半年</text>
+  <text x="256" y="275" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#ffffff">投資策略指南</text>
+  <text x="256" y="315" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" fill="#94a3b8">資產配置 × 趨勢分析 × 實戰策略</text>
+  <line x1="60" y1="470" x2="452" y2="470" stroke="url(#gold)" stroke-width="1.5" opacity="0.3"/>
+</svg>

@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a3a5c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#0066ff;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="glow2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:#ff0040;stop-opacity:0.05" />
+    </linearGradient>
+    <linearGradient id="chainGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066ff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#00aaff" flood-opacity="0.3"/>
+    </filter>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.06">
+    <line x1="0" y1="85" x2="512" y2="85" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="0" y1="170" x2="512" y2="170" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="0" y1="255" x2="512" y2="255" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="0" y1="340" x2="512" y2="340" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="0" y1="425" x2="512" y2="425" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="85" y1="0" x2="85" y2="512" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="170" y1="0" x2="170" y2="512" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="255" y1="0" x2="255" y2="512" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="340" y1="0" x2="340" y2="512" stroke="#00d4ff" stroke-width="0.5"/>
+    <line x1="425" y1="0" x2="425" y2="512" stroke="#00d4ff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Glow circles -->
+  <circle cx="120" cy="130" r="80" fill="url(#glow1)"/>
+  <circle cx="400" cy="380" r="90" fill="url(#glow2)"/>
+
+  <!-- Blockchain chain icon - center -->
+  <g transform="translate(256,170)" filter="url(#shadow)">
+    <!-- Hexagon shape -->
+    <polygon points="0,-55 48,-27 48,27 0,55 -48,27 -48,-27" fill="none" stroke="url(#chainGrad)" stroke-width="2.5" filter="url(#glow)"/>
+
+    <!-- Inner blockchain links -->
+    <circle cx="0" cy="0" r="18" fill="none" stroke="#00d4ff" stroke-width="1.8" opacity="0.8"/>
+    <circle cx="0" cy="0" r="8" fill="#00d4ff" opacity="0.3"/>
+
+    <!-- Connection dots -->
+    <circle cx="0" cy="-30" r="4" fill="#00d4ff" opacity="0.9"/>
+    <circle cx="26" cy="-15" r="4" fill="#00d4ff" opacity="0.9"/>
+    <circle cx="26" cy="15" r="4" fill="#00d4ff" opacity="0.9"/>
+    <circle cx="0" cy="30" r="4" fill="#00d4ff" opacity="0.9"/>
+    <circle cx="-26" cy="15" r="4" fill="#00d4ff" opacity="0.9"/>
+    <circle cx="-26" cy="-15" r="4" fill="#00d4ff" opacity="0.9"/>
+
+    <!-- Connecting lines between dots -->
+    <line x1="0" y1="-30" x2="26" y2="-15" stroke="#0066ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="26" y1="-15" x2="26" y2="15" stroke="#0066ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="26" y1="15" x2="0" y2="30" stroke="#0066ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="0" y1="30" x2="-26" y2="15" stroke="#0066ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="-26" y1="15" x2="-26" y2="-15" stroke="#0066ff" stroke-width="0.8" opacity="0.5"/>
+    <line x1="-26" y1="-15" x2="0" y2="-30" stroke="#0066ff" stroke-width="0.8" opacity="0.5"/>
+  </g>
+
+  <!-- Connecting chain links -->
+  <g opacity="0.4">
+    <path d="M130,170 Q140,150 160,155 Q180,160 180,140" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+    <path d="M332,170 Q340,145 360,150 Q380,155 380,135" fill="none" stroke="#0066ff" stroke-width="1.5"/>
+    <path d="M256,225 L256,245" stroke="#00d4ff" stroke-width="1.5"/>
+  </g>
+
+  <!-- DePIN label -->
+  <g transform="translate(120,235)">
+    <rect x="-20" y="-12" width="60" height="24" rx="12" fill="none" stroke="#ff6b35" stroke-width="1.2" opacity="0.7"/>
+    <text x="10" y="4" fill="#ff6b35" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" opacity="0.9">DePIN</text>
+  </g>
+
+  <!-- RWA label -->
+  <g transform="translate(380,235)">
+    <rect x="-18" y="-12" width="55" height="24" rx="12" fill="none" stroke="#00d4ff" stroke-width="1.2" opacity="0.7"/>
+    <text x="10" y="4" fill="#00d4ff" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" opacity="0.9">RWA</text>
+  </g>
+
+  <!-- PayFi label -->
+  <g transform="translate(256,265)">
+    <rect x="-18" y="-12" width="55" height="24" rx="12" fill="none" stroke="#7c3aed" stroke-width="1.2" opacity="0.7"/>
+    <text x="10" y="4" fill="#7c3aed" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" opacity="0.9">PayFi</text>
+  </g>
+
+  <!-- Decorative floating nodes -->
+  <g opacity="0.15">
+    <circle cx="80" cy="320" r="3" fill="#00d4ff"/>
+    <circle cx="430" cy="300" r="4" fill="#ff6b35"/>
+    <circle cx="50" cy="400" r="2" fill="#00d4ff"/>
+    <circle cx="460" cy="420" r="3" fill="#0066ff"/>
+    <circle cx="200" cy="380" r="2" fill="#7c3aed"/>
+    <circle cx="350" cy="390" r="2.5" fill="#00d4ff"/>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="340" fill="#ffffff" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" filter="url(#shadow)">
+    區塊鏈 x 真實世界
+  </text>
+
+  <!-- Subtitle line -->
+  <text x="256" y="370" fill="#88ccff" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" opacity="0.9">
+    DePIN · RWA · PayFi
+  </text>
+
+  <!-- Bottom line decoration -->
+  <line x1="170" y1="395" x2="342" y2="395" stroke="#00d4ff" stroke-width="1" opacity="0.4"/>
+  <circle cx="170" cy="395" r="2" fill="#00d4ff" opacity="0.6"/>
+  <circle cx="342" cy="395" r="2" fill="#00d4ff" opacity="0.6"/>
+
+  <!-- 2026 tag -->
+  <text x="256" y="425" fill="#4a7a9c" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" opacity="0.6">
+    2026 新浪潮
+  </text>
+
+  <!-- Bottom-right decorative block -->
+  <rect x="330" y="430" width="80" height="60" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.08"/>
+  <rect x="335" y="435" width="70" height="50" fill="none" stroke="#0066ff" stroke-width="0.3" opacity="0.06"/>
+</svg>

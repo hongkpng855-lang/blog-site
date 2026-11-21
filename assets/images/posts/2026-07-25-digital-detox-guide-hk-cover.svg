@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1a30;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#ff8c42;stop-opacity:0.3" />
+    </linearGradient>
+    <linearGradient id="gold_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c9a84c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8c84c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="green_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ade80;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- 太陽背景 -->
+  <circle cx="256" cy="100" r="120" fill="url(#sun)"/>
+  <!-- 手機圖示（中央打破） -->
+  <rect x="176" y="140" width="160" height="240" rx="20" fill="#2a3a5a" stroke="#c9a84c" stroke-width="2" opacity="0.8"/>
+  <rect x="186" y="150" width="140" height="200" rx="10" fill="#1a2a4a"/>
+  <!-- 手機畫面內容 -->
+  <rect x="200" y="170" width="112" height="8" rx="4" fill="#4a6a8a"/>
+  <rect x="200" y="190" width="80" height="8" rx="4" fill="#3a5a7a"/>
+  <rect x="200" y="210" width="60" height="8" rx="4" fill="#3a5a7a"/>
+  <rect x="200" y="240" width="112" height="40" rx="6" fill="#3a5a7a"/>
+  <rect x="200" y="290" width="112" height="40" rx="6" fill="#3a5a7a"/>
+  <!-- 蝴蝶破屏而出 -->
+  <path d="M256 200 Q230 160 200 180 Q220 200 256 200 Q292 200 312 180 Q282 160 256 200Z" fill="#c9a84c" opacity="0.9" filter="url(#glow)"/>
+  <path d="M256 200 Q240 230 220 250 Q245 235 256 200" fill="#e8c84c" opacity="0.7"/>
+  <path d="M256 200 Q272 230 292 250 Q267 235 256 200" fill="#e8c84c" opacity="0.7"/>
+  <!-- 裂縫效果 -->
+  <line x1="220" y1="300" x2="200" y2="340" stroke="#c9a84c" stroke-width="1.5" opacity="0.5"/>
+  <line x1="280" y1="300" x2="300" y2="340" stroke="#c9a84c" stroke-width="1.5" opacity="0.5"/>
+  <line x1="240" y1="310" x2="250" y2="350" stroke="#c9a84c" stroke-width="1" opacity="0.4"/>
+  <!-- 四張資訊卡 -->
+  <!-- 卡1: Screen Time -->
+  <rect x="30" y="370" width="100" height="55" rx="8" fill="#2a3a5a" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="80" y="392" font-family="Arial" font-size="11" fill="#4ade80" text-anchor="middle" font-weight="bold">Screen Time</text>
+  <text x="80" y="408" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">6h38m → 2h</text>
+  <!-- 卡2: 通知 -->
+  <rect x="144" y="370" width="100" height="55" rx="8" fill="#2a3a5a" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="194" y="392" font-family="Arial" font-size="11" fill="#60a5fa" text-anchor="middle" font-weight="bold">通知管理</text>
+  <text x="194" y="408" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">200+ → 20</text>
+  <!-- 卡3: 專注力 -->
+  <rect x="258" y="370" width="100" height="55" rx="8" fill="#2a3a5a" stroke="#c9a84c" stroke-width="1.5"/>
+  <text x="308" y="392" font-family="Arial" font-size="11" fill="#c9a84c" text-anchor="middle" font-weight="bold">專注時段</text>
+  <text x="308" y="408" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">0 → 4h/日</text>
+  <!-- 卡4: 社交 -->
+  <rect x="372" y="370" width="110" height="55" rx="8" fill="#2a3a5a" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="427" y="392" font-family="Arial" font-size="11" fill="#f472b6" text-anchor="middle" font-weight="bold">真實社交</text>
+  <text x="427" y="408" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">1x → 3x/週</text>
+  <!-- 底部分隔線 -->
+  <line x1="40" y1="440" x2="472" y2="440" stroke="#c9a84c" stroke-width="0.5" opacity="0.3"/>
+  <!-- 底部數據 -->
+  <text x="256" y="465" font-family="Arial" font-size="13" fill="#c9a84c" text-anchor="middle" font-weight="bold">數碼排毒 · Digital Detox</text>
+  <text x="256" y="485" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">香港人平均每日用手機 6.5h · 全球第 3</text>
+</svg>

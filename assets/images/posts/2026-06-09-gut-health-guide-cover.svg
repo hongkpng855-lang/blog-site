@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="50%" stop-color="#1A3A5C"/>
+      <stop offset="100%" stop-color="#0D2137"/>
+    </linearGradient>
+    <linearGradient id="gutGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="40%" stop-color="#E85D5D"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </linearGradient>
+    <linearGradient id="bacteriaGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2ECC71"/>
+      <stop offset="100%" stop-color="#27AE60"/>
+    </linearGradient>
+    <linearGradient id="bacteriaGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F39C12"/>
+      <stop offset="100%" stop-color="#E67E22"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#B8902E"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2C3E6B"/>
+      <stop offset="100%" stop-color="#1B2A4A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="20"/>
+
+  <!-- Intestinal tract decorative elements - wavy lines -->
+  <path d="M50 280 Q100 240 150 260 Q200 280 250 250 Q300 220 350 250 Q400 280 450 260" stroke="#C0392B" stroke-width="3" fill="none" opacity="0.15"/>
+  <path d="M40 320 Q90 360 140 340 Q190 320 240 350 Q290 380 340 350 Q390 320 440 340" stroke="#E85D5D" stroke-width="2" fill="none" opacity="0.1"/>
+
+  <!-- Title -->
+  <text x="256" y="55" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="22" font-weight="900" fill="#FB923C" filter="url(#glow)">腸道健康</text>
+  <text x="256" y="80" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" opacity="0.9">腸漏症・益生菌・消化修復</text>
+
+  <!-- Info Card 1: Leaky Gut -->
+  <rect x="20" y="100" width="227" height="130" rx="12" fill="url(#card1)" stroke="#C0392B" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="33" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#E85D5D">🔬 腸漏症</text>
+  <text x="33" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#B0B8D0">腸道屏障受損→</text>
+  <text x="33" y="155" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#B0B8D0">大分子穿腸入血</text>
+  <text x="33" y="175" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">• 慢性發炎</text>
+  <text x="33" y="190" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">• 食物不耐受</text>
+  <text x="33" y="205" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">• 自體免疫反應</text>
+  <!-- Barrier illustration -->
+  <rect x="170" y="108" width="68" height="3" rx="1.5" fill="#C0392B" opacity="0.6"/>
+  <rect x="172" y="113" width="64" height="3" rx="1.5" fill="#E85D5D" opacity="0.5"/>
+  <rect x="174" y="118" width="60" height="3" rx="1.5" fill="#C0392B" opacity="0.4"/>
+  <circle cx="200" cy="110" r="3" fill="#FF6B6B" opacity="0.6"/>
+  <circle cx="215" cy="116" r="2" fill="#FF6B6B" opacity="0.5"/>
+
+  <!-- Info Card 2: Probiotics -->
+  <rect x="265" y="100" width="227" height="130" rx="12" fill="url(#card1)" stroke="#2ECC71" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="278" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#2ECC71">🦠 益生菌科學</text>
+  <text x="278" y="140" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#B0B8D0">睇菌株・睇CFU・輪換食</text>
+  <text x="278" y="160" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">熱門菌株對症：</text>
+  <text x="278" y="178" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">• LGG → 抗生素腹瀉</text>
+  <text x="278" y="193" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">• B.infantis → IBS</text>
+  <text x="278" y="208" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">• BB-12 → 便秘</text>
+  <!-- Bacteria illustration -->
+  <ellipse cx="430" cy="150" rx="9" ry="6" fill="url(#bacteriaGrad1)" opacity="0.7"/>
+  <ellipse cx="440" cy="145" rx="3" ry="2" fill="#2ECC71" opacity="0.5"/>
+  <ellipse cx="420" cy="165" rx="7" ry="5" fill="url(#bacteriaGrad2)" opacity="0.6"/>
+
+  <!-- Info Card 3: Gut Repair Plan -->
+  <rect x="20" y="250" width="227" height="130" rx="12" fill="url(#card1)" stroke="#FB923C" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="33" y="272" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#FB923C">📋 腸道修復 5 步</text>
+  <text x="33" y="293" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">Step 1 移除刺激源</text>
+  <text x="33" y="310" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">Step 2 更換友善食物</text>
+  <text x="33" y="327" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">Step 3 補充關鍵營養</text>
+  <text x="33" y="344" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">Step 4 重建菌叢</text>
+  <text x="33" y="361" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">Step 5 生活習慣同步</text>
+
+  <!-- Info Card 4: Low FODMAP -->
+  <rect x="265" y="250" width="227" height="130" rx="12" fill="url(#card1)" stroke="#3498DB" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="278" y="272" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#3498DB">🥗 低 FODMAP 飲食</text>
+  <text x="278" y="293" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#B0B8D0">3 階段搵出 trigger food：</text>
+  <text x="278" y="313" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">❶ 嚴格限制期 (2-6 週)</text>
+  <text x="278" y="330" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">❷ 重新引入期 (6-8 週)</text>
+  <text x="278" y="347" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#90A0C0">❸ 個人化飲食期</text>
+  <text x="278" y="367" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#F39C12">✅ 對 IBS/腹脹效果顯著</text>
+
+  <!-- Bottom section -->
+  <rect x="20" y="400" width="472" height="55" rx="10" fill="#2C3E6B" stroke="#FB923C" stroke-width="1" opacity="0.8"/>
+  <text x="256" y="424" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#FB923C">🛡️ 70% 免疫細胞喺腸道</text>
+  <text x="256" y="443" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#B0B8D0">修復腸道 = 改善全身健康</text>
+
+  <!-- Footer -->
+  <text x="256" y="492" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="600" fill="#FB923C">ESGov 健康攻略</text>
+  <text x="256" y="505" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="8" fill="#666">腸道健康完整指南</text>
+</svg>

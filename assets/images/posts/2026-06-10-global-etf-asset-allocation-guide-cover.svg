@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A"/>
+      <stop offset="50%" style="stop-color:#1a3a5c"/>
+      <stop offset="100%" style="stop-color:#0f1e38"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4AF37"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2ECC71"/>
+      <stop offset="100%" style="stop-color:#27AE60"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E74C3C"/>
+      <stop offset="100%" style="stop-color:#C0392B"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)" rx="0"/>
+
+  <!-- Decorative circles -->
+  <circle cx="420" cy="80" r="180" fill="none" stroke="#FB923C" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="100" cy="400" r="140" fill="none" stroke="#2ECC71" stroke-width="0.5" opacity="0.10"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="#FB923C" stroke-width="0.3" opacity="0.08"/>
+
+  <!-- Pie chart representation -->
+  <g transform="translate(256, 195)">
+    <!-- VT slice (large blue) -->
+    <path d="M0,0 L0,-55 A55,55 0 0,1 46.2,-29.8 Z" fill="#3498DB" opacity="0.9"/>
+    <!-- BNDW slice (green) -->
+    <path d="M0,0 L46.2,-29.8 A55,55 0 0,1 42.5,34.9 Z" fill="#2ECC71" opacity="0.9"/>
+    <!-- AVGV slice (gold) -->
+    <path d="M0,0 L42.5,34.9 A55,55 0 0,1 10.8,53.9 Z" fill="#FB923C" opacity="0.9"/>
+    <!-- VNQ slice (red) -->
+    <path d="M0,0 L10.8,53.9 A55,55 0 0,1 0,55 Z" fill="#E74C3C" opacity="0.9"/>
+    <!-- Center hole -->
+    <circle cx="0" cy="0" r="18" fill="#1B2A4A"/>
+    <text x="0" y="4" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="11" font-weight="bold">ETF</text>
+  </g>
+
+  <!-- Legend items -->
+  <g transform="translate(60, 275)">
+    <rect x="0" y="0" width="10" height="10" rx="2" fill="#3498DB"/>
+    <text x="16" y="9" fill="#aabbcc" font-family="system-ui, sans-serif" font-size="9">VT 環球股票 60%</text>
+
+    <rect x="200" y="0" width="10" height="10" rx="2" fill="#2ECC71"/>
+    <text x="216" y="9" fill="#aabbcc" font-family="system-ui, sans-serif" font-size="9">BNDW 債券 25%</text>
+
+    <rect x="0" y="18" width="10" height="10" rx="2" fill="#FB923C"/>
+    <text x="16" y="27" fill="#aabbcc" font-family="system-ui, sans-serif" font-size="9">AVGV 價值因子 10%</text>
+
+    <rect x="200" y="18" width="10" height="10" rx="2" fill="#E74C3C"/>
+    <text x="216" y="27" fill="#aabbcc" font-family="system-ui, sans-serif" font-size="9">VNQ REITs 5%</text>
+  </g>
+
+  <!-- Globe icon (world) -->
+  <g transform="translate(420, 340)">
+    <circle cx="0" cy="0" r="22" fill="none" stroke="#3498DB" stroke-width="2" opacity="0.8"/>
+    <ellipse cx="0" cy="0" rx="10" ry="22" fill="none" stroke="#3498DB" stroke-width="1" opacity="0.5"/>
+    <ellipse cx="0" cy="0" rx="22" ry="10" fill="none" stroke="#3498DB" stroke-width="1" opacity="0.5"/>
+    <line x1="-22" y1="-8" x2="22" y2="-8" stroke="#3498DB" stroke-width="0.5" opacity="0.3"/>
+    <line x1="-22" y1="8" x2="22" y2="8" stroke="#3498DB" stroke-width="0.5" opacity="0.3"/>
+  </g>
+
+  <!-- Return arrow (rebalance) -->
+  <g transform="translate(80, 340)">
+    <path d="M20,0 Q0,0 0,15" fill="none" stroke="#FB923C" stroke-width="2" opacity="0.7"/>
+    <polygon points="-4,12 0,20 4,12" fill="#FB923C" opacity="0.7"/>
+    <text x="22" y="18" fill="#FB923C" font-family="system-ui, sans-serif" font-size="8" opacity="0.8">再平衡</text>
+  </g>
+
+  <!-- Bottom tagline -->
+  <text x="256" y="420" text-anchor="middle" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="11" font-weight="bold" letter-spacing="2">GLOBAL ETF ALLOCATION</text>
+  <text x="256" y="440" text-anchor="middle" fill="#8899bb" font-family="system-ui, sans-serif" font-size="9">建立穿越牛熊嘅投資組合</text>
+
+  <!-- Bottom decorative line -->
+  <line x1="150" y1="452" x2="362" y2="452" stroke="#FB923C" stroke-width="0.5" opacity="0.3"/>
+
+  <!-- Category badge -->
+  <rect x="206" y="462" width="100" height="22" rx="11" fill="none" stroke="#2ECC71" stroke-width="1" opacity="0.6"/>
+  <text x="256" y="477" text-anchor="middle" fill="#2ECC71" font-family="system-ui, sans-serif" font-size="9">💰 投資</text>
+</svg>

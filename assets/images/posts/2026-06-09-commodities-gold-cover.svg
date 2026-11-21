@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="50%" style="stop-color:#1a2a4a"/>
+      <stop offset="100%" style="stop-color:#0f1f3a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#E8C85A"/>
+    </linearGradient>
+    <linearGradient id="chart" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#E8C85A;stop-opacity:0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <!-- Grid lines -->
+  <g stroke="#ffffff10" stroke-width="0.5">
+    <line x1="100" y1="60" x2="700" y2="60"/>
+    <line x1="100" y1="130" x2="700" y2="130"/>
+    <line x1="100" y1="200" x2="700" y2="200"/>
+    <line x1="100" y1="270" x2="700" y2="270"/>
+    <line x1="100" y1="340" x2="700" y2="340"/>
+  </g>
+  <!-- Upward trend line -->
+  <polyline points="120,320 200,290 280,280 360,240 440,220 520,170 600,140 680,100"
+    fill="none" stroke="url(#gold)" stroke-width="3" filter="url(#glow)"/>
+  <!-- Chart fill -->
+  <polygon points="120,320 200,290 280,280 360,240 440,220 520,170 600,140 680,100 680,320"
+    fill="url(#chart)"/>
+  <!-- Gold bar icon -->
+  <rect x="60" y="45" width="32" height="18" rx="2" fill="url(#gold)" opacity="0.9"/>
+  <rect x="56" y="42" width="40" height="24" rx="3" fill="none" stroke="#FB923C" stroke-width="1.5" opacity="0.6"/>
+  <!-- Circle markers -->
+  <circle cx="200" cy="290" r="4" fill="#FB923C" opacity="0.6"/>
+  <circle cx="360" cy="240" r="4" fill="#FB923C" opacity="0.6"/>
+  <circle cx="520" cy="170" r="4" fill="#FB923C" opacity="0.6"/>
+  <circle cx="680" cy="100" r="5" fill="#E8C85A" filter="url(#glow)"/>
+  <!-- Title -->
+  <text x="400" y="390" text-anchor="middle" fill="#FB923C" font-family="system-ui,sans-serif" font-size="18" font-weight="bold" letter-spacing="1">黃金・白銀・商品投資</text>
+  <text x="400" y="415" text-anchor="middle" fill="#8899aa" font-family="system-ui,sans-serif" font-size="12" letter-spacing="1.5">2026 通脹減息年代資產配置</text>
+  <!-- Decorative dots -->
+  <circle cx="720" cy="380" r="1.5" fill="#FB923C" opacity="0.3"/>
+  <circle cx="730" cy="400" r="1" fill="#FB923C" opacity="0.2"/>
+  <circle cx="710" cy="410" r="1.5" fill="#FB923C" opacity="0.25"/>
+</svg>

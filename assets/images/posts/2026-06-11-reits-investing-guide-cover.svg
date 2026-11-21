@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0e27"/>
+      <stop offset="40%" stop-color="#121b3d"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="50%" stop-color="#E8D48B"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ef4444"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Decorative grid -->
+  <g opacity="0.03">
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="200" y1="0" x2="200" y2="450" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="400" y1="0" x2="400" y2="450" stroke="#FB923C" stroke-width="0.3"/>
+    <line x1="600" y1="0" x2="600" y2="450" stroke="#FB923C" stroke-width="0.3"/>
+  </g>
+
+  <!-- ===== Building Silhouette (HK Skyline) ===== -->
+  <g opacity="0.06" transform="translate(0, 230)">
+    <rect x="60" y="40" width="30" height="180" rx="2" fill="#FB923C"/>
+    <rect x="100" y="70" width="25" height="150" rx="2" fill="#FB923C"/>
+    <rect x="135" y="30" width="35" height="190" rx="2" fill="#FB923C"/>
+    <rect x="180" y="90" width="28" height="130" rx="2" fill="#FB923C"/>
+    <rect x="220" y="20" width="22" height="200" rx="2" fill="#FB923C"/>
+    <rect x="255" y="60" width="30" height="160" rx="2" fill="#FB923C"/>
+    <rect x="300" y="45" width="20" height="175" rx="2" fill="#FB923C"/>
+    <rect x="330" y="80" width="35" height="140" rx="2" fill="#FB923C"/>
+    <rect x="380" y="15" width="28" height="205" rx="2" fill="#FB923C"/>
+    <rect x="420" y="55" width="22" height="165" rx="2" fill="#FB923C"/>
+    <rect x="455" y="35" width="30" height="185" rx="2" fill="#FB923C"/>
+    <rect x="500" y="70" width="25" height="150" rx="2" fill="#FB923C"/>
+    <rect x="535" y="25" width="35" height="195" rx="2" fill="#FB923C"/>
+    <rect x="585" y="65" width="20" height="155" rx="2" fill="#FB923C"/>
+  </g>
+
+  <!-- ===== Title Section ===== -->
+  <line x1="50" y1="85" x2="750" y2="85" stroke="url(#gold)" stroke-width="1" opacity="0.2"/>
+
+  <text x="50" y="46" fill="#ffffff" font-size="26" font-family="sans-serif" font-weight="bold" filter="url(#shadow)">
+    香港 REITs 投資實戰指南
+  </text>
+
+  <text x="50" y="72" fill="#FB923C" font-size="13" font-family="sans-serif" opacity="0.9">
+    用房地產信託基金建立穩定現金流 · 唔使買樓都可以收租
+  </text>
+
+  <!-- ===== Dividend Growth Chart ===== -->
+  <path d="M 100,150
+           Q 150,148 200,155
+           Q 250,162 300,152
+           Q 350,142 400,148
+           Q 430,152 460,145
+           Q 490,138 520,142
+           Q 550,146 580,135
+           Q 610,124 650,128
+           Q 680,132 720,120"
+        fill="none" stroke="url(#green)" stroke-width="2.5" opacity="0.7"/>
+
+  <!-- Filled area under chart -->
+  <path d="M 100,150
+           Q 150,148 200,155
+           Q 250,162 300,152
+           Q 350,142 400,148
+           Q 430,152 460,145
+           Q 490,138 520,142
+           Q 550,146 580,135
+           Q 610,124 650,128
+           Q 680,132 720,120
+           L 720,230 L 100,230 Z"
+        fill="url(#green)" opacity="0.08"/>
+
+  <!-- DPU label -->
+  <text x="730" y="118" fill="#22c55e" font-size="10" font-family="sans-serif" font-weight="bold" opacity="0.8">DPU ↑</text>
+
+  <!-- Dividend markers on chart -->
+  <circle cx="300" cy="152" r="3" fill="#FB923C" opacity="0.6"/>
+  <circle cx="460" cy="145" r="3" fill="#FB923C" opacity="0.6"/>
+  <circle cx="580" cy="135" r="3" fill="#FB923C" opacity="0.6"/>
+  <circle cx="720" cy="120" r="4" fill="url(#gold)" opacity="0.8"/>
+
+  <!-- ===== Dividend $ Symbols ===== -->
+  <g opacity="0.12">
+    <text x="300" y="138" fill="#22c55e" font-size="16" font-family="sans-serif" text-anchor="middle">$</text>
+    <text x="460" y="130" fill="#22c55e" font-size="16" font-family="sans-serif" text-anchor="middle">$</text>
+    <text x="580" y="120" fill="#22c55e" font-size="16" font-family="sans-serif" text-anchor="middle">$</text>
+    <text x="720" y="105" fill="#22c55e" font-size="20" font-family="sans-serif" text-anchor="middle" font-weight="bold">$</text>
+  </g>
+
+  <!-- ===== 4 Info Cards ===== -->
+
+  <!-- Card 1: 穩定收息 -->
+  <g transform="translate(50, 370)" filter="url(#shadow)">
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="#FB923C" opacity="0.12"/>
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="none" stroke="#FB923C" stroke-width="0.8" opacity="0.4"/>
+    <text x="77" y="17" fill="#FB923C" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="600">🏢 穩定收息 6-8%</text>
+  </g>
+
+  <!-- Card 2: 分散風險 -->
+  <g transform="translate(220, 370)" filter="url(#shadow)">
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="#22c55e" opacity="0.12"/>
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="none" stroke="#22c55e" stroke-width="0.8" opacity="0.4"/>
+    <text x="77" y="17" fill="#22c55e" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="600">🛡️ 分散多個物業</text>
+  </g>
+
+  <!-- Card 3: 低入場費 -->
+  <g transform="translate(390, 370)" filter="url(#shadow)">
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="#06b6d4" opacity="0.12"/>
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="none" stroke="#06b6d4" stroke-width="0.8" opacity="0.4"/>
+    <text x="77" y="17" fill="#06b6d4" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="600">💰 低入場 $20K</text>
+  </g>
+
+  <!-- Card 4: 專業管理 -->
+  <g transform="translate(560, 370)" filter="url(#shadow)">
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="#a855f7" opacity="0.12"/>
+    <rect x="0" y="-5" width="155" height="32" rx="8" fill="none" stroke="#a855f7" stroke-width="0.8" opacity="0.4"/>
+    <text x="77" y="17" fill="#a855f7" font-size="12" font-family="sans-serif" text-anchor="middle" font-weight="600">📋 專業團隊管理</text>
+  </g>
+
+  <!-- ===== Bottom accent line ===== -->
+  <rect x="0" y="448" width="800" height="2" fill="url(#gold)" opacity="0.35"/>
+</svg>

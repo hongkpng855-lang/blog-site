@@ -1,0 +1,72 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgGlow" cx="256" cy="280" r="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1a3a5c" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#0f2440" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#070e1a" stop-opacity="1"/>
+    </radialGradient>
+    <radialGradient id="gutGlow" cx="256" cy="300" r="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGlow)"/>
+  <circle cx="256" cy="300" r="100" fill="url(#gutGlow)"/>
+  
+  <!-- Moon -->
+  <circle cx="400" cy="70" r="28" fill="#fff9c4" opacity="0.85"/>
+  <circle cx="410" cy="65" r="26" fill="#070e1a"/>
+  
+  <!-- Stars -->
+  <circle cx="70" cy="40" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="160" cy="25" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="330" cy="35" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="470" cy="120" r="1" fill="#fff" opacity="0.4"/>
+  <circle cx="50" cy="140" r="1.2" fill="#fff" opacity="0.5"/>
+  <circle cx="440" cy="180" r="1" fill="#fff" opacity="0.3"/>
+  <circle cx="100" cy="200" r="1" fill="#fff" opacity="0.35"/>
+  
+  <!-- Sleeping person silhouette -->
+  <g transform="translate(165, 240)">
+    <!-- Pillow -->
+    <ellipse cx="110" cy="30" rx="35" ry="12" fill="#1e3a5f" stroke="#3a6a9f" stroke-width="1" opacity="0.6"/>
+    <!-- Body -->
+    <path d="M50,45 Q55,25 75,20 L100,18 Q120,18 125,30 L130,55 Q130,75 110,85 L70,85 Q50,85 45,70 Z" fill="#162d4d" stroke="#4fc3f7" stroke-width="1" opacity="0.85"/>
+    <!-- Head -->
+    <circle cx="120" cy="22" r="22" fill="#162d4d" stroke="#4fc3f7" stroke-width="1" opacity="0.85"/>
+    <!-- ZZZ -->
+    <text x="150" y="0" font-family="Georgia, serif" font-size="22" fill="#4fc3f7" opacity="0.6" font-style="italic">z</text>
+    <text x="165" y="-16" font-family="Georgia, serif" font-size="16" fill="#4fc3f7" opacity="0.45" font-style="italic">z</text>
+    <text x="175" y="-28" font-family="Georgia, serif" font-size="11" fill="#4fc3f7" opacity="0.3" font-style="italic">z</text>
+  </g>
+  
+  <!-- Microbiome glowing particles (gut area) -->
+  <g>
+    <circle cx="230" cy="305" r="5" fill="#69f0ae" opacity="0.8"/>
+    <circle cx="255" cy="295" r="4" fill="#b2ff59" opacity="0.7"/>
+    <circle cx="275" cy="310" r="3.5" fill="#69f0ae" opacity="0.65"/>
+    <circle cx="240" cy="320" r="3" fill="#b2ff59" opacity="0.55"/>
+    <circle cx="215" cy="315" r="2.5" fill="#e0e0e0" opacity="0.4"/>
+    <circle cx="260" cy="325" r="3" fill="#69f0ae" opacity="0.5"/>
+    <circle cx="285" cy="295" r="2.5" fill="#b2ff59" opacity="0.45"/>
+    <circle cx="225" cy="290" r="2" fill="#e0e0e0" opacity="0.35"/>
+    <circle cx="270" cy="335" r="2" fill="#b2ff59" opacity="0.3"/>
+    <circle cx="250" cy="285" r="2.5" fill="#69f0ae" opacity="0.4"/>
+    <circle cx="295" cy="320" r="2" fill="#e0e0e0" opacity="0.25"/>
+    
+    <!-- Connecting lines (neural network style) -->
+    <line x1="230" y1="305" x2="255" y2="295" stroke="#69f0ae" stroke-width="0.5" opacity="0.3"/>
+    <line x1="255" y1="295" x2="275" y2="310" stroke="#b2ff59" stroke-width="0.5" opacity="0.25"/>
+    <line x1="230" y1="305" x2="240" y2="320" stroke="#69f0ae" stroke-width="0.5" opacity="0.2"/>
+    <line x1="275" y1="310" x2="260" y2="325" stroke="#b2ff59" stroke-width="0.5" opacity="0.2"/>
+    <line x1="240" y1="320" x2="260" y2="325" stroke="#e0e0e0" stroke-width="0.5" opacity="0.15"/>
+  </g>
+  
+  <!-- Brain connection line (gut-brain axis visual) -->
+  <path d="M255,295 Q300,260 280,220" stroke="#4fc3f7" stroke-width="1" fill="none" opacity="0.3" stroke-dasharray="4,4"/>
+  
+  <!-- Bottom text -->
+  <text x="256" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="17" fill="#ffffff" font-weight="bold" letter-spacing="1">腸道健康 × 睡眠品質</text>
+  <text x="256" y="462" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#4fc3f7" opacity="0.75">2026 最新科學實證 · 3個簡單方法</text>
+</svg>

@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B33"/>
+      <stop offset="50%" style="stop-color:#1B2A4A"/>
+      <stop offset="100%" style="stop-color:#2C3E6B"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C"/>
+      <stop offset="100%" style="stop-color:#D4B96A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981"/>
+      <stop offset="100%" style="stop-color:#34D399"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6"/>
+      <stop offset="100%" style="stop-color:#A78BFA"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Decorative grid dots -->
+  <g opacity="0.06">
+    <pattern id="dotGrid" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="white"/>
+    </pattern>
+    <rect width="800" height="450" fill="url(#dotGrid)"/>
+  </g>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="800" height="4" fill="url(#gold)"/>
+
+  <!-- Title -->
+  <text x="40" y="60" font-family="system-ui, -apple-system, sans-serif" font-size="26" font-weight="800" fill="url(#gold)" letter-spacing="1">
+    優質獨處時光
+  </text>
+  <text x="40" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="16" fill="#94A3B8" letter-spacing="0.5">
+    享受真正嘅 Me Time
+  </text>
+
+  <!-- Central icon: Person in a peaceful circle -->
+  <!-- Moon/stars decorative background circle -->
+  <circle cx="560" cy="200" r="110" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.15"/>
+
+  <!-- Person silhouette sitting peacefully -->
+  <!-- Body -->
+  <ellipse cx="560" cy="230" rx="30" ry="35" fill="url(#gold)" opacity="0.2"/>
+  <!-- Head -->
+  <circle cx="560" cy="195" r="18" fill="url(#gold)" opacity="0.3"/>
+  <!-- Cross-legged sitting pose -->
+  <ellipse cx="560" cy="255" rx="35" ry="12" fill="url(#gold)" opacity="0.15"/>
+
+  <!-- Small decorative stars/moons -->
+  <circle cx="500" cy="150" r="2" fill="url(#gold)" opacity="0.6"/>
+  <circle cx="620" cy="145" r="1.5" fill="url(#gold)" opacity="0.4"/>
+  <circle cx="530" cy="130" r="1.5" fill="url(#gold)" opacity="0.5"/>
+  <circle cx="600" cy="160" r="2.5" fill="url(#accent)" opacity="0.3"/>
+  <circle cx="510" cy="170" r="1" fill="url(#gold)" opacity="0.7"/>
+
+  <!-- Crescent moon -->
+  <path d="M 470 130 A 18 18 0 1 1 490 148 A 14 14 0 1 0 470 130" fill="url(#gold)" opacity="0.4"/>
+
+  <!-- Information cards -->
+  <!-- Card 1: Self Connection -->
+  <rect x="40" y="115" width="155" height="100" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(201,168,76,0.3)" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="40" y="115" width="155" height="3" rx="1.5" fill="url(#accent)"/>
+  <text x="60" y="147" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#E2E8F0">自我連結</text>
+  <text x="60" y="167" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">了解自己嘅價值觀</text>
+  <text x="60" y="183" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">同內在情緒</text>
+  <circle cx="52" cy="139" r="4" fill="url(#accent)" opacity="0.6"/>
+
+  <!-- Card 2: Creativity -->
+  <rect x="210" y="115" width="155" height="100" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(16,185,129,0.3)" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="210" y="115" width="155" height="3" rx="1.5" fill="url(#green)"/>
+  <text x="230" y="147" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#E2E8F0">創造力放飛</text>
+  <text x="230" y="167" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">空閒時大腦創意</text>
+  <text x="230" y="183" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">連結自然湧現</text>
+  <circle cx="222" cy="139" r="4" fill="url(#green)" opacity="0.6"/>
+
+  <!-- Card 3: Stress Relief -->
+  <rect x="40" y="235" width="155" height="100" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(245,158,11,0.3)" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="40" y="235" width="155" height="3" rx="1.5" fill="url(#orange)"/>
+  <text x="60" y="267" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#E2E8F0">壓力釋放</text>
+  <text x="60" y="287" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">皮質醇水平下降</text>
+  <text x="60" y="303" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">身心真正叉電</text>
+  <circle cx="52" cy="259" r="4" fill="url(#orange)" opacity="0.6"/>
+
+  <!-- Card 4: 7 Day Challenge -->
+  <rect x="210" y="235" width="155" height="100" rx="10" fill="rgba(255,255,255,0.05)" stroke="rgba(139,92,246,0.3)" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="210" y="235" width="155" height="3" rx="1.5" fill="url(#purple)"/>
+  <text x="230" y="267" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#E2E8F0">7日獨處挑戰</text>
+  <text x="230" y="287" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">由零開始建立</text>
+  <text x="230" y="303" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#94A3B8">獨處習慣</text>
+  <circle cx="222" cy="259" r="4" fill="url(#purple)" opacity="0.6"/>
+
+  <!-- Bottom stats bar -->
+  <rect x="40" y="375" width="720" height="50" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+
+  <!-- Stat items -->
+  <text x="80" y="402" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="url(#green)">67%</text>
+  <text x="80" y="416" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">缺乏獨處</text>
+
+  <text x="230" y="402" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="url(#accent)">15min</text>
+  <text x="230" y="416" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">每日最低門檻</text>
+
+  <text x="390" y="402" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="url(#gold)">2.5hr</text>
+  <text x="390" y="416" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">社交媒體替代時間</text>
+
+  <text x="560" y="402" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="800" fill="url(#purple)">2x</text>
+  <text x="560" y="416" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748B">創造力提升效果</text>
+</svg>

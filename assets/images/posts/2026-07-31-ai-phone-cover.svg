@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f1a30;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="cyan_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8c84c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glow_cyan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#0ea5e9;stop-opacity:0.15" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <!-- 背景網格點（科技感） -->
+  <g opacity="0.15">
+    <circle cx="60" cy="60" r="2" fill="#22d3ee"/>
+    <circle cx="140" cy="100" r="1.5" fill="#22d3ee"/>
+    <circle cx="400" cy="70" r="2" fill="#22d3ee"/>
+    <circle cx="460" cy="140" r="1.5" fill="#22d3ee"/>
+    <circle cx="80" cy="300" r="1.5" fill="#22d3ee"/>
+    <circle cx="450" cy="300" r="2" fill="#22d3ee"/>
+    <circle cx="130" cy="200" r="1.5" fill="#FB923C"/>
+    <circle cx="390" cy="220" r="1.5" fill="#FB923C"/>
+  </g>
+  <!-- 中央光暈 -->
+  <circle cx="256" cy="185" r="130" fill="url(#glow_cyan)" opacity="0.4"/>
+  <!-- 手機圖示 -->
+  <rect x="186" y="100" width="140" height="230" rx="22" fill="#2a3a5a" stroke="#22d3ee" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="196" y="110" width="120" height="200" rx="14" fill="#0f1a30"/>
+  <!-- 手機螢幕內容：AI 對話 -->
+  <circle cx="216" cy="130" r="6" fill="#22d3ee" opacity="0.9"/>
+  <rect x="232" y="124" width="70" height="12" rx="6" fill="#1e3a5a"/>
+  <rect x="196" y="150" width="90" height="12" rx="6" fill="#22d3ee" opacity="0.7"/>
+  <rect x="196" y="172" width="70" height="12" rx="6" fill="#1e3a5a"/>
+  <rect x="236" y="194" width="80" height="12" rx="6" fill="#22d3ee" opacity="0.55"/>
+  <rect x="196" y="216" width="60" height="12" rx="6" fill="#1e3a5a"/>
+  <!-- AI 核心晶片 -->
+  <rect x="226" y="240" width="60" height="40" rx="8" fill="url(#cyan_grad)" opacity="0.9"/>
+  <text x="256" y="258" font-family="Arial" font-size="13" fill="#0f1a30" text-anchor="middle" font-weight="bold">AI</text>
+  <text x="256" y="272" font-family="Arial" font-size="8" fill="#0f1a30" text-anchor="middle">NPU</text>
+  <line x1="256" y1="240" x2="256" y2="230" stroke="#22d3ee" stroke-width="1.5"/>
+  <line x1="246" y1="240" x2="246" y2="230" stroke="#22d3ee" stroke-width="1"/>
+  <line x1="266" y1="240" x2="266" y2="230" stroke="#22d3ee" stroke-width="1"/>
+  <line x1="256" y1="280" x2="256" y2="292" stroke="#22d3ee" stroke-width="1.5"/>
+  <!-- 底部 home bar -->
+  <rect x="231" y="300" width="50" height="4" rx="2" fill="#4a6a8a"/>
+  <!-- 頂部標題 -->
+  <text x="256" y="52" font-family="Arial" font-size="15" fill="#FB923C" text-anchor="middle" font-weight="bold">2026 AI 手機實戰指南</text>
+  <line x1="160" y1="62" x2="352" y2="62" stroke="#FB923C" stroke-width="1" opacity="0.5"/>
+  <!-- 四張資訊卡 -->
+  <!-- 卡1: 即時翻譯 -->
+  <rect x="24" y="348" width="112" height="58" rx="9" fill="#1e2e4e" stroke="#22d3ee" stroke-width="1.5"/>
+  <text x="80" y="368" font-family="Arial" font-size="11" fill="#22d3ee" text-anchor="middle" font-weight="bold">通話即時翻譯</text>
+  <text x="80" y="384" font-family="Arial" font-size="9" fill="#9ca3af" text-anchor="middle">廣東話 ↔ 外語</text>
+  <text x="80" y="397" font-family="Arial" font-size="9" fill="#FB923C" text-anchor="middle">Live Translate</text>
+  <!-- 卡2: AI 執相 -->
+  <rect x="148" y="348" width="112" height="58" rx="9" fill="#1e2e4e" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="204" y="368" font-family="Arial" font-size="11" fill="#4ade80" text-anchor="middle" font-weight="bold">AI 執相</text>
+  <text x="204" y="384" font-family="Arial" font-size="9" fill="#9ca3af" text-anchor="middle">一撳消除路人</text>
+  <text x="204" y="397" font-family="Arial" font-size="9" fill="#FB923C" text-anchor="middle">Clean Up</text>
+  <!-- 卡3: 智慧助理 -->
+  <rect x="272" y="348" width="112" height="58" rx="9" fill="#1e2e4e" stroke="#c9a84c" stroke-width="1.5"/>
+  <text x="328" y="368" font-family="Arial" font-size="11" fill="#c9a84c" text-anchor="middle" font-weight="bold">智慧助理</text>
+  <text x="328" y="384" font-family="Arial" font-size="9" fill="#9ca3af" text-anchor="middle">Siri / Gemini</text>
+  <text x="328" y="397" font-family="Arial" font-size="9" fill="#FB923C" text-anchor="middle">跨 App 做嘢</text>
+  <!-- 卡4: 搜尋 -->
+  <rect x="396" y="348" width="92" height="58" rx="9" fill="#1e2e4e" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="442" y="368" font-family="Arial" font-size="11" fill="#f472b6" text-anchor="middle" font-weight="bold">圈住就搵</text>
+  <text x="442" y="384" font-family="Arial" font-size="9" fill="#9ca3af" text-anchor="middle">Circle to</text>
+  <text x="442" y="397" font-family="Arial" font-size="9" fill="#FB923C" text-anchor="middle">Search</text>
+  <!-- 底部分隔線 -->
+  <line x1="40" y1="424" x2="472" y2="424" stroke="#FB923C" stroke-width="0.5" opacity="0.3"/>
+  <!-- 底部數據 -->
+  <text x="256" y="448" font-family="Arial" font-size="12" fill="#FB923C" text-anchor="middle" font-weight="bold">Apple Intelligence · Galaxy AI · Gemini</text>
+  <text x="256" y="468" font-family="Arial" font-size="10" fill="#9ca3af" text-anchor="middle">iOS 26.1 繁體中文支援 · 廣東話語音 · AI 手機全面落地</text>
+  <text x="256" y="488" font-family="Arial" font-size="9" fill="#64748b" text-anchor="middle">由功能教學到揀機指南 · 用盡你部 AI 手機</text>
+</svg>

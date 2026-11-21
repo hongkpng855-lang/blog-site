@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="50%" stop-color="#2C3E6B"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="gold-glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FB923C" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FB923C" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="arrow-grad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8D48B"/>
+    </linearGradient>
+    <linearGradient id="coin-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8D48B"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1000" cy="100" r="400" fill="url(#gold-glow)"/>
+  <circle cx="200" cy="500" r="300" fill="url(#gold-glow)" opacity="0.5"/>
+
+  <!-- Grid pattern (subtle) -->
+  <g opacity="0.05" stroke="#FB923C" stroke-width="0.5">
+    <line x1="0" y1="100" x2="1200" y2="100"/><line x1="0" y1="200" x2="1200" y2="200"/>
+    <line x1="0" y1="300" x2="1200" y2="300"/><line x1="0" y1="400" x2="1200" y2="400"/>
+    <line x1="200" y1="0" x2="200" y2="630"/><line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/><line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Upward trending arrow -->
+  <path d="M350,480 L350,350 L420,350 L420,280" fill="none" stroke="url(#arrow-grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <path d="M380,220 L420,280 L360,265" fill="none" stroke="#FB923C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Second arrow -->
+  <path d="M520,480 L520,300 L590,300 L590,200" fill="none" stroke="url(#arrow-grad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)" opacity="0.7"/>
+  <path d="M550,140 L590,200 L530,185" fill="none" stroke="#FB923C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+
+  <!-- Coins on the right -->
+  <g filter="url(#shadow)">
+    <ellipse cx="820" cy="420" rx="55" ry="10" fill="url(#coin-grad)" stroke="#B8962E" stroke-width="1.5"/>
+    <ellipse cx="820" cy="410" rx="55" ry="10" fill="url(#coin-grad)" stroke="#B8962E" stroke-width="1.5"/>
+    <ellipse cx="820" cy="400" rx="55" ry="10" fill="#E2CD7A" stroke="#B8962E" stroke-width="1.5"/>
+    <text x="820" y="405" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="18" fill="#8B6914">$</text>
+  </g>
+
+  <!-- Small coins scattered -->
+  <g filter="url(#shadow)">
+    <ellipse cx="750" cy="380" rx="22" ry="5" fill="url(#coin-grad)" stroke="#B8962E" stroke-width="1"/>
+    <ellipse cx="750" cy="376" rx="22" ry="5" fill="url(#coin-grad)" stroke="#B8962E" stroke-width="1"/>
+    <ellipse cx="750" cy="372" rx="22" ry="5" fill="#E2CD7A" stroke="#B8962E" stroke-width="1"/>
+    <text x="750" y="377" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="11" fill="#8B6914">$</text>
+
+    <ellipse cx="900" cy="390" rx="20" ry="4" fill="url(#coin-grad)" stroke="#B8962E" stroke-width="1" transform="rotate(-15,900,390)"/>
+    <ellipse cx="900" cy="386" rx="20" ry="4" fill="url(#coin-grad)" stroke="#B8962E" stroke-width="1" transform="rotate(-15,900,386)"/>
+    <ellipse cx="900" cy="382" rx="20" ry="4" fill="#E2CD7A" stroke="#B8962E" stroke-width="1" transform="rotate(-15,900,382)"/>
+    <text x="900" y="387" text-anchor="middle" font-family="sans-serif" font-weight="bold" font-size="10" fill="#8B6914" transform="rotate(-15,900,387)">$</text>
+  </g>
+
+  <!-- Briefcase icon on the left -->
+  <g filter="url(#shadow)">
+    <rect x="130" y="310" width="100" height="75" rx="8" fill="#2C3E6B" stroke="#FB923C" stroke-width="2.5"/>
+    <rect x="145" y="300" width="70" height="20" rx="5" fill="#2C3E6B" stroke="#FB923C" stroke-width="2.5"/>
+    <line x1="180" y1="310" x2="180" y2="300" stroke="#FB923C" stroke-width="2.5"/>
+    <rect x="160" y="345" width="40" height="8" rx="3" fill="#FB923C" opacity="0.4"/>
+    <rect x="160" y="360" width="40" height="8" rx="3" fill="#FB923C" opacity="0.4"/>
+  </g>
+
+  <!-- Rocket icon on the far right -->
+  <g filter="url(#shadow)" transform="translate(1010, 260)">
+    <path d="M30,80 L10,100 L20,80 L10,60 Z" fill="#FB923C" opacity="0.3"/>
+    <ellipse cx="30" cy="55" rx="12" ry="35" fill="#E8D48B" opacity="0.8"/>
+    <ellipse cx="30" cy="55" rx="8" ry="30" fill="#2C3E6B"/>
+    <path d="M22,35 Q30,20 38,35" fill="none" stroke="#FB923C" stroke-width="2" opacity="0.6"/>
+    <path d="M22,45 Q30,30 38,45" fill="none" stroke="#FB923C" stroke-width="2" opacity="0.4"/>
+    <circle cx="30" cy="55" r="6" fill="#E8D48B"/>
+    <circle cx="30" cy="55" r="3" fill="#FB923C"/>
+  </g>
+
+  <!-- Title text -->
+  <g filter="url(#shadow)">
+    <text x="460" y="100" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-weight="bold" font-size="44" fill="#E8D48B" letter-spacing="2">
+      香港人副業與斜槓創業指南
+    </text>
+    <text x="460" y="150" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-size="22" fill="#B8C5D6" letter-spacing="1">
+      由興趣變現到建立可持續收入系統嘅實戰攻略
+    </text>
+  </g>
+
+  <!-- Divider line -->
+  <line x1="250" y1="175" x2="670" y2="175" stroke="#FB923C" stroke-width="1" opacity="0.4"/>
+
+  <!-- Feature labels -->
+  <g font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-size="16" fill="#8899B0">
+    <circle cx="270" cy="220" r="4" fill="#FB923C"/>
+    <text x="285" y="225">5 條變現路徑</text>
+    <circle cx="410" cy="220" r="4" fill="#FB923C"/>
+    <text x="425" y="225">時間管理 3-3-3 法</text>
+    <circle cx="580" cy="220" r="4" fill="#FB923C"/>
+    <text x="595" y="225">由興趣到系統</text>
+  </g>
+
+  <!-- Bottom info bar -->
+  <rect x="250" y="540" width="420" height="40" rx="20" fill="#FB923C" opacity="0.1"/>
+  <text x="460" y="565" text-anchor="middle" font-family="'Noto Sans TC', 'PingFang TC', system-ui, sans-serif" font-size="14" fill="#FB923C" opacity="0.8">
+    #副業生活 #斜槓創業 #香港人 #生活提案 #2026
+  </text>
+</svg>

@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1A2E"/>
+      <stop offset="40%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#1F3A5F"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8C84A"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#253A5F"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1F3A5F"/>
+      <stop offset="100%" stop-color="#2A4A6F"/>
+    </linearGradient>
+    <linearGradient id="progressGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="50%" stop-color="#E8C84A"/>
+      <stop offset="100%" stop-color="#4ADE80"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGrad)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="80" x2="512" y2="80" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="160" x2="512" y2="160" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="240" x2="512" y2="240" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="320" x2="512" y2="320" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="0" y1="400" x2="512" y2="400" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="128" y1="0" x2="128" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+    <line x1="384" y1="0" x2="384" y2="512" stroke="#FB923C" stroke-width="0.5"/>
+  </g>
+
+  <!-- Header accent line -->
+  <rect x="0" y="0" width="512" height="4" fill="url(#goldGrad)"/>
+
+  <!-- Title area -->
+  <text x="256" y="44" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="13" font-weight="600" letter-spacing="2" opacity="0.8">🎯 學習．第七輪</text>
+
+  <!-- Main Title -->
+  <text x="256" y="78" text-anchor="middle" fill="#FFFFFF" font-family="system-ui, sans-serif" font-size="24" font-weight="800" letter-spacing="1">刻意練習實戰指南</text>
+  <text x="256" y="104" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="13" opacity="0.9">由新手到大師嘅科學訓練方法</text>
+
+  <!-- Central icon area: Skill Growth Stairs -->
+  <g transform="translate(256,200)" filter="url(#glow)">
+    <!-- Staircase going up -->
+    <rect x="-80" y="30" width="160" height="28" rx="4" fill="#253A5F" stroke="#FB923C" stroke-width="0.5" opacity="0.4"/>
+    <rect x="-60" y="4" width="120" height="26" rx="4" fill="#1F3A5F" stroke="#FB923C" stroke-width="0.8" opacity="0.6"/>
+    <rect x="-40" y="-20" width="80" height="24" rx="4" fill="#2A4A6F" stroke="#FB923C" stroke-width="1" opacity="0.8"/>
+    <rect x="-20" y="-42" width="40" height="22" rx="4" fill="#1B2A4A" stroke="#E8C84A" stroke-width="1.5"/>
+
+    <!-- Arrow going up gold -->
+    <polygon points="0,-60 -8,-48 8,-48" fill="#E8C84A"/>
+    <line x1="0" y1="-48" x2="0" y2="-30" stroke="#E8C84A" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Labels on stairs -->
+    <text x="0" y="48" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="8">🧠 新手</text>
+    <text x="0" y="22" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="8">📖 初階</text>
+    <text x="0" y="-2" text-anchor="middle" fill="#FB923C" font-family="system-ui, sans-serif" font-size="8">⚡ 進階</text>
+    <text x="0" y="-26" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="8" font-weight="700">🏆 大師</text>
+  </g>
+
+  <!-- 4 info cards row -->
+  <!-- Card 1: 刻意練習四大要素 -->
+  <g transform="translate(16, 300)" filter="url(#softShadow)">
+    <rect width="112" height="95" rx="8" fill="url(#card1)" stroke="#FB923C" stroke-width="0.5"/>
+    <rect x="0" y="0" width="112" height="24" rx="8" fill="url(#goldGrad)" opacity="0.15"/>
+    <text x="56" y="11" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="7" font-weight="700">四大要素</text>
+    <circle cx="16" cy="36" r="4" fill="#4ADE80" opacity="0.8"/>
+    <text x="24" y="39" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="7">清晰目標</text>
+    <circle cx="16" cy="50" r="4" fill="#4ADE80" opacity="0.8"/>
+    <text x="24" y="53" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="7">專注投入</text>
+    <circle cx="16" cy="64" r="4" fill="#4ADE80" opacity="0.8"/>
+    <text x="24" y="67" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="7">即時回饋</text>
+    <circle cx="16" cy="78" r="4" fill="#4ADE80" opacity="0.8"/>
+    <text x="24" y="81" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="7">舒適圈+1</text>
+  </g>
+
+  <!-- Card 2: 反饋循環 -->
+  <g transform="translate(135, 300)" filter="url(#softShadow)">
+    <rect width="112" height="95" rx="8" fill="url(#card2)" stroke="#FB923C" stroke-width="0.5"/>
+    <rect x="0" y="0" width="112" height="24" rx="8" fill="#4ADE80" opacity="0.12"/>
+    <text x="56" y="11" text-anchor="middle" fill="#4ADE80" font-family="system-ui, sans-serif" font-size="7" font-weight="700">反饋循環</text>
+    <circle cx="56" cy="40" r="18" fill="none" stroke="#FB923C" stroke-width="1.5" opacity="0.4"/>
+    <circle cx="56" cy="40" r="18" fill="none" stroke="#4ADE80" stroke-width="2" stroke-dasharray="85 28" stroke-dashoffset="-20" transform="rotate(-90 56 40)"/>
+    <text x="56" y="44" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="9" font-weight="700">PDCA</text>
+    <text x="56" y="68" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="7">教練 / AI / 自評</text>
+    <text x="56" y="82" text-anchor="middle" fill="#64748B" font-family="system-ui, sans-serif" font-size="6">持續修正</text>
+  </g>
+
+  <!-- Card 3: 10,000小時迷思 -->
+  <g transform="translate(254, 300)" filter="url(#softShadow)">
+    <rect width="112" height="95" rx="8" fill="url(#card1)" stroke="#FB923C" stroke-width="0.5"/>
+    <rect x="0" y="0" width="112" height="24" rx="8" fill="#F87171" opacity="0.12"/>
+    <text x="56" y="11" text-anchor="middle" fill="#F87171" font-family="system-ui, sans-serif" font-size="7" font-weight="700">10,000 小時迷思</text>
+    <text x="56" y="40" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="22" font-weight="800">≠</text>
+    <text x="56" y="62" text-anchor="middle" fill="#F87171" font-family="system-ui, sans-serif" font-size="8">用對方法先得</text>
+    <text x="56" y="78" text-anchor="middle" fill="#64748B" font-family="system-ui, sans-serif" font-size="6">品質 > 數量</text>
+  </g>
+
+  <!-- Card 4: 每日訓練計畫 -->
+  <g transform="translate(373, 300)" filter="url(#softShadow)">
+    <rect width="123" height="95" rx="8" fill="url(#card2)" stroke="#FB923C" stroke-width="0.5"/>
+    <rect x="0" y="0" width="123" height="24" rx="8" fill="#60A5FA" opacity="0.12"/>
+    <text x="61" y="11" text-anchor="middle" fill="#60A5FA" font-family="system-ui, sans-serif" font-size="7" font-weight="700">每日訓練模型</text>
+    <text x="16" y="37" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="6.5">🔍 拆解大師動作</text>
+    <text x="16" y="50" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="6.5">⚡ 專注弱點訓練</text>
+    <text x="16" y="63" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="6.5">🔄 即時修正錯誤</text>
+    <text x="16" y="76" fill="#CBD5E1" font-family="system-ui, sans-serif" font-size="6.5">📊 追蹤進步曲線</text>
+  </g>
+
+  <!-- Bottom: Progress bar - 30 Day Challenge -->
+  <g transform="translate(16, 420)">
+    <text x="240" y="10" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="9">30 日刻意練習挑戰</text>
+    <!-- Dots for each day -->
+    <rect x="0" y="20" width="480" height="12" rx="6" fill="#1F3A5F" opacity="0.5"/>
+    <rect x="0" y="20" width="160" height="12" rx="6" fill="url(#progressGrad)" opacity="0.6"/>
+    <rect x="0" y="20" width="80" height="12" rx="6" fill="url(#goldGrad)" opacity="0.4"/>
+    <text x="240" y="48" text-anchor="middle" fill="#64748B" font-family="system-ui, sans-serif" font-size="7">第 1-10 日：基礎建立 — 第 11-20 日：刻意練習 — 第 21-30 日：自動化</text>
+  </g>
+
+  <!-- Bottom stats bar -->
+  <g>
+    <rect x="0" y="475" width="512" height="37" fill="#1B2A4A" opacity="0.6"/>
+    <line x1="171" y1="480" x2="171" y2="508" stroke="#FB923C" stroke-width="0.5" opacity="0.3"/>
+    <line x1="341" y1="480" x2="341" y2="508" stroke="#FB923C" stroke-width="0.5" opacity="0.3"/>
+    <text x="85" y="495" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="16" font-weight="700">4</text>
+    <text x="85" y="506" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="6.5">核心要素</text>
+    <text x="256" y="495" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="16" font-weight="700">30</text>
+    <text x="256" y="506" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="6.5">每日挑戰</text>
+    <text x="426" y="495" text-anchor="middle" fill="#E8C84A" font-family="system-ui, sans-serif" font-size="16" font-weight="700">76%</text>
+    <text x="426" y="506" text-anchor="middle" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="6.5">進步率</text>
+  </g>
+</svg>

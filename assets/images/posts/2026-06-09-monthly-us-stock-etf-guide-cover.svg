@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1B2A4A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#E8C84A"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#4ADE80"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#162D50"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1B365D"/>
+      <stop offset="100%" stop-color="#142847"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A2F52"/>
+      <stop offset="100%" stop-color="#12253F"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#193050"/>
+      <stop offset="100%" stop-color="#112338"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g stroke="#1E3A5F" stroke-width="0.5" opacity="0.3">
+    <line x1="0" y1="75" x2="800" y2="75"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="225" x2="800" y2="225"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="375" x2="800" y2="375"/>
+  </g>
+
+  <!-- Chart line (upward) -->
+  <polyline points="50,320 150,280 250,290 350,240 450,250 550,180 650,160 750,120"
+            fill="none" stroke="url(#gold)" stroke-width="3" opacity="0.7"/>
+  <!-- Chart fill -->
+
+  <!-- Floating coins -->
+  <circle cx="650" cy="130" r="12" fill="url(#gold)" opacity="0.6"/>
+  <circle cx="680" cy="145" r="8" fill="url(#gold)" opacity="0.4"/>
+  <circle cx="620" cy="115" r="6" fill="url(#gold)" opacity="0.5"/>
+  <circle cx="700" cy="120" r="10" fill="url(#gold)" opacity="0.3"/>
+
+  <!-- Dollar sign on coin -->
+  <text x="650" y="135" text-anchor="middle" fill="#0F172A" font-size="14" font-weight="bold" opacity="0.6">$</text>
+
+  <!-- Title -->
+  <text x="50" y="52" fill="white" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" letter-spacing="1">2026 · 月供美股 ETF</text>
+  <text x="50" y="82" fill="white" font-family="system-ui, sans-serif" font-size="28" font-weight="bold">
+    <tspan fill="url(#gold)">由零建立</tspan>自動化美股組合
+  </text>
+  <text x="50" y="110" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="14">
+    每月 $3,000 開始 · 平均成本法 · 複利效應
+  </text>
+
+  <!-- 4 Info Cards -->
+  <!-- Card 1: VOO -->
+  <rect x="40" y="140" width="165" height="120" rx="10" fill="url(#card1)" stroke="#FB923C" stroke-width="0.5" opacity="0.9"/>
+  <text x="55" y="172" fill="url(#green)" font-family="monospace" font-size="22" font-weight="bold">VOO</text>
+  <text x="55" y="192" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">S&amp;P 500</text>
+  <text x="55" y="210" fill="white" font-family="system-ui, sans-serif" font-size="12">費用率 0.03%</text>
+  <text x="55" y="228" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="11">年回報 +11.3%</text>
+  <text x="55" y="248" fill="#64748B" font-family="system-ui, sans-serif" font-size="10">📊 新手首選</text>
+
+  <!-- Card 2: QQQ -->
+  <rect x="222" y="140" width="165" height="120" rx="10" fill="url(#card2)" stroke="#FB923C" stroke-width="0.5" opacity="0.9"/>
+  <text x="237" y="172" fill="url(#green)" font-family="monospace" font-size="22" font-weight="bold">QQQ</text>
+  <text x="237" y="192" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">NASDAQ 100</text>
+  <text x="237" y="210" fill="white" font-family="system-ui, sans-serif" font-size="12">費用率 0.20%</text>
+  <text x="237" y="228" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="11">年回報 +14.2%</text>
+  <text x="237" y="248" fill="#64748B" font-family="system-ui, sans-serif" font-size="10">🚀 科技增長</text>
+
+  <!-- Card 3: VT -->
+  <rect x="404" y="140" width="165" height="120" rx="10" fill="url(#card3)" stroke="#FB923C" stroke-width="0.5" opacity="0.9"/>
+  <text x="419" y="172" fill="url(#green)" font-family="monospace" font-size="22" font-weight="bold">VT</text>
+  <text x="419" y="192" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">全球股市</text>
+  <text x="419" y="210" fill="white" font-family="system-ui, sans-serif" font-size="12">費用率 0.07%</text>
+  <text x="419" y="228" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="11">9,000+ 公司</text>
+  <text x="419" y="248" fill="#64748B" font-family="system-ui, sans-serif" font-size="10">🌍 全球分散</text>
+
+  <!-- Card 4: BND -->
+  <rect x="586" y="140" width="165" height="120" rx="10" fill="url(#card4)" stroke="#FB923C" stroke-width="0.5" opacity="0.9"/>
+  <text x="601" y="172" fill="url(#green)" font-family="monospace" font-size="22" font-weight="bold">BND</text>
+  <text x="601" y="192" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">美國債券</text>
+  <text x="601" y="210" fill="white" font-family="system-ui, sans-serif" font-size="12">費用率 0.03%</text>
+  <text x="601" y="228" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="11">穩定收息</text>
+  <text x="601" y="248" fill="#64748B" font-family="system-ui, sans-serif" font-size="10">🔒 保守配置</text>
+
+  <!-- Bottom section -->
+  <rect x="40" y="285" width="720" height="140" rx="12" fill="#0F1D35" opacity="0.8"/>
+
+  <!-- Left: Monthly plan example -->
+  <text x="65" y="318" fill="white" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">📅 月供 $8,000 組合範例</text>
+
+  <!-- Progress bars -->
+  <g transform="translate(65, 335)">
+    <rect x="0" y="0" width="200" height="22" rx="4" fill="#1E3A5F"/>
+    <rect x="0" y="0" width="120" height="22" rx="4" fill="#334155"/>
+    <text x="10" y="15" fill="white" font-family="system-ui, sans-serif" font-size="11">VOO 60%</text>
+    <text x="220" y="15" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">$4,800</text>
+  </g>
+  <g transform="translate(65, 365)">
+    <rect x="0" y="0" width="200" height="22" rx="4" fill="#1E3A5F"/>
+    <rect x="0" y="0" width="80" height="22" rx="4" fill="#162D50"/>
+    <text x="10" y="15" fill="white" font-family="system-ui, sans-serif" font-size="11">QQQ 20%</text>
+    <text x="220" y="15" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">$1,600</text>
+  </g>
+  <g transform="translate(65, 395)">
+    <rect x="0" y="0" width="200" height="22" rx="4" fill="#1E3A5F"/>
+    <rect x="0" y="0" width="60" height="22" rx="4" fill="#142847"/>
+    <text x="10" y="15" fill="white" font-family="system-ui, sans-serif" font-size="11">VT 20%</text>
+    <text x="220" y="15" fill="#94A3B8" font-family="system-ui, sans-serif" font-size="11">$1,600</text>
+  </g>
+
+  <!-- Right: Compound interest visual -->
+  <g transform="translate(360, 310)">
+    <text x="0" y="14" fill="white" font-family="system-ui, sans-serif" font-size="15" font-weight="bold">💰 30年複利結果</text>
+    <text x="0" y="44" fill="#64748B" font-family="system-ui, sans-serif" font-size="12">本金投入</text>
+    <text x="0" y="64" fill="white" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">$1,080,000</text>
+  </g>
+  <g transform="translate(530, 310)">
+    <text x="0" y="14" fill="#64748B" font-family="system-ui, sans-serif" font-size="12">→</text>
+    <text x="20" y="14" fill="#64748B" font-family="system-ui, sans-serif" font-size="12">最終總值</text>
+    <text x="20" y="34" fill="url(#green)" font-family="system-ui, sans-serif" font-size="22" font-weight="bold">$446萬</text>
+    <text x="20" y="52" fill="url(#gold)" font-family="system-ui, sans-serif" font-size="12">(年化回報 8%)</text>
+  </g>
+
+  <!-- Separator line -->
+  <line x1="520" y1="310" x2="520" y2="410" stroke="#1E3A5F" stroke-width="1"/>
+</svg>

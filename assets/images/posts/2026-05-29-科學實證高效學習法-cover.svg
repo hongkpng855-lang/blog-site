@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#0f3460"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 背景 -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- 背景裝飾圓圈 -->
+  <circle cx="450" cy="80" r="60" fill="#0f3460" opacity="0.3"/>
+  <circle cx="60" cy="440" r="80" fill="#e94560" opacity="0.08"/>
+  <circle cx="400" cy="400" r="40" fill="#533483" opacity="0.2"/>
+
+  <!-- 書本（打開的樣子） -->
+  <g filter="url(#shadow)" transform="translate(256,220)">
+    <!-- 左頁 -->
+    <path d="M-10,-75 L-10,75" stroke="#533483" stroke-width="2" fill="none"/>
+    <path d="M-10,-75 Q-80,-55 -130,-40 L-130,60 Q-80,45 -10,75 Z" fill="#2d2d44" stroke="#533483" stroke-width="2"/>
+    <!-- 右頁 -->
+    <path d="M10,-75 L10,75" stroke="#e94560" stroke-width="2" fill="none"/>
+    <path d="M10,-75 Q80,-55 130,-40 L130,60 Q80,45 10,75 Z" fill="#1e2a4a" stroke="#e94560" stroke-width="2"/>
+
+    <!-- 書本上的文字線條 -->
+    <line x1="-90" y1="-30" x2="-20" y2="-15" stroke="#8899aa" stroke-width="2" opacity="0.6"/>
+    <line x1="-95" y1="-10" x2="-20" y2="5" stroke="#8899aa" stroke-width="2" opacity="0.6"/>
+    <line x1="-100" y1="10" x2="-20" y2="25" stroke="#8899aa" stroke-width="2" opacity="0.6"/>
+    <line x1="-105" y1="30" x2="-20" y2="45" stroke="#8899aa" stroke-width="2" opacity="0.6"/>
+
+    <line x1="25" y1="-30" x2="90" y2="-20" stroke="#aabbcc" stroke-width="2" opacity="0.6"/>
+    <line x1="25" y1="-10" x2="95" y2="0" stroke="#aabbcc" stroke-width="2" opacity="0.6"/>
+    <line x1="25" y1="10" x2="100" y2="20" stroke="#aabbcc" stroke-width="2" opacity="0.6"/>
+    <line x1="25" y1="30" x2="105" y2="40" stroke="#aabbcc" stroke-width="2" opacity="0.6"/>
+  </g>
+
+  <!-- 發光燈泡（頭腦靈感） -->
+  <g transform="translate(370,130)" filter="url(#softglow)">
+    <path d="M0,-40 Q-20,-40 -20,-20 Q-20,-5 -10,5 L-10,15 L10,15 L10,5 Q20,-5 20,-20 Q20,-40 0,-40 Z" fill="#f0c040" opacity="0.9"/>
+    <rect x="-6" y="18" width="12" height="5" rx="2" fill="#f0c040" opacity="0.7"/>
+    <line x1="-3" y1="26" x2="-3" y2="35" stroke="#f0c040" stroke-width="2" opacity="0.5"/>
+    <line x1="3" y1="26" x2="3" y2="35" stroke="#f0c040" stroke-width="2" opacity="0.5"/>
+    <!-- 光線 -->
+    <line x1="-30" y1="-25" x2="-40" y2="-30" stroke="#f0c040" stroke-width="2" opacity="0.4"/>
+    <line x1="30" y1="-25" x2="40" y2="-30" stroke="#f0c040" stroke-width="2" opacity="0.4"/>
+    <line x1="0" y1="-48" x2="0" y2="-58" stroke="#f0c040" stroke-width="2" opacity="0.4"/>
+    <line x1="-25" y1="-40" x2="-35" y2="-48" stroke="#f0c040" stroke-width="2" opacity="0.3"/>
+    <line x1="25" y1="-40" x2="35" y2="-48" stroke="#f0c040" stroke-width="2" opacity="0.3"/>
+  </g>
+
+  <!-- 鉛筆 -->
+  <g filter="url(#shadow)" transform="translate(130,350) rotate(-30)">
+    <rect x="0" y="0" width="10" height="80" fill="#e94560" rx="1"/>
+    <polygon points="0,0 10,0 5,-20" fill="#533483"/>
+    <rect x="0" y="80" width="10" height="8" fill="#2d2d44" rx="1"/>
+  </g>
+
+  <!-- 齒輪（思考） -->
+  <g transform="translate(380,340)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="#e94560" stroke-width="3" opacity="0.5"/>
+    <circle cx="0" cy="0" r="8" fill="#e94560" opacity="0.4"/>
+    <line x1="0" y1="-23" x2="0" y2="-33" stroke="#e94560" stroke-width="4" opacity="0.5"/>
+    <line x1="0" y1="23" x2="0" y2="33" stroke="#e94560" stroke-width="4" opacity="0.5"/>
+    <line x1="-23" y1="0" x2="-33" y2="0" stroke="#e94560" stroke-width="4" opacity="0.5"/>
+    <line x1="23" y1="0" x2="33" y2="0" stroke="#e94560" stroke-width="4" opacity="0.5"/>
+  </g>
+
+  <!-- 記憶 / 腦波節點 -->
+  <g opacity="0.3">
+    <circle cx="100" cy="120" r="4" fill="#e94560"/>
+    <circle cx="140" cy="100" r="4" fill="#e94560"/>
+    <circle cx="120" cy="150" r="4" fill="#e94560"/>
+    <line x1="100" y1="120" x2="140" y2="100" stroke="#e94560" stroke-width="1"/>
+    <line x1="100" y1="120" x2="120" y2="150" stroke="#e94560" stroke-width="1"/>
+    <line x1="140" y1="100" x2="120" y2="150" stroke="#e94560" stroke-width="1"/>
+  </g>
+
+  <!-- 底部文字區域 -->
+  <rect x="0" y="420" width="512" height="92" fill="#0d1117" opacity="0.6"/>
+  <text x="256" y="452" text-anchor="middle" fill="#aabbcc" font-family="Arial, sans-serif" font-size="16" font-weight="bold" letter-spacing="3">科學實證高效學習法</text>
+  <text x="256" y="478" text-anchor="middle" fill="#8899aa" font-family="Arial, sans-serif" font-size="11" letter-spacing="2">費曼技巧 · 主動回憶 · 間隔重複 · 交錯練習</text>
+
+  <!-- 左上標籤 -->
+  <rect x="0" y="0" width="80" height="28" fill="#e94560" opacity="0.8"/>
+  <text x="40" y="19" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-size="12" font-weight="bold">LEARNING</text>
+</svg>

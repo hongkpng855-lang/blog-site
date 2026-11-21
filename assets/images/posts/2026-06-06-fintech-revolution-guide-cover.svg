@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#142442;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1B2A4A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a5f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#152d4e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d1b69;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e1360;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="75" x2="800" y2="75" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="150" x2="800" y2="150" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="225" x2="800" y2="225" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#fff" stroke-width="0.5"/>
+    <line x1="0" y1="375" x2="800" y2="375" stroke="#fff" stroke-width="0.5"/>
+    <line x1="100" y1="0" x2="100" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="200" y1="0" x2="200" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="300" y1="0" x2="300" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="400" y1="0" x2="400" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="500" y1="0" x2="500" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="600" y1="0" x2="600" y2="450" stroke="#fff" stroke-width="0.5"/>
+    <line x1="700" y1="0" x2="700" y2="450" stroke="#fff" stroke-width="0.5"/>
+  </g>
+
+  <!-- Abstract circuit board elements -->
+  <g opacity="0.15" stroke="#60a5fa" stroke-width="1.5" fill="none">
+    <path d="M680,50 L720,50 L720,90 L760,90"/>
+    <circle cx="760" cy="90" r="3" fill="#60a5fa"/>
+    <path d="M80,400 L120,400 L120,360 L160,360"/>
+    <circle cx="160" cy="360" r="3" fill="#60a5fa"/>
+    <path d="M600,380 L640,380 L640,350 L680,350"/>
+    <circle cx="680" cy="350" r="3" fill="#60a5fa"/>
+    <path d="M30,80 L70,80 L70,120 L110,120"/>
+    <circle cx="110" cy="120" r="3" fill="#60a5fa"/>
+  </g>
+
+  <!-- Floating "cards" abstract representation -->
+  <rect x="55" y="180" width="120" height="75" rx="8" fill="url(#card1)" stroke="#3b82f6" stroke-width="0.5" opacity="0.4"/>
+  <rect x="75" y="195" width="80" height="8" rx="4" fill="#3b82f6" opacity="0.6"/>
+  <rect x="75" y="210" width="60" height="5" rx="2.5" fill="#2563eb" opacity="0.4"/>
+  <rect x="75" y="222" width="45" height="5" rx="2.5" fill="#2563eb" opacity="0.3"/>
+  <rect x="75" y="235" width="70" height="5" rx="2.5" fill="#2563eb" opacity="0.35"/>
+
+  <rect x="145" y="150" width="120" height="75" rx="8" fill="url(#card2)" stroke="#8b5cf6" stroke-width="0.5" opacity="0.4"/>
+  <rect x="165" y="165" width="80" height="8" rx="4" fill="#8b5cf6" opacity="0.6"/>
+  <rect x="165" y="180" width="60" height="5" rx="2.5" fill="#7c3aed" opacity="0.4"/>
+  <rect x="165" y="192" width="45" height="5" rx="2.5" fill="#7c3aed" opacity="0.3"/>
+  <rect x="165" y="205" width="70" height="5" rx="2.5" fill="#7c3aed" opacity="0.35"/>
+
+  <!-- Center icon: phone/mobile payment abstract -->
+  <g transform="translate(310, 150)" filter="url(#glow)">
+    <!-- Phone outline -->
+    <rect x="0" y="0" width="50" height="85" rx="6" fill="none" stroke="#60a5fa" stroke-width="1.5"/>
+    <rect x="3" y="3" width="44" height="79" rx="4" fill="#1e40af" opacity="0.3"/>
+    <!-- Screen glow -->
+    <rect x="8" y="12" width="34" height="60" rx="2" fill="#1e3a8a" opacity="0.5"/>
+    <circle cx="25" cy="77" r="2" fill="#60a5fa" opacity="0.7"/>
+    <!-- Dollar/currency symbol on screen -->
+    <text x="25" y="48" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#60a5fa" text-anchor="middle" opacity="0.8">$</text>
+  </g>
+
+  <!-- Connected dots (network) -->
+  <g fill="#60a5fa" opacity="0.3">
+    <circle cx="360" cy="150" r="2.5"/>
+    <circle cx="360" cy="235" r="2.5"/>
+    <circle cx="430" cy="180" r="2.5"/>
+    <circle cx="490" cy="150" r="2.5"/>
+    <circle cx="490" cy="235" r="2.5"/>
+    <circle cx="430" cy="300" r="2.5"/>
+  </g>
+  <g stroke="#60a5fa" stroke-width="0.8" opacity="0.15" fill="none">
+    <line x1="360" y1="150" x2="430" y2="180"/>
+    <line x1="430" y1="180" x2="490" y2="150"/>
+    <line x1="430" y1="180" x2="490" y2="235"/>
+    <line x1="360" y1="235" x2="430" y2="180"/>
+    <line x1="430" y1="180" x2="430" y2="300"/>
+  </g>
+
+  <!-- Global connection arcs -->
+  <g opacity="0.08" fill="none" stroke="#3b82f6" stroke-width="1">
+    <path d="M 500,280 Q 600,200 700,280"/>
+    <path d="M 520,290 Q 600,220 680,290"/>
+  </g>
+
+  <!-- Small globe dots -->
+  <g fill="#3b82f6" opacity="0.06">
+    <circle cx="600" cy="250" r="40" fill="none" stroke="#3b82f6" stroke-width="0.5"/>
+    <circle cx="600" cy="250" r="25" fill="none" stroke="#3b82f6" stroke-width="0.3"/>
+  </g>
+
+  <!-- Title text -->
+  <text x="400" y="110" font-family="'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif" font-size="34" font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="2">
+    FinTech 革命指南
+  </text>
+  <text x="400" y="145" font-family="'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif" font-size="15" fill="#94a3b8" text-anchor="middle" letter-spacing="1">
+    2026 數位金融新時代的完整地圖
+  </text>
+
+  <!-- Bottom tagline -->
+  <rect x="240" y="370" width="320" height="36" rx="18" fill="url(#accent)" opacity="0.15"/>
+  <rect x="240" y="370" width="320" height="36" rx="18" fill="none" stroke="url(#accent)" stroke-width="0.5"/>
+  <text x="400" y="394" font-family="'Noto Sans TC', 'Microsoft JhengHei', Arial, sans-serif" font-size="13" fill="#93c5fd" text-anchor="middle" letter-spacing="1">
+    手機 x 金融 x AI 的三位一體革命
+  </text>
+
+  <!-- Subtle decorative elements -->
+  <g opacity="0.04">
+    <rect x="650" y="100" width="80" height="80" rx="16" fill="none" stroke="#60a5fa" stroke-width="1" transform="rotate(30, 690, 140)"/>
+    <rect x="60" y="300" width="60" height="60" rx="12" fill="none" stroke="#8b5cf6" stroke-width="1" transform="rotate(-20, 90, 330)"/>
+  </g>
+
+  <!-- Bottom right arrow trend -->
+  <g opacity="0.07" fill="none" stroke="#34d399" stroke-width="2">
+    <path d="M 680,320 Q 710,290 740,300 L 740,320"/>
+    <path d="M 680,320 Q 710,290 740,300"/>
+  </g>
+</svg>

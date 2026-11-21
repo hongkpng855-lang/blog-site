@@ -1,0 +1,172 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#1a2744;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1f3c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#0088ff;stop-opacity:0.1" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d4ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0088ff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="hublight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00e5ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2979ff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <circle cx="400" cy="225" r="250" fill="url(#glow)" filter="url(#softglow)"/>
+
+  <!-- Grid lines -->
+  <g opacity="0.08" stroke="#00d4ff" stroke-width="0.5">
+    <line x1="0" y1="50" x2="800" y2="50"/>
+    <line x1="0" y1="100" x2="800" y2="100"/>
+    <line x1="0" y1="150" x2="800" y2="150"/>
+    <line x1="0" y1="200" x2="800" y2="200"/>
+    <line x1="0" y1="250" x2="800" y2="250"/>
+    <line x1="0" y1="300" x2="800" y2="300"/>
+    <line x1="0" y1="350" x2="800" y2="350"/>
+    <line x1="0" y1="400" x2="800" y2="400"/>
+    <line x1="100" y1="0" x2="100" y2="450"/>
+    <line x1="200" y1="0" x2="200" y2="450"/>
+    <line x1="300" y1="0" x2="300" y2="450"/>
+    <line x1="400" y1="0" x2="400" y2="450"/>
+    <line x1="500" y1="0" x2="500" y2="450"/>
+    <line x1="600" y1="0" x2="600" y2="450"/>
+    <line x1="700" y1="0" x2="700" y2="450"/>
+  </g>
+
+  <!-- House outline (smart home icon) -->
+  <g transform="translate(230, 80)">
+    <path d="M100 200 L100 80 L170 20 L240 80 L240 200 Z" fill="none" stroke="#00d4ff" stroke-width="2.5" opacity="0.3"/>
+    <!-- Roof -->
+    <path d="M80 80 L170 10 L260 80" fill="none" stroke="#00d4ff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Antenna / signal -->
+    <line x1="170" y1="10" x2="170" y2="-10" stroke="#0088ff" stroke-width="1.5" stroke-dasharray="3,3"/>
+    <circle cx="170" cy="-15" r="4" fill="none" stroke="#00d4ff" stroke-width="1.5"/>
+    <!-- Signal waves -->
+    <path d="M155 -25 Q170 -35 185 -25" fill="none" stroke="#0088ff" stroke-width="1" opacity="0.5"/>
+    <path d="M145 -35 Q170 -50 195 -35" fill="none" stroke="#0088ff" stroke-width="1" opacity="0.3"/>
+    <!-- Windows -->
+    <rect x="120" y="100" width="30" height="35" rx="2" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.5"/>
+    <rect x="190" y="100" width="30" height="35" rx="2" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.5"/>
+    <!-- Door -->
+    <rect x="155" y="140" width="30" height="55" rx="2" fill="none" stroke="#0088ff" stroke-width="1.5" opacity="0.5"/>
+    <!-- Wi-Fi in house -->
+    <path d="M130 60 Q150 45 170 60" fill="none" stroke="#00e5ff" stroke-width="1.5" opacity="0.6"/>
+    <path d="M120 50 Q150 30 180 50" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.4"/>
+    <path d="M110 40 Q150 15 190 40" fill="none" stroke="#00e5ff" stroke-width="0.8" opacity="0.25"/>
+  </g>
+
+  <!-- Connected devices around the house -->
+  <!-- Lightbulb top-left -->
+  <g transform="translate(120, 70)">
+    <circle cx="0" cy="0" r="12" fill="none" stroke="#ffd54f" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="0" cy="0" r="5" fill="#ffd54f" opacity="0.4"/>
+    <path d="M-8 -18 Q0 -25 8 -18" fill="none" stroke="#ffd54f" stroke-width="1" opacity="0.5"/>
+    <!-- Connection line -->
+    <path d="M0 12 Q50 30 100 50" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+  </g>
+
+  <!-- Camera top-right -->
+  <g transform="translate(560, 80)">
+    <rect x="-10" y="-8" width="20" height="14" rx="3" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="0" cy="-1" r="5" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.7"/>
+    <circle cx="0" cy="-1" r="2" fill="#00d4ff" opacity="0.3"/>
+    <path d="M0 8 L0 30" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+    <path d="M0 30 Q-50 50 -100 70" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+  </g>
+
+  <!-- Smart speaker bottom -->
+  <g transform="translate(560, 310)">
+    <rect x="-12" y="-18" width="24" height="30" rx="4" fill="none" stroke="#2979ff" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="0" cy="-6" r="4" fill="#2979ff" opacity="0.3"/>
+    <path d="M-15 -10 Q-25 -20 -20 -30" fill="none" stroke="#2979ff" stroke-width="1" opacity="0.4"/>
+    <path d="M15 -10 Q25 -20 20 -30" fill="none" stroke="#2979ff" stroke-width="1" opacity="0.4"/>
+    <path d="M0 12 L0 40" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+  </g>
+
+  <!-- Sensor bottom-left -->
+  <g transform="translate(150, 320)">
+    <rect x="-8" y="-8" width="16" height="16" rx="3" fill="none" stroke="#00e5ff" stroke-width="1.5" opacity="0.7"/>
+    <text x="0" y="3" text-anchor="middle" fill="#00e5ff" font-size="10" font-family="Arial" opacity="0.6">Z</text>
+    <path d="M0 8 Q50 20 100 30" fill="none" stroke="#00d4ff" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+  </g>
+
+  <!-- Central hub -->
+  <g transform="translate(400, 225)">
+    <circle cx="0" cy="0" r="25" fill="none" stroke="url(#hublight)" stroke-width="2" opacity="0.8"/>
+    <circle cx="0" cy="0" r="12" fill="url(#hublight)" opacity="0.15"/>
+    <circle cx="0" cy="0" r="3" fill="#00e5ff" filter="url(#neon)"/>
+    <!-- Hub connection rings -->
+    <circle cx="0" cy="0" r="40" fill="none" stroke="#00d4ff" stroke-width="0.8" stroke-dasharray="3,5" opacity="0.3">
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#0088ff" stroke-width="0.6" stroke-dasharray="2,6" opacity="0.2">
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="15s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Connection lines from hub to devices -->
+  <g stroke="#00d4ff" stroke-width="0.8" stroke-dasharray="4,6" opacity="0.25">
+    <line x1="400" y1="225" x2="180" y2="225"/>
+    <line x1="400" y1="225" x2="600" y2="225"/>
+    <line x1="400" y1="225" x2="400" y2="380"/>
+    <line x1="400" y1="225" x2="400" y2="70"/>
+  </g>
+
+  <!-- Data particles -->
+  <g fill="#00d4ff" opacity="0.4">
+    <circle cx="290" cy="225" r="1.5">
+      <animate attributeName="cx" values="400;180;400" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="225" r="1.5">
+      <animate attributeName="cx" values="400;600;400" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="400" cy="150" r="1.5">
+      <animate attributeName="cy" values="225;70;225" dur="7s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.4;0;0.4" dur="7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Title area -->
+  <g transform="translate(400, 420)">
+    <!-- Category badge -->
+    <rect x="-40" y="-10" width="80" height="20" rx="10" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.5"/>
+    <text x="0" y="4" text-anchor="middle" fill="#00d4ff" font-size="11" font-family="system-ui, sans-serif" opacity="0.8">科技．物聯網</text>
+  </g>
+
+  <!-- Decorative dots -->
+  <g fill="#00d4ff" opacity="0.15">
+    <circle cx="50" cy="50" r="2"/>
+    <circle cx="750" cy="40" r="1.5"/>
+    <circle cx="700" cy="420" r="2"/>
+    <circle cx="100" cy="400" r="1.5"/>
+    <circle cx="30" cy="200" r="1"/>
+    <circle cx="770" cy="200" r="1"/>
+    <circle cx="650" cy="60" r="1.5"/>
+    <circle cx="180" cy="420" r="1"/>
+  </g>
+</svg>

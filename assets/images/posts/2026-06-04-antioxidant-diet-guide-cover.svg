@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2d5a3e;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#e8c84a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5d742;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)" />
+
+  <!-- Decorative circles -->
+  <circle cx="650" cy="80" r="180" fill="#2a5a3e" opacity="0.3" />
+  <circle cx="150" cy="380" r="140" fill="#1f4830" opacity="0.25" />
+
+  <!-- Leaf decorations -->
+  <g opacity="0.15" fill="#5a9a6e">
+    <ellipse cx="100" cy="80" rx="60" ry="25" transform="rotate(-30 100 80)" />
+    <ellipse cx="140" cy="70" rx="50" ry="20" transform="rotate(15 140 70)" />
+    <ellipse cx="680" cy="380" rx="70" ry="28" transform="rotate(-45 680 380)" />
+    <ellipse cx="730" cy="370" rx="55" ry="22" transform="rotate(20 730 370)" />
+  </g>
+
+  <!-- Berry cluster (top right) -->
+  <g>
+    <circle cx="620" cy="120" r="18" fill="#c0392b" opacity="0.9" />
+    <circle cx="640" cy="105" r="14" fill="#e74c3c" opacity="0.9" />
+    <circle cx="655" cy="120" r="16" fill="#d35400" opacity="0.85" />
+    <circle cx="635" cy="132" r="12" fill="#c0392b" opacity="0.8" />
+    <!-- highlight -->
+    <circle cx="616" cy="116" r="4" fill="#fff" opacity="0.4" />
+  </g>
+
+  <!-- Citrus slice (left area) -->
+  <g transform="translate(180, 340)">
+    <circle cx="0" cy="0" r="40" fill="#f39c12" />
+    <circle cx="0" cy="0" r="35" fill="#f1c40f" />
+    <circle cx="0" cy="0" r="30" fill="none" stroke="#e67e22" stroke-width="2" />
+    <line x1="0" y1="0" x2="28" y2="10" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+    <line x1="0" y1="0" x2="-20" y2="22" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+    <line x1="0" y1="0" x2="-25" y2="-15" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+    <line x1="0" y1="0" x2="15" y2="-25" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+    <line x1="0" y1="0" x2="0" y2="-30" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+    <line x1="0" y1="0" x2="-30" y2="0" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+    <line x1="0" y1="0" x2="30" y2="-5" stroke="#e67e22" stroke-width="1.5" opacity="0.6" />
+  </g>
+
+  <!-- Avocado illustration (center) -->
+  <g transform="translate(400, 320)">
+    <ellipse cx="0" cy="0" rx="45" ry="55" fill="#7dcea0" />
+    <ellipse cx="0" cy="4" rx="35" ry="45" fill="#a9dfbf" />
+    <circle cx="0" cy="8" r="18" fill="#f5b041" />
+    <circle cx="0" cy="8" r="10" fill="#e67e22" />
+    <circle cx="0" cy="8" r="5" fill="#a04000" />
+  </g>
+
+  <!-- Nuts scattered (bottom) -->
+  <g fill="#c68c53">
+    <ellipse cx="300" cy="380" rx="10" ry="7" transform="rotate(30 300 380)" />
+    <ellipse cx="320" cy="390" rx="10" ry="7" transform="rotate(-15 320 390)" />
+    <ellipse cx="340" cy="378" rx="10" ry="7" transform="rotate(45 340 378)" />
+    <ellipse cx="500" cy="385" rx="10" ry="7" transform="rotate(10 500 385)" />
+    <ellipse cx="520" cy="375" rx="10" ry="7" transform="rotate(-30 520 375)" />
+  </g>
+
+  <!-- Blueberries (scattered) -->
+  <circle cx="450" cy="370" r="7" fill="#2e86c1" />
+  <circle cx="460" cy="380" r="6" fill="#2471a3" />
+  <circle cx="440" cy="382" r="5" fill="#2e86c1" />
+
+  <!-- Kale / green leaves bottom center -->
+  <g transform="translate(370, 400)" opacity="0.8">
+    <ellipse cx="0" cy="-15" rx="25" ry="8" fill="#27ae60" transform="rotate(-20)" />
+    <ellipse cx="20" cy="-10" rx="22" ry="7" fill="#2ecc71" transform="rotate(15)" />
+    <ellipse cx="-15" cy="-10" rx="20" ry="6" fill="#58d68d" transform="rotate(-40)" />
+  </g>
+
+  <!-- Title text -->
+  <text x="400" y="90" font-family="Noto Sans TC, system-ui, sans-serif" font-size="42" font-weight="bold" fill="#f5d742" text-anchor="middle" letter-spacing="1">抗氧化飲食完全指南</text>
+
+  <!-- Subtitle -->
+  <text x="400" y="140" font-family="Noto Sans TC, system-ui, sans-serif" font-size="18" fill="#a0d8b0" text-anchor="middle" letter-spacing="2">從藍區飲食到地中海飲食</text>
+  <text x="400" y="170" font-family="Noto Sans TC, system-ui, sans-serif" font-size="16" fill="#7cb88a" text-anchor="middle" letter-spacing="1">吃的抗發炎・對抗老化・科學實證</text>
+
+  <!-- Bottom bar -->
+  <rect x="250" y="200" width="300" height="3" rx="2" fill="url(#gold)" opacity="0.5" />
+
+  <!-- Badge - 2026 -->
+  <rect x="340" y="215" width="120" height="30" rx="15" fill="#f5d742" opacity="0.9" />
+  <text x="400" y="235" font-family="system-ui, sans-serif" font-size="14" font-weight="bold" fill="#1a3a2a" text-anchor="middle">2026 最新完整版</text>
+
+  <!-- Author line -->
+  <text x="400" y="430" font-family="Noto Sans TC, system-ui, sans-serif" font-size="12" fill="#5a8a6a" text-anchor="middle">GovFlow | 健康生活</text>
+</svg>

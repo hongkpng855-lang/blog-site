@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="heartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e74c3c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0392b;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="450" fill="url(#bg)"/>
+
+  <!-- Abstract heartbeat lines in background -->
+  <g opacity="0.08">
+    <path d="M0 200 Q50 150 100 200 Q150 250 200 200 Q250 150 300 200 Q350 250 400 200 Q450 150 500 200 Q550 250 600 200 Q650 150 700 200 Q750 250 800 200" stroke="#fff" stroke-width="2" fill="none"/>
+    <path d="M0 250 Q50 200 100 250 Q150 300 200 250 Q250 200 300 250 Q350 300 400 250 Q450 200 500 250 Q550 300 600 250 Q650 200 700 250 Q750 300 800 250" stroke="#fff" stroke-width="1.5" fill="none"/>
+  </g>
+
+  <!-- Floating particles -->
+  <g opacity="0.15">
+    <circle cx="120" cy="80" r="3" fill="#fff"/>
+    <circle cx="350" cy="60" r="2" fill="#fff"/>
+    <circle cx="620" cy="90" r="2.5" fill="#fff"/>
+    <circle cx="250" cy="380" r="2" fill="#fff"/>
+    <circle cx="550" cy="370" r="3" fill="#fff"/>
+    <circle cx="680" cy="350" r="2" fill="#fff"/>
+  </g>
+
+  <!-- Heart icon (center) -->
+  <g transform="translate(400, 170)" filter="url(#glow)">
+    <!-- Heart shape using path -->
+    <path d="M0 -40
+             C-60 -100, -150 -60, -150 0
+             C-150 50, -80 90, 0 140
+             C80 90, 150 50, 150 0
+             C150 -60, 60 -100, 0 -40Z"
+          fill="url(#heartGrad)" opacity="0.9"/>
+    <!-- Inner shine -->
+    <path d="M0 -20
+             C-35 -60, -90 -35, -90 0
+             C-90 30, -50 60, 0 100
+             C50 60, 90 30, 90 0
+             C90 -35, 35 -60, 0 -20Z"
+          fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  </g>
+
+  <!-- Pulse ring animation -->
+  <g opacity="0.3">
+    <circle cx="400" cy="170" r="110" fill="none" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="8 4"/>
+    <circle cx="400" cy="170" r="135" fill="none" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4 6" opacity="0.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="400" y="300" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="32" font-weight="bold" fill="#ffffff" filter="url(#shadow)">
+    心臟健康與心血管保養
+  </text>
+  <text x="400" y="340" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="18" fill="#a0c4ff" font-weight="300">
+    2026 科學實證護心策略完整指南
+  </text>
+
+  <!-- Bottom accent line -->
+  <line x1="300" y1="370" x2="500" y2="370" stroke="#e74c3c" stroke-width="2" opacity="0.6"/>
+
+  <!-- Small heartbeat monitor at bottom -->
+  <g transform="translate(360, 395)" opacity="0.4">
+    <rect x="0" y="0" width="80" height="25" rx="3" fill="none" stroke="#555" stroke-width="1"/>
+    <text x="40" y="17" text-anchor="middle" font-family="monospace" font-size="10" fill="#e74c3c">♥ 72 BPM</text>
+  </g>
+</svg>

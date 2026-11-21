@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B2A4A"/>
+      <stop offset="60%" style="stop-color:#2C3E6B"/>
+      <stop offset="100%" style="stop-color:#1a3a5c"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FB923C;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#E8D48B;stop-opacity:0.4"/>
+    </linearGradient>
+    <linearGradient id="gutGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8a87c"/>
+      <stop offset="50%" style="stop-color:#d4876a"/>
+      <stop offset="100%" style="stop-color:#c0765c"/>
+    </linearGradient>
+    <linearGradient id="microbeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ade80"/>
+      <stop offset="100%" style="stop-color:#22c55e"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#86efac;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#22c55e;stop-opacity:0.1"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c4b5fd;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.1"/>
+    </linearGradient>
+    <linearGradient id="card3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fcd34d;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:0.1"/>
+    </linearGradient>
+    <linearGradient id="card4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fc8181;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#ef4444;stop-opacity:0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="400" fill="url(#bgGrad)"/>
+  <!-- Subtle pattern -->
+  <g opacity="0.03">
+    <circle cx="50" cy="50" r="100" fill="white"/>
+    <circle cx="750" cy="350" r="150" fill="white"/>
+    <circle cx="200" cy="400" r="120" fill="white"/>
+  </g>
+  <!-- Title -->
+  <text x="55" y="70" font-family="system-ui, sans-serif" font-size="32" font-weight="700" fill="white">2026 香港人腸道健康實戰指南</text>
+  <text x="55" y="108" font-family="system-ui, sans-serif" font-size="17" fill="#9CA3AF">腸漏症 · 腸腦軸 · 微生物平衡——修復腸道嘅科學攻略</text>
+  <!-- Gut illustration (stylized intestines curve) -->
+  <path d="M55 140 Q80 130 110 150 Q140 170 170 145 Q200 120 230 140 Q260 160 290 140 Q320 120 350 145 Q380 170 410 150 Q440 130 470 155 Q500 180 520 160" stroke="url(#gutGrad)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Friendly microbes (small circles along gut) -->
+  <circle cx="80" cy="145" r="5" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="140" cy="155" r="4" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="200" cy="130" r="6" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="260" cy="155" r="5" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="320" cy="130" r="4" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="380" cy="145" r="5" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="440" cy="145" r="6" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="500" cy="165" r="4" fill="url(#microbeGrad)" filter="url(#glow)" opacity="0.8"/>
+  <!-- Brain icon (top right) connected to gut with dotted line (gut-brain axis) -->
+  <path d="M600 95 Q650 75 700 95" stroke="url(#brainGrad)" stroke-width="3" fill="none" stroke-dasharray="6,4" opacity="0.5"/>
+  <circle cx="650" cy="85" r="25" fill="url(#brainGrad)" opacity="0.15"/>
+  <circle cx="650" cy="85" r="15" fill="url(#brainGrad)" opacity="0.3"/>
+  <text x="650" y="90" text-anchor="middle" font-size="20">🧠</text>
+  <text x="650" y="75" text-anchor="middle" font-family="system-ui, sans-serif" font-size="11" fill="#a78bfa" font-weight="600">腸腦軸</text>
+  <!-- 4 info cards at bottom -->
+  <!-- Card 1: 腸漏修復 -->
+  <rect x="55" y="195" width="165" height="80" rx="10" fill="url(#card1)" stroke="#22c55e" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="72" y="222" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#86efac">🛡️ 腸漏修復</text>
+  <text x="72" y="243" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">L-Glutamine + Zinc</text>
+  <text x="72" y="260" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">修復腸道屏障</text>
+  <!-- Card 2: 腸腦軸 -->
+  <rect x="235" y="195" width="165" height="80" rx="10" fill="url(#card2)" stroke="#7c3aed" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="252" y="222" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#c4b5fd">🧠 腸腦軸</text>
+  <text x="252" y="243" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">情緒同腸道直接掛鉤</text>
+  <text x="252" y="260" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">90% 血清素嚟自腸道</text>
+  <!-- Card 3: 微生物平衡 -->
+  <rect x="415" y="195" width="165" height="80" rx="10" fill="url(#card3)" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="432" y="222" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#fcd34d">🦠 微生物平衡</text>
+  <text x="432" y="243" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">100 萬億細菌</text>
+  <text x="432" y="260" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">益生菌 × 益生元攻略</text>
+  <!-- Card 4: 4R 修復 -->
+  <rect x="595" y="195" width="165" height="80" rx="10" fill="url(#card4)" stroke="#ef4444" stroke-width="1" stroke-opacity="0.3"/>
+  <text x="612" y="222" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#fc8181">🔄 4R 修復方案</text>
+  <text x="612" y="243" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">Remove → Replace</text>
+  <text x="612" y="260" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">→ Reinoculate → Repair</text>
+  <!-- Stats bar at bottom -->
+  <rect x="55" y="300" width="705" height="45" rx="8" fill="white" fill-opacity="0.05" stroke="white" stroke-opacity="0.1" stroke-width="1"/>
+  <text x="100" y="327" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#FB923C">70%+</text>
+  <text x="130" y="327" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">香港人有腸道不適</text>
+  <line x1="250" y1="308" x2="250" y2="337" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+  <text x="300" y="327" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#FB923C">90%</text>
+  <text x="330" y="327" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">血清素由腸道製造</text>
+  <line x1="470" y1="308" x2="470" y2="337" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+  <text x="520" y="327" text-anchor="middle" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#FB923C">50%+</text>
+  <text x="550" y="327" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">IBS 患者同時有 SIBO</text>
+  <line x1="680" y1="308" x2="680" y2="337" stroke="white" stroke-opacity="0.15" stroke-width="1"/>
+  <text x="718" y="327" font-family="system-ui, sans-serif" font-size="11" fill="#9CA3AF">ESGov</text>
+  <!-- Decorative dots -->
+  <circle cx="730" cy="45" r="3" fill="#FB923C" opacity="0.5"/>
+  <circle cx="748" cy="55" r="2" fill="#FB923C" opacity="0.3"/>
+  <circle cx="755" cy="35" r="1.5" fill="#FB923C" opacity="0.4"/>
+  <!-- Bottom subtitle -->
+  <text x="55" y="370" font-family="system-ui, sans-serif" font-size="13" fill="#6B7280">由飲食到生活習慣——還返條腸一個公道</text>
+</svg>

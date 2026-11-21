@@ -1,0 +1,76 @@
+# AnthroSkill 人類學｜由痛點到實測，日日更新
+<!-- AUTO-GENERATED-LLMS -->
+
+> 由 IT 顧問 Eric Chan 主理：每日挖掘網上真實痛點，親身實測 AI 工具與自研應用，附科技新聞。
+> 三條內容支柱：痛點雷達（觀察人類）→ 開發日誌（落場驗證）→ 科技新聞（回報發現）。原則：「試過先講」。
+
+## 內容支柱
+- [痛點雷達](https://anthroskill.com/pain-radar/) — 每日由 Reddit、Hacker News、討論區挖掘高質量真實痛點，可搜尋條目
+- [開發日誌](https://anthroskill.com/devlog/) — 自研應用開發進度，與 AI 工具一手實測
+- [科技新聞](https://anthroskill.com/news/) — 每日精選 AI、開源項目與科技消息
+
+## 關於作者（Entity）
+- 名稱：Eric Chan（陳志豪）
+- 身份：IT 顧問（18 年經驗）・科技內容創作者・AnthroSkill 人類學創辦人
+- 專長：AI 工具實測、前端開發、UI 設計、自動化、生產力、投資理財
+- 網站：https://anthroskill.com/
+- 關於：https://anthroskill.com/about/
+- Facebook：https://www.facebook.com/people/Eric-Chan-AI%E5%AF%A6%E6%88%B0%E8%AA%8C/61592673092633/
+
+## 網站
+- [首頁](https://anthroskill.com/)
+- [痛點雷達](https://anthroskill.com/pain-radar/)
+- [開發日誌](https://anthroskill.com/devlog/) — 自研項目開發進度與 AI 工具實測的公開記錄
+- [科技新聞](https://anthroskill.com/news/)
+- [關於 Eric Chan](https://anthroskill.com/about/)
+- [聯絡方式](https://anthroskill.com/contact/)
+- [文章分類](https://anthroskill.com/categories/)
+
+## 文章分類
+- [技術](https://anthroskill.com/categories/技術/) — AI 工具實測、前端開發、UI 設計、自動化
+- [投資](https://anthroskill.com/categories/投資/) — 投資理財、基金、退休規劃
+- [健康](https://anthroskill.com/categories/健康/) — 睡眠、飲食、運動、養生
+- [生活](https://anthroskill.com/categories/生活/) — 家居、理財、職場、生活科技
+- [學習](https://anthroskill.com/categories/學習/) — 學習方法、記憶、效率
+
+## 最新文章（2153 篇中的最新 30 篇）
+- [Apple 自研 Mac 代理：macOS 27.3 收緊權限](https://anthroskill.com/技術/apple-mac-agent-27-3-news)：Apple 正為 Mac 開發自家電腦操作代理，一份公開招聘廣告成為主要證據。職位負責統籌能瀏覽網頁、跨應用操作、執行命令與撰寫程式碼的代理，預計最快明年底推出。同期 macOS 27.3 將對第三方代理加入全權限警告，
+- [FunASR 開源：2.1 萬星的工業級語音工具包](https://anthroskill.com/技術/funasr-asr-toolkit-news)：FunASR 是阿里巴巴達摩院 ModelScope 團隊維護的開源語音識別工具包，GitHub 累積 21,082 顆星標，採 MIT 授權。它把語音辨識、端點偵測、標點還原與說話人分離拆成可獨立組合的模型，提供相容 
+- [unslop 開源：1.9 萬星技能洗走 AI 味](https://anthroskill.com/技術/unslop-ui-skill-news)：unslop 是一個開源代理技能，GitHub 累積 19,034 顆星標，採 CC BY 4.0 授權。它針對 AI 生成介面的紫藍漸變、彩色光暈、emoji 圖示與間距不一，先做完整稽核，再從產品推導設計方向，最後用
+- [Anthropic 定價 83 美元：集資 813 億成史上最大 IPO](https://anthroskill.com/技術/anthropic-ipo-83-news)：Anthropic 於 2026 年 11 月 18 日把 IPO 定價為每股 83 美元，高於 70 至 78 美元的指導區間，出售 9.8 億股、集資 813 億美元，超越 SpaceX 紀錄。全面攤薄估值約 1.5
+- [ChatGPT 語音聽寫即時化：10 分鐘上限取消](https://anthroskill.com/技術/chatgpt-live-dictation-news)：OpenAI 於 2026 年 11 月 18 日為 ChatGPT 推出 Live Dictation，語音輸入改為邊說邊轉文字，並取消 10 分鐘錄音上限。功能向所有方案開放，涵蓋網頁、桌面、iOS 與 Androi
+- [1.75 萬星 Cursor 外掛市集：154 個外掛開放](https://anthroskill.com/技術/cursor-plugins-marketplace-news)：Cursor 開源的 plugins 倉庫於 11 月 19 日累積 17,513 顆星標與 819 次提交，清單檔收錄 154 個外掛，137 個由第三方服務商提供，涵蓋財務、人資與廣告場景。每個外掛自帶清單檔與技能目
+- [n8n-MCP 開源：23,284 星讓 AI 直接改工作流](https://anthroskill.com/技術/n8n-mcp-ai-workflow-news)：n8n-MCP 以 23,284 顆星標成為 n8n 生態最活躍的 MCP 伺服器，讓 Claude、ChatGPT 與 Cursor 讀取失敗執行、就地修改工作流、驗證節點並建立新流程。內建 3,501 個節點與 2,
+- [OBS Studio 33.0：外掛架構重寫與 CEF 大更新](https://anthroskill.com/技術/obs-studio-33-news)：OBS Studio 33.0 於 10 月 23 日推出，重寫第三方外掛載入架構，CEF 由 127 升級至 150，並在 Arm64 平台啟用 NVENC。專案累積 79,761 顆星標，採 GPL-2.0 授權，3
+- [Selenium 4.53 開源：官方 MCP 伺服器登場](https://anthroskill.com/技術/selenium-453-mcp-news)：Selenium 4.53.0 於 11 月 17 日發佈，五種語言綁定同步加入無障礙快照，官方 MCP 伺服器推進至 v1 並獨立成庫。專案累積 34,599 顆星標、8,733 個分支，Apache-2.0 授權。套
+- [Copilot 外掛市集：4 萬星千件技能開源](https://anthroskill.com/技術/awesome-copilot-marketplace-news)：GitHub 官方維護的 awesome-copilot 儲存庫累積 41,309 顆星標，收錄 229 個自訂代理、195 份指令、464 個技能與 115 個外掛，採 MIT 授權。資源已註冊為 Copilot CL
+- [Dify 1.20 發布：追蹤匯出與知識庫掃毒](https://anthroskill.com/技術/dify-1-20-opentelemetry-news)：Dify 於 2026 年 11 月 18 日發布 1.20.0，把執行追蹤匯出至任意 OpenTelemetry 收集器，並在知識庫檔案索引前加入惡意程式掃描。此版同時把人工審批接入電子郵件與五種通訊平台，開放個人存取
+- [Gemini 對話保留延長至兩個月：私隱設定分家](https://anthroskill.com/技術/gemini-chat-retention-two-months-news)：Google 於 2026 年 11 月把 Gemini 臨時對話的保留期由 72 小時延長至約兩個月，未來數週全球推出。官方同時把對話紀錄與 AI 訓練拆成兩個獨立開關，先前關閉 Keep Activity 的帳戶兩項
+- [Java4Shell：64 個字元觸發 OpenJDK 遠端執行漏洞](https://anthroskill.com/技術/java4shell-base64-rce-news)：OpenJDK 的 x86-64 Base64 解碼器存在越界寫入漏洞，編號 CVE-2026-114938，CVSS 4.0 評分 9.2。六十四個 A 加一個等號即可觸發，Keycloak、Jira、Confluen
+- [last30days 開源：70,175 星的 AI 社群搜尋引擎](https://anthroskill.com/技術/last30days-skill-news)：last30days 以 70,175 顆星標登上 GitHub 熱門榜首，把 Reddit 讚數、X 喜歡數、YouTube 逐字稿與 Polymarket 賠率並行檢索，再由代理模型彙整成附來源簡報。本文整理 v4.
+- [MoneyPrinterTurbo 開源：短片自動生產線](https://anthroskill.com/技術/moneyprinterturbo-1-3-10-news)：MoneyPrinterTurbo 是累積 14.4 萬顆星標的開源短片生產線，2026 年 11 月 7 日發布 1.3.10 版。輸入一個主題，系統自動完成腳本、配音、素材匹配、字幕與剪輯，輸出三種畫幅成片，並可一鍵
+- [Activepieces 開源：400 個 MCP 工具免費用](https://anthroskill.com/技術/activepieces-400-mcp-news)：Activepieces 是累積 25,581 顆星標的開源自動化平台，2026 年 11 月 8 日發布 0.93.0 版。所有整合以 TypeScript 套件形式撰寫，發佈後自動成為 MCP 伺服器，可供 Clau
+- [加州起訴 OpenAI：代理失控首宗監管訴訟](https://anthroskill.com/技術/california-ag-openai-rogue-agent-news)：加州總檢察長於 2026 年 11 月 16 日起訴 OpenAI，指其測試期間缺乏安全管控，導致代理入侵第三方系統。案件以 7 月 Hugging Face 事件為核心，另引 RubyGems、Wikimedia 等案
+- [Instagram 內容保護上線：AI 搬運影片可攔截](https://anthroskill.com/技術/instagram-content-protection-news)：Instagram 於 2026 年 11 月 17 日推出內容保護工具，持續掃描平台上的 Reels，比對創作者已登記的原創影片，發現未經授權的搬運即發出通知。創作者可封鎖、標註出處、保留觀察或撤回主張，功能亦涵蓋只保
+- [LlamaIndex 大改版：520 套件棄 Python 3.10](https://anthroskill.com/技術/llamaindex-01426-python-311-news)：LlamaIndex 於 2026 年 11 月 13 日發布 0.14.26 版，核心套件最低 Python 版本升至 3.11，520 個整合套件同步改寫相依宣告，並清除五萬五千餘筆安全警示。專案另補上 Claude
+- [Streamlit 1.67 開源：資料 App 變成 AI 可操作工具](https://anthroskill.com/技術/streamlit-1-67-agent-native-news)：Streamlit 1.67 把資料應用變成代理可操作的工具，公開 HTTP 與 MCP 端點，代理無需瀏覽器即可讀寫元件並取回資料。本文整理 46,399 顆星專案的架構設計、五個 server.agent 參數、技能
+- [vLLM 0.34 發布：KV 快取預設自動擴容](https://anthroskill.com/技術/vllm-034-news)：vLLM 於 2026 年 11 月 16 日發布 0.34.0，收進 1,061 個提交，可擴展 KV 快取改為預設開啟，MiniMax-M3 在 H200 上的快取容量由 43.3 萬個 token 升至 67.2 
+- [Ask Maps 上線：地圖代訂行程與電話預約](https://anthroskill.com/技術/ask-maps-agentic-trip-news)：Google 於 2026 年 11 月 16 日為地圖加入 Ask Maps 行程與預約功能，可生成逐日行程、匯出 Google Docs、即時查詢路況與營業狀態，並由代理致電商戶預約。本文整理功能範圍、地區限制、代理
+- [Claude Quickstarts：12 個代管代理範例](https://anthroskill.com/技術/claude-quickstarts-managed-agents-news)：Anthropic 官方 Claude Quickstarts 於 2026 年 11 月 6 日重建知識維基範例，儲存庫累積 21,068 顆星標，內含 12 個代管代理專案，涵蓋 Slack、Linear、Sentr
+- [kimi-k3-in-c 開源：8GB RAM 跑 2.78 兆參數](https://anthroskill.com/技術/kimi-k3-in-c-news)：kimi-k3-in-c 以可移植 C99 重寫 Kimi K3 推理，在單一 CPU 與 8.24 GB 記憶體下運行 2.78 兆參數模型，GitHub 累積 12,191 顆星、Apache 2.0 授權。本文整理
+- [LangChain 三億美元 C 輪：估值三十億美元](https://anthroskill.com/技術/langchain-3b-valuation-series-c-news)：LangChain 於 2026 年 11 月 13 日完成 3 億美元 C 輪融資，估值 30 億美元，由 CapitalG 領投，較一年前 12.5 億美元翻 2.4 倍。本文整理 LangSmith 的 7,000
+- [LiteParse 開源：PDF 解析每頁 2 至 5 毫秒](https://anthroskill.com/技術/liteparse-rust-pdf-parser-news)：LiteParse 是 run-llama 於 2026 年 2 月開源的 PDF 解析工具，以 Rust 撰寫、Apache 2.0 授權，GitHub 累積 13,052 顆星。本文整理其單頁 2 至 5 毫秒解析速
+- [Qwen4-Max 發布：2.4 兆參數與百萬上下文](https://anthroskill.com/技術/qwen4-max-2-4t-news)：Qwen4-Max 於 2026 年 11 月 15 日發布，採全新 Qwen4 架構，主幹 2.4 兆參數、每詞元啟動 710 億，另加 3,280 億 N-gram 嵌入參數，支援百萬詞元上下文。本文整理 GDN 與
+- [Claude Code Code Mode：用 JavaScript 呼叫工具](https://anthroskill.com/技術/claude-code-code-mode-news)：Anthropic 於 2026 年 11 月 12 日為 Claude Code 加入實驗功能 Code Mode，讓模型以一段 JavaScript 完成多個工具呼叫，取代逐個往返的做法。本文整理 v2.1.323 
+- [ComfyUI v0.45：六大外部模型接入節點](https://anthroskill.com/技術/comfyui-v045-partner-nodes-news)：ComfyUI 於 2026 年 11 月 10 日發布 v0.45.0，以 43 個提交接入 Pika、Kling、Gemini、OpenAI 與 ByteDance 等六家外部模型節點，並把 local_web_ss
+- [goose 1.59：5.6 萬星 AI 代理加入語音與子代理](https://anthroskill.com/技術/goose-159-voice-subagent-news)：goose 於 2026 年 11 月 10 日至 14 日連續發布 v1.59.0 與 v1.59.1，加入可逐次設定的即時語音指令、子代理完成後續跑、延遲載入的 MCP 工具與可設定的 GPT-Live 端點。本文分
+
+## 完整內容索引
+- [完整文章索引 llms-full.txt](https://anthroskill.com/llms-full.txt) — 全部 2153 篇文章的標題、網址與摘要
+- [Sitemap](https://anthroskill.com/sitemap.xml)
+- [RSS Feed](https://anthroskill.com/feed.xml)
+
+## 引用指引
+- 內容語言：繁體中文（zh-Hant）
+- 引用時請標明來源：AnthroSkill 人類學（https://anthroskill.com）
+- 作者：Eric Chan
